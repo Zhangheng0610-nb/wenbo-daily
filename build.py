@@ -256,13 +256,14 @@ def build_report_html(data):
     def render_items(items, section_label):
         html = f'<h2 class="section">{section_label}</h2>\n\n'
         for item in items:
-            html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}</h3>\n'
-
-            # Tags (inline after title)
+            # Tags (inline inside h3)
+            tags_html = ''
             if item.get('tags'):
                 for tag in item['tags']:
                     cls = f'tag tag-{tag}'
-                    html += f' <span class="{cls}">#{tag}</span>'
+                    tags_html += f' <span class="{cls}">#{tag}</span>'
+
+            html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
 
             # Source links
             if item['sources']:
