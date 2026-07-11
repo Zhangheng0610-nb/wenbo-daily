@@ -52,14 +52,27 @@ CSS = """<style>
     max-width: 100%; border-radius: 8px; margin: 4px 0;
     border: 1px solid var(--border);
   }
-  .news-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: 0 10px 10px 0; padding: 16px 18px;
-    margin-bottom: 16px;
+  .tag {
+    display: inline-block; font-size: .72em; padding: 2px 8px;
+    border-radius: 10px; margin-right: 4px; margin-bottom: 6px;
+    font-weight: 600; letter-spacing: .02em;
   }
-  .news-card h3 { margin-top: 0; }
-  .news-card hr { display: none; }
+  .tag-考古 { background: #fce4d6; color: #a0522d; }
+  .tag-博物馆 { background: #dbe9f5; color: #2c5f8a; }
+  .tag-展览 { background: #e8dbf0; color: #6b3a8b; }
+  .tag-文物追索 { background: #fde0dc; color: #b03a2e; }
+  .tag-科技 { background: #ccfbf1; color: #0d6b5e; }
+  .tag-文化遗产 { background: #d9f0d1; color: #3d6b2e; }
+  .tag-国际 { background: #fef3c7; color: #8b6914; }
+  @media (prefers-color-scheme: dark) {
+    .tag-考古 { background: #3d2010; color: #e8a87c; }
+    .tag-博物馆 { background: #1a2d3d; color: #7ab8e0; }
+    .tag-展览 { background: #2a1a3d; color: #b88ada; }
+    .tag-文物追索 { background: #3d1a16; color: #e8786e; }
+    .tag-科技 { background: #0d332e; color: #5eeadb; }
+    .tag-文化遗产 { background: #1a3316; color: #7cc46e; }
+    .tag-国际 { background: #3d3010; color: #e8c84a; }
+  }
   .toc {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 10px; padding: 14px 18px; margin: 0 0 20px;
@@ -153,12 +166,23 @@ def parse_md(filepath):
                 'number': item_idx,
                 'title': title,
                 'sources': [],
+                'tags': [],
                 'body': '',
                 'commentary': ''
             }
             data[current_section].append(current_item)
             data['toc_items'].append({'id': f'item{item_idx}', 'title': title})
             i += 1
+            continue
+
+        # Tag line: 🏷️ tag1 · tag2 · tag3
+        tag_match = re.match(r'🏷️\s*(.+)', line)
+        if tag_match and current_item:
+            tags = [t.strip() for t in re.split(r'[·,，、]\s*', tag_match.group(1))]
+            current_item['tags'] = [t for t in tags if t]
+            i += 1
+            if i < len(lines) and lines[i].strip() == '':
+                i += 1
             continue
 
         # Source links line
@@ -227,8 +251,15 @@ def build_report_html(data):
     def render_items(items, section_label):
         html = f'<h2 class="section">{section_label}</h2>\n\n'
         for item in items:
-            html += f'<div class="news-card">\n'
             html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}</h3>\n'
+
+            # Tags
+            if item.get('tags'):
+                html += '<p>'
+                for tag in item['tags']:
+                    cls = f'tag tag-{tag}'
+                    html += f'<span class="{cls}">#{tag}</span> '
+                html += '</p>\n'
 
             # Source links
             if item['sources']:
@@ -249,7 +280,7 @@ def build_report_html(data):
             if item['commentary']:
                 html += f'<blockquote><strong>点评：</strong> {item["commentary"]}</blockquote>\n'
 
-            html += '</div>\n\n'
+            html += '<hr>\n\n'
         return html
 
     domestic_html = render_items(data['domestic'], '🇨🇳 国内要闻')
