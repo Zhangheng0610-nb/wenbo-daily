@@ -311,6 +311,27 @@ def build_index(reports):
   header h1 { font-size: 1.6em; letter-spacing: .05em; }
   header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
   header p.tip { color: var(--muted); font-size: .78em; margin-top: 10px; opacity: .7; }
+  /* Search */
+  .search-wrap {
+    position: relative; margin-bottom: 20px;
+  }
+  .search-wrap input {
+    width: 100%; padding: 12px 40px 12px 16px;
+    font-size: .95em; border: 1px solid var(--border);
+    border-radius: 24px; background: var(--card); color: var(--text);
+    outline: none; transition: border-color .2s;
+    -webkit-appearance: none;
+  }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-wrap input::placeholder { color: var(--muted); opacity: .7; }
+  .search-wrap .clear {
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: var(--muted); font-size: 1.2em;
+    cursor: pointer; display: none; line-height: 1; padding: 4px;
+  }
+  .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
+  .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
+  .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
   a.day-card {
     background: var(--card); border-radius: 10px; padding: 18px 20px;
     margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
@@ -319,6 +340,7 @@ def build_index(reports):
     transition: transform .15s;
   }
   a.day-card:active { transform: scale(.98); }
+  a.day-card.hidden { display: none; }
   a.day-card .date { font-weight: 700; font-size: 1.1em; color: var(--accent); }
   a.day-card .weekday { color: var(--muted); font-size: .85em; margin-left: 8px; }
   a.day-card .badge {
@@ -327,6 +349,10 @@ def build_index(reports):
     margin-left: 6px; vertical-align: middle;
   }
   a.day-card .count { font-size: .82em; color: var(--muted); margin-top: 4px; }
+  a.day-card .match-preview {
+    font-size: .8em; color: var(--muted); margin-top: 4px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
   footer {
     text-align: center; padding: 32px 0 20px;
     color: var(--muted); font-size: .8em;
@@ -353,13 +379,138 @@ def build_index(reports):
   <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
   <p class="tip">📱 浏览器菜单 → 「添加到主屏幕」→ 体验接近小程序</p>
 </header>
+
+<div class="search-wrap">
+  <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off">
+  <button class="clear" id="clear" aria-label="清除">✕</button>
+</div>
+<div class="result-count" id="result-count"></div>
+<div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+
+<div id="card-list">
 {cards}
+</div>
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">文博资讯日报</a> 自动生成 ｜ 每日早 8:13 更新</p>
 </footer>
 
 </body>
 </html>'''
+    # Inject search JS
+    html = html.replace('</body>', '''<script>
+(async function(){
+  const searchInput = document.getElementById('search');
+  const clearBtn = document.getElementById('clear');
+  const cardList = document.getElementById('card-list');
+  const noResults = document.getElementById('no-results');
+  const resultCount = document.getElementById('result-count');
+  const cards = cardList.querySelectorAll('.day-card');
+
+  let searchData = null;
+  try {
+    const resp = await fetch('search-index.json');
+    if (resp.ok) searchData = await resp.json();
+  } catch(e) {}
+
+  function doSearch(q) {
+    q = q.trim().toLowerCase();
+    let visible = 0;
+
+    if (!q) {
+      cards.forEach(c => c.classList.remove('hidden'));
+      noResults.style.display = 'none';
+      resultCount.style.display = 'none';
+      clearBtn.style.display = 'none';
+      cards.forEach(c => {
+        const prev = c.querySelector('.match-preview');
+        if (prev) prev.remove();
+      });
+      return;
+    }
+
+    clearBtn.style.display = 'block';
+    const queryWords = q.split(/\\s+/).filter(Boolean);
+
+    cards.forEach((card) => {
+      const href = card.getAttribute('href');
+      const cardText = card.textContent.toLowerCase();
+      let matched = false;
+      let previewText = '';
+
+      for (const w of queryWords) {
+        if (cardText.includes(w)) { matched = true; break; }
+      }
+
+      if (!matched && searchData) {
+        const report = searchData.find(r => href && href.includes(r.date));
+        if (report) {
+          for (const item of report.items) {
+            const itemText = (item.title + ' ' + item.body + ' ' + (item.commentary||'')).toLowerCase();
+            for (const w of queryWords) {
+              if (itemText.includes(w)) {
+                matched = true;
+                const idx = itemText.indexOf(w);
+                const start = Math.max(0, idx - 30);
+                const end = Math.min(itemText.length, idx + w.length + 40);
+                let snippet = itemText.substring(start, end);
+                if (start > 0) snippet = '…' + snippet;
+                if (end < itemText.length) snippet = snippet + '…';
+                const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
+                snippet = snippet.replace(re, '<mark class="highlight">$1</mark>');
+                previewText = snippet;
+                break;
+              }
+            }
+            if (matched) break;
+          }
+        }
+      }
+
+      if (matched) {
+        card.classList.remove('hidden');
+        visible++;
+        let prev = card.querySelector('.match-preview');
+        if (previewText) {
+          if (!prev) {
+            prev = document.createElement('div');
+            prev.className = 'match-preview';
+            card.appendChild(prev);
+          }
+          prev.innerHTML = previewText;
+        } else {
+          if (prev) prev.remove();
+        }
+      } else {
+        card.classList.add('hidden');
+        const prev = card.querySelector('.match-preview');
+        if (prev) prev.remove();
+      }
+    });
+
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+    resultCount.style.display = 'block';
+    resultCount.textContent = `找到 ${visible} 天的相关报道`;
+  }
+
+  searchInput.addEventListener('input', function(){
+    doSearch(this.value);
+  });
+
+  clearBtn.addEventListener('click', function(){
+    searchInput.value = '';
+    doSearch('');
+    searchInput.focus();
+  });
+
+  const params = new URLSearchParams(location.search);
+  const q = params.get('q');
+  if (q) {
+    searchInput.value = q;
+    doSearch(q);
+  }
+})();
+</script>
+</body>''')
     return html
 
 
@@ -388,6 +539,29 @@ def main():
         print(f'  -> {html_path}')
 
         all_reports.append(data)
+
+    # Build search index JSON
+    search_data = []
+    for r in all_reports:
+        items = []
+        for item in r['domestic'] + r['international']:
+            items.append({
+                'title': item['title'],
+                'body': item['body'][:200] if item['body'] else '',
+                'commentary': item['commentary']
+            })
+        search_data.append({
+            'date': r['date'],
+            'weekday': r['weekday'],
+            'domestic_count': r['domestic_count'],
+            'international_count': r['international_count'],
+            'items': items
+        })
+    import json
+    idx_path = os.path.join(SITE_DIR, 'search-index.json')
+    with open(idx_path, 'w', encoding='utf-8') as f:
+        json.dump(search_data, f, ensure_ascii=False, indent=2)
+    print(f'Search index: {idx_path}')
 
     # Build index
     if all_reports:
