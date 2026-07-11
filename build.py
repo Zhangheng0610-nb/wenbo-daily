@@ -241,6 +241,15 @@ def build_report_html(data):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>文博资讯日报 | {data['date']}</title>
+<meta property="og:title" content="文博资讯日报 | {data['date']}">
+<meta property="og:description" content="{data['date']} 文博资讯日报，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
+<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/reports/{data['date']}.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="文博资讯日报">
+<meta name="twitter:card" content="summary_large_image">
 {CSS}
 </head>
 <body>
@@ -368,6 +377,15 @@ def build_index(reports):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>文博资讯日报</title>
+<meta property="og:title" content="文博资讯日报">
+<meta property="og:description" content="国内外文物博物馆 · 考古 · 文化遗产 · 每日推送">
+<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="文博资讯日报">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="文博日报">
 {index_css}
