@@ -48,6 +48,10 @@ CSS = """<style>
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
     color: var(--muted); font-size: .95em;
   }
+  .news-img {
+    max-width: 100%; border-radius: 8px; margin: 4px 0;
+    border: 1px solid var(--border);
+  }
   .toc {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 10px; padding: 14px 18px; margin: 0 0 20px;
@@ -159,6 +163,16 @@ def parse_md(filepath):
                 i += 1
             continue
 
+        # Image line: ![alt](url) or ![alt](url)
+        img_match = re.match(r'!\[.*?\]\((.+?)\)', line)
+        if img_match and current_item:
+            current_item['image'] = img_match.group(1)
+            i += 1
+            # Skip blank line after image
+            if i < len(lines) and lines[i].strip() == '':
+                i += 1
+            continue
+
         # Blockquote commentary
         if line.startswith('> ') and current_item:
             commentary = line.lstrip('> ').strip()
@@ -213,6 +227,10 @@ def build_report_html(data):
                 for s in item['sources']:
                     src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
                 html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n\n'
+
+            # Image
+            if item.get('image'):
+                html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n\n'
 
             # Body
             if item['body']:
