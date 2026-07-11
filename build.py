@@ -222,6 +222,11 @@ def parse_md(filepath):
             i += 1
             continue
 
+        # Skip markdown footer metadata
+        if line.strip().startswith('*本日报由'):
+            i += 1
+            continue
+
         # Body text - accumulate non-empty, non-separator lines
         if current_item and line.strip() and not line.startswith('---') and not line.startswith('>'):
             if current_item['body']:
@@ -253,13 +258,11 @@ def build_report_html(data):
         for item in items:
             html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}</h3>\n'
 
-            # Tags
+            # Tags (inline after title)
             if item.get('tags'):
-                html += '<p>'
                 for tag in item['tags']:
                     cls = f'tag tag-{tag}'
-                    html += f'<span class="{cls}">#{tag}</span> '
-                html += '</p>\n'
+                    html += f' <span class="{cls}">#{tag}</span>'
 
             # Source links
             if item['sources']:
