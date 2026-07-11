@@ -116,7 +116,7 @@ def parse_md(filepath):
 
     lines = content.split('\n')
 
-    # Parse title line: # 🏛️ 文博资讯日报 | 2026年7月11日（周六）
+    # Parse title line: # 🏛️ 每日文博资讯 | 2026年7月11日（周六）
     title_match = re.match(r'# .+?\|\s*(\d{4})年(\d{1,2})月(\d{1,2})日（(.+?)）', lines[0])
     if title_match:
         y, m, d, wd = title_match.groups()
@@ -302,22 +302,22 @@ def build_report_html(data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文博资讯日报 | {data['date']}</title>
-<meta property="og:title" content="文博资讯日报 | {data['date']}">
-<meta property="og:description" content="{data['date']} 文博资讯日报，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
+<title>每日文博资讯 | {data['date']}</title>
+<meta property="og:title" content="每日文博资讯 | {data['date']}">
+<meta property="og:description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
 <meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/reports/{data['date']}.html">
 <meta property="og:type" content="article">
-<meta property="og:site_name" content="文博资讯日报">
+<meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
 {CSS}
 </head>
 <body>
 
 <header>
-  <h1>🏛️ 文博资讯日报</h1>
+  <h1>🏛️ 每日文博资讯</h1>
   <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
 </header>
@@ -333,7 +333,7 @@ def build_report_html(data):
 <p><em>本日报由 Claude 自动采集编撰 | {data['date']}</em></p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">文博资讯日报</a> ｜ 每日早 8:13 自动更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新</p>
 </footer>
 
 </body>
@@ -438,15 +438,15 @@ def build_index(reports):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>文博资讯日报</title>
-<meta property="og:title" content="文博资讯日报">
+<title>每日文博资讯</title>
+<meta property="og:title" content="每日文博资讯">
 <meta property="og:description" content="国内外文物博物馆 · 考古 · 文化遗产 · 每日推送">
 <meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="文博资讯日报">
+<meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="文博日报">
@@ -455,7 +455,7 @@ def build_index(reports):
 <body>
 
 <header>
-  <h1>🏛️ 文博资讯日报</h1>
+  <h1>🏛️ 每日文博资讯</h1>
   <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
   <p class="tip">📱 浏览器菜单 → 「添加到主屏幕」→ 体验接近小程序</p>
 </header>
@@ -471,7 +471,7 @@ def build_index(reports):
 {cards}
 </div>
 <footer>
-  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">文博资讯日报</a> 自动生成 ｜ 每日早 8:13 更新</p>
+  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
 </footer>
 
 </body>
