@@ -52,6 +52,14 @@ CSS = """<style>
     max-width: 100%; border-radius: 8px; margin: 4px 0;
     border: 1px solid var(--border);
   }
+  .news-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .news-card h3 { margin-top: 0; }
+  .news-card hr { display: none; }
   .toc {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 10px; padding: 14px 18px; margin: 0 0 20px;
@@ -219,6 +227,7 @@ def build_report_html(data):
     def render_items(items, section_label):
         html = f'<h2 class="section">{section_label}</h2>\n\n'
         for item in items:
+            html += f'<div class="news-card">\n'
             html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}</h3>\n'
 
             # Source links
@@ -226,21 +235,21 @@ def build_report_html(data):
                 src_parts = []
                 for s in item['sources']:
                     src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
-                html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n\n'
+                html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
 
             # Image
             if item.get('image'):
-                html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n\n'
+                html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n'
 
             # Body
             if item['body']:
-                html += f'<p>{item["body"]}</p>\n\n'
+                html += f'<p>{item["body"]}</p>\n'
 
             # Commentary
             if item['commentary']:
-                html += f'<blockquote><strong>点评：</strong> {item["commentary"]}</blockquote>\n\n'
+                html += f'<blockquote><strong>点评：</strong> {item["commentary"]}</blockquote>\n'
 
-            html += '<hr>\n\n'
+            html += '</div>\n\n'
         return html
 
     domestic_html = render_items(data['domestic'], '🇨🇳 国内要闻')
