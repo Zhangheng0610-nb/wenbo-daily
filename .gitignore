@@ -1,5 +1,12 @@
-push.py
-deploy.py
-token.txt
-一键推送.bat
+# 敏感文件 - 永远不要提交
 *.bat
+*.cmd
+*.ps1
+token*
+.gitee-token
+deploy*.py
+push*.py
+enable*.py
+setup*.ps1
+ssh-*.py
+*.log
