@@ -269,10 +269,10 @@ def build_report_html(data):
                 html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n'
 
             if item['body']:
-                html += f'<p>{item["body"]}</p>\n'
+                html += f'<p>{md_inline(item["body"])}</p>\n'
 
             if item['commentary']:
-                html += f'<blockquote><strong>点评：</strong> {item["commentary"]}</blockquote>\n'
+                html += f'<blockquote><strong>点评：</strong> {md_inline(item["commentary"])}</blockquote>\n'
 
             html += '<hr>\n\n'
         return html
@@ -481,6 +481,19 @@ def parse_digest(filepath, dtype='weekly'):
     return data
 
 
+def md_inline(text):
+    """Convert markdown inline formatting to HTML."""
+    if not text:
+        return text
+    # **bold**
+    text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    # *italic*
+    text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
+    # `code`
+    text = re.sub(r'`(.+?)`', r'<code>\1</code>', text)
+    return text
+
+
 def build_digest_html(data):
     """Generate HTML for a weekly or monthly digest."""
     dtype = data['type']
@@ -489,7 +502,7 @@ def build_digest_html(data):
     # Overview
     overview_html = f'<h2 class="section">📊 本期概览</h2>\n'
     if data['overview']:
-        overview_html += f'<p>{data["overview"]}</p>\n'
+        overview_html += f'<p>{md_inline(data["overview"])}</p>\n'
     if data['overview_table']:
         overview_html += '<table>\n'
         for i, row in enumerate(data['overview_table']):
@@ -503,10 +516,10 @@ def build_digest_html(data):
         items_html += f'<h3 id="{item["id"]}">{item["title"]}</h3>\n'
 
         if item['body']:
-            items_html += f'<p>{item["body"]}</p>\n'
+            items_html += f'<p>{md_inline(item["body"])}</p>\n'
 
         if item['progress']:
-            items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {item["progress"]}</blockquote>\n'
+            items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {md_inline(item["progress"])}</blockquote>\n'
 
         if item['sources']:
             src_parts = []
