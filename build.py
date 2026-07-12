@@ -925,18 +925,30 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
     daily_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)
 
-    # Daily cards
-    cards = ''
+    # Daily cards — build list, limit to latest 7 by default
+    DAILY_LIMIT = 7
+    card_items = []
     for i, r in enumerate(daily_reports):
         total = r['domestic_count'] + r['international_count']
         badge = '<span class="badge">最新</span>' if i == 0 else ''
-        cards += f'''
+        card_items.append(f'''
 <a class="day-card" href="reports/{r['date']}.html">
   <span class="date">📅 {r['date']}</span>
   <span class="weekday">{r['weekday']}</span>
   {badge}
   <div class="count">📰 共 {total} 条 ｜ 国内 {r['domestic_count']} + 国际 {r['international_count']}</div>
-</a>'''
+</a>''')
+
+    latest_cards = '\n'.join(card_items[:DAILY_LIMIT])
+    older_cards_html = ''
+    if len(card_items) > DAILY_LIMIT:
+        older_count = len(card_items) - DAILY_LIMIT
+        older_cards_joined = '\n'.join(card_items[DAILY_LIMIT:])
+        older_cards_html = f'''
+<div class="older-cards" style="display:none;">
+{older_cards_joined}
+</div>
+<button class="show-more-btn" onclick="toggleOlder(this)">📅 展开更早的日报（{older_count} 天）</button>'''
 
     # Weekly cards
     weekly_cards = ''
@@ -1041,20 +1053,46 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   }
   footer a { color: var(--accent); }
   .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
+  /* Collapsible sections */
+  .section-header.collapsible {
+    cursor: pointer; user-select: none;
+    position: relative; padding-right: 28px;
+  }
+  .section-header.collapsible:hover { color: var(--text); }
+  .section-header.collapsible::after {
+    content: '▾'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%); font-size: .85em;
+    transition: transform .2s; color: var(--muted);
+  }
+  .section-header.collapsible.collapsed::after {
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  .section-body { transition: opacity .15s; }
+  .section-body.hidden { display: none; }
+  /* Show more button */
+  .show-more-btn {
+    display: block; width: 100%; padding: 10px;
+    background: var(--card); border: 1px dashed var(--border);
+    border-radius: 10px; color: var(--accent); font-size: .88em;
+    cursor: pointer; margin-bottom: 14px; text-align: center;
+    transition: background .15s;
+  }
+  .show-more-btn:hover { background: var(--tag-bg); }
+  .older-cards { }
 </style>"""
 
     # Build section blocks
     weekly_block = ''
     if weekly_cards:
-        weekly_block = f'<div class="section-header">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div id="weekly-list">{weekly_cards}</div>\n'
+        weekly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body"><div id="weekly-list">{weekly_cards}</div></div>\n'
     else:
-        weekly_block = '<div class="section-header">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="empty">周报每周日发布，敬请期待</div>\n'
+        weekly_block = '<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="section-body"><div class="empty">周报每周日发布，敬请期待</div></div>\n'
 
     monthly_block = ''
     if monthly_cards:
-        monthly_block = f'<div class="section-header">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div id="monthly-list">{monthly_cards}</div>\n'
+        monthly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body"><div id="monthly-list">{monthly_cards}</div></div>\n'
     else:
-        monthly_block = '<div class="section-header">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="empty">月报每月 1 日发布，敬请期待</div>\n'
+        monthly_block = '<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
 
     # Recruitment section
     recruitment_block = ''
@@ -1082,15 +1120,17 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     </a>'''
 
         urgent_badge = f'⏰ {urgent_count} 个即将截止 · ' if urgent_count else ''
-        recruitment_block = f'''<div class="section-header">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
+        recruitment_block = f'''<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
+<div class="section-body">
 {mini_cards}
 <a class="day-card recruitment-card all-recruitment" href="jobs.html">
   <span class="date">📋 查看全部 {total_jobs} 个岗位</span>
   <div class="count">🏛️ 博物馆 · 🏗️ 考古所 · 🎓 高校文博专业 ｜ 每两日更新 · 更新于 {recruitment_data['update_date']}</div>
 </a>
+</div>
 '''
     else:
-        recruitment_block = '<div class="section-header">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="empty">招聘信息每两日更新，敬请期待</div>\n'
+        recruitment_block = '<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -1126,9 +1166,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
 
-<div class="section-header">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
+<div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
+<div class="section-body">
 <div id="daily-list">
-{cards}
+{latest_cards}
+{older_cards_html}
+</div>
 </div>
 
 {weekly_block}
@@ -1143,8 +1186,24 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
 </body>
 </html>'''
-    # Inject search JS
+    # Inject JS (toggles + search)
     html = html.replace('</body>', '''<script>
+function toggleSection(header) {
+  header.classList.toggle('collapsed');
+  const body = header.nextElementSibling;
+  if (body && body.classList.contains('section-body')) {
+    body.classList.toggle('hidden');
+  }
+}
+function toggleOlder(btn) {
+  const olderDiv = btn.previousElementSibling;
+  if (olderDiv && olderDiv.classList.contains('older-cards')) {
+    const isHidden = olderDiv.style.display === 'none';
+    olderDiv.style.display = isHidden ? '' : 'none';
+    const count = olderDiv.querySelectorAll('.day-card').length;
+    btn.textContent = isHidden ? '📅 收起' : '📅 展开更早的日报（' + count + ' 天）';
+  }
+}
 (async function(){
   const searchInput = document.getElementById('search');
   const clearBtn = document.getElementById('clear');

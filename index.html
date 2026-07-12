@@ -98,6 +98,32 @@
   }
   footer a { color: var(--accent); }
   .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
+  /* Collapsible sections */
+  .section-header.collapsible {
+    cursor: pointer; user-select: none;
+    position: relative; padding-right: 28px;
+  }
+  .section-header.collapsible:hover { color: var(--text); }
+  .section-header.collapsible::after {
+    content: '▾'; position: absolute; right: 4px; top: 50%;
+    transform: translateY(-50%); font-size: .85em;
+    transition: transform .2s; color: var(--muted);
+  }
+  .section-header.collapsible.collapsed::after {
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  .section-body { transition: opacity .15s; }
+  .section-body.hidden { display: none; }
+  /* Show more button */
+  .show-more-btn {
+    display: block; width: 100%; padding: 10px;
+    background: var(--card); border: 1px dashed var(--border);
+    border-radius: 10px; color: var(--accent); font-size: .88em;
+    cursor: pointer; margin-bottom: 14px; text-align: center;
+    transition: background .15s;
+  }
+  .show-more-btn:hover { background: var(--tag-bg); }
+  .older-cards { }
 </style>
 </head>
 <body>
@@ -115,7 +141,8 @@
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
 
-<div class="section-header">📅 日报 <span class="count-badge">2 天</span></div>
+<div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">2 天</span></div>
+<div class="section-body">
 <div id="daily-list">
 
 <a class="day-card" href="reports/2026-07-12.html">
@@ -124,27 +151,31 @@
   <span class="badge">最新</span>
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
+
 <a class="day-card" href="reports/2026-07-11.html">
   <span class="date">📅 2026-07-11</span>
   <span class="weekday">周六</span>
   
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
+
+</div>
 </div>
 
-<div class="section-header">📰 周报 <span class="count-badge">1 期</span></div>
-<div id="weekly-list">
+<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">1 期</span></div>
+<div class="section-body"><div id="weekly-list">
 <a class="day-card weekly-card" href="reports/weekly-2026-07-12.html">
   <span class="date">📰 2026-07-06 — 2026-07-12</span>
   <div class="count">📋 共 10 条要闻</div>
-</a></div>
+</a></div></div>
 
 
-<div class="section-header">📊 月报 <span class="count-badge">0 期</span></div>
-<div class="empty">月报每月 1 日发布，敬请期待</div>
+<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>
+<div class="section-body"><div class="empty">月报每月 1 日发布，敬请期待</div></div>
 
 
-<div class="section-header">💼 招聘信息 <span class="count-badge">⏰ 1 个即将截止 · 20 个岗位</span></div>
+<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">⏰ 1 个即将截止 · 20 个岗位</span></div>
+<div class="section-body">
 <a class="day-card recruitment-card" href="jobs.html">
       <span class="date">⏰ 国家文物局考古研究中心</span>
       <div class="count">高层次人才（边疆考古/中外联合考古） · 截止 2026-07-13（**明天截止！**） · <span style="color:#e74c3c;font-weight:700;">明天截止</span></div>
@@ -153,6 +184,7 @@
   <span class="date">📋 查看全部 20 个岗位</span>
   <div class="count">🏛️ 博物馆 · 🏗️ 考古所 · 🎓 高校文博专业 ｜ 每两日更新 · 更新于 2026-07-12</div>
 </a>
+</div>
 
 
 <footer>
@@ -160,6 +192,22 @@
 </footer>
 
 <script>
+function toggleSection(header) {
+  header.classList.toggle('collapsed');
+  const body = header.nextElementSibling;
+  if (body && body.classList.contains('section-body')) {
+    body.classList.toggle('hidden');
+  }
+}
+function toggleOlder(btn) {
+  const olderDiv = btn.previousElementSibling;
+  if (olderDiv && olderDiv.classList.contains('older-cards')) {
+    const isHidden = olderDiv.style.display === 'none';
+    olderDiv.style.display = isHidden ? '' : 'none';
+    const count = olderDiv.querySelectorAll('.day-card').length;
+    btn.textContent = isHidden ? '📅 收起' : '📅 展开更早的日报（' + count + ' 天）';
+  }
+}
 (async function(){
   const searchInput = document.getElementById('search');
   const clearBtn = document.getElementById('clear');
