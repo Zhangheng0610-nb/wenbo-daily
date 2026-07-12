@@ -9,6 +9,7 @@ import os, re, glob, json
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPORTS_DIR = os.path.join(SITE_DIR, 'reports')
 MD_DIR = os.path.join(os.path.dirname(SITE_DIR), '日报')
+JOBS_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'jobs.md')
 
 WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
@@ -494,6 +495,314 @@ def md_inline(text):
     return text
 
 
+# ───────────────── 招聘信息 解析器 ─────────────────
+
+def parse_jobs(filepath):
+    """Parse recruitment markdown file and return structured data.
+
+    Returns dict with:
+      - update_date: 'YYYY-MM-DD'
+      - summary: str (intro paragraph)
+      - sections: [{category, icon, items: [{number, institution, position,
+          education, location, deadline, link_url, link_text, urgent, days_left}]}]
+    """
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    data = {
+        'update_date': '',
+        'summary': '',
+        'sections': []
+    }
+
+    lines = content.split('\n')
+
+    # Parse title line for update date
+    if lines:
+        title_match = re.match(
+            r'# .+?\|\s*(\d{4})年(\d{1,2})月(\d{1,2})日', lines[0])
+        if title_match:
+            y, m, d = title_match.groups()
+            data['update_date'] = f'{y}-{int(m):02d}-{int(d):02d}'
+
+    today = data['update_date']
+
+    current_section = None  # dict with category, icon, items
+    current_item = None
+
+    for line in lines[1:]:
+        stripped = line.strip()
+        if not stripped or stripped.startswith('---'):
+            continue
+
+        # Summary line: > text
+        if stripped.startswith('> '):
+            prefix = stripped[2:].strip()
+            if data['summary']:
+                data['summary'] += ' ' + prefix
+            else:
+                data['summary'] = prefix
+            continue
+
+        # Section header: ## 🏛️ 博物馆 etc.
+        sec_match = re.match(r'##\s+(.{1,2})\s+(.+)', stripped)
+        if sec_match:
+            icon = sec_match.group(1)
+            category = sec_match.group(2)
+            current_section = {'category': category, 'icon': icon, 'items': []}
+            data['sections'].append(current_section)
+            current_item = None
+            continue
+
+        # Item header: ### N. Institution — Position  (or ### N. ⏰ ...)
+        item_match = re.match(r'###\s+(\d+)\.\s+(⏰\s*)?(.+?)\s*[—\-]\s*(.+)', stripped)
+        if item_match:
+            number = int(item_match.group(1))
+            urgent = bool(item_match.group(2))
+            institution = item_match.group(3).strip()
+            position = item_match.group(4).strip()
+
+            current_item = {
+                'number': number,
+                'urgent': urgent,
+                'institution': institution,
+                'position': position,
+                'education': '',
+                'location': '',
+                'deadline': '',
+                'link_url': '',
+                'link_text': '招聘公告',
+                'days_left': None
+            }
+            if current_section is None:
+                # Default section
+                current_section = {'category': '招聘', 'icon': '💼', 'items': []}
+                data['sections'].append(current_section)
+            current_section['items'].append(current_item)
+            continue
+
+        # Field lines: - 🎓 **学历要求**：value
+        if current_item:
+            field_match = re.match(r'-\s*.+?\*\*(.+?)\*\*\s*[：:]\s*(.+)', stripped)
+            if field_match:
+                field_name = field_match.group(1).strip()
+                field_value = field_match.group(2).strip()
+
+                if '学历' in field_name:
+                    current_item['education'] = field_value
+                elif '地点' in field_name:
+                    current_item['location'] = field_value
+                elif '截止' in field_name:
+                    current_item['deadline'] = field_value
+                continue
+
+            # Link line: - 🔗 [text](url)
+            link_match = re.match(r'-\s*🔗\s*\[(.+?)\]\((.+?)\)', stripped)
+            if link_match:
+                current_item['link_text'] = link_match.group(1)
+                current_item['link_url'] = link_match.group(2)
+                continue
+
+    # Compute days_left and urgent flag for each item
+    for section in data['sections']:
+        for item in section['items']:
+            dl = item['deadline']
+            if dl and today:
+                dl_match = re.match(r'(\d{4})-(\d{1,2})-(\d{1,2})', dl)
+                if dl_match:
+                    try:
+                        from datetime import date
+                        dl_date = date(
+                            int(dl_match.group(1)),
+                            int(dl_match.group(2)),
+                            int(dl_match.group(3))
+                        )
+                        today_date = date.fromisoformat(today)
+                        item['days_left'] = (dl_date - today_date).days
+                        if 0 <= item['days_left'] <= 3:
+                            item['urgent'] = True
+                    except (ValueError, KeyError):
+                        pass
+
+    # Sort items within each section by deadline (earliest first, no-deadline last)
+    for section in data['sections']:
+        def sort_key(item):
+            if item['days_left'] is not None:
+                return (0, item['days_left'])
+            return (1, 9999)
+        section['items'].sort(key=sort_key)
+
+    return data
+
+
+def build_jobs_html(data):
+    """Generate HTML for the recruitment page (jobs.html)."""
+    total = sum(len(s['items']) for s in data['sections'])
+    urgent_count = sum(1 for s in data['sections'] for it in s['items'] if it['urgent'])
+
+    # Build sections
+    sections_html = ''
+    for sec in data['sections']:
+        items_html = ''
+        for item in sec['items']:
+            # Urgency badge
+            urgent_badge = ''
+            if item['urgent'] and item['days_left'] is not None:
+                if item['days_left'] == 0:
+                    urgent_badge = ' <span class="closing-badge">今天截止</span>'
+                elif item['days_left'] == 1:
+                    urgent_badge = ' <span class="closing-badge">明天截止</span>'
+                else:
+                    urgent_badge = f' <span class="closing-badge">{item["days_left"]}天后截止</span>'
+
+            row_class = ' urgent-row' if item['urgent'] else ''
+
+            items_html += f'''
+        <div class="job-item{row_class}">
+          <div class="job-header">
+            <span class="job-number">#{item['number']}</span>
+            <span class="job-title">{item['institution']} — {item['position']}</span>
+            {urgent_badge}
+          </div>
+          <div class="job-meta">
+            <span>🎓 {item['education'] or '见公告'}</span>
+            <span>📍 {item['location'] or '见公告'}</span>
+            <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
+          </div>
+          <div class="job-link">
+            <a href="{item['link_url']}" target="_blank" rel="noopener">🔗 {item['link_text']}</a>
+          </div>
+        </div>'''
+
+        sections_html += f'''
+    <div class="job-section">
+      <h2 class="section">{sec['icon']} {sec['category']} <span class="count-badge">{len(sec['items'])} 岗</span></h2>
+      {items_html}
+    </div>'''
+
+    # Summary
+    summary_html = ''
+    if data['summary']:
+        summary_html = f'<p class="job-summary">{md_inline(data["summary"])}</p>'
+
+    html = f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文博招聘信息 | {data['update_date']}</title>
+<meta property="og:title" content="文博招聘信息 | {data['update_date']}">
+<meta property="og:description" content="省级以上博物馆、考古院所、高校文博专业招聘信息，共 {total} 个岗位。即将截止 {urgent_count} 个。">
+<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/jobs.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="每日文博资讯">
+<meta name="twitter:card" content="summary_large_image">
+{CSS}
+<style>
+  .job-summary {{
+    background: var(--card); border-left: 3px solid var(--accent);
+    padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;
+    font-size: .9em; color: var(--muted);
+  }}
+  .job-section {{
+    margin: 24px 0;
+  }}
+  .job-item {{
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; margin: 10px 0;
+    transition: box-shadow .15s;
+  }}
+  .job-item:hover {{
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }}
+  .job-item.urgent-row {{
+    border-left: 4px solid #e74c3c;
+  }}
+  @media (prefers-color-scheme: dark) {{
+    .job-item.urgent-row {{
+      border-left-color: #ff6b5b;
+    }}
+  }}
+  .job-header {{
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }}
+  .job-number {{
+    color: var(--muted); font-size: .8em; min-width: 24px;
+  }}
+  .job-title {{
+    font-weight: 700; font-size: 1.05em; color: var(--text);
+  }}
+  .closing-badge {{
+    display: inline-block; font-size: .75em; padding: 2px 10px;
+    border-radius: 10px; background: #e74c3c; color: #fff;
+    font-weight: 600; white-space: nowrap;
+  }}
+  @media (prefers-color-scheme: dark) {{
+    .closing-badge {{
+      background: #c0392b;
+    }}
+  }}
+  .job-meta {{
+    display: flex; gap: 16px; flex-wrap: wrap; font-size: .85em;
+    color: var(--muted); margin: 6px 0;
+  }}
+  .job-deadline {{
+    font-weight: 600;
+  }}
+  .job-link {{
+    margin-top: 4px;
+  }}
+  .job-link a {{
+    font-size: .9em; color: var(--accent); font-weight: 600;
+    text-decoration: none;
+  }}
+  .job-link a:hover {{
+    text-decoration: underline;
+  }}
+  .stats-bar {{
+    display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0;
+  }}
+  .stat-item {{
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 16px; font-size: .85em;
+  }}
+  .stat-item strong {{ color: var(--accent); }}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>💼 文博招聘信息</h1>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个岗位 ｜ ⏰ 即将截止 {urgent_count} 个</p>
+  <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
+</header>
+
+{summary_html}
+
+<div class="stats-bar">
+  <div class="stat-item">📋 总岗位数：<strong>{total}</strong></div>
+  <div class="stat-item">⏰ 即将截止：<strong>{urgent_count}</strong></div>
+  <div class="stat-item">🔄 每两天更新一次</div>
+</div>
+
+{sections_html}
+
+<hr>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文，本页面仅做信息聚合。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
+
+<footer>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新</p>
+</footer>
+
+</body>
+</html>'''
+    return html
+
+
 def build_digest_html(data):
     """Generate HTML for a weekly or monthly digest."""
     dtype = data['type']
@@ -599,8 +908,8 @@ def build_digest_html(data):
 
 # ───────────────── 首页构建 ─────────────────
 
-def build_index(daily_reports, weekly_reports=None, monthly_reports=None):
-    """Rebuild index.html with daily, weekly, and monthly sections."""
+def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recruitment_data=None):
+    """Rebuild index.html with daily, weekly, monthly, and recruitment sections."""
     if weekly_reports is None:
         weekly_reports = []
     if monthly_reports is None:
@@ -739,6 +1048,42 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None):
     else:
         monthly_block = '<div class="section-header">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="empty">月报每月 1 日发布，敬请期待</div>\n'
 
+    # Recruitment section
+    recruitment_block = ''
+    if recruitment_data and recruitment_data.get('sections'):
+        total_jobs = sum(len(s['items']) for s in recruitment_data['sections'])
+        urgent_count = sum(1 for s in recruitment_data['sections'] for it in s['items'] if it['urgent'])
+
+        # Build mini-cards for urgent items (up to 3)
+        mini_cards = ''
+        urgent_items = []
+        for s in recruitment_data['sections']:
+            for it in s['items']:
+                if it['urgent']:
+                    urgent_items.append(it)
+        for j in urgent_items[:3]:
+            if j['days_left'] == 0:
+                label = '今天截止'
+            elif j['days_left'] == 1:
+                label = '明天截止'
+            else:
+                label = f'{j["days_left"]}天后截止'
+            mini_cards += f'''<a class="day-card recruitment-card" href="jobs.html">
+      <span class="date">⏰ {j['institution']}</span>
+      <div class="count">{j['position']} · 截止 {j['deadline']} · <span style="color:#e74c3c;font-weight:700;">{label}</span></div>
+    </a>'''
+
+        urgent_badge = f'⏰ {urgent_count} 个即将截止 · ' if urgent_count else ''
+        recruitment_block = f'''<div class="section-header">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
+{mini_cards}
+<a class="day-card recruitment-card all-recruitment" href="jobs.html">
+  <span class="date">📋 查看全部 {total_jobs} 个岗位</span>
+  <div class="count">🏛️ 博物馆 · 🏗️ 考古所 · 🎓 高校文博专业 ｜ 每两日更新 · 更新于 {recruitment_data['update_date']}</div>
+</a>
+'''
+    else:
+        recruitment_block = '<div class="section-header">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="empty">招聘信息每两日更新，敬请期待</div>\n'
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -781,6 +1126,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None):
 {weekly_block}
 
 {monthly_block}
+
+{recruitment_block}
 
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
@@ -987,12 +1334,28 @@ def main():
         json.dump(search_data, f, ensure_ascii=False, indent=2)
     print(f'Search index: {idx_path} ({len(search_data)} daily reports)')
 
-    # Build index with all three types
-    index_html = build_index(daily_reports, weekly_reports, monthly_reports)
+    # Parse recruitment data
+    recruitment_data = None
+    if os.path.exists(JOBS_MD):
+        recruitment_data = parse_jobs(JOBS_MD)
+        if recruitment_data and recruitment_data.get('sections'):
+            rec_html = build_jobs_html(recruitment_data)
+            rec_path = os.path.join(SITE_DIR, 'jobs.html')
+            with open(rec_path, 'w', encoding='utf-8') as f:
+                f.write(rec_html)
+            total = sum(len(s['items']) for s in recruitment_data['sections'])
+            print(f'Jobs: {rec_path} ({total} jobs)')
+        else:
+            print('Jobs: no listings found in', JOBS_MD)
+    else:
+        print('Jobs: no source file at', JOBS_MD)
+
+    # Build index with all four sections
+    index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data)
     index_path = os.path.join(SITE_DIR, 'index.html')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_html)
-    print(f'Index: {index_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报)')
+    print(f'Index: {index_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报 + {"招聘" if recruitment_data else "无招聘"})')
 
     print('\nDone! Run push to deploy.')
 
