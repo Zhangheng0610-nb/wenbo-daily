@@ -60,6 +60,16 @@
   .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
   .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
   .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
+  /* Section headers */
+  .section-header {
+    font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-header .count-badge {
+    font-size: .75em; background: var(--tag-bg); color: var(--muted);
+    padding: 2px 10px; border-radius: 10px; font-weight: normal;
+  }
   a.day-card {
     background: var(--card); border-radius: 10px; padding: 18px 20px;
     margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
@@ -87,7 +97,7 @@
     border-top: 1px solid var(--border); margin-top: 24px;
   }
   footer a { color: var(--accent); }
-  .empty { text-align: center; color: var(--muted); padding: 48px 0; }
+  .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
 </style>
 </head>
 <body>
@@ -105,7 +115,8 @@
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
 
-<div id="card-list">
+<div class="section-header">📅 日报 <span class="count-badge">2 天</span></div>
+<div id="daily-list">
 
 <a class="day-card" href="reports/2026-07-12.html">
   <span class="date">📅 2026-07-12</span>
@@ -120,6 +131,19 @@
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
 </div>
+
+<div class="section-header">📰 周报 <span class="count-badge">1 期</span></div>
+<div id="weekly-list">
+<a class="day-card weekly-card" href="reports/weekly-2026-07-12.html">
+  <span class="date">📰 2026-07-06 — 2026-07-12</span>
+  <div class="count">📋 共 10 条要闻</div>
+</a></div>
+
+
+<div class="section-header">📊 月报 <span class="count-badge">0 期</span></div>
+<div class="empty">月报每月 1 日发布，敬请期待</div>
+
+
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
 </footer>
@@ -128,10 +152,9 @@
 (async function(){
   const searchInput = document.getElementById('search');
   const clearBtn = document.getElementById('clear');
-  const cardList = document.getElementById('card-list');
   const noResults = document.getElementById('no-results');
   const resultCount = document.getElementById('result-count');
-  const cards = cardList.querySelectorAll('.day-card');
+  const cards = document.querySelectorAll('.day-card');
 
   let searchData = null;
   try {
