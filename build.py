@@ -603,6 +603,14 @@ def parse_jobs(filepath):
                 current_item['link_url'] = link_match.group(2)
                 continue
 
+            # Email line: - 📧 投递：email@addr  or  📧 email@addr
+            email_match = re.match(r'-\s*📧\s*(?:投递[：:]\s*)?([a-zA-Z0-9._%+-]+@[^\s|]+)', stripped)
+            if email_match:
+                email = email_match.group(1).strip()
+                current_item['link_url'] = f'mailto:{email}'
+                current_item['link_text'] = email
+                continue
+
     # Compute days_left and urgent flag for each item
     for section in data['sections']:
         for item in section['items']:
@@ -670,7 +678,7 @@ def build_jobs_html(data):
             <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
           </div>
           <div class="job-link">
-            <a href="{item['link_url']}" target="_blank" rel="noopener">🔗 {item['link_text']}</a>
+            {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
           </div>
         </div>'''
 
