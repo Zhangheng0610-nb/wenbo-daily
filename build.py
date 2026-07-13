@@ -647,10 +647,13 @@ def parse_jobs(filepath):
     return data
 
 
-def build_jobs_html(data):
-    """Generate HTML for the recruitment page (jobs.html)."""
+def build_jobs_html(data, page_type='jobs'):
+    """Generate HTML for the recruitment page (jobs.html) or internship page (intern.html)."""
     total = sum(len(s['items']) for s in data['sections'])
     urgent_count = sum(1 for s in data['sections'] for it in s['items'] if it['urgent'])
+    is_intern = (page_type == 'intern')
+    page_title = '🌱 文博实习招聘' if is_intern else '💼 文博招聘信息'
+    page_url = 'intern.html' if is_intern else 'jobs.html'
 
     # Build sections
     sections_html = ''
@@ -703,9 +706,9 @@ def build_jobs_html(data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文博招聘信息 | {data['update_date']}</title>
-<meta property="og:title" content="文博招聘信息 | {data['update_date']}">
-<meta property="og:description" content="省级以上博物馆、考古院所、高校文博专业招聘信息，共 {total} 个岗位。即将截止 {urgent_count} 个。">
+<title>{page_title} | {data['update_date']}</title>
+<meta property="og:title" content="{page_title} | {data['update_date']}">
+<meta property="og:description" content="{'文博实习岗位，面向在读学生，共 ' + str(total) + ' 个岗位' if is_intern else '省级以上博物馆、考古院所、高校文博专业招聘信息，共 ' + str(total) + ' 个岗位。即将截止 ' + str(urgent_count) + ' 个。'}">
 <meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -789,8 +792,8 @@ def build_jobs_html(data):
 <body>
 
 <header>
-  <h1>💼 文博招聘信息</h1>
-  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个岗位 ｜ ⏰ 即将截止 {urgent_count} 个</p>
+  <h1>{page_title}</h1>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'}{' ｜ ⏰ 即将截止 ' + str(urgent_count) + ' 个' if not is_intern and urgent_count else ''}</p>
   <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
 </header>
 
@@ -1430,7 +1433,7 @@ def main():
     if os.path.exists(INTERN_MD):
         intern_data = parse_jobs(INTERN_MD)
         if intern_data and intern_data.get('sections'):
-            intern_html = build_jobs_html(intern_data)
+            intern_html = build_jobs_html(intern_data, page_type='intern')
             intern_path = os.path.join(SITE_DIR, 'intern.html')
             with open(intern_path, 'w', encoding='utf-8') as f:
                 f.write(intern_html)
