@@ -572,7 +572,8 @@ def parse_jobs(filepath):
                 'deadline': '',
                 'link_url': '',
                 'link_text': '招聘公告',
-                'days_left': None
+                'days_left': None,
+                'note': ''
             }
             if current_section is None:
                 # Default section
@@ -594,6 +595,8 @@ def parse_jobs(filepath):
                     current_item['location'] = field_value
                 elif '截止' in field_name:
                     current_item['deadline'] = field_value
+                elif '待遇' in field_name:
+                    current_item['note'] = field_value
                 continue
 
             # Link line: - 🔗 [text](url)
@@ -676,6 +679,7 @@ def build_jobs_html(data):
             <span>🎓 {item['education'] or '见公告'}</span>
             <span>📍 {item['location'] or '见公告'}</span>
             <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
+            {('<span>💰 ' + item['note'] + '</span>') if item.get('note') else ''}
           </div>
           <div class="job-link">
             {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
@@ -1098,34 +1102,16 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     recruitment_block = ''
     if recruitment_data and recruitment_data.get('sections'):
         total_jobs = sum(len(s['items']) for s in recruitment_data['sections'])
-        urgent_count = sum(1 for s in recruitment_data['sections'] for it in s['items'] if it['urgent'])
-
-        # Build mini-cards for urgent items (up to 3)
-        mini_cards = ''
-        urgent_items = []
+        # Build summary of sections
+        section_labels = []
         for s in recruitment_data['sections']:
-            for it in s['items']:
-                if it['urgent']:
-                    urgent_items.append(it)
-        for j in urgent_items[:3]:
-            if j['days_left'] == 0:
-                label = '今天截止'
-            elif j['days_left'] == 1:
-                label = '明天截止'
-            else:
-                label = f'{j["days_left"]}天后截止'
-            mini_cards += f'''<a class="day-card recruitment-card" href="jobs.html">
-      <span class="date">⏰ {j['institution']}</span>
-      <div class="count">{j['position']} · 截止 {j['deadline']} · <span style="color:#e74c3c;font-weight:700;">{label}</span></div>
-    </a>'''
-
-        urgent_badge = f'⏰ {urgent_count} 个即将截止 · ' if urgent_count else ''
-        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
+            section_labels.append(f'{s["icon"]} {s["category"]} {len(s["items"])} 条')
+        section_summary = ' · '.join(section_labels) if section_labels else ''
+        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_jobs} 个岗位</span></div>
 <div class="section-body hidden">
-{mini_cards}
-<a class="day-card recruitment-card all-recruitment" href="jobs.html">
+<a class="day-card" href="jobs.html">
   <span class="date">📋 查看全部 {total_jobs} 个岗位</span>
-  <div class="count">🏛️ 博物馆 · 🏗️ 考古所 · 🎓 高校文博专业 ｜ 每两日更新 · 更新于 {recruitment_data['update_date']}</div>
+  <div class="count">{section_summary} ｜ 每两日更新 · 更新于 {recruitment_data['update_date']}</div>
 </a>
 </div>
 '''
