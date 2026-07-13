@@ -1084,15 +1084,15 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     # Build section blocks
     weekly_block = ''
     if weekly_cards:
-        weekly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body"><div id="weekly-list">{weekly_cards}</div></div>\n'
+        weekly_block = f'<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body hidden"><div id="weekly-list">{weekly_cards}</div></div>\n'
     else:
-        weekly_block = '<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="section-body"><div class="empty">周报每周日发布，敬请期待</div></div>\n'
+        weekly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">周报每周日发布，敬请期待</div></div>\n'
 
     monthly_block = ''
     if monthly_cards:
-        monthly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body"><div id="monthly-list">{monthly_cards}</div></div>\n'
+        monthly_block = f'<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body hidden"><div id="monthly-list">{monthly_cards}</div></div>\n'
     else:
-        monthly_block = '<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
+        monthly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
 
     # Recruitment section
     recruitment_block = ''
@@ -1120,8 +1120,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     </a>'''
 
         urgent_badge = f'⏰ {urgent_count} 个即将截止 · ' if urgent_count else ''
-        recruitment_block = f'''<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
-<div class="section-body">
+        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{urgent_badge}{total_jobs} 个岗位</span></div>
+<div class="section-body hidden">
 {mini_cards}
 <a class="day-card recruitment-card all-recruitment" href="jobs.html">
   <span class="date">📋 查看全部 {total_jobs} 个岗位</span>
@@ -1130,7 +1130,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </div>
 '''
     else:
-        recruitment_block = '<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
+        recruitment_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
