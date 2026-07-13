@@ -1102,44 +1102,43 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     else:
         monthly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
 
-    # Recruitment section
+    # Recruitment section (正职 + 实习 as sub-sections)
     recruitment_block = ''
-    if recruitment_data and recruitment_data.get('sections'):
-        total_jobs = sum(len(s['items']) for s in recruitment_data['sections'])
-        # Build summary of sections
-        section_labels = []
-        for s in recruitment_data['sections']:
-            section_labels.append(f'{s["icon"]} {s["category"]} {len(s["items"])} 条')
-        section_summary = ' · '.join(section_labels) if section_labels else ''
-        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_jobs} 个岗位</span></div>
-<div class="section-body hidden">
-<a class="day-card" href="jobs.html">
-  <span class="date">📋 查看全部 {total_jobs} 个岗位</span>
-  <div class="count">{section_summary} ｜ 每两日更新 · 更新于 {recruitment_data['update_date']}</div>
+    has_jobs = recruitment_data and recruitment_data.get('sections')
+    has_intern = intern_data and intern_data.get('sections')
+
+    total_jobs = sum(len(s['items']) for s in recruitment_data['sections']) if has_jobs else 0
+    total_intern = sum(len(s['items']) for s in intern_data['sections']) if has_intern else 0
+    total_all = total_jobs + total_intern
+
+    if has_jobs or has_intern:
+        # Job sub-card
+        jobs_card = ''
+        if has_jobs:
+            section_labels = [f'{s["icon"]} {s["category"]} {len(s["items"])} 条' for s in recruitment_data['sections']]
+            section_summary = ' · '.join(section_labels)
+            jobs_card = f'''<a class="day-card" href="jobs.html">
+  <span class="date">💼 正职招聘</span>
+  <div class="count">{section_summary} ｜ {total_jobs} 个岗位 · 更新于 {recruitment_data['update_date']}</div>
 </a>
+'''
+        # Intern sub-card
+        intern_card = ''
+        if has_intern:
+            intern_labels = [f'{s["icon"]} {s["category"]} {len(s["items"])} 条' for s in intern_data['sections']]
+            intern_summary = ' · '.join(intern_labels)
+            intern_card = f'''<a class="day-card" href="intern.html">
+  <span class="date">🌱 实习招聘</span>
+  <div class="count">{intern_summary} ｜ {total_intern} 个岗位 · 更新于 {intern_data['update_date']}</div>
+</a>
+'''
+        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_all} 个岗位</span></div>
+<div class="section-body hidden">
+{intern_card}{jobs_card}
 </div>
 '''
     else:
         recruitment_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
-
-    # Internship section
-    intern_block = ''
-    if intern_data and intern_data.get('sections'):
-        total_intern = sum(len(s['items']) for s in intern_data['sections'])
-        intern_section_labels = []
-        for s in intern_data['sections']:
-            intern_section_labels.append(f'{s["icon"]} {s["category"]} {len(s["items"])} 条')
-        intern_summary = ' · '.join(intern_section_labels) if intern_section_labels else ''
-        intern_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">🌱 实习招聘 <span class="count-badge">{total_intern} 个岗位</span></div>
-<div class="section-body hidden">
-<a class="day-card" href="intern.html">
-  <span class="date">📋 查看全部 {total_intern} 个实习岗位</span>
-  <div class="count">{intern_summary} ｜ 每两日更新 · 更新于 {intern_data['update_date']}</div>
-</a>
-</div>
-'''
-    else:
-        intern_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">🌱 实习招聘 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">实习信息每两日更新，敬请期待</div></div>\n'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -1188,8 +1187,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 {monthly_block}
 
 {recruitment_block}
-
-{intern_block}
 
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
