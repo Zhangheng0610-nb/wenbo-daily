@@ -10,6 +10,7 @@ SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPORTS_DIR = os.path.join(SITE_DIR, 'reports')
 MD_DIR = os.path.join(os.path.dirname(SITE_DIR), '日报')
 JOBS_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'jobs.md')
+INTERN_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'intern.md')
 
 WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
@@ -920,7 +921,7 @@ def build_digest_html(data):
 
 # ───────────────── 首页构建 ─────────────────
 
-def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recruitment_data=None):
+def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recruitment_data=None, intern_data=None):
     """Rebuild index.html with daily, weekly, monthly, and recruitment sections."""
     if weekly_reports is None:
         weekly_reports = []
@@ -1118,6 +1119,25 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     else:
         recruitment_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
 
+    # Internship section
+    intern_block = ''
+    if intern_data and intern_data.get('sections'):
+        total_intern = sum(len(s['items']) for s in intern_data['sections'])
+        intern_section_labels = []
+        for s in intern_data['sections']:
+            intern_section_labels.append(f'{s["icon"]} {s["category"]} {len(s["items"])} 条')
+        intern_summary = ' · '.join(intern_section_labels) if intern_section_labels else ''
+        intern_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">🌱 实习招聘 <span class="count-badge">{total_intern} 个岗位</span></div>
+<div class="section-body hidden">
+<a class="day-card" href="intern.html">
+  <span class="date">📋 查看全部 {total_intern} 个实习岗位</span>
+  <div class="count">{intern_summary} ｜ 每两日更新 · 更新于 {intern_data['update_date']}</div>
+</a>
+</div>
+'''
+    else:
+        intern_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">🌱 实习招聘 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">实习信息每两日更新，敬请期待</div></div>\n'
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -1165,6 +1185,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 {monthly_block}
 
 {recruitment_block}
+
+{intern_block}
 
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
@@ -1403,12 +1425,28 @@ def main():
     else:
         print('Jobs: no source file at', JOBS_MD)
 
-    # Build index with all four sections
-    index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data)
+    # Parse internship data
+    intern_data = None
+    if os.path.exists(INTERN_MD):
+        intern_data = parse_jobs(INTERN_MD)
+        if intern_data and intern_data.get('sections'):
+            intern_html = build_jobs_html(intern_data)
+            intern_path = os.path.join(SITE_DIR, 'intern.html')
+            with open(intern_path, 'w', encoding='utf-8') as f:
+                f.write(intern_html)
+            total_intern = sum(len(s['items']) for s in intern_data['sections'])
+            print(f'Intern: {intern_path} ({total_intern} internships)')
+        else:
+            print('Intern: no listings found in', INTERN_MD)
+    else:
+        print('Intern: no source file at', INTERN_MD)
+
+    # Build index with all sections
+    index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data, intern_data)
     index_path = os.path.join(SITE_DIR, 'index.html')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_html)
-    print(f'Index: {index_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报 + {"招聘" if recruitment_data else "无招聘"})')
+    print(f'Index: {index_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报 + {"招聘" if recruitment_data else "无招聘"} + {"实习" if intern_data else "无实习"})')
 
     print('\nDone! Run push to deploy.')
 
