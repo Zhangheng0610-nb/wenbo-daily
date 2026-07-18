@@ -933,8 +933,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
     daily_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)
 
-    # Daily cards — build list, limit to latest 7 by default
-    DAILY_LIMIT = 7
+    # Daily cards — build list, limit to latest 3 by default
+    DAILY_LIMIT = 3
     card_items = []
     for i, r in enumerate(daily_reports):
         total = r['domestic_count'] + r['international_count']
@@ -956,27 +956,47 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <div class="older-cards" style="display:none;">
 {older_cards_joined}
 </div>
-<button class="show-more-btn" onclick="toggleOlder(this)">📅 展开更早的日报（{older_count} 天）</button>'''
+<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📅 展开更早的日报（{older_count} 天）" data-collapse-text="📅 收起">📅 展开更早的日报（{older_count} 天）</button>'''
 
-    # Weekly cards
-    weekly_cards = ''
+    # Weekly cards — build list, limit to latest 1 by default
+    weekly_card_items = []
+    WEEKLY_LIMIT = 1
     weekly_reports = sorted(weekly_reports, key=lambda r: r['ref_date'], reverse=True)
     for r in weekly_reports:
-        weekly_cards += f'''
+        weekly_card_items.append(f'''
 <a class="day-card weekly-card" href="reports/weekly-{r['ref_date']}.html">
   <span class="date">📰 {r['date_range']}</span>
   <div class="count">📋 共 {len(r['items'])} 条要闻</div>
-</a>'''
+</a>''')
+    weekly_latest = '\n'.join(weekly_card_items[:WEEKLY_LIMIT])
+    weekly_older_html = ''
+    if len(weekly_card_items) > WEEKLY_LIMIT:
+        w_older_count = len(weekly_card_items) - WEEKLY_LIMIT
+        weekly_older_html = f'''
+<div class="older-cards" style="display:none;">
+{'\n'.join(weekly_card_items[WEEKLY_LIMIT:])}
+</div>
+<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📰 展开更早的周报（{w_older_count} 期）" data-collapse-text="📰 收起">📰 展开更早的周报（{w_older_count} 期）</button>'''
 
-    # Monthly cards
-    monthly_cards = ''
+    # Monthly cards — build list, limit to latest 1 by default
+    monthly_card_items = []
+    MONTHLY_LIMIT = 1
     monthly_reports = sorted(monthly_reports, key=lambda r: r['ref_date'], reverse=True)
     for r in monthly_reports:
-        monthly_cards += f'''
+        monthly_card_items.append(f'''
 <a class="day-card monthly-card" href="reports/monthly-{r['ref_date']}.html">
   <span class="date">📊 {r['date_range']}</span>
   <div class="count">📋 共 {len(r['items'])} 条要闻</div>
-</a>'''
+</a>''')
+    monthly_latest = '\n'.join(monthly_card_items[:MONTHLY_LIMIT])
+    monthly_older_html = ''
+    if len(monthly_card_items) > MONTHLY_LIMIT:
+        m_older_count = len(monthly_card_items) - MONTHLY_LIMIT
+        monthly_older_html = f'''
+<div class="older-cards" style="display:none;">
+{'\n'.join(monthly_card_items[MONTHLY_LIMIT:])}
+</div>
+<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📊 展开更早的月报（{m_older_count} 期）" data-collapse-text="📊 收起">📊 展开更早的月报（{m_older_count} 期）</button>'''
 
     index_css = """<style>
   :root {
@@ -1091,14 +1111,14 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
     # Build section blocks
     weekly_block = ''
-    if weekly_cards:
-        weekly_block = f'<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body hidden"><div id="weekly-list">{weekly_cards}</div></div>\n'
+    if weekly_card_items:
+        weekly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body"><div id="weekly-list">{weekly_latest}\n{weekly_older_html}</div></div>\n'
     else:
         weekly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">周报每周日发布，敬请期待</div></div>\n'
 
     monthly_block = ''
-    if monthly_cards:
-        monthly_block = f'<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body hidden"><div id="monthly-list">{monthly_cards}</div></div>\n'
+    if monthly_card_items:
+        monthly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body"><div id="monthly-list">{monthly_latest}\n{monthly_older_html}</div></div>\n'
     else:
         monthly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
 
@@ -1208,8 +1228,11 @@ function toggleOlder(btn) {
   if (olderDiv && olderDiv.classList.contains('older-cards')) {
     const isHidden = olderDiv.style.display === 'none';
     olderDiv.style.display = isHidden ? '' : 'none';
-    const count = olderDiv.querySelectorAll('.day-card').length;
-    btn.textContent = isHidden ? '📅 收起' : '📅 展开更早的日报（' + count + ' 天）';
+    if (isHidden) {
+      btn.textContent = btn.getAttribute('data-collapse-text') || '收起 ▲';
+    } else {
+      btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
+    }
   }
 }
 (async function(){

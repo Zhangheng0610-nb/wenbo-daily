@@ -166,6 +166,8 @@
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
 
+<div class="older-cards" style="display:none;">
+
 <a class="day-card" href="reports/2026-07-15.html">
   <span class="date">📅 2026-07-15</span>
   <span class="weekday">周三</span>
@@ -194,8 +196,6 @@
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
 
-<div class="older-cards" style="display:none;">
-
 <a class="day-card" href="reports/2026-07-11.html">
   <span class="date">📅 2026-07-11</span>
   <span class="weekday">周六</span>
@@ -203,16 +203,17 @@
   <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
 </a>
 </div>
-<button class="show-more-btn" onclick="toggleOlder(this)">📅 展开更早的日报（1 天）</button>
+<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📅 展开更早的日报（5 天）" data-collapse-text="📅 收起">📅 展开更早的日报（5 天）</button>
 </div>
 </div>
 
-<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">1 期</span></div>
-<div class="section-body hidden"><div id="weekly-list">
+<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">1 期</span></div>
+<div class="section-body"><div id="weekly-list">
 <a class="day-card weekly-card" href="reports/weekly-2026-07-12.html">
   <span class="date">📰 2026-07-06 — 2026-07-12</span>
   <div class="count">📋 共 10 条要闻</div>
-</a></div></div>
+</a>
+</div></div>
 
 
 <div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>
@@ -250,8 +251,11 @@ function toggleOlder(btn) {
   if (olderDiv && olderDiv.classList.contains('older-cards')) {
     const isHidden = olderDiv.style.display === 'none';
     olderDiv.style.display = isHidden ? '' : 'none';
-    const count = olderDiv.querySelectorAll('.day-card').length;
-    btn.textContent = isHidden ? '📅 收起' : '📅 展开更早的日报（' + count + ' 天）';
+    if (isHidden) {
+      btn.textContent = btn.getAttribute('data-collapse-text') || '收起 ▲';
+    } else {
+      btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
+    }
   }
 }
 (async function(){
