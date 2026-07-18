@@ -934,7 +934,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     daily_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)
 
     # Daily cards — build list, limit to latest 3 by default
-    DAILY_LIMIT = 3
+    DAILY_LIMIT = 2
     card_items = []
     for i, r in enumerate(daily_reports):
         total = r['domestic_count'] + r['international_count']
@@ -1152,8 +1152,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <div class="count">{intern_summary} ｜ {total_intern} 个岗位 · 更新于 {intern_data['update_date']}</div>
 </a>
 '''
-        recruitment_block = f'''<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_all} 个岗位</span></div>
-<div class="section-body hidden">
+        recruitment_block = f'''<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_all} 个岗位</span></div>
+<div class="section-body">
 {intern_card}{jobs_card}
 </div>
 '''
