@@ -26,6 +26,7 @@ CSS = """<style>
     }
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: var(--bg); color: var(--text); line-height: 1.85;
@@ -1010,6 +1011,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     }
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: var(--bg); color: var(--text); line-height: 1.7;
