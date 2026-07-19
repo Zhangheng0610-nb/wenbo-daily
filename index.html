@@ -215,13 +215,21 @@
 </div>
 </div>
 
-<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">1 期</span></div>
+<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">2 期</span></div>
 <div class="section-body"><div id="weekly-list">
+<a class="day-card weekly-card" href="reports/weekly-2026-07-19.html">
+  <span class="date">📰 2026-07-13 — 2026-07-19</span>
+  <div class="count">📋 共 10 条要闻</div>
+</a>
+
+<div class="older-cards" style="display:none;">
+
 <a class="day-card weekly-card" href="reports/weekly-2026-07-12.html">
   <span class="date">📰 2026-07-06 — 2026-07-12</span>
   <div class="count">📋 共 10 条要闻</div>
 </a>
-</div></div>
+</div>
+<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📰 展开更早的周报（1 期）" data-collapse-text="📰 收起">📰 展开更早的周报（1 期）</button></div></div>
 
 
 <div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>
