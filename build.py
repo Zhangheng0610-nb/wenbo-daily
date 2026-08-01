@@ -355,6 +355,7 @@ def parse_digest(filepath, dtype='weekly'):
         'upcoming_title': '',
         'upcoming_table': [],
         'trends': [],
+        'rich_sections': [],  # monthly report: arbitrary rich-text sections
         'footer': ''
     }
 
@@ -374,7 +375,7 @@ def parse_digest(filepath, dtype='weekly'):
             data['ref_date'] = f'{y2}-{int(m2):02d}-{int(d2):02d}'
             data['label'] = '周报'
     else:
-        # # 📊 文博资讯月报 | 2026年7月
+        # # 📚 文博资讯月报 | 2026年7月
         title_match = re.match(r'# .+?\|\s*(\d{4})年(\d{1,2})月', lines[0])
         if title_match:
             y, m = title_match.groups()
@@ -387,6 +388,7 @@ def parse_digest(filepath, dtype='weekly'):
     # Parse sections
     current_section = None
     current_item = None
+    current_rich = None
     i = 1
     while i < len(lines):
         line = lines[i]
@@ -394,23 +396,63 @@ def parse_digest(filepath, dtype='weekly'):
         # Section headers
         if line.startswith('## 📊') and '概览' in line:
             current_section = 'overview'
+            current_item = None; current_rich = None
             i += 1
             continue
-        elif line.startswith('## 🔟') or line.startswith('## 🔝') or ('要闻' in line and '##' in line):
+        elif line.startswith('## 🔟') or line.startswith('## 🔝') or ('要闻' in line and '##' in line and '趋势' not in line):
             current_section = 'items'
+            current_item = None; current_rich = None
             i += 1
             continue
         elif line.startswith('## 🗓️') or line.startswith('## 📅'):
             current_section = 'upcoming'
+            current_item = None; current_rich = None
             i += 1
             data['upcoming_title'] = line.lstrip('# ').strip()
             continue
         elif line.startswith('## 📊') and '趋势' in line:
-            current_section = 'trends'
+            # Monthly report: trends are rich-text sections, not just tables
+            if dtype == 'monthly':
+                current_section = 'rich'
+                title = line.lstrip('# ').strip()
+                title = re.sub(r'\s*\{#.*?\}\s*$', '', title)
+                current_rich = {'icon': '📊', 'title': title, 'raw_lines': []}
+                data['rich_sections'].append(current_rich)
+            else:
+                current_section = 'trends'
+            current_item = None
+            i += 1
+            continue
+
+        # Monthly report rich sections: 🌍, 💡, 📈, etc.
+        # For monthly reports, every unhandled ## header starts a new rich section
+        if dtype == 'monthly' and line.startswith('## ') and not line.startswith('## 📑'):
+            # Skip TOC section
+            if '目录' in line:
+                current_section = 'skip'
+                current_item = None; current_rich = None
+                i += 1
+                continue
+            # Start a new rich section (handles section transitions)
+            icon_match = re.match(r'##\s+(\S)\s', line)
+            icon = icon_match.group(1) if icon_match else '📄'
+            title = line.lstrip('# ').strip()
+            title = re.sub(r'\s*\{#.*?\}\s*$', '', title)
+            current_section = 'rich'
+            current_rich = {'icon': icon, 'title': title, 'raw_lines': []}
+            data['rich_sections'].append(current_rich)
+            current_item = None
             i += 1
             continue
         elif line.startswith('## ') or line.startswith('# '):
             current_section = None
+            current_item = None; current_rich = None
+            i += 1
+            continue
+
+        # Handle rich section content (monthly report)
+        if current_section == 'rich' and current_rich is not None:
+            current_rich['raw_lines'].append(line)
             i += 1
             continue
 
@@ -457,6 +499,21 @@ def parse_digest(filepath, dtype='weekly'):
                     data['upcoming_table'].append(cells)
                 elif current_section == 'trends':
                     data['trends'].append(cells)
+                elif current_section == 'items' and dtype == 'monthly':
+                    # Monthly report top-10 table: | rank | title | date | significance |
+                    if len(cells) >= 3 and cells[0].isdigit():
+                        rank = cells[0]
+                        title = cells[1] if len(cells) > 1 else ''
+                        date_info = cells[2] if len(cells) > 2 else ''
+                        significance = cells[3] if len(cells) > 3 else ''
+                        current_item = {
+                            'id': f'item{rank}',
+                            'title': title,
+                            'sources': [],
+                            'body': f'📅 {date_info} ｜ {significance}' if significance else date_info,
+                            'progress': ''
+                        }
+                        data['items'].append(current_item)
             i += 1
             continue
 
@@ -820,6 +877,93 @@ def build_jobs_html(data, page_type='jobs'):
     return html
 
 
+def _render_md_block(lines):
+    """Convert a list of raw markdown lines to HTML.
+    Handles: paragraphs, ### headers, bullet lists, tables, blockquotes.
+    """
+    html = ''
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+
+        # Blank line or horizontal rule
+        if not line.strip() or line.strip() == '---':
+            i += 1
+            continue
+
+        # Sub-header: ### Title
+        sub_match = re.match(r'###\s+(.+)', line)
+        if sub_match:
+            title = md_inline(sub_match.group(1).strip())
+            # Remove {#anchor}
+            title = re.sub(r'\s*\{#.*?\}\s*$', '', title)
+            html += f'<h3>{title}</h3>\n'
+            i += 1
+            continue
+
+        # Table
+        if line.startswith('|'):
+            table_rows = []
+            while i < len(lines) and lines[i].startswith('|'):
+                cells = [c.strip() for c in lines[i].split('|')[1:-1]]
+                if not all(c.startswith('-') for c in cells):
+                    table_rows.append(cells)
+                elif table_rows:
+                    # separator row — skip but it marks header
+                    pass
+                i += 1
+            if table_rows:
+                html += '<table>\n'
+                for ri, row in enumerate(table_rows):
+                    tag = 'th' if ri == 0 else 'td'
+                    html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
+                html += '</table>\n'
+            continue
+
+        # Blockquote
+        if line.startswith('> '):
+            content = line[2:].strip()
+            content = re.sub(r'\*\*点评[：:]\*\*\s*', '', content)
+            html += f'<blockquote>{md_inline(content)}</blockquote>\n'
+            i += 1
+            continue
+
+        # Unordered list
+        if re.match(r'^-\s+', line):
+            html += '<ul>\n'
+            while i < len(lines) and re.match(r'^-\s+', lines[i]):
+                item_text = md_inline(re.sub(r'^-\s+', '', lines[i]))
+                html += f'<li>{item_text}</li>\n'
+                i += 1
+            html += '</ul>\n'
+            continue
+
+        # Ordered list
+        if re.match(r'^\d+\.\s+', line):
+            html += '<ol>\n'
+            while i < len(lines) and re.match(r'^\d+\.\s+', lines[i]):
+                item_text = md_inline(re.sub(r'^\d+\.\s+', '', lines[i]))
+                html += f'<li>{item_text}</li>\n'
+                i += 1
+            html += '</ol>\n'
+            continue
+
+        # Regular paragraph — collect consecutive text lines
+        para_lines = []
+        while i < len(lines) and lines[i].strip() and not lines[i].startswith(('#', '|', '>', '-')) and not re.match(r'^\d+\.\s+', lines[i]):
+            para_lines.append(lines[i].strip())
+            i += 1
+        if para_lines:
+            text = ' '.join(para_lines)
+            html += f'<p>{md_inline(text)}</p>\n'
+            continue
+
+        # Fallback: skip unrecognized lines
+        i += 1
+
+    return html
+
+
 def build_digest_html(data):
     """Generate HTML for a weekly or monthly digest."""
     dtype = data['type']
@@ -839,7 +983,7 @@ def build_digest_html(data):
     # Items
     items_html = '<h2 class="section">🔟 本期要闻</h2>\n\n'
     for item in data['items']:
-        items_html += f'<h3 id="{item["id"]}">{item["title"]}</h3>\n'
+        items_html += f'<h3 id="{item["id"]}">{md_inline(item["title"])}</h3>\n'
 
         if item['body']:
             items_html += f'<p>{md_inline(item["body"])}</p>\n'
@@ -873,6 +1017,15 @@ def build_digest_html(data):
             tag = 'th' if i == 0 else 'td'
             trends_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
         trends_html += '</table>\n'
+
+    # Rich sections (monthly report)
+    rich_html = ''
+    if data.get('rich_sections'):
+        for sec in data['rich_sections']:
+            # Title already includes emoji, don't duplicate
+            rich_html += f'<h2 class="section">{sec["title"]}</h2>\n\n'
+            rich_html += _render_md_block(sec['raw_lines'])
+            rich_html += '\n'
 
     og_label = '文博资讯周报' if dtype == 'weekly' else '文博资讯月报'
     url_slug = f'{dtype}-{data["ref_date"]}'
@@ -909,6 +1062,8 @@ def build_digest_html(data):
 {upcoming_html}
 
 {trends_html}
+
+{rich_html}
 
 <hr>
 
