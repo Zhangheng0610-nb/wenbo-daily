@@ -286,7 +286,7 @@ def build_report_html(data):
     trends_html = '<h2 class="section">📊 今日趋势总结</h2>\n\n<table>\n'
     for i, row in enumerate(data['trends']):
         tag = 'th' if i == 0 else 'td'
-        trends_html += '<tr>' + ''.join(f'<{tag}>{c}</{tag}>' for c in row) + '</tr>\n'
+        trends_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
     trends_html += '</table>\n'
 
     html = f'''<!DOCTYPE html>
@@ -833,7 +833,7 @@ def build_digest_html(data):
         overview_html += '<table>\n'
         for i, row in enumerate(data['overview_table']):
             tag = 'th' if i == 0 else 'td'
-            overview_html += '<tr>' + ''.join(f'<{tag}>{c}</{tag}>' for c in row) + '</tr>\n'
+            overview_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
         overview_html += '</table>\n'
 
     # Items
@@ -862,7 +862,7 @@ def build_digest_html(data):
         upcoming_html = f'<h2 class="section">{upcoming_title}</h2>\n\n<table>\n'
         for i, row in enumerate(data['upcoming_table']):
             tag = 'th' if i == 0 else 'td'
-            upcoming_html += '<tr>' + ''.join(f'<{tag}>{c}</{tag}>' for c in row) + '</tr>\n'
+            upcoming_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
         upcoming_html += '</table>\n'
 
     # Trends
@@ -871,7 +871,7 @@ def build_digest_html(data):
         trends_html = '<h2 class="section">📊 趋势总结</h2>\n\n<table>\n'
         for i, row in enumerate(data['trends']):
             tag = 'th' if i == 0 else 'td'
-            trends_html += '<tr>' + ''.join(f'<{tag}>{c}</{tag}>' for c in row) + '</tr>\n'
+            trends_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
         trends_html += '</table>\n'
 
     og_label = '文博资讯周报' if dtype == 'weekly' else '文博资讯月报'
