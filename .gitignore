@@ -10,3 +10,4 @@ enable*.py
 setup*.ps1
 ssh-*.py
 *.log
+__pycache__/
