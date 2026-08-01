@@ -97,6 +97,26 @@ CSS = """<style>
   table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .85em; }
   td, th { border: 1px solid var(--border); padding: 7px 10px; }
   strong { color: var(--accent); }
+  .top10-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88em; }
+  .top10-table thead th {
+    background: var(--accent); color: #fff; padding: 10px 12px;
+    text-align: left; font-weight: 600; border: none;
+  }
+  .top10-table tbody td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .top10-table tbody tr:hover { background: var(--tag-bg); }
+  .top10-table .rank {
+    font-weight: 700; font-size: 1.15em; color: var(--accent);
+    text-align: center; width: 36px;
+  }
+  .top10-table .news-title { font-weight: 600; }
+  .top10-table .date {
+    color: var(--muted); font-size: .82em; white-space: nowrap;
+    width: 60px;
+  }
+  .top10-table .sig { color: var(--muted); font-size: .85em; line-height: 1.5; }
   footer {
     text-align: center; padding: 28px 0 16px;
     color: var(--muted); font-size: .78em;
@@ -981,23 +1001,47 @@ def build_digest_html(data):
         overview_html += '</table>\n'
 
     # Items
-    items_html = '<h2 class="section">🔟 本期要闻</h2>\n\n'
-    for item in data['items']:
-        items_html += f'<h3 id="{item["id"]}">{md_inline(item["title"])}</h3>\n'
+    if dtype == 'monthly' and data['items']:
+        # Monthly report: render top 10 as a styled ranking table
+        items_html = '<h2 class="section">🔟 七月十大文博新闻</h2>\n\n'
+        items_html += '<p>本月文博领域重大事件精选，按重要性和影响力综合排序。</p>\n'
+        items_html += '<table class="top10-table">\n'
+        items_html += '<thead><tr><th>#</th><th>新闻</th><th>日期</th><th>为什么重要</th></tr></thead>\n<tbody>\n'
+        for item in data['items']:
+            rank = item['id'].replace('item', '')
+            # body format: "📅 date | significance"
+            body = item.get('body', '')
+            date_str = ''
+            sig_str = ''
+            if '｜' in body:
+                parts = body.split('｜', 1)
+                date_str = parts[0].replace('📅', '').strip()
+                sig_str = parts[1].strip()
+            elif '|' in body:
+                parts = body.split('|', 1)
+                date_str = parts[0].replace('📅', '').strip()
+                sig_str = parts[1].strip()
+            items_html += f'<tr><td class="rank">{rank}</td><td class="news-title">{md_inline(item["title"])}</td><td class="date">{date_str}</td><td class="sig">{md_inline(sig_str)}</td></tr>\n'
+        items_html += '</tbody>\n</table>\n'
+    else:
+        # Weekly report: flat item list
+        items_html = '<h2 class="section">🔟 本期要闻</h2>\n\n'
+        for item in data['items']:
+            items_html += f'<h3 id="{item["id"]}">{md_inline(item["title"])}</h3>\n'
 
-        if item['body']:
-            items_html += f'<p>{md_inline(item["body"])}</p>\n'
+            if item['body']:
+                items_html += f'<p>{md_inline(item["body"])}</p>\n'
 
-        if item['progress']:
-            items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {md_inline(item["progress"])}</blockquote>\n'
+            if item['progress']:
+                items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {md_inline(item["progress"])}</blockquote>\n'
 
-        if item['sources']:
-            src_parts = []
-            for s in item['sources']:
-                src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
-            items_html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
+            if item['sources']:
+                src_parts = []
+                for s in item['sources']:
+                    src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
+                items_html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
 
-        items_html += '<hr>\n\n'
+            items_html += '<hr>\n\n'
 
     # Upcoming / forecast
     upcoming_html = ''

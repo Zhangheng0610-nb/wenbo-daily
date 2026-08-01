@@ -96,6 +96,26 @@
   table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .85em; }
   td, th { border: 1px solid var(--border); padding: 7px 10px; }
   strong { color: var(--accent); }
+  .top10-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88em; }
+  .top10-table thead th {
+    background: var(--accent); color: #fff; padding: 10px 12px;
+    text-align: left; font-weight: 600; border: none;
+  }
+  .top10-table tbody td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .top10-table tbody tr:hover { background: var(--tag-bg); }
+  .top10-table .rank {
+    font-weight: 700; font-size: 1.15em; color: var(--accent);
+    text-align: center; width: 36px;
+  }
+  .top10-table .news-title { font-weight: 600; }
+  .top10-table .date {
+    color: var(--muted); font-size: .82em; white-space: nowrap;
+    width: 60px;
+  }
+  .top10-table .sig { color: var(--muted); font-size: .85em; line-height: 1.5; }
   footer {
     text-align: center; padding: 28px 0 16px;
     color: var(--muted); font-size: .78em;

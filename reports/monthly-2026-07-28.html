@@ -96,6 +96,26 @@
   table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .85em; }
   td, th { border: 1px solid var(--border); padding: 7px 10px; }
   strong { color: var(--accent); }
+  .top10-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88em; }
+  .top10-table thead th {
+    background: var(--accent); color: #fff; padding: 10px 12px;
+    text-align: left; font-weight: 600; border: none;
+  }
+  .top10-table tbody td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .top10-table tbody tr:hover { background: var(--tag-bg); }
+  .top10-table .rank {
+    font-weight: 700; font-size: 1.15em; color: var(--accent);
+    text-align: center; width: 36px;
+  }
+  .top10-table .news-title { font-weight: 600; }
+  .top10-table .date {
+    color: var(--muted); font-size: .82em; white-space: nowrap;
+    width: 60px;
+  }
+  .top10-table .sig { color: var(--muted); font-size: .85em; line-height: 1.5; }
   footer {
     text-align: center; padding: 28px 0 16px;
     color: var(--muted); font-size: .78em;
@@ -115,48 +135,24 @@
 <h2 class="section">📊 本期概览</h2>
 
 
-<h2 class="section">🔟 本期要闻</h2>
+<h2 class="section">🔟 七月十大文博新闻</h2>
 
-<h3 id="item1"><strong>景德镇手工瓷业遗存列入世界遗产</strong></h3>
-<p>📅 7/25 ｜ 中国第61项世遗，填补"瓷"主题空白，AI+游戏深度集成保护全链路</p>
-<hr>
-
-<h3 id="item2"><strong>七部门揭榜挂帅首次纳入文物保护装备</strong></h3>
-<p>📅 7/30 ｜ 文保科技从行业内部消化升级为国家工业创新议程</p>
-<hr>
-
-<h3 id="item3"><strong>"博物馆里读中国"99项展览推介公布</strong></h3>
-<p>📅 7/29 ｜ 年度策展水平检阅，19项获重点推介</p>
-<hr>
-
-<h3 id="item4"><strong>马首铜像入闽 + XR沉浸展</strong></h3>
-<p>📅 7/31 ｜ "科技+文物"范式升级——不是加动画，是重建文物失去的语境</p>
-<hr>
-
-<h3 id="item5"><strong>世界互联网大会发布《文化遗产数字化案例集》</strong></h3>
-<p>📅 7/22 ｜ 45项来自13国的优秀实践，中国数字文保方案获全球认可</p>
-<hr>
-
-<h3 id="item6"><strong>三星堆祭祀坑40周年：意外失火说+象牙保护突破</strong></h3>
-<p>📅 7/31 ｜ 颠覆"火焚仪式"假说，骨胶原注象牙技术有望推广至整个长江流域</p>
-<hr>
-
-<h3 id="item7"><strong>八大山人诞辰400周年特展</strong></h3>
-<p>📅 7/10起 ｜ "一展双馆+全城联动"，129件文物，博物馆造城运动新样本</p>
-<hr>
-
-<h3 id="item8"><strong>国际文物归还浪潮：玻利维亚、哥伦比亚、叙利亚、土耳其</strong></h3>
-<p>📅 7月密集 ｜ 全球南方国家的文化遗产主权意识集体觉醒</p>
-<hr>
-
-<h3 id="item9"><strong>良渚VR展走进亚美尼亚 + 大足石刻展登陆纽约</strong></h3>
-<p>📅 7/31 ｜ 文化遗产"数字出海"两条路径渐清晰</p>
-<hr>
-
-<h3 id="item10"><strong>多瑙河干涸暴露猛犸遗骸</strong></h3>
-<p>📅 7/30 ｜ 气候变化成为2026年文化遗产保护不可回避的最大变量</p>
-<hr>
-
+<p>本月文博领域重大事件精选，按重要性和影响力综合排序。</p>
+<table class="top10-table">
+<thead><tr><th>#</th><th>新闻</th><th>日期</th><th>为什么重要</th></tr></thead>
+<tbody>
+<tr><td class="rank">1</td><td class="news-title"><strong>景德镇手工瓷业遗存列入世界遗产</strong></td><td class="date">7/25</td><td class="sig">中国第61项世遗，填补"瓷"主题空白，AI+游戏深度集成保护全链路</td></tr>
+<tr><td class="rank">2</td><td class="news-title"><strong>七部门揭榜挂帅首次纳入文物保护装备</strong></td><td class="date">7/30</td><td class="sig">文保科技从行业内部消化升级为国家工业创新议程</td></tr>
+<tr><td class="rank">3</td><td class="news-title"><strong>"博物馆里读中国"99项展览推介公布</strong></td><td class="date">7/29</td><td class="sig">年度策展水平检阅，19项获重点推介</td></tr>
+<tr><td class="rank">4</td><td class="news-title"><strong>马首铜像入闽 + XR沉浸展</strong></td><td class="date">7/31</td><td class="sig">"科技+文物"范式升级——不是加动画，是重建文物失去的语境</td></tr>
+<tr><td class="rank">5</td><td class="news-title"><strong>世界互联网大会发布《文化遗产数字化案例集》</strong></td><td class="date">7/22</td><td class="sig">45项来自13国的优秀实践，中国数字文保方案获全球认可</td></tr>
+<tr><td class="rank">6</td><td class="news-title"><strong>三星堆祭祀坑40周年：意外失火说+象牙保护突破</strong></td><td class="date">7/31</td><td class="sig">颠覆"火焚仪式"假说，骨胶原注象牙技术有望推广至整个长江流域</td></tr>
+<tr><td class="rank">7</td><td class="news-title"><strong>八大山人诞辰400周年特展</strong></td><td class="date">7/10起</td><td class="sig">"一展双馆+全城联动"，129件文物，博物馆造城运动新样本</td></tr>
+<tr><td class="rank">8</td><td class="news-title"><strong>国际文物归还浪潮：玻利维亚、哥伦比亚、叙利亚、土耳其</strong></td><td class="date">7月密集</td><td class="sig">全球南方国家的文化遗产主权意识集体觉醒</td></tr>
+<tr><td class="rank">9</td><td class="news-title"><strong>良渚VR展走进亚美尼亚 + 大足石刻展登陆纽约</strong></td><td class="date">7/31</td><td class="sig">文化遗产"数字出海"两条路径渐清晰</td></tr>
+<tr><td class="rank">10</td><td class="news-title"><strong>多瑙河干涸暴露猛犸遗骸</strong></td><td class="date">7/30</td><td class="sig">气候变化成为2026年文化遗产保护不可回避的最大变量</td></tr>
+</tbody>
+</table>
 
 
 
@@ -201,25 +197,23 @@
 <li><strong>归还≠敌对</strong>——法国归还叙利亚文物与马克龙访叙发生在同一天，文物归还成为外交关系的催化剂而非障碍</li>
 </ol>
 
-<h2 class="section">💡 专题：博物馆数字化——从"锦上添花"到"基础设施"</h2>
+<h2 class="section">💡 专题：博物馆数字化——7月的三个信号</h2>
 
-<h3>背景</h3>
-<p>7月，三个数字化事件集中发生：世界互联网大会发布《文化遗产数字化案例集（2026）》（45项实践，覆盖13国）、景德镇以"数字景德镇"配合世遗申报（全球首次AI+游戏深度集成于遗产保护全链路）、"数字敦煌"国际影响力获参考消息专题报道。</p>
-<p>这些事件放在一起揭示了一个趋势：<strong>博物馆数字化正在从"锦上添花"（做一个好看的数字展厅、开发一个AR导览App）升级为"基础设施"（数字化成为保护、研究、展示的底层逻辑，就像水电网一样）。</strong></p>
-<h3>为什么是现在？</h3>
-<p>数字化从"锦上添花"升级为"基础设施"，由三个因素驱动：</p>
-<p><strong>1. 成本塌陷。</strong> 五年前做一次石窟的高精度三维扫描要几十万元，现在一架消费级无人机+摄影测量软件，几千元就能做。数字化不再是头部大馆的专利——聊城东昌府区博物馆这样的区县级馆也能上线AI伴游了。</p>
-<p><strong>2. 世遗申报的"数字化标配"。</strong> 景德镇的案例很典型——以前申遗的核心材料是学术论文和保护规划，现在数字化展陈、AI数据集、互动体验成了申遗方案的标配。这不是因为UNESCO要求，而是因为数字化是向评审专家讲清楚"这个遗址为什么重要"的最有效方式。</p>
-<p><strong>3. "数字出海"的刚性需求。</strong> 文物原件出境的门槛越来越高——保险费用、运输风险、外交审批——数字化提供了低成本替代方案。良渚VR去亚美尼亚和大足石刻数字展去纽约，两条路径指向同一个结论：如果你想向外国人介绍你的文化遗产，先做数字化内容，再考虑实物出境。</p>
-<h3>行业瓶颈</h3>
-<p>但数字化要真正成为基础设施，还面临三个瓶颈：</p>
+<p>7月有三个数字化事件几乎同时发生：</p>
 <ul>
-<li><strong>标准缺失</strong>：每个馆各自为政，扫描精度、元数据结构、数据格式五花八门。甘肃简牍博物馆用多光谱、云冈石窟用高光谱、碑林用光度立体——技术路线不同导致数据无法互通。</li>
-<li><strong>"数字化僵尸"问题</strong>：很多馆扫描完就把数据存硬盘里，既不公开也不使用。数字化的真正价值不在于"存了多少TB数据"，而在于数据是否被研究、被展示、被公众使用。</li>
-<li><strong>人才断层</strong>：既懂文物又懂数字化的人极度稀缺。浙江励行文化和浙江古博勘测在招聘"数字化文保工程师"——但市场上合格的应聘者很少，因为这个交叉学科在中国高校里几乎没有对应的专业设置。</li>
+<li>世界互联网大会发布《文化遗产数字化案例集（2026）》，收录13国45项实践</li>
+<li>景德镇以"数字景德镇"配合世遗申报——AI+游戏首次深度集成于遗产保护全链路</li>
+<li>"数字敦煌"的国际影响力获得《参考消息》专题报道</li>
 </ul>
-<h3>行业人才培养的紧迫性</h3>
-<p>数字化真正成为基础设施，人才是关键瓶颈。浙江励行文化和浙江古博勘测在招聘"数字化文保工程师"——市场上合格的应聘者极少，因为这个交叉学科在国内高校里几乎没有对应的专业设置。博物馆数字化需要的人才既不是纯技术背景（不懂文物语境），也不是纯文博背景（不具备技术判断力），而是一个目前高等教育体系尚未系统培养的交叉领域。未来3-5年，能打通"文物知识+数字技术"的人才将是全行业争夺的稀缺资源。</p>
+<p>三件事指向同一个方向：<strong>博物馆数字化正在从单个项目的实验，升级为行业运作的默认模式。</strong> 不是"要不要做"的问题，是"怎么做才不落后"的问题。</p>
+<h3>什么在推动？</h3>
+<p><strong>成本门槛大幅降低。</strong> 五年前做石窟高精度三维扫描要几十万，现在消费级无人机+摄影测量软件，几千元就能完成。聊城东昌府区博物馆这样的区县级馆也上线了AI伴游——数字化不再是头部大馆的专利。</p>
+<p><strong>世遗申报倒逼数字化。</strong> 景德镇的做法很说明问题：过去申遗靠的是学术论文和保护规划，现在数字化展陈、AI数据集、互动体验成了标配。不是因为 UNESCO 要求，而是数字化是向评审专家说清楚"这个遗址为什么重要"的最有效方式。</p>
+<p><strong>文物出境的替代方案。</strong> 原件出境的门槛越来越高——保险、运输、外交审批每一项都在涨价。良渚VR去亚美尼亚、大足石刻数字展去纽约，两条路指向同一件事：数字内容先行探路，实物出境再跟进。</p>
+<h3>还有哪些问题？</h3>
+<p><strong>标准不统一。</strong> 各馆扫描精度、元数据结构、数据格式各不相同——同一个石窟，用不同设备扫出来的数据无法互通。行业需要一个基础性的数据标准。</p>
+<p><strong>"扫描完就存硬盘"。</strong> 很多馆把数字化当成一次性工程：扫完了、存起来了、就完了。数据的价值不在存储量，在使用量——是否被研究者调用、是否被策展人引用、是否对公众开放。</p>
+<p><strong>交叉人才断档。</strong> 纯技术背景的人不懂文物语境，纯文博背景的人没有技术判断力——市场上能打通两端的人极少。这不是某一两家博物馆的问题，是高等教育体系还没有长出这个交叉学科。</p>
 
 <h2 class="section">📈 八月展望</h2>
 
