@@ -60,6 +60,7 @@ CSS = """<style>
     display: inline-block; font-size: .72em; padding: 2px 8px;
     border-radius: 10px; margin-right: 4px; margin-bottom: 6px;
     font-weight: 600; letter-spacing: .02em;
+	    background: var(--tag-bg); color: var(--muted);
   }
   .tag-考古 { background: #fce4d6; color: #a0522d; }
   .tag-博物馆 { background: #dbe9f5; color: #2c5f8a; }
@@ -68,6 +69,11 @@ CSS = """<style>
   .tag-科技 { background: #ccfbf1; color: #0d6b5e; }
   .tag-文化遗产 { background: #d9f0d1; color: #3d6b2e; }
   .tag-国际 { background: #fef3c7; color: #8b6914; }
+	  .tag-世界遗产 { background: #fde8c8; color: #92400e; }
+	  .tag-政策 { background: #e2e8f0; color: #475569; }
+	  .tag-数字化 { background: #dbeafe; color: #1e40af; }
+	  .tag-文物保护 { background: #ffe4d6; color: #9a3412; }
+	  .tag-文物修复 { background: #fce7f3; color: #9d174d; }
   @media (prefers-color-scheme: dark) {
     .tag-考古 { background: #3d2010; color: #e8a87c; }
     .tag-博物馆 { background: #1a2d3d; color: #7ab8e0; }
@@ -76,6 +82,11 @@ CSS = """<style>
     .tag-科技 { background: #0d332e; color: #5eeadb; }
     .tag-文化遗产 { background: #1a3316; color: #7cc46e; }
     .tag-国际 { background: #3d3010; color: #e8c84a; }
+	    .tag-世界遗产 { background: #3d2808; color: #fbbf24; }
+	    .tag-政策 { background: #1e293b; color: #94a3b8; }
+	    .tag-数字化 { background: #1e3a5f; color: #93c5fd; }
+	    .tag-文物保护 { background: #3d2010; color: #f97316; }
+	    .tag-文物修复 { background: #3d1028; color: #f472b6; }
   }
   .toc {
     background: var(--card); border: 1px solid var(--border);
