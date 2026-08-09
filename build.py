@@ -1185,10 +1185,17 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     WEEKLY_LIMIT = 1
     weekly_reports = sorted(weekly_reports, key=lambda r: r['ref_date'], reverse=True)
     for r in weekly_reports:
+        w_count = len(r['items'])
+        if w_count == 0 and r.get('rich_sections'):
+            w_count_text = '综合周报'
+        elif w_count > 0:
+            w_count_text = f'共 {w_count} 条要闻'
+        else:
+            w_count_text = ''
         weekly_card_items.append(f'''
 <a class="day-card weekly-card" href="reports/weekly-{r['ref_date']}.html">
   <span class="date">📰 {r['date_range']}</span>
-  <div class="count">📋 共 {len(r['items'])} 条要闻</div>
+  <div class="count">📋 {w_count_text}</div>
 </a>''')
     weekly_latest = '\n'.join(weekly_card_items[:WEEKLY_LIMIT])
     weekly_older_html = ''
