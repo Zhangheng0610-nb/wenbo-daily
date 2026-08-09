@@ -455,9 +455,9 @@ def parse_digest(filepath, dtype='weekly'):
             i += 1
             continue
 
-        # Monthly report rich sections: 🌍, 💡, 📈, etc.
-        # For monthly reports, every unhandled ## header starts a new rich section
-        if dtype == 'monthly' and line.startswith('## ') and not line.startswith('## 📑'):
+        # Rich sections: 🌍, 💡, 📈, 🏆, 📂, etc.
+        # For monthly/weekly reports, every unhandled ## header starts a new rich section
+        if dtype in ('monthly', 'weekly') and line.startswith('## ') and not line.startswith('## 📑'):
             # Skip TOC section
             if '目录' in line:
                 current_section = 'skip'
@@ -1035,24 +1035,26 @@ def build_digest_html(data):
             items_html += f'<tr><td class="rank">{rank}</td><td class="news-title">{md_inline(item["title"])}</td><td class="date">{date_str}</td><td class="sig">{md_inline(sig_str)}</td></tr>\n'
         items_html += '</tbody>\n</table>\n'
     else:
-        # Weekly report: flat item list
-        items_html = '<h2 class="section">🔟 本期要闻</h2>\n\n'
-        for item in data['items']:
-            items_html += f'<h3 id="{item["id"]}">{md_inline(item["title"])}</h3>\n'
+        # Weekly report: flat item list (only if there are items)
+        items_html = ''
+        if data['items']:
+            items_html = '<h2 class="section">🔟 本期要闻</h2>\n\n'
+            for item in data['items']:
+                items_html += f'<h3 id="{item["id"]}">{md_inline(item["title"])}</h3>\n'
 
-            if item['body']:
-                items_html += f'<p>{md_inline(item["body"])}</p>\n'
+                if item['body']:
+                    items_html += f'<p>{md_inline(item["body"])}</p>\n'
 
-            if item['progress']:
-                items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {md_inline(item["progress"])}</blockquote>\n'
+                if item['progress']:
+                    items_html += f'<blockquote><strong>{data["label"]}新进展：</strong> {md_inline(item["progress"])}</blockquote>\n'
 
-            if item['sources']:
-                src_parts = []
-                for s in item['sources']:
-                    src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
-                items_html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
+                if item['sources']:
+                    src_parts = []
+                    for s in item['sources']:
+                        src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
+                    items_html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
 
-            items_html += '<hr>\n\n'
+                items_html += '<hr>\n\n'
 
     # Upcoming / forecast
     upcoming_html = ''
@@ -1085,6 +1087,15 @@ def build_digest_html(data):
     og_label = '文博资讯周报' if dtype == 'weekly' else '文博资讯月报'
     url_slug = f'{dtype}-{data["ref_date"]}'
 
+    # Count display: use items count, or fall back to overview-based text
+    item_count = len(data['items'])
+    if item_count == 0 and data.get('rich_sections'):
+        count_text = '综合周报'
+    elif item_count > 0:
+        count_text = f'共 {item_count} 条要闻'
+    else:
+        count_text = ''
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -1092,7 +1103,7 @@ def build_digest_html(data):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{og_label} | {data['date_range']}</title>
 <meta property="og:title" content="{og_label} | {data['date_range']}">
-<meta property="og:description" content="{data['date_range']} {og_label}，共 {len(data['items'])} 条要闻">
+<meta property="og:description" content="{data['date_range']} {og_label}{'，' + count_text if count_text else ''}">
 <meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -1106,7 +1117,7 @@ def build_digest_html(data):
 
 <header>
   <h1>{emoji} {og_label}</h1>
-  <p class="meta">{data['date_range']} ｜ 共 {len(data['items'])} 条要闻</p>
+  <p class="meta">{data['date_range']} ｜ {count_text}</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
 </header>
 
