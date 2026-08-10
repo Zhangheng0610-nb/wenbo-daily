@@ -750,15 +750,16 @@ def build_jobs_html(data, page_type='jobs'):
     for sec in data['sections']:
         items_html = ''
         for item in sec['items']:
-            # Urgency badge
+            # Urgency badge — use specific date, not relative ("今天"/"明天")
             urgent_badge = ''
             if item['urgent'] and item['days_left'] is not None:
-                if item['days_left'] == 0:
-                    urgent_badge = ' <span class="closing-badge">今天截止</span>'
-                elif item['days_left'] == 1:
-                    urgent_badge = ' <span class="closing-badge">明天截止</span>'
+                dl = item['deadline']
+                dl_match = re.match(r'(\d{4})-(\d{1,2})-(\d{1,2})', dl) if dl else None
+                if dl_match:
+                    m, d = int(dl_match.group(2)), int(dl_match.group(3))
+                    urgent_badge = f' <span class="closing-badge">{m}月{d}日截止</span>'
                 else:
-                    urgent_badge = f' <span class="closing-badge">{item["days_left"]}天后截止</span>'
+                    urgent_badge = ' <span class="closing-badge">即将截止</span>'
 
             row_class = ' urgent-row' if item['urgent'] else ''
 
