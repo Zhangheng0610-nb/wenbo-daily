@@ -194,6 +194,7 @@ def parse_md(filepath):
         if item_match and current_section in ('domestic', 'international'):
             num = int(item_match.group(1))
             title = item_match.group(2).strip()
+            title = re.sub(r'\s*\{#[^}]*\}\s*$', '', title)  # strip {#anchor} from title
             item_idx += 1
             current_item = {
                 'id': f'item{item_idx}',
