@@ -1377,7 +1377,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   }
   header h1 { font-size: 1.6em; letter-spacing: .05em; }
   header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
-  header p.tip { color: var(--muted); font-size: .78em; margin-top: 10px; opacity: .7; }
   /* Search */
   .search-wrap {
     position: relative; margin-bottom: 20px;
@@ -1557,7 +1556,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <header>
   <h1>🏛️ 每日文博资讯</h1>
   <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
-  <p class="tip">📱 浏览器菜单 → 「添加到主屏幕」→ 体验接近小程序</p>
 </header>
 
 <main>
