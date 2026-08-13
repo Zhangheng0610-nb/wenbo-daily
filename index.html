@@ -2,8 +2,12 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>每日文博资讯</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日文博资讯 | 文博·考古·博物馆行业日报</title>
+<meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 8:13 更新，已有 34 天日报">
+<meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,文博资讯,文博日报,每日文博">
+<link rel="canonical" href="https://zhangheng666.top/">
+<link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="https://zhangheng666.top/feed.xml">
 <meta property="og:title" content="每日文博资讯">
 <meta property="og:description" content="国内外文物博物馆 · 考古 · 文化遗产 · 每日推送">
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
@@ -15,6 +19,20 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="文博日报">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "每日文博资讯",
+  "url": "https://zhangheng666.top/",
+  "description": "国内外文物博物馆、考古、文化遗产领域每日推送",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://zhangheng666.top/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 <style>
   :root {
     --bg: #f5f0eb; --card: #fff; --text: #2c2416; --muted: #8b7355;
@@ -61,6 +79,16 @@
   .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
   .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
   .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
+  /* Tag cloud */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center; }
+  .tag-cloud-label { color: var(--muted); font-size: .85em; }
+  .tag-cloud-chip {
+    background: var(--tag-bg); color: var(--muted); border: none;
+    border-radius: 14px; padding: 4px 12px; font-size: .82em;
+    cursor: pointer; font-family: inherit;
+  }
+  .tag-cloud-chip:hover { color: var(--accent); }
+  .chip-count { opacity: .6; font-size: .85em; }
   /* Section headers */
   .section-header {
     font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
@@ -99,6 +127,17 @@
   }
   footer a { color: var(--accent); }
   .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
+  /* Headline teaser */
+  .headlines {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent); border-radius: 10px;
+    padding: 14px 18px; margin-bottom: 14px;
+  }
+  .headlines-title { font-size: .85em; color: var(--muted); margin-bottom: 6px; }
+  .headlines-title a { color: var(--accent); text-decoration: none; }
+  .headlines-list { margin: 0 0 0 18px; font-size: .92em; line-height: 1.9; }
+  .headlines-list a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--border); }
+  .headlines-list a:hover { color: var(--accent); }
   /* Collapsible sections */
   .section-header.collapsible {
     cursor: pointer; user-select: none;
@@ -135,15 +174,22 @@
   <p class="tip">📱 浏览器菜单 → 「添加到主屏幕」→ 体验接近小程序</p>
 </header>
 
+<main>
+
 <div class="search-wrap">
-  <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off">
+  <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off" aria-label="搜索新闻">
   <button class="clear" id="clear" aria-label="清除">✕</button>
 </div>
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+<div class="tag-cloud" id="tag-cloud"></div>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">34 天</span></div>
 <div class="section-body">
+<div class="headlines">
+  <div class="headlines-title">📌 最新一期头条 · <a href="reports/2026-08-13.html">2026-08-13 周四</a></div>
+  <ol class="headlines-list"><li><a href="reports/2026-08-13.html">🔥🔥 国家文物局推动博物馆"免预约、刷证即入"——预约制从常态变为例外，"随心逛"成文博惠民新方向</a></li><li><a href="reports/2026-08-13.html">🔥🔥 大足石刻数字展亮相纽约——千年石窟以"数字沉浸+实体复刻"首度大规模出海</a></li><li><a href="reports/2026-08-13.html">🔥🔥 内蒙古寨子塔石城出土龙山时期龙凤泥塑——北方最早"龙凤"实物组合，具象化上溯至公元前2300年</a></li></ol>
+</div>
 <div id="daily-list">
 
 <a class="day-card" href="reports/2026-08-13.html">
@@ -445,8 +491,10 @@
 </div>
 
 
+</main>
+
 <footer>
-  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新</p>
+  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新 ｜ <a href="about.html">关于本站</a> ｜ <a href="feed.xml">RSS 订阅</a></p>
 </footer>
 
 <script>
@@ -515,7 +563,7 @@ function toggleOlder(btn) {
         const report = searchData.find(r => href && href.includes(r.date));
         if (report) {
           for (const item of report.items) {
-            const itemText = (item.title + ' ' + item.body + ' ' + (item.commentary||'')).toLowerCase();
+            const itemText = (item.title + ' ' + item.body + ' ' + (item.commentary||'') + ' ' + (item.tags||[]).join(' ')).toLowerCase();
             for (const w of queryWords) {
               if (itemText.includes(w)) {
                 matched = true;
@@ -561,6 +609,27 @@ function toggleOlder(btn) {
     resultCount.style.display = 'block';
     resultCount.textContent = `找到 ${visible} 天的相关报道`;
   }
+
+  function buildTagCloud() {
+    const cloud = document.getElementById('tag-cloud');
+    if (!cloud) return;
+    if (!searchData) { cloud.style.display = 'none'; return; }
+    const counts = {};
+    searchData.forEach(r => r.items.forEach(it => (it.tags||[]).forEach(t => { counts[t] = (counts[t]||0)+1; })));
+    const top = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,14);
+    if (!top.length) { cloud.style.display = 'none'; return; }
+    cloud.innerHTML = '<span class="tag-cloud-label">🏷️ 按标签浏览</span>' +
+      top.map(([t,n]) => `<button class="tag-cloud-chip" data-tag="${t}">#${t} <span class="chip-count">${n}</span></button>`).join('');
+    cloud.querySelectorAll('.tag-cloud-chip').forEach(chip => {
+      chip.addEventListener('click', function(){
+        const t = this.getAttribute('data-tag');
+        searchInput.value = t;
+        doSearch(t);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    });
+  }
+  buildTagCloud();
 
   searchInput.addEventListener('input', function(){
     doSearch(this.value);

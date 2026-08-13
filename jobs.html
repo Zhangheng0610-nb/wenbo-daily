@@ -73,6 +73,7 @@
 	  .tag-数字化 { background: #dbeafe; color: #1e40af; }
 	  .tag-文物保护 { background: #ffe4d6; color: #9a3412; }
 	  .tag-文物修复 { background: #fce7f3; color: #9d174d; }
+  a.tag { text-decoration: none; }
   @media (prefers-color-scheme: dark) {
     .tag-考古 { background: #3d2010; color: #e8a87c; }
     .tag-博物馆 { background: #1a2d3d; color: #7ab8e0; }
@@ -133,6 +134,44 @@
     border-top: 1px solid var(--border); margin-top: 24px;
   }
   footer a { color: var(--accent); }
+  #back-to-top {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff; border: none;
+    font-size: 1.3em; cursor: pointer; opacity: 0;
+    transition: opacity .25s; display: flex;
+    align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  #back-to-top.show { opacity: .85; }
+  #back-to-top:hover { opacity: 1; }
+  #reading-progress {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+    background: var(--accent); width: 0%; transition: width .1s;
+  }
+  .nav-prev-next {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin: 20px 0; flex-wrap: wrap;
+  }
+  .nav-prev-next a {
+    flex: 1; min-width: 120px; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+    text-decoration: none; color: var(--text);
+    background: var(--card); font-size: .88em;
+    transition: border-color .15s;
+  }
+  .nav-prev-next a:hover { border-color: var(--accent); }
+  .nav-prev-next a.next { text-align: right; }
+  .nav-prev-next a .nav-label { color: var(--muted); font-size: .8em; }
+  .share-row { text-align: center; margin: 20px 0 8px; }
+  #share-btn {
+    background: var(--card); color: var(--accent);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 8px 24px; font-size: .88em; cursor: pointer;
+    font-family: inherit;
+  }
+  #share-btn:hover { border-color: var(--accent); }
+  .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
 </style>
 <style>
   .job-summary {
@@ -992,7 +1031,7 @@
 <p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文，本页面仅做信息聚合。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 </body>
