@@ -388,6 +388,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | {data['date']}</title>
 <meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,{data['date']}">
@@ -921,6 +922,7 @@ def build_jobs_html(data, page_type='jobs'):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{page_title} | {data['update_date']}</title>
 <meta property="og:title" content="{page_title} | {data['update_date']}">
 <meta property="og:description" content="{'文博实习岗位，面向在读学生，共 ' + str(total) + ' 个岗位' if is_intern else '省级以上博物馆、考古院所、高校文博专业招聘信息，共 ' + str(total) + ' 个岗位。即将截止 ' + str(urgent_count) + ' 个。'}">
@@ -1227,6 +1229,7 @@ def build_digest_html(data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{og_label} | {data['date_range']}</title>
 <meta property="og:title" content="{og_label} | {data['date_range']}">
 <meta property="og:description" content="{data['date_range']} {og_label}{'，' + count_text if count_text else ''}">
@@ -1520,6 +1523,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 文博·考古·博物馆行业日报</title>
 <meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 8:13 更新，已有 {len(daily_reports)} 天日报">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,文博资讯,文博日报,每日文博">
@@ -1801,6 +1805,7 @@ def build_about_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>关于本站 | 每日文博资讯</title>
 <meta name="description" content="每日文博资讯 — 网站介绍、内容来源、编撰流程与免责声明">
 <link rel="canonical" href="https://zhangheng666.top/about.html">
