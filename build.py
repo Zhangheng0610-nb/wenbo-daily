@@ -392,7 +392,6 @@ def build_report_html(data, prev_report=None, next_report=None):
 <meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,{data['date']}">
 <link rel="canonical" href="https://zhangheng666.top/reports/{data['date']}.html">
-<link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="https://zhangheng666.top/feed.xml">
 <meta property="og:title" content="每日文博资讯 | {data['date']}">
 <meta property="og:description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
@@ -450,7 +449,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a> ｜ <a href="../feed.xml">RSS 订阅</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>
@@ -1400,16 +1399,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
   .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
   .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
-  /* Tag cloud */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center; }
-  .tag-cloud-label { color: var(--muted); font-size: .85em; }
-  .tag-cloud-chip {
-    background: var(--tag-bg); color: var(--muted); border: none;
-    border-radius: 14px; padding: 4px 12px; font-size: .82em;
-    cursor: pointer; font-family: inherit;
-  }
-  .tag-cloud-chip:hover { color: var(--accent); }
-  .chip-count { opacity: .6; font-size: .85em; }
   /* Section headers */
   .section-header {
     font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
@@ -1448,17 +1437,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   }
   footer a { color: var(--accent); }
   .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
-  /* Headline teaser */
-  .headlines {
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 3px solid var(--accent); border-radius: 10px;
-    padding: 14px 18px; margin-bottom: 14px;
-  }
-  .headlines-title { font-size: .85em; color: var(--muted); margin-bottom: 6px; }
-  .headlines-title a { color: var(--accent); text-decoration: none; }
-  .headlines-list { margin: 0 0 0 18px; font-size: .92em; line-height: 1.9; }
-  .headlines-list a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--border); }
-  .headlines-list a:hover { color: var(--accent); }
   /* Collapsible sections */
   .section-header.collapsible {
     cursor: pointer; user-select: none;
@@ -1538,19 +1516,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     else:
         recruitment_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
 
-    # Headline teaser: top 3 items of the latest daily report
-    headline_html = ''
-    if daily_reports:
-        latest = daily_reports[0]
-        if latest['toc_items']:
-            links = ''.join(
-                f'<li><a href="reports/{latest["date"]}.html">{t["title"]}</a></li>'
-                for t in latest['toc_items'][:3])
-            headline_html = f'''<div class="headlines">
-  <div class="headlines-title">📌 最新一期头条 · <a href="reports/{latest["date"]}.html">{latest["date"]} {latest["weekday"]}</a></div>
-  <ol class="headlines-list">{links}</ol>
-</div>'''
-
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -1560,7 +1525,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 8:13 更新，已有 {len(daily_reports)} 天日报">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,文博资讯,文博日报,每日文博">
 <link rel="canonical" href="https://zhangheng666.top/">
-<link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="https://zhangheng666.top/feed.xml">
 <meta property="og:title" content="每日文博资讯">
 <meta property="og:description" content="国内外文物博物馆 · 考古 · 文化遗产 · 每日推送">
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
@@ -1604,11 +1568,9 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </div>
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
-<div class="tag-cloud" id="tag-cloud"></div>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
 <div class="section-body">
-{headline_html}
 <div id="daily-list">
 {latest_cards}
 {older_cards_html}
@@ -1624,7 +1586,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </main>
 
 <footer>
-  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新 ｜ <a href="about.html">关于本站</a> ｜ <a href="feed.xml">RSS 订阅</a></p>
+  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新 ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 </body>
@@ -1743,27 +1705,6 @@ function toggleOlder(btn) {
     resultCount.textContent = `找到 ${visible} 天的相关报道`;
   }
 
-  function buildTagCloud() {
-    const cloud = document.getElementById('tag-cloud');
-    if (!cloud) return;
-    if (!searchData) { cloud.style.display = 'none'; return; }
-    const counts = {};
-    searchData.forEach(r => r.items.forEach(it => (it.tags||[]).forEach(t => { counts[t] = (counts[t]||0)+1; })));
-    const top = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,14);
-    if (!top.length) { cloud.style.display = 'none'; return; }
-    cloud.innerHTML = '<span class="tag-cloud-label">🏷️ 按标签浏览</span>' +
-      top.map(([t,n]) => `<button class="tag-cloud-chip" data-tag="${t}">#${t} <span class="chip-count">${n}</span></button>`).join('');
-    cloud.querySelectorAll('.tag-cloud-chip').forEach(chip => {
-      chip.addEventListener('click', function(){
-        const t = this.getAttribute('data-tag');
-        searchInput.value = t;
-        doSearch(t);
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      });
-    });
-  }
-  buildTagCloud();
-
   searchInput.addEventListener('input', function(){
     doSearch(this.value);
   });
@@ -1853,67 +1794,6 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
     return xml
 
 
-# ───────────────── RSS feed ─────────────────
-
-def build_rss_feed(daily_reports, limit=20):
-    """Generate RSS 2.0 feed XML for the latest daily reports."""
-    from datetime import datetime
-    import xml.sax.saxutils as saxutils
-
-    base = 'https://zhangheng666.top'
-    sorted_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)[:limit]
-
-    items_xml = ''
-    for r in sorted_reports:
-        total = r['domestic_count'] + r['international_count']
-        title = f'每日文博资讯 | {r["date"]} {r["weekday"]}'
-        link = f'{base}/reports/{r["date"]}.html'
-        desc = f'{r["date"]} 每日文博资讯，共 {total} 条（国内 {r["domestic_count"]} + 国际 {r["international_count"]}）'
-
-        # Build description with item titles
-        item_titles = []
-        for item in r['toc_items']:
-            item_titles.append(f'  <li>{saxutils.escape(item["title"])}</li>')
-        desc_html = f'{saxutils.escape(desc)}<br/><br/>今日目录：<ul>{"".join(item_titles)}</ul>'
-
-        # Parse date to RFC 822 format
-        try:
-            dt = datetime.strptime(r['date'], '%Y-%m-%d')
-            pub_date = dt.strftime('%a, %d %b %Y 08:13:00 +0800')
-        except (ValueError, TypeError):
-            pub_date = ''
-
-        items_xml += f'''    <item>
-      <title>{saxutils.escape(title)}</title>
-      <link>{link}</link>
-      <guid isPermaLink="true">{link}</guid>
-      <description>{saxutils.escape(desc_html)}</description>
-      <pubDate>{pub_date}</pubDate>
-    </item>
-'''
-
-    # Build channel pubDate from latest report
-    latest_date = sorted_reports[0]['date'] if sorted_reports else '2026-07-11'
-    try:
-        dt = datetime.strptime(latest_date, '%Y-%m-%d')
-        channel_pub = dt.strftime('%a, %d %b %Y 08:13:00 +0800')
-    except (ValueError, TypeError):
-        channel_pub = ''
-
-    rss = f'''<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>每日文博资讯</title>
-    <link>{base}/</link>
-    <description>国内外文物博物馆 · 考古 · 文化遗产 · 每日推送</description>
-    <language>zh-CN</language>
-    <lastBuildDate>{channel_pub}</lastBuildDate>
-    <ttl>1440</ttl>
-{items_xml}  </channel>
-</rss>'''
-    return rss
-
-
 # ───────────────── 关于页面 ─────────────────
 
 def build_about_html():
@@ -1965,7 +1845,7 @@ def build_about_html():
 <p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。你只是阅读，我们只是展示。</p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ <a href="index.html">返回首页</a> ｜ <a href="feed.xml">RSS 订阅</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ <a href="index.html">返回首页</a></p>
 </footer>
 </main>
 </body>
@@ -2121,13 +2001,6 @@ def main():
     with open(sitemap_path, 'w', encoding='utf-8') as f:
         f.write(sitemap_xml)
     print(f'Sitemap: {sitemap_path} ({len(daily_reports)} daily + {len(weekly_reports)} weekly + {len(monthly_reports)} monthly)')
-
-    # Build RSS feed
-    rss_xml = build_rss_feed(daily_reports)
-    rss_path = os.path.join(SITE_DIR, 'feed.xml')
-    with open(rss_path, 'w', encoding='utf-8') as f:
-        f.write(rss_xml)
-    print(f'RSS feed: {rss_path} ({min(len(daily_reports), 20)} items)')
 
     print('\nDone! Run push to deploy.')
 
