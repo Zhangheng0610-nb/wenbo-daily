@@ -329,10 +329,10 @@ def build_report_html(data):
 <title>每日文博资讯 | {data['date']}</title>
 <meta property="og:title" content="每日文博资讯 | {data['date']}">
 <meta property="og:description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
-<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/reports/{data['date']}.html">
+<meta property="og:url" content="https://zhangheng666.top/reports/{data['date']}.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
@@ -800,10 +800,10 @@ def build_jobs_html(data, page_type='jobs'):
 <title>{page_title} | {data['update_date']}</title>
 <meta property="og:title" content="{page_title} | {data['update_date']}">
 <meta property="og:description" content="{'文博实习岗位，面向在读学生，共 ' + str(total) + ' 个岗位' if is_intern else '省级以上博物馆、考古院所、高校文博专业招聘信息，共 ' + str(total) + ' 个岗位。即将截止 ' + str(urgent_count) + ' 个。'}">
-<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/jobs.html">
+<meta property="og:url" content="https://zhangheng666.top/jobs.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
@@ -1106,10 +1106,10 @@ def build_digest_html(data):
 <title>{og_label} | {data['date_range']}</title>
 <meta property="og:title" content="{og_label} | {data['date_range']}">
 <meta property="og:description" content="{data['date_range']} {og_label}{'，' + count_text if count_text else ''}">
-<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/reports/{url_slug}.html">
+<meta property="og:url" content="https://zhangheng666.top/reports/{url_slug}.html">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
@@ -1400,10 +1400,10 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <title>每日文博资讯</title>
 <meta property="og:title" content="每日文博资讯">
 <meta property="og:description" content="国内外文物博物馆 · 考古 · 文化遗产 · 每日推送">
-<meta property="og:image" content="https://zhangheng0610-nb.github.io/wenbo-daily/cover.png">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng0610-nb.github.io/wenbo-daily/">
+<meta property="og:url" content="https://zhangheng666.top/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
