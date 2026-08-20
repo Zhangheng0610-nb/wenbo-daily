@@ -142,6 +142,18 @@
   }
   .show-more-btn:hover { background: var(--tag-bg); }
   .older-cards { }
+  /* Heatmap entry card */
+  .heatmap-card {
+    display: block; margin: 4px 0 18px; padding: 16px 18px; border-radius: 12px;
+    text-decoration: none; color: #fff; position: relative;
+    background: linear-gradient(135deg, #e8590c, #c92a2a);
+    box-shadow: 0 3px 12px rgba(201, 42, 42, .18);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .heatmap-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(201, 42, 42, .28); }
+  .heatmap-card .hm-title { font-size: 1.08em; font-weight: 700; }
+  .heatmap-card .hm-sub { font-size: .8em; opacity: .9; margin-top: 3px; }
+  .heatmap-card .hm-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.3em; opacity: .85; }
 </style>
 </head>
 <body>
@@ -159,6 +171,12 @@
 </div>
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+
+<a class="heatmap-card" href="heatmap.html">
+  <div class="hm-title">🗺️ 中国文博热点地图</div>
+  <div class="hm-sub">点击省份查看当地全部报道 · 热力随每日日报自动更新</div>
+  <span class="hm-arrow">→</span>
+</a>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">41 天</span></div>
 <div class="section-body">

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<title>文博热点地图 | 每日文博资讯</title>
+<meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<link rel="canonical" href="https://zhangheng666.top/heatmap.html">
+<meta property="og:title" content="文博热点地图 | 每日文博资讯">
+<meta property="og:description" content="全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<style>
+  :root {
+    --bg: #f6f5f1; --card: #ffffff; --text: #2b2b2b;
+    --muted: #8a867c; --border: #e5e2d9; --accent: #8a5a2b; --tag-bg: #f0ece2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#17161a; --card:#22222a; --text:#ecebe6; --muted:#9a97a8; --border:#33323c; --accent:#c9a06a; --tag-bg:#2c2c36; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 40px; }
+  header { padding: 24px 0 14px; }
+  header h1 { font-size: 1.35em; }
+  .back { display: inline-block; margin-bottom: 10px; font-size: .85em; color: var(--accent); text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  #map { width: 100%; height: 55vh; min-height: 320px; background: transparent; }
+  .meta { font-size: .78em; color: var(--muted); margin: 6px 0 14px; }
+  .note { font-size: .78em; color: var(--muted); margin: 4px 0 14px; }
+  h2.sec { font-size: 1em; margin: 20px 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 6px 12px; border-radius: 999px; font-size: .85em;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    cursor: pointer; transition: background .15s, transform .1s;
+  }
+  .chip:hover { background: var(--card); transform: translateY(-1px); }
+  .chip b { color: var(--accent); }
+  .chip .heat { color: var(--muted); font-weight: 400; margin-left: 3px; }
+  .detail {
+    display: none; margin-top: 16px; padding: 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  }
+  .detail.show { display: block; }
+  .detail .d-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .detail .d-name { font-size: 1.2em; font-weight: 700; }
+  .detail .d-heat { color: var(--accent); font-weight: 700; }
+  .detail .d-count { color: var(--muted); font-size: .85em; }
+  .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
+  .detail .d-items { margin-top: 12px; }
+  .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
+  .detail .d-items .it:last-child { border-bottom: none; }
+  .detail .d-items a { color: var(--accent); text-decoration: none; font-size: .9em; }
+  .detail .d-items a:hover { text-decoration: underline; }
+  .detail .d-items .it-date { display: block; font-size: .75em; color: var(--muted); margin-top: 2px; }
+  .err { color: var(--muted); text-align: center; padding: 24px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="./">← 返回首页</a>
+    <h1>🗺️ 中国文博热点地图</h1>
+    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份查看当地全部报道</p>
+  </header>
+  <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
+  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
+
+  <h2 class="sec">🔥 热点 Top 10</h2>
+  <div class="chips" id="chips"></div>
+
+  <div class="detail" id="detail">
+    <div class="d-head">
+      <span class="d-name" id="d-name"></span>
+      <span class="d-heat" id="d-heat"></span>
+      <span class="d-count" id="d-count"></span>
+      <button class="d-close" id="d-close" aria-label="关闭">✕</button>
+    </div>
+    <div class="d-items" id="d-items"></div>
+  </div>
+</div>
+
+<script src="lib/echarts.min.js"></script>
+<script>
+// 简称 → geojson 全称(与 china.json 的 properties.name 一一对应)
+var SHORT2GEO = {
+  '北京':'北京市','天津':'天津市','河北':'河北省','山西':'山西省','内蒙古':'内蒙古自治区',
+  '辽宁':'辽宁省','吉林':'吉林省','黑龙江':'黑龙江省','上海':'上海市','江苏':'江苏省',
+  '浙江':'浙江省','安徽':'安徽省','福建':'福建省','江西':'江西省','山东':'山东省',
+  '河南':'河南省','湖北':'湖北省','湖南':'湖南省','广东':'广东省','广西':'广西壮族自治区',
+  '海南':'海南省','重庆':'重庆市','四川':'四川省','贵州':'贵州省','云南':'云南省',
+  '西藏':'西藏自治区','陕西':'陕西省','甘肃':'甘肃省','青海':'青海省','宁夏':'宁夏回族自治区',
+  '新疆':'新疆维吾尔自治区','台湾':'台湾省','香港':'香港特别行政区','澳门':'澳门特别行政区'
+};
+var GEO2SHORT = {};
+for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
+
+var DATA = null;
+var SHORT_DATA = {};
+var chart = null;
+
+function isDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+
+function palette() {
+  var dark = isDark();
+  return {
+    colors: dark
+      ? ['#2a2a34', '#4b3a2b', '#8a4a1f', '#d0520c', '#e03131']
+      : ['#f4f2ea', '#f9dcc4', '#f8a55f', '#e8590c', '#c92a2a'],
+    tooltipBg: dark ? '#22222a' : '#ffffff',
+    tooltipText: dark ? '#eee' : '#333',
+    labelText: dark ? '#999' : '#777'
+  };
+}
+
+function showDetail(shortName, prov) {
+  var det = document.getElementById('detail');
+  if (!prov) { det.classList.remove('show'); return; }
+  document.getElementById('d-name').textContent = prov.name;
+  document.getElementById('d-heat').textContent = '热度 ' + prov.heat;
+  document.getElementById('d-count').textContent = prov.count + ' 条报道';
+  var box = document.getElementById('d-items');
+  box.innerHTML = '';
+  prov.items.forEach(function(it){
+    var div = document.createElement('div');
+    div.className = 'it';
+    var a = document.createElement('a');
+    a.href = it.url; a.textContent = it.title;
+    var d = document.createElement('span');
+    d.className = 'it-date'; d.textContent = it.date;
+    div.appendChild(a); div.appendChild(d);
+    box.appendChild(div);
+  });
+  det.classList.add('show');
+  det.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+}
+
+function renderTop10() {
+  var box = document.getElementById('chips');
+  box.innerHTML = '';
+  var top = DATA.provinces.slice(0, 10);
+  if (!top.length) {
+    box.innerHTML = '<div class="err">暂无数据，等日报积累几天后即可点亮地图。</div>';
+    return;
+  }
+  top.forEach(function(p){
+    var chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat + '</span>';
+    chip.onclick = function(){ showDetail(p.name, p); };
+    box.appendChild(chip);
+  });
+}
+
+function renderMap() {
+  if (!window.echarts || !window.ChinaGeo) {
+    document.getElementById('map-fallback').innerHTML = '地图组件加载失败，可用上方省份快速入口查看热点。';
+    return;
+  }
+  var p = palette();
+  var el = document.getElementById('map');
+  if (chart) chart.dispose();
+  chart = echarts.init(el);
+  var seriesData = DATA.provinces.map(function(pr){
+    return { name: SHORT2GEO[pr.name] || pr.name, value: pr.heat, count: pr.count };
+  });
+  chart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item', backgroundColor: p.tooltipBg, borderColor: 'rgba(0,0,0,.1)',
+      textStyle: { color: p.tooltipText, fontSize: 13 },
+      formatter: function(params){
+        var short = GEO2SHORT[params.name] || params.name;
+        var d = SHORT_DATA[short];
+        if (!d) return '<b>' + params.name + '</b><br/>暂无数据';
+        return '<b>' + d.name + '</b><br/>热度：' + d.heat + '<br/>报道：' + d.count + ' 条';
+      }
+    },
+    visualMap: {
+      min: 0, max: Math.max(1, Math.ceil((DATA.stats.maxHeat || 1) * 1.05)),
+      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
+      inRange: { color: p.colors },
+      textStyle: { color: p.labelText }
+    },
+    series: [{
+      type: 'map', map: 'china', roam: false, selectedMode: false,
+      label: { show: false },
+      emphasis: {
+        label: { show: true, fontSize: 13, fontWeight: 700, color: '#333' },
+        itemStyle: { areaColor: '#ff9f43' }
+      },
+      itemStyle: { borderColor: 'rgba(255,255,255,.6)', borderWidth: 0.6, areaColor: '#e5e2d9' },
+      data: seriesData
+    }]
+  });
+  chart.off('click');
+  chart.on('click', function(params){
+    if (!params || !params.name) return;
+    var short = GEO2SHORT[params.name] || params.name;
+    showDetail(short, SHORT_DATA[short]);
+  });
+}
+
+// 暗色模式切换时重建图表
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ renderMap(); });
+}
+
+// 加载 geojson → 注册地图
+fetch('lib/china.json').then(function(r){
+  return r.ok ? r.json() : Promise.reject();
+}).then(function(geo){
+  geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
+  window.ChinaGeo = geo;
+  echarts.registerMap('china', geo);
+  if (DATA) renderMap();
+}).catch(function(){
+  document.getElementById('map-fallback').innerHTML = '地图数据加载失败，可用上方省份快速入口查看热点。';
+});
+
+// 加载热力数据
+fetch('heatmap-data.json').then(function(r){
+  return r.ok ? r.json() : Promise.reject();
+}).then(function(d){
+  DATA = d;
+  DATA.provinces.forEach(function(pr){ SHORT_DATA[pr.name] = pr; });
+  renderTop10();
+  document.getElementById('map-fallback').style.display = 'none';
+  if (window.ChinaGeo) renderMap();
+  if (d.asOf) document.querySelector('.meta').innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · 数据截至 ' + d.asOf;
+}).catch(function(){
+  document.getElementById('map-fallback').innerHTML = '热力数据加载失败，请稍后刷新页面重试。';
+});
+
+document.getElementById('d-close').addEventListener('click', function(){
+  document.getElementById('detail').classList.remove('show');
+});
+</script>
+</body>
+</html>

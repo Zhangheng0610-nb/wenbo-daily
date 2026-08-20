@@ -4,8 +4,14 @@ Build HTML reports from Markdown files and rebuild index.html.
 Handles daily reports (日报), weekly digests (周报), and monthly digests (月报).
 Usage: python build.py
 """
-import os, re, glob, json
+import os, re, glob, json, sys
 from urllib.parse import quote
+
+if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass  # 控制台不支持 UTF-8 时保持默认,不阻断构建
 
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPORTS_DIR = os.path.join(SITE_DIR, 'reports')
@@ -14,6 +20,103 @@ JOBS_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'jobs.md')
 INTERN_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'intern.md')
 
 WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+
+# ───────────────── 热点地图 · 省份归类词表 ─────────────────
+# 严格规则:省份词只用"标准短名",单字简称(晋/湘/冀)一律不用(防人名地名撞字);
+# "中国/全国/国家/国际"绝不在省份词表(FORBIDDEN 双保险),避免把全国性新闻误标到某省。
+DECAY = 0.93          # 热力时间衰减系数(每天)
+
+PROVINCES = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江',
+             '安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川',
+             '贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆','台湾','香港','澳门']
+FORBIDDEN = ('中国','全国','国家','国际','中外','内地','大陆')
+
+# 城市→省词典:只收本语料中"无歧义"的地级市/文化名城(≥2字)。
+# 多义词一律不收或长词限定:北海(与广西北海撞)→不收;"朝阳"只作辽宁朝阳市(北京朝阳区不收);
+# 红山/龙山/花山/阿里/昭陵 跨省多义→不收。收词即写注释说明归因理由。
+CITY2PROV = {
+    # 河南
+    '郑州':'河南','洛阳':'河南','安阳':'河南','开封':'河南','三门峡':'河南','南阳':'河南',
+    # 陕西
+    '西安':'陕西','咸阳':'陕西','宝鸡':'陕西','榆林':'陕西','延安':'陕西',
+    # 四川
+    '成都':'四川','广汉':'四川',            # 广汉=三星堆所在
+    # 浙江
+    '杭州':'浙江','衢州':'浙江','绍兴':'浙江','宁波':'浙江','湖州':'浙江','温州':'浙江','台州':'浙江',
+    # 江苏
+    '南京':'江苏','苏州':'江苏','无锡':'江苏','扬州':'江苏','常州':'江苏','镇江':'江苏',
+    # 安徽
+    '马鞍山':'安徽',   # 朱然墓所在
+    # 湖北
+    '武汉':'湖北','随州':'湖北','荆州':'湖北','宜昌':'湖北','襄阳':'湖北',
+    # 湖南
+    '长沙':'湖南','益阳':'湖南','株洲':'湖南','岳阳':'湖南',
+    # 江西
+    '南昌':'江西','景德镇':'江西','赣州':'江西','九江':'江西','鹰潭':'江西',
+    # 山东
+    '济南':'山东','青岛':'山东','曲阜':'山东','滕州':'山东','日照':'山东','菏泽':'山东',
+    # 辽宁
+    '沈阳':'辽宁','大连':'辽宁','朝阳':'辽宁',   # 辽宁朝阳市(牛河梁);北京朝阳区不通过此词命中
+    # 山西
+    '太原':'山西','大同':'山西','侯马':'山西','临汾':'山西',
+    # 河北
+    '石家庄':'河北','保定':'河北','正定':'河北','邯郸':'河北','承德':'河北',   # 避暑山庄所在
+    # 黑龙江 / 吉林
+    '哈尔滨':'黑龙江','长春':'吉林','集安':'吉林',   # 集安=高句丽
+    # 甘肃
+    '兰州':'甘肃','天水':'甘肃','敦煌':'甘肃','武威':'甘肃','张掖':'甘肃',
+    # 宁夏 / 青海 / 西藏
+    '银川':'宁夏','固原':'宁夏','西宁':'青海','拉萨':'西藏','日喀则':'西藏',
+    # 新疆
+    '乌鲁木齐':'新疆','喀什':'新疆','吐鲁番':'新疆','和田':'新疆',
+    # 内蒙古
+    '呼和浩特':'内蒙古','赤峰':'内蒙古','呼伦贝尔':'内蒙古','阿拉善':'内蒙古',
+    # 云南 / 贵州 / 广西
+    '昆明':'云南','大理':'云南','丽江':'云南','保山':'云南',
+    '贵阳':'贵州','遵义':'贵州',
+    '南宁':'广西','桂林':'广西','合浦':'广西',       # 合浦=海上丝路始发港
+    # 广东 / 福建 / 海南
+    '广州':'广东','深圳':'广东','佛山':'广东','东莞':'广东','汕头':'广东','惠州':'广东',
+    '福州':'福建','泉州':'福建','厦门':'福建','漳州':'福建',
+    '海口':'海南','三亚':'海南',
+}
+
+# 遗址/博物馆→省词典:≥3字、无歧义,把"不带省名但指向明确的地点"归对省。
+# 多义词限定长词:故宫不收(误伤香港故宫)→必须"故宫博物院";国博不收(歧义)→用全称。
+SITE2PROV = {
+    '殷墟':'河南','二里头':'河南','龙门石窟':'河南','巩义':'河南',
+    '三星堆':'四川','金沙遗址':'四川','宝墩':'四川','蜀王':'四川',
+    '良渚':'浙江','河姆渡':'浙江','上山遗址':'浙江','跨湖桥':'浙江',
+    '莫高窟':'甘肃','麦积山':'甘肃','马家窑':'甘肃','悬泉置':'甘肃',
+    '秦始皇陵':'陕西','兵马俑':'陕西','石峁':'陕西','半坡遗址':'陕西','法门寺':'陕西',
+    '马王堆':'湖南','里耶':'湖南','城头山':'湖南',
+    '海昏侯':'江西','紫金城':'江西','朱然墓':'安徽',   # 马鞍山朱然家族墓地
+    '云冈石窟':'山西','晋南':'山西','晋北':'山西','晋中':'山西','平遥':'山西','陶寺':'山西','侯马盟书':'山西',
+    '曾侯乙':'湖北','盘龙城':'湖北','石家河':'湖北','云梦':'湖北',
+    '牛河梁':'辽宁','红山文化':'辽宁','张学良':'辽宁',
+    '大足石刻':'重庆','合川':'重庆',
+    '布达拉宫':'西藏','大昭寺':'西藏','罗布林卡':'西藏','唐竺古道':'西藏',
+    '黑水城':'内蒙古','额济纳':'内蒙古','成吉思汗陵':'内蒙古','辽上京':'内蒙古',
+    '大汶口':'山东','城子崖':'山东','孔庙':'山东',
+    '中国国家博物馆':'北京','故宫博物院':'北京','首都博物馆':'北京','圆明园':'北京','颐和园':'北京',
+    '观复博物馆':'北京','避暑山庄':'河北',   # 观复=马未都北京馆;避暑山庄=承德(河北)
+    '陕西历史博物馆':'陕西','南京博物院':'江苏','河南博物院':'河南','湖北省博物馆':'湖北','浙江省博物馆':'浙江',
+    '三星堆博物馆':'四川','殷墟博物馆':'河南','良渚博物院':'浙江',
+    '故宫博物院香港':'香港',
+}
+
+# 全国性关键词:命中即判定为"全国性/行业/政策/科技"主题 → 不归任何省(用户确认不展示)
+NATIONAL_KEYWORDS = ('全国','国家文物局','国家文物','中国考古','考古中国','中国文物','中国博物馆',
+                     '行业','政策','法规','办法','条例','通知','立法','规划','白皮书','报告','会议',
+                     '论坛','标准','数字化','数字','科技','AI','人工智能','大数据','发布','解读',
+                     '研讨','纪要','统计','公布','启动','工程','系统','平台','联盟','协会','学会')
+# 注意:'国家考古遗址公园'、'国家一级博物馆' 这类含"国家"的也会命中全国性——这是预期的(它们通常
+# 是行业性消息,不指向具体事件省份)。若未来发现某条该归省却被全国化,加回该省标签即可。
+
+# 对外交流:事件在境外(或涉外),不归国内任何省 → 归全国性-对外交流(用户确认国际不进地图)
+OUTREACH_TAGS = ('对外交流','文物出海','文明互鉴','文明桥梁','国际交流','援外','出海','联展','出境展','国际合作')
+OUTREACH_TITLE = ('中吉','中哈','中乌','中埃','中法','中英','中意','中美','中俄','中蒙',
+                  '中缅','中柬','中越','中老','中泰','中朝','中尼','中巴','中埃塞','中非')
 
 CSS = """<style>
   :root {
@@ -175,6 +278,438 @@ CSS = """<style>
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
 </style>"""
+
+
+# ───────────────── 热点地图 · 省份归类 ─────────────────
+# 逐级降置信:标题 > 标签 > 正文遗址 > 正文省份 > 全国性/对外交流。
+# 低置信字段永不覆盖高置信字段的命中。所有归属构建时打印 WARN 供人工抽检。
+
+def _scan(text, use_city=True, use_site=True):
+    """返回 text 中出现的省份短名,按在文中的首次出现位置排序(去重)。"""
+    occ = []
+    # 省份短名直接匹配;FORBIDDEN 双保险(即使词表未来被改,全国性词也绝不落省)
+    for p in PROVINCES:
+        if p in FORBIDDEN:
+            continue
+        i = text.find(p)
+        if i >= 0:
+            occ.append((i, p))
+    # 城市/遗址长词在后追加,不覆盖已有省份
+    pool = []
+    if use_city:
+        pool += list(CITY2PROV.items())
+    if use_site:
+        pool += list(SITE2PROV.items())
+    found = {p for _, p in occ}
+    for kw, p in pool:
+        i = text.find(kw)
+        if i >= 0 and p not in found:
+            occ.append((i, p))
+            found.add(p)
+    occ.sort()
+    return [p for _, p in occ]
+
+
+def _is_outreach(item, title, tags):
+    """事件在境外/涉外的对外交流 → 不归国内省。"""
+    if any(t in (item.get('tags') or []) for t in OUTREACH_TAGS):
+        return True
+    if any(k in title for k in OUTREACH_TITLE):
+        return True
+    return False
+
+
+def _is_national(title, tags):
+    """全国性/行业/政策/科技主题 → 不归省。"""
+    if any(k in title for k in NATIONAL_KEYWORDS):
+        return True
+    if any(t in (tags or []) for t in NATIONAL_KEYWORDS):
+        return True
+    return False
+
+
+def attribute_item(item):
+    """为单条新闻判定省份归属。
+
+    返回 {'provinces': [短名...], 'tier': str}。
+    tier: title/tags/site/body/national/outreach/unassigned
+    """
+    title = item['title']
+    tags = item.get('tags') or []
+    tags_txt = ' '.join(tags)
+
+    # 1) 标题命中(最高置信,含城市/遗址)
+    th = _scan(title)
+    if th:
+        return {'provinces': th, 'tier': 'title'}
+
+    # 2) 标签命中(AI 编辑写在标签里的省份,如"姑蔑·浙江")
+    gh = _scan(tags_txt)
+    if gh:
+        return {'provinces': gh, 'tier': 'tags'}
+
+    # 3) 对外交流:标题/标签无省、事件在境外 → 不归省(用户确认国际不进地图)
+    if _is_outreach(item, title, tags):
+        return {'provinces': [], 'tier': 'outreach'}
+
+    # 4) 全国性/行业/政策/科技 → 不归省(用户确认不展示)
+    if _is_national(title, tags):
+        return {'provinces': [], 'tier': 'national'}
+
+    # 5) 正文里的遗址/城市信号(如正文提到"殷墟""良渚")
+    body = item.get('body', '')
+    sh = _scan(body)
+    if sh:
+        return {'provinces': sh[:2], 'tier': 'site'}  # 正文取前2省(防止正文罗列多个游客来源省)
+
+    return {'provinces': [], 'tier': 'unassigned'}
+
+
+def build_heatmap_data(daily_reports):
+    """从全部日报解析结果生成热点地图数据。
+
+    只遍历 domestic 段;国际段不进。无省份归属的国内新闻不展示(用户确认)。
+    热力公式: item_weight = 1 + 标题🔥数; decayed = weight * DECAY^days;
+    多省归属时 share = decayed / len(provinces) 均分给各省。
+    返回 (heatmap_data_dict, audit_lines)。
+    """
+    audit = []
+    # 按日期归并,asOf = 最新日报日期(可复现,不依赖系统时间)
+    dates = sorted({r['date'] for r in daily_reports})
+    as_of = dates[-1] if dates else ''
+    as_of_dt = None
+    from datetime import date as _date
+    if as_of:
+        y, m, d = map(int, as_of.split('-'))
+        as_of_dt = _date(y, m, d)
+
+    # province short name -> {heat, count, items}
+    prov_agg = {p: {'heat': 0.0, 'count': 0, 'items': []} for p in PROVINCES}
+
+    for r in daily_reports:
+        rdate = r['date']
+        days = (as_of_dt - _date(*map(int, rdate.split('-')))).days if as_of_dt else 0
+        for item in r['domestic']:
+            att = attribute_item(item)
+            provs = att['provinces']
+            weight = 1 + item['title'].count('🔥')
+            decayed = weight * (DECAY ** days)
+            if not provs:
+                # 无省份归属(全国性/对外交流/未识别)→ 不展示
+                audit.append(('national' if att['tier'] in ('national', 'outreach') else 'unassigned',
+                              rdate, item['id'], item['title'], '-', att['tier']))
+                continue
+            share = round(decayed / len(provs), 2)
+            entry = {
+                'date': rdate,
+                'id': item['id'],
+                'title': item['title'],
+                'weight': weight,
+                'share': share,
+                'url': f"reports/{rdate}.html#{item['id']}",
+            }
+            for p in provs:
+                if p in prov_agg:
+                    prov_agg[p]['heat'] = round(prov_agg[p]['heat'] + share, 2)
+                    prov_agg[p]['count'] += 1
+                    prov_agg[p]['items'].append(entry)
+            audit.append(('prov' if len(provs) <= 1 else 'multi',
+                          rdate, item['id'], item['title'], '/'.join(provs), att['tier']))
+
+    # 排序:province 按 heat 降序;items 按 date 降序(同一省多日期)
+    prov_list = []
+    for p, agg in prov_agg.items():
+        if agg['items']:
+            agg['items'].sort(key=lambda e: e['date'], reverse=True)
+            prov_list.append({'name': p, 'heat': agg['heat'], 'count': agg['count'],
+                              'items': agg['items']})
+    prov_list.sort(key=lambda x: x['heat'], reverse=True)
+
+    # 归省条目数取唯一(多省条目出现在多省 items 列表,不能直接求和)
+    unique_items = set()
+    for x in prov_list:
+        for it in x['items']:
+            unique_items.add((it['date'], it['id']))
+
+    stats = {
+        'totalDomestic': sum(len(r['domestic']) for r in daily_reports),
+        'provincialItems': len(unique_items),
+        'internationalExcluded': sum(len(r['international']) for r in daily_reports),
+        'maxHeat': round(prov_list[0]['heat'], 2) if prov_list else 0.0,
+    }
+
+    data = {
+        'generated': as_of or '',
+        'asOf': as_of,
+        'decay': DECAY,
+        'stats': stats,
+        'provinces': prov_list,
+    }
+    return data, audit
+
+
+def _audit_print(audit):
+    """打印归属审核日志,便于人工抽检。"""
+    prov_n = sum(1 for a in audit if a[0] == 'prov')
+    multi_n = sum(1 for a in audit if a[0] == 'multi')
+    national_n = sum(1 for a in audit if a[0] == 'national')
+    unassigned_n = sum(1 for a in audit if a[0] == 'unassigned')
+    print(f'[HEATMAP] 归省 {prov_n} 条 | 多省均分 {multi_n} 条 | 全国性/对外 {national_n} 条 | 未识别 {unassigned_n} 条')
+    print('[HEATMAP] WARN 抽检重点(正文/多省/未识别):')
+    for kind, rdate, iid, title, provs, tier in audit:
+        if tier in ('site', 'body', 'unassigned') or kind == 'multi':
+            print(f'  [{tier}] {rdate} #{iid} {title[:36]} → {provs}')
+
+
+def build_heatmap_html():
+    """生成热点地图详情页 heatmap.html(ECharts 5 + 本地 china.json,内联 CSS/JS)。
+
+    数据在运行时从 heatmap-data.json 加载(渐进增强:地图组件/数据任一加载失败
+    都保留 Top10 快速入口)。暗色模式用 matchMedia 监听,切换时重建图表。
+    """
+    return '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<title>文博热点地图 | 每日文博资讯</title>
+<meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<link rel="canonical" href="https://zhangheng666.top/heatmap.html">
+<meta property="og:title" content="文博热点地图 | 每日文博资讯">
+<meta property="og:description" content="全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<style>
+  :root {
+    --bg: #f6f5f1; --card: #ffffff; --text: #2b2b2b;
+    --muted: #8a867c; --border: #e5e2d9; --accent: #8a5a2b; --tag-bg: #f0ece2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#17161a; --card:#22222a; --text:#ecebe6; --muted:#9a97a8; --border:#33323c; --accent:#c9a06a; --tag-bg:#2c2c36; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 40px; }
+  header { padding: 24px 0 14px; }
+  header h1 { font-size: 1.35em; }
+  .back { display: inline-block; margin-bottom: 10px; font-size: .85em; color: var(--accent); text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  #map { width: 100%; height: 55vh; min-height: 320px; background: transparent; }
+  .meta { font-size: .78em; color: var(--muted); margin: 6px 0 14px; }
+  .note { font-size: .78em; color: var(--muted); margin: 4px 0 14px; }
+  h2.sec { font-size: 1em; margin: 20px 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 6px 12px; border-radius: 999px; font-size: .85em;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    cursor: pointer; transition: background .15s, transform .1s;
+  }
+  .chip:hover { background: var(--card); transform: translateY(-1px); }
+  .chip b { color: var(--accent); }
+  .chip .heat { color: var(--muted); font-weight: 400; margin-left: 3px; }
+  .detail {
+    display: none; margin-top: 16px; padding: 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  }
+  .detail.show { display: block; }
+  .detail .d-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .detail .d-name { font-size: 1.2em; font-weight: 700; }
+  .detail .d-heat { color: var(--accent); font-weight: 700; }
+  .detail .d-count { color: var(--muted); font-size: .85em; }
+  .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
+  .detail .d-items { margin-top: 12px; }
+  .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
+  .detail .d-items .it:last-child { border-bottom: none; }
+  .detail .d-items a { color: var(--accent); text-decoration: none; font-size: .9em; }
+  .detail .d-items a:hover { text-decoration: underline; }
+  .detail .d-items .it-date { display: block; font-size: .75em; color: var(--muted); margin-top: 2px; }
+  .err { color: var(--muted); text-align: center; padding: 24px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="./">← 返回首页</a>
+    <h1>🗺️ 中国文博热点地图</h1>
+    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份查看当地全部报道</p>
+  </header>
+  <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
+  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
+
+  <h2 class="sec">🔥 热点 Top 10</h2>
+  <div class="chips" id="chips"></div>
+
+  <div class="detail" id="detail">
+    <div class="d-head">
+      <span class="d-name" id="d-name"></span>
+      <span class="d-heat" id="d-heat"></span>
+      <span class="d-count" id="d-count"></span>
+      <button class="d-close" id="d-close" aria-label="关闭">✕</button>
+    </div>
+    <div class="d-items" id="d-items"></div>
+  </div>
+</div>
+
+<script src="lib/echarts.min.js"></script>
+<script>
+// 简称 → geojson 全称(与 china.json 的 properties.name 一一对应)
+var SHORT2GEO = {
+  '北京':'北京市','天津':'天津市','河北':'河北省','山西':'山西省','内蒙古':'内蒙古自治区',
+  '辽宁':'辽宁省','吉林':'吉林省','黑龙江':'黑龙江省','上海':'上海市','江苏':'江苏省',
+  '浙江':'浙江省','安徽':'安徽省','福建':'福建省','江西':'江西省','山东':'山东省',
+  '河南':'河南省','湖北':'湖北省','湖南':'湖南省','广东':'广东省','广西':'广西壮族自治区',
+  '海南':'海南省','重庆':'重庆市','四川':'四川省','贵州':'贵州省','云南':'云南省',
+  '西藏':'西藏自治区','陕西':'陕西省','甘肃':'甘肃省','青海':'青海省','宁夏':'宁夏回族自治区',
+  '新疆':'新疆维吾尔自治区','台湾':'台湾省','香港':'香港特别行政区','澳门':'澳门特别行政区'
+};
+var GEO2SHORT = {};
+for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
+
+var DATA = null;
+var SHORT_DATA = {};
+var chart = null;
+
+function isDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+
+function palette() {
+  var dark = isDark();
+  return {
+    colors: dark
+      ? ['#2a2a34', '#4b3a2b', '#8a4a1f', '#d0520c', '#e03131']
+      : ['#f4f2ea', '#f9dcc4', '#f8a55f', '#e8590c', '#c92a2a'],
+    tooltipBg: dark ? '#22222a' : '#ffffff',
+    tooltipText: dark ? '#eee' : '#333',
+    labelText: dark ? '#999' : '#777'
+  };
+}
+
+function showDetail(shortName, prov) {
+  var det = document.getElementById('detail');
+  if (!prov) { det.classList.remove('show'); return; }
+  document.getElementById('d-name').textContent = prov.name;
+  document.getElementById('d-heat').textContent = '热度 ' + prov.heat;
+  document.getElementById('d-count').textContent = prov.count + ' 条报道';
+  var box = document.getElementById('d-items');
+  box.innerHTML = '';
+  prov.items.forEach(function(it){
+    var div = document.createElement('div');
+    div.className = 'it';
+    var a = document.createElement('a');
+    a.href = it.url; a.textContent = it.title;
+    var d = document.createElement('span');
+    d.className = 'it-date'; d.textContent = it.date;
+    div.appendChild(a); div.appendChild(d);
+    box.appendChild(div);
+  });
+  det.classList.add('show');
+  det.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+}
+
+function renderTop10() {
+  var box = document.getElementById('chips');
+  box.innerHTML = '';
+  var top = DATA.provinces.slice(0, 10);
+  if (!top.length) {
+    box.innerHTML = '<div class="err">暂无数据，等日报积累几天后即可点亮地图。</div>';
+    return;
+  }
+  top.forEach(function(p){
+    var chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat + '</span>';
+    chip.onclick = function(){ showDetail(p.name, p); };
+    box.appendChild(chip);
+  });
+}
+
+function renderMap() {
+  if (!window.echarts || !window.ChinaGeo) {
+    document.getElementById('map-fallback').innerHTML = '地图组件加载失败，可用上方省份快速入口查看热点。';
+    return;
+  }
+  var p = palette();
+  var el = document.getElementById('map');
+  if (chart) chart.dispose();
+  chart = echarts.init(el);
+  var seriesData = DATA.provinces.map(function(pr){
+    return { name: SHORT2GEO[pr.name] || pr.name, value: pr.heat, count: pr.count };
+  });
+  chart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item', backgroundColor: p.tooltipBg, borderColor: 'rgba(0,0,0,.1)',
+      textStyle: { color: p.tooltipText, fontSize: 13 },
+      formatter: function(params){
+        var short = GEO2SHORT[params.name] || params.name;
+        var d = SHORT_DATA[short];
+        if (!d) return '<b>' + params.name + '</b><br/>暂无数据';
+        return '<b>' + d.name + '</b><br/>热度：' + d.heat + '<br/>报道：' + d.count + ' 条';
+      }
+    },
+    visualMap: {
+      min: 0, max: Math.max(1, Math.ceil((DATA.stats.maxHeat || 1) * 1.05)),
+      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
+      inRange: { color: p.colors },
+      textStyle: { color: p.labelText }
+    },
+    series: [{
+      type: 'map', map: 'china', roam: false, selectedMode: false,
+      label: { show: false },
+      emphasis: {
+        label: { show: true, fontSize: 13, fontWeight: 700, color: '#333' },
+        itemStyle: { areaColor: '#ff9f43' }
+      },
+      itemStyle: { borderColor: 'rgba(255,255,255,.6)', borderWidth: 0.6, areaColor: '#e5e2d9' },
+      data: seriesData
+    }]
+  });
+  chart.off('click');
+  chart.on('click', function(params){
+    if (!params || !params.name) return;
+    var short = GEO2SHORT[params.name] || params.name;
+    showDetail(short, SHORT_DATA[short]);
+  });
+}
+
+// 暗色模式切换时重建图表
+if (window.matchMedia) {
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ renderMap(); });
+}
+
+// 加载 geojson → 注册地图
+fetch('lib/china.json').then(function(r){
+  return r.ok ? r.json() : Promise.reject();
+}).then(function(geo){
+  geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
+  window.ChinaGeo = geo;
+  echarts.registerMap('china', geo);
+  if (DATA) renderMap();
+}).catch(function(){
+  document.getElementById('map-fallback').innerHTML = '地图数据加载失败，可用上方省份快速入口查看热点。';
+});
+
+// 加载热力数据
+fetch('heatmap-data.json').then(function(r){
+  return r.ok ? r.json() : Promise.reject();
+}).then(function(d){
+  DATA = d;
+  DATA.provinces.forEach(function(pr){ SHORT_DATA[pr.name] = pr; });
+  renderTop10();
+  document.getElementById('map-fallback').style.display = 'none';
+  if (window.ChinaGeo) renderMap();
+  if (d.asOf) document.querySelector('.meta').innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · 数据截至 ' + d.asOf;
+}).catch(function(){
+  document.getElementById('map-fallback').innerHTML = '热力数据加载失败，请稍后刷新页面重试。';
+});
+
+document.getElementById('d-close').addEventListener('click', function(){
+  document.getElementById('detail').classList.remove('show');
+});
+</script>
+</body>
+</html>'''
 
 
 def parse_md(filepath):
@@ -1465,6 +2000,18 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   }
   .show-more-btn:hover { background: var(--tag-bg); }
   .older-cards { }
+  /* Heatmap entry card */
+  .heatmap-card {
+    display: block; margin: 4px 0 18px; padding: 16px 18px; border-radius: 12px;
+    text-decoration: none; color: #fff; position: relative;
+    background: linear-gradient(135deg, #e8590c, #c92a2a);
+    box-shadow: 0 3px 12px rgba(201, 42, 42, .18);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .heatmap-card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(201, 42, 42, .28); }
+  .heatmap-card .hm-title { font-size: 1.08em; font-weight: 700; }
+  .heatmap-card .hm-sub { font-size: .8em; opacity: .9; margin-top: 3px; }
+  .heatmap-card .hm-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.3em; opacity: .85; }
 </style>"""
 
     # Build section blocks
@@ -1570,6 +2117,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </div>
 <div class="result-count" id="result-count"></div>
 <div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+
+<a class="heatmap-card" href="heatmap.html">
+  <div class="hm-title">🗺️ 中国文博热点地图</div>
+  <div class="hm-sub">点击省份查看当地全部报道 · 热力随每日日报自动更新</div>
+  <span class="hm-arrow">→</span>
+</a>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
 <div class="section-body">
@@ -1761,6 +2314,11 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>''')
+    urls.append(f'''  <url>
+    <loc>{base}/heatmap.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>''')
 
     # Daily reports
     for r in sorted(daily_reports, key=lambda r: r['date'], reverse=True):
@@ -1934,6 +2492,20 @@ def main():
     with open(idx_path, 'w', encoding='utf-8') as f:
         json.dump(search_data, f, ensure_ascii=False, indent=2)
     print(f'Search index: {idx_path} ({len(search_data)} daily reports)')
+
+    # Build heatmap data + page (仅国内,国际段排除;资源缺失仅 WARN 不中断)
+    heat_data, heat_audit = build_heatmap_data(daily_reports)
+    heat_path = os.path.join(SITE_DIR, 'heatmap-data.json')
+    with open(heat_path, 'w', encoding='utf-8') as f:
+        json.dump(heat_data, f, ensure_ascii=False, indent=2)
+    st = heat_data['stats']
+    print(f'Heatmap data: {heat_path} | 国内 {st["totalDomestic"]} 条,归省 {st["provincialItems"]} 条,国际排除 {st["internationalExcluded"]} 条,最高热度 {st["maxHeat"]}')
+    _audit_print(heat_audit)
+    heat_html = build_heatmap_html()
+    heat_html_path = os.path.join(SITE_DIR, 'heatmap.html')
+    with open(heat_html_path, 'w', encoding='utf-8') as f:
+        f.write(heat_html)
+    print(f'Heatmap page: {heat_html_path}')
 
     # Build daily report HTML with prev/next navigation
     sorted_daily = sorted(daily_reports, key=lambda r: r['date'])
