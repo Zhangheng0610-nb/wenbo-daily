@@ -736,7 +736,7 @@ def parse_jobs(filepath):
     # Parse title line for update date
     if lines:
         title_match = re.match(
-            r'# .+?\|\s*(\d{4})年(\d{1,2})月(\d{1,2})日', lines[0])
+            r'# .+?\|\s*(\d{4})[年-](\d{1,2})[月-](\d{1,2})(?:日)?', lines[0])
         if title_match:
             y, m, d = title_match.groups()
             data['update_date'] = f'{y}-{int(m):02d}-{int(d):02d}'
