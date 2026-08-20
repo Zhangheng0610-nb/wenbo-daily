@@ -551,7 +551,7 @@ def build_heatmap_html():
   <div class="win-tabs" id="wintabs">
     <button class="win-tab" data-days="7">近7天</button>
     <button class="win-tab active" data-days="30">近30天</button>
-    <button class="win-tab" data-days="90">过去90天</button>
+    <button class="win-tab" data-days="90">近90天</button>
   </div>
 
   <h2 class="sec">🔥 热点 Top 10</h2>
@@ -594,7 +594,7 @@ var AS_OF_STR = '';
 var WINDOWS = [
   { key: '7d',  label: '近7天',   days: 7 },
   { key: '30d', label: '近30天',  days: 30 },
-  { key: '90d', label: '过去90天', days: 90 }
+  { key: '90d', label: '近90天', days: 90 }
 ];
 
 function parseUTC(s) {
