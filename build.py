@@ -805,12 +805,25 @@ function renderMap() {
   var maxHeat = VIEW.length ? VIEW[0].heat : 0;
   var vmMax = Math.max(1, Math.ceil(maxHeat * 1.05));
   var labelMin = maxHeat * 0.15;   // 热度≥最大值15%的省常显名称,防几十个标签互相遮挡
+  // 球直径与 visualMap 的 symbolSize:[5,38] 同一线性插值 → 决定省名放球内还是球旁
+  var rOf = function(v){ return 5 + (v / vmMax) * 33; };
+  var LABEL_INSIDE_R = 26;   // symbolSize=球直径:直径≥26px(半径13,装得下2字10px省名)时省名装球内,否则小字标球旁
   // 热力球数据:位置=各省几何中心(centroid),value=[lng, lat, heat]
   var ballData = [];
   VIEW.forEach(function(pr){
     var c = CENTROID[pr.name];
     if (!c) return;
-    ballData.push({ name: pr.name, value: [c[0], c[1], Math.round(pr.heat * 100) / 100] });
+    var v = Math.round(pr.heat * 100) / 100;
+    ballData.push({
+      name: pr.name, value: [c[0], c[1], v],
+      // 大球:省名白字装进球内(深色描边+暗影保证在各种球色上都可读);小球放不下:小字标在球右侧,画面更干净
+      label: rOf(v) >= LABEL_INSIDE_R
+        ? { position: 'inside', color: '#fff', fontWeight: 700, fontSize: 10,
+            textBorderColor: 'rgba(0,0,0,.35)', textBorderWidth: 1,
+            textShadowColor: 'rgba(0,0,0,.5)', textShadowBlur: 2 }
+        : { position: 'right', distance: 4, color: p.ballLabel, fontSize: 9,
+            fontWeight: 400, opacity: .85 }
+    });
   });
   chart.setOption({
     backgroundColor: 'transparent',
@@ -841,8 +854,9 @@ function renderMap() {
         type: 'map', map: 'china', roam: false, selectedMode: false,
         label: { show: false },
         emphasis: {
-          label: { show: true, fontSize: 13, fontWeight: 700, color: p.ballLabel },
-          itemStyle: { areaColor: p.ballColors[2] }
+          // 划过省份不再高亮色块、不再弹大号省名(热力已由球的大小/颜色表达,2026-08-21 用户要求)
+          label: { show: false },
+          itemStyle: { areaColor: p.mapFill }
         },
         itemStyle: { borderColor: p.mapBorder, borderWidth: 0.6, areaColor: p.mapFill },
         data: []
@@ -852,8 +866,8 @@ function renderMap() {
         name: '热点', type: 'scatter', coordinateSystem: 'geo', zlevel: 2,
         symbol: 'circle', data: ballData,
         label: {
-          show: true, position: 'top', distance: 5, fontSize: 11, fontWeight: 600,
-          color: p.ballLabel,
+          // 位置/字号/颜色由每条数据自带的 label 覆盖:大球省名在球内、小球小字在球旁(2026-08-21 用户要求)
+          show: true,
           formatter: function(p){ return p.value[2] >= labelMin ? p.name : ''; }
         },
         labelLayout: { hideOverlap: true },
