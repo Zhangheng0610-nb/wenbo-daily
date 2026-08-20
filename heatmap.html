@@ -149,12 +149,13 @@ function isDark() { return window.matchMedia && window.matchMedia('(prefers-colo
 function palette() {
   var dark = isDark();
   return {
-    // 热力球色带(低→高: 浅→深红,深浅两种主题均适配)
+    // 热力球色带(低→高: 浅→深红,深浅两种主题均适配;低端也保证与底色地图可区分)
     ballColors: dark
-      ? ['#3a3636', '#6e4a2e', '#b96a1f', '#e03d2b', '#ff5b5b']
+      ? ['#5c5148', '#8a5f33', '#c07a2c', '#e0483a', '#ff5f5f']
       : ['#e8ddd0', '#f2b28c', '#e8782e', '#d23a1f', '#a01313'],
     mapFill: dark ? '#26262f' : '#eae7df',      // 底色地图统一中性色,不随热力变色
     mapBorder: dark ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.7)',
+    ballBorder: dark ? 'rgba(255,255,255,.45)' : 'rgba(255,255,255,.85)', // 球描边,贴地色时也能被识别
     ballLabel: dark ? '#d5d2d8' : '#5a544c',
     tooltipBg: dark ? '#22222a' : '#ffffff',
     tooltipText: dark ? '#eee' : '#333',
@@ -311,7 +312,7 @@ function renderMap() {
           formatter: function(p){ return p.value[2] >= labelMin ? p.name : ''; }
         },
         labelLayout: { hideOverlap: true },
-        itemStyle: { shadowBlur: 8, shadowColor: 'rgba(0,0,0,.18)' },
+        itemStyle: { borderColor: p.ballBorder, borderWidth: 1, shadowBlur: 8, shadowColor: 'rgba(0,0,0,.25)' },
         emphasis: {
           label: { show: true, color: p.ballLabel, fontWeight: 700, fontSize: 13 },
           itemStyle: { borderColor: '#fff', borderWidth: 1.5, shadowBlur: 14, shadowColor: 'rgba(0,0,0,.4)' }
