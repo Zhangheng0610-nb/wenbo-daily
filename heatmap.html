@@ -31,6 +31,14 @@
   .meta { font-size: .78em; color: var(--muted); margin: 6px 0 14px; }
   .note { font-size: .78em; color: var(--muted); margin: 4px 0 14px; }
   h2.sec { font-size: 1em; margin: 20px 0 10px; }
+  .win-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+  .win-tab {
+    padding: 6px 14px; border-radius: 999px; font-size: .85em;
+    background: var(--tag-bg); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer; transition: all .15s;
+  }
+  .win-tab:hover { background: var(--card); }
+  .win-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
     padding: 6px 12px; border-radius: 999px; font-size: .85em;
@@ -69,6 +77,12 @@
   <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
   <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
 
+  <div class="win-tabs" id="wintabs">
+    <button class="win-tab" data-days="7">近7天</button>
+    <button class="win-tab active" data-days="30">近30天</button>
+    <button class="win-tab" data-days="">2026至今</button>
+  </div>
+
   <h2 class="sec">🔥 热点 Top 10</h2>
   <div class="chips" id="chips"></div>
 
@@ -98,9 +112,24 @@ var SHORT2GEO = {
 var GEO2SHORT = {};
 for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
 
-var DATA = null;
-var SHORT_DATA = {};
+var RAW = null;         // heatmap-data.json 全量数据
+var VIEW = null;        // 当前时间窗口重算后的省份列表
 var chart = null;
+var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中 active 一致)
+var AS_OF_UTC = 0;
+var AS_OF_STR = '';
+
+// 时间窗口定义:days = null 表示全部
+var WINDOWS = [
+  { key: '7d',  label: '近7天',   days: 7 },
+  { key: '30d', label: '近30天',  days: 30 },
+  { key: 'all', label: '2026至今', days: null }
+];
+
+function parseUTC(s) {
+  var a = s.split('-');
+  return Date.UTC(+a[0], +a[1] - 1, +a[2]);
+}
 
 function isDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
 
@@ -116,11 +145,38 @@ function palette() {
   };
 }
 
-function showDetail(shortName, prov) {
+// 按时间窗口重算省份热力(与 build.py 同公式: weight × DECAY^天数 / 省份数)
+function computeWindow(days) {
+  var byName = {};
+  RAW.provinces.forEach(function(p){
+    var heat = 0, count = 0, items = [];
+    p.items.forEach(function(it){
+      var since = (AS_OF_UTC - parseUTC(it.date)) / 86400000;
+      if (days !== null && since >= days) return;   // 窗口外报道跳过
+      heat += it.weight * Math.pow(0.93, since) / it.pcount;
+      count += 1;
+      items.push(it);
+    });
+    if (count > 0) byName[p.name] = { name: p.name, heat: heat, count: count, items: items };
+  });
+  var list = [];
+  for (var k in byName) list.push(byName[k]);
+  list.sort(function(a, b){ return b.heat - a.heat; });
+  return list;
+}
+
+function findProvince(name) {
+  var v = VIEW || [];
+  for (var i = 0; i < v.length; i++) if (v[i].name === name) return v[i];
+  return null;
+}
+
+function showDetail(shortName) {
+  var prov = findProvince(shortName);
   var det = document.getElementById('detail');
   if (!prov) { det.classList.remove('show'); return; }
   document.getElementById('d-name').textContent = prov.name;
-  document.getElementById('d-heat').textContent = '热度 ' + prov.heat;
+  document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
   document.getElementById('d-count').textContent = prov.count + ' 条报道';
   var box = document.getElementById('d-items');
   box.innerHTML = '';
@@ -141,22 +197,22 @@ function showDetail(shortName, prov) {
 function renderTop10() {
   var box = document.getElementById('chips');
   box.innerHTML = '';
-  var top = DATA.provinces.slice(0, 10);
+  var top = (VIEW || []).slice(0, 10);
   if (!top.length) {
-    box.innerHTML = '<div class="err">暂无数据，等日报积累几天后即可点亮地图。</div>';
+    box.innerHTML = '<div class="err">该时间段暂无热点数据，换个时间范围试试。</div>';
     return;
   }
   top.forEach(function(p){
     var chip = document.createElement('button');
     chip.className = 'chip';
-    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat + '</span>';
-    chip.onclick = function(){ showDetail(p.name, p); };
+    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat.toFixed(1) + '</span>';
+    chip.onclick = function(){ showDetail(p.name); };
     box.appendChild(chip);
   });
 }
 
 function renderMap() {
-  if (!window.echarts || !window.ChinaGeo) {
+  if (!window.echarts || !window.ChinaGeo || !VIEW) {
     document.getElementById('map-fallback').innerHTML = '地图组件加载失败，可用上方省份快速入口查看热点。';
     return;
   }
@@ -164,8 +220,9 @@ function renderMap() {
   var el = document.getElementById('map');
   if (chart) chart.dispose();
   chart = echarts.init(el);
-  var seriesData = DATA.provinces.map(function(pr){
-    return { name: SHORT2GEO[pr.name] || pr.name, value: pr.heat, count: pr.count };
+  var maxHeat = VIEW.length ? VIEW[0].heat : 0;
+  var seriesData = VIEW.map(function(pr){
+    return { name: SHORT2GEO[pr.name] || pr.name, value: Math.round(pr.heat * 100) / 100 };
   });
   chart.setOption({
     backgroundColor: 'transparent',
@@ -174,13 +231,13 @@ function renderMap() {
       textStyle: { color: p.tooltipText, fontSize: 13 },
       formatter: function(params){
         var short = GEO2SHORT[params.name] || params.name;
-        var d = SHORT_DATA[short];
-        if (!d) return '<b>' + params.name + '</b><br/>暂无数据';
-        return '<b>' + d.name + '</b><br/>热度：' + d.heat + '<br/>报道：' + d.count + ' 条';
+        var d = findProvince(short);
+        if (!d) return '<b>' + params.name + '</b><br/>该时间段暂无数据';
+        return '<b>' + d.name + '</b><br/>热度：' + d.heat.toFixed(2) + '<br/>报道：' + d.count + ' 条';
       }
     },
     visualMap: {
-      min: 0, max: Math.max(1, Math.ceil((DATA.stats.maxHeat || 1) * 1.05)),
+      min: 0, max: Math.max(1, Math.ceil(maxHeat * 1.05)),
       left: 12, bottom: 12, calculable: false, text: ['高', '低'],
       inRange: { color: p.colors },
       textStyle: { color: p.labelText }
@@ -199,10 +256,40 @@ function renderMap() {
   chart.off('click');
   chart.on('click', function(params){
     if (!params || !params.name) return;
-    var short = GEO2SHORT[params.name] || params.name;
-    showDetail(short, SHORT_DATA[short]);
+    showDetail(GEO2SHORT[params.name] || params.name);
   });
 }
+
+function updateMeta() {
+  var m = document.querySelector('.meta');
+  if (m && AS_OF_STR) m.innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · ' + CUR_WINDOW.label + ' · 数据截至 ' + AS_OF_STR;
+}
+
+function applyWindow(w) {
+  if (!RAW) return;
+  CUR_WINDOW = w;
+  VIEW = computeWindow(w.days);
+  document.querySelectorAll('.win-tab').forEach(function(btn){
+    var v = btn.getAttribute('data-days');
+    btn.classList.toggle('active', (w.days === null ? '' : String(w.days)) === v);
+  });
+  renderTop10();
+  renderMap();
+  updateMeta();
+  // 详情开着时刷新到新窗口
+  var det = document.getElementById('detail');
+  if (det.classList.contains('show')) {
+    showDetail(document.getElementById('d-name').textContent);
+  }
+}
+
+// 初始化时间范围切换
+document.querySelectorAll('.win-tab').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var v = btn.getAttribute('data-days');
+    applyWindow({ label: btn.textContent, days: (v === '') ? null : parseInt(v, 10) });
+  });
+});
 
 // 暗色模式切换时重建图表
 if (window.matchMedia) {
@@ -216,21 +303,23 @@ fetch('lib/china.json').then(function(r){
   geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
   window.ChinaGeo = geo;
   echarts.registerMap('china', geo);
-  if (DATA) renderMap();
+  if (RAW) renderMap();
 }).catch(function(){
   document.getElementById('map-fallback').innerHTML = '地图数据加载失败，可用上方省份快速入口查看热点。';
 });
 
-// 加载热力数据
+// 加载热力数据 → 按默认窗口初始化
 fetch('heatmap-data.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(d){
-  DATA = d;
-  DATA.provinces.forEach(function(pr){ SHORT_DATA[pr.name] = pr; });
+  RAW = d;
+  AS_OF_STR = d.asOf;
+  AS_OF_UTC = d.asOf ? parseUTC(d.asOf) : 0;
+  VIEW = computeWindow(CUR_WINDOW.days);
   renderTop10();
   document.getElementById('map-fallback').style.display = 'none';
   if (window.ChinaGeo) renderMap();
-  if (d.asOf) document.querySelector('.meta').innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · 数据截至 ' + d.asOf;
+  updateMeta();
 }).catch(function(){
   document.getElementById('map-fallback').innerHTML = '热力数据加载失败，请稍后刷新页面重试。';
 });
