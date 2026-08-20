@@ -11,3 +11,4 @@ setup*.ps1
 ssh-*.py
 *.log
 __pycache__/
+dedup-index.json

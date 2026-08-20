@@ -2610,6 +2610,23 @@ def build_about_html():
     return html
 
 
+def build_dedup_index(daily_reports, days=30):
+    """生成近 days 天日报标题索引(新→旧),供 auto_task 日报去重比对(防重复机制,2026-08-21)。
+    只含 日期+id+标题,紧凑格式,单次 read_file 可全读。仅本地使用(.gitignore 排除,不进 public 站点)。
+    """
+    sorted_r = sorted(daily_reports, key=lambda r: r['date'], reverse=True)[:days]
+    out = []
+    for r in sorted_r:
+        items = [{'id': it['id'], 'title': it['title']} for it in r['domestic'] + r['international']]
+        out.append({'date': r['date'], 'items': items})
+    path = os.path.join(SITE_DIR, 'dedup-index.json')
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False)  # 紧凑单行,控制体积保证单次 read_file 全读
+    n = sum(len(x['items']) for x in out)
+    print(f'Dedup index: {path} ({len(out)} 天, {n} 条标题,供 auto_task 去重)')
+    return path
+
+
 # ───────────────── 主流程 ─────────────────
 
 def main():
@@ -2702,6 +2719,9 @@ def main():
     with open(heat_html_path, 'w', encoding='utf-8') as f:
         f.write(heat_html)
     print(f'Heatmap page: {heat_html_path}')
+
+    # Dedup index for auto_task daily anti-repetition (近30天标题,本地使用)
+    build_dedup_index(daily_reports)
 
     # Build daily report HTML with prev/next navigation
     sorted_daily = sorted(daily_reports, key=lambda r: r['date'])
