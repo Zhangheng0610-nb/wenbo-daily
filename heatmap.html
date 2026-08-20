@@ -81,10 +81,10 @@
   <header>
     <a class="back" href="./">← 返回首页</a>
     <h1>🗺️ 中国文博热点地图</h1>
-    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份查看当地全部报道</p>
+    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份或热力球查看当地全部报道</p>
   </header>
   <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
+  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 热力球越大越红热度越高，越小越浅热度越低 · 仅统计国内报道</p>
   <p class="note">🔥 = 一般关注 · 🔥🔥 = 较高关注 · 🔥🔥🔥 = 高关注 · 热度仅反映本站日报报道的相对关注度，不代表官方统计或社会整体关注度</p>
 
   <div class="win-tabs" id="wintabs">
@@ -130,6 +130,7 @@ var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中
 var CUR_THEME = null;   // 省份摘要的当前主题筛选(null=全部);切时间窗口时保留
 var AS_OF_UTC = 0;
 var AS_OF_STR = '';
+var CENTROID = {};   // 简称 → [lng,lat] 省几何中心(取自 china.json properties.centroid)
 
 // 时间窗口定义
 var WINDOWS = [
@@ -148,9 +149,13 @@ function isDark() { return window.matchMedia && window.matchMedia('(prefers-colo
 function palette() {
   var dark = isDark();
   return {
-    colors: dark
-      ? ['#2a2a34', '#4b3a2b', '#8a4a1f', '#d0520c', '#e03131']
-      : ['#f4f2ea', '#f9dcc4', '#f8a55f', '#e8590c', '#c92a2a'],
+    // 热力球色带(低→高: 浅→深红,深浅两种主题均适配)
+    ballColors: dark
+      ? ['#3a3636', '#6e4a2e', '#b96a1f', '#e03d2b', '#ff5b5b']
+      : ['#e8ddd0', '#f2b28c', '#e8782e', '#d23a1f', '#a01313'],
+    mapFill: dark ? '#26262f' : '#eae7df',      // 底色地图统一中性色,不随热力变色
+    mapBorder: dark ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.7)',
+    ballLabel: dark ? '#d5d2d8' : '#5a544c',
     tooltipBg: dark ? '#22222a' : '#ffffff',
     tooltipText: dark ? '#eee' : '#333',
     labelText: dark ? '#999' : '#777'
@@ -263,8 +268,14 @@ function renderMap() {
   if (chart) chart.dispose();
   chart = echarts.init(el);
   var maxHeat = VIEW.length ? VIEW[0].heat : 0;
-  var seriesData = VIEW.map(function(pr){
-    return { name: SHORT2GEO[pr.name] || pr.name, value: Math.round(pr.heat * 100) / 100 };
+  var vmMax = Math.max(1, Math.ceil(maxHeat * 1.05));
+  var labelMin = maxHeat * 0.15;   // 热度≥最大值15%的省常显名称,防几十个标签互相遮挡
+  // 热力球数据:位置=各省几何中心(centroid),value=[lng, lat, heat]
+  var ballData = [];
+  VIEW.forEach(function(pr){
+    var c = CENTROID[pr.name];
+    if (!c) return;
+    ballData.push({ name: pr.name, value: [c[0], c[1], Math.round(pr.heat * 100) / 100] });
   });
   chart.setOption({
     backgroundColor: 'transparent',
@@ -278,22 +289,42 @@ function renderMap() {
         return '<b>' + d.name + '</b><br/>热度：' + d.heat.toFixed(2) + '<br/>报道：' + d.count + ' 条';
       }
     },
-    visualMap: {
-      min: 0, max: Math.max(1, Math.ceil(maxHeat * 1.05)),
-      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
-      inRange: { color: p.colors },
-      textStyle: { color: p.labelText }
-    },
-    series: [{
-      type: 'map', map: 'china', roam: false, selectedMode: false,
-      label: { show: false },
-      emphasis: {
-        label: { show: true, fontSize: 13, fontWeight: 700, color: '#333' },
-        itemStyle: { areaColor: '#ff9f43' }
+    series: [
+      {
+        // 底色地图:统一中性色,热力信息全部交给热力球(小面积省市不会被色块掩盖)
+        type: 'map', map: 'china', roam: false, selectedMode: false,
+        label: { show: false },
+        emphasis: {
+          label: { show: true, fontSize: 13, fontWeight: 700, color: p.ballLabel },
+          itemStyle: { areaColor: p.ballColors[2] }
+        },
+        itemStyle: { borderColor: p.mapBorder, borderWidth: 0.6, areaColor: p.mapFill },
+        data: []
       },
-      itemStyle: { borderColor: 'rgba(255,255,255,.6)', borderWidth: 0.6, areaColor: '#e5e2d9' },
-      data: seriesData
-    }]
+      {
+        // 热力球:大小与颜色均由 heat 值映射(visualMap seriesIndex=[1] 只作用本系列)
+        name: '热点', type: 'scatter', coordinateSystem: 'geo', zlevel: 2,
+        symbol: 'circle', data: ballData,
+        label: {
+          show: true, position: 'top', distance: 5, fontSize: 11, fontWeight: 600,
+          color: p.ballLabel,
+          formatter: function(p){ return p.value[2] >= labelMin ? p.name : ''; }
+        },
+        labelLayout: { hideOverlap: true },
+        itemStyle: { shadowBlur: 8, shadowColor: 'rgba(0,0,0,.18)' },
+        emphasis: {
+          label: { show: true, color: p.ballLabel, fontWeight: 700, fontSize: 13 },
+          itemStyle: { borderColor: '#fff', borderWidth: 1.5, shadowBlur: 14, shadowColor: 'rgba(0,0,0,.4)' }
+        }
+      }
+    ],
+    visualMap: {
+      min: 0, max: vmMax,
+      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
+      seriesIndex: [1], dimension: 2,
+      inRange: { color: p.ballColors, symbolSize: [5, 38] },
+      textStyle: { color: p.labelText }
+    }
   });
   chart.off('click');
   chart.on('click', function(params){
@@ -344,6 +375,13 @@ fetch('lib/china.json').then(function(r){
 }).then(function(geo){
   geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
   window.ChinaGeo = geo;
+  CENTROID = {};
+  geo.features.forEach(function(f){
+    var props = f.properties;
+    var short = GEO2SHORT[props.name];
+    if (!short || !(props.centroid || props.center)) return;
+    CENTROID[short] = props.centroid || props.center;   // DataV geojson 自带省几何中心,热力球定位用
+  });
   echarts.registerMap('china', geo);
   if (RAW) renderMap();
 }).catch(function(){
