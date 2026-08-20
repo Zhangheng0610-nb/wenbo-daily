@@ -118,6 +118,28 @@ OUTREACH_TAGS = ('对外交流','文物出海','文明互鉴','文明桥梁','�
 OUTREACH_TITLE = ('中吉','中哈','中乌','中埃','中法','中英','中意','中美','中俄','中蒙',
                   '中缅','中柬','中越','中老','中泰','中朝','中尼','中巴','中埃塞','中非')
 
+# ───────────────── 主题体系(2026-08-21 建立) ─────────────────
+# 主题筛选器的标准:今后日报标签中的"主题词"统一按这 9 类打(未雨绸缪,未来做 地区×主题×时间 三维检索)。
+# 省份摘要页(heatmap.html 点省)按此归一化统计"主要主题";建三维检索时前端/后端直接复用。
+# 键 = 归一化大类名;值 = 该类的标准词 + 历史同义词(AI 历史标签自动归一化)。
+# ⚠️ 地名/遗址名(浙江/三星堆/姑蔑)不是主题,标签里照旧单独打,供省份归类用(SITE2PROV/CITY2PROV)。
+# 顺序有讲究:扫描按此顺序,标签词命中第一个大类即停("国际展览"→展览 而非 国际交流)。
+THEMES = {
+    '考古':   ('考古', '考古发现', '考古学', '田野考古', '公共考古', '科技考古', '考古科技',
+              '考古遗址', '旧石器时代', '古文字', '简牍', '水下考古', '考古新发现', '发掘', '考古展'),
+    '博物馆': ('博物馆', '博物馆伦理', '博物馆建设', '博物馆日', '馆藏', '文博', '博物馆学会'),
+    '展览':   ('展览', '特展', '临展', '巡展', '文物展', '艺术展', '国际展览', '大展'),
+    '文物保护': ('文物保护', '文物安全', '文物修复', '修复', '保护技术', '科技保护', '古建修缮', '壁画保护', '预防性保护'),
+    '文化遗产': ('文化遗产', '文化遗产保护', '世界遗产', '世遗', '非遗', '非物质文化遗产', '工业遗产',
+              '海洋文化遗产', '农业遗产', '历史街区', '文明探源', '中华文明探源', '探源工程', '遗产大会'),
+    '数字化': ('数字化', '数字文博', '数字科技', '数字展示', '虚拟展览', '科技', 'AI', '人工智能', '元宇宙', '大数据'),
+    '文物追索': ('文物追索', '文物归还', '文物返还', '文物回归', '流失文物', '追缴', '返还'),
+    '国际交流': ('国际', '国际合作', '国际交流', '国际文化交流', '国际传播', '文化外交',
+              '对外交流', '文明互鉴', '文明桥梁', '海外', '出国', 'UNESCO'),
+    '政策行业': ('政策', '行业动态', '国家文物局', '立法', '规划', '标准', '人才', '教育', '出版',
+              '学术', '方法论', '文创', '产业', '文旅', '报告', '会议', '论坛'),
+}
+
 CSS = """<style>
   :root {
     --bg: #f5f0eb; --card: #fff; --text: #2c2416; --muted: #8b7355;
@@ -365,6 +387,22 @@ def attribute_item(item):
     return {'provinces': [], 'tier': 'unassigned'}
 
 
+def theme_of(tags):
+    """把标签归一到 THEMES 大主题类(去重,保序)。
+
+    按 THEMES 定义顺序扫描,每个标签词命中第一个大类即归属;
+    地名/遗址(浙江/三星堆)/未命中任何大类的标签直接忽略(它们用于省份归类,不用于主题)。
+    """
+    themes = []
+    for t in tags or []:
+        for name, words in THEMES.items():
+            if any(w in t for w in words):
+                if name not in themes:
+                    themes.append(name)
+                break
+    return themes
+
+
 def build_heatmap_data(daily_reports):
     """从全部日报解析结果生成热点地图数据。
 
@@ -408,6 +446,8 @@ def build_heatmap_data(daily_reports):
                 'pcount': len(provs),   # 前端时间窗口重算需按省份数均分
                 'share': share,
                 'url': f"reports/{rdate}.html#{item['id']}",
+                'tags': item.get('tags', []),   # 原始标签(主题筛选用)
+                'themes': theme_of(item.get('tags', [])),  # 归一化主题大类(省份摘要统计)
             }
             for p in provs:
                 if p in prov_agg:
@@ -529,6 +569,8 @@ def build_heatmap_html():
   .detail .d-heat { color: var(--accent); font-weight: 700; }
   .detail .d-count { color: var(--muted); font-size: .85em; }
   .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
+  .detail .d-themes { margin: 6px 0 2px; font-size: .8em; color: var(--muted); }
+  .detail .d-themes .th { display: inline-block; background: var(--tag-bg); border-radius: 8px; padding: 1px 8px; margin: 2px 4px 2px 0; color: var(--text); }
   .detail .d-items { margin-top: 12px; }
   .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
   .detail .d-items .it:last-child { border-bottom: none; }
@@ -547,6 +589,7 @@ def build_heatmap_html():
   </header>
   <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
   <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
+  <p class="note">🔥 = 一般关注 · 🔥🔥 = 较高关注 · 🔥🔥🔥 = 高关注 · 热度仅反映本站日报报道的相对关注度，不代表官方统计或社会整体关注度</p>
 
   <div class="win-tabs" id="wintabs">
     <button class="win-tab" data-days="7">近7天</button>
@@ -564,6 +607,7 @@ def build_heatmap_html():
       <span class="d-count" id="d-count"></span>
       <button class="d-close" id="d-close" aria-label="关闭">✕</button>
     </div>
+    <div class="d-themes" id="d-themes"></div>
     <div class="d-items" id="d-items"></div>
   </div>
 </div>
@@ -649,9 +693,25 @@ function showDetail(shortName) {
   document.getElementById('d-name').textContent = prov.name;
   document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
   document.getElementById('d-count').textContent = prov.count + ' 条报道';
+  // 主要主题:统计该省当前窗口报道的归一化主题大类频次
+  var thCount = {};
+  prov.items.forEach(function(it){
+    (it.themes || []).forEach(function(t){ thCount[t] = (thCount[t] || 0) + 1; });
+  });
+  var thHtml = '';
+  for (var t in thCount) {
+    if (!Object.prototype.hasOwnProperty.call(thCount, t)) continue;
+    thHtml += '<span class="th">' + t + ' ×' + thCount[t] + '</span>';
+  }
+  document.getElementById('d-themes').innerHTML = thHtml ? '主要主题：' + thHtml : '';
+  // 高🔥新闻置顶(weight 降序,同权按日期新→旧)
+  var sorted = prov.items.slice().sort(function(a, b){
+    if (b.weight !== a.weight) return b.weight - a.weight;
+    return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0);
+  });
   var box = document.getElementById('d-items');
   box.innerHTML = '';
-  prov.items.forEach(function(it){
+  sorted.forEach(function(it){
     var div = document.createElement('div');
     div.className = 'it';
     var a = document.createElement('a');

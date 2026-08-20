@@ -58,6 +58,8 @@
   .detail .d-heat { color: var(--accent); font-weight: 700; }
   .detail .d-count { color: var(--muted); font-size: .85em; }
   .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
+  .detail .d-themes { margin: 6px 0 2px; font-size: .8em; color: var(--muted); }
+  .detail .d-themes .th { display: inline-block; background: var(--tag-bg); border-radius: 8px; padding: 1px 8px; margin: 2px 4px 2px 0; color: var(--text); }
   .detail .d-items { margin-top: 12px; }
   .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
   .detail .d-items .it:last-child { border-bottom: none; }
@@ -76,6 +78,7 @@
   </header>
   <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
   <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 仅统计国内报道</p>
+  <p class="note">🔥 = 一般关注 · 🔥🔥 = 较高关注 · 🔥🔥🔥 = 高关注 · 热度仅反映本站日报报道的相对关注度，不代表官方统计或社会整体关注度</p>
 
   <div class="win-tabs" id="wintabs">
     <button class="win-tab" data-days="7">近7天</button>
@@ -93,6 +96,7 @@
       <span class="d-count" id="d-count"></span>
       <button class="d-close" id="d-close" aria-label="关闭">✕</button>
     </div>
+    <div class="d-themes" id="d-themes"></div>
     <div class="d-items" id="d-items"></div>
   </div>
 </div>
@@ -178,9 +182,25 @@ function showDetail(shortName) {
   document.getElementById('d-name').textContent = prov.name;
   document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
   document.getElementById('d-count').textContent = prov.count + ' 条报道';
+  // 主要主题:统计该省当前窗口报道的归一化主题大类频次
+  var thCount = {};
+  prov.items.forEach(function(it){
+    (it.themes || []).forEach(function(t){ thCount[t] = (thCount[t] || 0) + 1; });
+  });
+  var thHtml = '';
+  for (var t in thCount) {
+    if (!Object.prototype.hasOwnProperty.call(thCount, t)) continue;
+    thHtml += '<span class="th">' + t + ' ×' + thCount[t] + '</span>';
+  }
+  document.getElementById('d-themes').innerHTML = thHtml ? '主要主题：' + thHtml : '';
+  // 高🔥新闻置顶(weight 降序,同权按日期新→旧)
+  var sorted = prov.items.slice().sort(function(a, b){
+    if (b.weight !== a.weight) return b.weight - a.weight;
+    return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0);
+  });
   var box = document.getElementById('d-items');
   box.innerHTML = '';
-  prov.items.forEach(function(it){
+  sorted.forEach(function(it){
     var div = document.createElement('div');
     div.className = 'it';
     var a = document.createElement('a');
