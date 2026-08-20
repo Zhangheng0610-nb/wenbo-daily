@@ -59,7 +59,14 @@
   .detail .d-count { color: var(--muted); font-size: .85em; }
   .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
   .detail .d-themes { margin: 6px 0 2px; font-size: .8em; color: var(--muted); }
-  .detail .d-themes .th { display: inline-block; background: var(--tag-bg); border-radius: 8px; padding: 1px 8px; margin: 2px 4px 2px 0; color: var(--text); }
+  .detail .d-themes .th {
+    display: inline-block; background: var(--tag-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1px 10px; margin: 2px 4px 2px 0;
+    color: var(--text); font-size: inherit; font-family: inherit; line-height: 1.7;
+    cursor: pointer; transition: all .15s;
+  }
+  .detail .d-themes .th:hover { border-color: var(--accent); }
+  .detail .d-themes .th.on { background: var(--accent); border-color: var(--accent); color: #fff; }
   .detail .d-items { margin-top: 12px; }
   .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
   .detail .d-items .it:last-child { border-bottom: none; }
@@ -120,6 +127,7 @@ var RAW = null;         // heatmap-data.json 全量数据
 var VIEW = null;        // 当前时间窗口重算后的省份列表
 var chart = null;
 var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中 active 一致)
+var CUR_THEME = null;   // 省份摘要的当前主题筛选(null=全部);切时间窗口时保留
 var AS_OF_UTC = 0;
 var AS_OF_STR = '';
 
@@ -181,20 +189,34 @@ function showDetail(shortName) {
   if (!prov) { det.classList.remove('show'); return; }
   document.getElementById('d-name').textContent = prov.name;
   document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
-  document.getElementById('d-count').textContent = prov.count + ' 条报道';
-  // 主要主题:统计该省当前窗口报道的归一化主题大类频次
+  // 主题 chips:统计该省当前窗口报道的归一化主题大类频次,点击可筛选
   var thCount = {};
   prov.items.forEach(function(it){
     (it.themes || []).forEach(function(t){ thCount[t] = (thCount[t] || 0) + 1; });
   });
-  var thHtml = '';
+  var themesBox = document.getElementById('d-themes');
+  var thHtml = '<button class="th' + (CUR_THEME === null ? ' on' : '') + '" data-t="__all__">全部</button>';
   for (var t in thCount) {
     if (!Object.prototype.hasOwnProperty.call(thCount, t)) continue;
-    thHtml += '<span class="th">' + t + ' ×' + thCount[t] + '</span>';
+    thHtml += '<button class="th' + (CUR_THEME === t ? ' on' : '') + '" data-t="' + t + '">' + t + ' ×' + thCount[t] + '</button>';
   }
-  document.getElementById('d-themes').innerHTML = thHtml ? '主要主题：' + thHtml : '';
+  themesBox.innerHTML = thHtml ? '主要主题：' + thHtml : '';
+  themesBox.querySelectorAll('.th').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var t = btn.getAttribute('data-t');
+      CUR_THEME = (t === '__all__' || t === CUR_THEME) ? null : t;  // 再点同主题=取消筛选
+      showDetail(shortName);   // 重开,刷新 chips 激活态与列表
+    });
+  });
+  // 按当前主题筛选(数据已由 build.py 归一化,纯前端过滤,无需重分类)
+  var filtered = CUR_THEME
+    ? prov.items.filter(function(it){ return (it.themes || []).indexOf(CUR_THEME) !== -1; })
+    : prov.items;
+  document.getElementById('d-count').textContent = CUR_THEME
+    ? filtered.length + ' / ' + prov.count + ' 条报道 · ' + CUR_THEME
+    : prov.count + ' 条报道';
   // 高🔥新闻置顶(weight 降序,同权按日期新→旧)
-  var sorted = prov.items.slice().sort(function(a, b){
+  var sorted = filtered.slice().sort(function(a, b){
     if (b.weight !== a.weight) return b.weight - a.weight;
     return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0);
   });
