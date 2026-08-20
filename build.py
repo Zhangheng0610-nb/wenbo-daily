@@ -551,7 +551,7 @@ def build_heatmap_html():
   <div class="win-tabs" id="wintabs">
     <button class="win-tab" data-days="7">近7天</button>
     <button class="win-tab active" data-days="30">近30天</button>
-    <button class="win-tab" data-days="">2026至今</button>
+    <button class="win-tab" data-days="90">过去90天</button>
   </div>
 
   <h2 class="sec">🔥 热点 Top 10</h2>
@@ -590,11 +590,11 @@ var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中
 var AS_OF_UTC = 0;
 var AS_OF_STR = '';
 
-// 时间窗口定义:days = null 表示全部
+// 时间窗口定义
 var WINDOWS = [
   { key: '7d',  label: '近7天',   days: 7 },
   { key: '30d', label: '近30天',  days: 30 },
-  { key: 'all', label: '2026至今', days: null }
+  { key: '90d', label: '过去90天', days: 90 }
 ];
 
 function parseUTC(s) {
@@ -742,7 +742,7 @@ function applyWindow(w) {
   VIEW = computeWindow(w.days);
   document.querySelectorAll('.win-tab').forEach(function(btn){
     var v = btn.getAttribute('data-days');
-    btn.classList.toggle('active', (w.days === null ? '' : String(w.days)) === v);
+    btn.classList.toggle('active', String(w.days) === v);
   });
   renderTop10();
   renderMap();
@@ -758,7 +758,7 @@ function applyWindow(w) {
 document.querySelectorAll('.win-tab').forEach(function(btn){
   btn.addEventListener('click', function(){
     var v = btn.getAttribute('data-days');
-    applyWindow({ label: btn.textContent, days: (v === '') ? null : parseInt(v, 10) });
+    applyWindow({ label: btn.textContent, days: parseInt(v, 10) });
   });
 });
 
