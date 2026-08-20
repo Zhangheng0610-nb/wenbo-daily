@@ -824,6 +824,17 @@ function renderMap() {
         return '<b>' + d.name + '</b><br/>热度：' + d.heat.toFixed(2) + '<br/>报道：' + d.count + ' 条';
       }
     },
+    geo: {
+      // 关键:为 scatter 提供 'geo' 坐标系。ECharts 的 map 系列不提供可被其他系列引用的坐标系,
+      // 无 geo 组件时 scatter 拿不到坐标→点不绘制(2026-08-21 修"看不到球"根因)。
+      // 本组件透明+silent,只作坐标系统,视觉/悬停/点击全部交给 map 系列。
+      map: 'china', roam: false,
+      silent: true,
+      label: { show: false },
+      emphasis: { label: { show: false }, itemStyle: { areaColor: 'rgba(0,0,0,0)' } },
+      itemStyle: { areaColor: 'rgba(0,0,0,0)', borderColor: 'rgba(0,0,0,0)' },
+      zlevel: 0
+    },
     series: [
       {
         // 底色地图:统一中性色,热力信息全部交给热力球(小面积省市不会被色块掩盖)
