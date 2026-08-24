@@ -980,6 +980,7 @@ def parse_md(filepath):
     data = {
         'title': '', 'date': '', 'weekday': '',
         'domestic': [], 'international': [], 'trends': [],
+        'notes': [],  # standalone blockquotes (e.g. 编辑说明) after items
         'domestic_count': 0, 'international_count': 0,
         'toc_items': []
     }
@@ -1073,11 +1074,17 @@ def parse_md(filepath):
                 i += 1
             continue
 
-        # Blockquote commentary
-        if line.startswith('> ') and current_item:
-            commentary = line.lstrip('> ').strip()
-            commentary = re.sub(r'\*\*点评[：:]\*\*\s*', '', commentary)
-            current_item['commentary'] = commentary
+        # Blockquote: 点评 (within a news item) or standalone note (e.g. 编辑说明
+        # after the trends table). current_item is NOT reset on section change, so
+        # only attach to it inside 国内/国际 sections; otherwise a trailing
+        # blockquote would overwrite the last item's commentary.
+        if line.startswith('> '):
+            bq_text = line.lstrip('> ').strip()
+            bq_text = re.sub(r'\*\*点评[：:]\*\*\s*', '', bq_text)
+            if current_section in ('domestic', 'international') and current_item:
+                current_item['commentary'] = bq_text
+            else:
+                data['notes'].append(bq_text)
             i += 1
             continue
 
@@ -1159,6 +1166,12 @@ def build_report_html(data, prev_report=None, next_report=None):
         trends_html += '<tr>' + ''.join(f'<{tag}>{md_inline(c)}</{tag}>' for c in row) + '</tr>\n'
     trends_html += '</table>\n'
 
+    notes_html = ''
+    if data.get('notes'):
+        notes_html = '\n'
+        for note in data['notes']:
+            notes_html += f'<blockquote>{md_inline(note)}</blockquote>\n'
+
     # Pre-compute prev/next navigation
     if prev_report:
         prev_html = f'''<a class="prev" href="{prev_report['date']}.html">
@@ -1229,7 +1242,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 {domestic_html}
 {international_html}
-{trends_html}
+{trends_html}{notes_html}
 
 <hr>
 
