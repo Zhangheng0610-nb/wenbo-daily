@@ -2683,22 +2683,28 @@ def build_search_html():
   .search-wrap input:focus { border-color: var(--accent); }
   .search-submit { flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px; background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer; }
   .search-summary { color: var(--muted); font-size: .84em; margin: 12px 0 16px; }
-  .search-result { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin: 0 0 12px; }
-  .search-result h2 { font-size: 1em; line-height: 1.55; margin: 6px 0; }
-  .search-result h2 a { color: var(--text); text-decoration: none; }
-  .search-result h2 a:hover { color: var(--accent); }
+  .search-result { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin: 0 0 10px; overflow: hidden; }
+  .search-result summary { cursor: pointer; list-style: none; padding: 14px 16px; color: var(--text); font-size: 1em; font-weight: 600; line-height: 1.55; }
+  .search-result summary::-webkit-details-marker { display: none; }
+  .search-result summary::after { content: '＋'; float: right; margin-left: 12px; color: var(--muted); font-size: 1.05em; font-weight: 400; line-height: 1.45; }
+  .search-result[open] summary { color: var(--accent); }
+  .search-result[open] summary::after { content: '−'; }
+  .search-detail { border-top: 1px solid var(--border); padding: 0 16px 14px; }
   .search-meta { color: var(--muted); font-size: .78em; }
   .search-kind { display: inline-block; padding: 2px 7px; margin-right: 6px; border-radius: 9px; background: var(--tag-bg); color: var(--accent); }
   .search-snippet { color: var(--muted); font-size: .86em; line-height: 1.65; margin: 6px 0; }
   .search-source { color: var(--muted); font-size: .78em; margin-top: 8px; }
   .search-source a { margin-right: 8px; }
+  .search-open { margin: 10px 0 0; font-size: .82em; }
+  .search-open a { text-decoration: none; }
   .search-tag { display: inline-block; margin: 2px 5px 0 0; padding: 1px 6px; border-radius: 8px; background: var(--tag-bg); color: var(--muted); font-size: .72em; }
   mark { background: #f0c040; color: inherit; border-radius: 2px; padding: 0 1px; }
   .search-empty { text-align: center; color: var(--muted); padding: 42px 0; }
   @media (max-width: 520px) {
     .search-wrap { gap: 6px; }
     .search-submit { padding: 0 13px; }
-    .search-result { padding: 13px 14px; }
+    .search-result summary { padding: 13px 14px; }
+    .search-detail { padding: 0 14px 13px; }
   }
 </style>'''
 
@@ -2803,13 +2809,16 @@ function renderHit(hit, words) {
   const body = item ? (item.body || item.commentary || item.progress || '') : (record.text || '');
   const tags = item && Array.isArray(item.tags) ? item.tags.map(function(tag) { return '<span class="search-tag">#' + escapeHtml(tag) + '</span>'; }).join('') : '';
   const sources = item ? sourceList(item.sources) : '';
-  return '<article class="search-result">' +
-    '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
-    '<h2><a href="' + escapeHtml(href) + '">' + highlight(title, words) + '</a></h2>' +
-    (body ? '<p class="search-snippet">' + snippet(body, words) + '</p>' : '') +
-    (tags ? '<div>' + tags + '</div>' : '') +
-    (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
-    '</article>';
+  return '<details class="search-result">' +
+    '<summary>' + highlight(title, words) + '</summary>' +
+    '<div class="search-detail">' +
+      '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
+      (body ? '<p class="search-snippet">' + snippet(body, words) + '</p>' : '') +
+      (tags ? '<div>' + tags + '</div>' : '') +
+      (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
+      '<p class="search-open"><a href="' + escapeHtml(href) + '">打开所在报告 →</a></p>' +
+    '</div>' +
+    '</details>';
 }
 function renderSearch(data, rawQuery) {
   const query = String(rawQuery || '').trim().toLowerCase();
