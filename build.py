@@ -2620,7 +2620,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <a class="day-card" href="reports/{r['date']}.html">
   <span class="date">📅 {r['date']}</span>
   <span class="weekday">{r['weekday']}</span>
-  {badge}
+{badge}
   <div class="count">📰 共 {total} 条 ｜ 国内 {r['domestic_count']} + 国际 {r['international_count']}</div>
 </a>''')
 

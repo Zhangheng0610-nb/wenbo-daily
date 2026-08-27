@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-08-27",
-  "asOf": "2026-08-27",
+  "generated": "2026-08-28",
+  "asOf": "2026-08-28",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -4416,6 +4416,54 @@
         "candidateCount": 0,
         "note": "",
         "date": "2026-08-27"
+      },
+      {
+        "sourceId": "ncha",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
+      },
+      {
+        "sourceId": "archaeology",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
+      },
+      {
+        "sourceId": "museum-association",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "status": "no_update",
+        "checkedAt": "2026-08-28T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "date": "2026-08-28"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -4440,12 +4488,12 @@
     "excludedNonPanel": 0,
     "unassigned": 251,
     "panelSourceCount": 6,
-    "coverageDays": 90,
-    "completeCoverageDays": 1,
-    "successfulSourceChecks": 273,
+    "coverageDays": 91,
+    "completeCoverageDays": 2,
+    "successfulSourceChecks": 279,
     "coverageStatuses": {
       "success": 136,
-      "no_update": 137,
+      "no_update": 143,
       "partial": 267,
       "failed": 0
     },
