@@ -196,7 +196,13 @@ def crawl_cultural_relics_news(start: date, end: date) -> tuple[list[dict], bool
 
     def read_issue(published: date) -> tuple[date, str]:
         issue_url = base + "/DigitPager/paper/publishdate/" + published.isoformat()
-        return published, fetch(issue_url)
+        failure: RuntimeError | None = None
+        for _attempt in range(3):
+            try:
+                return published, fetch(issue_url)
+            except RuntimeError as exc:
+                failure = exc
+        raise failure or RuntimeError(f"{issue_url}: request failed")
 
     checked = 0
     with ThreadPoolExecutor(max_workers=8) as pool:
@@ -221,12 +227,19 @@ def crawl_cultural_relics_news(start: date, end: date) -> tuple[list[dict], bool
 
 def crawl_archaeology(start: date, end: date) -> tuple[list[dict], bool, str]:
     base = "http://kaogu.cssn.cn/"
-    sections = ("xwzx/kgdt/", "xwzx/bszx/", "xsqy/kycg/jbbg/")
+    # The institute's homepage exposes several independent archive families;
+    # the old crawler only visited three of them.  Include the visible
+    # archaeology, institute-news, academic-activity, research-paper and
+    # excavation-report sections, while retaining the same date boundary.
+    sections = (
+        "xwzx/kgdt/", "xwzx/skyw/", "xwzx/bszx/bsdt/", "xwzx/bszx/hzjl/",
+        "xwzx/bszx/xshy/", "xsqy/kycg/jbbg/", "xsqy/kycg/xslw/",
+    )
     found: dict[str, dict] = {}
     source_complete = True
     for section in sections:
         section_oldest: date | None = None
-        for page_no in range(0, 40):
+        for page_no in range(0, 80):
             suffix = "index.shtml" if page_no == 0 else f"index_{page_no}.shtml"
             url = urljoin(base, section + suffix)
             try:
@@ -267,7 +280,7 @@ def crawl_museum_association(start: date, end: date) -> tuple[list[dict], bool, 
     streams = ((11, "newList.html"), (12, "newList.html"), (13, "newList.html"), (14, "photoList.html"))
     for stream_id, endpoint in streams:
         stream_oldest: date | None = None
-        for page_no in range(1, 40):
+        for page_no in range(1, 80):
             url = f"{base}{endpoint}?id={stream_id}&pageIndex={page_no}"
             try:
                 page = fetch(url)
@@ -308,28 +321,45 @@ def crawl_museum_association(start: date, end: date) -> tuple[list[dict], bool, 
 
 
 def crawl_xinhua(start: date, end: date) -> tuple[list[dict], bool, str]:
-    url = "https://www.news.cn/ci/wb.html"
+    # The dedicated 文博 channel is the primary feed.  The culture channel's
+    # dated list catches official Xinhua culture/heritage reports that are not
+    # cross-posted into the dedicated channel.
+    feeds = (
+        "https://www.news.cn/ci/wb.html",
+        "https://www.news.cn/culture/cysj/index.html",
+        "https://www.news.cn/culturepro/",
+    )
     found: dict[str, dict] = {}
-    try:
-        page = fetch(url)
-    except RuntimeError as exc:
-        return [], False, str(exc)
-    for text, article_url in links(page, url):
-        if "news.cn/ci/" not in article_url or not article_url.endswith("/c.html"):
+    checked_all = True
+    for feed_url in feeds:
+        try:
+            page = fetch(feed_url)
+        except RuntimeError:
+            checked_all = False
             continue
-        published = date_from_url(article_url)
-        if published and in_window(published, start, end):
-            found[article_url] = candidate("xinhua-wenbo", published, text, article_url)
+        for text, article_url in links(page, feed_url):
+            if "news.cn" not in article_url or not article_url.endswith("/c.html"):
+                continue
+            published = date_from_url(article_url)
+            if published and in_window(published, start, end):
+                found[article_url] = candidate("xinhua-wenbo", published, text, article_url)
     if start == end:
-        return list(found.values()), True, "已检查新华网文博当日公开列表。"
-    return list(found.values()), False, "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+        note = "已检查新华网文博、文化频道当日公开列表。"
+        return list(found.values()), checked_all, note if checked_all else "新华网当日部分入口请求失败。"
+    return list(found.values()), False, "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
 
 
 def crawl_cctv(start: date, end: date) -> tuple[list[dict], bool, str]:
     # 央博是垂直专业入口；央视新闻频道补充那些进入全国公共议程的
     # 文博报道。两者同属中央广播电视总台，仍算同一个固定来源，避免
     # 把同一机构的两个栏目误当作两份独立证据。
-    feeds = ("https://yangbo.cctv.cn/", "https://news.cctv.com/")
+    feeds = (
+        "https://yangbo.cctv.cn/",
+        "https://news.cctv.com/",
+        "https://news.cctv.com/news/index.shtml",
+        "https://news.cctv.com/news/china/index.html",
+        "https://news.cctv.com/special/index.shtml",
+    )
     found: dict[str, dict] = {}
     checked_all = True
     for feed_url in feeds:
@@ -471,6 +501,13 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             prior = current.get(source_id, {})
             # Preserve a later operational check timestamp if present.
             prior_checked = prior.get("checkedAt", "")
+            # A historical backfill is allowed to add records, but it must
+            # never downgrade a later same-day live inspection.  Otherwise a
+            # 90-day maintenance run could make an already-audited day look
+            # partial again in the public coverage meter.
+            if prior_checked > checked_at and prior.get("status") in ("success", "no_update"):
+                status = prior["status"]
+                note = prior.get("note", "")
             refreshed.append({
                 "sourceId": source_id, "status": status,
                 "checkedAt": prior_checked if prior_checked > checked_at else checked_at,

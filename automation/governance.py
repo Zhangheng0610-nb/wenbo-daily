@@ -82,7 +82,10 @@ MAP_SOURCE_PANEL = OrderedDict([
         "name": "新华网文博",
         "role": "中央重点新闻网站文博栏目",
         "domains": ("news.cn", "xinhuanet.com", "xinhuanet.com.cn"),
-        "entry_urls": ("https://www.news.cn/ci/wb.html",),
+        "entry_urls": (
+            "https://www.news.cn/ci/wb.html",
+            "https://www.news.cn/culture/cysj/index.html",
+        ),
     }),
     ("cctv-wenbo", {
         "name": "央视网文博与央视新闻",
@@ -92,6 +95,8 @@ MAP_SOURCE_PANEL = OrderedDict([
             "https://style.cctv.com/special/wenbo/lxwm/index.shtml",
             "https://yangbo.cctv.cn/",
             "https://news.cctv.com/",
+            "https://news.cctv.com/news/index.shtml",
+            "https://news.cctv.com/special/index.shtml",
         ),
     }),
 ])

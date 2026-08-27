@@ -18,10 +18,10 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "partial",
+      "status": "success",
       "checkedAt": "2026-08-01T12:00:00+08:00",
-      "candidateCount": 23,
-      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+      "candidateCount": 48,
+      "note": ""
     },
     {
       "sourceId": "museum-association",
@@ -35,14 +35,14 @@
       "status": "partial",
       "checkedAt": "2026-08-01T12:00:00+08:00",
       "candidateCount": 0,
-      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+      "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
     },
     {
       "sourceId": "cctv-wenbo",
       "status": "partial",
       "checkedAt": "2026-08-01T12:00:00+08:00",
       "candidateCount": 2,
-      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+      "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
     }
   ],
   "items": [
@@ -72,6 +72,65 @@
         "展览",
         "政策行业",
         "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0266-6064190shtml",
+      "date": "2026-08-01",
+      "title": "“山地走廊：文化交流与民族融合（成都·2026）”学术研讨会在成都召开 2026-08-21 早期文化交流与传播历来是新石器时代考古关注的重点议题，对于揭示中华文明多元一体格局的史前根基与发展脉络，具有不可替代的学术价值。为进一步探讨西南地区考古发现、文化交流、人群迁移融合以及西南丝绸之路形成的史前基础等学术问题，由中国社会科学院考古研究所、中国考古学会新石器考古专业委员会、四川省文物考古研究院、成都市文物考古研究院主办，中国社会科...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202608/t20260821_6064190.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "四川"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0245-6062643shtml",
+      "date": "2026-08-01",
+      "title": "《科技考古集刊》《文化遗产保护集刊》发刊词 2026-08-07 文明，是一个民族存续的精神根脉；考古，是揭示历史本源的科学密钥；守护，是传承文脉的时代使命。在习近平总书记在哲学社会科学工作座谈会上发表重要讲话十周年之际，在“十五五”时期社会主义文化强国建设迈向高质量发展的重要阶段，在中国哲学社会科学自主知识体系加速建构的关键节点，《科技考古集刊》《文化遗产保护集刊》正式创办了。",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260807_6062643.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "展览"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -109,6 +168,122 @@
       "origin": "archive-backfill"
     },
     {
+      "recordId": "backfill-20260801-archaeology-0254-6064042shtml",
+      "date": "2026-08-01",
+      "title": "中国家羊的分子考古学研究综述与展望 2026-08-20 家羊(绵羊、山羊)是人类最早驯化的家养动物之一，其起源与扩散是农业起源和早期东西方文化交流的热点问题。本文梳理了中国家羊研究的传统考古学证据，包括文献记载、器物纹样、岩画及动物骨骼形态分析，重点综述了分子考古学领域的研究进展。",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260820_6064042.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0253-6064037shtml",
+      "date": "2026-08-01",
+      "title": "中国现代人起源与演化的考古学观察 2026-08-20 中国广袤区域内存在着旧石器时代文化持续共同体。“简单石核—石片”特征掩盖了内含的相关性，尤其是晚更新世以来，石核—石片体系蕴含着丰富的技术变革。但相比于莫斯特技术、勒瓦娄哇技术、石叶技术等，这种变革并不明显，有的区域可能仅仅是传承甚至并未发展。正是这个显然有别于世界其他地区的文化共同体，代表了现代人起源演化的一种模式。",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260820_6064037.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0265-6062010shtml",
+      "date": "2026-08-01",
+      "title": "中国社会科学院举办科技考古与文化遗产保护国际学术研讨会 2026-08-03 7月31日，由中国社会科学院主办的科技考古与文化遗产保护国际学术研讨会在京举行。中国社会科学院院长、中国历史研究院院长高翔，中国国家文物局副局长乔云飞，乌兹别克斯坦国家文化遗产署署长阿卜迪卡里莫夫，希腊外交部前部长、色雷斯德谟克利特大学教授卡特鲁加洛斯出席开幕式并致辞。 会议现场 记者 朱高磊/摄 高翔表示，考古学自诞生以来，...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202608/t20260803_6062010.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0288-6062003shtml",
+      "date": "2026-08-01",
+      "title": "中国社会科学院举办科技考古与文化遗产保护国际学术研讨会 2026-08-03 7月31日，由中国社会科学院主办的科技考古与文化遗产保护国际学术研讨会在京举行。中国社会科学院院长、中国历史研究院院长高翔，中国国家文物局副局长乔云飞，乌兹别克斯坦国家文化遗产署署长阿卜迪卡里莫夫，希腊外交部前部长、色雷斯德谟克利特大学教授卡特鲁加洛斯出席开幕式并致辞。 会议现场 记者 朱高磊/摄 高翔表示，考古学自诞生以来，...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202608/t20260803_6062003.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
       "recordId": "backfill-20260801-archaeology-0332-6062387shtml",
       "date": "2026-08-01",
       "title": "中国科研团队研究揭示广西花山岩画“千年不褪色”之谜 2026-08-06 近期，山东大学环境与社会考古国际合作联合实验室同广西民族博物馆等单位合作，在国际学术期刊《考古科学杂志》（Journal of Archaeological Science）发表题为《中国南方广西花山岩画的粘合剂是血诱导的生物矿化碳酸钙》的最新研究成果。研究利用前期收集到的天然脱落岩画碎块样本，揭秘左江花山岩画“驻颜”两千多年的原因。 图为左江花山岩画地理分布图。...",
@@ -134,6 +309,35 @@
         "博物馆",
         "国际交流",
         "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0262-6064224shtml",
+      "date": "2026-08-01",
+      "title": "中国考古机构首次赴南美洲开展联合考古 2026-08-22 北京时间8月22日，中国社会科学院考古研究所与秘鲁文化部卡拉尔考古区、国立圣马科斯大学考古学院正式签署考古合作协议，联合开展卡拉尔文明的考古研究。这是中国考古机构首次赴南美洲开展联合考古。 兴起于秘鲁北部海岸的卡拉尔文明，年代从公元前3000年一直延续至公元前1800年左右，是安第斯地区前陶时代最早的文化高峰，也是美洲迄今发现的最早文明。按照协议约...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202608/t20260822_6064224.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "北京"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -166,6 +370,91 @@
         "展览"
       ],
       "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0257-6062251shtml",
+      "date": "2026-08-01",
+      "title": "五千八百年前的回响——红山文化的守望与远行 2026-08-05 清晨的薄雾还未散尽，记者来到辽宁朝阳牛河梁遗址的祭坛，远眺连绵起伏的山峦。 那些沉睡在积石冢中的玉猪龙、女神庙里的泥塑神像、胎薄色艳的彩陶管子，正以静默而庄严的方式，向每一个来访者诉说着中华文明曙光初现时的模样。 溯源：在泥土中叩问文明来处 1986年7月25日，《光明日报》头版头条刊登消息称：“中华文明起源问题找到新线索，辽西发现...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260805_6062251.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "辽宁"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0247-6063167shtml",
+      "date": "2026-08-01",
+      "title": "从物质遗存到知识体系：明清景德镇的城市空间秩序与生产强化 2026-08-13 景德镇作为明清时期瓷业手工业重镇，其城市空间格局的形成发展受到传统文化的影响和贸易扩张等的推动。研究立足城市考古材料，尝试从建筑基址、窑炉与构件等“有形”遗存出发，对“无形”的传统营造知识（相地选址、立向与营建尺度等）提出可检验的推断。针对生产型城市遗址因长期“以废造地”与反复营建导致的地层碎片化与“时空混乱”等风险，强调“大地层单位整合-遗迹分...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260813_6063167.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0251-6063776shtml",
+      "date": "2026-08-01",
+      "title": "从纺织服装文化遗产中读懂中华文明 2026-08-19 图片纺织考古实验室科研人员对出土纺织品开展保护工作作者/供图图片纺织考古实验室科研人员对出土纺织品开展加固工作作者/供图认识中华文明，既要关注典籍文献、都城遗址、青铜礼器等文化遗产，也要关注与人民群众生产生活密切相关的纺织服装文化遗产。要坚持文献研究与考古发现相结合，坚持科技检测与历史阐释相结合，坚持文化遗产保护与创造性转化、创新性发展相结合，把...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260819_6063776.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "展览"
+      ],
+      "impact": 60,
       "selectedForDaily": false,
       "origin": "archive-backfill"
     },
@@ -224,6 +513,60 @@
       "origin": "archive-backfill"
     },
     {
+      "recordId": "backfill-20260801-archaeology-0255-6064191shtml",
+      "date": "2026-08-01",
+      "title": "北庭西大寺：高昌回鹘王家寺院典范 2026-08-21 吐鲁番和哈密地区的佛教遗址也保留了大量回鹘风格壁画或回鹘文题记，但高昌回鹘佛寺常常沿用或改造唐代佛寺或摩尼教寺院，因而难以判断其始建年代。类似的塔或塔形建筑位于中轴线上，前方有庭院和佛殿，四周建筑呈中轴对称式分布的佛寺布局，在高昌故城西南大佛寺、胜金口7号寺院这类庭院式佛寺当中也可见到，哈密拉甫却克古城的6号、8号建筑可能也属此类庭院式佛寺，可惜6...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260821_6064191.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0252-6063777shtml",
+      "date": "2026-08-01",
+      "title": "古代边疆治理视域下的北庭佛教官寺研究 2026-08-19 唐朝在西域建立了完备的军政管理体系后，基于西域佛教发展的形势，代表唐朝统治者意志的官寺体系也随之建立并不断完善。北庭作为唐代天山以北的中心城市，除了军政功能，还发挥重要的宗教文化功能。北庭城内先后有应运大宁寺、龙兴寺、高台寺，城西有西寺，均为官方寺院，考古发掘还发现悲田寺的线索。边疆官寺起到宣示主权、教化人心、民族融合、军事辅助的作用，推进了边...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260819_6063777.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
       "recordId": "backfill-20260801-archaeology-0335-6063047shtml",
       "date": "2026-08-01",
       "title": "古文字研究工程首期成果丰硕 甲骨文还原3000年前“流星雨” 2026-08-12 2020年11月，中央宣传部、教育部、中国社会科学院等8部门，联合启动实施“古文字与中华文明传承发展工程”，全面系统开展甲骨文、金文、简帛文字等古文字研究。目前第一期建设趋近尾声，取得一批重大成果，为早期中华文明研究提供新材料，并揭示出古文字在中华文明乃至人类文明发展史上的重要作用。 甲骨文记载流星雨 商代鲜活历史再现 清华大学出土文献研究与...",
@@ -243,6 +586,64 @@
         "展览"
       ],
       "tags": [
+        "展览"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0248-6063257shtml",
+      "date": "2026-08-01",
+      "title": "史前先民应对水旱灾害有策略 2026-08-14 众多考古发现表明，在生产力水平极其低下的新石器时代，史前先民为了适应复杂的气候变化，通过不断认识和改造聚落周边的自然环境，选择合适的居址地点，修建水利设施，以实现雨季防洪和旱季灌溉，推动了早期文明的诞生和发展。龙嘴、笑城遗址都位于岗地前端与平原湖沼交汇地带，高程29—32米，现今雨季中洪水有时也会淹没高程30米以下的区域，所以2个遗址都发现有较为完整的...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260814_6063257.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0258-6062924shtml",
+      "date": "2026-08-01",
+      "title": "吕鹏 | 在雅典遇见中华五千年 2026-08-11 在今年6月于希腊雅典举行的第二届世界古典学大会上，一场名为“让古典走进现代——世界古典文明成果展”的配套展览吸引不少观众驻足。中国社会科学院科技考古与文化遗产保护重点实验室携6项重大成果亮相，每一块展板、每一件展品背后，都凝聚着实验室几代人数十年的坚守与创新。 第二届世界古典学大会现场。新华社发 一个标本库和一段水脉 动物标本库是中国...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260811_6062924.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
         "展览"
       ],
       "impact": 80,
@@ -538,6 +939,34 @@
       "origin": "archive-backfill"
     },
     {
+      "recordId": "backfill-20260801-archaeology-0263-6064277shtml",
+      "date": "2026-08-01",
+      "title": "晚间新闻｜中国考古机构首次赴南美洲开展联合考古 2026-08-24 来源：央视新闻",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202608/t20260824_6064277.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
       "recordId": "backfill-20260801-archaeology-0330-6062256shtml",
       "date": "2026-08-01",
       "title": "汉晋城址见证古代西南边疆治理 2026-08-05 近2000年前的汉晋时期西南边城，竟有了疑似挖耳勺的器物：勺头圆润，长柄利落规整，除却岁月沉淀的斑驳青绿色，整体形制和现在随处能买到的款式几乎别无二致。 这件充满烟火气的小文物，是云南省昭通市朱提故城遗址的考古发现，让我们得以窥见汉晋时期西南边城的社会经济发展状况。 公元前135年，汉武帝设朱提县，成为汉朝势力深入云贵高原的早期据点，后来的...",
@@ -621,6 +1050,116 @@
       "origin": "archive-backfill"
     },
     {
+      "recordId": "backfill-20260801-archaeology-0289-6064537shtml",
+      "date": "2026-08-01",
+      "title": "深入学习习近平总书记关于历史和历史科学的重要论述 以新时代中国史学助力中国式现代化行稳致远 2026-08-25 深入学习习近平总书记关于历史和历史科学的重要论述 以新时代中国史学助力中国式现代化行稳致远高翔《时事报告（党委中心组学习）》2026年第4期 党的十八大以来，习近平总书记始终高度重视历史和历史科学，围绕中国历史、世界历史、考古等，提出一系列新思想新观点新论断，深刻回答了新时代为何发展中国特色历史学、怎样发展中国特色历史学等一系列根本性重大问题。这...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202608/t20260825_6064537.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0246-6062835shtml",
+      "date": "2026-08-01",
+      "title": "湖北省大洪山南麓史前聚落形态 2026-08-10 大洪山南麓位于湖北省江汉平原北部低山丘陵与平原湖沼的交汇地带，特殊的季风气候特征导致初夏时期降水集中，洪涝灾害频发，雨季之后经常受副热带高压控制而出现伏旱和秋旱天气，严重影响水稻等农作物的生长。运用无人机拍摄、遗址三维重建、空间分析等数字技术获取聚落遗址的空间信息，分析研判史前人水关系模式，揭示史前先民通过兴修水利工程来应对气候变化产生的不良影...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260810_6062835.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "数字化",
+        "湖北"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0249-6063279shtml",
+      "date": "2026-08-01",
+      "title": "溯源、重构和创新：人骨考古十年研究总结 2026-08-14 人类骨骼考古学作为考古学的重要分支，旨在通过考古遗址出土人骨遗存，研究、阐释古代人群健康状况和生存情况，进而复原古代人群社会。",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260814_6063279.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0259-6063040shtml",
+      "date": "2026-08-01",
+      "title": "火焰山中，重大发现！ 2026-08-12 *本文经授权转自公众号中国新闻周刊（ID：chinanewsweekly）。 几乎没有一块壁画是完整的，尤其是佛像脸，要么被铲掉，要么被戳坏，有些双目被精准地戳中，伤痕累累。这里是吐峪沟石窟，位于新疆吐鲁番鄯善县。 石窟里壁画保存得不多，人为破坏和外国探险家的掠夺，让它们所剩无几。但残留的壁画和出土文书，依然拼凑出一个消失的西域世界。 在盛夏，如果你从火...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260812_6063040.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "新疆"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
       "recordId": "backfill-20260801-archaeology-0336-6063163shtml",
       "date": "2026-08-01",
       "title": "科学构建我国西南地区彩绘岩画年代框架取得突破性进展 2026-08-13 近日，云南省文物考古研究所联合南京师范大学等单位，通过对云南西南部临沧市耿马县芒关岩画遗址的系统考古调查与高精度铀系测年，取得突破性进展，成果发表于国际著名考古学期刊Journal of Archaeological Science: Reports。研究团队首次为芒关岩画提供了绝对年代数据，并发现该遗址岩画早于著名的沧源岩画（该团队于2020年测得沧源岩画年代距今约3800-2700年），将中...",
@@ -646,6 +1185,36 @@
         "展览",
         "数字化",
         "云南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0244-6061898shtml",
+      "date": "2026-08-01",
+      "title": "科技拓展文明认知 2026-08-01 至20世纪60年代，中国科学院考古研究所率先建立国内考古领域的第一个常规碳十四年代学实验室，开始考古样品的常规法碳十四年代测定，随后开展陶瓷器、金属器的成分分析，以及热释光测年、体质人类学与动物考古等领域的研究。考古研究机构先后建立了食性分析、动物考古、植物考古、遥感考古、水下考古、环境考古、冶金考古、陶瓷考古、纺织考古、木材分析、同位素分析、古DNA...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260801_6061898.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "数字化"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -708,6 +1277,151 @@
         "文物保护",
         "博物馆",
         "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0260-6064187shtml",
+      "date": "2026-08-01",
+      "title": "赋能科研创新 助力数智转型——中国社会科学院考古研究所举办人工智能赋能考古科研专题培训 2026-08-21 中国社会科学院考古研究所（以下简称“考古所”）首期人工智能赋能考古科研专题培训班近日在京举行。考古所党委副书记、纪委书记、副所长尤利前出席培训结业式并讲话。 当前，人工智能技术深度融入哲学社会科学研究各领域、各环节，为考古学科突破发展瓶颈、提升研究质效提供了全新路径，也对考古工作者的科研能力提出了更高要求。考古所团支部在所党委指导下，针对...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260821_6064187.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0261-6064696shtml",
+      "date": "2026-08-01",
+      "title": "赵芮副院长在青海调研伏俟城遗址 2026-08-26 8月20日，中国社会科学院副院长、党组成员赵芮一行赴青海省海南藏族自治州共和县伏俟城遗址调研，看望慰问伏俟城联合考古队队员，实地考察指导考古发掘工作。 调研期间，赵芮一行实地考察伏俟城遗址和考古发掘现场，听取考古队关于遗址历史沿革、历年考古工作及本年度发掘进展的汇报，详细了解重要遗迹现象及相关研究情况。随后，赵芮一行来到考古队驻地，与一线考古...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260826_6064696.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "海南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "海南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0264-6064816shtml",
+      "date": "2026-08-01",
+      "title": "跨洋叩响远古文明之门——考古研究所与秘鲁方面携手开展联合考古 2026-08-27 山海迢迢，文明相通。相隔万里的中华文明与安第斯古文明，虽被大洋阻隔，却在人类早期发展历程中留下诸多遥相呼应的历史线索。习近平总书记高度重视中国和秘鲁两国人文交流。2024年11月，习近平总书记在秘鲁媒体发表署名文章，指出“中华文明是世界上唯一没有中断、延绵5000多年的文明，以卡拉尔文明为代表的海洋文明和以印加文明为代表的陆地文明彰显了秘鲁文明的历史...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202608/t20260827_6064816.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0250-6063617shtml",
+      "date": "2026-08-01",
+      "title": "近十年中国世界文化遗产保护事业发展情况综述——探索中国特色文化遗产保护传承体系的实践 2026-08-18 十年间，中国的世界文化遗产保护事业实现了从世界遗产申报项目的“数量领先”向“质量领先”，从“抢救性保护”向“系统性保护”的双重转型。良渚古城遗址、北京中轴线、西夏陵等世界文化遗产成功列入《世界遗产名录》，充分彰显了中华文明多元一体格局。",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260818_6063617.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "文物保护",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "展览",
+        "北京"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260801-archaeology-0256-6064192shtml",
+      "date": "2026-08-01",
+      "title": "进素图诺尔遗址：早期红玉髓/玛瑙珠研究的新契机 2026-08-21 更令人振奋的是，近日《草原文物》刊载了内蒙古进素图诺尔遗址的考古调查简报（《阿拉善盟额济纳旗进素图诺尔玛瑙加工遗址考古调查简报》《草原文物》2026年第2期，以下简称《简报》）。最近15年，随着河西走廊地区几部发掘和调查报告的出版，学者们注意到，河西走廊地区不仅于公元前二千纪初先于中原地区开始使用红玉髓/玛瑙珠，而且在酒泉干骨崖墓地，阿拉善盟Ukh-tokhoi...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260821_6064192.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "内蒙古"
       ],
       "impact": 60,
       "selectedForDaily": false,
