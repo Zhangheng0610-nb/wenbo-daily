@@ -980,6 +980,7 @@ def build_heatmap_html():
   .meta { margin-top:12px; color:var(--muted); font-size:.8em; }
   .method-strip { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 18px; padding:12px 15px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--muted); font-size:.78em; }
   .method-strip strong { color:var(--text); }
+  .mobile-guide { display:none; }
   .toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:16px; }
   .win-tabs { display:flex; gap:7px; flex-wrap:wrap; }
   .win-tab { padding:7px 15px; border:1px solid var(--border); border-radius:999px; color:var(--text); background:var(--card); cursor:pointer; }
@@ -1056,20 +1057,25 @@ def build_heatmap_html():
   footer { margin-top:24px; padding:22px 0; color:var(--muted); text-align:center; font-size:.75em; border-top:1px solid var(--border); }
   @media (max-width:850px) {
     .workspace { grid-template-columns:1fr; }
-    .rank-panel { order:1; } .map-panel { order:2; }
+    .map-panel { order:1; } .rank-panel { order:2; }
     .rank-scroll { max-height:360px; }
     #map { height:430px; }
   }
   @media (max-width:620px) {
     .wrap { padding:0 14px 40px; }
     header { padding-top:20px; }
-    .stats { grid-template-columns:repeat(2,1fr); }
+    header .meta,.method-strip,.stats { display:none; }
+    .mobile-guide { display:block; margin:-2px 0 14px; padding:12px 13px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:10px; background:var(--card); font-size:.8em; }
+    .mobile-guide strong { color:var(--text); }
+    .mobile-guide p { margin-top:3px; color:var(--muted); line-height:1.55; }
     .event-list,.secondary-grid { grid-template-columns:1fr; }
     .coverage-grid { grid-template-columns:repeat(2,1fr); }
     .toolbar { align-items:flex-start; }
     .theme-control { width:100%; justify-content:space-between; }
     .theme-control select { flex:1; max-width:none; }
     #map { height:370px; }
+    .map-note { display:none; }
+    .rank-scroll { max-height:300px; }
     th:nth-child(5),td:nth-child(5) { display:none; }
   }
 </style>
@@ -1098,6 +1104,11 @@ def build_heatmap_html():
       <select id="theme"><option value="">全部主题</option></select>
     </label>
   </div>
+  <section class="mobile-guide" aria-label="地图阅读提示">
+    <strong>先看地图</strong>
+    <p>颜色越深，代表本页追踪的权威来源近期更集中地报道了该地区。点地图上的省份，可以查看具体事项和原文。</p>
+    <p id="mobile-guide-status">正在准备本页资料说明…</p>
+  </section>
   <section class="stats" aria-label="当前窗口概况">
     <div class="stat"><strong id="s-events">—</strong><span>本期重点事项</span></div>
     <div class="stat"><strong id="s-provinces">—</strong><span>涉及地区</span></div>
@@ -1314,6 +1325,9 @@ function renderCoverage() {
   if(c.ready)status.innerHTML='<strong>资料已足够：</strong>当前范围内，可以比较这些权威来源对不同地区的相对关注；但它不等同于各地真实文博活动总量。';
   else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前已完成 '+c.successful+'/'+c.planned+' 次来源检查。地图可供浏览，但暂不适合拿来比较不同地区。';
   else status.innerHTML='<strong>资料刚开始积累：</strong>从下一次自动更新起，网站会每天检查固定的权威来源。当前展示的是从旧日报整理出的历史资料，只供了解，不用于比较不同地区。';
+  var mobileGuide=document.getElementById('mobile-guide-status');
+  if(c.ready)mobileGuide.textContent='资料已经比较充分，可以用地图看这些权威来源近期更关注哪里。';
+  else mobileGuide.textContent='资料还在积累，先把地图当作了解行业动态的线索，不拿它比较哪个地区更活跃。';
   document.getElementById('rank-note').textContent=c.ready?'资料充足｜点击查看来源':'资料积累中｜暂不比较地区';
   var list=document.getElementById('panel-list');list.innerHTML='';c.panel.forEach(function(source){
     var row=document.createElement('div');row.className='panel-source';var left=document.createElement('span'),link=document.createElement('a');link.href=(source.entryUrls||[])[0]||'#';link.target='_blank';link.rel='noopener';link.textContent=source.name;left.appendChild(link);var role=document.createElement('small');role.textContent=' · '+source.role;left.appendChild(role);var right=document.createElement('small');right.textContent='已检查 '+(c.sourceGood[source.id]||0)+'/'+CUR_WINDOW.days+' 天';row.appendChild(left);row.appendChild(right);list.appendChild(row);
