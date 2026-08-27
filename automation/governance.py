@@ -16,9 +16,11 @@ SOURCE_GROUPS = OrderedDict([
             "ncha.gov.cn", "chinawenbao.com.cn", "chinamuseum.org.cn",
             "chinamuseums.org.cn", "kaogu.cn", "kaogu.cssn.cn",
             "news.cn", "xinhuanet.com", "xinhuanet.com.cn", "cctv.com",
-            "people.com.cn", "chinanews.com.cn", "gmw.cn", "cnr.cn",
+            "people.com.cn", "people.cn", "chinanews.com.cn", "chinanews.com",
+            "gmw.cn", "cnr.cn", "cctv.cn", "mrdx.cn", "workercn.cn",
             "china.org.cn", "dpm.org.cn", "chnmus.net", "chnmuseum.cn",
             "shanghaimuseum.net", "capitalmuseum.org.cn", "namoc.org",
+            "cssn.cn", "xinhua.org", "sxhm.com", "sdmuseum.com",
             "unesco.org", "whc.unesco.org", "iccrom.org", "icom.museum",
         ),
     }),
@@ -28,7 +30,10 @@ SOURCE_GROUPS = OrderedDict([
         "domains": (
             "apnews.com", "reuters.com", "bbc.com", "archaeology.org",
             "theartnewspaper.com", "thepaper.cn", "chinadaily.com.cn",
-            "cri.cn", "nationalgeographic.com", "artnews.com",
+            "cri.cn", "nationalgeographic.com", "artnews.com", "ap.org",
+            "nature.com", "shobserver.cn", "nfnews.com", "bjnews.com.cn",
+            "zjol.com.cn", "dayoo.com", "cqcb.com", "caixin.com",
+            "globaltimes.cn", "cnn.com", "bbc.co.uk",
         ),
     }),
     ("C", {
@@ -80,6 +85,13 @@ def source_info(url):
         return {"tier": "C", "label": "C级｜无效链接", "host": "", "blocked": True}
     if any(host_matches(host, blocked) for blocked in BLOCKED_HOSTS):
         return {"tier": "C", "label": "C级｜禁止作为最终来源", "host": host, "blocked": True}
+    # Chinese government and university domains are institution-controlled
+    # primary sources.  Keeping this as a suffix rule avoids a brittle registry
+    # of every provincial bureau, museum authority, and research university.
+    if host.endswith(".gov.cn") or host == "gov.cn":
+        return {"tier": "A", "label": "A级｜政府官方", "host": host, "blocked": False}
+    if host.endswith(".edu.cn") or host == "edu.cn":
+        return {"tier": "A", "label": "A级｜高校官方", "host": host, "blocked": False}
     for tier, spec in SOURCE_GROUPS.items():
         if any(host_matches(host, domain) for domain in spec["domains"]):
             return {"tier": tier, "label": spec["label"], "host": host, "blocked": False}
@@ -119,7 +131,7 @@ def source_registry_rows():
     for tier, spec in SOURCE_GROUPS.items():
         domains = list(spec["domains"])
         if tier == "A":
-            domains += ["*.museum", "*.museum.cn"]
+            domains += ["*.gov.cn", "*.edu.cn", "*.museum", "*.museum.cn"]
         rows.append({"tier": tier, "label": spec["label"],
                      "description": spec["description"], "domains": domains})
     return rows

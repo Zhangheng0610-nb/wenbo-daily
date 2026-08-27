@@ -4,7 +4,8 @@ Build HTML reports from Markdown files and rebuild index.html.
 Handles daily reports (日报), weekly digests (周报), and monthly digests (月报).
 Usage: python build.py
 """
-import os, re, glob, json, sys
+import os, re, glob, json, sys, hashlib
+from difflib import SequenceMatcher
 from urllib.parse import quote
 from datetime import date as _date, datetime, timedelta, timezone
 
@@ -117,8 +118,9 @@ SITE2PROV = {
     '观复博物馆':'北京','避暑山庄':'河北',   # 观复=马未都北京馆;避暑山庄=承德(河北)
     # ⚠️ 圆明园 2026-08-21 从词表移除:语料中 5 条"圆明园"新闻全是圆明园文物在他省展览(浙博/深圳/福建),
     #    "圆明园"是文物来源地而非事件地;移除后由 杭州/深圳(标题)、浙江(标签)、浙江省博物馆/福建博物院(正文)归位。
-    '陕西历史博物馆':'陕西','南京博物院':'江苏','河南博物院':'河南','湖北省博物馆':'湖北','浙江省博物馆':'浙江',
+    '陕西历史博物馆':'陕西','南京博物院':'江苏','南博':'江苏','河南博物院':'河南','湖北省博物馆':'湖北','浙江省博物馆':'浙江',
     '浙博':'浙江',   # 2026-08-21 加:浙江省博物馆简称(标题层)。修"太平年·天下同宁"大展标题含浙博、正文列出国博/陕历博/南博等出借方→误归北京+浙江双省。标题含"浙博"=主办馆在浙,标题层直接命中,正文出借方列表不再参与;事件地=浙江,出借方≠事件地。
+    '上博':'上海','辽博':'辽宁','磁州窑址':'河北',
     '福建博物院':'福建',   # 2026-08-21 加:马首入闽首展地(正文强信号,早于全国性判定)
     '三星堆博物馆':'四川','殷墟博物馆':'河南','良渚博物院':'浙江',
     '故宫博物院香港':'香港',
@@ -405,6 +407,41 @@ def _scan(text, use_city=True, use_site=True):
     return [p for _, p in occ]
 
 
+def _title_event_destination(title):
+    """Prefer a host venue or explicit destination over an object's origin."""
+    institution_aliases = {
+        '国博': '北京', '上博': '上海', '南博': '江苏', '浙博': '浙江', '辽博': '辽宁',
+        '故宫博物院': '北京', '首都博物馆': '北京', '陕西历史博物馆': '陕西',
+        '河南博物院': '河南', '湖北省博物馆': '湖北', '浙江省博物馆': '浙江',
+        '福建博物院': '福建', '山东博物馆': '山东',
+    }
+    prefix = title[:22]
+    for name, province in institution_aliases.items():
+        if name == '国博':
+            if re.search(r'(?<![全中])国博', prefix):
+                return province
+        elif name in prefix:
+            return province
+    terms = [(p, p) for p in PROVINCES]
+    terms += list(CITY2PROV.items())
+    # A destination verb followed by a place is stronger than a subject's
+    # place of origin: "马王堆帛画亮相上海" belongs primarily to Shanghai.
+    verbs = ('亮相', '登陆', '落地', '巡展至', '巡展到', '赴', '入驻', '移师')
+    hits = []
+    for term, province in sorted(terms, key=lambda x: len(x[0]), reverse=True):
+        for verb in verbs:
+            match = re.search(re.escape(verb) + r'[^，。；：—]{0,8}' + re.escape(term), title)
+            if match:
+                hits.append((match.start(), province))
+        match = re.search(re.escape(term) + r'[^，。；：—]{0,6}(?:开幕|开展|启幕|开放|举行)', title)
+        if match:
+            hits.append((match.start(), province))
+    if hits:
+        hits.sort()
+        return hits[-1][1]
+    return ''
+
+
 def _is_outreach(item, title, tags):
     """事件在境外/涉外的对外交流 → 不归国内省。"""
     if any(t in (item.get('tags') or []) for t in OUTREACH_TAGS):
@@ -435,8 +472,11 @@ def attribute_item(item):
     body = item.get('body', '')
 
     # 1) 标题命中(最高置信,含城市/遗址)
+    destination = _title_event_destination(title)
     th = _scan(title)
-    if th:
+    if th or destination:
+        if destination:
+            th = [destination] + [p for p in th if p != destination]
         return {'provinces': th, 'tier': 'title'}
 
     # 2) 标签命中(AI 编辑写在标签里的省份,如"姑蔑·浙江")
@@ -488,225 +528,478 @@ def theme_of(tags):
     return themes
 
 
-def build_heatmap_data(daily_reports):
-    """从全部日报解析结果生成热点地图数据。
+HEATMAP_VERSION = 2
+LOCATION_CONFIDENCE = {
+    'title': 0.96, 'tags': 0.90, 'site': 0.78, 'body': 0.58,
+    'national': 0.85, 'outreach': 0.85, 'unassigned': 0.0,
+}
 
-    只遍历 domestic 段;国际段不进。无省份归属的国内新闻不展示(用户确认)。
-    热力公式: item_weight = 1 + 标题🔥数; decayed = weight * DECAY^days;
-    多省归属时 share = decayed / len(provinces) 均分给各省。
-    返回 (heatmap_data_dict, audit_lines)。
-    """
-    audit = []
-    # 按日期归并,asOf = 最新日报日期(可复现,不依赖系统时间)
-    dates = sorted({r['date'] for r in daily_reports})
-    as_of = dates[-1] if dates else ''
-    as_of_dt = None
-    from datetime import date as _date
-    if as_of:
-        y, m, d = map(int, as_of.split('-'))
-        as_of_dt = _date(y, m, d)
 
-    # province short name -> {heat, count, items}
-    prov_agg = {p: {'heat': 0.0, 'count': 0, 'items': []} for p in PROVINCES}
-
-    for r in daily_reports:
-        rdate = r['date']
-        days = (as_of_dt - _date(*map(int, rdate.split('-')))).days if as_of_dt else 0
-        for item in r['domestic']:
-            att = attribute_item(item)
-            provs = att['provinces']
-            weight = 1 + item['title'].count('🔥')
-            decayed = weight * (DECAY ** days)
-            if not provs:
-                # 无省份归属(全国性/对外交流/未识别)→ 不展示
-                audit.append(('national' if att['tier'] in ('national', 'outreach') else 'unassigned',
-                              rdate, item['id'], item['title'], '-', att['tier']))
-                continue
-            share = round(decayed / len(provs), 2)
-            entry = {
-                'date': rdate,
-                'id': item['id'],
-                'title': item['title'],
-                'weight': weight,
-                'pcount': len(provs),   # 前端时间窗口重算需按省份数均分
-                'share': share,
-                'url': f"reports/{rdate}.html#{item['id']}",
-                'tags': item.get('tags', []),   # 原始标签(主题筛选用)
-                'themes': theme_of(item.get('tags', [])),  # 归一化主题大类(省份摘要统计)
-            }
-            for p in provs:
-                if p in prov_agg:
-                    prov_agg[p]['heat'] = round(prov_agg[p]['heat'] + share, 2)
-                    prov_agg[p]['count'] += 1
-                    prov_agg[p]['items'].append(entry)
-            audit.append(('prov' if len(provs) <= 1 else 'multi',
-                          rdate, item['id'], item['title'], '/'.join(provs), att['tier']))
-
-    # 排序:province 按 heat 降序;items 按 date 降序(同一省多日期)
-    prov_list = []
-    for p, agg in prov_agg.items():
-        if agg['items']:
-            agg['items'].sort(key=lambda e: e['date'], reverse=True)
-            prov_list.append({'name': p, 'heat': agg['heat'], 'count': agg['count'],
-                              'items': agg['items']})
-    prov_list.sort(key=lambda x: x['heat'], reverse=True)
-
-    # 归省条目数取唯一(多省条目出现在多省 items 列表,不能直接求和)
-    unique_items = set()
-    for x in prov_list:
-        for it in x['items']:
-            unique_items.add((it['date'], it['id']))
-
-    stats = {
-        'totalDomestic': sum(len(r['domestic']) for r in daily_reports),
-        'provincialItems': len(unique_items),
-        'internationalExcluded': sum(len(r['international']) for r in daily_reports),
-        'maxHeat': round(prov_list[0]['heat'], 2) if prov_list else 0.0,
+def _source_grade(item):
+    """Return executable source governance for a report item."""
+    rows = []
+    for source in item.get('sources') or []:
+        info = source_info(source.get('url', ''))
+        rows.append({
+            'name': source.get('name') or info.get('host') or '原文',
+            'url': canonical_url(source.get('url', '')),
+            'host': info.get('host', ''),
+            'tier': info.get('tier', 'C'),
+            'blocked': bool(info.get('blocked')),
+        })
+    tiers = {row['tier'] for row in rows}
+    best = 'A' if 'A' in tiers else ('B' if 'B' in tiers else 'C')
+    blocked = any(row['blocked'] for row in rows)
+    return {
+        'tier': best,
+        'blocked': blocked,
+        'eligible': bool(rows) and best in ('A', 'B') and not blocked,
+        'sources': rows,
     }
 
+
+def _impact_score(item):
+    """Transparent editorial impact rubric, independent from title emoji."""
+    text = ' '.join([item.get('title', ''), ' '.join(item.get('tags') or [])])
+    score = 48
+    if any(k in text for k in ('讲座', '报名', '征集', '招募', '预告', '文创上新', '打卡')):
+        score = 34
+    if any(k in text for k in ('展览', '特展', '开馆', '博物馆', '遗址公园')):
+        score = max(score, 56)
+    if any(k in text for k in ('数字化', '人工智能', 'AI', '保护工程', '修复', '科技保护')):
+        score = max(score, 66)
+    if any(k in text for k in ('考古发现', '新发现', '发掘', '遗址', '墓葬', '石窟')):
+        score = max(score, 76)
+    if any(k in text for k in ('返还', '追索', '被盗', '失窃', '损毁', '火灾', '盗掘', '文物安全')):
+        score = max(score, 84)
+    if any(k in text for k in ('国家文物局', '条例', '立法', '规划', '国家标准', '世界遗产名录',
+                               '全国十大考古新发现', '重大考古发现', '一级文物')):
+        score = max(score, 90)
+    return min(score, 100)
+
+
+def _impact_label(score):
+    if score >= 88:
+        return '重大'
+    if score >= 74:
+        return '重要'
+    if score >= 58:
+        return '关注'
+    return '一般'
+
+
+def _event_norm(title):
+    text = re.sub(r'^[🔥\s]+', '', title or '').lower()
+    for phrase in ('今日', '正式', '首次', '最新', '持续', '再度', '集中', '重磅', '即将',
+                   '开幕', '开展', '亮相', '发布', '公布', '启动', '启幕', '落幕'):
+        text = text.replace(phrase, '')
+    return re.sub(r'[^0-9a-z\u4e00-\u9fff]+', '', text)
+
+
+def _trigrams(text):
+    if len(text) < 3:
+        return {text} if text else set()
+    return {text[i:i + 3] for i in range(len(text) - 2)}
+
+
+def _same_event(candidate, event):
+    if candidate.get('primaryProvince', '') != event.get('primaryProvince', ''):
+        return False
+    cthemes = set(candidate.get('themes') or [])
+    ethemes = set(event.get('themes') or [])
+    if cthemes and ethemes and not cthemes.intersection(ethemes):
+        return False
+    cdate = _date.fromisoformat(candidate['date'])
+    edate = _date.fromisoformat(event['lastDate'])
+    if abs((cdate - edate).days) > 45:
+        return False
+    left, right = candidate['_norm'], event['_norm']
+    if min(len(left), len(right)) >= 10 and (left in right or right in left):
+        return True
+    ratio = SequenceMatcher(None, left, right).ratio()
+    if ratio >= 0.58:
+        return True
+    a, b = _trigrams(left), _trigrams(right)
+    jaccard = len(a & b) / max(1, len(a | b))
+    return jaccard >= 0.36
+
+
+def _candidate(rdate, item, att, grade, scope='province'):
+    provinces = att.get('provinces') or []
+    display_title = re.sub(r'^[🔥\s]+', '', item.get('title', '')).strip()
+    return {
+        'date': rdate,
+        'itemId': item.get('id', ''),
+        'title': display_title,
+        '_norm': _event_norm(display_title),
+        'url': f"reports/{rdate}.html#{item.get('id', '')}",
+        'primaryProvince': provinces[0] if provinces else '',
+        'relatedProvinces': provinces[1:] if len(provinces) > 1 else [],
+        'locationTier': att.get('tier', 'unassigned'),
+        'locationConfidence': LOCATION_CONFIDENCE.get(att.get('tier'), 0.0),
+        'themes': theme_of(item.get('tags', [])),
+        'tags': item.get('tags', []),
+        'impact': _impact_score(item),
+        'sourceTier': grade['tier'],
+        'sources': grade['sources'],
+        'scope': scope,
+    }
+
+
+def _cluster_events(candidates):
+    """Conservatively merge follow-up reports into independently scored events."""
+    events = []
+    for cand in sorted(candidates, key=lambda x: (x['date'], x['title'])):
+        match = None
+        for event in reversed(events):
+            if _same_event(cand, event):
+                match = event
+                break
+        report = {
+            'date': cand['date'], 'title': cand['title'], 'url': cand['url'],
+            'sourceTier': cand['sourceTier'],
+            'sources': cand['sources'],
+        }
+        if match is None:
+            events.append({
+                '_norm': cand['_norm'], '_seed': cand['_norm'],
+                'title': cand['title'], 'firstDate': cand['date'], 'lastDate': cand['date'],
+                'primaryProvince': cand['primaryProvince'],
+                'relatedProvinces': list(cand['relatedProvinces']),
+                'locationTier': cand['locationTier'],
+                'locationConfidence': cand['locationConfidence'],
+                'themes': list(cand['themes']), 'tags': list(cand['tags']),
+                'impact': cand['impact'], 'scope': cand['scope'],
+                'reports': [report],
+            })
+            continue
+        match['firstDate'] = min(match['firstDate'], cand['date'])
+        match['lastDate'] = max(match['lastDate'], cand['date'])
+        if cand['impact'] > match['impact'] or (cand['impact'] == match['impact'] and cand['date'] >= match['lastDate']):
+            match['title'] = cand['title']
+            match['_norm'] = cand['_norm']
+        match['impact'] = max(match['impact'], cand['impact'])
+        match['locationConfidence'] = max(match['locationConfidence'], cand['locationConfidence'])
+        for province in cand['relatedProvinces']:
+            if province != match['primaryProvince'] and province not in match['relatedProvinces']:
+                match['relatedProvinces'].append(province)
+        for theme in cand['themes']:
+            if theme not in match['themes']:
+                match['themes'].append(theme)
+        for tag in cand['tags']:
+            if tag not in match['tags']:
+                match['tags'].append(tag)
+        match['reports'].append(report)
+
+    for event in events:
+        source_map = {}
+        for report in event['reports']:
+            for source in report['sources']:
+                key = source.get('host') or source.get('url')
+                source_map[key] = source
+        sources = list(source_map.values())
+        tiers = {source['tier'] for source in sources}
+        tier = 'A' if 'A' in tiers else ('B' if 'B' in tiers else 'C')
+        source_count = len(source_map)
+        event['eventId'] = 'evt-' + hashlib.sha1(
+            (event['scope'] + '|' + event['primaryProvince'] + '|' + event['_seed']).encode('utf-8')
+        ).hexdigest()[:10]
+        event['sourceTier'] = tier
+        event['sourceCount'] = source_count
+        event['reportCount'] = len(event['reports'])
+        event['evidence'] = 100 if tier == 'A' else 72
+        event['breadth'] = min(100, 40 + max(0, source_count - 1) * 25)
+        event['impactLabel'] = _impact_label(event['impact'])
+        event['primaryTheme'] = event['themes'][0] if event['themes'] else '其他'
+        event['sources'] = sources
+        event['reports'].sort(key=lambda x: x['date'], reverse=True)
+        del event['_norm']
+        del event['_seed']
+    events.sort(key=lambda x: (x['lastDate'], x['impact'], x['sourceCount']), reverse=True)
+    return events
+
+
+def build_heatmap_data(daily_reports):
+    """Build an auditable industry-attention dataset instead of emoji heat."""
+    dates = sorted({r['date'] for r in daily_reports})
+    as_of = dates[-1] if dates else ''
+    audit = []
+    provincial_candidates, national_candidates, international_candidates = [], [], []
+    source_tiers = {'A': 0, 'B': 0, 'C': 0}
+    excluded_c = excluded_blocked = unassigned_eligible = 0
+
+    for report in daily_reports:
+        rdate = report['date']
+        for item in report['domestic']:
+            grade = _source_grade(item)
+            source_tiers[grade['tier']] += 1
+            att = attribute_item(item)
+            if grade['blocked']:
+                excluded_blocked += 1
+                audit.append(('blocked', rdate, item['id'], item['title'], '-', att['tier']))
+                continue
+            if not grade['eligible']:
+                excluded_c += 1
+                audit.append(('source-c', rdate, item['id'], item['title'], '-', att['tier']))
+                continue
+            if att['provinces']:
+                provincial_candidates.append(_candidate(rdate, item, att, grade))
+                audit.append(('included', rdate, item['id'], item['title'], '/'.join(att['provinces']), att['tier']))
+            elif att['tier'] in ('national', 'outreach'):
+                national_candidates.append(_candidate(rdate, item, att, grade, 'national'))
+                audit.append(('national', rdate, item['id'], item['title'], '-', att['tier']))
+            else:
+                unassigned_eligible += 1
+                audit.append(('unassigned', rdate, item['id'], item['title'], '-', att['tier']))
+
+        for item in report['international']:
+            grade = _source_grade(item)
+            if not grade['eligible']:
+                continue
+            att = {'provinces': [], 'tier': 'outreach'}
+            international_candidates.append(_candidate(rdate, item, att, grade, 'international'))
+
+    events = _cluster_events(provincial_candidates)
+    national_events = _cluster_events(national_candidates)
+    international_events = _cluster_events(international_candidates)
+    stats = {
+        'totalDomesticReports': sum(len(r['domestic']) for r in daily_reports),
+        'includedProvincialReports': len(provincial_candidates),
+        'provincialEvents': len(events),
+        'nationalEvents': len(national_events),
+        'internationalEvents': len(international_events),
+        'excludedC': excluded_c,
+        'excludedBlocked': excluded_blocked,
+        'unassignedEligible': unassigned_eligible,
+        'sourceTiers': source_tiers,
+    }
+    samples = [{
+        'reason': kind, 'date': rdate, 'title': title, 'tier': tier,
+    } for kind, rdate, _iid, title, _provs, tier in audit if kind != 'included'][:24]
     data = {
-        'generated': as_of or '',
+        'version': HEATMAP_VERSION,
+        'generated': as_of,
         'asOf': as_of,
-        'start': dates[0] if dates else '',   # 最早日报日期(前端时间窗口用)
+        'start': dates[0] if dates else '',
         'decay': DECAY,
+        'methodology': {
+            'name': '行业关注指数',
+            'weights': {'impact': 35, 'evidence': 30, 'breadth': 20, 'recency': 15},
+            'sourceGate': '仅 A/B 级来源；C 级与禁止来源不进入指数',
+            'geography': '主要发生地计分，关联地区仅展示，不重复分摊',
+        },
         'stats': stats,
-        'provinces': prov_list,
+        'events': events,
+        'nationalEvents': national_events,
+        'internationalEvents': international_events,
+        'auditSamples': samples,
     }
     return data, audit
 
 
 def _audit_print(audit):
-    """打印归属审核日志,便于人工抽检。"""
-    prov_n = sum(1 for a in audit if a[0] == 'prov')
-    multi_n = sum(1 for a in audit if a[0] == 'multi')
-    national_n = sum(1 for a in audit if a[0] == 'national')
-    unassigned_n = sum(1 for a in audit if a[0] == 'unassigned')
-    print(f'[HEATMAP] 归省 {prov_n} 条 | 多省均分 {multi_n} 条 | 全国性/对外 {national_n} 条 | 未识别 {unassigned_n} 条')
-    print('[HEATMAP] WARN 抽检重点(正文/多省/未识别):')
+    """Print quality-gate and attribution diagnostics for every build."""
+    included = sum(1 for a in audit if a[0] == 'included')
+    national = sum(1 for a in audit if a[0] == 'national')
+    source_c = sum(1 for a in audit if a[0] == 'source-c')
+    blocked = sum(1 for a in audit if a[0] == 'blocked')
+    unassigned = sum(1 for a in audit if a[0] == 'unassigned')
+    print(f'[HEATMAP V2] 纳入 {included} 条 | 全国性 {national} 条 | C级隔离 {source_c} 条 | 禁止来源隔离 {blocked} 条 | 地理待核 {unassigned} 条')
+    print('[HEATMAP V2] 抽检重点(低置信地域/多地区/被隔离):')
+    shown = 0
     for kind, rdate, iid, title, provs, tier in audit:
-        if tier in ('site', 'body', 'unassigned') or kind == 'multi':
-            print(f'  [{tier}] {rdate} #{iid} {title[:36]} → {provs}')
+        if kind in ('blocked', 'source-c', 'unassigned') or tier in ('site', 'body') or '/' in provs:
+            print(f'  [{kind}/{tier}] {rdate} #{iid} {title[:36]} → {provs}')
+            shown += 1
+            if shown >= 36:
+                print('  ... 其余记录已写入 heatmap-data.json 审计摘要')
+                break
 
 
 def build_heatmap_html():
-    """生成热点地图详情页 heatmap.html(ECharts 5 + 本地 china.json,内联 CSS/JS)。
-
-    数据在运行时从 heatmap-data.json 加载(渐进增强:地图组件/数据任一加载失败
-    都保留 Top10 快速入口)。暗色模式用 matchMedia 监听,切换时重建图表。
-    """
+    """Generate the evidence-gated industry attention map."""
     return '''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
-<title>文博热点地图 | 每日文博资讯</title>
-<meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<title>文博行业关注地图 | 每日文博资讯</title>
+<meta name="description" content="基于权威公开报道、独立事件与可解释指标生成的中国文博行业关注地图。">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">
-<meta property="og:title" content="文博热点地图 | 每日文博资讯">
-<meta property="og:description" content="全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<meta property="og:title" content="文博行业关注地图 | 每日文博资讯">
+<meta property="og:description" content="从地区、事件、来源与趋势四个维度观察中国文博行业动态。">
 <style>
   :root {
-    --bg: #f6f5f1; --card: #ffffff; --text: #2b2b2b;
-    --muted: #8a867c; --border: #e5e2d9; --accent: #8a5a2b; --tag-bg: #f0ece2;
+    --bg:#f4f1eb; --card:#fffdf9; --text:#28231d; --muted:#786f64;
+    --border:#ded7ca; --accent:#8a4b27; --accent-soft:#f2e6da; --tag:#eee8de;
+    --good:#2f6b4f; --warn:#a15c16; --bad:#a33b34; --shadow:0 12px 36px rgba(75,55,35,.08);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#17161a; --card:#22222a; --text:#ecebe6; --muted:#9a97a8; --border:#33323c; --accent:#c9a06a; --tag-bg:#2c2c36; }
+    :root { --bg:#171513; --card:#23201d; --text:#eee8df; --muted:#aaa095; --border:#3a342e; --accent:#d5a06f; --accent-soft:#392a20; --tag:#302b26; --good:#86c7a6; --warn:#e3ac69; --bad:#ef928b; --shadow:none; }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6;
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+  button,select { font:inherit; }
+  button:focus-visible,select:focus-visible,a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  a { color:var(--accent); }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px 54px; }
+  header { padding:30px 0 20px; }
+  .back { display:inline-block; margin-bottom:14px; color:var(--accent); text-decoration:none; font-size:.86em; }
+  h1 { font-size:clamp(1.55rem,3vw,2.15rem); letter-spacing:-.02em; }
+  .lede { max-width:760px; margin-top:8px; color:var(--muted); font-size:.94em; }
+  .meta { margin-top:12px; color:var(--muted); font-size:.8em; }
+  .method-strip { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 18px; padding:12px 15px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--muted); font-size:.78em; }
+  .method-strip strong { color:var(--text); }
+  .toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:16px; }
+  .win-tabs { display:flex; gap:7px; flex-wrap:wrap; }
+  .win-tab { padding:7px 15px; border:1px solid var(--border); border-radius:999px; color:var(--text); background:var(--card); cursor:pointer; }
+  .win-tab.active { color:#fff; border-color:var(--accent); background:var(--accent); }
+  .theme-control { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:.84em; }
+  .theme-control select { max-width:170px; padding:7px 30px 7px 10px; border:1px solid var(--border); border-radius:9px; background:var(--card); color:var(--text); }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
+  .stat { padding:14px 15px; background:var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow); }
+  .stat strong { display:block; font-size:1.45em; line-height:1.15; color:var(--accent); }
+  .stat span { display:block; margin-top:5px; color:var(--muted); font-size:.76em; }
+  .workspace { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr); gap:16px; align-items:start; }
+  .panel { background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; }
+  .panel-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:15px 17px 0; }
+  .panel-head h2 { font-size:1em; }
+  .panel-head span { color:var(--muted); font-size:.75em; }
+  #map { width:100%; height:520px; }
+  .map-note { padding:0 17px 15px; color:var(--muted); font-size:.74em; }
+  .rank-scroll { max-height:500px; overflow:auto; padding:8px 10px 12px; }
+  table { width:100%; border-collapse:collapse; font-size:.79em; }
+  th { position:sticky; top:0; z-index:2; padding:8px 7px; color:var(--muted); background:var(--card); text-align:right; font-weight:500; border-bottom:1px solid var(--border); }
+  th:nth-child(2) { text-align:left; }
+  td { padding:9px 7px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; }
+  td:nth-child(2) { text-align:left; }
+  .province-btn { border:0; background:none; color:var(--text); cursor:pointer; font-weight:650; }
+  .province-btn:hover { color:var(--accent); }
+  .rank { color:var(--muted); }
+  .index { color:var(--accent); font-weight:750; }
+  .trend-up { color:var(--good); } .trend-down { color:var(--bad); } .trend-flat { color:var(--muted); }
+  .detail { display:none; margin-top:16px; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+  .detail.show { display:block; }
+  .detail-head { display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .detail-title { font-size:1.28em; }
+  .detail-metrics { color:var(--muted); font-size:.82em; }
+  .detail-close { margin-left:auto; border:1px solid var(--border); border-radius:8px; padding:5px 9px; color:var(--muted); background:transparent; cursor:pointer; }
+  .event-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:14px; }
+  .event { padding:14px; border:1px solid var(--border); border-radius:12px; background:color-mix(in srgb,var(--card) 88%,var(--tag)); }
+  .event h3 { font-size:.92em; line-height:1.5; }
+  .event h3 a { color:var(--text); text-decoration:none; }
+  .event h3 a:hover { color:var(--accent); }
+  .badges { display:flex; gap:5px; flex-wrap:wrap; margin:8px 0 6px; }
+  .badge { display:inline-block; padding:2px 7px; border-radius:999px; background:var(--tag); color:var(--muted); font-size:.68em; }
+  .badge.a { color:var(--good); } .badge.b { color:var(--warn); } .badge.impact { color:var(--accent); }
+  .event-meta { color:var(--muted); font-size:.72em; }
+  .source-row { margin-top:6px; color:var(--muted); font-size:.7em; }
+  .source-row a { margin-right:7px; text-decoration:none; }
+  .followups { margin-top:8px; color:var(--muted); font-size:.73em; }
+  .followups summary { cursor:pointer; }
+  .followups a { display:block; margin-top:5px; text-decoration:none; }
+  .secondary-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  details.box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; }
+  details.box > summary { cursor:pointer; font-weight:700; }
+  .scope-list { margin-top:10px; }
+  .scope-item { padding:9px 0; border-bottom:1px dashed var(--border); }
+  .scope-item:last-child { border-bottom:0; }
+  .scope-item a { color:var(--text); text-decoration:none; font-size:.86em; }
+  .scope-item span { display:block; color:var(--muted); font-size:.7em; }
+  .quality { margin-top:16px; padding:16px; border:1px solid var(--border); border-left:4px solid var(--good); border-radius:12px; background:var(--card); }
+  .quality h2 { font-size:.95em; }
+  .quality p { margin-top:6px; color:var(--muted); font-size:.78em; }
+  .quality strong { color:var(--text); }
+  .formula { margin-top:10px; padding:10px 12px; border-radius:9px; background:var(--tag); color:var(--muted); font-size:.75em; }
+  .err { padding:34px 18px; color:var(--muted); text-align:center; }
+  footer { margin-top:24px; padding:22px 0; color:var(--muted); text-align:center; font-size:.75em; border-top:1px solid var(--border); }
+  @media (max-width:850px) {
+    .workspace { grid-template-columns:1fr; }
+    .rank-panel { order:1; } .map-panel { order:2; }
+    .rank-scroll { max-height:360px; }
+    #map { height:430px; }
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 40px; }
-  header { padding: 24px 0 14px; }
-  header h1 { font-size: 1.35em; }
-  .back { display: inline-block; margin-bottom: 10px; font-size: .85em; color: var(--accent); text-decoration: none; }
-  .back:hover { text-decoration: underline; }
-  #map { width: 100%; height: 55vh; min-height: 320px; background: transparent; }
-  .meta { font-size: .78em; color: var(--muted); margin: 6px 0 14px; }
-  .note { font-size: .78em; color: var(--muted); margin: 4px 0 14px; }
-  h2.sec { font-size: 1em; margin: 20px 0 10px; }
-  .win-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
-  .win-tab {
-    padding: 6px 14px; border-radius: 999px; font-size: .85em;
-    background: var(--tag-bg); border: 1px solid var(--border);
-    color: var(--text); cursor: pointer; transition: all .15s;
+  @media (max-width:620px) {
+    .wrap { padding:0 14px 40px; }
+    header { padding-top:20px; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .event-list,.secondary-grid { grid-template-columns:1fr; }
+    .toolbar { align-items:flex-start; }
+    .theme-control { width:100%; justify-content:space-between; }
+    .theme-control select { flex:1; max-width:none; }
+    #map { height:370px; }
+    th:nth-child(5),td:nth-child(5) { display:none; }
   }
-  .win-tab:hover { background: var(--card); }
-  .win-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    padding: 6px 12px; border-radius: 999px; font-size: .85em;
-    background: var(--tag-bg); border: 1px solid var(--border);
-    cursor: pointer; transition: background .15s, transform .1s;
-  }
-  .chip:hover { background: var(--card); transform: translateY(-1px); }
-  .chip b { color: var(--accent); }
-  .chip .heat { color: var(--muted); font-weight: 400; margin-left: 3px; }
-  .detail {
-    display: none; margin-top: 16px; padding: 16px;
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  }
-  .detail.show { display: block; }
-  .detail .d-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .detail .d-name { font-size: 1.2em; font-weight: 700; }
-  .detail .d-heat { color: var(--accent); font-weight: 700; }
-  .detail .d-count { color: var(--muted); font-size: .85em; }
-  .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
-  .detail .d-themes { margin: 6px 0 2px; font-size: .8em; color: var(--muted); }
-  .detail .d-themes .th {
-    display: inline-block; background: var(--tag-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 1px 10px; margin: 2px 4px 2px 0;
-    color: var(--text); font-size: inherit; font-family: inherit; line-height: 1.7;
-    cursor: pointer; transition: all .15s;
-  }
-  .detail .d-themes .th:hover { border-color: var(--accent); }
-  .detail .d-themes .th.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .detail .d-items { margin-top: 12px; }
-  .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
-  .detail .d-items .it:last-child { border-bottom: none; }
-  .detail .d-items a { color: var(--accent); text-decoration: none; font-size: .9em; }
-  .detail .d-items a:hover { text-decoration: underline; }
-  .detail .d-items .it-date { display: block; font-size: .75em; color: var(--muted); margin-top: 2px; }
-  .err { color: var(--muted); text-align: center; padding: 24px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <a class="back" href="./">← 返回首页</a>
-    <h1>🗺️ 中国文博热点地图</h1>
-    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份或热力球查看当地全部报道</p>
+    <h1>文博行业关注地图</h1>
+    <p class="lede">从权威公开报道中识别独立事件，观察各地区近期值得行业从业者关注的考古、博物馆、展览、保护与数字化动向。</p>
+    <p class="meta" id="meta">正在读取事件索引…</p>
   </header>
-  <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 热力球越大越红热度越高，越小越浅热度越低 · 仅统计国内报道</p>
-  <p class="note">🔥 = 一般关注 · 🔥🔥 = 较高关注 · 🔥🔥🔥 = 高关注 · 热度仅反映本站日报报道的相对关注度，不代表官方统计或社会整体关注度</p>
-
-  <div class="win-tabs" id="wintabs">
-    <button class="win-tab" data-days="7">近7天</button>
-    <button class="win-tab active" data-days="30">近30天</button>
-    <button class="win-tab" data-days="90">近90天</button>
+  <div class="method-strip">
+    <span><strong>口径</strong> 独立事件，不重复累计连续报道</span>
+    <span><strong>信源</strong> 仅 A/B 级进入指数</span>
+    <span><strong>地域</strong> 主要发生地计分，关联地区只作说明</span>
+    <span><strong>性质</strong> 本站行业关注指数，不代表社会舆情</span>
   </div>
-
-  <h2 class="sec">🔥 热点 Top 10</h2>
-  <div class="chips" id="chips"></div>
-
-  <div class="detail" id="detail">
-    <div class="d-head">
-      <span class="d-name" id="d-name"></span>
-      <span class="d-heat" id="d-heat"></span>
-      <span class="d-count" id="d-count"></span>
-      <button class="d-close" id="d-close" aria-label="关闭">✕</button>
+  <div class="toolbar">
+    <div class="win-tabs" aria-label="时间范围">
+      <button class="win-tab" data-days="7">近7天</button>
+      <button class="win-tab active" data-days="30">近30天</button>
+      <button class="win-tab" data-days="90">近90天</button>
     </div>
-    <div class="d-themes" id="d-themes"></div>
-    <div class="d-items" id="d-items"></div>
+    <label class="theme-control">主题
+      <select id="theme"><option value="">全部主题</option></select>
+    </label>
   </div>
+  <section class="stats" aria-label="当前窗口概况">
+    <div class="stat"><strong id="s-events">—</strong><span>独立地域事件</span></div>
+    <div class="stat"><strong id="s-provinces">—</strong><span>有有效事件的地区</span></div>
+    <div class="stat"><strong id="s-a">—</strong><span>A 级证据事件</span></div>
+    <div class="stat"><strong id="s-reports">—</strong><span>合格报道证据</span></div>
+  </section>
+  <section class="workspace">
+    <div class="panel map-panel">
+      <div class="panel-head"><h2>地区关注分布</h2><span>相对指数 0—100</span></div>
+      <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
+      <p class="map-note">颜色越深，表示当前时间范围内的事件影响、证据强度、独立来源与时效综合值越高。无色不等于没有文博活动，只表示本站没有足够的合格证据。</p>
+    </div>
+    <div class="panel rank-panel">
+      <div class="panel-head"><h2>地区关注排名</h2><span id="rank-note">点击地区查看证据</span></div>
+      <div class="rank-scroll">
+        <table>
+          <thead><tr><th>#</th><th>地区</th><th>指数</th><th>事件</th><th>证据</th><th>趋势</th></tr></thead>
+          <tbody id="ranking"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="detail" id="detail" aria-live="polite">
+    <div class="detail-head">
+      <div><h2 class="detail-title" id="d-name"></h2><p class="detail-metrics" id="d-metrics"></p></div>
+      <button class="detail-close" id="d-close" aria-label="关闭地区详情">关闭</button>
+    </div>
+    <div class="event-list" id="d-events"></div>
+  </section>
+  <section class="secondary-grid">
+    <details class="box"><summary>全国性政策与对外合作 <span id="national-count"></span></summary><div class="scope-list" id="national-list"></div></details>
+    <details class="box"><summary>国际文博观察 <span id="international-count"></span></summary><div class="scope-list" id="international-list"></div></details>
+  </section>
+  <section class="quality">
+    <h2>数据质量与审计</h2>
+    <p id="quality-text">正在计算信源与地域质量…</p>
+    <div class="formula"><strong>指数公式：</strong>事件影响 35% + 证据强度 30% + 独立来源 20% + 时效 15%。同一事件的后续报道合并，标题中的“🔥”不再参与计算。<a href="sources.html">查看信源与方法</a></div>
+  </section>
+  <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
-
 <script src="lib/echarts.min.js"></script>
 <script>
-// 简称 → geojson 全称(与 china.json 的 properties.name 一一对应)
 var SHORT2GEO = {
   '北京':'北京市','天津':'天津市','河北':'河北省','山西':'山西省','内蒙古':'内蒙古自治区',
   '辽宁':'辽宁省','吉林':'吉林省','黑龙江':'黑龙江省','上海':'上海市','江苏':'江苏省',
@@ -718,316 +1011,179 @@ var SHORT2GEO = {
 };
 var GEO2SHORT = {};
 for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
-
-var RAW = null;         // heatmap-data.json 全量数据
-var VIEW = null;        // 当前时间窗口重算后的省份列表
-var chart = null;
-var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中 active 一致)
-var CUR_THEME = null;   // 省份摘要的当前主题筛选(null=全部);切时间窗口时保留
-var AS_OF_UTC = 0;
-var AS_OF_STR = '';
-var CENTROID = {};   // 简称 → [lng,lat] 省几何中心(取自 china.json properties.centroid)
-
-// 时间窗口定义
-var WINDOWS = [
-  { key: '7d',  label: '近7天',   days: 7 },
-  { key: '30d', label: '近30天',  days: 30 },
-  { key: '90d', label: '近90天', days: 90 }
-];
-
+var RAW=null, VIEW=[], PREVIOUS=[], chart=null, MAP_READY=false;
+var CUR_WINDOW={label:'近30天',days:30}, CUR_THEME='';
+var AS_OF_UTC=0, AS_OF_STR='';
 function parseUTC(s) {
   var a = s.split('-');
   return Date.UTC(+a[0], +a[1] - 1, +a[2]);
 }
-
 function isDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
-
 function palette() {
   var dark = isDark();
   return {
-    // 热力球色带(低→高: 浅→深红,深浅两种主题均适配;低端也保证与底色地图可区分)
-    ballColors: dark
-      ? ['#5c5148', '#8a5f33', '#c07a2c', '#e0483a', '#ff5f5f']
-      : ['#e8ddd0', '#f2b28c', '#e8782e', '#d23a1f', '#a01313'],
-    mapFill: dark ? '#26262f' : '#eae7df',      // 底色地图统一中性色,不随热力变色
-    mapBorder: dark ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.7)',
-    ballBorder: dark ? 'rgba(255,255,255,.45)' : 'rgba(255,255,255,.85)', // 球描边,贴地色时也能被识别
-    ballLabel: dark ? '#d5d2d8' : '#5a544c',
+    colors: dark ? ['#342d27','#65503d','#9a6743','#ce7046','#ef8b63'] : ['#eee8df','#e5c5aa','#d79568','#bd633d','#884226'],
+    empty: dark ? '#292622' : '#ebe7df', border: dark ? '#4a443e' : '#fffdf9',
     tooltipBg: dark ? '#22222a' : '#ffffff',
-    tooltipText: dark ? '#eee' : '#333',
-    labelText: dark ? '#999' : '#777'
+    tooltipText: dark ? '#eee' : '#333', label: dark ? '#c9c0b6' : '#5f554b'
   };
 }
-
-// 按时间窗口重算省份热力(与 build.py 同公式: weight × DECAY^天数 / 省份数)
-function computeWindow(days) {
+function eventScore(event) {
+  var age=Math.max(0,(AS_OF_UTC-parseUTC(event.lastDate))/86400000);
+  var recency=100*Math.pow(RAW.decay||.93,age);
+  return event.impact*.35+event.evidence*.30+event.breadth*.20+recency*.15;
+}
+function eventInRange(event, days, previous) {
+  var age=(AS_OF_UTC-parseUTC(event.lastDate))/86400000;
+  var start=previous?days:0, end=previous?days*2:days;
+  return age>=start && age<end;
+}
+function computeView(days, previous) {
   var byName = {};
-  RAW.provinces.forEach(function(p){
-    var heat = 0, count = 0, items = [];
-    p.items.forEach(function(it){
-      var since = (AS_OF_UTC - parseUTC(it.date)) / 86400000;
-      if (days !== null && since >= days) return;   // 窗口外报道跳过
-      heat += it.weight * Math.pow(0.93, since) / it.pcount;
-      count += 1;
-      items.push(it);
-    });
-    if (count > 0) byName[p.name] = { name: p.name, heat: heat, count: count, items: items };
+  (RAW.events||[]).forEach(function(event){
+    if (!eventInRange(event,days,previous)) return;
+    if (CUR_THEME && (event.themes||[]).indexOf(CUR_THEME)===-1) return;
+    var name=event.primaryProvince;
+    if (!name) return;
+    if (!byName[name]) byName[name]={name:name,raw:0,eventCount:0,reportCount:0,evidenceCount:0,aCount:0,confidenceTotal:0,events:[]};
+    var row=byName[name], score=eventScore(event);
+    row.raw+=score; row.eventCount+=1; row.reportCount+=event.reportCount;
+    row.evidenceCount+=event.sourceCount; row.aCount+=event.sourceTier==='A'?1:0;
+    row.confidenceTotal+=event.locationConfidence; row.events.push({event:event,score:score});
   });
-  var list = [];
-  for (var k in byName) list.push(byName[k]);
-  list.sort(function(a, b){ return b.heat - a.heat; });
+  var list=Object.keys(byName).map(function(k){ return byName[k]; });
+  var maxRaw=list.reduce(function(m,x){return Math.max(m,x.raw);},0);
+  list.forEach(function(row){
+    row.index=maxRaw?row.raw/maxRaw*100:0;
+    row.confidence=row.eventCount?row.confidenceTotal/row.eventCount:0;
+    row.events.sort(function(a,b){return b.score-a.score;});
+  });
+  list.sort(function(a,b){return b.raw-a.raw;});
   return list;
 }
-
 function findProvince(name) {
-  var v = VIEW || [];
-  for (var i = 0; i < v.length; i++) if (v[i].name === name) return v[i];
+  for (var i=0;i<VIEW.length;i++) if (VIEW[i].name===name) return VIEW[i];
   return null;
 }
-
-function showDetail(shortName) {
-  var prov = findProvince(shortName);
-  var det = document.getElementById('detail');
-  if (!prov) { det.classList.remove('show'); return; }
-  document.getElementById('d-name').textContent = prov.name;
-  document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
-  // 主题 chips:统计该省当前窗口报道的归一化主题大类频次,点击可筛选
-  var thCount = {};
-  prov.items.forEach(function(it){
-    (it.themes || []).forEach(function(t){ thCount[t] = (thCount[t] || 0) + 1; });
-  });
-  var themesBox = document.getElementById('d-themes');
-  var thHtml = '<button class="th' + (CUR_THEME === null ? ' on' : '') + '" data-t="__all__">全部</button>';
-  for (var t in thCount) {
-    if (!Object.prototype.hasOwnProperty.call(thCount, t)) continue;
-    thHtml += '<button class="th' + (CUR_THEME === t ? ' on' : '') + '" data-t="' + t + '">' + t + ' ×' + thCount[t] + '</button>';
-  }
-  themesBox.innerHTML = thHtml ? '主要主题：' + thHtml : '';
-  themesBox.querySelectorAll('.th').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var t = btn.getAttribute('data-t');
-      CUR_THEME = (t === '__all__' || t === CUR_THEME) ? null : t;  // 再点同主题=取消筛选
-      showDetail(shortName);   // 重开,刷新 chips 激活态与列表
-    });
-  });
-  // 按当前主题筛选(数据已由 build.py 归一化,纯前端过滤,无需重分类)
-  var filtered = CUR_THEME
-    ? prov.items.filter(function(it){ return (it.themes || []).indexOf(CUR_THEME) !== -1; })
-    : prov.items;
-  document.getElementById('d-count').textContent = CUR_THEME
-    ? filtered.length + ' / ' + prov.count + ' 条报道 · ' + CUR_THEME
-    : prov.count + ' 条报道';
-  // 高🔥新闻置顶(weight 降序,同权按日期新→旧)
-  var sorted = filtered.slice().sort(function(a, b){
-    if (b.weight !== a.weight) return b.weight - a.weight;
-    return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0);
-  });
-  var box = document.getElementById('d-items');
-  box.innerHTML = '';
-  sorted.forEach(function(it){
-    var div = document.createElement('div');
-    div.className = 'it';
-    var a = document.createElement('a');
-    a.href = it.url; a.textContent = it.title;
-    var d = document.createElement('span');
-    d.className = 'it-date'; d.textContent = it.date;
-    div.appendChild(a); div.appendChild(d);
-    box.appendChild(div);
-  });
-  det.classList.add('show');
-  det.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+function badge(text, cls) {
+  var span=document.createElement('span'); span.className='badge '+(cls||''); span.textContent=text; return span;
 }
-
-function renderTop10() {
-  var box = document.getElementById('chips');
-  box.innerHTML = '';
-  var top = (VIEW || []).slice(0, 10);
-  if (!top.length) {
-    box.innerHTML = '<div class="err">该时间段暂无热点数据，换个时间范围试试。</div>';
-    return;
+function eventCard(entry) {
+  var event=entry.event, article=document.createElement('article'); article.className='event';
+  var h=document.createElement('h3'), link=document.createElement('a'); link.href=event.reports[0].url; link.textContent=event.title;
+  h.appendChild(link); article.appendChild(h);
+  var badges=document.createElement('div'); badges.className='badges';
+  badges.appendChild(badge(event.impactLabel+'影响','impact'));
+  badges.appendChild(badge(event.sourceTier+'级证据',event.sourceTier.toLowerCase()));
+  badges.appendChild(badge(event.primaryTheme));
+  badges.appendChild(badge('指数 '+entry.score.toFixed(0)));
+  article.appendChild(badges);
+  var meta=document.createElement('p'); meta.className='event-meta';
+  meta.textContent=event.lastDate+' · '+event.sourceCount+' 个独立来源 · 地理置信度 '+Math.round(event.locationConfidence*100)+'%'+(event.relatedProvinces.length?' · 关联 '+event.relatedProvinces.join('、'):'');
+  article.appendChild(meta);
+  var sourceRow=document.createElement('p'); sourceRow.className='source-row'; sourceRow.appendChild(document.createTextNode('来源：'));
+  event.sources.slice(0,4).forEach(function(source){var a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener';a.textContent=source.name+'（'+source.tier+'）';sourceRow.appendChild(a);});
+  article.appendChild(sourceRow);
+  if (event.reports.length>1) {
+    var details=document.createElement('details'); details.className='followups';
+    var summary=document.createElement('summary'); summary.textContent='查看 '+event.reports.length+' 条连续报道'; details.appendChild(summary);
+    event.reports.forEach(function(report){ var a=document.createElement('a'); a.href=report.url; a.textContent=report.date+'｜'+report.title; details.appendChild(a); });
+    article.appendChild(details);
   }
-  top.forEach(function(p){
-    var chip = document.createElement('button');
-    chip.className = 'chip';
-    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat.toFixed(1) + '</span>';
-    chip.onclick = function(){ showDetail(p.name); };
-    box.appendChild(chip);
+  return article;
+}
+function showDetail(name) {
+  var row=findProvince(name), box=document.getElementById('detail');
+  if(!row){box.classList.remove('show');return;}
+  document.getElementById('d-name').textContent=row.name+'｜行业关注指数 '+row.index.toFixed(0);
+  document.getElementById('d-metrics').textContent=row.eventCount+' 个独立事件 · '+row.reportCount+' 条合格报道 · '+row.evidenceCount+' 个来源证据 · 平均地理置信度 '+Math.round(row.confidence*100)+'%';
+  var list=document.getElementById('d-events'); list.innerHTML=''; row.events.forEach(function(entry){list.appendChild(eventCard(entry));});
+  box.classList.add('show'); box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function trendFor(row) {
+  var span=document.createElement('span');
+  var archiveDays=RAW.start?Math.floor((AS_OF_UTC-parseUTC(RAW.start))/86400000)+1:0;
+  if(archiveDays<CUR_WINDOW.days*2){span.className='trend-flat';span.textContent='基线不足';return span;}
+  var old=null; for(var i=0;i<PREVIOUS.length;i++) if(PREVIOUS[i].name===row.name) old=PREVIOUS[i];
+  if(!old||old.raw===0){span.className='trend-up';span.textContent='新进入';return span;}
+  var change=(row.raw-old.raw)/old.raw*100;
+  span.className=Math.abs(change)<5?'trend-flat':(change>0?'trend-up':'trend-down');
+  span.textContent=(change>0?'↑ ':change<0?'↓ ':'')+Math.abs(change).toFixed(0)+'%'; return span;
+}
+function renderRanking() {
+  var body=document.getElementById('ranking'); body.innerHTML='';
+  if(!VIEW.length){var tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.className='err';td.textContent='当前筛选下暂无合格地域事件。';tr.appendChild(td);body.appendChild(tr);return;}
+  VIEW.forEach(function(row,i){
+    var tr=document.createElement('tr');
+    [String(i+1),'',row.index.toFixed(0),String(row.eventCount),String(row.evidenceCount),''].forEach(function(text,idx){var td=document.createElement('td');td.textContent=text;if(idx===0)td.className='rank';if(idx===2)td.className='index';tr.appendChild(td);});
+    var btn=document.createElement('button');btn.className='province-btn';btn.textContent=row.name;btn.onclick=function(){showDetail(row.name);};tr.children[1].appendChild(btn);tr.children[5].appendChild(trendFor(row));body.appendChild(tr);
   });
 }
-
 function renderMap() {
-  if (!window.echarts || !window.ChinaGeo || !VIEW) {
-    document.getElementById('map-fallback').innerHTML = '地图组件加载失败，可用上方省份快速入口查看热点。';
+  if(!window.echarts||!MAP_READY){
+    document.getElementById('map-fallback').textContent='地图组件暂时不可用，可使用地区排名查看全部数据。';
     return;
   }
-  var p = palette();
-  var el = document.getElementById('map');
-  if (chart) chart.dispose();
-  chart = echarts.init(el);
-  var maxHeat = VIEW.length ? VIEW[0].heat : 0;
-  var vmMax = Math.max(1, Math.ceil(maxHeat * 1.05));
-  var labelMin = maxHeat * 0.15;   // 热度≥最大值15%的省常显名称,防几十个标签互相遮挡
-  // 球直径与 visualMap 的 symbolSize:[5,38] 同一线性插值 → 决定省名放球内还是球旁
-  var rOf = function(v){ return 5 + (v / vmMax) * 33; };
-  var LABEL_INSIDE_R = 26;   // symbolSize=球直径:直径≥26px(半径13,装得下2字10px省名)时省名装球内,否则小字标球旁
-  // 热力球数据:位置=各省几何中心(centroid),value=[lng, lat, heat]
-  var ballData = [];
-  VIEW.forEach(function(pr){
-    var c = CENTROID[pr.name];
-    if (!c) return;
-    var v = Math.round(pr.heat * 100) / 100;
-    ballData.push({
-      name: pr.name, value: [c[0], c[1], v],
-      // 大球:省名白字装进球内(深色描边+暗影保证在各种球色上都可读);小球放不下:小字标在球右侧,画面更干净
-      label: rOf(v) >= LABEL_INSIDE_R
-        ? { position: 'inside', color: '#fff', fontWeight: 700, fontSize: 10,
-            textBorderColor: 'rgba(0,0,0,.35)', textBorderWidth: 1,
-            textShadowColor: 'rgba(0,0,0,.5)', textShadowBlur: 2 }
-        : { position: 'right', distance: 4, color: p.ballLabel, fontSize: 9,
-            fontWeight: 400, opacity: .85 }
-    });
-  });
+  var p=palette(),el=document.getElementById('map');if(chart)chart.dispose();chart=echarts.init(el);
+  var data=VIEW.map(function(row){return{name:SHORT2GEO[row.name]||row.name,value:+row.index.toFixed(1),events:row.eventCount,evidence:row.evidenceCount};});
   chart.setOption({
-    backgroundColor: 'transparent',
-    tooltip: {
-      trigger: 'item', backgroundColor: p.tooltipBg, borderColor: 'rgba(0,0,0,.1)',
-      textStyle: { color: p.tooltipText, fontSize: 13 },
-      formatter: function(params){
-        var short = GEO2SHORT[params.name] || params.name;
-        var d = findProvince(short);
-        if (!d) return '<b>' + params.name + '</b><br/>该时间段暂无数据';
-        return '<b>' + d.name + '</b><br/>热度：' + d.heat.toFixed(2) + '<br/>报道：' + d.count + ' 条';
-      }
-    },
-    geo: {
-      // 关键:为 scatter 提供 'geo' 坐标系。ECharts 的 map 系列不提供可被其他系列引用的坐标系,
-      // 无 geo 组件时 scatter 拿不到坐标→点不绘制(2026-08-21 修"看不到球"根因)。
-      // 本组件透明+silent,只作坐标系统,视觉/悬停/点击全部交给 map 系列。
-      map: 'china', roam: false,
-      silent: true,
-      label: { show: false },
-      emphasis: { label: { show: false }, itemStyle: { areaColor: 'rgba(0,0,0,0)' } },
-      itemStyle: { areaColor: 'rgba(0,0,0,0)', borderColor: 'rgba(0,0,0,0)' },
-      zlevel: 0
-    },
-    series: [
-      {
-        // 底色地图:统一中性色,热力信息全部交给热力球(小面积省市不会被色块掩盖)
-        type: 'map', map: 'china', roam: false, selectedMode: false,
-        label: { show: false },
-        emphasis: {
-          // 划过省份不再高亮色块、不再弹大号省名(热力已由球的大小/颜色表达,2026-08-21 用户要求)
-          label: { show: false },
-          itemStyle: { areaColor: p.mapFill }
-        },
-        itemStyle: { borderColor: p.mapBorder, borderWidth: 0.6, areaColor: p.mapFill },
-        data: []
-      },
-      {
-        // 热力球:大小与颜色均由 heat 值映射(visualMap seriesIndex=[1] 只作用本系列)
-        name: '热点', type: 'scatter', coordinateSystem: 'geo', zlevel: 2,
-        symbol: 'circle', data: ballData,
-        label: {
-          // 位置/字号/颜色由每条数据自带的 label 覆盖:大球省名在球内、小球小字在球旁(2026-08-21 用户要求)
-          show: true,
-          formatter: function(p){ return p.value[2] >= labelMin ? p.name : ''; }
-        },
-        labelLayout: { hideOverlap: true },
-        itemStyle: { borderColor: p.ballBorder, borderWidth: 1, shadowBlur: 8, shadowColor: 'rgba(0,0,0,.25)' },
-        emphasis: {
-          label: { show: true, color: p.ballLabel, fontWeight: 700, fontSize: 13 },
-          itemStyle: { borderColor: '#fff', borderWidth: 1.5, shadowBlur: 14, shadowColor: 'rgba(0,0,0,.4)' }
-        }
-      }
-    ],
-    visualMap: {
-      min: 0, max: vmMax,
-      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
-      seriesIndex: [1], dimension: 2,
-      inRange: { color: p.ballColors, symbolSize: [5, 38] },
-      textStyle: { color: p.labelText }
-    }
+    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>行业关注指数：'+row.index.toFixed(0)+'<br/>独立事件：'+row.eventCount+'<br/>来源证据：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无合格事件';}},
+    visualMap:{min:0,max:100,left:14,bottom:8,text:['高','低'],calculable:false,inRange:{color:p.colors},textStyle:{color:p.label}},
+    series:[{type:'map',map:'china',roam:false,selectedMode:false,data:data,label:{show:false},itemStyle:{areaColor:p.empty,borderColor:p.border,borderWidth:.8},emphasis:{label:{show:true,color:p.tooltipText,fontWeight:700},itemStyle:{areaColor:p.colors[p.colors.length-1]}}}]
   });
-  chart.off('click');
-  chart.on('click', function(params){
-    if (!params || !params.name) return;
-    showDetail(GEO2SHORT[params.name] || params.name);
-  });
+  chart.off('click');chart.on('click',function(params){if(params&&params.name)showDetail(GEO2SHORT[params.name]||params.name);});
 }
-
+function renderStats() {
+  var events=VIEW.reduce(function(n,x){return n+x.eventCount;},0),reports=VIEW.reduce(function(n,x){return n+x.reportCount;},0),a=VIEW.reduce(function(n,x){return n+x.aCount;},0);
+  document.getElementById('s-events').textContent=events;document.getElementById('s-provinces').textContent=VIEW.length;document.getElementById('s-a').textContent=a;document.getElementById('s-reports').textContent=reports;
+}
+function renderScope(events,id,countId) {
+  var list=(events||[]).filter(function(e){return eventInRange(e,CUR_WINDOW.days,false)&&(CUR_THEME?(e.themes||[]).indexOf(CUR_THEME)!==-1:true);}).slice(0,12);
+  document.getElementById(countId).textContent='（'+list.length+'）';var box=document.getElementById(id);box.innerHTML='';
+  if(!list.length){box.textContent='当前筛选下暂无合格事件。';return;}
+  list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
+}
+function renderQuality() {
+  var s=RAW.stats,excluded=s.excludedC+s.excludedBlocked;
+  document.getElementById('quality-text').innerHTML='全档案共检查 <strong>'+s.totalDomesticReports+'</strong> 条国内报道；<strong>'+s.includedProvincialReports+'</strong> 条合格地域报道聚合为 <strong>'+s.provincialEvents+'</strong> 个独立事件。<strong>'+s.excludedC+'</strong> 条 C 级与 <strong>'+s.excludedBlocked+'</strong> 条禁止来源已隔离，不参与指数；另保留 <strong>'+s.nationalEvents+'</strong> 个全国性事件。';
+}
 function updateMeta() {
-  var m = document.querySelector('.meta');
-  if (m && AS_OF_STR) m.innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · ' + CUR_WINDOW.label + ' · 数据截至 ' + AS_OF_STR;
+  var label=CUR_THEME?' · '+CUR_THEME:'';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · 指数按当前窗口内最高地区归一为 100';
 }
-
-function applyWindow(w) {
-  if (!RAW) return;
-  CUR_WINDOW = w;
-  VIEW = computeWindow(w.days);
-  document.querySelectorAll('.win-tab').forEach(function(btn){
-    var v = btn.getAttribute('data-days');
-    btn.classList.toggle('active', String(w.days) === v);
-  });
-  renderTop10();
-  renderMap();
-  updateMeta();
-  // 详情开着时刷新到新窗口
-  var det = document.getElementById('detail');
-  if (det.classList.contains('show')) {
-    showDetail(document.getElementById('d-name').textContent);
-  }
+function refresh() {
+  if(!RAW)return;VIEW=computeView(CUR_WINDOW.days,false);PREVIOUS=computeView(CUR_WINDOW.days,true);
+  renderStats();renderRanking();renderMap();renderScope(RAW.nationalEvents,'national-list','national-count');renderScope(RAW.internationalEvents,'international-list','international-count');renderQuality();updateMeta();
+  document.getElementById('detail').classList.remove('show');
 }
-
-// 初始化时间范围切换
 document.querySelectorAll('.win-tab').forEach(function(btn){
   btn.addEventListener('click', function(){
-    var v = btn.getAttribute('data-days');
-    applyWindow({ label: btn.textContent, days: parseInt(v, 10) });
+    CUR_WINDOW={label:btn.textContent,days:parseInt(btn.getAttribute('data-days'),10)};
+    document.querySelectorAll('.win-tab').forEach(function(x){x.classList.toggle('active',x===btn);});refresh();
   });
 });
-
-// 暗色模式切换时重建图表
+document.getElementById('theme').addEventListener('change',function(){CUR_THEME=this.value;refresh();});
+document.getElementById('d-close').addEventListener('click',function(){document.getElementById('detail').classList.remove('show');});
+window.addEventListener('resize',function(){if(chart)chart.resize();});
 if (window.matchMedia) {
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ renderMap(); });
 }
-
-// 加载 geojson → 注册地图
 fetch('lib/china.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(geo){
-  geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
-  window.ChinaGeo = geo;
-  CENTROID = {};
-  geo.features.forEach(function(f){
-    var props = f.properties;
-    var short = GEO2SHORT[props.name];
-    if (!short || !(props.centroid || props.center)) return;
-    CENTROID[short] = props.centroid || props.center;   // DataV geojson 自带省几何中心,热力球定位用
-  });
-  echarts.registerMap('china', geo);
-  if (RAW) renderMap();
+  geo.features=geo.features.filter(function(f){return f.properties&&f.properties.name;});echarts.registerMap('china',geo);MAP_READY=true;if(RAW)renderMap();
 }).catch(function(){
-  document.getElementById('map-fallback').innerHTML = '地图数据加载失败，可用上方省份快速入口查看热点。';
+  document.getElementById('map-fallback').textContent='地图数据加载失败，可使用地区排名查看全部数据。';
 });
-
-// 加载热力数据 → 按默认窗口初始化
 fetch('heatmap-data.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(d){
-  RAW = d;
-  AS_OF_STR = d.asOf;
-  AS_OF_UTC = d.asOf ? parseUTC(d.asOf) : 0;
-  VIEW = computeWindow(CUR_WINDOW.days);
-  renderTop10();
-  document.getElementById('map-fallback').style.display = 'none';
-  if (window.ChinaGeo) renderMap();
-  updateMeta();
+  if(!d||d.version<2||!Array.isArray(d.events))throw new Error('schema');
+  RAW=d;AS_OF_STR=d.asOf;AS_OF_UTC=d.asOf?parseUTC(d.asOf):0;
+  var themes={};d.events.forEach(function(e){(e.themes||[]).forEach(function(t){themes[t]=true;});});
+  Object.keys(themes).sort().forEach(function(t){var option=document.createElement('option');option.value=t;option.textContent=t;document.getElementById('theme').appendChild(option);});
+  document.getElementById('map-fallback').style.display='none';refresh();
 }).catch(function(){
-  document.getElementById('map-fallback').innerHTML = '热力数据加载失败，请稍后刷新页面重试。';
-});
-
-document.getElementById('d-close').addEventListener('click', function(){
-  document.getElementById('detail').classList.remove('show');
+  document.getElementById('meta').textContent='事件索引暂时不可用';document.getElementById('map-fallback').textContent='数据加载失败，请稍后刷新页面重试。';
 });
 </script>
 </body>
@@ -2572,7 +2728,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <nav class="quick-nav" aria-label="主要栏目">
   <a class="primary" href="{latest_daily_href}">今日精选</a>
   <a href="#daily-list">日报档案</a>
-  <a href="heatmap.html">热点地图</a>
+  <a href="heatmap.html">行业关注地图</a>
   <a href="digital-trends.html">数字趋势</a>
   <a href="intern.html">实习</a>
   <a href="jobs.html">招聘</a>
@@ -3221,7 +3377,7 @@ def main():
     with open(heat_path, 'w', encoding='utf-8') as f:
         json.dump(heat_data, f, ensure_ascii=False, indent=2)
     st = heat_data['stats']
-    print(f'Heatmap data: {heat_path} | 国内 {st["totalDomestic"]} 条,归省 {st["provincialItems"]} 条,国际排除 {st["internationalExcluded"]} 条,最高热度 {st["maxHeat"]}')
+    print(f'Heatmap data V2: {heat_path} | 国内 {st["totalDomesticReports"]} 条,纳入地域 {st["includedProvincialReports"]} 条/{st["provincialEvents"]} 个事件,C级隔离 {st["excludedC"]} 条,禁止来源隔离 {st["excludedBlocked"]} 条')
     _audit_print(heat_audit)
     heat_html = build_heatmap_html()
     heat_html_path = os.path.join(SITE_DIR, 'heatmap.html')

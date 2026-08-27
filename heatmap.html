@@ -4,113 +4,182 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
-<title>文博热点地图 | 每日文博资讯</title>
-<meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<title>文博行业关注地图 | 每日文博资讯</title>
+<meta name="description" content="基于权威公开报道、独立事件与可解释指标生成的中国文博行业关注地图。">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">
-<meta property="og:title" content="文博热点地图 | 每日文博资讯">
-<meta property="og:description" content="全国文物博物馆、考古、文化遗产热点省份热度可视化">
+<meta property="og:title" content="文博行业关注地图 | 每日文博资讯">
+<meta property="og:description" content="从地区、事件、来源与趋势四个维度观察中国文博行业动态。">
 <style>
   :root {
-    --bg: #f6f5f1; --card: #ffffff; --text: #2b2b2b;
-    --muted: #8a867c; --border: #e5e2d9; --accent: #8a5a2b; --tag-bg: #f0ece2;
+    --bg:#f4f1eb; --card:#fffdf9; --text:#28231d; --muted:#786f64;
+    --border:#ded7ca; --accent:#8a4b27; --accent-soft:#f2e6da; --tag:#eee8de;
+    --good:#2f6b4f; --warn:#a15c16; --bad:#a33b34; --shadow:0 12px 36px rgba(75,55,35,.08);
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#17161a; --card:#22222a; --text:#ecebe6; --muted:#9a97a8; --border:#33323c; --accent:#c9a06a; --tag-bg:#2c2c36; }
+    :root { --bg:#171513; --card:#23201d; --text:#eee8df; --muted:#aaa095; --border:#3a342e; --accent:#d5a06f; --accent-soft:#392a20; --tag:#302b26; --good:#86c7a6; --warn:#e3ac69; --bad:#ef928b; --shadow:none; }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6;
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.65; }
+  button,select { font:inherit; }
+  button:focus-visible,select:focus-visible,a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  a { color:var(--accent); }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 22px 54px; }
+  header { padding:30px 0 20px; }
+  .back { display:inline-block; margin-bottom:14px; color:var(--accent); text-decoration:none; font-size:.86em; }
+  h1 { font-size:clamp(1.55rem,3vw,2.15rem); letter-spacing:-.02em; }
+  .lede { max-width:760px; margin-top:8px; color:var(--muted); font-size:.94em; }
+  .meta { margin-top:12px; color:var(--muted); font-size:.8em; }
+  .method-strip { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 18px; padding:12px 15px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--muted); font-size:.78em; }
+  .method-strip strong { color:var(--text); }
+  .toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:16px; }
+  .win-tabs { display:flex; gap:7px; flex-wrap:wrap; }
+  .win-tab { padding:7px 15px; border:1px solid var(--border); border-radius:999px; color:var(--text); background:var(--card); cursor:pointer; }
+  .win-tab.active { color:#fff; border-color:var(--accent); background:var(--accent); }
+  .theme-control { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:.84em; }
+  .theme-control select { max-width:170px; padding:7px 30px 7px 10px; border:1px solid var(--border); border-radius:9px; background:var(--card); color:var(--text); }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
+  .stat { padding:14px 15px; background:var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:var(--shadow); }
+  .stat strong { display:block; font-size:1.45em; line-height:1.15; color:var(--accent); }
+  .stat span { display:block; margin-top:5px; color:var(--muted); font-size:.76em; }
+  .workspace { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(330px,.85fr); gap:16px; align-items:start; }
+  .panel { background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; }
+  .panel-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:15px 17px 0; }
+  .panel-head h2 { font-size:1em; }
+  .panel-head span { color:var(--muted); font-size:.75em; }
+  #map { width:100%; height:520px; }
+  .map-note { padding:0 17px 15px; color:var(--muted); font-size:.74em; }
+  .rank-scroll { max-height:500px; overflow:auto; padding:8px 10px 12px; }
+  table { width:100%; border-collapse:collapse; font-size:.79em; }
+  th { position:sticky; top:0; z-index:2; padding:8px 7px; color:var(--muted); background:var(--card); text-align:right; font-weight:500; border-bottom:1px solid var(--border); }
+  th:nth-child(2) { text-align:left; }
+  td { padding:9px 7px; text-align:right; border-bottom:1px solid var(--border); white-space:nowrap; }
+  td:nth-child(2) { text-align:left; }
+  .province-btn { border:0; background:none; color:var(--text); cursor:pointer; font-weight:650; }
+  .province-btn:hover { color:var(--accent); }
+  .rank { color:var(--muted); }
+  .index { color:var(--accent); font-weight:750; }
+  .trend-up { color:var(--good); } .trend-down { color:var(--bad); } .trend-flat { color:var(--muted); }
+  .detail { display:none; margin-top:16px; padding:20px; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); }
+  .detail.show { display:block; }
+  .detail-head { display:flex; align-items:flex-start; gap:12px; flex-wrap:wrap; }
+  .detail-title { font-size:1.28em; }
+  .detail-metrics { color:var(--muted); font-size:.82em; }
+  .detail-close { margin-left:auto; border:1px solid var(--border); border-radius:8px; padding:5px 9px; color:var(--muted); background:transparent; cursor:pointer; }
+  .event-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:14px; }
+  .event { padding:14px; border:1px solid var(--border); border-radius:12px; background:color-mix(in srgb,var(--card) 88%,var(--tag)); }
+  .event h3 { font-size:.92em; line-height:1.5; }
+  .event h3 a { color:var(--text); text-decoration:none; }
+  .event h3 a:hover { color:var(--accent); }
+  .badges { display:flex; gap:5px; flex-wrap:wrap; margin:8px 0 6px; }
+  .badge { display:inline-block; padding:2px 7px; border-radius:999px; background:var(--tag); color:var(--muted); font-size:.68em; }
+  .badge.a { color:var(--good); } .badge.b { color:var(--warn); } .badge.impact { color:var(--accent); }
+  .event-meta { color:var(--muted); font-size:.72em; }
+  .source-row { margin-top:6px; color:var(--muted); font-size:.7em; }
+  .source-row a { margin-right:7px; text-decoration:none; }
+  .followups { margin-top:8px; color:var(--muted); font-size:.73em; }
+  .followups summary { cursor:pointer; }
+  .followups a { display:block; margin-top:5px; text-decoration:none; }
+  .secondary-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
+  details.box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:14px 16px; }
+  details.box > summary { cursor:pointer; font-weight:700; }
+  .scope-list { margin-top:10px; }
+  .scope-item { padding:9px 0; border-bottom:1px dashed var(--border); }
+  .scope-item:last-child { border-bottom:0; }
+  .scope-item a { color:var(--text); text-decoration:none; font-size:.86em; }
+  .scope-item span { display:block; color:var(--muted); font-size:.7em; }
+  .quality { margin-top:16px; padding:16px; border:1px solid var(--border); border-left:4px solid var(--good); border-radius:12px; background:var(--card); }
+  .quality h2 { font-size:.95em; }
+  .quality p { margin-top:6px; color:var(--muted); font-size:.78em; }
+  .quality strong { color:var(--text); }
+  .formula { margin-top:10px; padding:10px 12px; border-radius:9px; background:var(--tag); color:var(--muted); font-size:.75em; }
+  .err { padding:34px 18px; color:var(--muted); text-align:center; }
+  footer { margin-top:24px; padding:22px 0; color:var(--muted); text-align:center; font-size:.75em; border-top:1px solid var(--border); }
+  @media (max-width:850px) {
+    .workspace { grid-template-columns:1fr; }
+    .rank-panel { order:1; } .map-panel { order:2; }
+    .rank-scroll { max-height:360px; }
+    #map { height:430px; }
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 18px 40px; }
-  header { padding: 24px 0 14px; }
-  header h1 { font-size: 1.35em; }
-  .back { display: inline-block; margin-bottom: 10px; font-size: .85em; color: var(--accent); text-decoration: none; }
-  .back:hover { text-decoration: underline; }
-  #map { width: 100%; height: 55vh; min-height: 320px; background: transparent; }
-  .meta { font-size: .78em; color: var(--muted); margin: 6px 0 14px; }
-  .note { font-size: .78em; color: var(--muted); margin: 4px 0 14px; }
-  h2.sec { font-size: 1em; margin: 20px 0 10px; }
-  .win-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
-  .win-tab {
-    padding: 6px 14px; border-radius: 999px; font-size: .85em;
-    background: var(--tag-bg); border: 1px solid var(--border);
-    color: var(--text); cursor: pointer; transition: all .15s;
+  @media (max-width:620px) {
+    .wrap { padding:0 14px 40px; }
+    header { padding-top:20px; }
+    .stats { grid-template-columns:repeat(2,1fr); }
+    .event-list,.secondary-grid { grid-template-columns:1fr; }
+    .toolbar { align-items:flex-start; }
+    .theme-control { width:100%; justify-content:space-between; }
+    .theme-control select { flex:1; max-width:none; }
+    #map { height:370px; }
+    th:nth-child(5),td:nth-child(5) { display:none; }
   }
-  .win-tab:hover { background: var(--card); }
-  .win-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip {
-    padding: 6px 12px; border-radius: 999px; font-size: .85em;
-    background: var(--tag-bg); border: 1px solid var(--border);
-    cursor: pointer; transition: background .15s, transform .1s;
-  }
-  .chip:hover { background: var(--card); transform: translateY(-1px); }
-  .chip b { color: var(--accent); }
-  .chip .heat { color: var(--muted); font-weight: 400; margin-left: 3px; }
-  .detail {
-    display: none; margin-top: 16px; padding: 16px;
-    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  }
-  .detail.show { display: block; }
-  .detail .d-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .detail .d-name { font-size: 1.2em; font-weight: 700; }
-  .detail .d-heat { color: var(--accent); font-weight: 700; }
-  .detail .d-count { color: var(--muted); font-size: .85em; }
-  .detail .d-close { margin-left: auto; cursor: pointer; color: var(--muted); border: none; background: none; font-size: 1em; }
-  .detail .d-themes { margin: 6px 0 2px; font-size: .8em; color: var(--muted); }
-  .detail .d-themes .th {
-    display: inline-block; background: var(--tag-bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 1px 10px; margin: 2px 4px 2px 0;
-    color: var(--text); font-size: inherit; font-family: inherit; line-height: 1.7;
-    cursor: pointer; transition: all .15s;
-  }
-  .detail .d-themes .th:hover { border-color: var(--accent); }
-  .detail .d-themes .th.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .detail .d-items { margin-top: 12px; }
-  .detail .d-items .it { padding: 9px 0; border-bottom: 1px dashed var(--border); }
-  .detail .d-items .it:last-child { border-bottom: none; }
-  .detail .d-items a { color: var(--accent); text-decoration: none; font-size: .9em; }
-  .detail .d-items a:hover { text-decoration: underline; }
-  .detail .d-items .it-date { display: block; font-size: .75em; color: var(--muted); margin-top: 2px; }
-  .err { color: var(--muted); text-align: center; padding: 24px 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <a class="back" href="./">← 返回首页</a>
-    <h1>🗺️ 中国文博热点地图</h1>
-    <p class="meta">按每日日报标题🔥加权、随时间衰减生成 · 点击省份或热力球查看当地全部报道</p>
+    <h1>文博行业关注地图</h1>
+    <p class="lede">从权威公开报道中识别独立事件，观察各地区近期值得行业从业者关注的考古、博物馆、展览、保护与数字化动向。</p>
+    <p class="meta" id="meta">正在读取事件索引…</p>
   </header>
-  <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-  <p class="note">热力值 = 该省相关报道热度(🔥加权)随时间衰减后的累加 · 热力球越大越红热度越高，越小越浅热度越低 · 仅统计国内报道</p>
-  <p class="note">🔥 = 一般关注 · 🔥🔥 = 较高关注 · 🔥🔥🔥 = 高关注 · 热度仅反映本站日报报道的相对关注度，不代表官方统计或社会整体关注度</p>
-
-  <div class="win-tabs" id="wintabs">
-    <button class="win-tab" data-days="7">近7天</button>
-    <button class="win-tab active" data-days="30">近30天</button>
-    <button class="win-tab" data-days="90">近90天</button>
+  <div class="method-strip">
+    <span><strong>口径</strong> 独立事件，不重复累计连续报道</span>
+    <span><strong>信源</strong> 仅 A/B 级进入指数</span>
+    <span><strong>地域</strong> 主要发生地计分，关联地区只作说明</span>
+    <span><strong>性质</strong> 本站行业关注指数，不代表社会舆情</span>
   </div>
-
-  <h2 class="sec">🔥 热点 Top 10</h2>
-  <div class="chips" id="chips"></div>
-
-  <div class="detail" id="detail">
-    <div class="d-head">
-      <span class="d-name" id="d-name"></span>
-      <span class="d-heat" id="d-heat"></span>
-      <span class="d-count" id="d-count"></span>
-      <button class="d-close" id="d-close" aria-label="关闭">✕</button>
+  <div class="toolbar">
+    <div class="win-tabs" aria-label="时间范围">
+      <button class="win-tab" data-days="7">近7天</button>
+      <button class="win-tab active" data-days="30">近30天</button>
+      <button class="win-tab" data-days="90">近90天</button>
     </div>
-    <div class="d-themes" id="d-themes"></div>
-    <div class="d-items" id="d-items"></div>
+    <label class="theme-control">主题
+      <select id="theme"><option value="">全部主题</option></select>
+    </label>
   </div>
+  <section class="stats" aria-label="当前窗口概况">
+    <div class="stat"><strong id="s-events">—</strong><span>独立地域事件</span></div>
+    <div class="stat"><strong id="s-provinces">—</strong><span>有有效事件的地区</span></div>
+    <div class="stat"><strong id="s-a">—</strong><span>A 级证据事件</span></div>
+    <div class="stat"><strong id="s-reports">—</strong><span>合格报道证据</span></div>
+  </section>
+  <section class="workspace">
+    <div class="panel map-panel">
+      <div class="panel-head"><h2>地区关注分布</h2><span>相对指数 0—100</span></div>
+      <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
+      <p class="map-note">颜色越深，表示当前时间范围内的事件影响、证据强度、独立来源与时效综合值越高。无色不等于没有文博活动，只表示本站没有足够的合格证据。</p>
+    </div>
+    <div class="panel rank-panel">
+      <div class="panel-head"><h2>地区关注排名</h2><span id="rank-note">点击地区查看证据</span></div>
+      <div class="rank-scroll">
+        <table>
+          <thead><tr><th>#</th><th>地区</th><th>指数</th><th>事件</th><th>证据</th><th>趋势</th></tr></thead>
+          <tbody id="ranking"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="detail" id="detail" aria-live="polite">
+    <div class="detail-head">
+      <div><h2 class="detail-title" id="d-name"></h2><p class="detail-metrics" id="d-metrics"></p></div>
+      <button class="detail-close" id="d-close" aria-label="关闭地区详情">关闭</button>
+    </div>
+    <div class="event-list" id="d-events"></div>
+  </section>
+  <section class="secondary-grid">
+    <details class="box"><summary>全国性政策与对外合作 <span id="national-count"></span></summary><div class="scope-list" id="national-list"></div></details>
+    <details class="box"><summary>国际文博观察 <span id="international-count"></span></summary><div class="scope-list" id="international-list"></div></details>
+  </section>
+  <section class="quality">
+    <h2>数据质量与审计</h2>
+    <p id="quality-text">正在计算信源与地域质量…</p>
+    <div class="formula"><strong>指数公式：</strong>事件影响 35% + 证据强度 30% + 独立来源 20% + 时效 15%。同一事件的后续报道合并，标题中的“🔥”不再参与计算。<a href="sources.html">查看信源与方法</a></div>
+  </section>
+  <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
-
 <script src="lib/echarts.min.js"></script>
 <script>
-// 简称 → geojson 全称(与 china.json 的 properties.name 一一对应)
 var SHORT2GEO = {
   '北京':'北京市','天津':'天津市','河北':'河北省','山西':'山西省','内蒙古':'内蒙古自治区',
   '辽宁':'辽宁省','吉林':'吉林省','黑龙江':'黑龙江省','上海':'上海市','江苏':'江苏省',
@@ -122,316 +191,179 @@ var SHORT2GEO = {
 };
 var GEO2SHORT = {};
 for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
-
-var RAW = null;         // heatmap-data.json 全量数据
-var VIEW = null;        // 当前时间窗口重算后的省份列表
-var chart = null;
-var CUR_WINDOW = { label: '近30天', days: 30 };   // 默认窗口(与 HTML 中 active 一致)
-var CUR_THEME = null;   // 省份摘要的当前主题筛选(null=全部);切时间窗口时保留
-var AS_OF_UTC = 0;
-var AS_OF_STR = '';
-var CENTROID = {};   // 简称 → [lng,lat] 省几何中心(取自 china.json properties.centroid)
-
-// 时间窗口定义
-var WINDOWS = [
-  { key: '7d',  label: '近7天',   days: 7 },
-  { key: '30d', label: '近30天',  days: 30 },
-  { key: '90d', label: '近90天', days: 90 }
-];
-
+var RAW=null, VIEW=[], PREVIOUS=[], chart=null, MAP_READY=false;
+var CUR_WINDOW={label:'近30天',days:30}, CUR_THEME='';
+var AS_OF_UTC=0, AS_OF_STR='';
 function parseUTC(s) {
   var a = s.split('-');
   return Date.UTC(+a[0], +a[1] - 1, +a[2]);
 }
-
 function isDark() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
-
 function palette() {
   var dark = isDark();
   return {
-    // 热力球色带(低→高: 浅→深红,深浅两种主题均适配;低端也保证与底色地图可区分)
-    ballColors: dark
-      ? ['#5c5148', '#8a5f33', '#c07a2c', '#e0483a', '#ff5f5f']
-      : ['#e8ddd0', '#f2b28c', '#e8782e', '#d23a1f', '#a01313'],
-    mapFill: dark ? '#26262f' : '#eae7df',      // 底色地图统一中性色,不随热力变色
-    mapBorder: dark ? 'rgba(255,255,255,.14)' : 'rgba(255,255,255,.7)',
-    ballBorder: dark ? 'rgba(255,255,255,.45)' : 'rgba(255,255,255,.85)', // 球描边,贴地色时也能被识别
-    ballLabel: dark ? '#d5d2d8' : '#5a544c',
+    colors: dark ? ['#342d27','#65503d','#9a6743','#ce7046','#ef8b63'] : ['#eee8df','#e5c5aa','#d79568','#bd633d','#884226'],
+    empty: dark ? '#292622' : '#ebe7df', border: dark ? '#4a443e' : '#fffdf9',
     tooltipBg: dark ? '#22222a' : '#ffffff',
-    tooltipText: dark ? '#eee' : '#333',
-    labelText: dark ? '#999' : '#777'
+    tooltipText: dark ? '#eee' : '#333', label: dark ? '#c9c0b6' : '#5f554b'
   };
 }
-
-// 按时间窗口重算省份热力(与 build.py 同公式: weight × DECAY^天数 / 省份数)
-function computeWindow(days) {
+function eventScore(event) {
+  var age=Math.max(0,(AS_OF_UTC-parseUTC(event.lastDate))/86400000);
+  var recency=100*Math.pow(RAW.decay||.93,age);
+  return event.impact*.35+event.evidence*.30+event.breadth*.20+recency*.15;
+}
+function eventInRange(event, days, previous) {
+  var age=(AS_OF_UTC-parseUTC(event.lastDate))/86400000;
+  var start=previous?days:0, end=previous?days*2:days;
+  return age>=start && age<end;
+}
+function computeView(days, previous) {
   var byName = {};
-  RAW.provinces.forEach(function(p){
-    var heat = 0, count = 0, items = [];
-    p.items.forEach(function(it){
-      var since = (AS_OF_UTC - parseUTC(it.date)) / 86400000;
-      if (days !== null && since >= days) return;   // 窗口外报道跳过
-      heat += it.weight * Math.pow(0.93, since) / it.pcount;
-      count += 1;
-      items.push(it);
-    });
-    if (count > 0) byName[p.name] = { name: p.name, heat: heat, count: count, items: items };
+  (RAW.events||[]).forEach(function(event){
+    if (!eventInRange(event,days,previous)) return;
+    if (CUR_THEME && (event.themes||[]).indexOf(CUR_THEME)===-1) return;
+    var name=event.primaryProvince;
+    if (!name) return;
+    if (!byName[name]) byName[name]={name:name,raw:0,eventCount:0,reportCount:0,evidenceCount:0,aCount:0,confidenceTotal:0,events:[]};
+    var row=byName[name], score=eventScore(event);
+    row.raw+=score; row.eventCount+=1; row.reportCount+=event.reportCount;
+    row.evidenceCount+=event.sourceCount; row.aCount+=event.sourceTier==='A'?1:0;
+    row.confidenceTotal+=event.locationConfidence; row.events.push({event:event,score:score});
   });
-  var list = [];
-  for (var k in byName) list.push(byName[k]);
-  list.sort(function(a, b){ return b.heat - a.heat; });
+  var list=Object.keys(byName).map(function(k){ return byName[k]; });
+  var maxRaw=list.reduce(function(m,x){return Math.max(m,x.raw);},0);
+  list.forEach(function(row){
+    row.index=maxRaw?row.raw/maxRaw*100:0;
+    row.confidence=row.eventCount?row.confidenceTotal/row.eventCount:0;
+    row.events.sort(function(a,b){return b.score-a.score;});
+  });
+  list.sort(function(a,b){return b.raw-a.raw;});
   return list;
 }
-
 function findProvince(name) {
-  var v = VIEW || [];
-  for (var i = 0; i < v.length; i++) if (v[i].name === name) return v[i];
+  for (var i=0;i<VIEW.length;i++) if (VIEW[i].name===name) return VIEW[i];
   return null;
 }
-
-function showDetail(shortName) {
-  var prov = findProvince(shortName);
-  var det = document.getElementById('detail');
-  if (!prov) { det.classList.remove('show'); return; }
-  document.getElementById('d-name').textContent = prov.name;
-  document.getElementById('d-heat').textContent = '热度 ' + prov.heat.toFixed(2);
-  // 主题 chips:统计该省当前窗口报道的归一化主题大类频次,点击可筛选
-  var thCount = {};
-  prov.items.forEach(function(it){
-    (it.themes || []).forEach(function(t){ thCount[t] = (thCount[t] || 0) + 1; });
-  });
-  var themesBox = document.getElementById('d-themes');
-  var thHtml = '<button class="th' + (CUR_THEME === null ? ' on' : '') + '" data-t="__all__">全部</button>';
-  for (var t in thCount) {
-    if (!Object.prototype.hasOwnProperty.call(thCount, t)) continue;
-    thHtml += '<button class="th' + (CUR_THEME === t ? ' on' : '') + '" data-t="' + t + '">' + t + ' ×' + thCount[t] + '</button>';
-  }
-  themesBox.innerHTML = thHtml ? '主要主题：' + thHtml : '';
-  themesBox.querySelectorAll('.th').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var t = btn.getAttribute('data-t');
-      CUR_THEME = (t === '__all__' || t === CUR_THEME) ? null : t;  // 再点同主题=取消筛选
-      showDetail(shortName);   // 重开,刷新 chips 激活态与列表
-    });
-  });
-  // 按当前主题筛选(数据已由 build.py 归一化,纯前端过滤,无需重分类)
-  var filtered = CUR_THEME
-    ? prov.items.filter(function(it){ return (it.themes || []).indexOf(CUR_THEME) !== -1; })
-    : prov.items;
-  document.getElementById('d-count').textContent = CUR_THEME
-    ? filtered.length + ' / ' + prov.count + ' 条报道 · ' + CUR_THEME
-    : prov.count + ' 条报道';
-  // 高🔥新闻置顶(weight 降序,同权按日期新→旧)
-  var sorted = filtered.slice().sort(function(a, b){
-    if (b.weight !== a.weight) return b.weight - a.weight;
-    return b.date < a.date ? -1 : (b.date > a.date ? 1 : 0);
-  });
-  var box = document.getElementById('d-items');
-  box.innerHTML = '';
-  sorted.forEach(function(it){
-    var div = document.createElement('div');
-    div.className = 'it';
-    var a = document.createElement('a');
-    a.href = it.url; a.textContent = it.title;
-    var d = document.createElement('span');
-    d.className = 'it-date'; d.textContent = it.date;
-    div.appendChild(a); div.appendChild(d);
-    box.appendChild(div);
-  });
-  det.classList.add('show');
-  det.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+function badge(text, cls) {
+  var span=document.createElement('span'); span.className='badge '+(cls||''); span.textContent=text; return span;
 }
-
-function renderTop10() {
-  var box = document.getElementById('chips');
-  box.innerHTML = '';
-  var top = (VIEW || []).slice(0, 10);
-  if (!top.length) {
-    box.innerHTML = '<div class="err">该时间段暂无热点数据，换个时间范围试试。</div>';
-    return;
+function eventCard(entry) {
+  var event=entry.event, article=document.createElement('article'); article.className='event';
+  var h=document.createElement('h3'), link=document.createElement('a'); link.href=event.reports[0].url; link.textContent=event.title;
+  h.appendChild(link); article.appendChild(h);
+  var badges=document.createElement('div'); badges.className='badges';
+  badges.appendChild(badge(event.impactLabel+'影响','impact'));
+  badges.appendChild(badge(event.sourceTier+'级证据',event.sourceTier.toLowerCase()));
+  badges.appendChild(badge(event.primaryTheme));
+  badges.appendChild(badge('指数 '+entry.score.toFixed(0)));
+  article.appendChild(badges);
+  var meta=document.createElement('p'); meta.className='event-meta';
+  meta.textContent=event.lastDate+' · '+event.sourceCount+' 个独立来源 · 地理置信度 '+Math.round(event.locationConfidence*100)+'%'+(event.relatedProvinces.length?' · 关联 '+event.relatedProvinces.join('、'):'');
+  article.appendChild(meta);
+  var sourceRow=document.createElement('p'); sourceRow.className='source-row'; sourceRow.appendChild(document.createTextNode('来源：'));
+  event.sources.slice(0,4).forEach(function(source){var a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener';a.textContent=source.name+'（'+source.tier+'）';sourceRow.appendChild(a);});
+  article.appendChild(sourceRow);
+  if (event.reports.length>1) {
+    var details=document.createElement('details'); details.className='followups';
+    var summary=document.createElement('summary'); summary.textContent='查看 '+event.reports.length+' 条连续报道'; details.appendChild(summary);
+    event.reports.forEach(function(report){ var a=document.createElement('a'); a.href=report.url; a.textContent=report.date+'｜'+report.title; details.appendChild(a); });
+    article.appendChild(details);
   }
-  top.forEach(function(p){
-    var chip = document.createElement('button');
-    chip.className = 'chip';
-    chip.innerHTML = '<b>' + p.name + '</b> <span class="heat">' + p.heat.toFixed(1) + '</span>';
-    chip.onclick = function(){ showDetail(p.name); };
-    box.appendChild(chip);
+  return article;
+}
+function showDetail(name) {
+  var row=findProvince(name), box=document.getElementById('detail');
+  if(!row){box.classList.remove('show');return;}
+  document.getElementById('d-name').textContent=row.name+'｜行业关注指数 '+row.index.toFixed(0);
+  document.getElementById('d-metrics').textContent=row.eventCount+' 个独立事件 · '+row.reportCount+' 条合格报道 · '+row.evidenceCount+' 个来源证据 · 平均地理置信度 '+Math.round(row.confidence*100)+'%';
+  var list=document.getElementById('d-events'); list.innerHTML=''; row.events.forEach(function(entry){list.appendChild(eventCard(entry));});
+  box.classList.add('show'); box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function trendFor(row) {
+  var span=document.createElement('span');
+  var archiveDays=RAW.start?Math.floor((AS_OF_UTC-parseUTC(RAW.start))/86400000)+1:0;
+  if(archiveDays<CUR_WINDOW.days*2){span.className='trend-flat';span.textContent='基线不足';return span;}
+  var old=null; for(var i=0;i<PREVIOUS.length;i++) if(PREVIOUS[i].name===row.name) old=PREVIOUS[i];
+  if(!old||old.raw===0){span.className='trend-up';span.textContent='新进入';return span;}
+  var change=(row.raw-old.raw)/old.raw*100;
+  span.className=Math.abs(change)<5?'trend-flat':(change>0?'trend-up':'trend-down');
+  span.textContent=(change>0?'↑ ':change<0?'↓ ':'')+Math.abs(change).toFixed(0)+'%'; return span;
+}
+function renderRanking() {
+  var body=document.getElementById('ranking'); body.innerHTML='';
+  if(!VIEW.length){var tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=6;td.className='err';td.textContent='当前筛选下暂无合格地域事件。';tr.appendChild(td);body.appendChild(tr);return;}
+  VIEW.forEach(function(row,i){
+    var tr=document.createElement('tr');
+    [String(i+1),'',row.index.toFixed(0),String(row.eventCount),String(row.evidenceCount),''].forEach(function(text,idx){var td=document.createElement('td');td.textContent=text;if(idx===0)td.className='rank';if(idx===2)td.className='index';tr.appendChild(td);});
+    var btn=document.createElement('button');btn.className='province-btn';btn.textContent=row.name;btn.onclick=function(){showDetail(row.name);};tr.children[1].appendChild(btn);tr.children[5].appendChild(trendFor(row));body.appendChild(tr);
   });
 }
-
 function renderMap() {
-  if (!window.echarts || !window.ChinaGeo || !VIEW) {
-    document.getElementById('map-fallback').innerHTML = '地图组件加载失败，可用上方省份快速入口查看热点。';
+  if(!window.echarts||!MAP_READY){
+    document.getElementById('map-fallback').textContent='地图组件暂时不可用，可使用地区排名查看全部数据。';
     return;
   }
-  var p = palette();
-  var el = document.getElementById('map');
-  if (chart) chart.dispose();
-  chart = echarts.init(el);
-  var maxHeat = VIEW.length ? VIEW[0].heat : 0;
-  var vmMax = Math.max(1, Math.ceil(maxHeat * 1.05));
-  var labelMin = maxHeat * 0.15;   // 热度≥最大值15%的省常显名称,防几十个标签互相遮挡
-  // 球直径与 visualMap 的 symbolSize:[5,38] 同一线性插值 → 决定省名放球内还是球旁
-  var rOf = function(v){ return 5 + (v / vmMax) * 33; };
-  var LABEL_INSIDE_R = 26;   // symbolSize=球直径:直径≥26px(半径13,装得下2字10px省名)时省名装球内,否则小字标球旁
-  // 热力球数据:位置=各省几何中心(centroid),value=[lng, lat, heat]
-  var ballData = [];
-  VIEW.forEach(function(pr){
-    var c = CENTROID[pr.name];
-    if (!c) return;
-    var v = Math.round(pr.heat * 100) / 100;
-    ballData.push({
-      name: pr.name, value: [c[0], c[1], v],
-      // 大球:省名白字装进球内(深色描边+暗影保证在各种球色上都可读);小球放不下:小字标在球右侧,画面更干净
-      label: rOf(v) >= LABEL_INSIDE_R
-        ? { position: 'inside', color: '#fff', fontWeight: 700, fontSize: 10,
-            textBorderColor: 'rgba(0,0,0,.35)', textBorderWidth: 1,
-            textShadowColor: 'rgba(0,0,0,.5)', textShadowBlur: 2 }
-        : { position: 'right', distance: 4, color: p.ballLabel, fontSize: 9,
-            fontWeight: 400, opacity: .85 }
-    });
-  });
+  var p=palette(),el=document.getElementById('map');if(chart)chart.dispose();chart=echarts.init(el);
+  var data=VIEW.map(function(row){return{name:SHORT2GEO[row.name]||row.name,value:+row.index.toFixed(1),events:row.eventCount,evidence:row.evidenceCount};});
   chart.setOption({
-    backgroundColor: 'transparent',
-    tooltip: {
-      trigger: 'item', backgroundColor: p.tooltipBg, borderColor: 'rgba(0,0,0,.1)',
-      textStyle: { color: p.tooltipText, fontSize: 13 },
-      formatter: function(params){
-        var short = GEO2SHORT[params.name] || params.name;
-        var d = findProvince(short);
-        if (!d) return '<b>' + params.name + '</b><br/>该时间段暂无数据';
-        return '<b>' + d.name + '</b><br/>热度：' + d.heat.toFixed(2) + '<br/>报道：' + d.count + ' 条';
-      }
-    },
-    geo: {
-      // 关键:为 scatter 提供 'geo' 坐标系。ECharts 的 map 系列不提供可被其他系列引用的坐标系,
-      // 无 geo 组件时 scatter 拿不到坐标→点不绘制(2026-08-21 修"看不到球"根因)。
-      // 本组件透明+silent,只作坐标系统,视觉/悬停/点击全部交给 map 系列。
-      map: 'china', roam: false,
-      silent: true,
-      label: { show: false },
-      emphasis: { label: { show: false }, itemStyle: { areaColor: 'rgba(0,0,0,0)' } },
-      itemStyle: { areaColor: 'rgba(0,0,0,0)', borderColor: 'rgba(0,0,0,0)' },
-      zlevel: 0
-    },
-    series: [
-      {
-        // 底色地图:统一中性色,热力信息全部交给热力球(小面积省市不会被色块掩盖)
-        type: 'map', map: 'china', roam: false, selectedMode: false,
-        label: { show: false },
-        emphasis: {
-          // 划过省份不再高亮色块、不再弹大号省名(热力已由球的大小/颜色表达,2026-08-21 用户要求)
-          label: { show: false },
-          itemStyle: { areaColor: p.mapFill }
-        },
-        itemStyle: { borderColor: p.mapBorder, borderWidth: 0.6, areaColor: p.mapFill },
-        data: []
-      },
-      {
-        // 热力球:大小与颜色均由 heat 值映射(visualMap seriesIndex=[1] 只作用本系列)
-        name: '热点', type: 'scatter', coordinateSystem: 'geo', zlevel: 2,
-        symbol: 'circle', data: ballData,
-        label: {
-          // 位置/字号/颜色由每条数据自带的 label 覆盖:大球省名在球内、小球小字在球旁(2026-08-21 用户要求)
-          show: true,
-          formatter: function(p){ return p.value[2] >= labelMin ? p.name : ''; }
-        },
-        labelLayout: { hideOverlap: true },
-        itemStyle: { borderColor: p.ballBorder, borderWidth: 1, shadowBlur: 8, shadowColor: 'rgba(0,0,0,.25)' },
-        emphasis: {
-          label: { show: true, color: p.ballLabel, fontWeight: 700, fontSize: 13 },
-          itemStyle: { borderColor: '#fff', borderWidth: 1.5, shadowBlur: 14, shadowColor: 'rgba(0,0,0,.4)' }
-        }
-      }
-    ],
-    visualMap: {
-      min: 0, max: vmMax,
-      left: 12, bottom: 12, calculable: false, text: ['高', '低'],
-      seriesIndex: [1], dimension: 2,
-      inRange: { color: p.ballColors, symbolSize: [5, 38] },
-      textStyle: { color: p.labelText }
-    }
+    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>行业关注指数：'+row.index.toFixed(0)+'<br/>独立事件：'+row.eventCount+'<br/>来源证据：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无合格事件';}},
+    visualMap:{min:0,max:100,left:14,bottom:8,text:['高','低'],calculable:false,inRange:{color:p.colors},textStyle:{color:p.label}},
+    series:[{type:'map',map:'china',roam:false,selectedMode:false,data:data,label:{show:false},itemStyle:{areaColor:p.empty,borderColor:p.border,borderWidth:.8},emphasis:{label:{show:true,color:p.tooltipText,fontWeight:700},itemStyle:{areaColor:p.colors[p.colors.length-1]}}}]
   });
-  chart.off('click');
-  chart.on('click', function(params){
-    if (!params || !params.name) return;
-    showDetail(GEO2SHORT[params.name] || params.name);
-  });
+  chart.off('click');chart.on('click',function(params){if(params&&params.name)showDetail(GEO2SHORT[params.name]||params.name);});
 }
-
+function renderStats() {
+  var events=VIEW.reduce(function(n,x){return n+x.eventCount;},0),reports=VIEW.reduce(function(n,x){return n+x.reportCount;},0),a=VIEW.reduce(function(n,x){return n+x.aCount;},0);
+  document.getElementById('s-events').textContent=events;document.getElementById('s-provinces').textContent=VIEW.length;document.getElementById('s-a').textContent=a;document.getElementById('s-reports').textContent=reports;
+}
+function renderScope(events,id,countId) {
+  var list=(events||[]).filter(function(e){return eventInRange(e,CUR_WINDOW.days,false)&&(CUR_THEME?(e.themes||[]).indexOf(CUR_THEME)!==-1:true);}).slice(0,12);
+  document.getElementById(countId).textContent='（'+list.length+'）';var box=document.getElementById(id);box.innerHTML='';
+  if(!list.length){box.textContent='当前筛选下暂无合格事件。';return;}
+  list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
+}
+function renderQuality() {
+  var s=RAW.stats,excluded=s.excludedC+s.excludedBlocked;
+  document.getElementById('quality-text').innerHTML='全档案共检查 <strong>'+s.totalDomesticReports+'</strong> 条国内报道；<strong>'+s.includedProvincialReports+'</strong> 条合格地域报道聚合为 <strong>'+s.provincialEvents+'</strong> 个独立事件。<strong>'+s.excludedC+'</strong> 条 C 级与 <strong>'+s.excludedBlocked+'</strong> 条禁止来源已隔离，不参与指数；另保留 <strong>'+s.nationalEvents+'</strong> 个全国性事件。';
+}
 function updateMeta() {
-  var m = document.querySelector('.meta');
-  if (m && AS_OF_STR) m.innerHTML = '按每日日报标题🔥加权、随时间衰减生成 · ' + CUR_WINDOW.label + ' · 数据截至 ' + AS_OF_STR;
+  var label=CUR_THEME?' · '+CUR_THEME:'';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · 指数按当前窗口内最高地区归一为 100';
 }
-
-function applyWindow(w) {
-  if (!RAW) return;
-  CUR_WINDOW = w;
-  VIEW = computeWindow(w.days);
-  document.querySelectorAll('.win-tab').forEach(function(btn){
-    var v = btn.getAttribute('data-days');
-    btn.classList.toggle('active', String(w.days) === v);
-  });
-  renderTop10();
-  renderMap();
-  updateMeta();
-  // 详情开着时刷新到新窗口
-  var det = document.getElementById('detail');
-  if (det.classList.contains('show')) {
-    showDetail(document.getElementById('d-name').textContent);
-  }
+function refresh() {
+  if(!RAW)return;VIEW=computeView(CUR_WINDOW.days,false);PREVIOUS=computeView(CUR_WINDOW.days,true);
+  renderStats();renderRanking();renderMap();renderScope(RAW.nationalEvents,'national-list','national-count');renderScope(RAW.internationalEvents,'international-list','international-count');renderQuality();updateMeta();
+  document.getElementById('detail').classList.remove('show');
 }
-
-// 初始化时间范围切换
 document.querySelectorAll('.win-tab').forEach(function(btn){
   btn.addEventListener('click', function(){
-    var v = btn.getAttribute('data-days');
-    applyWindow({ label: btn.textContent, days: parseInt(v, 10) });
+    CUR_WINDOW={label:btn.textContent,days:parseInt(btn.getAttribute('data-days'),10)};
+    document.querySelectorAll('.win-tab').forEach(function(x){x.classList.toggle('active',x===btn);});refresh();
   });
 });
-
-// 暗色模式切换时重建图表
+document.getElementById('theme').addEventListener('change',function(){CUR_THEME=this.value;refresh();});
+document.getElementById('d-close').addEventListener('click',function(){document.getElementById('detail').classList.remove('show');});
+window.addEventListener('resize',function(){if(chart)chart.resize();});
 if (window.matchMedia) {
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ renderMap(); });
 }
-
-// 加载 geojson → 注册地图
 fetch('lib/china.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(geo){
-  geo.features = geo.features.filter(function(f){ return f.properties && f.properties.name; }); // 剔除空名"十段线"单元
-  window.ChinaGeo = geo;
-  CENTROID = {};
-  geo.features.forEach(function(f){
-    var props = f.properties;
-    var short = GEO2SHORT[props.name];
-    if (!short || !(props.centroid || props.center)) return;
-    CENTROID[short] = props.centroid || props.center;   // DataV geojson 自带省几何中心,热力球定位用
-  });
-  echarts.registerMap('china', geo);
-  if (RAW) renderMap();
+  geo.features=geo.features.filter(function(f){return f.properties&&f.properties.name;});echarts.registerMap('china',geo);MAP_READY=true;if(RAW)renderMap();
 }).catch(function(){
-  document.getElementById('map-fallback').innerHTML = '地图数据加载失败，可用上方省份快速入口查看热点。';
+  document.getElementById('map-fallback').textContent='地图数据加载失败，可使用地区排名查看全部数据。';
 });
-
-// 加载热力数据 → 按默认窗口初始化
 fetch('heatmap-data.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(d){
-  RAW = d;
-  AS_OF_STR = d.asOf;
-  AS_OF_UTC = d.asOf ? parseUTC(d.asOf) : 0;
-  VIEW = computeWindow(CUR_WINDOW.days);
-  renderTop10();
-  document.getElementById('map-fallback').style.display = 'none';
-  if (window.ChinaGeo) renderMap();
-  updateMeta();
+  if(!d||d.version<2||!Array.isArray(d.events))throw new Error('schema');
+  RAW=d;AS_OF_STR=d.asOf;AS_OF_UTC=d.asOf?parseUTC(d.asOf):0;
+  var themes={};d.events.forEach(function(e){(e.themes||[]).forEach(function(t){themes[t]=true;});});
+  Object.keys(themes).sort().forEach(function(t){var option=document.createElement('option');option.value=t;option.textContent=t;document.getElementById('theme').appendChild(option);});
+  document.getElementById('map-fallback').style.display='none';refresh();
 }).catch(function(){
-  document.getElementById('map-fallback').innerHTML = '热力数据加载失败，请稍后刷新页面重试。';
-});
-
-document.getElementById('d-close').addEventListener('click', function(){
-  document.getElementById('detail').classList.remove('show');
+  document.getElementById('meta').textContent='事件索引暂时不可用';document.getElementById('map-fallback').textContent='数据加载失败，请稍后刷新页面重试。';
 });
 </script>
 </body>

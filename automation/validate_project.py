@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Portable, deterministic checks for the native Codex publishing workflow."""
 import argparse
+import json
 import re
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -64,6 +65,41 @@ def today_cn():
     return datetime.now(timezone(timedelta(hours=8))).date()
 
 
+def check_heatmap():
+    """Validate the public industry-attention dataset and its source gate."""
+    path = ROOT / 'heatmap-data.json'
+    if not path.exists():
+        return ['missing heatmap-data.json']
+    try:
+        data = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f'invalid heatmap-data.json: {exc}']
+    errors = []
+    if data.get('version') != 2:
+        errors.append('heatmap-data.json must use schema version 2')
+    events = data.get('events')
+    if not isinstance(events, list):
+        return errors + ['heatmap-data.json events must be a list']
+    seen = set()
+    for event in events:
+        event_id = event.get('eventId', '')
+        if not event_id or event_id in seen:
+            errors.append(f'duplicate or missing heatmap event id: {event_id or "<empty>"}')
+        seen.add(event_id)
+        if event.get('sourceTier') not in ('A', 'B'):
+            errors.append(f'non-qualified heatmap event: {event_id}')
+        if not event.get('primaryProvince'):
+            errors.append(f'missing primary province: {event_id}')
+        confidence = event.get('locationConfidence')
+        if not isinstance(confidence, (int, float)) or not 0 < confidence <= 1:
+            errors.append(f'invalid location confidence: {event_id}')
+        for source in event.get('sources', []):
+            info = source_info(source.get('url', ''))
+            if info['blocked'] or info['tier'] not in ('A', 'B'):
+                errors.append(f'blocked source leaked into heatmap event {event_id}: {source.get("url", "")}')
+    return sorted(set(errors))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', help='YYYY-MM-DD; defaults to Asia/Shanghai today')
@@ -84,6 +120,7 @@ def main():
             errors.append(f'missing report HTML: {html_path.relative_to(ROOT)}')
     for path in paths:
         errors.extend(f'{path.relative_to(ROOT)}: {e}' for e in check_daily(path, strict=(not args.all or args.strict_all)))
+    errors.extend(check_heatmap())
     if errors:
         print('VALIDATION FAILED')
         print('\n'.join(sorted(set(errors))))
