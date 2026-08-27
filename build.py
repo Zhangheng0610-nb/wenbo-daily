@@ -15,9 +15,12 @@ if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8
 
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPORTS_DIR = os.path.join(SITE_DIR, 'reports')
-MD_DIR = os.path.join(os.path.dirname(SITE_DIR), '日报')
-JOBS_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'jobs.md')
-INTERN_MD = os.path.join(os.path.dirname(SITE_DIR), '招聘', 'intern.md')
+# The repository is self-contained. Keep a legacy fallback so the older
+# Windows/Claude checkout can still be built while the migration is staged.
+PROJECT_DIR = os.path.join(SITE_DIR, 'content') if os.path.isdir(os.path.join(SITE_DIR, 'content')) else os.path.dirname(SITE_DIR)
+MD_DIR = os.path.join(PROJECT_DIR, '日报')
+JOBS_MD = os.path.join(PROJECT_DIR, '招聘', 'jobs.md')
+INTERN_MD = os.path.join(PROJECT_DIR, '招聘', 'intern.md')
 
 WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
