@@ -28,7 +28,7 @@
   "description": "国内外文物博物馆、考古、文化遗产领域每日推送",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://zhangheng666.top/?q={search_term_string}",
+    "target": "https://zhangheng666.top/search.html?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -58,11 +58,9 @@
   header h1 { font-size: 1.6em; letter-spacing: .05em; }
   header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
   /* Search */
-  .search-wrap {
-    position: relative; margin-bottom: 20px;
-  }
+  .search-wrap { display: flex; gap: 8px; margin-bottom: 20px; }
   .search-wrap input {
-    width: 100%; padding: 12px 40px 12px 16px;
+    flex: 1; min-width: 0; padding: 12px 16px;
     font-size: .95em; border: 1px solid var(--border);
     border-radius: 24px; background: var(--card); color: var(--text);
     outline: none; transition: border-color .2s;
@@ -70,14 +68,12 @@
   }
   .search-wrap input:focus { border-color: var(--accent); }
   .search-wrap input::placeholder { color: var(--muted); opacity: .7; }
-  .search-wrap .clear {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: var(--muted); font-size: 1.2em;
-    cursor: pointer; display: none; line-height: 1; padding: 4px;
+  .search-submit {
+    flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px;
+    background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer;
+    transition: opacity .15s, transform .15s;
   }
-  .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
-  .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
-  .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
+  .search-submit:hover { opacity: .88; transform: translateY(-1px); }
   /* Section headers */
   .section-header {
     font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
@@ -183,12 +179,10 @@
   <a href="jobs.html">招聘</a>
 </nav>
 
-<div class="search-wrap">
-  <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off" aria-label="搜索新闻">
-  <button class="clear" id="clear" aria-label="清除">✕</button>
-</div>
-<div class="result-count" id="result-count"></div>
-<div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+<form class="search-wrap" action="search.html" method="get" role="search">
+  <input type="search" name="q" placeholder="🔍 输入关键词，查看全部相关文章" autocomplete="off" aria-label="搜索新闻" required>
+  <button class="search-submit" type="submit">搜索</button>
+</form>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">48 天</span></div>
 <div class="section-body">
@@ -662,108 +656,6 @@ function collapseActiveSection() {
     header.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 }
-(async function(){
-  const searchInput = document.getElementById('search');
-  const clearBtn = document.getElementById('clear');
-  const noResults = document.getElementById('no-results');
-  const resultCount = document.getElementById('result-count');
-  const cards = document.querySelectorAll('.day-card');
-
-  let searchData = null;
-  try {
-    const resp = await fetch('search-index.json');
-    if (resp.ok) searchData = await resp.json();
-  } catch(e) {}
-
-  function doSearch(q) {
-    q = q.trim().toLowerCase();
-    let visible = 0;
-
-    if (!q) {
-      cards.forEach(c => c.classList.remove('hidden'));
-      noResults.style.display = 'none';
-      resultCount.style.display = 'none';
-      clearBtn.style.display = 'none';
-      cards.forEach(c => {
-        const prev = c.querySelector('.match-preview');
-        if (prev) prev.remove();
-      });
-      return;
-    }
-
-    clearBtn.style.display = 'block';
-    const queryWords = q.split(/\s+/).filter(Boolean);
-
-    cards.forEach((card) => {
-      const href = card.getAttribute('href');
-      const cardText = card.textContent.toLowerCase();
-      const path = (href || '').replace(/^\.\//, '');
-      const record = searchData && searchData.find(r => r.path === path || (r.type === 'daily' && href && href.includes(r.date)));
-      let matched = false;
-      let previewText = '';
-      const searchable = [cardText, record && record.title, record && record.text]
-        .concat(record && record.items ? record.items.map(item =>
-          [item.title, item.body, item.commentary, (item.tags || []).join(' '), (item.sources || []).join(' ')].join(' ')) : [])
-        .filter(Boolean).join(' ').toLowerCase();
-
-      for (const w of queryWords) {
-        if (searchable.includes(w)) {
-          matched = true;
-          const idx = searchable.indexOf(w);
-          const start = Math.max(0, idx - 30);
-          const end = Math.min(searchable.length, idx + w.length + 50);
-          let snippet = searchable.substring(start, end);
-          if (start > 0) snippet = '…' + snippet;
-          if (end < searchable.length) snippet = snippet + '…';
-          const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-          previewText = snippet.replace(re, '<mark class="highlight">$1</mark>');
-          break;
-        }
-      }
-
-      if (matched) {
-        card.classList.remove('hidden');
-        visible++;
-        let prev = card.querySelector('.match-preview');
-        if (previewText) {
-          if (!prev) {
-            prev = document.createElement('div');
-            prev.className = 'match-preview';
-            card.appendChild(prev);
-          }
-          prev.innerHTML = previewText;
-        } else {
-          if (prev) prev.remove();
-        }
-      } else {
-        card.classList.add('hidden');
-        const prev = card.querySelector('.match-preview');
-        if (prev) prev.remove();
-      }
-    });
-
-    noResults.style.display = visible === 0 ? 'block' : 'none';
-    resultCount.style.display = 'block';
-    resultCount.textContent = `找到 ${visible} 个相关栏目`;
-  }
-
-  searchInput.addEventListener('input', function(){
-    doSearch(this.value);
-  });
-
-  clearBtn.addEventListener('click', function(){
-    searchInput.value = '';
-    doSearch('');
-    searchInput.focus();
-  });
-
-  const params = new URLSearchParams(location.search);
-  const q = params.get('q');
-  if (q) {
-    searchInput.value = q;
-    doSearch(q);
-  }
-})();
 </script>
 </body>
 </html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<title>搜索文博新闻 | 每日文博资讯</title>
+<meta name="description" content="搜索每日文博资讯中的考古、博物馆、文物保护、文化遗产和行业新闻。">
+<meta property="og:title" content="搜索文博新闻 | 每日文博资讯">
+<meta property="og:description" content="从每日文博资讯历史档案中集中检索相关报道。">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="每日文博资讯">
+<style>
+  :root {
+    --bg: #f5f0eb; --card: #fff; --text: #2c2416; --muted: #8b7355;
+    --accent: #8b4513; --tag-bg: #f0e6d3; --border: #e0d5c1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1815; --card: #252320; --text: #e8e0d0; --muted: #9b8b7a;
+      --accent: #d4a76a; --tag-bg: #2a2520; --border: #3a3530;
+    }
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.85;
+    padding: 16px; max-width: 720px; margin: 0 auto; font-size: 16px;
+  }
+  header {
+    text-align: center; padding: 20px 0 16px;
+    border-bottom: 2px solid var(--accent); margin-bottom: 20px;
+  }
+  header h1 { font-size: 1.3em; }
+  header .meta { color: var(--muted); font-size: .88em; margin-top: 6px; }
+  header a { color: var(--accent); }
+  h2.section {
+    font-size: 1.1em; color: var(--accent); margin: 28px 0 14px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.02em; margin: 20px 0 8px; }
+  p { margin: 8px 0; }
+  a { color: var(--accent); word-break: break-all; }
+  a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
+  blockquote {
+    border-left: 3px solid var(--accent); padding: 6px 14px;
+    margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
+    color: var(--muted); font-size: .95em;
+  }
+  .news-img {
+    max-width: 100%; border-radius: 8px; margin: 4px 0;
+    border: 1px solid var(--border);
+  }
+  .tag {
+    display: inline-block; font-size: .72em; padding: 2px 8px;
+    border-radius: 10px; margin-right: 4px; margin-bottom: 6px;
+    font-weight: 600; letter-spacing: .02em;
+	    background: var(--tag-bg); color: var(--muted);
+  }
+  .tag-考古 { background: #fce4d6; color: #a0522d; }
+  .tag-博物馆 { background: #dbe9f5; color: #2c5f8a; }
+  .tag-展览 { background: #e8dbf0; color: #6b3a8b; }
+  .tag-文物追索 { background: #fde0dc; color: #b03a2e; }
+  .tag-科技 { background: #ccfbf1; color: #0d6b5e; }
+  .tag-文化遗产 { background: #d9f0d1; color: #3d6b2e; }
+  .tag-国际 { background: #fef3c7; color: #8b6914; }
+	  .tag-世界遗产 { background: #fde8c8; color: #92400e; }
+	  .tag-政策 { background: #e2e8f0; color: #475569; }
+	  .tag-数字化 { background: #dbeafe; color: #1e40af; }
+	  .tag-文物保护 { background: #ffe4d6; color: #9a3412; }
+	  .tag-文物修复 { background: #fce7f3; color: #9d174d; }
+  a.tag { text-decoration: none; }
+  @media (prefers-color-scheme: dark) {
+    .tag-考古 { background: #3d2010; color: #e8a87c; }
+    .tag-博物馆 { background: #1a2d3d; color: #7ab8e0; }
+    .tag-展览 { background: #2a1a3d; color: #b88ada; }
+    .tag-文物追索 { background: #3d1a16; color: #e8786e; }
+    .tag-科技 { background: #0d332e; color: #5eeadb; }
+    .tag-文化遗产 { background: #1a3316; color: #7cc46e; }
+    .tag-国际 { background: #3d3010; color: #e8c84a; }
+	    .tag-世界遗产 { background: #3d2808; color: #fbbf24; }
+	    .tag-政策 { background: #1e293b; color: #94a3b8; }
+	    .tag-数字化 { background: #1e3a5f; color: #93c5fd; }
+	    .tag-文物保护 { background: #3d2010; color: #f97316; }
+	    .tag-文物修复 { background: #3d1028; color: #f472b6; }
+  }
+  .toc {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 18px; margin: 0 0 20px;
+  }
+  .toc summary {
+    font-size: 1em; color: var(--accent); cursor: pointer;
+    padding: 4px 0; user-select: none;
+  }
+  .toc ol {
+    margin: 10px 0 0 20px; font-size: .92em; line-height: 2;
+  }
+  .toc ol a {
+    color: var(--text); text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+  }
+  .toc ol a:hover { color: var(--accent); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .85em; }
+  td, th { border: 1px solid var(--border); padding: 7px 10px; }
+  strong { color: var(--accent); }
+  .top10-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: .88em; }
+  .top10-table thead th {
+    background: var(--accent); color: #fff; padding: 10px 12px;
+    text-align: left; font-weight: 600; border: none;
+  }
+  .top10-table tbody td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .top10-table tbody tr:hover { background: var(--tag-bg); }
+  .top10-table .rank {
+    font-weight: 700; font-size: 1.15em; color: var(--accent);
+    text-align: center; width: 36px;
+  }
+  .top10-table .news-title { font-weight: 600; }
+  .top10-table .date {
+    color: var(--muted); font-size: .82em; white-space: nowrap;
+    width: 60px;
+  }
+  .top10-table .sig { color: var(--muted); font-size: .85em; line-height: 1.5; }
+  footer {
+    text-align: center; padding: 28px 0 16px;
+    color: var(--muted); font-size: .78em;
+    border-top: 1px solid var(--border); margin-top: 24px;
+  }
+  footer a { color: var(--accent); }
+  #back-to-top {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--accent); color: #fff; border: none;
+    font-size: 1.3em; cursor: pointer; opacity: 0;
+    transition: opacity .25s; display: flex;
+    align-items: center; justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  #back-to-top.show { opacity: .85; }
+  #back-to-top:hover { opacity: 1; }
+  #reading-progress {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+    background: var(--accent); width: 0%; transition: width .1s;
+  }
+  .nav-prev-next {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin: 20px 0; flex-wrap: wrap;
+  }
+  .nav-prev-next a {
+    flex: 1; min-width: 120px; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 8px;
+    text-decoration: none; color: var(--text);
+    background: var(--card); font-size: .88em;
+    transition: border-color .15s;
+  }
+  .nav-prev-next a:hover { border-color: var(--accent); }
+  .nav-prev-next a.next { text-align: right; }
+  .nav-prev-next a .nav-label { color: var(--muted); font-size: .8em; }
+  .share-row { text-align: center; margin: 20px 0 8px; }
+  #share-btn {
+    background: var(--card); color: var(--accent);
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 8px 24px; font-size: .88em; cursor: pointer;
+    font-family: inherit;
+  }
+  #share-btn:hover { border-color: var(--accent); }
+  .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
+</style><style>
+  .search-head { text-align: left; padding-bottom: 14px; }
+  .search-head h1 { font-size: 1.35em; }
+  .search-head .back { font-size: .86em; }
+  .search-wrap { display: flex; gap: 8px; margin: 18px 0 10px; }
+  .search-wrap input { flex: 1; min-width: 0; padding: 11px 14px; border: 1px solid var(--border); border-radius: 24px; background: var(--card); color: var(--text); font: inherit; outline: none; }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-submit { flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px; background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer; }
+  .search-summary { color: var(--muted); font-size: .84em; margin: 12px 0 16px; }
+  .search-result { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin: 0 0 12px; }
+  .search-result h2 { font-size: 1em; line-height: 1.55; margin: 6px 0; }
+  .search-result h2 a { color: var(--text); text-decoration: none; }
+  .search-result h2 a:hover { color: var(--accent); }
+  .search-meta { color: var(--muted); font-size: .78em; }
+  .search-kind { display: inline-block; padding: 2px 7px; margin-right: 6px; border-radius: 9px; background: var(--tag-bg); color: var(--accent); }
+  .search-snippet { color: var(--muted); font-size: .86em; line-height: 1.65; margin: 6px 0; }
+  .search-source { color: var(--muted); font-size: .78em; margin-top: 8px; }
+  .search-source a { margin-right: 8px; }
+  .search-tag { display: inline-block; margin: 2px 5px 0 0; padding: 1px 6px; border-radius: 8px; background: var(--tag-bg); color: var(--muted); font-size: .72em; }
+  mark { background: #f0c040; color: inherit; border-radius: 2px; padding: 0 1px; }
+  .search-empty { text-align: center; color: var(--muted); padding: 42px 0; }
+  @media (max-width: 520px) {
+    .search-wrap { gap: 6px; }
+    .search-submit { padding: 0 13px; }
+    .search-result { padding: 13px 14px; }
+  }
+</style>
+</head>
+<body>
+<header class="search-head">
+  <p><a class="back" href="index.html">← 返回首页</a></p>
+  <h1>🔎 搜索文博新闻</h1>
+  <p class="meta">从日报、周报、月报及招聘档案中集中检索</p>
+</header>
+
+<main>
+  <form class="search-wrap" action="search.html" method="get" role="search">
+    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词" required>
+    <button class="search-submit" type="submit">搜索</button>
+  </form>
+  <p id="summary" class="search-summary">请输入关键词开始搜索。</p>
+  <section id="results" aria-live="polite"><div class="search-empty">正在加载搜索索引…</div></section>
+</main>
+
+<footer>
+  <p><a href="index.html">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="sources.html">信源与方法</a></p>
+</footer>
+
+<script>
+const queryInput = document.getElementById('query');
+const summary = document.getElementById('summary');
+const results = document.getElementById('results');
+const typeLabels = {daily: '日报', weekly: '周报', monthly: '月报', jobs: '招聘', intern: '实习'};
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(ch) {
+    return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[ch];
+  });
+}
+function escapeRegExp(value) {
+  const slash = String.fromCharCode(92);
+  const special = '.^$*+?()[]{}|' + slash;
+  return Array.from(value).map(function(ch) { return special.includes(ch) ? slash + ch : ch; }).join('');
+}
+function highlight(value, words) {
+  let out = escapeHtml(value);
+  words.slice().sort((a, b) => b.length - a.length).forEach(function(word) {
+    if (!word) return;
+    const safe = escapeHtml(word);
+    out = out.replace(new RegExp('(' + escapeRegExp(safe) + ')', 'gi'), '<mark>$1</mark>');
+  });
+  return out;
+}
+function compact(value) { return String(value || '').toLowerCase().replace(/[^0-9a-z\u4e00-\u9fff]+/g, ''); }
+function sourceList(sources) {
+  return (Array.isArray(sources) ? sources : []).map(function(source) {
+    const item = typeof source === 'string' ? {name: source, url: ''} : source;
+    const name = escapeHtml(item.name || '');
+    return item.url ? '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+  }).filter(Boolean).join(' · ');
+}
+function itemText(item) {
+  return [item.title, item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
+}
+function matches(text, words) {
+  const lower = String(text || '').toLowerCase();
+  return words.every(function(word) { return lower.includes(word); });
+}
+function snippet(text, words) {
+  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!clean) return '';
+  const lower = clean.toLowerCase();
+  const hit = words.map(function(word) { return lower.indexOf(word); }).filter(function(index) { return index >= 0; }).sort(function(a, b) { return a - b; })[0] || 0;
+  const start = Math.max(0, hit - 48);
+  const end = Math.min(clean.length, start + 180);
+  return (start > 0 ? '…' : '') + highlight(clean.slice(start, end), words) + (end < clean.length ? '…' : '');
+}
+function renderHit(hit, words) {
+  const record = hit.record;
+  const item = hit.item;
+  const title = item ? item.title : record.title;
+  const href = record.path + (item && item.id ? '#' + item.id : '');
+  const body = item ? (item.body || item.commentary || item.progress || '') : (record.text || '');
+  const tags = item && Array.isArray(item.tags) ? item.tags.map(function(tag) { return '<span class="search-tag">#' + escapeHtml(tag) + '</span>'; }).join('') : '';
+  const sources = item ? sourceList(item.sources) : '';
+  return '<article class="search-result">' +
+    '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
+    '<h2><a href="' + escapeHtml(href) + '">' + highlight(title, words) + '</a></h2>' +
+    (body ? '<p class="search-snippet">' + snippet(body, words) + '</p>' : '') +
+    (tags ? '<div>' + tags + '</div>' : '') +
+    (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
+    '</article>';
+}
+function renderSearch(data, rawQuery) {
+  const query = String(rawQuery || '').trim().toLowerCase();
+  queryInput.value = rawQuery || '';
+  if (!query) {
+    summary.textContent = '请输入关键词开始搜索。';
+    results.innerHTML = '<div class="search-empty">搜索日报、周报、月报及招聘档案中的完整关键词。</div>';
+    return;
+  }
+  const words = query.split(/\s+/).filter(Boolean);
+  const hits = [];
+  const seen = new Set();
+  const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
+  records.forEach(function(record) {
+    const items = Array.isArray(record.items) ? record.items : [];
+    if (items.length) {
+      items.forEach(function(item) {
+        if (!matches(itemText(item), words)) return;
+        const key = compact(item.title) || (record.path + (item.id || ''));
+        if (seen.has(key)) return;
+        seen.add(key);
+        hits.push({record: record, item: item});
+      });
+    } else if (matches([record.title, record.text].join(' '), words)) {
+      const key = 'page:' + record.path;
+      if (!seen.has(key)) {
+        seen.add(key);
+        hits.push({record: record, item: null});
+      }
+    }
+  });
+  summary.textContent = '找到 ' + hits.length + ' 条匹配新闻（已合并重复标题，优先显示最新记录）';
+  results.innerHTML = hits.length ? hits.map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配新闻。可以换一个更具体或更常见的关键词。</div>';
+}
+
+const params = new URLSearchParams(location.search);
+const initialQuery = params.get('q') || '';
+fetch('search-index.json').then(function(response) {
+  if (!response.ok) throw new Error('search index unavailable');
+  return response.json();
+}).then(function(data) {
+  renderSearch(data, initialQuery);
+}).catch(function() {
+  summary.textContent = '搜索索引暂时不可用。';
+  results.innerHTML = '<div class="search-empty">请稍后刷新重试。</div>';
+});
+</script>
+</body>
+</html>

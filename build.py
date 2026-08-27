@@ -1210,7 +1210,7 @@ def build_report_html(data, prev_report=None, next_report=None):
             if item.get('tags'):
                 for tag in item['tags']:
                     cls = f'tag tag-{tag}'
-                    tags_html += f' <a class="{cls}" href="../index.html?q={quote(tag)}">#{tag}</a>'
+                    tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
 
             html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
 
@@ -2107,7 +2107,7 @@ def build_digest_html(data, daily_reports=None):
                 parts = body.split('|', 1)
                 date_str = parts[0].replace('📅', '').strip()
                 sig_str = parts[1].strip()
-            items_html += f'<tr><td class="rank">{rank}</td><td class="news-title">{md_inline(item["title"])}</td><td class="date">{date_str}</td><td class="sig">{md_inline(sig_str)}</td></tr>\n'
+            items_html += f'<tr id="{item["id"]}"><td class="rank">{rank}</td><td class="news-title">{md_inline(item["title"])}</td><td class="date">{date_str}</td><td class="sig">{md_inline(sig_str)}</td></tr>\n'
         items_html += '</tbody>\n</table>\n'
     else:
         # Weekly report: flat item list (only if there are items)
@@ -2369,11 +2369,9 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   header h1 { font-size: 1.6em; letter-spacing: .05em; }
   header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
   /* Search */
-  .search-wrap {
-    position: relative; margin-bottom: 20px;
-  }
+  .search-wrap { display: flex; gap: 8px; margin-bottom: 20px; }
   .search-wrap input {
-    width: 100%; padding: 12px 40px 12px 16px;
+    flex: 1; min-width: 0; padding: 12px 16px;
     font-size: .95em; border: 1px solid var(--border);
     border-radius: 24px; background: var(--card); color: var(--text);
     outline: none; transition: border-color .2s;
@@ -2381,14 +2379,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   }
   .search-wrap input:focus { border-color: var(--accent); }
   .search-wrap input::placeholder { color: var(--muted); opacity: .7; }
-  .search-wrap .clear {
-    position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: var(--muted); font-size: 1.2em;
-    cursor: pointer; display: none; line-height: 1; padding: 4px;
+  .search-submit {
+    flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px;
+    background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer;
+    transition: opacity .15s, transform .15s;
   }
-  .highlight { background: #f0c040; border-radius: 2px; padding: 0 1px; }
-  .no-results { text-align: center; color: var(--muted); padding: 36px 0; display: none; }
-  .result-count { font-size: .8em; color: var(--muted); text-align: center; margin-bottom: 12px; display: none; }
+  .search-submit:hover { opacity: .88; transform: translateY(-1px); }
   /* Section headers */
   .section-header {
     font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
@@ -2557,7 +2553,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   "description": "国内外文物博物馆、考古、文化遗产领域每日推送",
   "potentialAction": {{
     "@type": "SearchAction",
-    "target": "https://zhangheng666.top/?q={{search_term_string}}",
+    "target": "https://zhangheng666.top/search.html?q={{search_term_string}}",
     "query-input": "required name=search_term_string"
   }}
 }}
@@ -2582,12 +2578,10 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <a href="jobs.html">招聘</a>
 </nav>
 
-<div class="search-wrap">
-  <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off" aria-label="搜索新闻">
-  <button class="clear" id="clear" aria-label="清除">✕</button>
-</div>
-<div class="result-count" id="result-count"></div>
-<div class="no-results" id="no-results">😕 没有找到匹配的结果</div>
+<form class="search-wrap" action="search.html" method="get" role="search">
+  <input type="search" name="q" placeholder="🔍 输入关键词，查看全部相关文章" autocomplete="off" aria-label="搜索新闻" required>
+  <button class="search-submit" type="submit">搜索</button>
+</form>
 
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
 <div class="section-body">
@@ -2667,111 +2661,196 @@ function collapseActiveSection() {
     header.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 }
-(async function(){
-  const searchInput = document.getElementById('search');
-  const clearBtn = document.getElementById('clear');
-  const noResults = document.getElementById('no-results');
-  const resultCount = document.getElementById('result-count');
-  const cards = document.querySelectorAll('.day-card');
-
-  let searchData = null;
-  try {
-    const resp = await fetch('search-index.json');
-    if (resp.ok) searchData = await resp.json();
-  } catch(e) {}
-
-  function doSearch(q) {
-    q = q.trim().toLowerCase();
-    let visible = 0;
-
-    if (!q) {
-      cards.forEach(c => c.classList.remove('hidden'));
-      noResults.style.display = 'none';
-      resultCount.style.display = 'none';
-      clearBtn.style.display = 'none';
-      cards.forEach(c => {
-        const prev = c.querySelector('.match-preview');
-        if (prev) prev.remove();
-      });
-      return;
-    }
-
-    clearBtn.style.display = 'block';
-    const queryWords = q.split(/\\s+/).filter(Boolean);
-
-    cards.forEach((card) => {
-      const href = card.getAttribute('href');
-      const cardText = card.textContent.toLowerCase();
-      const path = (href || '').replace(/^\\.\\//, '');
-      const record = searchData && searchData.find(r => r.path === path || (r.type === 'daily' && href && href.includes(r.date)));
-      let matched = false;
-      let previewText = '';
-      const searchable = [cardText, record && record.title, record && record.text]
-        .concat(record && record.items ? record.items.map(item =>
-          [item.title, item.body, item.commentary, (item.tags || []).join(' '), (item.sources || []).join(' ')].join(' ')) : [])
-        .filter(Boolean).join(' ').toLowerCase();
-
-      for (const w of queryWords) {
-        if (searchable.includes(w)) {
-          matched = true;
-          const idx = searchable.indexOf(w);
-          const start = Math.max(0, idx - 30);
-          const end = Math.min(searchable.length, idx + w.length + 50);
-          let snippet = searchable.substring(start, end);
-          if (start > 0) snippet = '…' + snippet;
-          if (end < searchable.length) snippet = snippet + '…';
-          const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
-          previewText = snippet.replace(re, '<mark class="highlight">$1</mark>');
-          break;
-        }
-      }
-
-      if (matched) {
-        card.classList.remove('hidden');
-        visible++;
-        let prev = card.querySelector('.match-preview');
-        if (previewText) {
-          if (!prev) {
-            prev = document.createElement('div');
-            prev.className = 'match-preview';
-            card.appendChild(prev);
-          }
-          prev.innerHTML = previewText;
-        } else {
-          if (prev) prev.remove();
-        }
-      } else {
-        card.classList.add('hidden');
-        const prev = card.querySelector('.match-preview');
-        if (prev) prev.remove();
-      }
-    });
-
-    noResults.style.display = visible === 0 ? 'block' : 'none';
-    resultCount.style.display = 'block';
-    resultCount.textContent = `找到 ${visible} 个相关栏目`;
-  }
-
-  searchInput.addEventListener('input', function(){
-    doSearch(this.value);
-  });
-
-  clearBtn.addEventListener('click', function(){
-    searchInput.value = '';
-    doSearch('');
-    searchInput.focus();
-  });
-
-  const params = new URLSearchParams(location.search);
-  const q = params.get('q');
-  if (q) {
-    searchInput.value = q;
-    doSearch(q);
-  }
-})();
 </script>
 </body>''')
     return html
+
+
+# ───────────────── 搜索结果页 ─────────────────
+
+def build_search_html():
+    """Generate the standalone keyword search page.
+
+    The page reads the unified search index in the browser, then flattens
+    matching article items into one deduplicated result stream.
+    """
+    search_css = '''<style>
+  .search-head { text-align: left; padding-bottom: 14px; }
+  .search-head h1 { font-size: 1.35em; }
+  .search-head .back { font-size: .86em; }
+  .search-wrap { display: flex; gap: 8px; margin: 18px 0 10px; }
+  .search-wrap input { flex: 1; min-width: 0; padding: 11px 14px; border: 1px solid var(--border); border-radius: 24px; background: var(--card); color: var(--text); font: inherit; outline: none; }
+  .search-wrap input:focus { border-color: var(--accent); }
+  .search-submit { flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px; background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer; }
+  .search-summary { color: var(--muted); font-size: .84em; margin: 12px 0 16px; }
+  .search-result { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin: 0 0 12px; }
+  .search-result h2 { font-size: 1em; line-height: 1.55; margin: 6px 0; }
+  .search-result h2 a { color: var(--text); text-decoration: none; }
+  .search-result h2 a:hover { color: var(--accent); }
+  .search-meta { color: var(--muted); font-size: .78em; }
+  .search-kind { display: inline-block; padding: 2px 7px; margin-right: 6px; border-radius: 9px; background: var(--tag-bg); color: var(--accent); }
+  .search-snippet { color: var(--muted); font-size: .86em; line-height: 1.65; margin: 6px 0; }
+  .search-source { color: var(--muted); font-size: .78em; margin-top: 8px; }
+  .search-source a { margin-right: 8px; }
+  .search-tag { display: inline-block; margin: 2px 5px 0 0; padding: 1px 6px; border-radius: 8px; background: var(--tag-bg); color: var(--muted); font-size: .72em; }
+  mark { background: #f0c040; color: inherit; border-radius: 2px; padding: 0 1px; }
+  .search-empty { text-align: center; color: var(--muted); padding: 42px 0; }
+  @media (max-width: 520px) {
+    .search-wrap { gap: 6px; }
+    .search-submit { padding: 0 13px; }
+    .search-result { padding: 13px 14px; }
+  }
+</style>'''
+
+    html = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<title>搜索文博新闻 | 每日文博资讯</title>
+<meta name="description" content="搜索每日文博资讯中的考古、博物馆、文物保护、文化遗产和行业新闻。">
+<meta property="og:title" content="搜索文博新闻 | 每日文博资讯">
+<meta property="og:description" content="从每日文博资讯历史档案中集中检索相关报道。">
+<meta property="og:image" content="https://zhangheng666.top/cover.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="每日文博资讯">
+__SEARCH_CSS__
+</head>
+<body>
+<header class="search-head">
+  <p><a class="back" href="index.html">← 返回首页</a></p>
+  <h1>🔎 搜索文博新闻</h1>
+  <p class="meta">从日报、周报、月报及招聘档案中集中检索</p>
+</header>
+
+<main>
+  <form class="search-wrap" action="search.html" method="get" role="search">
+    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词" required>
+    <button class="search-submit" type="submit">搜索</button>
+  </form>
+  <p id="summary" class="search-summary">请输入关键词开始搜索。</p>
+  <section id="results" aria-live="polite"><div class="search-empty">正在加载搜索索引…</div></section>
+</main>
+
+<footer>
+  <p><a href="index.html">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="sources.html">信源与方法</a></p>
+</footer>
+
+<script>
+const queryInput = document.getElementById('query');
+const summary = document.getElementById('summary');
+const results = document.getElementById('results');
+const typeLabels = {daily: '日报', weekly: '周报', monthly: '月报', jobs: '招聘', intern: '实习'};
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(ch) {
+    return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[ch];
+  });
+}
+function escapeRegExp(value) {
+  const slash = String.fromCharCode(92);
+  const special = '.^$*+?()[]{}|' + slash;
+  return Array.from(value).map(function(ch) { return special.includes(ch) ? slash + ch : ch; }).join('');
+}
+function highlight(value, words) {
+  let out = escapeHtml(value);
+  words.slice().sort((a, b) => b.length - a.length).forEach(function(word) {
+    if (!word) return;
+    const safe = escapeHtml(word);
+    out = out.replace(new RegExp('(' + escapeRegExp(safe) + ')', 'gi'), '<mark>$1</mark>');
+  });
+  return out;
+}
+function compact(value) { return String(value || '').toLowerCase().replace(/[^0-9a-z\\u4e00-\\u9fff]+/g, ''); }
+function sourceList(sources) {
+  return (Array.isArray(sources) ? sources : []).map(function(source) {
+    const item = typeof source === 'string' ? {name: source, url: ''} : source;
+    const name = escapeHtml(item.name || '');
+    return item.url ? '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+  }).filter(Boolean).join(' · ');
+}
+function itemText(item) {
+  return [item.title, item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
+}
+function matches(text, words) {
+  const lower = String(text || '').toLowerCase();
+  return words.every(function(word) { return lower.includes(word); });
+}
+function snippet(text, words) {
+  const clean = String(text || '').replace(/\\s+/g, ' ').trim();
+  if (!clean) return '';
+  const lower = clean.toLowerCase();
+  const hit = words.map(function(word) { return lower.indexOf(word); }).filter(function(index) { return index >= 0; }).sort(function(a, b) { return a - b; })[0] || 0;
+  const start = Math.max(0, hit - 48);
+  const end = Math.min(clean.length, start + 180);
+  return (start > 0 ? '…' : '') + highlight(clean.slice(start, end), words) + (end < clean.length ? '…' : '');
+}
+function renderHit(hit, words) {
+  const record = hit.record;
+  const item = hit.item;
+  const title = item ? item.title : record.title;
+  const href = record.path + (item && item.id ? '#' + item.id : '');
+  const body = item ? (item.body || item.commentary || item.progress || '') : (record.text || '');
+  const tags = item && Array.isArray(item.tags) ? item.tags.map(function(tag) { return '<span class="search-tag">#' + escapeHtml(tag) + '</span>'; }).join('') : '';
+  const sources = item ? sourceList(item.sources) : '';
+  return '<article class="search-result">' +
+    '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
+    '<h2><a href="' + escapeHtml(href) + '">' + highlight(title, words) + '</a></h2>' +
+    (body ? '<p class="search-snippet">' + snippet(body, words) + '</p>' : '') +
+    (tags ? '<div>' + tags + '</div>' : '') +
+    (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
+    '</article>';
+}
+function renderSearch(data, rawQuery) {
+  const query = String(rawQuery || '').trim().toLowerCase();
+  queryInput.value = rawQuery || '';
+  if (!query) {
+    summary.textContent = '请输入关键词开始搜索。';
+    results.innerHTML = '<div class="search-empty">搜索日报、周报、月报及招聘档案中的完整关键词。</div>';
+    return;
+  }
+  const words = query.split(/\\s+/).filter(Boolean);
+  const hits = [];
+  const seen = new Set();
+  const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
+  records.forEach(function(record) {
+    const items = Array.isArray(record.items) ? record.items : [];
+    if (items.length) {
+      items.forEach(function(item) {
+        if (!matches(itemText(item), words)) return;
+        const key = compact(item.title) || (record.path + (item.id || ''));
+        if (seen.has(key)) return;
+        seen.add(key);
+        hits.push({record: record, item: item});
+      });
+    } else if (matches([record.title, record.text].join(' '), words)) {
+      const key = 'page:' + record.path;
+      if (!seen.has(key)) {
+        seen.add(key);
+        hits.push({record: record, item: null});
+      }
+    }
+  });
+  summary.textContent = '找到 ' + hits.length + ' 条匹配新闻（已合并重复标题，优先显示最新记录）';
+  results.innerHTML = hits.length ? hits.map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配新闻。可以换一个更具体或更常见的关键词。</div>';
+}
+
+const params = new URLSearchParams(location.search);
+const initialQuery = params.get('q') || '';
+fetch('search-index.json').then(function(response) {
+  if (!response.ok) throw new Error('search index unavailable');
+  return response.json();
+}).then(function(data) {
+  renderSearch(data, initialQuery);
+}).catch(function() {
+  summary.textContent = '搜索索引暂时不可用。';
+  results.innerHTML = '<div class="search-empty">请稍后刷新重试。</div>';
+});
+</script>
+</body>
+</html>'''
+    return html.replace('__SEARCH_CSS__', CSS + search_css)
 
 
 # ───────────────── sitemap.xml ─────────────────
@@ -2788,6 +2867,11 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
     <loc>{base}/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>''')
+    urls.append(f'''  <url>
+    <loc>{base}/search.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>''')
 
     # Jobs & intern pages
@@ -3081,11 +3165,13 @@ def main():
         items = []
         for item in r['domestic'] + r['international']:
             items.append({
+                'id': item.get('id', ''),
+                'number': item.get('number', ''),
                 'title': item['title'],
                 'body': item['body'][:200] if item['body'] else '',
                 'commentary': item['commentary'],
                 'tags': item.get('tags', []),
-                'sources': [s.get('name', '') for s in item.get('sources', [])],
+                'sources': [{'name': s.get('name', ''), 'url': s.get('url', '')} for s in item.get('sources', [])],
             })
         search_data.append({
             'type': 'daily',
@@ -3197,6 +3283,12 @@ def main():
     with open(idx_path, 'w', encoding='utf-8') as f:
         json.dump(search_data, f, ensure_ascii=False, indent=2)
     print(f'Search index: {idx_path} ({len(search_data)} searchable pages)')
+
+    search_html = build_search_html()
+    search_path = os.path.join(SITE_DIR, 'search.html')
+    with open(search_path, 'w', encoding='utf-8') as f:
+        f.write(search_html)
+    print(f'Search page: {search_path}')
 
     # Build index with all sections
     index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data, intern_data)
