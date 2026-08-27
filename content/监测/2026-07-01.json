@@ -20,7 +20,7 @@
       "sourceId": "archaeology",
       "status": "success",
       "checkedAt": "2026-07-01T12:00:00+08:00",
-      "candidateCount": 49,
+      "candidateCount": 6,
       "note": ""
     },
     {
@@ -47,285 +47,9 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260701-archaeology-0186-6061610shtml",
+      "recordId": "backfill-20260701-archaeology-0158-6057138shtml",
       "date": "2026-07-01",
-      "title": "一图读懂《国家文物事业发展“十五五”规划》 2026-07-30",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061610.shtml"
-        }
-      ],
-      "scope": "national",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "展览",
-        "政策行业"
-      ],
-      "tags": [
-        "展览",
-        "政策行业"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0140-6060253shtml",
-      "date": "2026-07-01",
-      "title": "三峡考古的坚守与赓续传承 2026-07-21 近日，三部关于长江三峡工程文物保护项目报告——《巫山双堰塘》《巫山古城和大昌蓝家寨》《巫山琵琶洲遗址与山包墓地》的发布，展现了考古研究方面的丰硕成果，其背后更凸显了中国社会科学院考古研究所（以下简称“考古所”）一代代学者的努力付出。《巫山琵琶洲遗址与山包墓地》中琵琶洲遗址是一处以汉代遗存为主的聚落，由于遗址位置优越，历代反复居住，汉代之后的遗存...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260721_6060253.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0175-6059008shtml",
-      "date": "2026-07-01",
-      "title": "三星堆三号坑铜顶尊跪坐人像科技分析成果发布 2026-07-13 近日，四川省文物考古研究院发布三星堆遗址三号祭祀坑，铜顶尊跪坐人像的科技考古研究成果。科研团队通过金相分析、合金成分检测、铅同位素对比等手段，系统还原了这件器物的合金配比、材料来源与制作工艺，为认识古蜀与中原、长江流域青铜文化的交流互动提供了新的实物证据。 此次研究的器物由上下两部分组成：上部为一件高55厘米的青铜大口尊，尊口沿内侧铸有短柱...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260713_6059008.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "四川",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "数字化",
-        "政策行业"
-      ],
-      "tags": [
-        "考古",
-        "数字化",
-        "政策行业",
-        "四川"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0185-6061309shtml",
-      "date": "2026-07-01",
-      "title": "三星堆考古新认知：祭祀所用神庙疑似失火倒塌 2026-07-29 近日，三星堆遗址袁家院祭祀区考古研究再获新进展。四川省文物考古研究院研究团队通过系统对比祭祀坑的形制与埋藏特征，对三星堆祭祀坑的性质提出新的学术观点。 四类坑性质不同 六座大坑或另有身份 专家表示，袁家院祭祀区是目前确认的三星堆遗址唯一一处固定举行祭祀活动的场所，等级最高，年代距今约3200至3000年，相当于晚商时期。 研究团队将目前发现...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260729_6061309.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "四川",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "展览",
-        "四川"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0142-6060629shtml",
-      "date": "2026-07-01",
-      "title": "中华文明八千年的考古实证 2026-07-23 重建中国自主知识体系以及作为这一体系核心问题的中华文明理论，直接关系到中华文脉的传承与文明信史的溯源，必须根据真实的史料考索发明。目前发现的长江流域八千年上下的考古资料已不再局限于稻作遗存，而已具有形上思辨的意义。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060629.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0152-6058691shtml",
-      "date": "2026-07-01",
-      "title": "中国社会科学院大学历史学院与中国社会科学院考古研究所召开“学科建设暨人才培养专题调研座谈会” 2026-07-10 7月8日下午，中国社会科学院大学历史学院党委书记罗自文、副院长袁宝龙、党委副书记董慧子一行前往中国社会科学院考古研究所调研，于考古研究所作铭厅召开“考古学科建设暨人才培养专题调研座谈会”。中国社会科学院考古研究所副所长（主持所务工作）施劲松，党委副书记、纪委书记、副所长尤利前，副所长陈时龙及相关科研人员代表参加座谈。 座谈会上，罗自文围绕历...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202607/t20260710_6058691.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0151-6057590shtml",
-      "date": "2026-07-01",
-      "title": "中国社会科学院考古研究所与巴基斯坦旁遮普大学代表团就印度河文明考古合作项目进行座谈 2026-07-03 2026年6月22日下午，中国社会科学院“印度河文明考古发掘与研究”项目的合作方——巴基斯坦旁遮普大学代表顺访考古研究所，与考古研究所领导和相关学者就该项目的阶段性成果和下一步合作事宜进行了座谈。中国社会科学院考古研究所党委书记梅忠堂，副所长（主持所务工作）施劲松，副所长陈时龙，科研处负责人彭小军，以及印度河文明考古项目负责人仝涛及团队成员，与巴基...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202607/t20260703_6057590.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0150-6061315shtml",
-      "date": "2026-07-01",
-      "title": "亚长的餐桌：一位商代将军的饮食人生 2026-07-29 2000—2001年寒冬进行抢救性发掘，编号M54，共出土随葬品570余件，是殷墟继妇好墓之后出土随葬品数量最多的墓葬。墓主为一位名叫“亚长”的商代高级武将，从他身下铺遍的花椒，到装满美酒的青铜尊，从炖肉的鼎，到骨骼里的饮食信息，无不诉说着一场跨越生死的永恒盛宴。首先看主食，所有人都以小米为主食，在他们食物中的比例高达九成以上，也与以往对殷墟居民饮食结构的分...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260729_6061315.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 45,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0134-6058467shtml",
-      "date": "2026-07-01",
-      "title": "从“红山诸文化”到夏家店下层文化 2026-07-09 辽西区新石器时代的特征之一是多支考古学文化平行并存，这一点通过兴隆洼文化、赵宝沟文化、红山文化陶器上的戳压之字纹各具不同的演变序列可以得到较为清楚的揭示，此即苏秉琦先生1986年在《辽西古文化古城古国》一文中所称述的“红山诸文化”。至4000年前之后，辽西区的“红山诸文化”演进为该区唯一的夏家店下层文化。虽然夏家店下层文化的石城址群未必和防御有关，但从...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260709_6058467.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0139-6059392shtml",
-      "date": "2026-07-01",
-      "title": "从汉长安城未央宫遗址看中华文明的传承与发展 2026-07-15 “长安复携手，再顾重千金。”2023年5月19日，习近平总书记在古都西安主持首届中国—中亚峰会时，引用了唐朝诗人李白的诗句。短短两句诗，让人梦回汉唐的盛世繁华，更让人感叹中华文明绵延千载、传承至今的动人魅力。汉长安城是西汉王朝的首都，也是古丝绸之路的东方起点。位于汉长安城西南的未央宫，作为西汉王朝二百余年的皇宫正殿，亦是当时的政治中枢与国家象征。其遗址...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260715_6059392.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "展览"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0170-6057138shtml",
-      "date": "2026-07-01",
-      "title": "全国考古人才振兴计划“三代都邑的墓地人群结构血缘组织关系研究”项目开题论证会召开 2026-07-01 2026年6月28日下午，全国考古人才振兴计划“三代都邑的墓地人群结构血缘组织关系研究”项目开题论证会于中国社会科学院考古研究所举行。会议由中国社会科学院考古研究所考古大数据资料中心副主任汤超主持，国家文物局科技教育司教育处处长党志刚、四级调研员付瑜出席会议，北京联合大学校长雷兴山教授、北京大学教授吴小红、首都师范大学教授袁广阔、中国社会科学院考古...",
+      "title": "全国考古人才振兴计划“三代都邑的墓地人群结构血缘组织关系研究”项目开题论证会召开",
       "sources": [
         {
           "sourceId": "archaeology",
@@ -333,66 +57,30 @@
           "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260701_6057138.shtml"
         }
       ],
-      "scope": "province",
-      "primaryProvince": "北京",
+      "scope": "national",
+      "primaryProvince": "",
       "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
+      "locationTier": "national",
+      "locationConfidence": 0.85,
       "themes": [
-        "考古",
-        "数字化",
-        "政策行业"
+        "考古"
       ],
       "tags": [
-        "考古",
-        "数字化",
-        "政策行业",
-        "北京"
+        "考古"
       ],
       "impact": 80,
       "selectedForDaily": false,
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-archaeology-0173-6058402shtml",
+      "recordId": "backfill-20260701-archaeology-0156-6056985shtml",
       "date": "2026-07-01",
-      "title": "全国考古人才振兴计划“新时代中国石窟寺考古发现与探索”项目开题论证会召开 2026-07-08 2026年6月29日下午，全国考古人才振兴计划“新时代中国石窟寺考古发现与探索”项目开题论证会在中国社会科学院考古研究所举行。会议由中国社会科学院考古研究所副所长陈时龙研究员主持，国家文物局科技教育司教育处处长党志刚、四级调研员付瑜出席会议，中国社会科学院考古研究所李裕群研究员、北京大学考古文博学院李崇峰教授、中国人民大学历史学院考古文博系李梅田教...",
+      "title": "四项盐业考古重要成果描绘海盐与井盐生产技术及历史演进图景",
       "sources": [
         {
           "sourceId": "archaeology",
           "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260708_6058402.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "北京",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "数字化",
-        "政策行业"
-      ],
-      "tags": [
-        "考古",
-        "数字化",
-        "政策行业",
-        "北京"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0138-6059387shtml",
-      "date": "2026-07-01",
-      "title": "吐峪沟石窟新出文书所见唐代寺院及其活动 2026-07-15 吐峪沟石窟新出文书中发现了八个唐代寺院名，除丁谷寺外，其余七个寺院皆为外来寺院，寺院的人数规模一般在十至二十人之间。吐峪沟石窟以清幽的环境为外来寺院僧人提供了每年禅修和结夏的活动场所，外来僧人自备物资，并参与修造供禅修的禅窟，因而吐峪沟石窟是一个多寺院共同活动的公共神圣空间，与城内寺院拥挤嘈杂的环境形成鲜明对比，并在一定程度上形成了世俗性与神圣...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260715_6059387.shtml"
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260701_6056985.shtml"
         }
       ],
       "scope": "unassigned",
@@ -406,74 +94,40 @@
       "tags": [
         "考古"
       ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260701-archaeology-0153-6056986shtml",
+      "date": "2026-07-01",
+      "title": "在目录与类书中重新定位中国传统岁时",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260701_6056986.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
       "impact": 45,
       "selectedForDaily": false,
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-archaeology-0168-6056985shtml",
+      "recordId": "backfill-20260701-archaeology-0155-6056981shtml",
       "date": "2026-07-01",
-      "title": "四项盐业考古重要成果描绘海盐与井盐生产技术及历史演进图景 2026-07-01 6月25日，国家文物局召开“考古中国”重大项目重要进展工作会，聚焦我国盐业考古的重要进展，发布浙江舟山群岛盐业遗址群、江苏东部沿海地区盐业考古新发现、重庆彭水中堡盐业遗址、山东渤海南岸盐业考古新进展等四项重要考古成果。四项盐业考古成果进一步丰富我国海盐与井盐的考古学实证，系统展现自新石器时代晚期至明清时期制盐工艺、生产组织、管理模式与产销格局的...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260701_6056985.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "江苏",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "展览",
-        "政策行业"
-      ],
-      "tags": [
-        "考古",
-        "展览",
-        "政策行业",
-        "江苏"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0187-6061622shtml",
-      "date": "2026-07-01",
-      "title": "国家文物局关于印发《国家文物事业发展“十五五”规划》的通知 2026-07-30 文物政发〔2026〕22号 各省、自治区、直辖市文物局（文化和旅游厅/局），新疆生产建设兵团文物局，本局机关各部门、各直属单位： 《国家文物事业发展“十五五”规划》已经国家文物局党组会议审议通过，现印发给你们，请认真贯彻执行。 特此通知。 国家文物局 2026年7月20日 国家文物事业发展“十五五”规划 文物是不可再生、不可替代的宝贵...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061622.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "新疆",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "展览",
-        "政策行业"
-      ],
-      "tags": [
-        "展览",
-        "政策行业",
-        "新疆"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0167-6056981shtml",
-      "date": "2026-07-01",
-      "title": "在考古新发现中重识唐代社会 2026-07-01 6月25日，“稽古传新：考古新发现与唐代区域社会”学术交流会在山东聊城举行。来自考古学、历史学、文化遗产保护等领域的学者，从都城考古、地方墓葬、石刻文献及科技考古等角度，揭示了唐代社会的多维面貌。 中国社会科学院考古研究所研究员安家瑶以唐幽州卢龙节度使刘济墓的考古发掘为例，揭示了考古发现如何为文献记载和文化遗产保护提供支撑。刘济墓的考古发...",
+      "title": "在考古新发现中重识唐代社会",
       "sources": [
         {
           "sourceId": "archaeology",
@@ -481,60 +135,25 @@
           "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260701_6056981.shtml"
         }
       ],
-      "scope": "province",
-      "primaryProvince": "山东",
+      "scope": "unassigned",
+      "primaryProvince": "",
       "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "文物保护",
-        "数字化"
+        "考古"
       ],
       "tags": [
-        "考古",
-        "文物保护",
-        "数字化",
-        "山东"
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-archaeology-0148-6061184shtml",
+      "recordId": "backfill-20260701-archaeology-0154-6056989shtml",
       "date": "2026-07-01",
-      "title": "大运河流域出土明代纺织品调查研究 2026-07-28 本文以大运河流域明代墓葬出土纺织品为研究样本，围绕纤维材质、织物类型、款式结构、图案风格四个维度，结合地理空间分布、时间演进脉络与墓主身份属性开展系统性探究，整合多项考古调查数据，融合大数据分析、地理信息系统空间分析、科学检测及数字建模等跨学科技术方法，构建标准化样本数据库与“织物样本”“地理空间”“时间演进”分布图谱。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260728_6061184.shtml"
-        }
-      ],
-      "scope": "national",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "考古",
-        "展览",
-        "数字化"
-      ],
-      "tags": [
-        "考古",
-        "展览",
-        "数字化"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0129-6056989shtml",
-      "date": "2026-07-01",
-      "title": "妇好墓两件玉勾形器的来源及其改制 2026-07-01 本文考察妇好墓出土的两件玉勾形器的来源及其改制情况，指出M5∶964为来自西拉木伦河流域赤峰地区的红山文化遗玉，可能由该文化典型的玉勾云形器改制而成，改制时间发生在红山文化时期；M5∶1120也属于红山文化遗玉，其阴刻工艺反映了商晚期砣具阴刻技术，改制时间应发生在商晚期。红山文化遗玉经由夏家店下层文化南传至殷商王朝，被直接使用或改制再使用，其功能也在器物流...",
+      "title": "妇好墓两件玉勾形器的来源及其改制",
       "sources": [
         {
           "sourceId": "archaeology",
@@ -558,297 +177,9 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-archaeology-0183-6060991shtml",
+      "recordId": "backfill-20260701-archaeology-0157-6057103shtml",
       "date": "2026-07-01",
-      "title": "山西垣曲北白鹅墓地2024年度发掘资料公布 2026-07-27 垣曲北白鹅墓地位于山西省运城市垣曲县英言镇北白鹅村东，北依太行牛心山，南距黄河10公里，向东30公里至王屋山，东南距洛阳70余公里，西距垣曲县城直线30余公里。地势北高南低，呈缓坡状，北面较宽，南面狭长。除西北角外，四面环以河沟，墓地位于河沟环绕的梁峁之上。 北白鹅墓地位置示意图 2024年度主要对北白鹅墓地Ⅰ区西部进行勘探和发掘。2024年4月，对Ⅰ...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260727_6060991.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "山西"
-      ],
-      "impact": 45,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0179-6060084shtml",
-      "date": "2026-07-01",
-      "title": "山西夏县发现东汉中晚期家族墓地 2026-07-20 近日，山西省考古研究院公布运城市夏县裴介村汉墓发掘资料，其中五座汉墓的形制和随葬器物组合的特征均符合中原地区东汉中晚期墓葬的整体特征和发展趋势，墓葬两两异穴并列，应为家族合葬。这一发现为研究晋南地区东汉中晚期的葬俗、葬制以及基层社会的关系和组织结构提供了新的资料。 2021年1—8月，由山西省考古研究院、运城市文物保护中心、运城市考古队组成的联...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260720_6060084.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "展览",
-        "山西"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0182-6060664shtml",
-      "date": "2026-07-01",
-      "title": "山西绛县西吴壁遗址最新发掘成果公布 2026-07-23 7月6日，山西省考古研究院公布运城市绛县西吴壁遗址2024年度夏商遗存发掘资料。考古人员在遗址东北部ID6区揭露出史前及夏商周等时期文化遗存，为研究晋南地区夏代聚落社会分工与社会形态、商代族群构成与文化变迁提供重要实物资料。 西吴壁遗址位于绛县古绛镇西吴壁村南，是一处夏商时期重要冶铜遗址。2024年，中国国家博物馆、山西省考古研究院及运城市文物保护中...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260723_6060664.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护",
-        "博物馆"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "博物馆",
-        "山西"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0136-6058779shtml",
-      "date": "2026-07-01",
-      "title": "建设中华文明科技考古资源标准库的展望 2026-07-10 这一项目的核心目标，是解决当前科技考古和文化遗产保护数据存在的“小规模、分散化、非标准化”问题，为人工智能在考古领域的深度应用提供高质量数据基础。在考古木材树种鉴定方面，国家文物局考古研究中心科研人员构建融合卷积神经网络和深度学习模型，利用现代木材和安徽武王墩一号墓出土考古木材的显微图像进行训练，对12种现代木材识别总体准确率达94.20％。在同位素研...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260710_6058779.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "安徽",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "展览",
-        "安徽"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0143-6060655shtml",
-      "date": "2026-07-01",
-      "title": "彭山江口遗址出水明代王府金册考 2026-07-14 彭山江口明末战场遗址出水的王府金册中有两件残缺严重，目前未能辨析或形成统一意见。结合册文起首格式与文献考证，可初步判定：其一为嘉靖二十四年（1545年）十二月二十日册封湖广武冈州岷王朱誉荣的金册，其二为万历四十七年（1619年）七月十一日册封桂王朱常瀛王妃吕氏的金册。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060655.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0135-6058587shtml",
-      "date": "2026-07-01",
-      "title": "数据库与人工智能：考古研究的双核驱动 2026-07-09 传统考古方法在这里遇到了前所未有的挑战——如何对海量碎片进行快速提取、识别和拼合？答案正来自两个看似与古物无关的领域：数据库与人工智能。数据库打牢了考古的“数字地基”。如今，这一体系在中国社会科学院科技考古与文化遗产保护重点实验室的推进下，形成中华文明科技考古资源标准库建设项目，扩展至碳十四年代、人骨考古、树木年轮年表等多个专业领域，这一标准化...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260709_6058587.shtml"
-        }
-      ],
-      "scope": "national",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0180-6060089shtml",
-      "date": "2026-07-01",
-      "title": "新发现 | “取卤煎盐”两千年——山东东营坡家庄制盐遗址考古发现与收获 2026-07-20 坡家庄遗址位于山东省黄河三角洲农业高新技术产业示范区坡家庄村东南，东距渤海约20公里，南邻小清河，经勘探，遗址面积约8.9万平方米。所在区域处于莱州湾南岸第四纪以来形成的地下卤水带。 2024年7月至2025年7月，为配合基本建设，经国家文物局批准，山东省水下考古研究中心进行了考古发掘工作，共揭露遗址面积11400平方米，取得了重要考古收获，发现了集中分布的...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260720_6060089.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山东",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "山东"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0177-6059560shtml",
-      "date": "2026-07-01",
-      "title": "新发现 | 山间别业 士族余晖——江苏苏州高新区锦峰南朝环壕聚落遗址发掘收获 2026-07-16 锦峰山东遗址（以下简称锦峰遗址），位于苏州高新区科技城锦峰山东麓，地处西部山区，周遭群山环抱，为典型山间小盆地，整体地势呈西北高、东南低。遗址东距苏州古城约20公里，西距太湖约10公里，南临吴宅河故道，遗址面积2.9万平方米（图一）。 图一 锦峰遗址位置示意图 2025年11月至2026年6月，为配合基本建设，经国家文物局批准，苏州市考古研究所对锦峰遗址...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260716_6059560.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "江苏",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "数字化"
-      ],
-      "tags": [
-        "考古",
-        "数字化",
-        "江苏"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0181-6060254shtml",
-      "date": "2026-07-01",
-      "title": "新发现 | 河南太康县刘庄遗址考古发掘收获与初步认识 2026-07-21 遗址概况 刘庄遗址位于河南省周口市太康县张集镇刘庄村南约300米处，为近圆形堌堆遗址，地势高出周围地面约5米，当地俗称牛王堌堆，2006年被周口市人民政府公布为市级文物保护单位。 以往文物调查结果显示，该遗址文化内涵丰富，遗存年代涵盖龙山至商周时期，其中龙山文化遗存最为丰富。从调查采集的陶片分析来看，陶器质地以泥质灰陶为主，夹砂灰陶次之，泥质红...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260721_6060254.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "河南",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "河南"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0172-6057554shtml",
-      "date": "2026-07-01",
-      "title": "新发现 | 陕西渭南市旧石器考古调查取得重要成果 2026-07-03 渭南市位于关中平原东部，为陕北黄土高原与秦岭的连接部位，地势以渭河为轴线，地貌呈现南北两山、两塬、中部平川五大地貌类型区。境内有黄河及其支流渭河两大河流，渭河自西向东贯穿中部核心区，在潼关汇入黄河。渭河以南有发源于秦岭、并行汇入渭河的潼河、赤水河、沋河、零河等多条一级支流。渭河北有发源于陕北榆林定边县与铜川北山的北洛河和石川河等一级支流，渭...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260703_6057554.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "河北",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "河北"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0169-6057103shtml",
-      "date": "2026-07-01",
-      "title": "新发现 | 青海河湟地区新发现多处打制石器地点 2026-07-01 青藏高原东北部是连接东亚低海拔平原与高原腹地的地理过渡地带，也是解读远古人类向高海拔区域迁徙、适应高寒环境的核心关键区域，在全球旧石器时代人类演化与扩散研究中占据不可替代的学术地位。长期以来，青藏高原东北部旧石器考古工作重心集中于青海湖环湖沿岸地带，学界对青海湖周边古人类活动线索已有一定基础积累；而自然水土条件优越、史前文化密集分布的河湟谷...",
+      "title": "新发现 | 青海河湟地区新发现多处打制石器地点",
       "sources": [
         {
           "sourceId": "archaeology",
@@ -862,570 +193,18 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "考古"
+        "政策行业"
       ],
       "tags": [
-        "考古",
+        "政策行业",
         "青海"
       ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0132-6057557shtml",
-      "date": "2026-07-01",
-      "title": "新疆吐峪沟石窟出土黄地暗紫色条纹繝布残片材质与工艺结构研究 2026-07-03 以新疆吐峪沟石窟寺出土的土黄地暗紫色条纹繝布残片为研究对象，综合运用电子数码显微镜、傅里叶变换红外光谱仪、台式扫描电子显微镜、超景深三维显微镜及纤维显微鉴定等多种现代设备和分析测试技术，系统地分析了其捻回捻向、织物密度、材质来源和装饰工艺。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260703_6057557.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "新疆",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "新疆"
-      ],
       "impact": 45,
       "selectedForDaily": false,
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-archaeology-0162-6059878shtml",
-      "date": "2026-07-01",
-      "title": "新疆温泉县呼斯塔遗址东区墓地第1、2号冢的发掘 2026-07-18",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260718_6059878.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "新疆",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "新疆"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0141-6060627shtml",
-      "date": "2026-07-01",
-      "title": "日记里的老友：沈从文与夏鼐 2026-07-23 沈从文与夏鼐，一位是中国现代文学的巨匠、中国古代服饰研究的开拓者，一位是中国现代考古学的主要奠基人。《夏鼐日记》作者/供图早年神交：从阅读沈从文开始夏鼐与沈从文的缘分，早在20世纪30年代便已埋下伏笔。1932年 3月 17日，尚在清华大学读书的夏鼐在日记中写下“阅书：沈从文《爱丽思漫游中国记》”，这是《夏鼐日记》中第一次出现沈从文的名字。沈从文是夏鼐日记中...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060627.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0133-6057939shtml",
-      "date": "2026-07-01",
-      "title": "明代四合如意暗花马面裙的结构研究与数字化复原 2026-07-06 通过对江苏常州胡濙夫妻合葬墓出土的明代四合如意暗花马面裙开展科技检测，并结合图像与文献资料进行综合分析，揭示了明代马面裙在结构演变过渡阶段的结构特征，为马面裙的演变提供了实物依据。采用三维虚拟技术与实物复原相结合的方法，实现了对马面裙结构的双重复原。进一步分析其布幅与褶裥的结构特征，探讨了在固定布幅条件下，如何通过褶量调控与A/H型打褶方式实现“以...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260706_6057939.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "江苏",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "展览",
-        "数字化"
-      ],
-      "tags": [
-        "展览",
-        "数字化",
-        "江苏"
-      ],
-      "impact": 45,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0145-6060686shtml",
-      "date": "2026-07-01",
-      "title": "殷墟式牙璋初探 2026-07-23 近年在安阳体育学校出土一件风格独特的晚商牙璋，可与南阳望城岗、桐柏月河及成都金沙遗址发现的类似器物，及流散至海外部分博物馆的同类器一起讨论。这些牙璋以或黑或灰褐的玉质颜色、特殊的扉牙排列形式等特点自成一系，尝试命名为“殷墟式牙璋”。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060686.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古",
-        "博物馆",
-        "国际交流"
-      ],
-      "tags": [
-        "考古",
-        "博物馆",
-        "国际交流"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0164-6060622shtml",
-      "date": "2026-07-01",
-      "title": "汉魏洛阳城宫城宫墙遗址考古发掘报告 2026-07-23",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260723_6060622.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0166-6061323shtml",
-      "date": "2026-07-01",
-      "title": "河南永城市王庄遗址ⅠM6、ⅠM16 发掘简报 2026-07-29",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260729_6061323.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "河南",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "河南"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0176-6059196shtml",
-      "date": "2026-07-01",
-      "title": "湖北郭家庙出土春秋早期器物 2026-07-14 记者10日从湖北省文物考古研究院获悉，湖北郭家庙墓地出土一批文物，呈现出从春秋早期的初期向偏晚阶段过渡的时代特征，为进一步细化曾国历史分期提供新证。 郭家庙墓地位于湖北枣阳市吴店镇东赵湖村，是一处春秋早期遗址。湖北省文物考古研究所(现湖北省文物考古研究院)等单位对郭家庙墓地86号墓进行考古发掘，出土青铜器、陶器、漆木器、玉器等各类文物148件(套)。...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260714_6059196.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "湖北",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "湖北"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0165-6060674shtml",
-      "date": "2026-07-01",
-      "title": "琉璃河发掘报告（1995~1997） 2026-07-23",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260723_6060674.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 45,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0184-6061176shtml",
-      "date": "2026-07-01",
-      "title": "申遗成功见证千年瓷都新跨越 2026-07-28 在江西省景德镇的一间制瓷作坊里，工匠在进行拉坯（2024年8月28日摄）。新华社记者 万象 摄 “景德镇手工瓷业遗存”项目成功列入《世界遗产名录》，这是中国首次以产业遗产类型申报世界遗产项目。 当地时间7月25日，在韩国釜山召开的联合国教科文组织第48届世界遗产大会上，中国提交的该项目顺利通过审议列入《世界遗产名录》。至此，中国世界遗产总数...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260728_6061176.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "江西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "国际交流"
-      ],
-      "tags": [
-        "国际交流",
-        "江西"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0149-6061187shtml",
-      "date": "2026-07-01",
-      "title": "盘筑拉坯技术的运用：山东茌平教场铺遗址陶器成型工艺研究 2026-07-28 教场铺遗址陶器成型工艺存在三大核心技术，即盘筑拉坯、拼接与磨光。通过对典型陶器标本制作痕迹的观察发现，盘筑拉坯是大型粗胎器及小型薄胎器塑形的核心技术。基于盘筑拉坯技术成型的空心圆柱体是器身构成的基础模块，配合拼接技术完成陶器的整体塑形，并通过磨光与渗碳赋予等级及文化属性。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260728_6061187.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山东",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "山东"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0147-6061002shtml",
-      "date": "2026-07-01",
-      "title": "科技考古视野下的商文明 2026-07-27",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260727_6061002.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古",
-        "数字化"
-      ],
-      "tags": [
-        "考古",
-        "数字化"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0178-6059877shtml",
-      "date": "2026-07-01",
-      "title": "苏州发现罕见南朝时期大型庄园遗址 2026-07-18 记者从苏州市考古研究所获悉，该所在江苏苏州高新区锦峰山东麓考古发现一处遗址，将其命名为锦峰山东遗址（以下简称“锦峰遗址”）。经科学研判，基本确认该聚落为一处罕见的南朝庄园遗址。 经国家文物局批准，2025年11月至2026年6月，苏州市考古研究所对锦峰遗址进行了考古发掘工作，完整揭露一处呈现“日”字形的大型环壕聚落，核心区面积9095平方米。锦峰遗址地层...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260718_6059877.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "江苏",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "江苏"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0188-6061623shtml",
-      "date": "2026-07-01",
-      "title": "西藏阿里地区喀力地点石制品组合的最新研究成果 2026-07-30 记者从中国科学院古脊椎动物与古人类研究所了解到，近日，国际考古学专业期刊《亚洲考古研究》（Archaeological Research in Asia）在线发表了该所张晓凌研究团队联合西藏自治区文物保护研究所关于西藏阿里地区喀力地点石制品组合的最新研究成果。该研究通过对喀力地点地表采集石制品开展技术类型学分析，揭示了青藏高原西部早全新世人类活动、石器技术组合以及高海拔环...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061623.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "西藏",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "展览",
-        "西藏"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0130-6057312shtml",
-      "date": "2026-07-01",
-      "title": "辽上京遗址出土银铤纸质附签的保护修复研究 2026-07-02 本研究以辽上京遗址出土的银铤纸质附签为研究对象，旨在探索科学的保护修复方法，为同类极端环境下考古纸质文物的修复积累实践经验。通过无损与微损检测技术，我们对附签进行了形貌测量、纤维分析、红外光谱、扫描电镜与能谱分析、pH测定及字迹溶解性测试，基于“最小干预”和“可逆性”保护理念，采用逐步深入的物理清洁、布海苔溶液湿性清洁、局部修补及现代保护性装裱等...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260702_6057312.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古",
-        "文物保护"
-      ],
-      "tags": [
-        "考古",
-        "文物保护"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0137-6059016shtml",
-      "date": "2026-07-01",
-      "title": "辽宁北票波台沟辽墓出土树皮葬具的考古发现与树种鉴定 2026-07-13 在对波台沟辽墓出土尸床开展实验室考古清理过程中，发现了两类疑似树皮的残留物，依据其分布范围，推测其中一类用途应为覆盖尸体的葬具。学界普遍认为中国古代北方民族桦树皮文化历史悠久，但截至目前尚无实验证实这一论断。鉴于此，本文对该墓葬出土的两类疑似树皮的残留物开展分析与树种鉴定，通过显微观察与疑似目标树皮标本的比对分析，结合树木分布的地理范围、生长特...",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260713_6059016.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "辽宁",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "展览"
-      ],
-      "tags": [
-        "考古",
-        "展览",
-        "辽宁"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0146-6060996shtml",
-      "date": "2026-07-01",
-      "title": "重庆武隆关口西汉一号墓出土木牍的保护 2026-07-27 重庆武隆关口西汉一号墓出土饱水木牍是研究汉代初期墓葬制度的重要实物。为科学制定保护方案，本研究在现场保护的基础上，综合运用树种鉴定、含水率测定、光学显微镜观察、红外光谱分析、离子色谱及电感耦合等离子体发射光谱等技术，对木牍保存状况、降解特征及环境离子影响进行评估。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260727_6060996.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "重庆",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古",
-        "文物保护"
-      ],
-      "tags": [
-        "考古",
-        "文物保护",
-        "重庆"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0131-6057546shtml",
-      "date": "2026-07-01",
-      "title": "陕西佳县乔家寨遗址动物遗存研究 2026-07-03 本文对 2019 年陕北佳县乔家寨距今 4800—4500aBP 龙山早期早段遗址出土的所有动物骨骼按照考古堆积层位进行了分类、测量和鉴定。结果表明该遗址至少有 8 个种属，包括环 颈雉、褐家鼠、中华鼢鼠、蒙古兔、狗獾、家猪、麝和羚羊。出",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260703_6057546.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "陕西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "陕西"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0161-6059518shtml",
-      "date": "2026-07-01",
-      "title": "陕西渭南富平县西晋十六国时期墓葬发掘简报 2026-07-16",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260716_6059518.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "陕西",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "陕西"
-      ],
-      "impact": 45,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-archaeology-0144-6060666shtml",
-      "date": "2026-07-01",
-      "title": "高句丽佛寺的发现及相关问题探讨 2026-07-23 目前在中国和朝鲜境内均发现了高句丽佛寺遗址，主要包括吉林珲春古城村1号寺庙址，平壤清岩里土城佛寺遗址、力浦区域定陵寺遗址，平安南道平原郡德山面元五里佛寺遗址、大同郡林原面上五里佛寺遗址，黄海北道凤山郡土城里佛寺遗址等。",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060666.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "吉林",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "吉林"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "archive-backfill"
-    },
-    {
-      "recordId": "backfill-20260701-ncha-0190-22203523html",
+      "recordId": "backfill-20260701-ncha-0160-22203523html",
       "date": "2026-07-01",
       "title": "文物行业1名共产党员、8个基层党组织获“两优一先”表彰",
       "sources": [
@@ -1451,7 +230,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260701-ncha-0189-22203511html",
+      "recordId": "backfill-20260701-ncha-0159-22203511html",
       "date": "2026-07-01",
       "title": "看展览 | 博物馆展讯速览",
       "sources": [

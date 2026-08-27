@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-20T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -45,5 +45,60 @@
       "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "recordId": "backfill-20260720-archaeology-0225-6060084shtml",
+      "date": "2026-07-20",
+      "title": "山西夏县发现东汉中晚期家族墓地",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260720_6060084.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "山西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260720-archaeology-0226-6060089shtml",
+      "date": "2026-07-20",
+      "title": "新发现 | “取卤煎盐”两千年——山东东营坡家庄制盐遗址考古发现与收获",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260720_6060089.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
 }

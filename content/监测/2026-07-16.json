@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-16T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 4,
       "note": ""
     },
     {
@@ -47,7 +47,114 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260716-cultural-relics-news-0245-2734id112256",
+      "recordId": "backfill-20260716-archaeology-0212-6059560shtml",
+      "date": "2026-07-16",
+      "title": "新发现 | 山间别业 士族余晖——江苏苏州高新区锦峰南朝环壕聚落遗址发掘收获",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260716_6059560.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江苏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "江苏"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260716-archaeology-0213-6059521shtml",
+      "date": "2026-07-16",
+      "title": "社科要闻 | 港澳研究中心正式揭牌",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260716_6059521.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260716-archaeology-0210-6059518shtml",
+      "date": "2026-07-16",
+      "title": "陕西渭南富平县西晋十六国时期墓葬发掘简报",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260716_6059518.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "陕西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260716-archaeology-0211-6059561shtml",
+      "date": "2026-07-16",
+      "title": "陕西西安西咸新区新发现宋金时期窑址及相关问题初探",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260716_6059561.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "陕西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260716-cultural-relics-news-0215-2734id112256",
       "date": "2026-07-16",
       "title": "2026年度国家文物政策理论研究课题启动申报",
       "sources": [
@@ -73,7 +180,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260716-cultural-relics-news-0244-2734id112255",
+      "recordId": "backfill-20260716-cultural-relics-news-0214-2734id112255",
       "date": "2026-07-16",
       "title": "文化和旅游部副部长、国家文物局局长会见香港西九文化区管理局行政总裁",
       "sources": [

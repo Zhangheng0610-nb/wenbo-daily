@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-12T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,13 +47,91 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260812-cctv-wenbo-0404-r260812shtml",
+      "recordId": "backfill-20260812-archaeology-0357-6063038shtml",
+      "date": "2026-08-12",
+      "title": "从华北地区的新石器化历程看细石器的衰落",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260812_6063038.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260812-archaeology-0359-6063047shtml",
+      "date": "2026-08-12",
+      "title": "古文字研究工程首期成果丰硕 甲骨文还原3000年前“流星雨”",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260812_6063047.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260812-archaeology-0358-6063040shtml",
+      "date": "2026-08-12",
+      "title": "火焰山中，重大发现！",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260812_6063040.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260812-cctv-wenbo-0360-r260812shtml",
       "date": "2026-08-12",
       "title": "《探索·发现》 20260812 高青大墓发掘记（下）",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://tv.cctv.cn/2026/08/12/VIDEtFL812MHwnT9LPtbGcRr260812.shtml"
         }
       ],
@@ -73,7 +151,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260812-ncha-0405-22204299html",
+      "recordId": "backfill-20260812-ncha-0361-22204299html",
       "date": "2026-08-12",
       "title": "陕西省委书记赵一德在调研文物保护和考古工作时强调 坚定文化自信 勇担使命责任 让...",
       "sources": [

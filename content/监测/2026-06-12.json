@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-12T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 5,
       "note": ""
     },
     {
@@ -46,6 +46,137 @@
     }
   ],
   "items": [
+    {
+      "recordId": "backfill-20260612-archaeology-0073-6053692shtml",
+      "date": "2026-06-12",
+      "title": "古典文明成果惊艳亮相雅典 中医药文化展尽显千年底蕴",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260612_6053692.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260612-archaeology-0071-6053686shtml",
+      "date": "2026-06-12",
+      "title": "央视新闻 | 第二届世界古典学大会 中外专家齐聚雅典探讨古典智慧的现代启示",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260612_6053686.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "国际交流"
+      ],
+      "tags": [
+        "国际交流"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260612-archaeology-0072-6053689shtml",
+      "date": "2026-06-12",
+      "title": "央视新闻 | 第二届世界古典学大会 持续推进古典文明交流互鉴 赋能当代世界",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260612_6053689.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260612-archaeology-0074-6053698shtml",
+      "date": "2026-06-12",
+      "title": "新华社｜【综述】从北京到雅典——世界古典学大会连接古今文明与世界对话",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260612_6053698.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "北京"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260612-archaeology-0075-6053712shtml",
+      "date": "2026-06-12",
+      "title": "社科要闻|第二届世界古典学大会在希腊雅典圆满闭幕",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260612_6053712.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
     {
       "recordId": "backfill-20260612-ncha-0076-22203185html",
       "date": "2026-06-12",

@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-04T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,85 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260704-cultural-relics-news-0197-2702id112145",
+      "recordId": "backfill-20260704-archaeology-0170-6057606shtml",
+      "date": "2026-07-04",
+      "title": "喜报！中国社会科学院1名共产党员、1名党务工作者、5个基层党组织荣获中央和国家机关“两优一先”荣...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260704_6057606.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260704-archaeology-0172-6057737shtml",
+      "date": "2026-07-04",
+      "title": "社科要闻 | 中国社会科学院“两优一先”表彰会在京召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260704_6057737.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260704-archaeology-0171-6057736shtml",
+      "date": "2026-07-04",
+      "title": "社科要闻 | 中国社会科学院召开树立和践行正确政绩观学习教育警示教育会暨纪律建设工作责任制推进会",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260704_6057736.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260704-cultural-relics-news-0173-2702id112145",
       "date": "2026-07-04",
       "title": "从文化遗产保护看政绩观",
       "sources": [
@@ -73,7 +151,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260704-cultural-relics-news-0198-2702id112146",
+      "recordId": "backfill-20260704-cultural-relics-news-0174-2702id112146",
       "date": "2026-07-04",
       "title": "筑牢红色堡垒 赓续革命薪火——文物行业“全国先进基层党组织”事迹摘要",
       "sources": [

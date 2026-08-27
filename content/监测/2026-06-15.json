@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-15T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,85 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260615-museum-association-0094-ntentid14716",
+      "recordId": "backfill-20260615-archaeology-0093-6054110shtml",
+      "date": "2026-06-15",
+      "title": "以匠心守初心",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260615_6054110.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260615-archaeology-0092-6054108shtml",
+      "date": "2026-06-15",
+      "title": "构建中华文明标识体系的几点思考",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260615_6054108.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260615-archaeology-0094-6053957shtml",
+      "date": "2026-06-15",
+      "title": "社科要闻 | 高翔会见希腊议会国防与外交事务委员会主席朵拉·芭戈雅尼",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260615_6053957.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260615-museum-association-0095-ntentid14716",
       "date": "2026-06-15",
       "title": "天坛博物馆揭牌成立，北京8处世界文化遗产都有了专题博物馆",
       "sources": [
@@ -74,7 +152,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260615-ncha-0095-22203274html",
+      "recordId": "backfill-20260615-ncha-0096-22203274html",
       "date": "2026-06-15",
       "title": "2026年文物消防安全主题海报及安全隐患排查整治微视频征集活动启动",
       "sources": [
@@ -100,7 +178,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260615-ncha-0096-22203280html",
+      "recordId": "backfill-20260615-ncha-0097-22203280html",
       "date": "2026-06-15",
       "title": "“文物01星”遥感监测卫星成功发射",
       "sources": [
@@ -126,7 +204,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260615-ncha-0097-22203282html",
+      "recordId": "backfill-20260615-ncha-0098-22203282html",
       "date": "2026-06-15",
       "title": "一周各地文物动态摘编（6.6-6.13）",
       "sources": [

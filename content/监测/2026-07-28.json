@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-28T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 4,
       "note": ""
     },
     {
@@ -47,13 +47,118 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260728-cctv-wenbo-0299-m260728shtml",
+      "recordId": "backfill-20260728-archaeology-0267-6061173shtml",
+      "date": "2026-07-28",
+      "title": "中国社会科学院党组：习近平党建思想的重大意义",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260728_6061173.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-archaeology-0264-6061184shtml",
+      "date": "2026-07-28",
+      "title": "大运河流域出土明代纺织品调查研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260728_6061184.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-archaeology-0266-6061176shtml",
+      "date": "2026-07-28",
+      "title": "申遗成功见证千年瓷都新跨越",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260728_6061176.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-archaeology-0265-6061187shtml",
+      "date": "2026-07-28",
+      "title": "盘筑拉坯技术的运用：山东茌平教场铺遗址陶器成型工艺研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260728_6061187.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-cctv-wenbo-0268-m260728shtml",
       "date": "2026-07-28",
       "title": "辽博年度特展《微笑——文物里的中国精神印记》开展",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://yangbo.cctv.cn/2026/07/28/ARTIuSMndsnnmNrJeUnFFFVm260728.shtml"
         }
       ],
@@ -73,7 +178,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260728-cultural-relics-news-0301-2766id112386",
+      "recordId": "backfill-20260728-cultural-relics-news-0270-2766id112386",
       "date": "2026-07-28",
       "title": "“景德镇手工瓷业遗存”成功列入《世界遗产名录》",
       "sources": [
@@ -99,7 +204,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260728-cultural-relics-news-0302-2766id112387",
+      "recordId": "backfill-20260728-cultural-relics-news-0271-2766id112387",
       "date": "2026-07-28",
       "title": "把“千年瓷都”这张靓丽的名片擦得更亮——文化和旅游部副部长、国家文物局局长饶权详解“景德镇手工瓷业遗存”成功申遗",
       "sources": [
@@ -125,7 +230,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260728-cultural-relics-news-0300-2766id112385",
+      "recordId": "backfill-20260728-cultural-relics-news-0269-2766id112385",
       "date": "2026-07-28",
       "title": "擦亮中华文明重要名片——习近平文化思想引领中国世界遗产申报保护工作壮阔实践",
       "sources": [
@@ -153,7 +258,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260728-ncha-0305-22204016html",
+      "recordId": "backfill-20260728-ncha-0272-22204016html",
       "date": "2026-07-28",
       "title": "国家文物局召开新闻发布会 介绍《国有文物资源数据管理办法》《革命文物保护工程技术...",
       "sources": [

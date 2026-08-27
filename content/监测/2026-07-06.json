@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-06T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 1,
       "note": ""
     },
     {
@@ -45,5 +45,32 @@
       "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "recordId": "backfill-20260706-archaeology-0176-6057939shtml",
+      "date": "2026-07-06",
+      "title": "明代四合如意暗花马面裙的结构研究与数字化复原",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260706_6057939.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "数字化"
+      ],
+      "tags": [
+        "数字化"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
 }

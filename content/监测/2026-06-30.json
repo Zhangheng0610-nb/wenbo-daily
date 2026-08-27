@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-30T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 1,
       "note": ""
     },
     {
@@ -47,7 +47,33 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260630-cultural-relics-news-0159-2686id112096",
+      "recordId": "backfill-20260630-archaeology-0149-6056797shtml",
+      "date": "2026-06-30",
+      "title": "隋唐洛阳城正平坊区域出土砖瓦科技分析及工艺继承研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260630_6056797.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "数字化"
+      ],
+      "tags": [
+        "数字化"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260630-cultural-relics-news-0151-2686id112096",
       "date": "2026-06-30",
       "title": "中国共产党的创建文物史料展在京开幕",
       "sources": [
@@ -73,7 +99,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260630-cultural-relics-news-0157-2686id112094",
+      "recordId": "backfill-20260630-cultural-relics-news-0150-2686id112094",
       "date": "2026-06-30",
       "title": "浙江革命文物专题展在南湖革命纪念馆开幕",
       "sources": [
@@ -102,7 +128,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260630-museum-association-0160-ntentid14720",
+      "recordId": "backfill-20260630-museum-association-0152-ntentid14720",
       "date": "2026-06-30",
       "title": "“文创赋能美好生活——全国博物馆文创推进工作十周年文创产品展示活动暨文创培训班”在湖北省博物馆召开",
       "sources": [

@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-14T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 4,
       "note": ""
     },
     {
@@ -47,7 +47,113 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260814-ncha-0418-22204332html",
+      "recordId": "backfill-20260814-archaeology-0376-6063257shtml",
+      "date": "2026-08-14",
+      "title": "史前先民应对水旱灾害有策略",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260814_6063257.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260814-archaeology-0378-6063258shtml",
+      "date": "2026-08-14",
+      "title": "广西岩利山多层洞穴留存近百万年生物演化序列",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260814_6063258.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "广西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "广西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260814-archaeology-0375-6063269shtml",
+      "date": "2026-08-14",
+      "title": "河南安阳殷墟大司空村东南地2016—2017年发掘报告",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202608/t20260814_6063269.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260814-archaeology-0377-6063279shtml",
+      "date": "2026-08-14",
+      "title": "溯源、重构和创新：人骨考古十年研究总结",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260814_6063279.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260814-ncha-0379-22204332html",
       "date": "2026-08-14",
       "title": "图片故事 | 坚守无声 石为之铭——承德石质文物保护工作掠影",
       "sources": [

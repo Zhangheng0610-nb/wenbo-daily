@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-13T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -45,5 +45,87 @@
       "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "recordId": "backfill-20260713-archaeology-0200-6059008shtml",
+      "date": "2026-07-13",
+      "title": "三星堆三号坑铜顶尊跪坐人像科技分析成果发布",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260713_6059008.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "数字化",
+        "政策行业"
+      ],
+      "tags": [
+        "数字化",
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260713-archaeology-0201-6058924shtml",
+      "date": "2026-07-13",
+      "title": "社科要闻 | 立志做大学问、做真学问——中国社会科学院召开第三届学风和道德建设论坛",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260713_6058924.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260713-archaeology-0199-6059016shtml",
+      "date": "2026-07-13",
+      "title": "辽宁北票波台沟辽墓出土树皮葬具的考古发现与树种鉴定",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260713_6059016.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "辽宁"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
 }

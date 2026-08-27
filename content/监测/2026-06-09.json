@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-09T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 5,
       "note": ""
     },
     {
@@ -47,7 +47,139 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260609-cultural-relics-news-0059-2632id111889",
+      "recordId": "backfill-20260609-archaeology-0049-6053004shtml",
+      "date": "2026-06-09",
+      "title": "宣传片 | 从北京到雅典：一场穿越时空的“古今对话”",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260609_6053004.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "北京"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260609-archaeology-0048-6053021shtml",
+      "date": "2026-06-09",
+      "title": "新发现 | 山东海岛考古新突破：大钦岛东村遗址发现打制石器及大汶口聚落制玉线索",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260609_6053021.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260609-archaeology-0050-6053005shtml",
+      "date": "2026-06-09",
+      "title": "激活古典智慧 向未来而行——写在第二届世界古典学大会召开之际",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260609_6053005.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260609-archaeology-0052-6053045shtml",
+      "date": "2026-06-09",
+      "title": "社科快讯 | 第二届世界古典学大会在希腊雅典开幕",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260609_6053045.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260609-archaeology-0051-6053018shtml",
+      "date": "2026-06-09",
+      "title": "重读经典 照鉴未来：古典学的当代角色与时代使命",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260609_6053018.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260609-cultural-relics-news-0053-2632id111889",
       "date": "2026-06-09",
       "title": "卡塔尔游牧生活与文化展在中国国家博物馆开幕",
       "sources": [
@@ -75,7 +207,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260609-ncha-0065-22203108html",
+      "recordId": "backfill-20260609-ncha-0055-22203108html",
       "date": "2026-06-09",
       "title": "文化和旅游部副部长、国家文物局局长调研北京市革命旧址保护工作",
       "sources": [
@@ -102,7 +234,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260609-ncha-0064-22203104html",
+      "recordId": "backfill-20260609-ncha-0054-22203104html",
       "date": "2026-06-09",
       "title": "荆楚留遗响 今作南风歌——“文物保护看基层”（湖北行）之博物馆观察",
       "sources": [

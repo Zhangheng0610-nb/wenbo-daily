@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-10T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,85 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260610-ncha-0066-22203143html",
+      "recordId": "backfill-20260610-archaeology-0057-6053190shtml",
+      "date": "2026-06-10",
+      "title": "新华社 | 第二届世界古典学大会在希腊雅典举办",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260610_6053190.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260610-archaeology-0056-6053186shtml",
+      "date": "2026-06-10",
+      "title": "新闻联播 | 第二届世界古典学大会在希腊雅典举办",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260610_6053186.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260610-archaeology-0058-6053192shtml",
+      "date": "2026-06-10",
+      "title": "社科要闻 | 在文明对话中思考古典学的当代使命——青年古典学者座谈会在雅典举行",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260610_6053192.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260610-ncha-0059-22203143html",
       "date": "2026-06-10",
       "title": "向内守护 向外激活 湖北文物保护的微与著——“文物保护看基层”（湖北行）之文物保...",
       "sources": [
@@ -74,7 +152,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260610-ncha-0067-22203145html",
+      "recordId": "backfill-20260610-ncha-0060-22203145html",
       "date": "2026-06-10",
       "title": "文化和旅游部副部长、国家文物局局长会见冲突地区遗产保护国际联盟执行主任瓦莱里·弗...",
       "sources": [

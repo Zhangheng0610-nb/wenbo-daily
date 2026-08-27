@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-18T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,85 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260618-cultural-relics-news-0112-2658id111990",
+      "recordId": "backfill-20260618-archaeology-0110-6054940shtml",
+      "date": "2026-06-18",
+      "title": "古典学的思想交响：一场跨越文明、技术与时代的学术合奏",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260618_6054940.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260618-archaeology-0112-6055013shtml",
+      "date": "2026-06-18",
+      "title": "社科要闻 | 中共中国社会科学院党组传达学习全国党建工作座谈会精神",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260618_6055013.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260618-archaeology-0111-6054950shtml",
+      "date": "2026-06-18",
+      "title": "让古典文明之光照亮世界前行之路——第二届世界古典学大会发言摘编",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260618_6054950.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260618-cultural-relics-news-0113-2658id111990",
       "date": "2026-06-18",
       "title": "2026年文物消防安全主题海报及安全隐患排查整治微视频征集活动启动",
       "sources": [
@@ -73,7 +151,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260618-cultural-relics-news-0113-2658id111991",
+      "recordId": "backfill-20260618-cultural-relics-news-0114-2658id111991",
       "date": "2026-06-18",
       "title": "安徽修订实施文物保护法办法8月1日起施行",
       "sources": [
@@ -102,7 +180,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260618-museum-association-0114-ntentid14711",
+      "recordId": "backfill-20260618-museum-association-0115-ntentid14711",
       "date": "2026-06-18",
       "title": "关于举办中国博物馆协会2026年讲解员高级培训班的通知",
       "sources": [
@@ -130,7 +208,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260618-ncha-0115-22203350html",
+      "recordId": "backfill-20260618-ncha-0116-22203350html",
       "date": "2026-06-18",
       "title": "文化和旅游部副部长、国家文物局局长会见希腊驻华大使埃夫耶尼奥斯·卡尔佩里斯",
       "sources": [

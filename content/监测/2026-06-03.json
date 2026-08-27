@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-03T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 6,
       "note": ""
     },
     {
@@ -47,7 +47,166 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260603-museum-association-0037-ntentid14695",
+      "recordId": "backfill-20260603-archaeology-0020-6008888shtml",
+      "date": "2026-06-03",
+      "title": "会追问的人工智能，能为考古带来什么",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260603_6008888.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-archaeology-0021-6008920shtml",
+      "date": "2026-06-03",
+      "title": "山西太原发现一处新石器遗址 出土大量彩陶",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260603_6008920.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-archaeology-0023-6008130shtml",
+      "date": "2026-06-03",
+      "title": "更好担负起新的文化使命",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260603_6008130.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-archaeology-0025-6008919shtml",
+      "date": "2026-06-03",
+      "title": "社科要闻 | 中俄智库高端论坛（2026）在莫斯科召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260603_6008919.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-archaeology-0024-6008135shtml",
+      "date": "2026-06-03",
+      "title": "社科要闻 | 学习贯彻习近平总书记在文化传承发展座谈会上重要讲话精神座谈会在京召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260603_6008135.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-archaeology-0022-6008123shtml",
+      "date": "2026-06-03",
+      "title": "赓续历史文脉 谱写时代华章——习近平文化思想引领新时代文化传承发展",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260603_6008123.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260603-museum-association-0026-ntentid14695",
       "date": "2026-06-03",
       "title": "《中国博物馆陈列展览精品·策展笔记》丛书（第四辑）图书出版项目单一来源采购结果公示",
       "sources": [
@@ -75,7 +234,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260603-ncha-0039-22202998html",
+      "recordId": "backfill-20260603-ncha-0027-22202998html",
       "date": "2026-06-03",
       "title": "国家文物局召开第二季度例行新闻发布会 2026年文化和自然遗产日活动即将精彩呈现",
       "sources": [

@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-13T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,86 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260813-cultural-relics-news-0409-2813id112560",
+      "recordId": "backfill-20260813-archaeology-0362-6063167shtml",
+      "date": "2026-08-13",
+      "title": "从物质遗存到知识体系：明清景德镇的城市空间秩序与生产强化",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260813_6063167.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260813-archaeology-0364-6063165shtml",
+      "date": "2026-08-13",
+      "title": "新发现 | 吉林长春宽城区小城子古城的调查与初步研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260813_6063165.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "吉林",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "吉林"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260813-archaeology-0363-6063163shtml",
+      "date": "2026-08-13",
+      "title": "科学构建我国西南地区彩绘岩画年代框架取得突破性进展",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260813_6063163.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260813-cultural-relics-news-0367-2813id112560",
       "date": "2026-08-13",
       "title": "2026北京博物馆季“研学月”收官“科技月”接续启航",
       "sources": [
@@ -76,7 +155,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-cultural-relics-news-0411-2813id112562",
+      "recordId": "backfill-20260813-cultural-relics-news-0369-2813id112562",
       "date": "2026-08-13",
       "title": "匠从八方来，器成天下走 记“何以景德镇——景德镇手工瓷业遗存的世界遗产价值和当代传承”主题展",
       "sources": [
@@ -104,7 +183,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-cultural-relics-news-0410-2813id112561",
+      "recordId": "backfill-20260813-cultural-relics-news-0368-2813id112561",
       "date": "2026-08-13",
       "title": "石质文物保护成果主题宣传活动启动",
       "sources": [
@@ -130,7 +209,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-cultural-relics-news-0408-2813id112559",
+      "recordId": "backfill-20260813-cultural-relics-news-0366-2813id112559",
       "date": "2026-08-13",
       "title": "第四次全国文物普查领导小组办公室组织完成黑龙江、吉林、内蒙古、山东、河北省域整体验收",
       "sources": [
@@ -157,7 +236,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-cultural-relics-news-0407-2813id112558",
+      "recordId": "backfill-20260813-cultural-relics-news-0365-2813id112558",
       "date": "2026-08-13",
       "title": "行走文物主题游径 千年文脉踏路而来",
       "sources": [
@@ -183,7 +262,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-museum-association-0412-ntentid14759",
+      "recordId": "backfill-20260813-museum-association-0370-ntentid14759",
       "date": "2026-08-13",
       "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公告",
       "sources": [
@@ -209,7 +288,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-ncha-0413-22204311html",
+      "recordId": "backfill-20260813-ncha-0371-22204311html",
       "date": "2026-08-13",
       "title": "匠从八方来，器成天下走 记“何以景德镇——景德镇手工瓷业遗存的世界遗产价值和当代...",
       "sources": [
@@ -235,7 +314,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-ncha-0415-22204315html",
+      "recordId": "backfill-20260813-ncha-0373-22204315html",
       "date": "2026-08-13",
       "title": "石质文物保护成果主题宣传活动启动",
       "sources": [
@@ -261,7 +340,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-ncha-0414-22204313html",
+      "recordId": "backfill-20260813-ncha-0372-22204313html",
       "date": "2026-08-13",
       "title": "行走文物主题游径 千年文脉踏路而来",
       "sources": [
@@ -287,7 +366,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260813-xinhua-wenbo-0416-914bcb4chtml",
+      "recordId": "backfill-20260813-xinhua-wenbo-0374-914bcb4chtml",
       "date": "2026-08-13",
       "title": "探展｜把泰顺廊桥1：1复刻搬进展馆，体验与乡土文化共生的非遗密码",
       "sources": [

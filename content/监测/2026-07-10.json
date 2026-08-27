@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-10T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,63 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260710-museum-association-0218-ntentid14730",
+      "recordId": "backfill-20260710-archaeology-0190-6058691shtml",
+      "date": "2026-07-10",
+      "title": "中国社会科学院大学历史学院与中国社会科学院考古研究所召开“学科建设暨人才培养专题调研座谈会”",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202607/t20260710_6058691.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260710-archaeology-0189-6058779shtml",
+      "date": "2026-07-10",
+      "title": "建设中华文明科技考古资源标准库的展望",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260710_6058779.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "展览",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "数字化"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260710-museum-association-0191-ntentid14730",
       "date": "2026-07-10",
       "title": "2026年博物馆志愿服务工作培训班暨博物馆常态化讲解志愿服务项目交流会在宁波召开",
       "sources": [
@@ -73,7 +129,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260710-ncha-0220-22203680html",
+      "recordId": "backfill-20260710-ncha-0193-22203680html",
       "date": "2026-07-10",
       "title": "国家文物局召开中央专项彩票公益金支持国家古迹文物保护项目工作交流会",
       "sources": [
@@ -99,7 +155,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260710-ncha-0219-22203678html",
+      "recordId": "backfill-20260710-ncha-0192-22203678html",
       "date": "2026-07-10",
       "title": "国家革命文物协同研究中心工作会在沪召开",
       "sources": [

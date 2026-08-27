@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-24T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 1,
       "note": ""
     },
     {
@@ -45,5 +45,34 @@
       "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "recordId": "backfill-20260824-archaeology-0407-6064277shtml",
+      "date": "2026-08-24",
+      "title": "晚间新闻｜中国考古机构首次赴南美洲开展联合考古",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202608/t20260824_6064277.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
 }

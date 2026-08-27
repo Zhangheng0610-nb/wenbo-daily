@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-25T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -46,6 +46,61 @@
     }
   ],
   "items": [
+    {
+      "recordId": "backfill-20260625-archaeology-0131-6056004shtml",
+      "date": "2026-06-25",
+      "title": "“考古中国”重大项目重要进展工作会在京召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260625_6056004.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260625-archaeology-0130-6056003shtml",
+      "date": "2026-06-25",
+      "title": "山西万荣乌苏东周墓地出土罕见西戎风格陶器 实证古代民族交流融合",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260625_6056003.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "山西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
     {
       "recordId": "backfill-20260625-cultural-relics-news-0132-2674id112047",
       "date": "2026-06-25",
@@ -160,7 +215,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260625-ncha-0138-22203430html",
+      "recordId": "backfill-20260625-ncha-0137-22203430html",
       "date": "2026-06-25",
       "title": "“考古中国”重大项目重要进展工作会在京召开",
       "sources": [
@@ -188,7 +243,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260625-ncha-0137-22203428html",
+      "recordId": "backfill-20260625-ncha-0136-22203428html",
       "date": "2026-06-25",
       "title": "四项盐业考古重要成果描绘海盐与井盐生产技术及历史演进图景",
       "sources": [

@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-29T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,13 +47,92 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260729-cctv-wenbo-0306-p260729shtml",
+      "recordId": "backfill-20260729-archaeology-0275-6061309shtml",
+      "date": "2026-07-29",
+      "title": "三星堆考古新认知：祭祀所用神庙疑似失火倒塌",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260729_6061309.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260729-archaeology-0274-6061315shtml",
+      "date": "2026-07-29",
+      "title": "亚长的餐桌：一位商代将军的饮食人生",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260729_6061315.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260729-archaeology-0273-6061323shtml",
+      "date": "2026-07-29",
+      "title": "河南永城市王庄遗址ⅠM6、ⅠM16 发掘简报",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260729_6061323.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260729-cctv-wenbo-0276-p260729shtml",
       "date": "2026-07-29",
       "title": "“太平年·天下同宁”大展今日在浙江省博物馆开幕",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://yangbo.cctv.cn/2026/07/29/ARTIYaqagHVeH6EmnYLAbZBP260729.shtml"
         }
       ],
@@ -76,7 +155,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260729-museum-association-0307-ntentid14741",
+      "recordId": "backfill-20260729-museum-association-0277-ntentid14741",
       "date": "2026-07-29",
       "title": "2026年中国博物馆协会青年策展人高级研修班正式开班",
       "sources": [
@@ -104,7 +183,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260729-ncha-0310-22204025html",
+      "recordId": "backfill-20260729-ncha-0280-22204025html",
       "date": "2026-07-29",
       "title": "一图读懂《国家文物事业发展“十五五”规划》",
       "sources": [
@@ -132,7 +211,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260729-ncha-0308-22204021html",
+      "recordId": "backfill-20260729-ncha-0278-22204021html",
       "date": "2026-07-29",
       "title": "第48届世界遗产大会“古代水文观测遗产与历史气候变迁”主题边会成功举办",
       "sources": [
@@ -158,7 +237,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260729-ncha-0309-22204023html",
+      "recordId": "backfill-20260729-ncha-0279-22204023html",
       "date": "2026-07-29",
       "title": "第48届世界遗产大会“基于中国案例研究探析突出价值属性”主题边会成功举办",
       "sources": [
@@ -184,7 +263,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260729-xinhua-wenbo-0311-e4980d2chtml",
+      "recordId": "backfill-20260729-xinhua-wenbo-0281-e4980d2chtml",
       "date": "2026-07-29",
       "title": "我国将建设国有文物资源数据登记管理平台",
       "sources": [

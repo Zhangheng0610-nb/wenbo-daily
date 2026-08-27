@@ -47,13 +47,13 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260725-cctv-wenbo-0283-4260725shtml",
+      "recordId": "backfill-20260725-cctv-wenbo-0252-4260725shtml",
       "date": "2026-07-25",
       "title": "《考古公开课》 20260725 营造北京",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://tv.cctv.cn/2026/07/25/VIDEGP5IqGAmEZ3xshG2qZJ4260725.shtml"
         }
       ],
@@ -74,7 +74,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260725-cultural-relics-news-0286-2762id112365",
+      "recordId": "backfill-20260725-cultural-relics-news-0254-2762id112365",
       "date": "2026-07-25",
       "title": "中泰联合考古发现铁器时代海丝贸易新证据",
       "sources": [
@@ -100,7 +100,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260725-cultural-relics-news-0289-2762id112368",
+      "recordId": "backfill-20260725-cultural-relics-news-0255-2762id112368",
       "date": "2026-07-25",
       "title": "全国博物馆建设管理座谈会在天津召开",
       "sources": [
@@ -127,7 +127,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260725-cultural-relics-news-0285-2762id112364",
+      "recordId": "backfill-20260725-cultural-relics-news-0253-2762id112364",
       "date": "2026-07-25",
       "title": "山东潍坊获批国家历史文化名城",
       "sources": [
@@ -154,7 +154,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260725-cultural-relics-news-0290-2762id112369",
+      "recordId": "backfill-20260725-cultural-relics-news-0256-2762id112369",
       "date": "2026-07-25",
       "title": "山西发布文物系统性保护的实施意见",
       "sources": [
@@ -183,7 +183,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260725-ncha-0291-22203985html",
+      "recordId": "backfill-20260725-ncha-0257-22203985html",
       "date": "2026-07-25",
       "title": "“景德镇手工瓷业遗存”成功列入《世界遗产名录》",
       "sources": [

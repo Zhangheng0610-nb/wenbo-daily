@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-26T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,59 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260626-museum-association-0139-ntentid14718",
+      "recordId": "backfill-20260626-archaeology-0139-6056197shtml",
+      "date": "2026-06-26",
+      "title": "“十大考古”领队说｜有心栽花求突破 无心插柳获奇珍——裴李岗遗址发掘记",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260626_6056197.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260626-archaeology-0138-6056195shtml",
+      "date": "2026-06-26",
+      "title": "北方旱作农业起源和形成阶段的“坝上模式”研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260626_6056195.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260626-museum-association-0140-ntentid14718",
       "date": "2026-06-26",
       "title": "中国博物馆协会代表出席国际博协2026年年会暨成立80周年庆典",
       "sources": [

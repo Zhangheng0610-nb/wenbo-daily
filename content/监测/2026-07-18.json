@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-18T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,13 +47,92 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260718-cctv-wenbo-0252-j260718shtml",
+      "recordId": "backfill-20260718-archaeology-0217-6059878shtml",
+      "date": "2026-07-18",
+      "title": "新疆温泉县呼斯塔遗址东区墓地第1、2号冢的发掘",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260718_6059878.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "新疆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260718-archaeology-0219-6059876shtml",
+      "date": "2026-07-18",
+      "title": "社科要闻 | 中国社会科学院召开组织人事工作座谈会",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260718_6059876.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260718-archaeology-0218-6059877shtml",
+      "date": "2026-07-18",
+      "title": "苏州发现罕见南朝时期大型庄园遗址",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260718_6059877.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260718-cctv-wenbo-0221-j260718shtml",
       "date": "2026-07-18",
       "title": "《考古公开课》 20260718 往事越千年·南越王的宝藏",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://tv.cctv.cn/2026/07/18/VIDEi0US8tE5UEJd044giuqJ260718.shtml"
         }
       ],
@@ -73,13 +152,13 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260718-cctv-wenbo-0250-e260718shtml",
+      "recordId": "backfill-20260718-cctv-wenbo-0220-e260718shtml",
       "date": "2026-07-18",
       "title": "《考古公开课》 20260718 往事越千年·寻迹南越国",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://tv.cctv.cn/2026/07/18/VIDEdA66sCRISMaNQ8NertlE260718.shtml"
         }
       ],
@@ -99,7 +178,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260718-cultural-relics-news-0259-2742id112287",
+      "recordId": "backfill-20260718-cultural-relics-news-0223-2742id112287",
       "date": "2026-07-18",
       "title": "中突联合考古再结硕果——本·阿鲁斯森林遗址保护展示工程竣工",
       "sources": [
@@ -129,7 +208,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260718-cultural-relics-news-0258-2742id112286",
+      "recordId": "backfill-20260718-cultural-relics-news-0222-2742id112286",
       "date": "2026-07-18",
       "title": "公安部国家文物局部署深入推进打击防范文物犯罪“云鸮”专项行动",
       "sources": [

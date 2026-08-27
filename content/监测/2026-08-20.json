@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-20T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,87 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260820-cultural-relics-news-0442-2833id112634",
+      "recordId": "backfill-20260820-archaeology-0392-6064042shtml",
+      "date": "2026-08-20",
+      "title": "中国家羊的分子考古学研究综述与展望",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260820_6064042.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260820-archaeology-0391-6064037shtml",
+      "date": "2026-08-20",
+      "title": "中国现代人起源与演化的考古学观察",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260820_6064037.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260820-archaeology-0393-6064032shtml",
+      "date": "2026-08-20",
+      "title": "高端访谈 | 深刻把握习近平党建思想的理论贡献和重大意义——访中国社会科学院院长、党组书记高翔",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202608/t20260820_6064032.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260820-cultural-relics-news-0395-2833id112634",
       "date": "2026-08-20",
       "title": "2026年度中乌布哈拉联合考古发掘启动",
       "sources": [
@@ -73,7 +153,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260820-cultural-relics-news-0440-2833id112632",
+      "recordId": "backfill-20260820-cultural-relics-news-0394-2833id112632",
       "date": "2026-08-20",
       "title": "为石头“问诊”十五年——中国文化遗产研究院探索石质文物保护“承德经验”",
       "sources": [

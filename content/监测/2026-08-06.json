@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-06T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,60 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260806-cultural-relics-news-0372-2793id112482",
+      "recordId": "backfill-20260806-archaeology-0325-6062384shtml",
+      "date": "2026-08-06",
+      "title": "“两周考古学术前沿暨周原云塘—齐镇建筑基址、庄李铸铜作坊发掘报告座谈会”在宝鸡召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260806_6062384.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260806-archaeology-0326-6062387shtml",
+      "date": "2026-08-06",
+      "title": "中国科研团队研究揭示广西花山岩画“千年不褪色”之谜",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260806_6062387.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "广西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "广西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260806-cultural-relics-news-0328-2793id112482",
       "date": "2026-08-06",
       "title": "三星堆遗址祭祀坑发现40周年：惊世之后，追问不止",
       "sources": [
@@ -73,7 +126,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260806-cultural-relics-news-0371-2793id112481",
+      "recordId": "backfill-20260806-cultural-relics-news-0327-2793id112481",
       "date": "2026-08-06",
       "title": "中外专家共话科技考古与文化遗产保护",
       "sources": [
@@ -103,7 +156,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260806-cultural-relics-news-0373-2793id112483",
+      "recordId": "backfill-20260806-cultural-relics-news-0329-2793id112483",
       "date": "2026-08-06",
       "title": "湖北省文物局专题研究部署全省博物馆建设管理工作",
       "sources": [
@@ -130,7 +183,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260806-cultural-relics-news-0374-2793id112484",
+      "recordId": "backfill-20260806-cultural-relics-news-0330-2793id112484",
       "date": "2026-08-06",
       "title": "红二十五军长征革命文物联展开幕",
       "sources": [
@@ -156,7 +209,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260806-ncha-0376-22204173html",
+      "recordId": "backfill-20260806-ncha-0331-22204173html",
       "date": "2026-08-06",
       "title": "文化和旅游部副部长、国家文物局局长调研内蒙古、辽宁文物工作",
       "sources": [

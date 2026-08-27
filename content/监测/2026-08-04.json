@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-04T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,64 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260804-cultural-relics-news-0364-2786id112460",
+      "recordId": "backfill-20260804-archaeology-0316-6062144shtml",
+      "date": "2026-08-04",
+      "title": "中外专家共话科技考古与文化遗产保护",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260804_6062144.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260804-archaeology-0315-6062140shtml",
+      "date": "2026-08-04",
+      "title": "宁夏固原出土两千多年前战国时期秦酒",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260804_6062140.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "宁夏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "宁夏"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260804-cultural-relics-news-0319-2786id112460",
       "date": "2026-08-04",
       "title": "《广西考古前置工作管理办法（试行）》出台",
       "sources": [
@@ -76,7 +133,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260804-cultural-relics-news-0362-2786id112458",
+      "recordId": "backfill-20260804-cultural-relics-news-0317-2786id112458",
       "date": "2026-08-04",
       "title": "国家文物局印发《未定级民居类文物建筑修缮审批工作指引（试行）》",
       "sources": [
@@ -102,7 +159,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260804-cultural-relics-news-0363-2786id112459",
+      "recordId": "backfill-20260804-cultural-relics-news-0318-2786id112459",
       "date": "2026-08-04",
       "title": "第六批天津市文物保护单位申报遴选工作启动",
       "sources": [

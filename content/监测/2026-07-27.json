@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-27T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,89 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260727-museum-association-0296-ntentid14742",
+      "recordId": "backfill-20260727-archaeology-0261-6060991shtml",
+      "date": "2026-07-27",
+      "title": "山西垣曲北白鹅墓地2024年度发掘资料公布",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260727_6060991.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260727-archaeology-0260-6061002shtml",
+      "date": "2026-07-27",
+      "title": "科技考古视野下的商文明",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260727_6061002.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260727-archaeology-0259-6060996shtml",
+      "date": "2026-07-27",
+      "title": "重庆武隆关口西汉一号墓出土木牍的保护",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260727_6060996.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "重庆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护",
+        "重庆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260727-museum-association-0262-ntentid14742",
       "date": "2026-07-27",
       "title": "全国博物馆建设管理座谈会在天津召开",
       "sources": [
@@ -74,7 +156,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260727-xinhua-wenbo-0298-b5a12e6chtml",
+      "recordId": "backfill-20260727-xinhua-wenbo-0263-b5a12e6chtml",
       "date": "2026-07-27",
       "title": "别说文物高冷！辽博这个展，看完嘴角压不下来",
       "sources": [

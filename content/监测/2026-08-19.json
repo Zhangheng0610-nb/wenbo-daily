@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-19T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,59 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260819-ncha-0433-22204423html",
+      "recordId": "backfill-20260819-archaeology-0387-6063776shtml",
+      "date": "2026-08-19",
+      "title": "从纺织服装文化遗产中读懂中华文明",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260819_6063776.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260819-archaeology-0388-6063777shtml",
+      "date": "2026-08-19",
+      "title": "古代边疆治理视域下的北庭佛教官寺研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260819_6063777.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260819-ncha-0390-22204423html",
       "date": "2026-08-19",
       "title": "为石头“问诊”十五年——中国文化遗产研究院探索石质文物保护“承德经验”",
       "sources": [
@@ -73,7 +125,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260819-ncha-0432-22204421html",
+      "recordId": "backfill-20260819-ncha-0389-22204421html",
       "date": "2026-08-19",
       "title": "守护文物安然度汛",
       "sources": [

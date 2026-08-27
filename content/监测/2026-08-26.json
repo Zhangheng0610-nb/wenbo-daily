@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-26T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,87 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260826-museum-association-0458-ntentid14761",
+      "recordId": "backfill-20260826-archaeology-0412-6064693shtml",
+      "date": "2026-08-26",
+      "title": "加强尕日塘秦刻石的系统性研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260826_6064693.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260826-archaeology-0413-6064694shtml",
+      "date": "2026-08-26",
+      "title": "广西蒙山发现汉代古墓 抢救性发掘出土各类文物19件",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260826_6064694.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "广西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "广西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260826-archaeology-0411-6064696shtml",
+      "date": "2026-08-26",
+      "title": "赵芮副院长在青海调研伏俟城遗址",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260826_6064696.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "青海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "青海"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260826-museum-association-0414-ntentid14761",
       "date": "2026-08-26",
       "title": "中国博物馆协会博物馆管理专业委员会2026年年会在西藏拉萨召开",
       "sources": [

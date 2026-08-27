@@ -47,13 +47,13 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260815-cctv-wenbo-0420-g260815shtml",
+      "recordId": "backfill-20260815-cctv-wenbo-0380-g260815shtml",
       "date": "2026-08-15",
       "title": "《探索·发现》 20260815 考古零距离（6）",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://tv.cctv.cn/2026/08/15/VIDEh74swoiVJYd55oIr6Qhg260815.shtml"
         }
       ],
@@ -73,7 +73,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260815-cultural-relics-news-0423-2821id112589",
+      "recordId": "backfill-20260815-cultural-relics-news-0381-2821id112589",
       "date": "2026-08-15",
       "title": "坚守无声 石为之铭——河北承德石质文物保护工作掠影",
       "sources": [

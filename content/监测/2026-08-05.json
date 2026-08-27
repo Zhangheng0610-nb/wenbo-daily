@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-05T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,59 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260805-museum-association-0369-ntentid14750",
+      "recordId": "backfill-20260805-archaeology-0320-6062251shtml",
+      "date": "2026-08-05",
+      "title": "五千八百年前的回响——红山文化的守望与远行",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/bsdt/202608/t20260805_6062251.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260805-archaeology-0321-6062256shtml",
+      "date": "2026-08-05",
+      "title": "汉晋城址见证古代西南边疆治理",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260805_6062256.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260805-museum-association-0324-ntentid14750",
       "date": "2026-08-05",
       "title": "2026年中国博物馆协会青年策展人高级研修班圆满结业",
       "sources": [
@@ -75,7 +127,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260805-museum-association-0367-ntentid14748",
+      "recordId": "backfill-20260805-museum-association-0322-ntentid14748",
       "date": "2026-08-05",
       "title": "关于举办第十四期“博物馆系统新入职员工培训班”的通知",
       "sources": [
@@ -103,7 +155,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260805-museum-association-0368-ntentid14749",
+      "recordId": "backfill-20260805-museum-association-0323-ntentid14749",
       "date": "2026-08-05",
       "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公示",
       "sources": [

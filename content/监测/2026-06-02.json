@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-02T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,85 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260602-cultural-relics-news-0032-2612id111814",
+      "recordId": "backfill-20260602-archaeology-0012-6003094shtml",
+      "date": "2026-06-02",
+      "title": "系列学术活动预告｜中国历史研究院学习贯彻习近平总书记在文化传承发展座谈会上重要讲话精神",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260602_6003094.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260602-archaeology-0013-6003152shtml",
+      "date": "2026-06-02",
+      "title": "重温习近平总书记重要讲话｜文化传承发展座谈会三周年",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260602_6003152.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260602-archaeology-0014-6003182shtml",
+      "date": "2026-06-02",
+      "title": "重温！2023年6月2日，习近平总书记在中国历史研究院出席文化传承发展座谈会并发表重要讲话",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202606/t20260602_6003182.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260602-cultural-relics-news-0016-2612id111814",
       "date": "2026-06-02",
       "title": "《金石探文明》解码“中国”一词最早文物实证",
       "sources": [
@@ -73,7 +151,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260602-cultural-relics-news-0033-2612id111815",
+      "recordId": "backfill-20260602-cultural-relics-news-0017-2612id111815",
       "date": "2026-06-02",
       "title": "一座桥，三代人，十年路——泰顺廊桥从被毁到重生的“守与进”",
       "sources": [
@@ -99,7 +177,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260602-cultural-relics-news-0031-2612id111813",
+      "recordId": "backfill-20260602-cultural-relics-news-0015-2612id111813",
       "date": "2026-06-02",
       "title": "文化和旅游部副部长、国家文物局局长调研山西文物工作",
       "sources": [
@@ -126,7 +204,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260602-museum-association-0035-ntentid14693",
+      "recordId": "backfill-20260602-museum-association-0019-ntentid14693",
       "date": "2026-06-02",
       "title": "《中国博物馆数字技术应用及案例研究2025年度报告》重磅发布",
       "sources": [
@@ -156,7 +234,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260602-museum-association-0034-ntentid14692",
+      "recordId": "backfill-20260602-museum-association-0018-ntentid14692",
       "date": "2026-06-02",
       "title": "第五届中国博物馆协会民族博物馆专业委员会青年学术研讨会成功举办",
       "sources": [

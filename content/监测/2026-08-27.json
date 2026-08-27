@@ -20,7 +20,7 @@
       "sourceId": "archaeology",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,62 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260827-ncha-0460-22204540html",
+      "recordId": "backfill-20260827-archaeology-0416-6064809shtml",
+      "date": "2026-08-27",
+      "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260827-archaeology-0415-6064816shtml",
+      "date": "2026-08-27",
+      "title": "跨洋叩响远古文明之门——考古研究所与秘鲁方面携手开展联合考古",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/hzjl/202608/t20260827_6064816.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260827-ncha-0417-22204540html",
       "date": "2026-08-27",
       "title": "中外联合考古工作会议在长春召开",
       "sources": [

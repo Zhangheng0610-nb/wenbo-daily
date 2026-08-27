@@ -133,7 +133,7 @@ def in_window(day: date, start: date, end: date) -> bool:
 def date_from_url(url: str) -> date | None:
     patterns = (
         r"/(20\d{2})/(\d{1,2})/(\d{1,2})/",
-        r"/(20\d{2})(\d{2})/t\d+",
+        r"/(?:20\d{4})/t(20\d{2})(\d{2})(\d{2})[_/]",
         r"/(20\d{2})(\d{2})(\d{2})/",
     )
     for pattern in patterns:
@@ -150,8 +150,26 @@ def date_from_url(url: str) -> date | None:
     return None
 
 
+def clean_source_title(source_id: str, title: str) -> str:
+    """Keep index titles separate from dates and teaser text.
+
+    Several Chinese Archaeology pages put the title, date and a long abstract
+    inside one anchor.  The date is the reliable boundary: everything after it
+    is a teaser, not part of the headline.  The final cap is only a safeguard
+    for malformed or script-generated entries.
+    """
+    value = plain(title)
+    if source_id == "archaeology":
+        value = re.split(r"\s*20\d{2}-\d{2}-\d{2}\b", value, maxsplit=1)[0].strip()
+    value = re.sub(r"\s+", " ", value).strip(" -|｜")
+    if len(value) > 120:
+        cut = max((value.rfind(mark, 30, 120) for mark in "：:，,。；;——"), default=-1)
+        value = value[:cut if cut >= 36 else 120].rstrip(" ，,：:;；") + "…"
+    return value or "未命名文博报道"
+
+
 def candidate(source_id: str, published: date, title: str, url: str) -> dict:
-    return {"sourceId": source_id, "date": published.isoformat(), "title": title, "url": url}
+    return {"sourceId": source_id, "date": published.isoformat(), "title": clean_source_title(source_id, title), "url": url}
 
 
 def is_wenbo_relevant(title: str) -> bool:
@@ -449,6 +467,65 @@ def empty_day(day: date) -> dict:
     ], "items": []}
 
 
+def normalize_archaeology_backfill() -> None:
+    """Repair old generated archaeology rows after parser improvements.
+
+    Earlier runs could store a ``tYYYYMMDD`` article under the first day of
+    its month and retain the index teaser as its title.  Move only generated
+    archaeology observations to the URL-derived day and leave human-authored
+    or baseline records untouched.
+    """
+    payloads = {}
+    moved: dict[str, dict[str, dict]] = defaultdict(dict)
+    for path in sorted(MONITORING.glob("2026-*.json")):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        kept = []
+        for item in payload.get("items", []):
+            sources = item.get("sources") or []
+            source = sources[0] if sources else {}
+            url = source.get("url", "")
+            if item.get("origin") != "archive-backfill" or source.get("sourceId") != "archaeology":
+                kept.append(item)
+                continue
+            item["title"] = clean_source_title("archaeology", item.get("title", ""))
+            corrected = date_from_url(url)
+            target = corrected.isoformat() if corrected else item.get("date", path.stem)
+            item["date"] = target
+            item["recordId"] = re.sub(
+                r"^backfill-\d{8}-", f"backfill-{target.replace('-', '')}-", item.get("recordId", "")
+            )
+            moved[target][url] = item
+        payload["items"] = kept
+        payloads[path.stem] = payload
+    for target, rows in moved.items():
+        payload = payloads.get(target)
+        if not payload:
+            continue
+        payload["items"].extend(rows.values())
+    for stem, payload in payloads.items():
+        counts = defaultdict(int)
+        for item in payload.get("items", []):
+            for source in item.get("sources", []):
+                counts[source.get("sourceId", "")] += 1
+        for coverage in payload.get("coverage", []):
+            coverage["candidateCount"] = counts[coverage.get("sourceId", "")]
+        payload["items"] = sorted(
+            payload.get("items", []),
+            key=lambda value: (value.get("sources", [{}])[0].get("sourceId", ""), value.get("title", "")),
+        )
+        (MONITORING / f"{stem}.json").write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+
+
+def allowed_backfill_row(row: dict) -> bool:
+    # The archaeology source is already a domain-specific institute archive;
+    # academic papers from its core sections need not repeat a keyword such as
+    # “考古” in the headline.  Other source feeds still use the strict title
+    # gate to keep general current-affairs items out of the corpus.
+    return row.get("sourceId") == "archaeology" or is_wenbo_relevant(row.get("title", ""))
+
+
 def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tuple[bool, str]]) -> None:
     baseline_path = MONITORING / "baseline.json"
     baseline_urls: set[str] = set()
@@ -459,7 +536,8 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
                 if source.get("url"):
                     baseline_urls.add(source["url"].rstrip("/"))
     by_day: dict[str, list[dict]] = defaultdict(list)
-    rows = [row for row in rows if is_wenbo_relevant(row["title"])]
+    rows = [row for row in rows if allowed_backfill_row(row)]
+    row_urls = {row["url"].rstrip("/") for row in rows}
     for index, row in enumerate(sorted(rows, key=lambda value: (value["date"], value["sourceId"], value["url"])), 1):
         by_day[row["date"]].append(as_record(row, index))
     day = start
@@ -480,13 +558,25 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             # migration corpus.  Keep a human-authored operational item intact.
             if item.get("origin") == "archive-backfill" and item_url.rstrip("/") in baseline_urls:
                 continue
-            if item.get("origin") == "archive-backfill" and not is_wenbo_relevant(item.get("title", "")):
+            # A corrected parser may move an old generated observation to its
+            # real publication date. Remove the stale copy here; the cleaned
+            # row will be inserted into its new date below.
+            if item.get("origin") == "archive-backfill" and item_url.rstrip("/") in row_urls:
+                continue
+            if item.get("origin") == "archive-backfill" and not allowed_backfill_row({
+                "sourceId": source.get("sourceId", ""), "title": item.get("title", "")
+            }):
                 continue
             existing[item_url] = item
         for item in by_day.get(day.isoformat(), []):
             item_url = item["sources"][0]["url"]
             if item_url.rstrip("/") not in baseline_urls:
-                existing.setdefault(item_url, item)
+                # Refresh an earlier generated archive item so title/parser
+                # improvements are applied on the next maintenance run. Keep
+                # any human-authored operational observation untouched.
+                prior = existing.get(item_url)
+                if prior is None or prior.get("origin") == "archive-backfill":
+                    existing[item_url] = item
         payload["items"] = sorted(existing.values(), key=lambda value: (value["sources"][0]["sourceId"], value["title"]))
         counts = defaultdict(int)
         for item in payload["items"]:
@@ -517,6 +607,7 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
         payload["coverage"] = refreshed
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         day += timedelta(days=1)
+    normalize_archaeology_backfill()
 
 
 def main() -> int:
@@ -539,7 +630,7 @@ def main() -> int:
         all_rows.extend(rows)
         outcomes[source_id] = (complete, note)
         print(f"{source_id}: {len(rows)} 条 | {'完整' if complete else '部分'} | {note}")
-    relevant = [row for row in all_rows if is_wenbo_relevant(row["title"])]
+    relevant = [row for row in all_rows if allowed_backfill_row(row)]
     print(f"合计：{len(all_rows)} 条原文候选，其中 {len(relevant)} 条符合文博主题准入，时间范围 {start} 至 {args.end}。")
     if args.write:
         merge_write(start, args.end, all_rows, outcomes)

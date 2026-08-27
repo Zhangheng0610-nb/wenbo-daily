@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-03T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,97 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260803-museum-association-0358-ntentid14747",
+      "recordId": "backfill-20260803-archaeology-0311-6062010shtml",
+      "date": "2026-08-03",
+      "title": "中国社会科学院举办科技考古与文化遗产保护国际学术研讨会",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202608/t20260803_6062010.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260803-archaeology-0313-6062003shtml",
+      "date": "2026-08-03",
+      "title": "中国社会科学院举办科技考古与文化遗产保护国际学术研讨会",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202608/t20260803_6062003.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260803-archaeology-0312-6062012shtml",
+      "date": "2026-08-03",
+      "title": "科技考古与文化遗产保护国际学术研讨会在京举行",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260803_6062012.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260803-museum-association-0314-ntentid14747",
       "date": "2026-08-03",
       "title": "中国博物馆协会纪念馆专业委员会2026年主任工作会议在黑龙江省哈尔滨市召开",
       "sources": [

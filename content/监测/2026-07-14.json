@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-14T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,60 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260714-cultural-relics-news-0235-2726id112224",
+      "recordId": "backfill-20260714-archaeology-0202-6059198shtml",
+      "date": "2026-07-14",
+      "title": "初唐织锦织造技艺与织机形态考辨",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260714_6059198.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260714-archaeology-0203-6059196shtml",
+      "date": "2026-07-14",
+      "title": "湖北郭家庙出土春秋早期器物",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260714_6059196.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "湖北"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260714-cultural-relics-news-0205-2726id112224",
       "date": "2026-07-14",
       "title": "国家文物局印发《革命文物保护工程技术导则（试行）》",
       "sources": [
@@ -73,7 +126,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260714-cultural-relics-news-0234-2726id112223",
+      "recordId": "backfill-20260714-cultural-relics-news-0204-2726id112223",
       "date": "2026-07-14",
       "title": "西夏陵世界文化遗产保护与价值阐释系列活动在银川举办",
       "sources": [
@@ -99,7 +152,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260714-museum-association-0239-ntentid14732",
+      "recordId": "backfill-20260714-museum-association-0206-ntentid14732",
       "date": "2026-07-14",
       "title": "晋察冀边区印刷局博物馆开馆",
       "sources": [

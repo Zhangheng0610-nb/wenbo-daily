@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-30T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 6,
       "note": ""
     },
     {
@@ -47,7 +47,168 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260730-cultural-relics-news-0314-2774id112414",
+      "recordId": "backfill-20260730-archaeology-0282-6061610shtml",
+      "date": "2026-07-30",
+      "title": "一图读懂《国家文物事业发展“十五五”规划》",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061610.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "展览",
+        "政策行业"
+      ],
+      "tags": [
+        "展览",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-archaeology-0287-6061593shtml",
+      "date": "2026-07-30",
+      "title": "为西夏学研究开新面——访中央和国家机关优秀共产党员、中国社会科学院学部委员史金波",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260730_6061593.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-archaeology-0283-6061622shtml",
+      "date": "2026-07-30",
+      "title": "国家文物局关于印发《国家文物事业发展“十五五”规划》的通知",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061622.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "展览",
+        "政策行业"
+      ],
+      "tags": [
+        "展览",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-archaeology-0285-6061578shtml",
+      "date": "2026-07-30",
+      "title": "把服务党和国家工作大局 为人民做学问作为真正的政绩",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260730_6061578.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-archaeology-0286-6061582shtml",
+      "date": "2026-07-30",
+      "title": "新时代伟大实践彰显马克思主义强大生命力",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260730_6061582.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-archaeology-0284-6061623shtml",
+      "date": "2026-07-30",
+      "title": "西藏阿里地区喀力地点石制品组合的最新研究成果",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260730_6061623.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "西藏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "西藏"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260730-cultural-relics-news-0289-2774id112414",
       "date": "2026-07-30",
       "title": "国家文物事业发展“十五五”规划",
       "sources": [
@@ -75,7 +236,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-cultural-relics-news-0313-2774id112413",
+      "recordId": "backfill-20260730-cultural-relics-news-0288-2774id112413",
       "date": "2026-07-30",
       "title": "国家文物局关于印发《国家文物事业发展“十五五”规划》的通知",
       "sources": [
@@ -103,7 +264,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-cultural-relics-news-0317-2774id112417",
+      "recordId": "backfill-20260730-cultural-relics-news-0292-2774id112417",
       "date": "2026-07-30",
       "title": "国家文物局召开新闻发布会 介绍《国有文物资源数据管理办法》《革命文物保护工程技术导则》等情况",
       "sources": [
@@ -133,7 +294,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-cultural-relics-news-0316-2774id112416",
+      "recordId": "backfill-20260730-cultural-relics-news-0291-2774id112416",
       "date": "2026-07-30",
       "title": "第48届世界遗产大会“古代水文观测遗产与历史气候变迁”主题边会成功举办",
       "sources": [
@@ -159,7 +320,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-cultural-relics-news-0315-2774id112415",
+      "recordId": "backfill-20260730-cultural-relics-news-0290-2774id112415",
       "date": "2026-07-30",
       "title": "第48届世界遗产大会“基于中国案例研究探析突出价值属性”主题边会成功举办",
       "sources": [
@@ -185,7 +346,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-museum-association-0318-ntentid14744",
+      "recordId": "backfill-20260730-museum-association-0293-ntentid14744",
       "date": "2026-07-30",
       "title": "“同心杯”铸牢中华民族共同体意识全国博物馆讲解员大赛在京举办",
       "sources": [
@@ -211,7 +372,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260730-museum-association-0319-ntentid14743",
+      "recordId": "backfill-20260730-museum-association-0294-ntentid14743",
       "date": "2026-07-30",
       "title": "国家文物局关于印发《国家文物事业发展“十五五”规划》的通知",
       "sources": [

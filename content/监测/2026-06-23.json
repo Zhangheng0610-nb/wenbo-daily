@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-23T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,7 +47,87 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260623-cultural-relics-news-0123-2666id112017",
+      "recordId": "backfill-20260623-archaeology-0122-6055465shtml",
+      "date": "2026-06-23",
+      "title": "团凤环龙四千年",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260623_6055465.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260623-archaeology-0123-6055461shtml",
+      "date": "2026-06-23",
+      "title": "新发现 | 山西运城盐湖区寺北遗址发掘主要收获",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260623_6055461.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260623-archaeology-0121-6055468shtml",
+      "date": "2026-06-23",
+      "title": "河北赞皇县北魏李子云夫妇墓发掘简报",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202606/t20260623_6055468.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河北"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260623-cultural-relics-news-0124-2666id112017",
       "date": "2026-06-23",
       "title": "文化和旅游部副部长、国家文物局局长会见希腊驻华大使埃夫耶尼奥斯·卡尔佩里斯",
       "sources": [

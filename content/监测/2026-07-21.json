@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-21T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 3,
       "note": ""
     },
     {
@@ -47,13 +47,92 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260721-cctv-wenbo-0263-p260721shtml",
+      "recordId": "backfill-20260721-archaeology-0228-6060253shtml",
+      "date": "2026-07-21",
+      "title": "三峡考古的坚守与赓续传承",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260721_6060253.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260721-archaeology-0227-6060262shtml",
+      "date": "2026-07-21",
+      "title": "放射性碳素测定年代报告（五二）",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260721_6060262.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260721-archaeology-0229-6060254shtml",
+      "date": "2026-07-21",
+      "title": "新发现 | 河南太康县刘庄遗址考古发掘收获与初步认识",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260721_6060254.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260721-cctv-wenbo-0230-p260721shtml",
       "date": "2026-07-21",
       "title": "“了不起的汉字——古文字与中华文明传承发展工程‘十四五’成果展”在国博展出",
       "sources": [
         {
           "sourceId": "cctv-wenbo",
-          "name": "央视网文博",
+          "name": "央视网文博与央视新闻",
           "url": "https://yangbo.cctv.cn/2026/07/21/ARTI89kZrd3C5ebC4g0gMJ4p260721.shtml"
         }
       ],
@@ -73,7 +152,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260721-cultural-relics-news-0268-2746id112306",
+      "recordId": "backfill-20260721-cultural-relics-news-0232-2746id112306",
       "date": "2026-07-21",
       "title": "中吉联合舒拉巴夏特古城遗址考古工作启动",
       "sources": [
@@ -99,7 +178,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260721-cultural-relics-news-0267-2746id112305",
+      "recordId": "backfill-20260721-cultural-relics-news-0231-2746id112305",
       "date": "2026-07-21",
       "title": "国家文物局发布通知要求各地做好2026年暑期博物馆开放服务工作",
       "sources": [
@@ -127,7 +206,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260721-cultural-relics-news-0269-2746id112307",
+      "recordId": "backfill-20260721-cultural-relics-news-0233-2746id112307",
       "date": "2026-07-21",
       "title": "山西举办“美美与共 共筑未来”国际文化遗产保护活动周",
       "sources": [

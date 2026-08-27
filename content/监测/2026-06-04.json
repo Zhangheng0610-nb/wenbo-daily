@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-06-04T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 2,
       "note": ""
     },
     {
@@ -47,7 +47,62 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260604-cultural-relics-news-0044-2620id111843",
+      "recordId": "backfill-20260604-archaeology-0028-6010043shtml",
+      "date": "2026-06-04",
+      "title": "浅谈二里头遗址所出的兵器戈",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202606/t20260604_6010043.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260604-archaeology-0029-6010054shtml",
+      "date": "2026-06-04",
+      "title": "陕西集中发布多项考古研究成果 部分发现填补史料空白",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260604_6010054.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业",
+        "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260604-cultural-relics-news-0032-2620id111843",
       "date": "2026-06-04",
       "title": "“要把这些中华文化瑰宝保护好、传承好、传播好”",
       "sources": [
@@ -73,7 +128,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260604-cultural-relics-news-0042-2620id111841",
+      "recordId": "backfill-20260604-cultural-relics-news-0030-2620id111841",
       "date": "2026-06-04",
       "title": "国家文物局关于加强文物防灾减灾救灾工作的通知",
       "sources": [
@@ -99,7 +154,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260604-cultural-relics-news-0043-2620id111842",
+      "recordId": "backfill-20260604-cultural-relics-news-0031-2620id111842",
       "date": "2026-06-04",
       "title": "国家文物局召开第二季度例行新闻发布会 2026年文化和自然遗产日活动即将精彩呈现",
       "sources": [
@@ -125,7 +180,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260604-cultural-relics-news-0045-2620id111844",
+      "recordId": "backfill-20260604-cultural-relics-news-0033-2620id111844",
       "date": "2026-06-04",
       "title": "蔽风雨 连古今——廊桥保护三年行动纪实",
       "sources": [
@@ -151,7 +206,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260604-museum-association-0046-ntentid14701",
+      "recordId": "backfill-20260604-museum-association-0034-ntentid14701",
       "date": "2026-06-04",
       "title": "关于开展第二批中国博物馆协会科研课题资助计划项目结项验收工作的通知",
       "sources": [
@@ -181,7 +236,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260604-ncha-0047-22203032html",
+      "recordId": "backfill-20260604-ncha-0035-22203032html",
       "date": "2026-06-04",
       "title": "国家文物局与中央美术学院签署战略合作协议",
       "sources": [

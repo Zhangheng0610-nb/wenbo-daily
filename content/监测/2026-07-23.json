@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-07-23T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 12,
       "note": ""
     },
     {
@@ -47,7 +47,320 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260723-cultural-relics-news-0271-2754id112332",
+      "recordId": "backfill-20260723-archaeology-0237-6060629shtml",
+      "date": "2026-07-23",
+      "title": "中华文明八千年的考古实证",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060629.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0241-6060664shtml",
+      "date": "2026-07-23",
+      "title": "山西绛县西吴壁遗址最新发掘成果公布",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260723_6060664.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0238-6060655shtml",
+      "date": "2026-07-23",
+      "title": "彭山江口遗址出水明代王府金册考",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060655.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0245-6060638shtml",
+      "date": "2026-07-23",
+      "title": "新华社｜中国社会科学院设立全球文明研究院",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260723_6060638.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0242-6060633shtml",
+      "date": "2026-07-23",
+      "title": "新闻直播间 | 全球文明研究院今天成立",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260723_6060633.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0236-6060627shtml",
+      "date": "2026-07-23",
+      "title": "日记里的老友：沈从文与夏鼐",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060627.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0244-6060637shtml",
+      "date": "2026-07-23",
+      "title": "晚间新闻 | 全球文明研究院今天成立",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260723_6060637.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0240-6060686shtml",
+      "date": "2026-07-23",
+      "title": "殷墟式牙璋初探",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060686.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0234-6060622shtml",
+      "date": "2026-07-23",
+      "title": "汉魏洛阳城宫城宫墙遗址考古发掘报告",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260723_6060622.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0235-6060674shtml",
+      "date": "2026-07-23",
+      "title": "琉璃河发掘报告（1995~1997）",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202607/t20260723_6060674.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0243-6060636shtml",
+      "date": "2026-07-23",
+      "title": "社科要闻 | 全球文明研究院正式成立",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202607/t20260723_6060636.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-archaeology-0239-6060666shtml",
+      "date": "2026-07-23",
+      "title": "高句丽佛寺的发现及相关问题探讨",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202607/t20260723_6060666.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260723-cultural-relics-news-0246-2754id112332",
       "date": "2026-07-23",
       "title": "让文物更好服务人民——各地博物馆暑期多措并举丰富服务供给",
       "sources": [
@@ -73,7 +386,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260723-cultural-relics-news-0273-2754id112334",
+      "recordId": "backfill-20260723-cultural-relics-news-0247-2754id112334",
       "date": "2026-07-23",
       "title": "重庆安排部署汛期暑期文物安全等重点工作",
       "sources": [
@@ -100,7 +413,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260723-museum-association-0275-ntentid14739",
+      "recordId": "backfill-20260723-museum-association-0248-ntentid14739",
       "date": "2026-07-23",
       "title": "2026年博物馆安全管理及技术培训班在山西晋城举办",
       "sources": [
@@ -129,7 +442,7 @@
       "origin": "archive-backfill"
     },
     {
-      "recordId": "backfill-20260723-museum-association-0276-ntentid14740",
+      "recordId": "backfill-20260723-museum-association-0249-ntentid14740",
       "date": "2026-07-23",
       "title": "第二届“博协杯”全国博物馆讲解大赛进入半决赛阶段",
       "sources": [

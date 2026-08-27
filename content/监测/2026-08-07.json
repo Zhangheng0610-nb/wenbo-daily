@@ -18,9 +18,9 @@
     },
     {
       "sourceId": "archaeology",
-      "status": "no_update",
+      "status": "success",
       "checkedAt": "2026-08-07T12:00:00+08:00",
-      "candidateCount": 0,
+      "candidateCount": 1,
       "note": ""
     },
     {
@@ -47,7 +47,37 @@
   ],
   "items": [
     {
-      "recordId": "backfill-20260807-ncha-0377-22204196html",
+      "recordId": "backfill-20260807-archaeology-0332-6062643shtml",
+      "date": "2026-08-07",
+      "title": "《科技考古集刊》《文化遗产保护集刊》发刊词",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202608/t20260807_6062643.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260807-ncha-0333-22204196html",
       "date": "2026-08-07",
       "title": "第四次全国文物普查领导小组办公室组织完成辽宁省省域整体验收",
       "sources": [
