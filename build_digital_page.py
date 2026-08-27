@@ -208,13 +208,13 @@ function init(data) {{
     return out;
   }}
 
-  // 生成某粒度 series: xAxis 全轴, data 用 null 表示空(线断开)
+  // 生成某粒度 series: xAxis 全轴, 空数据用 0(连续折线)
   function buildSeries(keys, map, displayFmt) {{
     var cats = [], vals = [];
     keys.forEach(function(k) {{
       cats.push(displayFmt(k));
       var s = map[k];
-      vals.push(s ? s.count : null);
+      vals.push(s ? s.count : 0);
     }});
     return {{ cats: cats, vals: vals, keys: keys }};
   }}
@@ -248,8 +248,7 @@ function init(data) {{
         confine: true,
         formatter: function(params) {{
           var p = params[0];
-          if (p.value == null) return p.axisValue + '<br/>暂无数据';
-          return p.axisValue + '<br/>数字化相关新闻：<b>' + p.value + '</b> 条';
+          return p.axisValue + '<br/>数字化相关新闻：<b>' + (p.value || 0) + '</b> 条';
         }}
       }},
       grid: {{ left: 46, right: 20, top: 30, bottom: 60 }},
