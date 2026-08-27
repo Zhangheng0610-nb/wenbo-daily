@@ -143,6 +143,14 @@
   }
   .show-more-btn:hover { background: var(--tag-bg); }
   .older-cards { }
+  .collapse-floating {
+    display: none; position: fixed; right: max(16px, calc((100vw - 720px) / 2 + 16px)); bottom: 18px;
+    z-index: 20; padding: 9px 14px; border: 1px solid var(--accent); border-radius: 999px;
+    background: var(--accent); color: #fff; font: inherit; font-size: .82em; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,.22); transition: transform .15s, opacity .15s;
+  }
+  .collapse-floating.show { display: block; }
+  .collapse-floating:hover { transform: translateY(-2px); }
   .quick-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 18px; }
   .quick-nav a { display: inline-block; padding: 5px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--text); text-decoration: none; font-size: .8em; transition: border-color .15s, color .15s, background .15s; }
   .quick-nav a:hover { border-color: var(--accent); color: var(--accent); background: var(--tag-bg); }
@@ -153,6 +161,7 @@
     header h1 { font-size: 1.4em; }
     .quick-nav { justify-content: flex-start; }
     a.day-card { padding: 15px 16px; }
+    .collapse-floating { right: 12px; bottom: 14px; }
   }
 </style>
 </head>
@@ -598,12 +607,31 @@
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
+<button id="collapse-floating" class="collapse-floating" type="button" onclick="collapseActiveSection()" aria-label="收起已展开的历史栏目">↑ 收起本栏</button>
+
 <script>
+let activeOlderButton = null;
+function showCollapseFloating(btn) {
+  activeOlderButton = btn;
+  const floating = document.getElementById('collapse-floating');
+  if (floating) floating.classList.add('show');
+}
+function hideCollapseFloating(btn) {
+  if (btn && activeOlderButton !== btn) return;
+  activeOlderButton = null;
+  const floating = document.getElementById('collapse-floating');
+  if (floating) floating.classList.remove('show');
+}
 function toggleSection(header) {
   header.classList.toggle('collapsed');
   const body = header.nextElementSibling;
   if (body && body.classList.contains('section-body')) {
     body.classList.toggle('hidden');
+    if (body.classList.contains('hidden') && activeOlderButton && body.contains(activeOlderButton)) {
+      const olderDiv = activeOlderButton.previousElementSibling;
+      if (olderDiv && olderDiv.classList.contains('older-cards')) olderDiv.style.display = 'none';
+      hideCollapseFloating(activeOlderButton);
+    }
   }
 }
 function toggleOlder(btn) {
@@ -613,9 +641,25 @@ function toggleOlder(btn) {
     olderDiv.style.display = isHidden ? '' : 'none';
     if (isHidden) {
       btn.textContent = btn.getAttribute('data-collapse-text') || '收起 ▲';
+      showCollapseFloating(btn);
     } else {
       btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
+      hideCollapseFloating(btn);
     }
+  }
+}
+function collapseActiveSection() {
+  const btn = activeOlderButton;
+  if (!btn) return;
+  const olderDiv = btn.previousElementSibling;
+  const header = btn.closest('.section-body')?.previousElementSibling;
+  if (olderDiv && olderDiv.classList.contains('older-cards')) {
+    olderDiv.style.display = 'none';
+    btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
+  }
+  hideCollapseFloating(btn);
+  if (header && header.classList.contains('section-header')) {
+    header.scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 }
 (async function(){
