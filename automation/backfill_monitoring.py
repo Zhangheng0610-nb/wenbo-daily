@@ -50,7 +50,7 @@ SOURCE_META = {
     "archaeology": ("中国考古网", "http://kaogu.cssn.cn"),
     "museum-association": ("中国博物馆协会", "https://www.chinamuseum.org.cn"),
     "xinhua-wenbo": ("新华网文博", "https://www.news.cn"),
-    "cctv-wenbo": ("央视网文博", "https://yangbo.cctv.cn"),
+    "cctv-wenbo": ("央视网文博与央视新闻", "https://yangbo.cctv.cn"),
 }
 
 PROVINCES = (
@@ -326,21 +326,32 @@ def crawl_xinhua(start: date, end: date) -> tuple[list[dict], bool, str]:
 
 
 def crawl_cctv(start: date, end: date) -> tuple[list[dict], bool, str]:
-    url = "https://yangbo.cctv.cn/"
+    # 央博是垂直专业入口；央视新闻频道补充那些进入全国公共议程的
+    # 文博报道。两者同属中央广播电视总台，仍算同一个固定来源，避免
+    # 把同一机构的两个栏目误当作两份独立证据。
+    feeds = ("https://yangbo.cctv.cn/", "https://news.cctv.com/")
     found: dict[str, dict] = {}
-    try:
-        page = fetch(url)
-    except RuntimeError as exc:
-        return [], False, str(exc)
-    for text, article_url in links(page, url):
-        if "cctv" not in article_url or not article_url.endswith(".shtml"):
+    checked_all = True
+    for feed_url in feeds:
+        try:
+            page = fetch(feed_url)
+        except RuntimeError:
+            checked_all = False
             continue
-        published = date_from_url(article_url)
-        if published and in_window(published, start, end):
-            found[article_url] = candidate("cctv-wenbo", published, text, article_url)
+        for text, article_url in links(page, feed_url):
+            if "cctv" not in article_url or not article_url.endswith(".shtml"):
+                continue
+            # 新闻频道首页的链接量很大；先按文博主题准入，避免把综合新闻
+            # 混入监测库。文章出现在央视新闻网页，不等同于已播出新闻联播。
+            if not is_wenbo_relevant(text):
+                continue
+            published = date_from_url(article_url)
+            if published and in_window(published, start, end):
+                found[article_url] = candidate("cctv-wenbo", published, text, article_url)
     if start == end:
-        return list(found.values()), True, "已检查央视网文博当日公开列表。"
-    return list(found.values()), False, "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+        note = "已检查央视网文博与央视新闻当日公开列表。"
+        return list(found.values()), checked_all, note if checked_all else "央视网当日部分入口请求失败。"
+    return list(found.values()), False, "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
 
 
 CRAWLERS = (

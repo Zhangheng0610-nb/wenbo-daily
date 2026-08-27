@@ -85,12 +85,13 @@ MAP_SOURCE_PANEL = OrderedDict([
         "entry_urls": ("https://www.news.cn/ci/wb.html",),
     }),
     ("cctv-wenbo", {
-        "name": "央视网文博",
-        "role": "中央广播电视总台文博报道",
+        "name": "央视网文博与央视新闻",
+        "role": "中央广播电视总台文博报道与新闻频道",
         "domains": ("cctv.com", "cctv.cn"),
         "entry_urls": (
             "https://style.cctv.com/special/wenbo/lxwm/index.shtml",
             "https://yangbo.cctv.cn/",
+            "https://news.cctv.com/",
         ),
     }),
 ])
