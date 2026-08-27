@@ -90,12 +90,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "展览"
+        "展览",
+        "考古"
       ],
       "tags": [
-        "考古",
-        "展览"
+        "展览",
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -119,12 +119,10 @@
       "locationConfidence": 0.0,
       "themes": [
         "考古",
-        "国际交流",
         "政策行业"
       ],
       "tags": [
         "考古",
-        "国际交流",
         "政策行业"
       ],
       "impact": 60,

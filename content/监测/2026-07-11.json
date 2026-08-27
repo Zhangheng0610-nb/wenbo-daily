@@ -89,10 +89,12 @@
       "locationTier": "national",
       "locationConfidence": 0.85,
       "themes": [
-        "文物保护"
+        "文物保护",
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "文物保护",
+        "政策行业"
       ],
       "impact": 80,
       "selectedForDaily": false,

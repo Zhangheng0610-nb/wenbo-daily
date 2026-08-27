@@ -63,10 +63,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护",
+        "政策行业",
         "山西"
       ],
       "impact": 60,
@@ -119,10 +119,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "政策行业"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -145,10 +145,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "数字化"
+        "政策行业"
       ],
       "tags": [
-        "数字化",
+        "政策行业",
         "湖北"
       ],
       "impact": 45,
@@ -198,10 +198,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -276,12 +276,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护",
-        "展览"
+        "文化遗产"
       ],
       "tags": [
-        "文物保护",
-        "展览"
+        "文化遗产"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -331,10 +329,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "政策行业"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -357,10 +355,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "展览",
+        "文化遗产"
       ],
       "tags": [
-        "展览"
+        "展览",
+        "文化遗产"
       ],
       "impact": 45,
       "selectedForDaily": false,

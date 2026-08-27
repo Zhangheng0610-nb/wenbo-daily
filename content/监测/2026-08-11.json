@@ -63,10 +63,12 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "tags": [
         "考古",
+        "政策行业",
         "内蒙古"
       ],
       "impact": 45,

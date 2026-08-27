@@ -168,12 +168,12 @@
       "locationTier": "national",
       "locationConfidence": 0.85,
       "themes": [
-        "文物保护",
-        "国际交流"
+        "国际交流",
+        "政策行业"
       ],
       "tags": [
-        "文物保护",
-        "国际交流"
+        "国际交流",
+        "政策行业"
       ],
       "impact": 80,
       "selectedForDaily": false,

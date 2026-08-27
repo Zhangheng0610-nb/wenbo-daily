@@ -89,10 +89,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "政策行业"
+        "考古"
       ],
       "tags": [
-        "政策行业",
+        "考古",
         "湖北"
       ],
       "impact": 45,
@@ -116,10 +116,12 @@
       "locationTier": "national",
       "locationConfidence": 0.85,
       "themes": [
-        "文物保护"
+        "文物保护",
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "文物保护",
+        "政策行业"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -142,10 +144,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "文化遗产"
       ],
       "tags": [
-        "文物保护"
+        "文化遗产"
       ],
       "impact": 60,
       "selectedForDaily": false,

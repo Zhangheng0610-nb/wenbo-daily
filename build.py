@@ -14,6 +14,7 @@ from automation.governance import (
     map_source_registry_rows, source_info, source_link_html,
     source_registry_rows, source_stats,
 )
+from automation.theme_rules import classify_themes
 
 CN_TZ = timezone(timedelta(hours=8))
 
@@ -153,22 +154,9 @@ OUTREACH_TITLE = ('中吉','中哈','中乌','中埃','中法','中英','中意'
 # 省份摘要页(heatmap.html 点省)按此归一化统计"主要主题";建三维检索时前端/后端直接复用。
 # 键 = 归一化大类名;值 = 该类的标准词 + 历史同义词(AI 历史标签自动归一化)。
 # ⚠️ 地名/遗址名(浙江/三星堆/姑蔑)不是主题,标签里照旧单独打,供省份归类用(SITE2PROV/CITY2PROV)。
-# 顺序有讲究:扫描按此顺序,标签词命中第一个大类即停("国际展览"→展览 而非 国际交流)。
-THEMES = {
-    '考古':   ('考古', '考古发现', '考古学', '田野考古', '公共考古', '科技考古', '考古科技',
-              '考古遗址', '旧石器时代', '古文字', '简牍', '水下考古', '考古新发现', '发掘', '考古展'),
-    '博物馆': ('博物馆', '博物馆伦理', '博物馆建设', '博物馆日', '馆藏', '文博', '博物馆学会'),
-    '展览':   ('展览', '特展', '临展', '巡展', '文物展', '艺术展', '国际展览', '大展'),
-    '文物保护': ('文物保护', '文物安全', '文物修复', '修复', '保护技术', '科技保护', '古建修缮', '壁画保护', '预防性保护'),
-    '文化遗产': ('文化遗产', '文化遗产保护', '世界遗产', '世遗', '非遗', '非物质文化遗产', '工业遗产',
-              '海洋文化遗产', '农业遗产', '历史街区', '文明探源', '中华文明探源', '探源工程', '遗产大会'),
-    '数字化': ('数字化', '数字文博', '数字科技', '数字展示', '虚拟展览', '科技', 'AI', '人工智能', '元宇宙', '大数据'),
-    '文物追索': ('文物追索', '文物归还', '文物返还', '文物回归', '流失文物', '追缴', '返还'),
-    '国际交流': ('国际', '国际合作', '国际交流', '国际文化交流', '国际传播', '文化外交',
-              '对外交流', '文明互鉴', '文明桥梁', '海外', '出国', 'UNESCO'),
-    '政策行业': ('政策', '行业动态', '国家文物局', '立法', '规划', '标准', '人才', '教育', '出版',
-              '学术', '方法论', '文创', '产业', '文旅', '报告', '会议', '论坛'),
-}
+# 主题判定由 automation.theme_rules 统一维护。这里保留这段注释，提醒
+# 生成日报和生成行业地图必须使用同一套保守口径，避免同一条新闻在两处
+# 出现不同归类。
 
 CSS = """<style>
   :root {
@@ -514,20 +502,9 @@ def attribute_item(item):
     return {'provinces': [], 'tier': 'unassigned'}
 
 
-def theme_of(tags):
-    """把标签归一到 THEMES 大主题类(去重,保序)。
-
-    按 THEMES 定义顺序扫描,每个标签词命中第一个大类即归属;
-    地名/遗址(浙江/三星堆)/未命中任何大类的标签直接忽略(它们用于省份归类,不用于主题)。
-    """
-    themes = []
-    for t in tags or []:
-        for name, words in THEMES.items():
-            if any(w in t for w in words):
-                if name not in themes:
-                    themes.append(name)
-                break
-    return themes
+def theme_of(tags, title=''):
+    """把日报/历史监测标签归一为统一的、保守的主题 facets。"""
+    return classify_themes(title=title, tags=tags)
 
 
 HEATMAP_VERSION = 3
@@ -640,7 +617,7 @@ def _candidate(rdate, item, att, grade, scope='province'):
         'relatedProvinces': provinces[1:] if len(provinces) > 1 else [],
         'locationTier': att.get('tier', 'unassigned'),
         'locationConfidence': LOCATION_CONFIDENCE.get(att.get('tier'), 0.0),
-        'themes': theme_of(item.get('tags', [])),
+        'themes': theme_of(item.get('tags', []), item.get('title', '')),
         'tags': item.get('tags', []),
         'impact': _impact_score(item),
         'sourceTier': grade['tier'],
@@ -785,7 +762,9 @@ def _monitor_candidate(record, grade):
     display_title = re.sub(r'^[🔥\s]+', '', record.get('title', '')).strip()
     scope = record.get('scope', 'province')
     primary = record.get('primaryProvince', '') if scope == 'province' else ''
-    themes = list(record.get('themes') or theme_of(record.get('tags', [])))
+    # Recompute legacy monitoring themes so old broad tags cannot keep a
+    # systematic false positive such as “古文字展”→“考古”.
+    themes = theme_of(record.get('tags', []), record.get('title', ''))
     confidence = record.get('locationConfidence')
     location_tier = record.get('locationTier', 'unassigned')
     if not isinstance(confidence, (int, float)):

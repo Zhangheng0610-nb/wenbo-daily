@@ -89,10 +89,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "政策行业"
       ],
       "tags": [
-        "国际交流"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -194,10 +194,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "数字化"
+        "政策行业"
       ],
       "tags": [
-        "数字化",
+        "政策行业",
         "湖北"
       ],
       "impact": 45,

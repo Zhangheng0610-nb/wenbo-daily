@@ -63,10 +63,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "tags": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -143,13 +145,11 @@
       "locationConfidence": 0.0,
       "themes": [
         "考古",
-        "文物保护",
-        "数字化"
+        "文化遗产"
       ],
       "tags": [
         "考古",
-        "文物保护",
-        "数字化"
+        "文化遗产"
       ],
       "impact": 60,
       "selectedForDaily": false,

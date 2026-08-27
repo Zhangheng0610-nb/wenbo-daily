@@ -64,13 +64,11 @@
       "locationConfidence": 0.0,
       "themes": [
         "考古",
-        "文物保护",
-        "数字化"
+        "文化遗产"
       ],
       "tags": [
         "考古",
-        "文物保护",
-        "数字化"
+        "文化遗产"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -93,10 +91,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "政策行业"
+        "考古"
       ],
       "tags": [
-        "政策行业",
+        "考古",
         "宁夏"
       ],
       "impact": 45,
@@ -120,12 +118,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "考古",
-        "政策行业"
+        "考古"
       ],
       "tags": [
         "考古",
-        "政策行业",
         "广西"
       ],
       "impact": 60,

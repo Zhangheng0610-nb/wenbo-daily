@@ -142,10 +142,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -168,10 +168,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古"
+        "考古",
+        "国际交流"
       ],
       "tags": [
-        "考古"
+        "考古",
+        "国际交流"
       ],
       "impact": 60,
       "selectedForDaily": false,

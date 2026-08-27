@@ -63,12 +63,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "展览"
+        "展览",
+        "考古"
       ],
       "tags": [
-        "考古",
-        "展览"
+        "展览",
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,

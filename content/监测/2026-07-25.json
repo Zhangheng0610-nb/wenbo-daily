@@ -170,11 +170,9 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护",
         "政策行业"
       ],
       "tags": [
-        "文物保护",
         "政策行业",
         "山西"
       ],
@@ -199,10 +197,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,

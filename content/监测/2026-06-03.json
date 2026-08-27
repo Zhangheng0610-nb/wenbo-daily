@@ -170,10 +170,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -196,10 +196,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -222,12 +222,14 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
+        "展览",
         "博物馆",
-        "展览"
+        "政策行业"
       ],
       "tags": [
+        "展览",
         "博物馆",
-        "展览"
+        "政策行业"
       ],
       "impact": 60,
       "selectedForDaily": false,

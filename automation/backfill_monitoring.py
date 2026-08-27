@@ -31,6 +31,11 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPSHandler, ProxyHandler, Request, build_opener
 
+try:
+    from automation.theme_rules import classify_themes
+except ModuleNotFoundError:  # direct execution: python automation/backfill_monitoring.py
+    from theme_rules import classify_themes
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MONITORING = ROOT / "content" / "监测"
@@ -61,16 +66,6 @@ PROVINCES = (
 )
 
 NATIONAL_WORDS = ("国家文物局", "全国", "国务院", "部际", "国际博物馆日", "行业", "规划", "标准", "指南", "通知")
-THEME_WORDS = (
-    ("考古", ("考古", "遗址", "发掘", "墓葬", "石窟")),
-    ("文物保护", ("保护", "修复", "安全", "预防性", "古建筑")),
-    ("博物馆", ("博物馆", "博物院", "纪念馆", "展馆", "开馆")),
-    ("展览", ("展", "展览", "展出", "开展")),
-    ("数字化", ("数字", "科技", "数据", "人工智能", "虚拟")),
-    ("国际交流", ("国际", "海外", "世界遗产", "中外", "联合国")),
-    ("政策行业", ("通知", "规划", "办法", "标准", "指南", "发布", "会议")),
-)
-
 # A publication's home page can also carry general current-affairs wire copy.
 # Fixed-source status is necessary but not sufficient: a record still has to
 # be directly about the cultural-heritage / museum field to enter this corpus.
@@ -422,8 +417,7 @@ def choose_location(title: str) -> tuple[str, str, float]:
 
 
 def choose_themes(title: str) -> list[str]:
-    themes = [theme for theme, words in THEME_WORDS if any(word in title for word in words)]
-    return themes[:3] or ["政策行业"]
+    return classify_themes(title=title)
 
 
 def impact(title: str) -> int:

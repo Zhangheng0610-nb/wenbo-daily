@@ -90,12 +90,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "数字化"
+        "考古"
       ],
       "tags": [
-        "考古",
-        "数字化"
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -118,10 +116,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护"
+        "考古"
       ],
       "tags": [
-        "文物保护",
+        "考古",
         "重庆"
       ],
       "impact": 60,
@@ -172,10 +170,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,

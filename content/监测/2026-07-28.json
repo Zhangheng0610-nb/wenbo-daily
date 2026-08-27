@@ -89,10 +89,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "政策行业"
+        "考古"
       ],
       "tags": [
-        "政策行业"
+        "考古"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -194,10 +194,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -246,12 +246,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护",
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "文物保护",
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -275,12 +273,10 @@
       "locationConfidence": 0.85,
       "themes": [
         "文物保护",
-        "数字化",
         "政策行业"
       ],
       "tags": [
         "文物保护",
-        "数字化",
         "政策行业"
       ],
       "impact": 80,

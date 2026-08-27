@@ -141,10 +141,12 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "博物馆"
+        "博物馆",
+        "文化遗产"
       ],
       "tags": [
         "博物馆",
+        "文化遗产",
         "北京"
       ],
       "impact": 60,
@@ -168,10 +170,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,

@@ -89,10 +89,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "博物馆"
+        "博物馆",
+        "考古"
       ],
       "tags": [
-        "博物馆"
+        "博物馆",
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,

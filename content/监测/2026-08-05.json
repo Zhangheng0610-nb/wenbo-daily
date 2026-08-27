@@ -115,12 +115,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "博物馆",
-        "展览"
+        "博物馆"
       ],
       "tags": [
-        "博物馆",
-        "展览"
+        "博物馆"
       ],
       "impact": 60,
       "selectedForDaily": false,

@@ -142,12 +142,12 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "博物馆",
-        "展览"
+        "展览",
+        "博物馆"
       ],
       "tags": [
-        "博物馆",
         "展览",
+        "博物馆",
         "浙江"
       ],
       "impact": 60,
@@ -171,12 +171,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "博物馆",
-        "展览"
+        "博物馆"
       ],
       "tags": [
-        "博物馆",
-        "展览"
+        "博物馆"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -199,11 +197,9 @@
       "locationTier": "national",
       "locationConfidence": 0.85,
       "themes": [
-        "展览",
         "政策行业"
       ],
       "tags": [
-        "展览",
         "政策行业"
       ],
       "impact": 80,
@@ -227,10 +223,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -253,10 +249,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -279,10 +275,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "数字化"
+        "政策行业"
       ],
       "tags": [
-        "数字化"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,

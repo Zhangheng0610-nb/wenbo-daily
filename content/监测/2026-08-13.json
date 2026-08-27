@@ -116,10 +116,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "政策行业"
       ],
       "tags": [
-        "展览"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -142,12 +142,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "博物馆",
-        "数字化"
+        "博物馆"
       ],
       "tags": [
         "博物馆",
-        "数字化",
         "北京"
       ],
       "impact": 60,
@@ -171,12 +169,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览",
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "展览",
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -304,10 +300,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "国际交流"
+        "文化遗产"
       ],
       "tags": [
-        "国际交流"
+        "文化遗产"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -383,11 +379,11 @@
       "locationConfidence": 0.0,
       "themes": [
         "博物馆",
-        "展览"
+        "文化遗产"
       ],
       "tags": [
         "博物馆",
-        "展览"
+        "文化遗产"
       ],
       "impact": 45,
       "selectedForDaily": false,

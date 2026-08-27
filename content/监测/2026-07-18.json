@@ -194,14 +194,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "文物保护",
-        "展览"
+        "考古"
       ],
       "tags": [
-        "考古",
-        "文物保护",
-        "展览"
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,

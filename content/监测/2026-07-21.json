@@ -142,10 +142,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "展览",
+        "博物馆"
       ],
       "tags": [
-        "展览"
+        "展览",
+        "博物馆"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -222,11 +224,11 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护",
+        "文化遗产",
         "国际交流"
       ],
       "tags": [
-        "文物保护",
+        "文化遗产",
         "国际交流",
         "山西"
       ],

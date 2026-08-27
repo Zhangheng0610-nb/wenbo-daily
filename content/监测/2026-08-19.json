@@ -63,10 +63,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "政策行业"
+        "文化遗产"
       ],
       "tags": [
-        "政策行业"
+        "文化遗产"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -115,10 +115,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "文物保护",
+        "文化遗产"
       ],
       "tags": [
-        "文物保护"
+        "文物保护",
+        "文化遗产"
       ],
       "impact": 60,
       "selectedForDaily": false,

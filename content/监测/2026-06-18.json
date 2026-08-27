@@ -141,10 +141,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护"
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -167,12 +167,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护",
-        "政策行业"
+        "文物保护"
       ],
       "tags": [
         "文物保护",
-        "政策行业",
         "安徽"
       ],
       "impact": 60,

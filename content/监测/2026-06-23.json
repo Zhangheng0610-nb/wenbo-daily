@@ -169,12 +169,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古",
-        "文物保护"
+        "考古"
       ],
       "tags": [
-        "考古",
-        "文物保护"
+        "考古"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -198,12 +196,10 @@
       "locationConfidence": 0.85,
       "themes": [
         "博物馆",
-        "展览",
         "政策行业"
       ],
       "tags": [
         "博物馆",
-        "展览",
         "政策行业"
       ],
       "impact": 60,

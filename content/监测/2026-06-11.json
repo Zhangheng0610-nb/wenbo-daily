@@ -89,10 +89,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "政策行业"
+        "考古"
       ],
       "tags": [
-        "政策行业",
+        "考古",
         "山东"
       ],
       "impact": 45,
@@ -116,10 +116,10 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "政策行业"
+        "展览"
       ],
       "tags": [
-        "政策行业"
+        "展览"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -221,12 +221,12 @@
       "locationTier": "national",
       "locationConfidence": 0.85,
       "themes": [
-        "文物保护",
-        "国际交流"
+        "国际交流",
+        "政策行业"
       ],
       "tags": [
-        "文物保护",
-        "国际交流"
+        "国际交流",
+        "政策行业"
       ],
       "impact": 80,
       "selectedForDaily": false,
@@ -249,10 +249,10 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护"
+        "政策行业"
       ],
       "tags": [
-        "文物保护",
+        "政策行业",
         "北京"
       ],
       "impact": 80,
@@ -276,12 +276,12 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护",
-        "博物馆"
+        "博物馆",
+        "文物保护"
       ],
       "tags": [
-        "文物保护",
         "博物馆",
+        "文物保护",
         "湖北"
       ],
       "impact": 60,

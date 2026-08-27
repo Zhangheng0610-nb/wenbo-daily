@@ -272,10 +272,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "tags": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "impact": 60,
       "selectedForDaily": false,
@@ -298,10 +300,12 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "tags": [
-        "考古"
+        "考古",
+        "政策行业"
       ],
       "impact": 45,
       "selectedForDaily": false,
@@ -429,11 +433,9 @@
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护",
         "博物馆"
       ],
       "tags": [
-        "文物保护",
         "博物馆",
         "山西"
       ],
