@@ -1079,14 +1079,14 @@ def build_heatmap_html():
   <header>
     <a class="back" href="./">← 返回首页</a>
     <h1>文博行业关注地图</h1>
-    <p class="lede">独立巡检固定权威信源池，识别其中全部文博相关新事件；日报是否选中，不再影响地图收录。</p>
+    <p class="lede">每天检查 6 个固定的权威来源，记录其中所有值得关注的文博动态；一条新闻有没有进入日报，不影响它是否出现在地图里。</p>
     <p class="meta" id="meta">正在读取事件索引…</p>
   </header>
   <div class="method-strip">
-    <span><strong>口径</strong> 先完整巡检，再做日报精选</span>
-    <span><strong>信源</strong> 固定 6 个全国权威来源</span>
-    <span><strong>地域</strong> 主要发生地计分，关联地区只作说明</span>
-    <span><strong>性质</strong> 权威信源关注度，不等同真实行业活动总量</span>
+    <span><strong>做法</strong> 先查全来源，再制作日报</span>
+    <span><strong>来源</strong> 固定 6 个全国权威平台</span>
+    <span><strong>地区</strong> 一件事只归到主要发生地</span>
+    <span><strong>提醒</strong> 反映报道关注，不等同实际活动总量</span>
   </div>
   <div class="toolbar">
     <div class="win-tabs" aria-label="时间范围">
@@ -1099,22 +1099,22 @@ def build_heatmap_html():
     </label>
   </div>
   <section class="stats" aria-label="当前窗口概况">
-    <div class="stat"><strong id="s-events">—</strong><span>独立地域事件</span></div>
-    <div class="stat"><strong id="s-provinces">—</strong><span>有有效事件的地区</span></div>
-    <div class="stat"><strong id="s-a">—</strong><span>覆盖到的固定信源</span></div>
-    <div class="stat"><strong id="s-reports">—</strong><span>监测记录</span></div>
+    <div class="stat"><strong id="s-events">—</strong><span>本期重点事项</span></div>
+    <div class="stat"><strong id="s-provinces">—</strong><span>涉及地区</span></div>
+    <div class="stat"><strong id="s-a">—</strong><span>本期收录来源</span></div>
+    <div class="stat"><strong id="s-reports">—</strong><span>收录信息</span></div>
   </section>
   <section class="workspace">
     <div class="panel map-panel">
-      <div class="panel-head"><h2>固定信源关注分布</h2><span>样本内相对指数 0—100</span></div>
+      <div class="panel-head"><h2>地区关注度分布</h2><span>本页最高值为 100</span></div>
       <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-      <p class="map-note">颜色越深，只表示固定信源池在当前时间范围内给予该地区较多关注。无色不等于没有文博活动；覆盖率不足时不得据此判断地区真实活跃度。</p>
+      <p class="map-note">颜色越深，表示本页追踪的权威来源近期更集中地报道了该地区。无色不等于当地没有文博活动；资料积累不足时，不应用它判断各地真实活跃程度。</p>
     </div>
     <div class="panel rank-panel">
-      <div class="panel-head"><h2>样本内地区排序</h2><span id="rank-note">正在核算覆盖率</span></div>
+      <div class="panel-head"><h2>地区关注度排序</h2><span id="rank-note">正在核对资料完整度</span></div>
       <div class="rank-scroll">
         <table>
-          <thead><tr><th>#</th><th>地区</th><th>指数</th><th>事件</th><th>证据</th><th>趋势</th></tr></thead>
+          <thead><tr><th>#</th><th>地区</th><th>关注度</th><th>事项</th><th>来源</th><th>趋势</th></tr></thead>
           <tbody id="ranking"></tbody>
         </table>
       </div>
@@ -1132,17 +1132,17 @@ def build_heatmap_html():
     <details class="box"><summary>国际文博观察 <span id="international-count"></span></summary><div class="scope-list" id="international-list"></div></details>
   </section>
   <section class="quality" id="quality" data-state="insufficient">
-    <h2>固定信源巡检与可比性</h2>
-    <p id="coverage-status">正在核算所选窗口的信源日覆盖率…</p>
+    <h2>本页数据说明</h2>
+    <p id="coverage-status">正在核对本页资料是否足够用于地区比较…</p>
     <div class="coverage-grid">
-      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>信源日覆盖率</span></div>
-      <div class="coverage-cell"><strong id="c-days">—</strong><span>完整巡检天数</span></div>
-      <div class="coverage-cell"><strong id="c-sources">—</strong><span>固定信源数量</span></div>
-      <div class="coverage-cell"><strong id="c-window">—</strong><span>当前时间窗口</span></div>
+      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>本窗口检查完成度</span></div>
+      <div class="coverage-cell"><strong id="c-days">—</strong><span>全部来源已检查</span></div>
+      <div class="coverage-cell"><strong id="c-sources">—</strong><span>追踪的权威来源</span></div>
+      <div class="coverage-cell"><strong id="c-window">—</strong><span>查看范围</span></div>
     </div>
-    <details class="panel-details"><summary>查看固定信源池与逐源覆盖</summary><div id="panel-list"></div></details>
+    <details class="panel-details"><summary>查看我们每天检查哪些来源</summary><div id="panel-list"></div></details>
     <p id="quality-text">正在计算信源与地域质量…</p>
-    <div class="formula"><strong>指数公式：</strong>事件影响 35% + 证据强度 30% + 独立来源 20% + 时效 15%。只有固定信源池原文进入指数；同一事件的后续报道合并。<a href="sources.html">查看完整口径</a></div>
+    <div class="formula"><strong>关注度如何计算：</strong>事情的重要程度占 35%，来源可靠程度占 30%，是否有不同来源印证占 20%，发布时间新近程度占 15%。同一件事的后续报道会合并计算；只收录本页列出的固定权威来源。<a href="sources.html">查看来源与方法</a></div>
   </section>
   <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
@@ -1221,13 +1221,13 @@ function eventCard(entry) {
   var h=document.createElement('h3'), link=document.createElement('a'); link.href=event.reports[0].url; link.textContent=event.title;
   h.appendChild(link); article.appendChild(h);
   var badges=document.createElement('div'); badges.className='badges';
-  badges.appendChild(badge(event.impactLabel+'影响','impact'));
-  badges.appendChild(badge('固定池证据','a'));
+  badges.appendChild(badge('事项级别：'+event.impactLabel,'impact'));
+  badges.appendChild(badge('来源已核对','a'));
   badges.appendChild(badge(event.primaryTheme));
   badges.appendChild(badge('指数 '+entry.score.toFixed(0)));
   article.appendChild(badges);
   var meta=document.createElement('p'); meta.className='event-meta';
-  meta.textContent=event.lastDate+' · '+event.sourceCount+' 个独立来源 · 地理置信度 '+Math.round(event.locationConfidence*100)+'%'+(event.relatedProvinces.length?' · 关联 '+event.relatedProvinces.join('、'):'');
+  meta.textContent=event.lastDate+' · '+event.sourceCount+' 个不同来源 · 地点明确度 '+Math.round(event.locationConfidence*100)+'%'+(event.relatedProvinces.length?' · 关联 '+event.relatedProvinces.join('、'): '');
   article.appendChild(meta);
   var sourceRow=document.createElement('p'); sourceRow.className='source-row'; sourceRow.appendChild(document.createTextNode('来源：'));
   event.sources.slice(0,4).forEach(function(source){var a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener';a.textContent=source.name+'（'+source.tier+'）';sourceRow.appendChild(a);});
@@ -1243,8 +1243,8 @@ function eventCard(entry) {
 function showDetail(name) {
   var row=findProvince(name), box=document.getElementById('detail');
   if(!row){box.classList.remove('show');return;}
-  document.getElementById('d-name').textContent=row.name+'｜样本内关注指数 '+row.index.toFixed(0);
-  document.getElementById('d-metrics').textContent=row.eventCount+' 个独立事件 · '+row.reportCount+' 条监测记录 · '+row.evidenceCount+' 个固定池来源证据 · 平均地理置信度 '+Math.round(row.confidence*100)+'%';
+  document.getElementById('d-name').textContent=row.name+'｜地区关注度 '+row.index.toFixed(0);
+  document.getElementById('d-metrics').textContent=row.eventCount+' 件重点事项 · '+row.reportCount+' 条收录信息 · '+row.evidenceCount+' 条已核对来源 · 平均地点明确度 '+Math.round(row.confidence*100)+'%';
   var list=document.getElementById('d-events'); list.innerHTML=''; row.events.forEach(function(entry){list.appendChild(eventCard(entry));});
   box.classList.add('show'); box.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
@@ -1276,7 +1276,7 @@ function renderMap() {
   var p=palette(),el=document.getElementById('map');if(chart)chart.dispose();chart=echarts.init(el);
   var data=VIEW.map(function(row){return{name:SHORT2GEO[row.name]||row.name,value:+row.index.toFixed(1),events:row.eventCount,evidence:row.evidenceCount};});
   chart.setOption({
-    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>样本内关注指数：'+row.index.toFixed(0)+'<br/>独立事件：'+row.eventCount+'<br/>固定池证据：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无监测事件';}},
+    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>地区关注度：'+row.index.toFixed(0)+'<br/>重点事项：'+row.eventCount+'<br/>已核对来源：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无收录信息';}},
     visualMap:{min:0,max:100,left:14,bottom:8,text:['高','低'],calculable:false,inRange:{color:p.colors},textStyle:{color:p.label}},
     series:[{type:'map',map:'china',roam:false,selectedMode:false,data:data,label:{show:false},itemStyle:{areaColor:p.empty,borderColor:p.border,borderWidth:.8},emphasis:{label:{show:true,color:p.tooltipText,fontWeight:700},itemStyle:{areaColor:p.colors[p.colors.length-1]}}}]
   });
@@ -1311,20 +1311,20 @@ function renderCoverage() {
   CUR_COVERAGE=coverageForWindow(CUR_WINDOW.days,false);PREVIOUS_COVERAGE=coverageForWindow(CUR_WINDOW.days,true);var c=CUR_COVERAGE,quality=document.getElementById('quality');quality.setAttribute('data-state',c.state);
   document.getElementById('c-coverage').textContent=Math.round(c.rate*100)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
   var status=document.getElementById('coverage-status');
-  if(c.ready)status.innerHTML='<strong>覆盖达标：</strong>当前窗口可用于比较固定权威信源对各地区的相对关注。仍不能解释为各地真实文博活动总量。';
-  else if(c.successful)status.innerHTML='<strong>覆盖尚未达标：</strong>当前只有 '+c.successful+'/'+c.planned+' 个信源日完成巡检，地图保留为过渡观察，不作严谨地区横向结论。';
-  else status.innerHTML='<strong>口径迁移期：</strong>独立完整巡检将从下一次自动更新开始累积；当前地图仅展示固定信源的历史编辑样本，不作地区横向结论。';
-  document.getElementById('rank-note').textContent=c.ready?'覆盖达标｜点击查看证据':'过渡样本｜暂不作严谨排名';
+  if(c.ready)status.innerHTML='<strong>资料已足够：</strong>当前范围内，可以比较这些权威来源对不同地区的相对关注；但它不等同于各地真实文博活动总量。';
+  else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前已完成 '+c.successful+'/'+c.planned+' 次来源检查。地图可供浏览，但暂不适合拿来比较不同地区。';
+  else status.innerHTML='<strong>资料刚开始积累：</strong>从下一次自动更新起，网站会每天检查固定的权威来源。当前展示的是从旧日报整理出的历史资料，只供了解，不用于比较不同地区。';
+  document.getElementById('rank-note').textContent=c.ready?'资料充足｜点击查看来源':'资料积累中｜暂不比较地区';
   var list=document.getElementById('panel-list');list.innerHTML='';c.panel.forEach(function(source){
-    var row=document.createElement('div');row.className='panel-source';var left=document.createElement('span'),link=document.createElement('a');link.href=(source.entryUrls||[])[0]||'#';link.target='_blank';link.rel='noopener';link.textContent=source.name;left.appendChild(link);var role=document.createElement('small');role.textContent=' · '+source.role;left.appendChild(role);var right=document.createElement('small');right.textContent=(c.sourceGood[source.id]||0)+'/'+CUR_WINDOW.days+' 天';row.appendChild(left);row.appendChild(right);list.appendChild(row);
+    var row=document.createElement('div');row.className='panel-source';var left=document.createElement('span'),link=document.createElement('a');link.href=(source.entryUrls||[])[0]||'#';link.target='_blank';link.rel='noopener';link.textContent=source.name;left.appendChild(link);var role=document.createElement('small');role.textContent=' · '+source.role;left.appendChild(role);var right=document.createElement('small');right.textContent='已检查 '+(c.sourceGood[source.id]||0)+'/'+CUR_WINDOW.days+' 天';row.appendChild(left);row.appendChild(right);list.appendChild(row);
   });
 }
 function renderQuality() {
   var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
-  document.getElementById('quality-text').innerHTML='独立监测库现有 <strong>'+s.totalMonitoredRecords+'</strong> 条固定池记录，其中 <strong>'+s.includedProvincialRecords+'</strong> 条地域记录聚合为 <strong>'+s.provincialEvents+'</strong> 个独立事件；另有 <strong>'+s.nationalEvents+'</strong> 个全国性事件。历史迁移基线 <strong>'+s.legacyBaselineRecords+'</strong> 条，覆盖率不可审计；正式逐源巡检记录 <strong>'+s.operationalRecords+'</strong> 条。';
+  document.getElementById('quality-text').innerHTML='本页目前收录 <strong>'+s.totalMonitoredRecords+'</strong> 条来自固定权威来源的历史资料，其中 <strong>'+s.includedProvincialRecords+'</strong> 条涉及具体地区，合并为 <strong>'+s.provincialEvents+'</strong> 件事项；另有 <strong>'+s.nationalEvents+'</strong> 条全国性动态。这些历史资料来自旧日报整理，无法确认当时是否每天都查全了，所以暂不用于地区比较。新的每日检查目前已积累 <strong>'+s.operationalRecords+'</strong> 条资料。';
 }
 function updateMeta() {
-  var label=CUR_THEME?' · '+CUR_THEME:'',quality=CUR_COVERAGE&&CUR_COVERAGE.ready?'覆盖达标':'覆盖不足';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · '+quality+' · 样本内最高地区归一为 100';
+  var label=CUR_THEME?' · '+CUR_THEME:'',quality=CUR_COVERAGE&&CUR_COVERAGE.ready?'资料充足':'资料积累中';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · '+quality+' · 本页最高关注度显示为 100';
 }
 function refresh() {
   if(!RAW)return;VIEW=computeView(CUR_WINDOW.days,false);PREVIOUS=computeView(CUR_WINDOW.days,true);
