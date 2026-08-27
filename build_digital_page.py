@@ -377,7 +377,7 @@ function init(data) {{
   }});
 
   window.addEventListener('resize', function() {{ chart.resize(); }});
-}});
+}}
 </script>
 </body>
 </html>'''
