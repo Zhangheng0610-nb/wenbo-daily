@@ -278,7 +278,7 @@ def save_data(items, extra, digest_count, levels):
 def main():
     force = '--force' in sys.argv
     build_only = '--build-only' in sys.argv
-    cache_valid = False
+    cache_valid = build_only  # --build-only: 只用现有数据重建页面
     if not force and not build_only and os.path.exists(DATA_PATH):
         try:
             with open(DATA_PATH, encoding='utf-8') as f:

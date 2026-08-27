@@ -65,7 +65,7 @@
   footer { text-align: center; color: var(--muted); font-size: .84em; margin-top: 26px; }
   footer a { color: var(--accent); text-decoration: none; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="echarts.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -132,8 +132,8 @@ function init(data) {
 
   // 月粒度完整轴
   function monthKeys() {
-    var out = [], d = new Date(rangeStart + '-01');
-    var end = new Date(rangeEnd + '-01');
+    var out = [], d = new Date(rangeStart.slice(0, 7) + '-01');
+    var end = new Date(rangeEnd.slice(0, 7) + '-01');
     while (d <= end) {
       out.push(d.getFullYear() + '-' + pad(d.getMonth() + 1));
       d.setMonth(d.getMonth() + 1);
