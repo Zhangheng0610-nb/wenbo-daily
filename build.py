@@ -2116,9 +2116,17 @@ def build_digest_html(data, daily_reports=None):
 
     # Legacy digest files often omitted source links. Recover direct evidence
     # from matching daily items and make any remaining gap visible to readers.
+    evidence_targets = list(data.get('items', []))
+    if not evidence_targets and data.get('type') == 'weekly':
+        # The newer weekly format stores its headline list inside the first
+        # rich section (usually “本周重磅”) instead of item records.
+        for line in (data.get('rich_sections') or [{}])[0].get('raw_lines', []):
+            match = re.match(r'###\s+(.+)', line)
+            if match:
+                evidence_targets.append({'title': match.group(1).strip(), 'sources': []})
     evidence_rows = []
     missing_evidence = 0
-    for item in data.get('items', []):
+    for item in evidence_targets:
         sources = item.get('sources') or related_digest_sources(item.get('title', ''), daily_reports or [])
         unique = []
         seen = set()
