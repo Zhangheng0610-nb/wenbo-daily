@@ -2570,6 +2570,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <a href="#daily-list">日报档案</a>
   <a href="heatmap.html">热点地图</a>
   <a href="digital-trends.html">数字趋势</a>
+  <a href="intern.html">实习</a>
   <a href="jobs.html">招聘</a>
 </nav>
 
