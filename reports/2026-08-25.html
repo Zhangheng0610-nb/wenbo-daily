@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 2026-08-25</title>
 <meta name="description" content="2026-08-25 每日文博资讯，共 9 条（国内 6 + 国际 3）。🔥 上海世界技能博物馆"CHINA白"特展开幕：德化白瓷100余件珍品+0.2毫米薄纱瓷塑">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,2026-08-25">
@@ -22,8 +22,8 @@
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | 2026-08-25",
-  "datePublished": "2026-08-25T08:13:00+08:00",
-  "dateModified": "2026-08-25T08:13:00+08:00",
+  "datePublished": "2026-08-25T07:13:00+08:00",
+  "dateModified": "2026-08-25T07:13:00+08:00",
   "description": "2026-08-25 每日文博资讯，共 9 条",
   "url": "https://zhangheng666.top/reports/2026-08-25.html",
   "publisher": {
@@ -192,6 +192,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -221,45 +253,50 @@
   </details>
 </div>
 
+<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 9 个来源中，A级 1 个、B级 2 个、待复核 6 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>
+
 <h2 class="section">🇨🇳 国内要闻</h2>
 
 <h3 id="item1">1. 🔥 上海世界技能博物馆"CHINA白"特展开幕：德化白瓷100余件珍品+0.2毫米薄纱瓷塑 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-上海" href="../index.html?q=%E4%B8%8A%E6%B5%B7">#上海</a></h3>
-<p>📎 <a href="https://m.gmw.cn/2026-08/25/content_1304553435.htm" target="_blank" rel="noopener">光明网</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="https://m.gmw.cn/2026-08/25/content_1304553435.htm" target="_blank" rel="noopener">光明网</a></span></p>
 <p><a id="item1"></a>
 世界技能博物馆联合德化县政府历时一年打造的"CHINA白"年度主题临展8月25日在沪启幕，免费开放、无需预约。展览展出中国工艺美术大师、全国技术能手创作的100余件白瓷艺术珍品，以英文"CHINA"为线索分为"Classic天工""Horse白驹""Icon伊人""Nature芳华""Advance新声"五个篇章。最受瞩目的展品是由德化瓷烧制技艺非遗传承人连德理创作的《神话》"玉漱公主"瓷塑——纱衣厚度仅0.2毫米、发丝直径0.3毫米，达到"远看是纱、近看是瓷"的极致效果，此前在国博展出时已走红全网。四楼"WE赛场"同步将第48届世界技能大赛微缩为互动展位。</p>
 <blockquote><strong>点评：</strong> 这个展的看点不在"网红"而在"手艺与产业的双重展示"——0.2毫米薄纱瓷是国家级非遗与专利工艺的结晶，把它放进世界技能博物馆，等于把"工匠精神"从口号还原成可见的极致技艺。德化白瓷从宋元海丝远销欧洲的"Blanc de Chine"，到今天靠一件瓷塑出圈，说明传统工艺的当代化，缺的从来不是技艺，而是"被看见的叙事"。对文博行业而言，"展品出圈"与"非遗传承"如何互相成就，这场展给出了一个可参考的样本。</blockquote>
 <hr>
 
 <h3 id="item2">2. 🔥 马王堆三号墓T形帛画国内首次跨省展出：迄今最大汉代彩绘帛画亮相上海 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-上海" href="../index.html?q=%E4%B8%8A%E6%B5%B7">#上海</a></h3>
-<p>📎 <a href="https://www.thepaper.cn/newsDetail_forward_33836679" target="_blank" rel="noopener">澎湃新闻</a></p>
+<p class="source-row">📎 <span class="source-chip source-b"><b>B</b> <a href="https://www.thepaper.cn/newsDetail_forward_33836679" target="_blank" rel="noopener">澎湃新闻</a></span></p>
 <p><a id="item2"></a>
 8月24日消息，正在上海美术馆（中华艺术宫）展出的"千金之家——马王堆汉墓的生活美学及养成"大展迎来展陈更替，马王堆三号墓T形帛画本周与观众见面，系该文物国内首次跨省公开展出。通长234.6厘米的帛画是迄今所见最大的汉代彩绘帛画，绘有78种图形，画幅比一号墓帛画更大、年代更早、内容更丰富。此前一号墓T形帛画已于8月16日结束展期运回湖南省博物馆保养，由三号墓帛画"接力"展出。</p>
 <blockquote><strong>点评：</strong> T形帛画首次出湘，本身就是一次高规格文物流动——234.6厘米的尺幅意味着极高的光照与温湿度控制难度，能够成行，说明跨馆借展的文物保护标准已相当成熟。更值得注意的是"接力展"模式：一号墓帛画与三号墓帛画先后亮相，既让观众连续看到国宝，又为每件文物留出"休养"周期，把文物保护从一次性的"借出"做成了可持续的"排期"。马王堆研究近年在分子考古、数字复原上不断出新，这次展览也让普通观众直观感受到：文物的价值不止在库房，更在被精心管理的公共凝视里。</blockquote>
 <hr>
 
 <h3 id="item3">3. 🔥 云冈石窟"光谱指纹"项目：全球首个3D高光谱石质文物数字化平台 <a class="tag tag-数字化" href="../index.html?q=%E6%95%B0%E5%AD%97%E5%8C%96">#数字化</a> <a class="tag tag-山西" href="../index.html?q=%E5%B1%B1%E8%A5%BF">#山西</a></h3>
-<p>📎 <a href="https://m.thepaper.cn/newsDetail_forward_33845410" target="_blank" rel="noopener">澎湃新闻（据科技日报）</a></p>
+<p class="source-row">📎 <span class="source-chip source-b"><b>B</b> <a href="https://m.thepaper.cn/newsDetail_forward_33845410" target="_blank" rel="noopener">澎湃新闻（据科技日报）</a></span></p>
 <p><a id="item3"></a>
 科技日报8月25日刊发报道，云冈研究院"解密千年石窟的'指纹'——云冈石窟第7、8窟三维高光谱数据采集"项目入选《世界互联网大会文化遗产数字化案例集（2026）》。项目联合中山大学、广州光信科技自主研发恒温宽光谱冷光源采集设备，实现"3D+高光谱"双传感器融合，建成全球首个3D高光谱融合数据分析与展示平台，可对颜料组成与病害分布进行三维空间可视化，是全球首次将高光谱技术系统性应用于大型立体石质文物数字化保护。</p>
 <blockquote><strong>点评：</strong> 云冈的进步在于把"数字化"从拍照片升级到"化验"。传统三维扫描只记录几何形态，测不准颜料、分不清病害；高光谱则像给石窟做"光谱指纹"，把矿料来源、病害类型一一识别出来——本质上是给文物保护装上了"CT机"。对行业而言，云冈这套自研设备的示范意义在于：数字化的深度不该被商业扫描仪锁定，科研机构完全可以把保护需求转译成自研装备，做出"懂文物"的采集系统。石窟数字化的下一步，竞争的不是精度，而是"采集完能不能读出病害成因"。</blockquote>
 <hr>
 
 <h3 id="item4">4. 兰州市博物馆"河湟同源 丹墨流韵"书画联展：兰西城市群8馆联展 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-甘肃" href="../index.html?q=%E7%94%98%E8%82%83">#甘肃</a></h3>
-<p>📎 <a href="http://gansu.gansudaily.com.cn/system/2026/08/25/031422324.shtml" target="_blank" rel="noopener">甘肃日报</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://gansu.gansudaily.com.cn/system/2026/08/25/031422324.shtml" target="_blank" rel="noopener">甘肃日报</a></span></p>
 <p><a id="item4"></a>
 由兰州市文旅局、西宁市文旅广电局主办的"河湟同源 丹墨流韵——馆藏书画联展"8月24日在兰州市博物馆东二展厅开幕，联合西宁市博物馆、永登县博物馆、榆中县博物馆等8家博物馆共同承办，展期至10月10日。展览汇聚兰西城市群博物馆馆藏书画精品，以"河湟同源"为主题，展现黄河、湟水流域一脉相承的文化根脉。</p>
 <blockquote><strong>点评：</strong> 兰西城市群是黄河流域最西端的城市群，河湟地区作为多民族交融地带，其书画收藏往往被"馆小藏品少"掩盖。这次8馆联展的价值不在展品数量，而在"区域文化共同体"的建构——用一次联合策展把分散在州县馆的书画家底并置对照，让观众直观看到河湟文脉的连续性。对中小博物馆而言，跨区域联合办展是成本最低的"破圈"路径：资源不必都归拢到大馆，抱团一样能讲出有分量的区域故事。</blockquote>
 <hr>
 
 <h3 id="item5">5. "数见苏韵"环省行走进宿迁：江苏13市文物+数字展+800款文创 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-江苏" href="../index.html?q=%E6%B1%9F%E8%8B%8F">#江苏</a></h3>
-<p>📎 <a href="https://www.suxinwen.cn/news/2821617" target="_blank" rel="noopener">速新闻</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.suxinwen.cn/news/2821617" target="_blank" rel="noopener">速新闻</a></span></p>
 <p><a id="item5"></a>
 8月22日，江苏省"数见苏韵·家门口看大展"环省行第二季走进宿迁，以"珍贵文物+数字技术+文创艺术"形式，汇集全省13个设区市博物馆文物，推出沉浸式数字展、VR大空间体验等，并展示超800款文创好物，让文物"流动"到群众家门口。</p>
 <blockquote><strong>点评：</strong> "环省行"模式的价值在于重新定义了"展览"的边界——不再要求观众专程去省城看国宝，而是让全省文物以"数字+实物"的混合形态轮转各地。800款文创的集中亮相，也把博物馆文创从"馆内商店"推向"巡回市集"，激活县域消费场景。这种"全省一盘棋"的文物流动方式，比单个大馆的顶流特展更能检验一个省的文博资源配置能力，也更易被其他省份复制推广。</blockquote>
 <hr>
 
 <h3 id="item6">6. 东乡县博物馆馆藏文物数字化保护项目竣工：县域文物毫米级三维建模 <a class="tag tag-数字化" href="../index.html?q=%E6%95%B0%E5%AD%97%E5%8C%96">#数字化</a> <a class="tag tag-甘肃" href="../index.html?q=%E7%94%98%E8%82%83">#甘肃</a></h3>
-<p>📎 <a href="http://www.chinalxnet.com:888/index/news/detail.html?id=530698" target="_blank" rel="noopener">中国临夏网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://www.chinalxnet.com:888/index/news/detail.html?id=530698" target="_blank" rel="noopener">中国临夏网</a></span></p>
 <p><a id="item6"></a>
 8月24日消息，甘肃省临夏州东乡县博物馆馆藏文物数字化保护项目全面竣工投用，完成125件文物及化石的高清拍摄与毫米级三维建模，建成县域首个标准化馆藏文物数字资源库，配套上线100条微信语音导览、多媒体互动展墙及50件文物线上3D展示，实现"实物入藏、数字示人"的展陈模式。</p>
 <blockquote><strong>点评：</strong> 当一个县级博物馆完成125件文物的毫米级三维建模，说明文物数字化正在从"头部大馆的专项工程"下沉为"县域博物馆的标配动作"。东乡县的意义在于它证明了数字化不必昂贵——125件藏品的体量、县域团队的配置，反而更接近中国绝大多数基层博物馆的真实处境。当"数字示人"成为基层馆的常态，文物资源才真正谈得上"全社会共享底座"。下一步值得观察的是：这些县域数字资源能否接入省级乃至全国平台，避免成为新的"信息孤岛"。</blockquote>
@@ -269,21 +306,21 @@
 <h2 class="section">🌍 国际要闻</h2>
 
 <h3 id="item7">7. 🔥 美国FBI向埃及归还48件非法出口文物 <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-埃及" href="../index.html?q=%E5%9F%83%E5%8F%8A">#埃及</a></h3>
-<p>📎 <a href="https://en.sputniknews.africa/20260823/1088561858.html" target="_blank" rel="noopener">Sputnik Africa</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://en.sputniknews.africa/20260823/1088561858.html" target="_blank" rel="noopener">Sputnik Africa</a></span></p>
 <p><a id="item7"></a>
 8月23日消息，美国联邦调查局（FBI）洛杉矶办公室向埃及归还48件非法出口文物，涉及法老时期、罗马时期及科普特时期文物。这是近年来美国执法机构又一次向埃及归还流失文物，反映出国际社会通过执法合作打击文物非法贸易、推动流失文物返还的持续趋势。</p>
 <blockquote><strong>点评：</strong> FBI向埃及归还48件文物，是"执法驱动型返还"的又一例证——相比外交谈判的漫长拉锯，"没收非法出口物+司法返还"提供了一条更硬的路径。这批文物横跨法老、罗马、科普特三个时期，说明美国境内非法文物市场的流通规模远超公众想象。对中国而言，这条新闻的启示是：文物追索从来不是单一渠道，司法合作、执法行动与外交磋商必须多轨并行。国际返还的"共识潮"正在形成，关键是把每一单个案都做成可复制的制度样本。</blockquote>
 <hr>
 
 <h3 id="item8">8. 塔吉克斯坦Sayyod遗址出土贵霜王朝王室印章 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-塔吉克" href="../index.html?q=%E5%A1%94%E5%90%89%E5%85%8B">#塔吉克</a></h3>
-<p>📎 <a href="https://eng.belta.by/partner_news/view/ancient-royal-seal-unearthed-at-sayyod-archaeological-site-in-tajikistan-184989-2026/" target="_blank" rel="noopener">Belta</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://eng.belta.by/partner_news/view/ancient-royal-seal-unearthed-at-sayyod-archaeological-site-in-tajikistan-184989-2026/" target="_blank" rel="noopener">Belta</a></span></p>
 <p><a id="item8"></a>
 塔吉克斯坦国家博物馆专家近日在哈特隆州Sayyod遗址发掘出一枚罕见的陶质王室印章，高约5厘米，印纽带穿孔，印身刻有巴克特里亚铭文、几何纹样、头戴齿形王冠的国王胸像、山羊及贵霜国家象征图案。专家认为该发现对贵霜时期研究具有重要价值，目前正由考古与钱币学部门作进一步研究。</p>
 <blockquote><strong>点评：</strong> 一枚5厘米的陶印，信息密度却极高——巴克特里亚铭文、齿形王冠、山羊与几何纹，几乎是一部浓缩的贵霜王朝符号学。印章是"权力在场的物质凭证"，王室印章的出土，让贵霜的统治网络从文献推演落回可触摸的实物。对中亚考古而言，Sayyod这类遗址的价值在于：它位于丝绸之路腹地，每一枚印章、每一枚钱币都在提示我们，这一区域的历史主体性长期被"东西方之间"的叙事遮蔽。中国考古团队近年深度参与中亚联合考古，若能接入这类发现，环帕米尔的古代文明比较将更有纵深。</blockquote>
 <hr>
 
 <h3 id="item9">9. 巴基斯坦Swat遗址列入UNESCO预备名单 <a class="tag tag-遗产" href="../index.html?q=%E9%81%97%E4%BA%A7">#遗产</a> <a class="tag tag-巴基斯坦" href="../index.html?q=%E5%B7%B4%E5%9F%BA%E6%96%AF%E5%9D%A6">#巴基斯坦</a></h3>
-<p>📎 <a href="https://www.dawn.com/news/2024880/inclusion-of-swat-archaeological-site-in-unesco-list-termed-landmark-development" target="_blank" rel="noopener">Dawn</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.dawn.com/news/2024880/inclusion-of-swat-archaeological-site-in-unesco-list-termed-landmark-development" target="_blank" rel="noopener">Dawn</a></span></p>
 <p><a id="item9"></a>
 8月24日消息，巴基斯坦斯瓦特（Swat）地区的Bazira-Barikot考古遗址被列入联合国教科文组织世界遗产预备名单，被视为里程碑式进展。负责该遗址发掘的意大利考古团团长Olivieri博士称其为南亚最重要的遗址之一，其文化层自公元前两千纪延续至早期历史时期、贵霜、贵霜—萨珊、晚期历史及早期伊斯兰时期，包含佛教遗迹及后来的印度教沙希王朝与伊斯兰遗存。该提名被视为迈向正式世界遗产地位的重要一步，或有望在2028—2029年申遗成功。</p>
 <blockquote><strong>点评：</strong> Swat遗址入预备名单的意义不止于"多了一个遗产候选"——它坐落在犍陀罗佛教文明的核心地带，文化层从公元前两千纪一路叠压到伊斯兰时期，本身就是一部南亚文明通史的"地层档案"。更值得注意的是它承载的"平衡价值"：当世界遗产名录长期偏向欧洲与单一文明时，一条能同时呈现佛教、印度教与伊斯兰多层遗产的南亚序列，本身就是对名录代表性的修正。对文博行业而言，Swat提醒我们：遗产价值的认定，正在从"单体之美"转向"文明交叠之厚"。</blockquote>
@@ -327,7 +364,7 @@
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>

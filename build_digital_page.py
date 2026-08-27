@@ -104,7 +104,7 @@ def build_page(html_path, data_path):
 <div class="wrap">
   <header>
     <h1>📈 文博数字化趋势</h1>
-    <div class="sub">数据源：<a href="http://www.ncha.gov.cn/col/col722/index.html" target="_blank">国家文物局 · 文物新闻</a> ｜ {rng['start']} 至 {rng['end']} ｜ 每日本站更新时增量刷新</div>
+    <div class="sub">数据源：<a href="https://www.ncha.gov.cn/col/col722/index.html" target="_blank">国家文物局 · 文物新闻</a> ｜ {rng['start']} 至 {rng['end']} ｜ 每日本站更新时增量刷新</div>
   </header>
 
   <div class="stats">
@@ -135,7 +135,7 @@ def build_page(html_path, data_path):
     </ul>
   </div>
 
-  <footer><a href="/">← 返回首页</a> ｜ <a href="/about.html">关于本站</a></footer>
+  <footer><a href="/">← 返回首页</a> ｜ <a href="/sources.html">信源与方法</a> ｜ <a href="/about.html">关于本站</a></footer>
 </div>
 
 <script>

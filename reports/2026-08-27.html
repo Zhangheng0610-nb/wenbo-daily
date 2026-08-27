@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 2026-08-27</title>
 <meta name="description" content="2026-08-27 每日文博资讯，共 10 条（国内 6 + 国际 4）。🔥 宁夏博物馆大空间VR《寻梦西夏陵》正式开放：VR里"穿越"西夏王朝">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,2026-08-27">
@@ -22,8 +22,8 @@
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | 2026-08-27",
-  "datePublished": "2026-08-27T08:13:00+08:00",
-  "dateModified": "2026-08-27T08:13:00+08:00",
+  "datePublished": "2026-08-27T07:13:00+08:00",
+  "dateModified": "2026-08-27T07:13:00+08:00",
   "description": "2026-08-27 每日文博资讯，共 10 条",
   "url": "https://zhangheng666.top/reports/2026-08-27.html",
   "publisher": {
@@ -192,6 +192,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -222,40 +254,45 @@
   </details>
 </div>
 
+<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 10 个来源中，A级 0 个、B级 2 个、待复核 8 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>
+
 <h2 class="section">🇨🇳 国内要闻</h2>
 
 <h3 id="item1">1. 🔥 宁夏博物馆大空间VR《寻梦西夏陵》正式开放：VR里"穿越"西夏王朝 <a class="tag tag-数字化" href="../index.html?q=%E6%95%B0%E5%AD%97%E5%8C%96">#数字化</a> <a class="tag tag-宁夏" href="../index.html?q=%E5%AE%81%E5%A4%8F">#宁夏</a></h3>
-<p>📎 <a href="https://news.cri.cn/n/20260827/06e72112-63ae-4f7c-bed7-5121a8f3e056.html" target="_blank" rel="noopener">国际在线：大空间VR沉浸式体验产品亮相宁夏博物馆</a></p>
+<p class="source-row">📎 <span class="source-chip source-b"><b>B</b> <a href="https://news.cri.cn/n/20260827/06e72112-63ae-4f7c-bed7-5121a8f3e056.html" target="_blank" rel="noopener">国际在线：大空间VR沉浸式体验产品亮相宁夏博物馆</a></span></p>
 <p>8月27日，宁夏博物馆正式开放以西夏陵、长城文化为核心主题的大空间VR沉浸式体验产品。已上线作品《解密石语：寻梦西夏陵》运用LBE空间定位、动作捕捉与沉浸式交互技术，以"寻找高世昌"为叙事主线，让游客穿越时空观赏西夏陵建筑群、兴庆府市井风貌，并亲身体验地宫壁画绘制、木活字印刷、夏国剑锻打等传统技艺；聚焦长城文化的《边月照长城》正在打磨。系列还将于8月28日上线与国家农业博物馆合作的二十四节气主题VR作品《二十四节气·时序》。</p>
 <blockquote><strong>点评：</strong> 西夏陵这类大型土遗址，"不可移动+不易沉浸展示"是天然短板，大空间VR恰好把劣势变成优势——观众不是"看"遗址，而是"进入"历史场景。宁夏博物馆把叙事线（寻人）、技艺体验（木活字/锻剑）、在地IP（西夏陵/长城）打包成可迭代的产品矩阵，说明地方馆数字化正从"单点展项"走向"内容产品化"。跨馆合作（与农业博物馆联合做节气题材）更值得关注：数字化内容一旦可复用，馆际协作的空间就打开了。</blockquote>
 <hr>
 
 <h3 id="item2">2. 第十届内蒙古文博会开幕：AR眼镜、裸眼3D与"文博新语"集中亮相 <a class="tag tag-政策行业" href="../index.html?q=%E6%94%BF%E7%AD%96%E8%A1%8C%E4%B8%9A">#政策行业</a> <a class="tag tag-内蒙古" href="../index.html?q=%E5%86%85%E8%92%99%E5%8F%A4">#内蒙古</a></h3>
-<p>📎 <a href="https://m.nmgnews.com.cn/nmgxw/system/2026/08/27/030391455.shtml" target="_blank" rel="noopener">内蒙古新闻网：十年文博盛会 彰显文化活力</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://m.nmgnews.com.cn/nmgxw/system/2026/08/27/030391455.shtml" target="_blank" rel="noopener">内蒙古新闻网：十年文博盛会 彰显文化活力</a></span></p>
 <p>8月27日，第十届内蒙古自治区文化产业博览交易会在呼和浩特开幕，持续至8月31日，展览面积2万平方米，设8大展区，吸引全国20余个省区市及10余个国家和地区的500余家企业参展。展会首次打造"祖国正北方 亮丽内蒙古"主题展，设文艺繁花、非遗赓续、文博新语、数智赋能等八大版块；文化与科技创新融合主题展区引入科大讯飞、海康威视、京东方艺云等企业，集中展示AR智能眼镜（文物实景赋能、多语种实时翻译）、裸眼3D空中成像等前沿技术，元上都遗址保护成果、流动数字博物馆等文博创新成果同步亮相。</p>
 <blockquote><strong>点评：</strong> 文博会正从"产品大卖场"变成"文博+科技的风向标"。AR眼镜做文物实景赋能、裸眼3D空中成像这类技术集体登场，意味着数字文博已从博物馆的自选动作上升为区域产业政策的一部分。更值得注意的是"文博新语"被单列为版块——文博从文化事业的"配角"成为文化产业叙事的主角。流动数字博物馆的持续输出，也让"馆藏走出去"有了可复制的边疆样本。</blockquote>
 <hr>
 
 <h3 id="item3">3. "盈寸千里"内画艺术传承创新展：鼻烟壶非遗走向可穿戴文创 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-北京" href="../index.html?q=%E5%8C%97%E4%BA%AC">#北京</a></h3>
-<p>📎 <a href="https://xinwen.bjd.com.cn/content/s6a8ce02ee4b03fa51a83572b.html" target="_blank" rel="noopener">北京日报客户端："盈寸千里"内画艺术展在中国工艺美术馆开幕</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://xinwen.bjd.com.cn/content/s6a8ce02ee4b03fa51a83572b.html" target="_blank" rel="noopener">北京日报客户端："盈寸千里"内画艺术展在中国工艺美术馆开幕</a></span></p>
 <p>8月24日，"盈寸千里——黄双水、黄鹏内画艺术传承创新展"在中国工艺美术馆（中国非物质文化遗产馆）开幕，展期至9月17日。展览呈现中国工艺美术大师黄双水（艺名黄三）与北京工艺美术大师黄鹏父子的内画代表作品：既展出恪守传统的天然水晶鼻烟壶经典之作（如《敦煌之光》《千字文书法》《珍禽图》），也推出内画吊坠、手镯、印章等生活化、可穿戴创新文创，打破传统品类边界。内画鼻烟壶为北京市级非遗代表性项目，黄双水系该项目非遗代表性传承人。</p>
 <blockquote><strong>点评：</strong> 内画是最典型的"盈寸千里"式非遗——在方寸鼻烟壶内作画，技艺门槛极高，但传承的最大难题从来不是技艺，而是"年轻人为什么要买"。展览给出的答案是把内画从"瓶内"搬到"身上"：吊坠、手镯、印章让非遗变成可穿戴的生活方式单品。非遗活化最怕"为了创新而创新"，黄氏父子的路径是保守的技术内核+开放的形态外延，值得其他非遗门类借鉴。</blockquote>
 <hr>
 
 <h3 id="item4">4. 第二届粤港澳大湾区（广东）文创联盟换届：130余家成员、7大专委会 <a class="tag tag-文创" href="../index.html?q=%E6%96%87%E5%88%9B">#文创</a> <a class="tag tag-广东" href="../index.html?q=%E5%B9%BF%E4%B8%9C">#广东</a></h3>
-<p>📎 <a href="https://www.nfnews.com/content/53859pGG6B.html" target="_blank" rel="noopener">南方网：七大专委会、130多家成员单位，第二届粤港澳大湾区（广东）文创联盟成立</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.nfnews.com/content/53859pGG6B.html" target="_blank" rel="noopener">南方网：七大专委会、130多家成员单位，第二届粤港澳大湾区（广东）文创联盟成立</a></span></p>
 <p>8月下旬，第二届粤港澳大湾区（广东）文创联盟在河源完成换届，广东省博物馆副馆长赵丽帆任理事长。联盟设文化文物、非遗、景区、设计、文创企业、湾区礼物、港澳共7个专业委员会，成员单位增至130多家；同期举办2026粤港澳青年设计师"走读乡村"访学活动，近40名粤港澳三地青年设计师参与，推动文创资源下沉乡村。</p>
 <blockquote><strong>点评：</strong> 继江苏"潮品苏创"联盟之后，大湾区文创联盟换届扩容，2026年"博物馆文创联盟化"已是全国性浪潮。大湾区联盟的特殊价值在"湾区礼物"与"港澳"专委——它天然承担着文化产品的跨境流通角色。而"走读乡村"把青年设计师送进乡村，则是文创从"城市博物馆"向"县域资源"延伸的信号：文博IP的下一个增量市场，可能就在乡镇与非遗现场。</blockquote>
 <hr>
 
 <h3 id="item5">5. 广西博物馆"尚武精神"挂包走红：网友喊话复刻，馆方回应"安排" <a class="tag tag-文创" href="../index.html?q=%E6%96%87%E5%88%9B">#文创</a> <a class="tag tag-公众互动" href="../index.html?q=%E5%85%AC%E4%BC%97%E4%BA%92%E5%8A%A8">#公众互动</a></h3>
-<p>📎 <a href="https://www.cqcb.com/news/16/2026-08-21/6203848.html" target="_blank" rel="noopener">上游新闻：广西博物馆馆藏"尚武精神"挂包走红，网友喊话原样复刻</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.cqcb.com/news/16/2026-08-21/6203848.html" target="_blank" rel="noopener">上游新闻：广西博物馆馆藏"尚武精神"挂包走红，网友喊话原样复刻</a></span></p>
 <p>广西博物馆一件馆藏"尚武精神"挂包近日在社交平台走红，网友纷纷喊话馆方"原样复刻"。馆方文创店回应"已经接收到大家的呼声啦，正在筹备相关文创开发"，并表示产品设计、材质及上市时间尚未最终确定，将通过官方账号发布进展。</p>
 <blockquote><strong>点评：</strong> 这是一场由观众发起的"文创立项"。过去文创开发是馆方单向供给，如今网友用转发投票倒逼馆方排期，说明公众对"有故事、有性格"的文物周边有强烈需求——一件土地革命时期的赤卫军挂包，因承载"尚武精神"的历史叙事而自带传播势能。馆方"安排"的回应同样值得点赞：学会接住观众的期待，就是最好的运营。</blockquote>
 <hr>
 
 <h3 id="item6">6. 河源和平县用AIGC为文物造"拟人IP"：南朝鸡首壶开口说话 <a class="tag tag-数字化" href="../index.html?q=%E6%95%B0%E5%AD%97%E5%8C%96">#数字化</a> <a class="tag tag-广东" href="../index.html?q=%E5%B9%BF%E4%B8%9C">#广东</a></h3>
-<p>📎 <a href="http://www.hyrbnews.cn/xinwen/shehui/content/2026-08/25/content_359385.html" target="_blank" rel="noopener">河源日报：创新展陈让文物自己"开口说话"</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://www.hyrbnews.cn/xinwen/shehui/content/2026-08/25/content_359385.html" target="_blank" rel="noopener">河源日报：创新展陈让文物自己"开口说话"</a></span></p>
 <p>广东省河源市和平县阳明博物馆近日依托AIGC技术打造文物拟人IP数字化体系：东莞城市学院"知行竹韵队"通过数字活化，让南朝鸡首壶等馆藏文物以拟人形象"开口说话"，以"数字活化+线下巡展"方式推动县域文物年轻化传播。当地正探索将馆藏文物转化为可交互、可传播的数字内容，补齐县域博物馆数字化短板。</p>
 <blockquote><strong>点评：</strong> AIGC让县级博物馆第一次有了"内容生产力"。过去县域馆做数字化，缺技术、缺预算、缺人才，往往只能停留在三维扫描存档；而AIGC拟人IP把门槛降到一支学生团队就能完成，让"文物开口说话"成为可负担的传播手段。不过也要警惕：拟人化的"萌化"叙事若缺乏学术底座的约束，容易滑向娱乐化。县域文物活化，好玩是手段，准确是底线。</blockquote>
 <hr>
@@ -264,25 +301,25 @@
 <h2 class="section">🌍 国际要闻</h2>
 
 <h3 id="item7">7. 🔥 希腊古城苏里亚新发现：阿尔忒弥斯雕像与117米挡土墙或指向神庙遗址 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-希腊" href="../index.html?q=%E5%B8%8C%E8%85%8A">#希腊</a></h3>
-<p>📎 <a href="https://greekreporter.com/2026/08/27/ancient-city-greece-buildings-temple-statuette-artemis/" target="_blank" rel="noopener">Greek Reporter</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://greekreporter.com/2026/08/27/ancient-city-greece-buildings-temple-statuette-artemis/" target="_blank" rel="noopener">Greek Reporter</a></span></p>
 <p>希腊伯罗奔尼撒半岛南部古城苏里亚的发掘中，考古队发现一尊无头阿尔忒弥斯大理石雕像、一块男性神祇头部残片，以及一道全长117米的挡土墙，同时出土蓄水井、希腊化时期陶器等遗物。因剧场南侧散落大量建筑构件，发掘负责人认为该区域可能隐藏神庙基址，有待进一步发掘确认。</p>
 <blockquote><strong>点评：</strong> 古希腊城邦的"仪式轴线"——从道路、挡土墙到神庙的层位关系，往往比单体雕像更能还原城市布局。117米挡土墙的量级提示这可能是城邦级公共工程而非单体建筑；雕像头部缺失则常为希腊化时期"改塑"或战乱损毁的痕迹。若神庙基址获确认，苏里亚的城市功能分区将得到关键坐标。</blockquote>
 <hr>
 
 <h3 id="item8">8. 意大利托斯卡纳发掘双线告捷：24只巨型储罐原址保存，实证希腊化经济中心 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-意大利" href="../index.html?q=%E6%84%8F%E5%A4%A7%E5%88%A9">#意大利</a></h3>
-<p>📎 <a href="https://www.buffalo.edu/home/story-repository.host.html/content/shared/university/news/ub-reporter-articles/stories/2026/08/italy-archeological-excavations.detail.html" target="_blank" rel="noopener">University at Buffalo</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.buffalo.edu/home/story-repository.host.html/content/shared/university/news/ub-reporter-articles/stories/2026/08/italy-archeological-excavations.detail.html" target="_blank" rel="noopener">University at Buffalo</a></span></p>
 <p>美国布法罗大学考古队在南托斯卡纳的希腊化聚落波代雷·坎尼奇发掘出一座农业仓库，室内24只大型陶罐（dolia）保持原始摆放位置，为该遗址首次发现的大型仓储设施，印证此处是一处组织化的经济中心。同区鲁塞莱遗址另清理出10座伦巴第及中世纪早期（568–774年）墓葬，人骨保存良好。</p>
 <blockquote><strong>点评：</strong> 陶罐"原址保存"是经济史研究的稀缺证据——24只 dolia 的位置关系可还原仓储物流动线，而非仅凭器物本身。从希腊化仓储到伦巴第墓葬的跨越，恰是一部托斯卡纳内陆聚落兴衰的编年，也再次提示"聚落考古"正取代"墓葬本位"叙事。</blockquote>
 <hr>
 
 <h3 id="item9">9. 维也纳利奥波德博物馆"Vienna 1900"永久展开幕：席勒最大收藏+克林姆杰作 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-奥地利" href="../index.html?q=%E5%A5%A5%E5%9C%B0%E5%88%A9">#奥地利</a></h3>
-<p>📎 <a href="https://www.wien.info/en/now-on/events/vienna-1900-935572" target="_blank" rel="noopener">Vienna Tourism：Vienna 1900 – Birth of Modernism</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.wien.info/en/now-on/events/vienna-1900-935572" target="_blank" rel="noopener">Vienna Tourism：Vienna 1900 – Birth of Modernism</a></span></p>
 <p>8月26日，维也纳利奥波德博物馆全新永久展"Vienna 1900：现代主义诞生"正式向公众开放，展出约1300件展品，分布于三层空间，涵盖全球规模最大的埃贡·席勒收藏、古斯塔夫·克林姆杰作，以及玻璃、陶瓷、金属、纺织品、珠宝、家具等工艺精品，全景呈现维也纳现代主义从绘画到日用设计的完整谱系。</p>
 <blockquote><strong>点评：</strong> 维也纳1900年是艺术史的高密度切片——分离派、装饰艺术、心理学几乎同时爆发。利奥波德博物馆把它做成永久展而非临时展，是把"时代切片"固化为城市文化基础设施的手笔。席勒+克林姆的顶配收藏，加上工艺品的日常面向，让观众既能看"大师"也能看"生活"，这正是欧洲城市博物馆策展成熟的体现。</blockquote>
 <hr>
 
 <h3 id="item10">10. 埃及卢克索出土"唱诗女祭司"Merit墓：30具猫木乃伊与10具彩棺 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-埃及" href="../index.html?q=%E5%9F%83%E5%8F%8A">#埃及</a></h3>
-<p>📎 <a href="https://www.nationalgeographic.com/history/article/egyptian-chantress-merit" target="_blank" rel="noopener">National Geographic</a></p>
+<p class="source-row">📎 <span class="source-chip source-b"><b>B</b> <a href="https://www.nationalgeographic.com/history/article/egyptian-chantress-merit" target="_blank" rel="noopener">National Geographic</a></span></p>
 <p>埃及旅游与文物部宣布在卢克索附近的德拉·阿布·纳迦墓地（山谷节仪式路线沿线）发现一批新墓葬：包括一名净化祭司之墓、一处藏有30具猫木乃伊的封藏，以及一个埋藏约10具精绘木质彩棺的隐蔽竖井。其中一具彩棺属于18王朝"唱诗女祭司"Merit——女祭司在宗教仪典中引导队列、召唤诸神，属精英女性角色。考古学家认为竖井实为祭司为防盗而重新掩埋棺椁的"藏棺窖"。</p>
 <blockquote><strong>点评：</strong> "唱诗女祭司"是常被低估的埃及女性精英样本——她们既非王族也非神职最高层，却在仪式秩序中占据不可替代的位置。30具猫木乃伊与彩棺窖藏并出，提示该墓地长期作为仪式与丧葬双重场域的功能分层。尤其"祭司二次掩埋"的发现，说明古埃及人自己就在与盗墓者"赛跑"，为理解墓葬扰动与文物流转提供了第一手注脚。</blockquote>
 <hr>
@@ -319,7 +356,7 @@
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>

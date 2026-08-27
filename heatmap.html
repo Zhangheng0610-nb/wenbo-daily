@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博热点地图 | 每日文博资讯</title>
 <meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">

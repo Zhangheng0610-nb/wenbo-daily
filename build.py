@@ -6,6 +6,18 @@ Usage: python build.py
 """
 import os, re, glob, json, sys
 from urllib.parse import quote
+from datetime import date as _date, datetime, timedelta, timezone
+
+from automation.governance import (
+    SOURCE_GROUPS, canonical_url, source_info, source_link_html,
+    source_registry_rows, source_stats,
+)
+
+CN_TZ = timezone(timedelta(hours=8))
+
+
+def china_today():
+    return datetime.now(CN_TZ).date()
 
 if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8':
     try:
@@ -313,6 +325,38 @@ CSS = """<style>
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>"""
 
 
@@ -540,7 +584,7 @@ def build_heatmap_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博热点地图 | 每日文博资讯</title>
 <meta name="description" content="中国文博热点地图 — 全国文物博物馆、考古、文化遗产热点省份热度可视化">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">
@@ -1125,6 +1169,17 @@ def build_report_html(data, prev_report=None, next_report=None):
     prev_report/next_report: dict with 'date' and 'weekday' or None.
     """
     total = data['domestic_count'] + data['international_count']
+    report_source_stats = source_stats([data])
+    if report_source_stats['C']:
+        quality_html = f'''<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 {report_source_stats['total']} 个来源中，A级 {report_source_stats['A']} 个、B级 {report_source_stats['B']} 个、待复核 {report_source_stats['C']} 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>'''
+    else:
+        quality_html = f'''<div class="quality-banner">
+  <strong>✅ 来源透明度：</strong>本期 {report_source_stats['total']} 个来源全部通过本站 A/B 级发布门槛。
+  <div class="source-note">A级为官方/一手来源，B级为专业补充来源；点击来源名称核对原文。</div>
+</div>'''
 
     toc_html = '<div class="toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
     for item in data['toc_items']:
@@ -1143,10 +1198,8 @@ def build_report_html(data, prev_report=None, next_report=None):
             html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
 
             if item['sources']:
-                src_parts = []
-                for s in item['sources']:
-                    src_parts.append(f'<a href="{s["url"]}" target="_blank" rel="noopener">{s["name"]}</a>')
-                html += '<p>📎 ' + ' | '.join(src_parts) + '</p>\n'
+                src_parts = [source_link_html(s) for s in item['sources']]
+                html += '<p class="source-row">📎 ' + ' '.join(src_parts) + '</p>\n'
 
             if item.get('image'):
                 html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n'
@@ -1199,7 +1252,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | {data['date']}</title>
 <meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,{data['date']}">
@@ -1218,8 +1271,8 @@ def build_report_html(data, prev_report=None, next_report=None):
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | {data['date']}",
-  "datePublished": "{data['date']}T08:13:00+08:00",
-  "dateModified": "{data['date']}T08:13:00+08:00",
+  "datePublished": "{data['date']}T07:13:00+08:00",
+  "dateModified": "{data['date']}T07:13:00+08:00",
   "description": "{data['date']} 每日文博资讯，共 {total} 条",
   "url": "https://zhangheng666.top/reports/{data['date']}.html",
   "publisher": {{
@@ -1243,6 +1296,8 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 {toc_html}
 
+{quality_html}
+
 {domestic_html}
 {international_html}
 {trends_html}{notes_html}
@@ -1261,7 +1316,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>
@@ -1298,7 +1353,7 @@ document.getElementById('share-btn').addEventListener('click', function() {{
 
 </body>
 </html>'''
-    return html
+    return '\n'.join(line.rstrip() for line in html.splitlines()) + '\n'
 
 
 # ───────────────── 周报 / 月报 解析器 ─────────────────
@@ -1524,6 +1579,11 @@ def md_inline(text):
 
 # ───────────────── 招聘信息 解析器 ─────────────────
 
+def extract_deadline_date(text):
+    """Use the final date in a deadline range as the actual closing date."""
+    matches = re.findall(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or '')
+    return matches[-1] if matches else None
+
 def parse_jobs(filepath):
     """Parse recruitment markdown file and return structured data.
 
@@ -1552,7 +1612,9 @@ def parse_jobs(filepath):
             y, m, d = title_match.groups()
             data['update_date'] = f'{y}-{int(m):02d}-{int(d):02d}'
 
-    today = data['update_date']
+    # Expiry must be evaluated against today's Beijing date, not the file's
+    # update date; otherwise stale listings can look active forever.
+    today = china_today().isoformat()
 
     current_section = None  # dict with category, icon, items
     current_item = None
@@ -1600,7 +1662,8 @@ def parse_jobs(filepath):
                 'link_url': '',
                 'link_text': '招聘公告',
                 'days_left': None,
-                'note': ''
+                'note': '',
+                'status': 'check'
             }
             if current_section is None:
                 # Default section
@@ -1646,17 +1709,19 @@ def parse_jobs(filepath):
         for item in section['items']:
             dl = item['deadline']
             if dl and today:
-                dl_match = re.match(r'(\d{4})-(\d{1,2})-(\d{1,2})', dl)
+                dl_match = extract_deadline_date(dl)
                 if dl_match:
                     try:
                         from datetime import date
                         dl_date = date(
-                            int(dl_match.group(1)),
-                            int(dl_match.group(2)),
-                            int(dl_match.group(3))
+                            int(dl_match[0]), int(dl_match[1]), int(dl_match[2])
                         )
                         today_date = date.fromisoformat(today)
                         item['days_left'] = (dl_date - today_date).days
+                        if item['days_left'] < 0:
+                            item['status'] = 'closed'
+                        else:
+                            item['status'] = 'open'
                         if 0 <= item['days_left'] <= 3:
                             item['urgent'] = True
                     except (ValueError, KeyError):
@@ -1665,9 +1730,11 @@ def parse_jobs(filepath):
     # Sort items within each section by deadline (earliest first, no-deadline last)
     for section in data['sections']:
         def sort_key(item):
-            if item['days_left'] is not None:
-                return (0, item['days_left'])
-            return (1, 9999)
+            if item['status'] == 'open':
+                return (0, item['days_left'] if item['days_left'] is not None else 9999)
+            if item['status'] == 'check':
+                return (1, 9999)
+            return (2, item['days_left'] if item['days_left'] is not None else 9999)
         section['items'].sort(key=sort_key)
 
     return data
@@ -1677,6 +1744,9 @@ def build_jobs_html(data, page_type='jobs'):
     """Generate HTML for the recruitment page (jobs.html) or internship page (intern.html)."""
     total = sum(len(s['items']) for s in data['sections'])
     urgent_count = sum(1 for s in data['sections'] for it in s['items'] if it['urgent'])
+    closed_count = sum(1 for s in data['sections'] for it in s['items'] if it.get('status') == 'closed')
+    check_count = sum(1 for s in data['sections'] for it in s['items'] if it.get('status') == 'check')
+    active_count = sum(1 for s in data['sections'] for it in s['items'] if it.get('status') == 'open')
     is_intern = (page_type == 'intern')
     page_title = '🌱 文博实习招聘' if is_intern else '💼 文博招聘信息'
     page_url = 'intern.html' if is_intern else 'jobs.html'
@@ -1690,20 +1760,32 @@ def build_jobs_html(data, page_type='jobs'):
             urgent_badge = ''
             if item['urgent'] and item['days_left'] is not None:
                 dl = item['deadline']
-                dl_match = re.match(r'(\d{4})-(\d{1,2})-(\d{1,2})', dl) if dl else None
+                dl_match = extract_deadline_date(dl) if dl else None
                 if dl_match:
-                    m, d = int(dl_match.group(2)), int(dl_match.group(3))
+                    m, d = int(dl_match[1]), int(dl_match[2])
                     urgent_badge = f' <span class="closing-badge">{m}月{d}日截止</span>'
                 else:
                     urgent_badge = ' <span class="closing-badge">即将截止</span>'
 
-            row_class = ' urgent-row' if item['urgent'] else ''
+            row_class = ' urgent-row' if item['urgent'] else (' closed-row' if item.get('status') == 'closed' else '')
+            if item.get('status') == 'closed':
+                status_badge = '<span class="status-badge status-closed">已截止</span>'
+            elif item.get('status') == 'open':
+                status_badge = '<span class="status-badge status-open">可申请</span>'
+            else:
+                status_badge = '<span class="status-badge status-check">待核截止</span>'
+            if item.get('link_url', '').startswith(('http://', 'https://')):
+                link_info = source_info(item['link_url'])
+                link_badge = f' <span class="source-note">{link_info["tier"]}级来源</span>'
+            else:
+                link_badge = ''
 
             items_html += f'''
         <div class="job-item{row_class}">
           <div class="job-header">
             <span class="job-number">#{item['number']}</span>
             <span class="job-title">{item['institution']} — {item['position']}</span>
+            {status_badge}
             {urgent_badge}
           </div>
           <div class="job-meta">
@@ -1713,7 +1795,7 @@ def build_jobs_html(data, page_type='jobs'):
             {('<span>💰 ' + item['note'] + '</span>') if item.get('note') else ''}
           </div>
           <div class="job-link">
-            {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
+            {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' + link_badge if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
           </div>
         </div>'''
 
@@ -1733,7 +1815,7 @@ def build_jobs_html(data, page_type='jobs'):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{page_title} | {data['update_date']}</title>
 <meta property="og:title" content="{page_title} | {data['update_date']}">
 <meta property="og:description" content="{'文博实习岗位，面向在读学生，共 ' + str(total) + ' 个岗位' if is_intern else '省级以上博物馆、考古院所、高校文博专业招聘信息，共 ' + str(total) + ' 个岗位。即将截止 ' + str(urgent_count) + ' 个。'}">
@@ -1765,6 +1847,7 @@ def build_jobs_html(data, page_type='jobs'):
   .job-item.urgent-row {{
     border-left: 4px solid #e74c3c;
   }}
+  .job-item.closed-row {{ opacity: .62; border-left: 4px solid var(--border); }}
   @media (prefers-color-scheme: dark) {{
     .job-item.urgent-row {{
       border-left-color: #ff6b5b;
@@ -1821,7 +1904,7 @@ def build_jobs_html(data, page_type='jobs'):
 
 <header>
   <h1>{page_title}</h1>
-  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'}{' ｜ ⏰ 即将截止 ' + str(urgent_count) + ' 个' if not is_intern and urgent_count else ''}</p>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'} ｜ 可申请 {active_count} ｜ 已截止 {closed_count}</p>
   <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
 </header>
 
@@ -1829,22 +1912,25 @@ def build_jobs_html(data, page_type='jobs'):
 
 <div class="stats-bar">
   <div class="stat-item">📋 总岗位数：<strong>{total}</strong></div>
-  <div class="stat-item">⏰ 即将截止：<strong>{urgent_count}</strong></div>
+  <div class="stat-item">🟢 可申请：<strong>{active_count}</strong></div>
+  <div class="stat-item">⏰ 3天内截止：<strong>{urgent_count}</strong></div>
+  <div class="stat-item">🔴 已截止：<strong>{closed_count}</strong></div>
+  <div class="stat-item">🧭 待核截止：<strong>{check_count}</strong></div>
   <div class="stat-item">🔄 每两天更新一次</div>
 </div>
 
 {sections_html}
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文，本页面仅做信息聚合。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 </body>
 </html>'''
-    return html
+    return '\n'.join(line.rstrip() for line in html.splitlines()) + '\n'
 
 
 def _render_md_block(lines):
@@ -1934,7 +2020,40 @@ def _render_md_block(lines):
     return html
 
 
-def build_digest_html(data):
+def _compact_title(text):
+    return re.sub(r'[^0-9a-zA-Z\u4e00-\u9fff]', '', (text or '')).lower()
+
+
+def related_digest_sources(title, daily_reports):
+    """Recover evidence for legacy weekly/monthly summaries from daily items.
+
+    New digest Markdown should carry 📎 links itself. This fallback only links
+    an aggregate item when its title clearly matches a daily item title.
+    """
+    if not title or not daily_reports:
+        return []
+    target = _compact_title(title)
+    if len(target) < 8:
+        return []
+    matches = []
+    for report in daily_reports:
+        for item in report.get('domestic', []) + report.get('international', []):
+            candidate = _compact_title(item.get('title', ''))
+            if not candidate:
+                continue
+            shared = target in candidate or candidate in target
+            if not shared:
+                # Long common prefix is safer than a loose keyword match.
+                shared = len(target[:12]) >= 8 and target[:12] in candidate
+            if shared:
+                for source in item.get('sources', []):
+                    matches.append(source)
+                if matches:
+                    return matches[:2]
+    return []
+
+
+def build_digest_html(data, daily_reports=None):
     """Generate HTML for a weekly or monthly digest."""
     dtype = data['type']
     emoji = '📰' if dtype == 'weekly' else '📊'
@@ -1995,6 +2114,33 @@ def build_digest_html(data):
 
                 items_html += '<hr>\n\n'
 
+    # Legacy digest files often omitted source links. Recover direct evidence
+    # from matching daily items and make any remaining gap visible to readers.
+    evidence_rows = []
+    missing_evidence = 0
+    for item in data.get('items', []):
+        sources = item.get('sources') or related_digest_sources(item.get('title', ''), daily_reports or [])
+        unique = []
+        seen = set()
+        for source in sources:
+            key = canonical_url(source.get('url', ''))
+            if key and key not in seen:
+                seen.add(key)
+                unique.append(source)
+        if unique:
+            evidence_rows.append('<li><span class="digest-evidence-title">' + md_inline(item.get('title', '')) + '</span><br>' +
+                                 ' '.join(source_link_html(s) for s in unique) + '</li>')
+        else:
+            missing_evidence += 1
+            evidence_rows.append('<li><span class="digest-evidence-title">' + md_inline(item.get('title', '')) +
+                                  '</span> <span class="status-badge status-check">待补原始来源</span></li>')
+    evidence_html = ''
+    if evidence_rows:
+        warning = f' 仍有 {missing_evidence} 条要闻未能从日报回溯来源。' if missing_evidence else ''
+        evidence_html = (f'<div class="digest-sources"><h3>🔎 本期证据索引</h3>'
+                         f'<p class="source-note">优先展示日报中可回溯的原始来源；{warning}</p>'
+                         f'<ol>' + ''.join(evidence_rows) + '</ol></div>')
+
     # Upcoming / forecast
     upcoming_html = ''
     if data['upcoming_table']:
@@ -2040,7 +2186,7 @@ def build_digest_html(data):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{og_label} | {data['date_range']}</title>
 <meta property="og:title" content="{og_label} | {data['date_range']}">
 <meta property="og:description" content="{data['date_range']} {og_label}{'，' + count_text if count_text else ''}">
@@ -2063,6 +2209,8 @@ def build_digest_html(data):
 
 {overview_html}
 
+{evidence_html}
+
 {items_html}
 
 {upcoming_html}
@@ -2076,7 +2224,7 @@ def build_digest_html(data):
 <p><em>{data['footer']}</em></p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a></p>
 </footer>
 
 </body>
@@ -2288,6 +2436,8 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   .heatmap-card .hm-title { font-size: 1.08em; font-weight: 700; }
   .heatmap-card .hm-sub { font-size: .8em; opacity: .9; margin-top: 3px; }
   .heatmap-card .hm-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.3em; opacity: .85; }
+  .governance-card { background: linear-gradient(135deg, #315b63, #1d3e49); box-shadow: 0 3px 12px rgba(29,62,73,.18); }
+  .home-note { color: var(--muted); font-size: .84em; margin: -6px 0 18px; text-align: center; }
 </style>"""
 
     # Build section blocks
@@ -2346,9 +2496,9 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 文博·考古·博物馆行业日报</title>
-<meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 8:13 更新，已有 {len(daily_reports)} 天日报">
+<meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 7:13（北京时间）更新，已有 {len(daily_reports)} 天日报">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,文博资讯,文博日报,每日文博">
 <link rel="canonical" href="https://zhangheng666.top/">
 <meta property="og:title" content="每日文博资讯">
@@ -2382,10 +2532,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
 <header>
   <h1>🏛️ 每日文博资讯</h1>
-  <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
+<p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
 </header>
 
 <main>
+
+<p class="home-note">每天只保留值得核验的行业信息；来源、方法和历史档案状态均公开。</p>
 
 <div class="search-wrap">
   <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off" aria-label="搜索新闻">
@@ -2406,6 +2558,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <span class="hm-arrow">→</span>
 </a>
 
+<a class="heatmap-card governance-card" href="sources.html">
+  <div class="hm-title">🧭 信源与方法</div>
+  <div class="hm-sub">A级官方来源 · B级专业补充 · 历史档案审计与发布门槛</div>
+  <span class="hm-arrow">→</span>
+</a>
+
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
 <div class="section-body">
 <div id="daily-list">
@@ -2423,7 +2581,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </main>
 
 <footer>
-  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 8:13 更新 ｜ <a href="about.html">关于本站</a></p>
+  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 </body>
@@ -2484,35 +2642,27 @@ function toggleOlder(btn) {
     cards.forEach((card) => {
       const href = card.getAttribute('href');
       const cardText = card.textContent.toLowerCase();
+      const path = (href || '').replace(/^\\.\\//, '');
+      const record = searchData && searchData.find(r => r.path === path || (r.type === 'daily' && href && href.includes(r.date)));
       let matched = false;
       let previewText = '';
+      const searchable = [cardText, record && record.title, record && record.text]
+        .concat(record && record.items ? record.items.map(item =>
+          [item.title, item.body, item.commentary, (item.tags || []).join(' '), (item.sources || []).join(' ')].join(' ')) : [])
+        .filter(Boolean).join(' ').toLowerCase();
 
       for (const w of queryWords) {
-        if (cardText.includes(w)) { matched = true; break; }
-      }
-
-      if (!matched && searchData) {
-        const report = searchData.find(r => href && href.includes(r.date));
-        if (report) {
-          for (const item of report.items) {
-            const itemText = (item.title + ' ' + item.body + ' ' + (item.commentary||'') + ' ' + (item.tags||[]).join(' ')).toLowerCase();
-            for (const w of queryWords) {
-              if (itemText.includes(w)) {
-                matched = true;
-                const idx = itemText.indexOf(w);
-                const start = Math.max(0, idx - 30);
-                const end = Math.min(itemText.length, idx + w.length + 40);
-                let snippet = itemText.substring(start, end);
-                if (start > 0) snippet = '…' + snippet;
-                if (end < itemText.length) snippet = snippet + '…';
-                const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
-                snippet = snippet.replace(re, '<mark class="highlight">$1</mark>');
-                previewText = snippet;
-                break;
-              }
-            }
-            if (matched) break;
-          }
+        if (searchable.includes(w)) {
+          matched = true;
+          const idx = searchable.indexOf(w);
+          const start = Math.max(0, idx - 30);
+          const end = Math.min(searchable.length, idx + w.length + 50);
+          let snippet = searchable.substring(start, end);
+          if (start > 0) snippet = '…' + snippet;
+          if (end < searchable.length) snippet = snippet + '…';
+          const re = new RegExp('(' + w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'gi');
+          previewText = snippet.replace(re, '<mark class="highlight">$1</mark>');
+          break;
         }
       }
 
@@ -2539,7 +2689,7 @@ function toggleOlder(btn) {
 
     noResults.style.display = visible === 0 ? 'block' : 'none';
     resultCount.style.display = 'block';
-    resultCount.textContent = `找到 ${visible} 天的相关报道`;
+    resultCount.textContent = `找到 ${visible} 个相关栏目`;
   }
 
   searchInput.addEventListener('input', function(){
@@ -2590,6 +2740,11 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
     <loc>{base}/about.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>''')
+    urls.append(f'''  <url>
+    <loc>{base}/sources.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>''')
     urls.append(f'''  <url>
     <loc>{base}/intern.html</loc>
@@ -2650,7 +2805,7 @@ def build_about_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>关于本站 | 每日文博资讯</title>
 <meta name="description" content="每日文博资讯 — 网站介绍、内容来源、编撰流程与免责声明">
 <link rel="canonical" href="https://zhangheng666.top/about.html">
@@ -2676,18 +2831,18 @@ def build_about_html():
 <h2 class="section">🕐 更新节奏</h2>
 <table>
 <tr><th>栏目</th><th>更新频率</th></tr>
-<tr><td>📅 日报</td><td>每天早 8:13</td></tr>
+<tr><td>📅 日报</td><td>每天早 7:13（北京时间）</td></tr>
 <tr><td>📰 周报</td><td>每周日</td></tr>
 <tr><td>📊 月报</td><td>每月 1 日</td></tr>
 <tr><td>💼 招聘 / 🌱 实习</td><td>每两天（偶数日期）</td></tr>
 </table>
 
 <h2 class="section">🗞️ 信源说明</h2>
-<p>本站采用<strong>白名单信源机制</strong>。国内 A 级来源包括国家文物局、新华社、央视、中国文物报、中国博物馆协会、中国考古网/社科院考古及博物馆官网；国际 A 级来源包括 UNESCO、世界遗产中心、ICOM、ICCROM。AP、Reuters、BBC、Archaeology Magazine、The Art Newspaper 仅作高质量补充。公众号、百家号、头条号、搜索引擎跳转页和聚合转载页不作为最终信源。每篇报道均附来源链接，方便核对原文。</p>
+<p>本站采用<strong>可执行的信源分级机制</strong>：A级为国家文物局、新华社、央视、中国文物报、专业机构和博物馆官网，以及 UNESCO、ICOM、ICCROM 等国际组织；B级为 Reuters、AP、BBC、专业刊物和研究机构，用于高质量补充；公众号、百家号、头条号、搜索引擎跳转页和聚合转载页为 C 级，仅作线索，不能进入新的最终稿。完整登记表和历史档案审计见<a href="sources.html">《信源与方法》</a>。</p>
 
 <h2 class="section">🤖 AI 编撰流程与声明</h2>
 <blockquote><strong>重要声明：</strong>本站内容由 AI 自动生成，未经人工逐条核实。AI 可能出错——请务必以文末附带的原始来源链接为准，重要信息请查证官方原文后再引用。</blockquote>
-<p>流程：定时检索白名单平台 → 按一手性、时效、实质增量和行业价值筛选 → 与近 30 天内容去重 → 生成条目、标签与点评 → 构建页面并部署。日报按“国内要闻 / 国际要闻”组织，标签再归一到考古、博物馆、展览、文物保护、文化遗产、数字化、文物追索、国际交流、政策行业九类，供搜索和趋势地图使用。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
+<p>流程：定向检索登记来源 → 核对原文日期、数量和事件状态 → 按实质增量和行业价值筛选 → 与近 30 天内容去重 → 分开生成事实摘要和编辑判断 → 构建页面并执行质量门禁。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题，供搜索和趋势地图使用。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
 
 <h2 class="section">🔒 隐私</h2>
 <p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。你只是阅读，我们只是展示。</p>
@@ -2699,6 +2854,86 @@ def build_about_html():
 </body>
 </html>'''
     return html
+
+
+def build_sources_html(daily_reports):
+    """Generate a reader-facing source registry and archive audit page."""
+    stats = source_stats(daily_reports)
+    tier_cards = []
+    for row in source_registry_rows():
+        tier = row['tier']
+        domains = '、'.join(row['domains'])
+        tier_cards.append(f'''<div class="registry-card source-{tier.lower()}">
+  <h3>{row['label']}</h3>
+  <p>{row['description']}</p>
+  <p class="source-note">登记范围：{domains}</p>
+</div>''')
+    legacy_hosts = sorted(stats['hosts'].items(), key=lambda x: (-x[1], x[0]))
+    legacy_lines = []
+    for host, count in legacy_hosts:
+        if source_info('https://' + host)['tier'] == 'C':
+            legacy_lines.append(f'<li>{host}（{count} 次）</li>')
+    legacy_html = ''.join(legacy_lines[:24]) or '<li>当前没有待复核来源</li>'
+    audit_class = ' legacy' if stats['C'] else ''
+    audit_text = ('历史档案中仍存在未登记来源；它们被保留用于完整记录，但不会进入新的自动发布。'
+                  if stats['C'] else '当前档案来源均已登记，可按 A/B 级发布门槛继续维护。')
+    return f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信源与方法 | 每日文博资讯</title>
+<meta name="description" content="每日文博资讯的信源分级、内容筛选、去重和核验方法。">
+{CSS}
+<style>
+  .registry-card {{ border: 1px solid var(--border); border-left: 4px solid var(--accent); background: var(--card); border-radius: 10px; padding: 14px; margin: 12px 0; }}
+  .registry-card h3 {{ margin: 0 0 5px; }}
+  .registry-card.source-c {{ border-left-color: #b91c1c; }}
+  .audit-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }}
+  .audit-cell {{ background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }}
+  .audit-cell strong {{ display: block; font-size: 1.25em; }}
+  @media (max-width: 520px) {{ .audit-grid {{ grid-template-columns: repeat(2, 1fr); }} }}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>🧭 信源与方法</h1>
+  <p class="meta">把“可信”变成可检查的发布规则</p>
+  <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
+</header>
+
+<div class="quality-banner{audit_class}"><strong>档案审计：</strong>已检查 {len(daily_reports)} 份日报、{stats['total']} 个来源链接；A级 {stats['A']} 个，B级 {stats['B']} 个，待复核 {stats['C']} 个。{audit_text}</div>
+
+<h2 class="section">📚 信源分级</h2>
+{''.join(tier_cards)}
+
+<h2 class="section">🧪 发布门槛</h2>
+<ol>
+  <li>搜索引擎只负责发现候选，最终链接必须指向登记来源。</li>
+  <li>涉及政策、考古年代、文物数量、归还争议和招聘截止日期，优先使用A级原文。</li>
+  <li>B级来源只作专业补充；找不到可核验原文时宁可不发，不为凑数收录。</li>
+  <li>每个事件按 canonical URL、标题和实体去重；只有实质新进展才重复出现。</li>
+  <li>事实摘要和编辑判断分开，无法确认的内容标记“待核”，不把推测写成定论。</li>
+</ol>
+
+<h2 class="section">📊 当前档案统计</h2>
+<div class="audit-grid">
+  <div class="audit-cell"><strong>{stats['total']}</strong>来源链接</div>
+  <div class="audit-cell"><strong>{stats['A']}</strong>A级来源</div>
+  <div class="audit-cell"><strong>{stats['B']}</strong>B级来源</div>
+  <div class="audit-cell"><strong>{stats['C']}</strong>待复核</div>
+</div>
+<p class="source-note">C级来源只在历史档案中展示为待复核，不代表本站推荐或认可。</p>
+<ul>{legacy_html}</ul>
+
+<h2 class="section">🤖 AI 编撰边界</h2>
+<p>本站由原生 Codex 自动生成页面，但 AI 不是事实来源，也不替代原文核验。重要信息请点击来源链接回到发布机构或专业媒体原文；发现错误可在项目仓库提交 issue。</p>
+
+<footer><p><a href="index.html">返回首页</a> ｜ <a href="about.html">关于本站</a></p></footer>
+</main>
+</body>
+</html>'''
 
 
 def build_dedup_index(daily_reports, days=30):
@@ -2746,24 +2981,16 @@ def main():
             if not data['ref_date']:
                 print('  SKIP: could not parse weekly date')
                 continue
-            html = build_digest_html(data)
-            html_path = os.path.join(REPORTS_DIR, f'weekly-{data["ref_date"]}.html')
-            with open(html_path, 'w', encoding='utf-8') as f:
-                f.write(html)
-            print(f'  -> weekly-{data["ref_date"]}.html')
             weekly_reports.append(data)
+            print(f'  -> parsed weekly-{data["ref_date"]}.html')
 
         elif '月报' in first_line:
             data = parse_digest(md_path, 'monthly')
             if not data['ref_date']:
                 print('  SKIP: could not parse monthly date')
                 continue
-            html = build_digest_html(data)
-            html_path = os.path.join(REPORTS_DIR, f'monthly-{data["ref_date"]}.html')
-            with open(html_path, 'w', encoding='utf-8') as f:
-                f.write(html)
-            print(f'  -> monthly-{data["ref_date"]}.html')
             monthly_reports.append(data)
+            print(f'  -> parsed monthly-{data["ref_date"]}.html')
 
         else:
             # Daily report - parse first, build HTML later (need prev/next)
@@ -2774,7 +3001,21 @@ def main():
             print(f'  -> parsed {data["date"]}')
             daily_reports.append(data)
 
-    # Build search index JSON (daily reports only for now)
+    # Digests are rendered after all daily reports are parsed so legacy
+    # summaries can recover matching original sources from the full archive.
+    for data in weekly_reports:
+        html = build_digest_html(data, daily_reports)
+        html_path = os.path.join(REPORTS_DIR, f'weekly-{data["ref_date"]}.html')
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+    for data in monthly_reports:
+        html = build_digest_html(data, daily_reports)
+        html_path = os.path.join(REPORTS_DIR, f'monthly-{data["ref_date"]}.html')
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+
+    # Build a unified search index. It covers editorial archives and the two
+    # practical job boards, not only daily reports.
     search_data = []
     for r in daily_reports:
         items = []
@@ -2783,19 +3024,32 @@ def main():
                 'title': item['title'],
                 'body': item['body'][:200] if item['body'] else '',
                 'commentary': item['commentary'],
-                'tags': item.get('tags', [])
+                'tags': item.get('tags', []),
+                'sources': [s.get('name', '') for s in item.get('sources', [])],
             })
         search_data.append({
+            'type': 'daily',
+            'path': f"reports/{r['date']}.html",
+            'title': r['title'],
             'date': r['date'],
             'weekday': r['weekday'],
             'domestic_count': r['domestic_count'],
             'international_count': r['international_count'],
             'items': items
         })
-    idx_path = os.path.join(SITE_DIR, 'search-index.json')
-    with open(idx_path, 'w', encoding='utf-8') as f:
-        json.dump(search_data, f, ensure_ascii=False, indent=2)
-    print(f'Search index: {idx_path} ({len(search_data)} daily reports)')
+    for r in weekly_reports + monthly_reports:
+        digest_text = ' '.join([r.get('title', ''), r.get('overview', '')])
+        digest_text += ' ' + ' '.join(i.get('title', '') + ' ' + i.get('body', '') + ' ' + i.get('progress', '') for i in r.get('items', []))
+        digest_text += ' ' + ' '.join(s.get('title', '') + ' ' + ' '.join(s.get('raw_lines', [])) for s in r.get('rich_sections', []))
+        prefix = 'weekly' if r['type'] == 'weekly' else 'monthly'
+        search_data.append({
+            'type': r['type'],
+            'path': f"reports/{prefix}-{r['ref_date']}.html",
+            'title': r['title'],
+            'date': r['ref_date'],
+            'text': digest_text,
+            'items': r.get('items', []),
+        })
 
     # Build heatmap data + page (仅国内,国际段排除;资源缺失仅 WARN 不中断)
     heat_data, heat_audit = build_heatmap_data(daily_reports)
@@ -2857,6 +3111,33 @@ def main():
     else:
         print('Intern: no source file at', INTERN_MD)
 
+    def append_job_search_record(data, kind, path):
+        if not data:
+            return
+        parts = [data.get('summary', '')]
+        for section in data.get('sections', []):
+            parts.append(section.get('category', ''))
+            for item in section.get('items', []):
+                parts.extend([item.get('institution', ''), item.get('position', ''),
+                              item.get('education', ''), item.get('location', ''),
+                              item.get('deadline', ''), item.get('note', ''),
+                              item.get('link_text', '')])
+        search_data.append({
+            'type': kind,
+            'path': path,
+            'title': '文博实习招聘' if kind == 'intern' else '文博招聘信息',
+            'date': data.get('update_date', ''),
+            'text': ' '.join(parts),
+            'items': [],
+        })
+
+    append_job_search_record(recruitment_data, 'jobs', 'jobs.html')
+    append_job_search_record(intern_data, 'intern', 'intern.html')
+    idx_path = os.path.join(SITE_DIR, 'search-index.json')
+    with open(idx_path, 'w', encoding='utf-8') as f:
+        json.dump(search_data, f, ensure_ascii=False, indent=2)
+    print(f'Search index: {idx_path} ({len(search_data)} searchable pages)')
+
     # Build index with all sections
     index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data, intern_data)
     index_path = os.path.join(SITE_DIR, 'index.html')
@@ -2870,6 +3151,12 @@ def main():
     with open(about_path, 'w', encoding='utf-8') as f:
         f.write(about_html)
     print(f'About: {about_path}')
+
+    sources_html = build_sources_html(daily_reports)
+    sources_path = os.path.join(SITE_DIR, 'sources.html')
+    with open(sources_path, 'w', encoding='utf-8') as f:
+        f.write(sources_html)
+    print(f'Sources: {sources_path}')
 
     # Build robots.txt
     robots_txt = 'User-agent: *\nAllow: /\n\nSitemap: https://zhangheng666.top/sitemap.xml\n'

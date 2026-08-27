@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 2026-08-06</title>
 <meta name="description" content="2026-08-06 每日文博资讯，共 8 条（国内 4 + 国际 4）。🔥🔥 马王堆"双帛画"首次同场地轮换展出——一号墓T形帛画8/16撤展进入10天倒计时，三号墓8/18国内首次省外亮相">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,2026-08-06">
@@ -22,8 +22,8 @@
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | 2026-08-06",
-  "datePublished": "2026-08-06T08:13:00+08:00",
-  "dateModified": "2026-08-06T08:13:00+08:00",
+  "datePublished": "2026-08-06T07:13:00+08:00",
+  "dateModified": "2026-08-06T07:13:00+08:00",
   "description": "2026-08-06 每日文博资讯，共 8 条",
   "url": "https://zhangheng666.top/reports/2026-08-06.html",
   "publisher": {
@@ -192,6 +192,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -220,10 +252,15 @@
   </details>
 </div>
 
+<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 8 个来源中，A级 2 个、B级 0 个、待复核 6 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>
+
 <h2 class="section">🇨🇳 国内要闻</h2>
 
 <h3 id="item1">1. 🔥🔥 马王堆"双帛画"首次同场地轮换展出——一号墓T形帛画8/16撤展进入10天倒计时，三号墓8/18国内首次省外亮相 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-国宝" href="../index.html?q=%E5%9B%BD%E5%AE%9D">#国宝</a></h3>
-<p>📎 <a href="https://www.news.cn/local/20260805/662ba1ae6d5249689e328fb2c58030e5/c.html" target="_blank" rel="noopener">新华网</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/local/20260805/662ba1ae6d5249689e328fb2c58030e5/c.html" target="_blank" rel="noopener">新华网</a></span></p>
 <p>8月6日起，正在上海美术馆（中华艺术宫）展出的"千金之家——马王堆汉墓的生活美学及养成"国宝艺术大展迎来关键节点：<strong>一号墓T形帛画进入最后10天展期倒计时</strong>，将于8月16日18:00正式撤展并运回湖南省博物馆。
 这将是文博界史无前例的操作——一号墓帛画撤展后仅隔一天（8月17日），<strong>三号墓T形帛画将"接力"到场</strong>，8月18日起对公众亮相直至10月7日大展闭幕。两幅T形帛画在同一展馆内以轮换方式先后展出，<strong>在文博史上尚属首次</strong>。马王堆研究院院长喻燕姣明确表示，"今后几乎不会有在湖南省外同展期、同展厅观赏到两件帛画的机会"。
 一号墓帛画（辛追夫人墓出土）是国家首批禁止出国（境）展览文物，近30多年来原件仅4次离开库房公开展出，此次上海展结束后将接受系统评估与专业保养，"未来相当长时间内无对外展出计划"。三号墓帛画（辛追之子利豨墓出土）长达<strong>2.34米</strong>，是目前所见汉代最大的彩绘帛画，画面内容更为浩瀚繁杂，此次为<strong>国内首次省外展出</strong>。</p>
@@ -231,7 +268,7 @@
 <hr>
 
 <h3 id="item2">2. 🔥 上博"世界树之巅"美洲大展暑期成绩单——10万+观众、文创破千万、2300+款产品，文博经济新标杆 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-博物馆经济" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86%E7%BB%8F%E6%B5%8E">#博物馆经济</a></h3>
-<p>📎 <a href="https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html" target="_blank" rel="noopener">新华网</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html" target="_blank" rel="noopener">新华网</a></span></p>
 <p>上海博物馆"世界树之巅：美洲古代文明大展"自7月9日开展以来，不到一个月已接待<strong>超过10万人次观众</strong>，<strong>文创总营收突破1000万元</strong>。这个被媒体称为"全球史上规模最大的美洲古代文明专题展"汇聚了墨西哥、秘鲁等<strong>14家文博机构</strong>的1129组、近3000件珍贵文物，展陈面积超7000平方米，时间跨度从公元前1200年到公元16世纪。
 文创是本次大展最引人注目的商业创新：首发达<strong>2300余款产品</strong>（全展期将突破3000款），70%以上定价在100元以下，涵盖冰箱贴、毛绒手办、服饰、首饰等品类。部分爆款已卖到断货。馆方还将文创商店延伸至商圈——淮海中路600+平方米快闪店、南京东路1000+平方米主题店同步运营，联动上海动物园、世博文化公园等推出"文物、人物、动物、植物、食物"<strong>五物联动</strong>模式。青浦科技企业还推出了AI定制平台：观众拍展品照片上传小程序，AI提取文物纹样元素，24小时内生成个性化定制T恤或帆布包。
 学术层面，展览由中洪联合考古队中方领队李新伟担任学术总顾问，科潘遗址考古是中国考古学家在中美洲的首个学术研究项目。</p>
@@ -239,14 +276,14 @@
 <hr>
 
 <h3 id="item3">3. 🔥 浙博圆明园四大兽首展8/6起单独预约限流——单日1万人次，兽首热持续升温 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-公共服务" href="../index.html?q=%E5%85%AC%E5%85%B1%E6%9C%8D%E5%8A%A1">#公共服务</a></h3>
-<p>📎 <a href="https://zjnews.zjol.com.cn/zjnews/202608/t20260802_31821698.shtml" target="_blank" rel="noopener">浙江在线</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://zjnews.zjol.com.cn/zjnews/202608/t20260802_31821698.shtml" target="_blank" rel="noopener">浙江在线</a></span></p>
 <p>浙江省博物馆之江馆区"再现圆明园——国宝百年归藏特展"自7月30日开放以来持续火爆（本系列8月2日曾报道首周末单日2.4万人、排队4小时的盛况）。8月6日起，馆方正式实行<strong>单独预约参观制</strong>，<strong>单日限流10000人次</strong>，观众需通过浙博官方渠道提前预约该展览的参观名额。
 展览核心展品——圆明园海晏堂十二生肖水力钟中的<strong>牛首、虎首、猴首、猪首</strong>四尊铜像原件——自开幕以来持续吸引全国观众。加上同期在福州展出的马首铜像（全国巡回展首站），2026年暑期共有五尊兽首同时面向公众，形成了近年来规模最大的兽首集体亮相。限流措施虽然可能影响部分临时到馆观众，但对于保障观展体验和文物安全是必要之举——此前单日近2.4万人的客流已逼近之江馆区的物理承载极限。展览免费开放，展期至10月18日。</p>
 <blockquote><strong>点评：</strong> 从"排队4小时"到"单独预约限流1万"——兽首展的管理措施升级，反映的是一座博物馆在"泼天流量"面前的快速学习和适应。但限流本身也提出了一个新问题：当博物馆展览成为"稀缺资源"时，如何确保预约机制的公平性？会不会被黄牛盯上？免费展览的预约额度如何防止"抢了不去"的浪费？这些问题兽首展可能只是遭遇而非解决——但它们是中国博物馆在流量时代必须面对的公共管理课题。</blockquote>
 <hr>
 
 <h3 id="item4">4. 三星堆祭祀坑发现40周年学术研讨会——近2万件文物出土，多学科融合范式确立，三大未解之谜待破解 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-回顾与展望" href="../index.html?q=%E5%9B%9E%E9%A1%BE%E4%B8%8E%E5%B1%95%E6%9C%9B">#回顾与展望</a></h3>
-<p>📎 <a href="http://mrdx.cn/content/20260806/Articel07005NR.htm" target="_blank" rel="noopener">新华每日电讯</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://mrdx.cn/content/20260806/Articel07005NR.htm" target="_blank" rel="noopener">新华每日电讯</a></span></p>
 <p>8月6日，新华每日电讯以整版篇幅回顾三星堆遗址祭祀坑发现40周年。7月底，国内外考古学家齐聚四川广汉，参加"纪念三星堆遗址祭祀坑发现四十周年暨古象牙研究与保护学术研讨会"。
 40年来，8个祭祀坑出土<strong>近2万件珍贵文物</strong>（青铜器、金器、玉器、象牙等），实证了3000多年前长江上游存在高度发达的青铜文明，改写了"黄河流域是中华文明唯一发源地"的单一叙事。中国古迹遗址保护协会理事长宋新潮指出，3号至8号坑的发掘建立了"<strong>中国考古学多学科结合的范式</strong>"——田野发掘、实验室分析、文物保护三线同步推进，碳十四测年、古DNA、同位素、残留物分析等30多个学科参与了本轮发掘。
 然而，三星堆仍有大量核心问题悬而未决：<strong>青铜器的铸造地在哪？高等级墓葬在哪里？古蜀国的社会结构是如何组织的？</strong> 这三个问题任何一项的突破，都可能再次改写对中国早期文明的认知。目前，城址功能布局和水资源利用研究仍在持续推进。</p>
@@ -257,7 +294,7 @@
 <h2 class="section">🌍 国际要闻</h2>
 
 <h3 id="item5">5. 🔥🔥 泰国猜也奔府发现1.3亿年前未知食肉恐龙化石——100+件标本，比同省已知恐龙早2000万年 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-古生物学" href="../index.html?q=%E5%8F%A4%E7%94%9F%E7%89%A9%E5%AD%A6">#古生物学</a></h3>
-<p>📎 <a href="https://en.vietnamplus.vn/thailand-uncovers-130-million-year-old-carnivorous-dinosaur-fossil-post349541.vnp" target="_blank" rel="noopener">VietnamPlus</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://en.vietnamplus.vn/thailand-uncovers-130-million-year-old-carnivorous-dinosaur-fossil-post349541.vnp" target="_blank" rel="noopener">VietnamPlus</a></span></p>
 <p>8月4日，泰国<strong>猜也奔府（Chaiyaphum）</strong>宣布一项重大古生物学发现：在Khao Sam Phan Ta山发现一种<strong>此前未知的食肉恐龙化石</strong>，年代超过<strong>1.3亿年</strong>（白垩纪早期），是该府迄今发现的最古老恐龙。
 发现过程颇具戏剧性——53岁当地居民Yodsanya Pitabut在修建火葬场平整土地时首次发现骨骼碎片。泰国玛哈萨拉堪大学古生物研究与教育中心Sita Manitkul博士带领联合考察队（含孔敬府恐龙研究与博物馆中心地质专家）随后进行系统调查，已收集<strong>超过100件化石标本</strong>，包括椎骨、腿骨、踝骨和趾骨等。同一地点还发现了鲨鱼鳍化石，指示当时该地区可能为近海环境。
 这具化石比同省此前发现的草食性恐龙_Nakha Titan Chaiyaphumensis_（约1.1-1.15亿年）还要早约<strong>2000万年</strong>，是猜也奔府发现的第4具恐龙标本。泰国政府和当地社区计划在研究完成后将发现地开发为省级古生物学习、研究与旅游目的地。</p>
@@ -265,7 +302,7 @@
 <hr>
 
 <h3 id="item6">6. 🔥 俄罗斯Zvyaginsky墓地出土6-7世纪Murom女性仪式冠饰——8枚十字形胸针光环状排列，溯源芬兰-乌戈尔文化源头 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-民族考古" href="../index.html?q=%E6%B0%91%E6%97%8F%E8%80%83%E5%8F%A4">#民族考古</a></h3>
-<p>📎 <a href="https://www.heritagedaily.com/2026/08/ceremonial-headdress-among-murom-grave-discoveries/158841" target="_blank" rel="noopener">Heritage Daily</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.heritagedaily.com/2026/08/ceremonial-headdress-among-murom-grave-discoveries/158841" target="_blank" rel="noopener">Heritage Daily</a></span></p>
 <p>俄罗斯科学院考古研究所与下诺夫哥罗德博物馆保护区联合考古队，在2026年田野季对<strong>Zvyaginsky II墓地</strong>（下诺夫哥罗德州瓦恰区）的发掘取得重要成果。本季揭露约<strong>1000平方米</strong>，清理<strong>43座墓葬</strong>（37座土葬、1座火葬、6座马葬）。
 最具标志性的发现来自一座高等级女性墓葬：墓主头部周围排列着<strong>8枚十字形胸针（fibulae）</strong>——7枚小胸针以<strong>光环状</strong>环绕头骨，1枚较大的双板胸针置于脑后。胸针缺少功能性的别针，表明它们并非实用衣物配件，而是缝缀在一顶纺织物冠饰上的纯装饰组件。冠饰上还绣有锡铅珠饰，皮制束带以青铜环扣连接，形成了一种独特的仪式头饰系统。这种排列方式与此前在伏尔加-奥卡河流域多个5-7世纪墓地发现的头饰高度一致，指向一个跨越广泛地理区域的<strong>共同文化传统</strong>。
 墓葬年代推定为<strong>6世纪末至7世纪初</strong>，早于此前认定的Murom文化起始时间。考古学家指出，这一发现正在将研究焦点从"Muroma人何时消失"转向"他们从何而来"——冠饰传统将Muroma族群与更早的芬兰-乌戈尔语系人群以及Bezvodninsky-Akhmylovsky考古学文化（5-7世纪）联系起来。</p>
@@ -273,7 +310,7 @@
 <hr>
 
 <h3 id="item7">7. 保加利亚索非亚"被遗忘的神祇"展8月7日开幕——213件文物跨越6200 BC至罗马时期，多件首次公开展出 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-宗教考古" href="../index.html?q=%E5%AE%97%E6%95%99%E8%80%83%E5%8F%A4">#宗教考古</a></h3>
-<p>📎 <a href="https://www.bta.bg/en/news/1180161-archaeologists-unveil-forgotten-deities-exhibition-in-sofia" target="_blank" rel="noopener">BTA保加利亚通讯社</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.bta.bg/en/news/1180161-archaeologists-unveil-forgotten-deities-exhibition-in-sofia" target="_blank" rel="noopener">BTA保加利亚通讯社</a></span></p>
 <p>8月7日，保加利亚国家考古博物馆（索非亚）将正式推出大型临时展览"<strong>被遗忘的神祇</strong>"（Forgotten Deities），展期至2027年1月17日。展览历时约<strong>8个月筹备</strong>，全部<strong>213件文物</strong>均来自博物馆自身超过百万件藏品的库房，其中多件为<strong>专门修复后首次公开展出</strong>。
 展览以时间线为轴分三部分：<strong>史前宗教</strong>（新石器时代早期约公元前6200年起）——大母神崇拜、丰产仪式、自然崇拜；<strong>色雷斯文化</strong>（公元前1千年）——色雷斯与希腊宗教的交融互动；<strong>罗马时期</strong>（2-3世纪为主，本段展出137件文物，数量最多）——宙斯、狄奥尼索斯、密特拉、色雷斯骑士等多元信仰共存的万神殿图景。
 重点展品包括：Kapitan Andreevo新石器时代晚期拟人陶器、Balantash圣殿的Sabazios神银牌饰、Simeonovgrad贵族墓随葬红绘调酒缸、Alamoura山顶圣殿的阿波罗许愿浮雕，以及来自Dionysopolis、Philippopolis和Kabyle三座古城的铭文。展览运用多媒体沉浸环境——影像、音效和象征古代信仰的云装置——策展团队希望让观众"看到历史上曾塑造保加利亚大地的被遗忘的众神"。展览同时推出保加利亚语和英语双语图录。</p>
@@ -281,7 +318,7 @@
 <hr>
 
 <h3 id="item8">8. 印度加尔各答博物馆联手IIT启用AI修复文物——数字化保存+AR互动+Google Arts & Culture，南亚博物馆数字化转型加速 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-数字化" href="../index.html?q=%E6%95%B0%E5%AD%97%E5%8C%96">#数字化</a></h3>
-<p>📎 <a href="https://www.telegraphindia.com/india/indian-museum-taps-ai-to-restore-archaeological-artefacts-teams-up-with-iit-kharagpur/cid/2173158" target="_blank" rel="noopener">The Telegraph India</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.telegraphindia.com/india/indian-museum-taps-ai-to-restore-archaeological-artefacts-teams-up-with-iit-kharagpur/cid/2173158" target="_blank" rel="noopener">The Telegraph India</a></span></p>
 <p>印度最古老的博物馆——<strong>加尔各答印度博物馆</strong>（Indian Museum, 成立于1814年）近日宣布与<strong>印度理工学院卡拉格普尔分校（IIT-Kharagpur）</strong>合作，正式启动<strong>AI辅助考古文物修复与数字化保存</strong>项目。这是南亚地区博物馆首次系统性地将人工智能引入文物保护工作流程。
 项目核心包括三个方向：一是利用AI算法对残缺文物进行<strong>数字重建和虚拟修复</strong>——根据现存部分的形态和纹饰特征推断缺失部分的外观；二是对馆藏进行高精度三维扫描，建立<strong>数字孪生档案</strong>用于学术研究和远程访问；三是开发<strong>AR增强现实互动导览</strong>，观众可通过手机扫描展品获取叠加的历史信息和复原动画。博物馆还同步推出了<strong>Google Arts & Culture虚拟展览</strong>，将部分精品文物以超高分辨率影像向全球开放。
 印度博物馆拥有超过10万件藏品，涵盖从史前到殖民时期的南亚艺术与考古材料。此次合作的首批目标聚焦于石刻、青铜和彩绘陶器等最易受环境退化影响的文物类别。</p>
@@ -323,7 +360,7 @@
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 2026-07-20</title>
 <meta name="description" content="2026-07-20 每日文博资讯，共 10 条（国内 5 + 国际 5）。🔥 稽中遗址出土简牍突破 1500 枚——含"会稽""山阴"，浙江首次郡县级汉简">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,2026-07-20">
@@ -22,8 +22,8 @@
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | 2026-07-20",
-  "datePublished": "2026-07-20T08:13:00+08:00",
-  "dateModified": "2026-07-20T08:13:00+08:00",
+  "datePublished": "2026-07-20T07:13:00+08:00",
+  "dateModified": "2026-07-20T07:13:00+08:00",
   "description": "2026-07-20 每日文博资讯，共 10 条",
   "url": "https://zhangheng666.top/reports/2026-07-20.html",
   "publisher": {
@@ -192,6 +192,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -222,36 +254,41 @@
   </details>
 </div>
 
+<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 10 个来源中，A级 1 个、B级 1 个、待复核 8 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>
+
 <h2 class="section">🇨🇳 国内要闻</h2>
 
 <h3 id="item1">1. 🔥 稽中遗址出土简牍突破 1500 枚——含"会稽""山阴"，浙江首次郡县级汉简 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-简牍" href="../index.html?q=%E7%AE%80%E7%89%8D">#简牍</a></h3>
-<p>📎 <a href="https://m.chinanews.com/wap/detail/chs/zw/10662536.shtml" target="_blank" rel="noopener">中新网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://m.chinanews.com/wap/detail/chs/zw/10662536.shtml" target="_blank" rel="noopener">中新网</a></span></p>
 <p>7 月 19 日，绍兴市文物考古研究所所长、稽中遗址考古项目负责人李龙彬在 2026 年中华传统晒书大会城市主场活动上公布最新数据：<strong>稽中遗址已累计出土简牍 1500 余枚</strong>，年代以西汉、东汉与三国时期为主。这是浙江省境内<strong>首次经科学发掘出土的郡县级官方文书</strong>——此前浙江虽有零星简牍发现，但规模和质量均不及此次。
 简牍内容堪称"东汉至三国会稽郡鲜活档案"：包含法律文书（刑徒坐罪簿）、行政文书与户籍、账簿、汉代日历、私人书信与名刺（如"弟子会稽张龙 诣门下 山阴字伯龙"），以及《仓颉篇》木牍——汉代官方蒙学教材。部分简牍明确出现"会稽""山阴"等郡县名称及"河平二年"（公元前 27 年）的明确纪年。出土的"会稽郡壁"铭文砖更是"一锤定音"，确认该遗址为汉六朝会稽郡山阴县官署所在。目前考古仍在持续，遗址水井和灰坑中仍可能有更多简牍出土。稽中遗址此前已入选 2025 年度全国十大考古新发现。</p>
 <blockquote><strong>点评：</strong> 1500 枚简牍对于一个郡治遗址来说是什么概念？它不是在补充史料，而是在生成一部此前完全缺失的地方行政档案。传统史学中的会稽郡面目模糊——我们知道它是东汉江南大郡，但不知道它的日常行政如何运转、基层社会如何组织。这批简牍给出了"河平二年"的具体纪年、"山阴安成里"的基层单位名称、"文学掾""门下掾"等官职结构。这不是在证实已知，而是在填补空白。稽中遗址加上 5 月已经公布的首批简牍成果，2026 年堪称中国南方简牍考古的突破之年。</blockquote>
 <hr>
 
 <h3 id="item2">2. 🔥 朱然墓四件禁止出境国宝首度同台——漆木屐出土 40 年首次原件展出 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a></h3>
-<p>📎 <a href="https://www.thepaper.cn/newsDetail_forward_33618178" target="_blank" rel="noopener">澎湃新闻</a></p>
+<p class="source-row">📎 <span class="source-chip source-b"><b>B</b> <a href="https://www.thepaper.cn/newsDetail_forward_33618178" target="_blank" rel="noopener">澎湃新闻</a></span></p>
 <p>7 月 17 日，《漆望·吴境——朱然博物馆珍贵漆木器特展》在马鞍山市三国朱然家族墓地博物馆正式开展，展期至 12 月 31 日。展览最大看点：<strong>朱然墓出土的 4 件禁止出国（境）展览文物首次同台亮相</strong>——全国可移动文物中仅 195 件入选禁止出境名录，安徽省共 5 件，其中 4 件出自朱然墓。
 四件国宝分别是：<strong>漆木屐</strong>（我国现存最早髹漆木屐实物，距今 1700 余年，出土 40 余年来<strong>首次原件公开展出</strong>）、彩绘季札挂剑图漆盘（现存最早有纪年绘画实物之一）、犀皮黄口羽觞（展现早期犀皮漆工艺美学）、彩绘宴娱图漆盘（描绘东吴贵族宴饮生活）。朱然为三国东吴名将，其墓于 1984 年发掘，出土随葬品 140 余件，漆木器占约 57%，墓主身份明确、品级较高，是迄今已发掘的最大规模东吴高等级墓葬之一，曾被评为 20 世纪 80 年代中国十大考古收获之一。</p>
 <blockquote><strong>点评：</strong> 漆木屐出土 40 年不敢展原件——这件事本身就说明了这批文物的脆弱性和珍贵程度。三国时期的漆器存世极少，因为漆木器在南方酸性土壤中极难保存。朱然墓的漆器之所以能幸存，是因为墓葬早年进水后形成了一个厌氧密封环境。四件禁止出境国宝同台，在省级中小博物馆中极为罕见——马鞍山没有省博的体量和预算，但凭朱然墓这一张底牌就打出了顶级展览的效果。这也是一个案例：中小博物馆如何用"唯一性"对抗"全面性"——与其做面面俱到的通史展，不如把仅有的王炸打透。</blockquote>
 <hr>
 
 <h3 id="item3">3. 公安部、国家文物局深入推进"云鸮"专项行动 <a class="tag tag-文物保护" href="../index.html?q=%E6%96%87%E7%89%A9%E4%BF%9D%E6%8A%A4">#文物保护</a> <a class="tag tag-执法" href="../index.html?q=%E6%89%A7%E6%B3%95">#执法</a></h3>
-<p>📎 <a href="https://society-app.people.cn/n1/2026/0720/c1008-40763748.html" target="_blank" rel="noopener">人民网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://society-app.people.cn/n1/2026/0720/c1008-40763748.html" target="_blank" rel="noopener">人民网</a></span></p>
 <p>7 月 19 日，公安部与国家文物局联合召开会议，部署深入推进打击防范文物犯罪"云鸮"专项行动。自 5 月 15 日行动启动以来，公安与文物部门共<strong>立案侦办文物犯罪案件 170 余起，抓获犯罪嫌疑人 390 余名，追缴涉案文物 2700 余件</strong>（其中珍贵文物 230 余件）。会议提出下一阶段重点：深化文物犯罪线索排查、加强重点区域巡查防控、推进网络文物非法交易专项整治，以及完善"公安 + 文物"常态化联合执法机制。</p>
 <blockquote><strong>点评：</strong> 平均每天追回 45 件文物——这个效率放在全球任何国家都是罕见的。但更值得关注的是会议里提到的"网络文物非法交易专项整治"——文物犯罪的主战场正在从盗洞转移到直播间和电商平台。那些在短视频里拿着金属探测器"探宝"的网红，本质上是在给文物盗掘做直播带货。专项行动总有结束的时候，"公安 + 文物"常态化联动机制能不能在专项行动结束后继续运转，才是真正的长效药。另外，追缴的 2700 余件文物里，230 件是珍贵文物——占比约 8.5%，这意味着绝大多数被盗掘的文物可能并非"珍品"，而是普通的传世或出土器物。但这些"非珍品"在学术上同样有价值，被盗掘意味着出土地层和共存关系的永久丧失。</blockquote>
 <hr>
 
 <h3 id="item4">4. 山西夏县发现东汉中晚期家族墓地——5 座砖砌多室墓出土 147 件套文物 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-汉代" href="../index.html?q=%E6%B1%89%E4%BB%A3">#汉代</a></h3>
-<p>📎 <a href="https://news.cctv.com/2026/07/18/ARTI5qj63dyeuE5cV8UQxUtP260718.shtml" target="_blank" rel="noopener">央视新闻</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="https://news.cctv.com/2026/07/18/ARTI5qj63dyeuE5cV8UQxUtP260718.shtml" target="_blank" rel="noopener">央视新闻</a></span></p>
 <p>山西省考古研究院 7 月 18 日公布夏县裴介村汉墓发掘资料：共清理 <strong>5 座东汉中晚期墓葬</strong>，均为长斜坡墓道砖砌多室墓，两两异穴并列，判定为<strong>家族合葬墓地</strong>。出土陶器、釉陶器、铜器、铁器等 147 件（套）。与 7 月 14 日公布的绛县西吴壁商代墓地（29 座、整齐排列 10 排）前后呼应，晋南地区一周之内连续公布两项墓葬考古成果，反映出山西考古的系统性和持续性。</p>
 <blockquote><strong>点评：</strong> 夏县裴介村汉墓和绛县西吴壁商墓同属晋南，但时代差了约 1500 年——把这两项发现放在一起看，晋南地区的考古图景正在从"点状发现"升级为"线状覆盖"。但东汉家族墓地在考古上并不是稀缺材料——真正值得追问的是：5 座墓的墓主之间是什么关系？如果 DNA 能介入，证实或推翻"家族合葬"的假设，这个发现的价值会成倍增加。石峁的古 DNA 分析已经证明基因考古的杀伤力——接下来整个行业需要考虑的是：同样的技术能不能下沉到中小型遗址中去。</blockquote>
 <hr>
 
 <h3 id="item5">5. 辽宁考古博物馆暑期研学活动开启——红山 + 长城双主题 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-公共考古" href="../index.html?q=%E5%85%AC%E5%85%B1%E8%80%83%E5%8F%A4">#公共考古</a></h3>
-<p>📎 <a href="http://epaper.lnd.com.cn/lnrbepaper/pc/con/202607/20/content_332892.html" target="_blank" rel="noopener">辽宁日报</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://epaper.lnd.com.cn/lnrbepaper/pc/con/202607/20/content_332892.html" target="_blank" rel="noopener">辽宁日报</a></span></p>
 <p>即日起至 8 月 31 日，辽宁考古博物馆推出 2026 暑期公众开放月活动，面向全国大中小学生开设专属考古研学专场。活动聚焦<strong>红山文化和长城文化</strong>两大辽宁核心文脉，配套考古模拟体验、文物修复演示、文创打卡等互动环节，实行线上实名预约，每场限 30 人以保证体验质量。辽宁省文物考古研究院将开放部分考古标本库房和实验室供参观，这在省级考古机构中属于较为开放的做法。</p>
 <blockquote><strong>点评：</strong> 一个趋势值得注意：今年暑期多个省级考古机构都在推研学——辽宁有考古研学、马鞍山有朱然墓特展、国博有汉字展——文博机构正在把"暑期档"当作争夺公众注意力的关键营销窗口。但辽宁考古博物馆限 30 人一场的小班制，实际上是在品质和规模之间选择了品质。另一个有意思的信号是"开放考古标本库房"——考古机构的库房通常是最封闭的区域，开放库房意味着接受了公众监督的眼光。公共考古正在从"讲解员带着转一圈"进化到"给你看我们真在做什么"——这一步迈得很慢，但方向是对的。</blockquote>
 <hr>
@@ -260,7 +297,7 @@
 <h2 class="section">🌍 国际要闻</h2>
 
 <h3 id="item6">6. 🔥 世遗大会首日通过《釜山宣言》——"协作"成为第六 C，AI 首次进入世遗框架 <a class="tag tag-世界遗产" href="../index.html?q=%E4%B8%96%E7%95%8C%E9%81%97%E4%BA%A7">#世界遗产</a> <a class="tag tag-UNESCO" href="../index.html?q=UNESCO">#UNESCO</a></h3>
-<p>📎 <a href="https://en.yna.co.kr/view/AEN20260720006700315" target="_blank" rel="noopener">韩联社</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://en.yna.co.kr/view/AEN20260720006700315" target="_blank" rel="noopener">韩联社</a></span></p>
 <p>第 48 届 UNESCO 世界遗产委员会会议 7 月 20 日在韩国釜山 BEXCO 正式进入全体会议。开幕首日最重要的事件是：<strong>21 个委员国与三大咨询机构（ICCROM、ICOMOS、IUCN）一致通过由韩国主导提出的《釜山世界遗产宣言》</strong>。
 宣言的核心内容是提议将 <strong>"协作"（Collaboration）</strong> 新增为《世界遗产公约》的第六个 C 战略目标——此前只有可信度（Credibility）、保护（Conservation）、能力建设（Capacity-building）、传播（Communication）和社区（Communities）五个。新增"协作"旨在推动国际社会对武装冲突、气候变化和开发压力联合应对。此外，宣言首次在世界遗产框架内正式讨论了<strong>生成式人工智能的负责任使用</strong>——这是数字化和 AI 议题首次进入世遗顶层话语。
 韩国国家遗产厅厅长许旻同步宣布了 12 项后续落地计划，包括：建立定期"釜山论坛"、支持南亚遗产地管理、开发基于生成式 AI 的文化遗产数字技术、非洲世界遗产申报能力建设、文化遗产 ODA、气候变化与遗产韧性研究、小岛屿发展中国家可持续旅游与遗产保护等。釜山大会还将审议 <strong>33 项提案</strong>（30 项新提名 + 3 项扩展），以及对日本佐渡金矿世界遗产后续措施的批评性决议草案。</p>
@@ -268,25 +305,25 @@
 <hr>
 
 <h3 id="item7">7. Rapa Nui 先祖遗骸 143 年后从澳大利亚归还——馆长"无保留道歉" <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-原住民遗产" href="../index.html?q=%E5%8E%9F%E4%BD%8F%E6%B0%91%E9%81%97%E4%BA%A7">#原住民遗产</a></h3>
-<p>📎 <a href="https://newsapp.abc.net.au/news/2026-07-16/repatriation-of-rapa-nui-remains-australian-museum-easter-island/106917256" target="_blank" rel="noopener">ABC News</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://newsapp.abc.net.au/news/2026-07-16/repatriation-of-rapa-nui-remains-australian-museum-easter-island/106917256" target="_blank" rel="noopener">ABC News</a></span></p>
 <p>7 月 16 日，澳大利亚博物馆举行正式归还仪式，将<strong>十余具 Rapa Nui（复活节岛）原住民先祖遗骸</strong>交还智利政府及 Rapa Nui 社区代表团。这批遗骸于 1882 年被一支欧洲海军探险队从岛上神圣墓葬中取走，次年由澳大利亚博物馆购入，已在该馆库房存放 <strong>143 年</strong>。馆长在仪式上发表"无保留道歉"，承认当年获取遗骸的方式违背了 Rapa Nui 人民的意愿和信仰。遗骸将跨越太平洋返回复活节岛，重新安葬于祖地。</p>
 <blockquote><strong>点评：</strong> "无保留道歉"——这四个字在博物馆归还史上极少出现。多数归还声明用的是技术性语言："根据本馆政策""经双方友好协商"。澳大利亚博物馆馆长选择用道歉而非声明来为这场归还定性，是承认了博物馆自身是殖民暴力链条的一部分——不仅仅是当年的欧洲探险队，也包括那个在 1883 年出钱购买遗骸的博物馆。还有一个不易察觉的细节：这不是国家之间的文物归还（Rapa Nui 不是主权国家，属于智利），而是博物馆对一个原住民社区的归还。全球有无数博物馆库房里存放着原住民遗骸和圣物，Rapa Nui 案例是否会成为一个触发点？如果每个博物馆都要像澳大利亚博物馆一样"无保留道歉"并归还，库房里一半的人类学收藏都将面临重新审视。</blockquote>
 <hr>
 
 <h3 id="item8">8. 也门确认 28 件被掠夺文物在伦敦——20 件藏于大英博物馆 <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-也门" href="../index.html?q=%E4%B9%9F%E9%97%A8">#也门</a></h3>
-<p>📎 <a href="https://www.artforum.com/news/yemen-identifies-28-allegedly-looted-artifacts-1234754157/" target="_blank" rel="noopener">Artforum</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.artforum.com/news/yemen-identifies-28-allegedly-looted-artifacts-1234754157/" target="_blank" rel="noopener">Artforum</a></span></p>
 <p>也门文物与博物馆总局正式确认，已在伦敦发现 <strong>28 件被指控为掠夺出境的也门文物</strong>。其中 8 件于 7 月初经邦瀚斯（Bonhams）和阿波罗艺术拍卖行拍出，<strong>20 件藏于大英博物馆</strong>。这批文物包括青铜香炉、古代印章、穆斯奈德铭文碑、泥板和雕像，年代跨越古代也门诸王国时期。也门当局指控这些文物系英国殖民时期（亚丁殖民地和保护国时期）非法取得，要求英国方面启动归还程序。这是继 2024 年也门成功从美国追回一批文物后，又一次大规模海外文物确认行动。</p>
 <blockquote><strong>点评：</strong> 28 件里有 20 件在大英博物馆——这个比例本身就是一份控诉书。也门的案例之所以值得追踪，是因为它不像希腊帕特农或埃及罗塞塔那样有全球关注度，只能靠穷国的文物部门用极其有限的资源一个一个去锁定和追索。邦瀚斯和阿波罗的 8 件刚刚被拍卖——这意味着文物非法流通的上游（来源国战乱）、中游（国际拍卖行的尽职调查漏洞）和下游（买家的收藏需求）三条线仍然畅通无阻。也门内战从 2014 年打到今天还没停，文物追索的窗口期正在被战争吞噬——每多打一年，就多一批文物从盗洞流入市场。</blockquote>
 <hr>
 
 <h3 id="item9">9. 赫库兰尼姆"碳化家具之家"关闭 30 年后重新开放 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-保护" href="../index.html?q=%E4%BF%9D%E6%8A%A4">#保护</a></h3>
-<p>📎 <a href="https://www.finestresullarte.info/en/archaeology/herculaneum-the-house-of-charred-furniture-reopens-after-thirty-years" target="_blank" rel="noopener">Finestre sull'Arte</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.finestresullarte.info/en/archaeology/herculaneum-the-house-of-charred-furniture-reopens-after-thirty-years" target="_blank" rel="noopener">Finestre sull'Arte</a></span></p>
 <p>意大利赫库兰尼姆考古公园（UNESCO 世界遗产）的<strong>"碳化家具之家"（Casa della Mobilia Carbonizzata）</strong> 在关闭近三十年后，于 7 月 9 日正式重新对公众开放。这座古罗马宅邸于 1930 年代发掘，因公元 79 年维苏威火山喷发产生的高温火山碎屑流瞬间碳化并完整保存了室内<strong>木制床和桌子</strong>而闻名于世——这是在庞贝和赫库兰尼姆所有遗址中极为罕见的木质家具原位遗存。修复工作由帕卡德人文研究所（Packard Humanities Institute）合作完成，包括屋顶重建、表面加固、三维激光扫描，以及碳化木片段的科学复位。考古公园计划在今年秋季前陆续开放更多此前长期关闭的宅邸。</p>
 <blockquote><strong>点评：</strong> 在庞贝和赫库兰尼姆，"开放新区域"本身就是新闻——这两座遗址太有名了，以至于大多数游客不知道他们看到的只占已发掘面积的一小部分。碳化家具之家关闭 30 年，原因很简单：碳化的木头是所有文物里最脆弱的一类——光照、湿度、震动都能让它化成一堆黑粉。但"保护"和"开放"之间的平衡点在哪？如果为了保护一件文物而让它永远不见天日，保护的意义又是什么？赫库兰尼姆的选择是做精细修复、控人流、控环境——而不是永远锁门。这对中国的兵马俑彩绘、马王堆丝织品等面临同样困境的遗址有直接的参考意义。</blockquote>
 <hr>
 
 <h3 id="item10">10. 阿尔及利亚加速 Imedghassen 努米底亚陵墓申遗进程 <a class="tag tag-文化遗产" href="../index.html?q=%E6%96%87%E5%8C%96%E9%81%97%E4%BA%A7">#文化遗产</a> <a class="tag tag-申遗" href="../index.html?q=%E7%94%B3%E9%81%97">#申遗</a></h3>
-<p>📎 <a href="https://news.radioalgerie.dz/en/node/90439" target="_blank" rel="noopener">阿尔及利亚广播电台</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://news.radioalgerie.dz/en/node/90439" target="_blank" rel="noopener">阿尔及利亚广播电台</a></span></p>
 <p>阿尔及利亚文化部长 7 月 15 日主持召开专题会议，敦促为 <strong>Imedghassen 努米底亚时期陵墓</strong>制定保护和价值提升方案，并加速推动该遗址与阿尔及利亚境内其他努米底亚王陵联合申报联合国教科文组织世界遗产。Imedghassen 大陵墓位于阿尔及利亚东北部奥雷斯山区，是现存规模最大的努米底亚时期（公元前 3 至前 1 世纪）王室陵墓之一，以独特的圆锥形石砌外观和柏柏尔-布匿复合建筑风格著称，被阿尔及利亚视为本国文明起源的核心象征之一。</p>
 <blockquote><strong>点评：</strong> 中国读者对努米底亚这个名字熟悉又陌生——它是迦太基的邻居和盟友、罗马在北非的对手，但在世遗版图上几乎是空白。阿尔及利亚只有 7 处世界遗产，远低于邻国突尼斯和摩洛哥。这次申遗提速有两个信号：一是阿尔及利亚想通过文化遗产来强化国家认同（努米底亚 → 柏柏尔 → 阿尔及利亚的叙事链）；二是全球世遗版图的不平衡问题——非洲大陆的遗产地数量严重偏低。釜山宣言里提到要支持"非洲世界遗产申报能力建设"，Imedghassen 很可能成为这个承诺的一块试金石。</blockquote>
 <hr>
@@ -327,7 +364,7 @@
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>

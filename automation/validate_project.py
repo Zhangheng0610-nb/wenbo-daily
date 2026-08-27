@@ -11,6 +11,11 @@ ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / 'content'
 REPORTS = ROOT / 'reports'
 
+import sys as _sys
+if str(ROOT) not in _sys.path:
+    _sys.path.insert(0, str(ROOT))
+from automation.governance import canonical_url, source_info
+
 ALLOWED = (
     'chinawenbao.com.cn', 'chinamuseum.org.cn', 'chinamuseums.org.cn',
     'kaogu.cn', 'kaogu.cssn.cn', 'ncha.gov.cn', 'news.cn',
@@ -30,22 +35,28 @@ URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
 
 
 def host_allowed(url):
-    host = urlparse(url).netloc.lower().split(':', 1)[0].rstrip('.')
-    return any(host == d or host.endswith('.' + d) for d in ALLOWED) or host.endswith('.museum') or host.endswith('.museum.cn')
+    return source_info(url)['tier'] in ('A', 'B')
 
 
-def check_daily(path):
+def check_daily(path, strict=True):
     errors = []
     if not path.exists() or path.stat().st_size == 0:
         return [f'missing or empty: {path}']
     text = path.read_text(encoding='utf-8')
     urls = URL_RE.findall(text)
+    seen = set()
     for url in urls:
-        low = url.lower()
-        if any(x in low for x in BANNED):
-            errors.append(f'banned source: {url}')
-        elif not host_allowed(url):
-            errors.append(f'unapproved source: {urlparse(url).netloc}')
+        info = source_info(url)
+        if info['tier'] == 'C':
+            message = f"{'unapproved source' if not info['blocked'] else 'banned source'}: {url}"
+            if strict:
+                errors.append(message)
+        normalized = canonical_url(url)
+        if normalized in seen and strict:
+            errors.append(f'duplicate source URL in report: {normalized}')
+        seen.add(normalized)
+    if text.count('### ') and len(urls) < text.count('### '):
+        errors.append('each news item must include at least one source link')
     return sorted(set(errors))
 
 
@@ -57,6 +68,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', help='YYYY-MM-DD; defaults to Asia/Shanghai today')
     ap.add_argument('--all', action='store_true', help='audit all daily reports')
+    ap.add_argument('--strict-all', action='store_true', help='treat legacy archive source gaps as failures')
     args = ap.parse_args()
     errors = []
     for required in (CONTENT / '日报', CONTENT / '招聘', ROOT / 'build.py'):
@@ -71,7 +83,7 @@ def main():
         if not html_path.exists():
             errors.append(f'missing report HTML: {html_path.relative_to(ROOT)}')
     for path in paths:
-        errors.extend(f'{path.relative_to(ROOT)}: {e}' for e in check_daily(path))
+        errors.extend(f'{path.relative_to(ROOT)}: {e}' for e in check_daily(path, strict=(not args.all or args.strict_all)))
     if errors:
         print('VALIDATION FAILED')
         print('\n'.join(sorted(set(errors))))

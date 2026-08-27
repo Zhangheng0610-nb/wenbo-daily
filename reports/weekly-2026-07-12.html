@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博资讯周报 | 2026-07-06 — 2026-07-12</title>
 <meta property="og:title" content="文博资讯周报 | 2026-07-06 — 2026-07-12">
 <meta property="og:description" content="2026-07-06 — 2026-07-12 文博资讯周报，共 10 条要闻">
@@ -173,6 +173,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -193,6 +225,8 @@
 <tr><td>学术会议</td><td>2 场（简牍学研讨、ICOM-CECA预热）</td></tr>
 </table>
 
+
+<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源；</p><ol><li><span class="digest-evidence-title">🔥 三星堆铜顶尊跪坐人像"分铸组装"重大突破（7/10）</span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.xinhuanet.com.cn/politics/20260710/9169f9a4b92045e5a84844b216ce7cf8/c.html" target="_blank" rel="noopener">新华社</a></span></li><li><span class="digest-evidence-title">🔥 巴约挂毯近千年首次重返英国（7/10）</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.cnn.com/2026/07/10/style/bayeux-tapestry-arrives-britain-scli-intl" target="_blank" rel="noopener">CNN</a></span></li><li><span class="digest-evidence-title">🔥 "考古中国"发布四项盐业考古重大成果（7/6）</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://www.scio.gov.cn/xwfb/bwxwfb/gbwfbh/wwj/202607/t20260701_996969.html" target="_blank" rel="noopener">国务院新闻办</a></span></li><li><span class="digest-evidence-title">🔥 埃及地中海古城发现 18 座密封墓室与金舌护符（7/4-10）</span><br><span class="source-chip source-b"><b>B</b> <a href="https://www.artnews.com/art-news/news/egypt-discovers-sealed-tombs-gold-amulets-marina-el-alamein-1234791727/" target="_blank" rel="noopener">ARTnews</a></span></li><li><span class="digest-evidence-title">🏛️ 上博"世界树之巅"美洲文明大展揭幕（7/9）</span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.xinhuanet.com.cn/politics/20260710/3ca98cfa4f3d49d5bf9d853c6bf88032/c.html" target="_blank" rel="noopener">新华网</a></span></li><li><span class="digest-evidence-title">⚖️ 法国归还叙利亚 23 件文物——文化外交的"总统专机"（7/7-8）</span><br><span class="source-chip source-b"><b>B</b> <a href="https://apnews.com/article/syria-archaeology-artifacts-france-macron-palmyra-758a2ff0fc3ae6d7725126d31fe33093" target="_blank" rel="noopener">AP News</a></span></li><li><span class="digest-evidence-title">🚨 观复博物馆被盗佛像风波持续发酵（7/1-5）</span><br><span class="source-chip source-a"><b>A</b> <a href="https://news.cnr.cn/native/gd/20260703/t20260703_527688151.shtml" target="_blank" rel="noopener">央广网</a></span></li><li><span class="digest-evidence-title">🌏 UNESCO 世界遗产大会釜山开幕在即（7/20-29 预告）</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.unesco.org/en/articles/world-heritage-committee-will-examine-new-nominations-and-state-conservation-inscribed-sites" target="_blank" rel="noopener">UNESCO</a></span></li><li><span class="digest-evidence-title">🇦🇺🇮🇳 澳大利亚-印度双向文物归还（7/9-11）</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://indianexpress.com/article/india/australian-museum-three-11th-12th-century-antiquities-tamil-nadu-10779420/" target="_blank" rel="noopener">The Indian Express</a></span></li><li><span class="digest-evidence-title">💻 中国文物数字化保护引世界瞩目（本周专题）</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/info/20260703/82ef2b15dd194cdca35d33fb3cb5d5de/c.html" target="_blank" rel="noopener">新华网</a></span></li></ol></div>
 
 <h2 class="section">🔟 本期要闻</h2>
 
@@ -295,7 +329,7 @@
 <p><em>本周报由 Claude 自动采集编撰 | 2026年7月12日</em></p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a></p>
 </footer>
 
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博资讯周报 | 2026-07-27 — 2026-08-02</title>
 <meta property="og:title" content="文博资讯周报 | 2026-07-27 — 2026-08-02">
 <meta property="og:description" content="2026-07-27 — 2026-08-02 文博资讯周报，共 10 条要闻">
@@ -173,6 +173,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -193,6 +225,8 @@
 <tr><td>下周关注</td><td>暑期客流峰值应对、各馆限流措施升级、圆明园兽首双城展持续引爆</td></tr>
 </table>
 
+
+<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 6 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title">🔥🔥🔥 第 48 届世遗大会釜山闭幕——25 处新遗产 +《釜山宣言》将"合作"增为第六战略目标</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">🔥🔥🔥 《国家文物事业发展"十五五"规划》印发——11 项指标、10 大任务，五年蓝图落地</span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/29/art_2318_48456.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title">🔥🔥🔥 法国博物馆连环盗窃案——维克斯公主金项圈白天被抢，33 项紧急措施出台</span><br><span class="source-chip source-b"><b>B</b> <a href="https://www.artnews.com/art-news/news/thieves-snatch-2500-year-old-celtic-gold-torque-france-1234793494/" target="_blank" rel="noopener">ARTnews</a></span></li><li><span class="digest-evidence-title">🔥🔥 三星堆祭祀坑 40 周年——青铜溯源+意外失火说+象牙保护+陨铁文物，四线并进</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">🔥🔥 宁夏固原 2300 年前战国古酒——分子考古打开"味道的历史"</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://news.cctv.cn/2026/07/31/ARTIrOsmMpz2d213TuJK3GJJ260730.shtml" target="_blank" rel="noopener">央视新闻</a></span></li><li><span class="digest-evidence-title">🔥🔥 圆明园五兽首同期双城展——马首入闽 + 杭州四兽首排队 4 小时</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">🔥🔥 全球文物追索多线推进——巴基斯坦 1417 件、瑞士尼日利亚、法国叙利亚</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">🔥 全国首个"博物馆疗愈联盟"成立——450 张"博物馆处方"已开出</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">🔥 "博物馆里读中国"99 项展览推介——全国博物馆策展年度地图</span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title">🔥 古 DNA 与分子考古持续颠覆传统认知——从英国女萨满到匈牙利罗马混血</span> <span class="status-badge status-check">待补原始来源</span></li></ol></div>
 
 <h2 class="section">🔟 本期要闻</h2>
 
@@ -307,7 +341,7 @@
 <p><em></em></p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a></p>
 </footer>
 
 </body>

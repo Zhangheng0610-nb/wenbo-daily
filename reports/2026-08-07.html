@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 2026-08-07</title>
 <meta name="description" content="2026-08-07 每日文博资讯，共 9 条（国内 5 + 国际 4）。🔥🔥 红山文化大会闭幕：牛河梁现北斗七星祭坛，郑家沟将红山下限延后200年，基因实证贯通辽西-冀北走廊">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,2026-08-07">
@@ -22,8 +22,8 @@
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | 2026-08-07",
-  "datePublished": "2026-08-07T08:13:00+08:00",
-  "dateModified": "2026-08-07T08:13:00+08:00",
+  "datePublished": "2026-08-07T07:13:00+08:00",
+  "dateModified": "2026-08-07T07:13:00+08:00",
   "description": "2026-08-07 每日文博资讯，共 9 条",
   "url": "https://zhangheng666.top/reports/2026-08-07.html",
   "publisher": {
@@ -192,6 +192,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -221,10 +253,15 @@
   </details>
 </div>
 
+<div class="quality-banner legacy">
+  <strong>🧭 来源透明度：</strong>本期 9 个来源中，A级 2 个、B级 0 个、待复核 7 个。
+  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
+</div>
+
 <h2 class="section">🇨🇳 国内要闻</h2>
 
 <h3 id="item1">1. 🔥🔥 红山文化大会闭幕：牛河梁现北斗七星祭坛，郑家沟将红山下限延后200年，基因实证贯通辽西-冀北走廊 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-红山" href="../index.html?q=%E7%BA%A2%E5%B1%B1">#红山</a> <a class="tag tag-牛河梁" href="../index.html?q=%E7%89%9B%E6%B2%B3%E6%A2%81">#牛河梁</a> <a class="tag tag-文明探源" href="../index.html?q=%E6%96%87%E6%98%8E%E6%8E%A2%E6%BA%90">#文明探源</a></h3>
-<p>📎 <a href="https://www.news.cn/politics/20260807/3ee1ddfb2eb24c64a509da3ba9bf07ca/c.html" target="_blank" rel="noopener">新华社</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/politics/20260807/3ee1ddfb2eb24c64a509da3ba9bf07ca/c.html" target="_blank" rel="noopener">新华社</a></span></p>
 <p>8月5日至6日，以"红山文化连古今·文明对话向未来"为主题的<strong>2026红山文化大会</strong>在辽宁朝阳举行，多国驻华使节与海内外学者齐聚西辽河流域。此次大会是红山文化申遗进程中的重要学术动员，也集中披露了多项足以改写红山文化时空框架的新发现。
 <strong>北斗七星祭坛：红山先民的宇宙观实证。</strong> 牛河梁遗址第一地点7号台基北部<strong>新发现7座红烧土坑</strong>，其排布格局与北斗七星高度契合——这不是推测，而是精确的空间测量结果。如果这一判断被进一步验证，它将把中国先民对北斗七星的天象认知与祭祀实践从文献时代（战国至汉代）前推至<strong>距今5500年前后</strong>的红山文化鼎盛期。牛河梁遗址群本身包含祭坛、女神庙和数十座积石冢，是中华文明探源工程确认的古国时代第一阶段典型代表，北斗七星祭坛的发现为这座"5000年前的宗教首都"增添了天文学维度。
 <strong>郑家沟：红山下限延后200年。</strong> 河北宣化郑家沟积石冢遗址出土了玦形玉龙、三联璧等典型红山玉礼器组合，碳十四测年将红山文化存续<strong>下限从距今5000年延至4800年</strong>，向后推了近两个世纪。更关键的是，古人类基因组研究证实郑家沟先民与辽西红山人群拥有<strong>直接遗传联系</strong>——这不是文化影响的扩散，而是红山人群的物理迁徙和血脉延续。加上承德平泉东山头遗址填补了牛河梁与郑家沟之间的地理缺口，一条"辽西→冀北→冀西北"的红山文化廊道已经浮出水面。
@@ -233,7 +270,7 @@
 <hr>
 
 <h3 id="item2">2. 🔥 中国考古博物馆首轮"月月上新"启动——10件新文物跨越商周至明，常态化更新机制重塑观众期待 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-北京" href="../index.html?q=%E5%8C%97%E4%BA%AC">#北京</a></h3>
-<p>📎 <a href="https://beijing.qianlong.com/2026/0806/8708263.shtml" target="_blank" rel="noopener">千龙网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://beijing.qianlong.com/2026/0806/8708263.shtml" target="_blank" rel="noopener">千龙网</a></span></p>
 <p>位于北京奥林匹克公园核心区的中国考古博物馆近日完成第一轮文物上新，共新增<strong>10件重点文物</strong>，时间跨度从商周延伸至明代，上新展柜均贴有醒目的红色"本月文物上新"标签，方便观众识别。
 <strong>上新亮点：从商周礼器到北齐生活。</strong> 出土于山东滕州前掌大遗址的<strong>西周早期铜盉</strong>，是贵族宴饮与祭祀用的盛酒礼器，器形融合中原与东夷文化元素，实证了西周早期中原王朝与东方齐鲁地区的文化交融。出自河北磁县湾漳壁画墓的<strong>北齐跽坐陶俑</strong>——湾漳墓是迄今考古发现规模最大的北齐壁画墓——以标准的跪坐姿态呈现了古人"坐有坐相"的礼制传统。同期首展的<strong>端箕女侍仆俑</strong>则细腻刻画了北齐贵族家庭的侍从生活细节，与跽坐陶俑形成了"礼制—日常"的互补叙事。此外还有<strong>西汉茧形陶壶</strong>（体量硕大、造型独特，是汉代民间储酒储水的实用器）、西周铜弓形器、宋代"金玉满堂"青釉瓷碗、明万历刻本《皇明世说新语》等。
 <strong>"月月上新"：博物馆从'大展驱动'转向'持续生长'。</strong> 中国考古博物馆常设展采取了每月持续补充文物的机制，这在国家级大馆中尚属首创。传统博物馆的逻辑是：几年策划一个大展→集中上新→观众集中涌入→展后归于平淡。而"月月上新"打破了这种脉冲式节奏——它让博物馆从一次性目的地变成了可以反复造访的"活空间"。观众的期待也从"有什么大展了吗"变成了"这个月又上了什么"。</p>
@@ -241,7 +278,7 @@
 <hr>
 
 <h3 id="item3">3. 山西夏县西阴考古博物馆10月试运营——"中国考古学第一铲"百年后将拥有专题展示空间 <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-山西" href="../index.html?q=%E5%B1%B1%E8%A5%BF">#山西</a></h3>
-<p>📎 <a href="https://sx.china.com/home/focus/20002612/20260807/26009521.html" target="_blank" rel="noopener">山西新闻网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://sx.china.com/home/focus/20002612/20260807/26009521.html" target="_blank" rel="noopener">山西新闻网</a></span></p>
 <p>据山西省运城市政府8月6日消息，<strong>夏县西阴考古博物馆</strong>外立面施工已全面收尾，配套绿化工程有序推进，目前已进入布展筹备阶段，<strong>预计2026年10月试运营</strong>。
 这座馆对一般人来说可能只是一座地方博物馆，但在中国考古学史上，它的选址有着近乎神圣的意义。<strong>1926年</strong>，清华学校国学研究院学者<strong>李济</strong>（后被誉为"中国考古学之父"）主持了山西夏县西阴村遗址的发掘——这是<strong>中国学者第一次独立主持的田野考古发掘</strong>，被考古学界公认为"中国考古学独立走向田野的第一铲"。此前中国境内的考古发掘（如仰韶、周口店）均由外国学者主导，西阴村发掘标志着中国考古学从"被研究对象"转变为"研究主体"。
 西阴文化（距今约6000—5200年，属仰韶时代中期）以绚丽多彩的<strong>彩陶</strong>著称，最著名的是1926年李济发掘出的一枚<strong>经人工切割的半颗蚕茧</strong>——如果确为仰韶时代遗物，将把中国养蚕缫丝的历史前推至6000年前。这枚蚕茧的学术争论持续至今，也侧面说明了西阴遗址的研究潜力远未被穷尽。</p>
@@ -249,7 +286,7 @@
 <hr>
 
 <h3 id="item4">4. 🔥 浙博兽首展"挤到道歉"——周末5.7万人排队5小时，馆方致歉并推分时预约，拟组建"国宝回家"联盟 <a class="tag tag-展览" href="../index.html?q=%E5%B1%95%E8%A7%88">#展览</a> <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-杭州" href="../index.html?q=%E6%9D%AD%E5%B7%9E">#杭州</a></h3>
-<p>📎 <a href="http://www.zj.chinanews.com.cn/xwl/2026-08-06/detail-ihfhytzk9165596.shtml" target="_blank" rel="noopener">中国新闻网</a></p>
+<p class="source-row">📎 <span class="source-chip source-a"><b>A</b> <a href="http://www.zj.chinanews.com.cn/xwl/2026-08-06/detail-ihfhytzk9165596.shtml" target="_blank" rel="noopener">中国新闻网</a></span></p>
 <p>浙江省博物馆之江馆区"再现圆明园——国宝百年归藏特展"自7月30日开幕以来热度持续飙升，仅8月1日至2日周末两天，进馆观众达<strong>5.7万人次</strong>，观众排队超五小时只为一睹<strong>牛首、虎首、猴首、猪首四尊兽首铜像原件</strong>。加上同期在福州展出的马首铜像（全国巡回展首站），2026年暑期共有<strong>五尊兽首同时面向公众</strong>，形成了近年来规模最大的兽首集体亮相。
 8月6日晚，浙博发布公告，<strong>因客流超限导致观展体验不佳向受影响观众致歉</strong>，并宣布推出<strong>分时预约、增设核验闸机、优化排队动线</strong>等措施。一座博物馆因为"人太多"而公开道歉——这在文博界几乎是史无前例的。它表明中国博物馆正在集体经历一个从"怕没人来"到"怕来太多"的急速转型期，而多数场馆的物理空间和管理机制还没有跟上公众文化消费热情的爆发式增长。
 <strong>从展览到联盟："国宝回家"的社会化实验。</strong> 浙博馆长纪云飞在展览热潮中透露了一个更具野心的计划：积极推动组建<strong>"国宝回家"联盟</strong>，凝聚社会力量参与流失海外文物的追索与返还。展览同步提及2026年5月法国议会通过的<strong>简化非法所获文物归还程序法案</strong>——这是欧洲主要国家中首部系统性降低文物追索法律门槛的立法，或将为更多欧洲国家释放示范效应。</p>
@@ -257,7 +294,7 @@
 <hr>
 
 <h3 id="item5">5. 辽博"镇岳凝山海"帝陵展配套公益讲座8月8日开讲——200件首展文物+考古专家现场解读辽代皇家葬制 <a class="tag tag-博物馆" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86">#博物馆</a> <a class="tag tag-考古" href="../index.html?q=%E8%80%83%E5%8F%A4">#考古</a> <a class="tag tag-讲座" href="../index.html?q=%E8%AE%B2%E5%BA%A7">#讲座</a></h3>
-<p>📎 <a href="https://www.syd.com.cn/wenhua/content/2026-08/07/content_253185.html" target="_blank" rel="noopener">沈阳网</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.syd.com.cn/wenhua/content/2026-08/07/content_253185.html" target="_blank" rel="noopener">沈阳网</a></span></p>
 <p>辽宁省博物馆"<strong>镇岳凝山海——医巫闾山辽代帝陵考古成果展</strong>"正在馆内火热展出（本展系辽宁省博年度原创大展），汇集医巫闾山辽代显陵、乾陵遗址出土的<strong>200余件（套）文物</strong>，绝大多数为首次面向公众展出。展品涵盖金银器、陶瓷器、丝织品、石刻墓志等多个品类，系统呈现了辽代皇家陵寝的营建规制、葬俗信仰及契丹与中原文化的融合特征。
 8月8日（周六），辽博讲堂将配合展览推出<strong>两场公益专题讲座</strong>，邀请直接参与医巫闾山帝陵考古发掘的一线专家，为公众深入解读辽代显陵与乾陵的最新考古成果、契丹葬俗中的"魂归山林"信仰、以及医巫闾山如何成为辽代皇家的圣山。医巫闾山是辽代五座镇山之一，辽代九位皇帝中有显、乾二陵选址于此，近年来的考古工作正在逐步揭示这个被长期低估的辽代皇家陵区。</p>
 <blockquote><strong>点评：</strong> "镇岳凝山海"这个展名恰如其分地传递了辽代帝陵的双重气质——"镇岳"是契丹草原民族的山岳崇拜，"凝山海"是中原礼制中"普天之下莫非王土"的空间宇宙。辽代是一个高度汉化但始终保持契丹认同的政权，它的帝陵制度也是如此：既有中原的墓道壁画传统（出行图、伎乐图），又有契丹独有的金属面具和网络葬衣。公益讲座如果能让公众理解这种"混合性"而非简单地归入"汉化叙事"，就是成功的考古科普。</blockquote>
@@ -267,7 +304,7 @@
 <h2 class="section">🌍 国际要闻</h2>
 
 <h3 id="item6">6. 🔥 美国向墨西哥归还三件前哥伦布文物——含大都会博物馆主动交出的91cm陶俑战士，曼哈顿检察官文物走私组截获 <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-墨西哥" href="../index.html?q=%E5%A2%A8%E8%A5%BF%E5%93%A5">#墨西哥</a> <a class="tag tag-美国" href="../index.html?q=%E7%BE%8E%E5%9B%BD">#美国</a> <a class="tag tag-大都会" href="../index.html?q=%E5%A4%A7%E9%83%BD%E4%BC%9A">#大都会</a></h3>
-<p>📎 <a href="https://www.infobae.com/mexico/2026/08/05/eeuu-entregara-a-mexico-tres-tesoros-prehispanicas-uno-de-ellos-estaba-en-famoso-museo-de-ny/" target="_blank" rel="noopener">Infobae</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.infobae.com/mexico/2026/08/05/eeuu-entregara-a-mexico-tres-tesoros-prehispanicas-uno-de-ellos-estaba-en-famoso-museo-de-ny/" target="_blank" rel="noopener">Infobae</a></span></p>
 <p>墨西哥外交部与文化部8月4日联合宣布，三件前哥伦布时期的考古文物即将从美国归还墨西哥，文物已由曼哈顿地区检察官办公室文物走私调查组（<strong>Antiquities Trafficking Unit</strong>）在刑事案件调查中截获，将通过外交邮袋运回墨西哥，由国立人类学与历史研究所（INAH）正式接收。
 三件文物中最引人注目的是一尊<strong>91厘米高的陶制战士立像</strong>，属伊斯特兰德尔里奥风格（Ixtlán del Río），约公元前100年—公元600年，出自墨西哥西部的"墓葬井"传统（Tumbas de Tiro）。这件陶俑此前收藏于纽约<strong>大都会艺术博物馆</strong>——据墨方公告，大都会博物馆系<strong>主动申请归还</strong>。另外两件分别为格雷罗州中部的石碗（公元300—900年）和一件黑曜石棱柱形刀片。
 墨西哥的文物追索成绩令人瞩目：<strong>2024年辛鲍姆总统上任以来已追回3716件</strong>，自2018年洛佩斯政府启动系统性追索计划以来的累计总数达<strong>17878件</strong>。墨西哥的追索策略值得所有文物流失国研究——它不是零敲碎打的个案交涉，而是将文物追索上升为国家文化政策，整合外交部、文化部、检察机关和国际刑警的力量，在全球主要文物市场中保持持续的法律存在。</p>
@@ -275,14 +312,14 @@
 <hr>
 
 <h3 id="item7">7. 🔥🔥 约旦归还伊拉克1300件被盗文物——巴比伦珍品与苏美尔楔形文字泥板在巴格达国家博物馆重见天日 <a class="tag tag-文物追索" href="../index.html?q=%E6%96%87%E7%89%A9%E8%BF%BD%E7%B4%A2">#文物追索</a> <a class="tag tag-伊拉克" href="../index.html?q=%E4%BC%8A%E6%8B%89%E5%85%8B">#伊拉克</a> <a class="tag tag-约旦" href="../index.html?q=%E7%BA%A6%E6%97%A6">#约旦</a> <a class="tag tag-中东" href="../index.html?q=%E4%B8%AD%E4%B8%9C">#中东</a></h3>
-<p>📎 <a href="https://news.cgtn.com/news/3d3d514f776b444e32457a6333566d54/index.html" target="_blank" rel="noopener">CGTN</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://news.cgtn.com/news/3d3d514f776b444e32457a6333566d54/index.html" target="_blank" rel="noopener">CGTN</a></span></p>
 <p>约旦近日在一场正式外交仪式上向伊拉克归还了<strong>1300件被盗文物</strong>，包括苏美尔楔形文字泥板、彩绘陶器、玻璃器皿和巴比伦时期的金属器物。这批文物目前已在巴格达的<strong>伊拉克国家博物馆</strong>公开展出。这是近年来中东地区规模最大的单次文物跨境归还行动。
 伊拉克的文物之殇是世界文化史上最沉痛的一页。2003年伊拉克战争期间，伊拉克国家博物馆遭大规模洗劫——约<strong>1.5万件文物失踪</strong>，其中仅约7000件被陆续追回。更严重的是，战争导致全国数千处考古遗址在安全真空中被盗掘，被挖出的文物通过土耳其、约旦、阿联酋等国的中转网络流入欧洲和北美古董市场。约旦此次归还的1300件文物，很可能只是其边境截获和警方追缴文物中的一部分。约旦的定位从"文物过境国"转变为"文物守护者和归还者"，对阻断中东文物走私链条具有重要的示范意义。</p>
 <blockquote><strong>点评：</strong> 1300这个数字本身就揭示了中东文物非法贸易的产业规模。它不是偶然被走私的几件"漏网之鱼"，而是可以批量截获、批量归还的货物。文物走私在中东的规模足以与毒品和武器走私并列——因为它有相同的物流网络、相同的腐败土壤和相同的跨国犯罪组织参与。伊拉克的悲剧提醒所有文化遗产地国家：战争对文物的破坏不只是"炮火炸毁"这种看得见的暴力，更致命的是战后秩序真空期中的系统性盗掘。和平和法治是文化遗产的第一道防线——这句话在任何时代都不过时。</blockquote>
 <hr>
 
 <h3 id="item8">8. 罗马尼亚批准Coțofenești黄金头盔修复方案——这件从炸药劫案中追回的公元前4世纪国宝将重焕光彩 <a class="tag tag-文物修复" href="../index.html?q=%E6%96%87%E7%89%A9%E4%BF%AE%E5%A4%8D">#文物修复</a> <a class="tag tag-罗马尼亚" href="../index.html?q=%E7%BD%97%E9%A9%AC%E5%B0%BC%E4%BA%9A">#罗马尼亚</a> <a class="tag tag-博物馆安全" href="../index.html?q=%E5%8D%9A%E7%89%A9%E9%A6%86%E5%AE%89%E5%85%A8">#博物馆安全</a></h3>
-<p>📎 <a href="https://www.romania-insider.com/cotofenesti-helmet-restoration-ok-aug-2026" target="_blank" rel="noopener">Romania Insider</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.romania-insider.com/cotofenesti-helmet-restoration-ok-aug-2026" target="_blank" rel="noopener">Romania Insider</a></span></p>
 <p>罗马尼亚国家博物馆与收藏品委员会8月6日正式批准了<strong>Coțofenești黄金头盔</strong>的修复方案。这顶公元前4世纪的古代色雷斯黄金头盔重约<strong>750克</strong>，通体以高纯度黄金锤揲而成，装饰着仪式场景浮雕和神兽图案，是罗马尼亚最珍贵的国宝级文物之一，也是欧洲铁器时代金器工艺的巅峰之作。
 头盔过去两年经历了堪比惊悚电影的命运：<strong>2025年1月</strong>，它与两件达契亚金手镯在荷兰德伦茨博物馆（Drents Museum）展出期间，窃贼用<strong>炸药炸开展厅大门</strong>，三分半钟内盗走包括头盔在内的多件展品，案件震惊欧洲文物界。经过国际刑警组织和荷兰、罗马尼亚、比利时三国警方的联合追查，头盔于<strong>2026年4月</strong>在荷兰一处乡间地窖中被找到，两件金手镯也一并追回。
 此次修复将重点处理盗窃过程中造成的结构损伤和表面划痕，修复方案必须在对公众展示和最小干预原则之间取得平衡——罗马尼亚舆论强烈要求让国宝尽快回归公众视野，但修复团队坚持不能为了"好看"而牺牲文物的原始信息。修复完成后，头盔将回归罗马尼亚国家历史博物馆<strong>永久陈列</strong>，不再外借。</p>
@@ -290,7 +327,7 @@
 <hr>
 
 <h3 id="item9">9. 美巴共建联合文化日历——犍陀罗遣返文物展10月登陆伊斯兰堡，韩国参投博物馆升级 <a class="tag tag-文化遗产" href="../index.html?q=%E6%96%87%E5%8C%96%E9%81%97%E4%BA%A7">#文化遗产</a> <a class="tag tag-巴基斯坦" href="../index.html?q=%E5%B7%B4%E5%9F%BA%E6%96%AF%E5%9D%A6">#巴基斯坦</a> <a class="tag tag-犍陀罗" href="../index.html?q=%E7%8A%8D%E9%99%80%E7%BD%97">#犍陀罗</a> <a class="tag tag-国际合作" href="../index.html?q=%E5%9B%BD%E9%99%85%E5%90%88%E4%BD%9C">#国际合作</a></h3>
-<p>📎 <a href="https://www.dawn.com/news/2021110/us-envoy-proposes-joint-cultural-calendar-to-expand-pakistan-us-heritage-cooperation" target="_blank" rel="noopener">Dawn</a></p>
+<p class="source-row">📎 <span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.dawn.com/news/2021110/us-envoy-proposes-joint-cultural-calendar-to-expand-pakistan-us-heritage-cooperation" target="_blank" rel="noopener">Dawn</a></span></p>
 <p>8月7日，美国驻巴基斯坦临时代办娜塔莉·贝克与巴基斯坦国家遗产与文化部长举行会谈，双方提出打造<strong>"联合文化日历"</strong>——一个涵盖展览互借、艺术家驻地交流、考古联合发掘和文物修复培训的系统性年度合作框架。
 会谈透露了三项具体进展：一是美方将协助遣返一批走私至美国的<strong>犍陀罗佛教文物</strong>，并计划于2026年10月在伊斯兰堡的巴基斯坦国家艺术委员会（PNCA）举办<strong>被遣返文物专题展览</strong>，以"展览+归还"的模式将文物追索从外交程序升级为公共教育事件；二是<strong>韩国政府</strong>已确认参与伊斯兰堡博物馆的升级改造项目，提供数字化展陈技术和资金支持；三是双方讨论了在塔克西拉（Taxila，犍陀罗文明核心遗址、UNESCO世界遗产）设立联合考古工作站的可能性。
 巴基斯坦是全球犍陀罗佛教文化遗产最丰富的国家，塔克西拉、斯瓦特和白沙瓦地区的寺院遗址、佛像和浮雕是世界佛教艺术的源头之一。但长期以来，这些遗址面临盗掘、城市化侵蚀和管理资源不足的三重压力。美国2018年以来已多次协助巴基斯坦追回走私至美的犍陀罗文物，但此前多为个案操作，此次"联合文化日历"的提出意味着双方试图将合作从应急式的文物追索升级为常态化的文化战略协作。</p>
@@ -332,7 +369,7 @@
 </main>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新 ｜ <a href="../about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a> ｜ <a href="../about.html">关于本站</a></p>
 </footer>
 
 <div id="reading-progress"></div>

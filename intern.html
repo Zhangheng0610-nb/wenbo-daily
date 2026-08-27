@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>🌱 文博实习招聘 | 2026-08-26</title>
 <meta property="og:title" content="🌱 文博实习招聘 | 2026-08-26">
 <meta property="og:description" content="文博实习岗位，面向在读学生，共 18 个岗位">
@@ -173,6 +173,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 <style>
   .job-summary {
@@ -194,6 +226,7 @@
   .job-item.urgent-row {
     border-left: 4px solid #e74c3c;
   }
+  .job-item.closed-row { opacity: .62; border-left: 4px solid var(--border); }
   @media (prefers-color-scheme: dark) {
     .job-item.urgent-row {
       border-left-color: #ff6b5b;
@@ -250,7 +283,7 @@
 
 <header>
   <h1>🌱 文博实习招聘</h1>
-  <p class="meta">2026-08-26 更新 ｜ 共 18 个实习岗位</p>
+  <p class="meta">2026-08-26 更新 ｜ 共 18 个实习岗位 ｜ 可申请 4 ｜ 已截止 0</p>
   <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
 </header>
 
@@ -258,18 +291,22 @@
 
 <div class="stats-bar">
   <div class="stat-item">📋 总岗位数：<strong>18</strong></div>
-  <div class="stat-item">⏰ 即将截止：<strong>1</strong></div>
+  <div class="stat-item">🟢 可申请：<strong>4</strong></div>
+  <div class="stat-item">⏰ 3天内截止：<strong>3</strong></div>
+  <div class="stat-item">🔴 已截止：<strong>0</strong></div>
+  <div class="stat-item">🧭 待核截止：<strong>14</strong></div>
   <div class="stat-item">🔄 每两天更新一次</div>
 </div>
 
 
     <div class="job-section">
       <h2 class="section">🏛️ 博物馆实习 <span class="count-badge">13 岗</span></h2>
-      
+
         <div class="job-item urgent-row">
           <div class="job-header">
             <span class="job-number">#10</span>
             <span class="job-title">潮州市博物馆 — 暑期志愿实习生（社教/影像/行政）</span>
+            <span class="status-badge status-open">可申请</span>
              <span class="closing-badge">8月28日截止</span>
           </div>
           <div class="job-meta">
@@ -279,14 +316,15 @@
             <span>💰 广东省"展翅计划"三方盖章实习证明，无薪资</span>
           </div>
           <div class="job-link">
-            <a href="https://www.wondercv.com/xiaozhao/chaozhou-museum-2026-summer-intern-volunteer-11336-bcc8dc/" target="_blank" rel="noopener">🔗 招聘详情</a>
+            <a href="https://www.wondercv.com/xiaozhao/chaozhou-museum-2026-summer-intern-volunteer-11336-bcc8dc/" target="_blank" rel="noopener">🔗 招聘详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item urgent-row">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">📍 浙江省地质博物馆 — 新媒体实习生 3 名</span>
-            
+            <span class="status-badge status-open">可申请</span>
+             <span class="closing-badge">8月30日截止</span>
           </div>
           <div class="job-meta">
             <span>🎓 本科及以上在校生，新媒体/新闻传播/视觉设计/地质学等专业优先</span>
@@ -295,14 +333,15 @@
             <span>💰 劳务报酬 + 实习证明 + 免费参与特展、科普培训、学术讲座 + 近距离接触古生物化石和岩矿标本</span>
           </div>
           <div class="job-link">
-            <a href="https://m.hz.bendibao.com/job/171556.shtm" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="https://m.hz.bendibao.com/job/171556.shtm" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item urgent-row">
           <div class="job-header">
             <span class="job-number">#8</span>
             <span class="job-title">📍 南京中国科举博物馆 — 研究部志愿者（实习生）</span>
-            
+            <span class="status-badge status-open">可申请</span>
+             <span class="closing-badge">8月30日截止</span>
           </div>
           <div class="job-meta">
             <span>🎓 本科大二及以上 / 研究生在读（历史学、考古学、文物与博物馆学等专业优先）</span>
@@ -311,14 +350,15 @@
             <span>💰 免费工作餐 + 实习证明（月满 60 小时）+ 免费参观展览及讲座</span>
           </div>
           <div class="job-link">
-            <a href="https://m.nj.bendibao.com/news/182191.shtm" target="_blank" rel="noopener">🔗 招聘公告</a>
+            <a href="https://m.nj.bendibao.com/news/182191.shtm" target="_blank" rel="noopener">🔗 招聘公告</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#13</span>
             <span class="job-title">莲池书院博物馆（河北保定） — 暑期大学生志愿者 20 名</span>
-            
+            <span class="status-badge status-open">可申请</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 满 18 周岁在校大学生</span>
@@ -327,14 +367,15 @@
             <span>💰 出具志愿服务证明（食宿自负）</span>
           </div>
           <div class="job-link">
-            <a href="https://lcsy.hbu.cn/index.php?c=show&id=444" target="_blank" rel="noopener">🔗 招聘公告</a>
+            <a href="https://lcsy.hbu.cn/index.php?c=show&id=444" target="_blank" rel="noopener">🔗 招聘公告</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 杭州博物馆（国家一级博物馆） — 艺术设计 / 教育活动策划 / 文创开发 / 新媒体运营</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 本科及以上在读（研0/研究生均可），设计/文博/教育/传媒等相关专业</span>
@@ -343,14 +384,15 @@
             <span>💰 提供早午餐 + 实习证明 + 免费培训 + 文创优惠；不含住宿和补贴</span>
           </div>
           <div class="job-link">
-            <a href="http://mp.weixin.qq.com/s?__biz=MzkwNjY5NzgyNg==&mid=2247485799&idx=2&sn=5dec0bdf223aa9a436dd374d0a568cad" target="_blank" rel="noopener">🔗 招聘公告</a>
+            <a href="http://mp.weixin.qq.com/s?__biz=MzkwNjY5NzgyNg==&mid=2247485799&idx=2&sn=5dec0bdf223aa9a436dd374d0a568cad" target="_blank" rel="noopener">🔗 招聘公告</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">📍 宁波市天一阁博物院 — 博物馆讲解宣教（实习生）</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 全日制本科及以上在校生，中文/历史/播音主持/旅游营销等专业</span>
@@ -359,14 +401,15 @@
             <span>💰 1000-1200 元/月，正式实习证明，参与志愿者活动和文创开发</span>
           </div>
           <div class="job-link">
-            <a href="https://ycyg.nbhr.org.cn/JobFairJob/Info?guid=42dd1a5d-7697-472b-9995-a83b0c875cd9" target="_blank" rel="noopener">🔗 宁波市人力资源服务平台</a>
+            <a href="https://ycyg.nbhr.org.cn/JobFairJob/Info?guid=42dd1a5d-7697-472b-9995-a83b0c875cd9" target="_blank" rel="noopener">🔗 宁波市人力资源服务平台</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#4</span>
             <span class="job-title">📍 上海震旦博物馆 — 公教活动及媒体实习生</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 上海地区统招全日制在校大学生（研0/本科在读均可）</span>
@@ -375,14 +418,15 @@
             <span>💰 周二至周四 100 元/天，周五至周日 150 元/天 + 餐补</span>
           </div>
           <div class="job-link">
-            <a href="http://news.cafa.edu.cn/MobileNews/independenWeixinContent?contentId=225509871" target="_blank" rel="noopener">🔗 中央美术学院就业网招聘详情</a>
+            <a href="http://news.cafa.edu.cn/MobileNews/independenWeixinContent?contentId=225509871" target="_blank" rel="noopener">🔗 中央美术学院就业网招聘详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#5</span>
             <span class="job-title">📍 上海电影博物馆 — 运营管理部实习生（现场管理）</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 本科及以上，历史学/文博专业优先</span>
@@ -391,14 +435,15 @@
             <span>💰 未明确（联系确认）</span>
           </div>
           <div class="job-link">
-            <a href="http://www.zgsydw.com/shanghai/20260525/1568320_1.html" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="http://www.zgsydw.com/shanghai/20260525/1568320_1.html" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#6</span>
             <span class="job-title">📍 世博会博物馆（上海） — 展览执行实习生 1 名</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 硕士研究生在读（西方美术史、艺术史理论相关专业优先）</span>
@@ -407,14 +452,15 @@
             <span>💰 按出勤发放津贴 + 工作午餐 + 官方实习证明</span>
           </div>
           <div class="job-link">
-            <a href="https://www.163.com/dy/article/L3GPOPHD05568W0A.html" target="_blank" rel="noopener">🔗 招聘原文</a>
+            <a href="https://www.163.com/dy/article/L3GPOPHD05568W0A.html" target="_blank" rel="noopener">🔗 招聘原文</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#7</span>
             <span class="job-title">📍 南京博物院 — VR 沉浸式展览《觀天下·坤輿萬國全圖》实习生</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 本科及以上在校生，熟悉 VR 设备/英语流利者优先</span>
@@ -423,14 +469,15 @@
             <span>💰 提供午餐 + 实习证明 + 岗前培训（无薪资）</span>
           </div>
           <div class="job-link">
-            <a href="https://www.fenbi.com/page/exam-information-detail/467380650399745" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="https://www.fenbi.com/page/exam-information-detail/467380650399745" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#9</span>
             <span class="job-title">清华大学艺术博物馆 — 事业发展部实习生（文创开发/运营推广）</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 艺术管理/文化产业/新闻传播/市场营销等相关专业（研0/在读均可）</span>
@@ -439,14 +486,15 @@
             <span>💰 免费参观展览、员工培训、正式实习证明</span>
           </div>
           <div class="job-link">
-            <a href="https://www.artmuseum.tsinghua.edu.cn/news/dtxw/202606/t20260630_20779.shtml" target="_blank" rel="noopener">🔗 清华艺博官网公告</a>
+            <a href="https://www.artmuseum.tsinghua.edu.cn/news/dtxw/202606/t20260630_20779.shtml" target="_blank" rel="noopener">🔗 清华艺博官网公告</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#11</span>
             <span class="job-title">商丘博物馆 — 教育活动策划 / 自媒体宣传 / 社教课程与文创研发 / 志愿者管理（实习生）</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 本科及以上在校生，设计/文博/历史/汉语言文学专业优先</span>
@@ -455,14 +503,15 @@
             <span>💰 提供工作餐，实习结束出具正式实践证明</span>
           </div>
           <div class="job-link">
-            <a href="https://henan.597.com/institution/276913.html" target="_blank" rel="noopener">🔗 招聘参考</a>
+            <a href="https://henan.597.com/institution/276913.html" target="_blank" rel="noopener">🔗 招聘参考</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#12</span>
             <span class="job-title">汕头臻宝博物馆（广东） — 志愿讲解岗 / 公共服务岗</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 年满 15 周岁（活动支持岗）/ 讲解岗及公共服务岗长期有效</span>
@@ -471,18 +520,19 @@
             <span>💰 志愿服务时长证明 + 伴手礼 + 专业培训</span>
           </div>
           <div class="job-link">
-            <a href="http://st.bendibao.com/news/202686/26798.shtm" target="_blank" rel="noopener">🔗 招聘参考</a>
+            <a href="http://st.bendibao.com/news/202686/26798.shtm" target="_blank" rel="noopener">🔗 招聘参考</a> <span class="source-note">C级来源</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏗️ 考古所实习 <span class="count-badge">2 岗</span></h2>
-      
+
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 宁夏姚河塬遗址考古队（"全国十大考古新发现"项目） — 田野考古实习 / 文物修复实习 / 器物绘图实习</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 考古/文博/历史相关专业在读（研0/本科均可）</span>
@@ -491,14 +541,15 @@
             <span>💰 150 元/天，包吃住（不定期专家讲座，每周六休息）</span>
           </div>
           <div class="job-link">
-            <a href="http://mp.weixin.qq.com/s?__biz=MzkwOTUzMTQxOA==&mid=2247487280&idx=1&sn=938fb2f39a567da471bde0702563eada" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="http://mp.weixin.qq.com/s?__biz=MzkwOTUzMTQxOA==&mid=2247487280&idx=1&sn=938fb2f39a567da471bde0702563eada" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">📍 广东省文物考古研究院 — 东江流域（博罗地区）考古调查实习生（每季度 4-6 人）</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 考古学、博物馆学及相关专业在读硕士/博士，或优秀本科生</span>
@@ -507,18 +558,19 @@
             <span>💰 住宿 + 田野补助 + 人身意外伤害保险</span>
           </div>
           <div class="job-link">
-            <a href="https://mp.weixin.qq.com/s/OwPFdLzyerfAKCPM8MzpZw" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="https://mp.weixin.qq.com/s/OwPFdLzyerfAKCPM8MzpZw" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏢 企业实习 <span class="count-badge">3 岗</span></h2>
-      
+
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 浙江匀碧文物古建筑工程有限公司 — 文物古建筑修缮设计实习生</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 建筑学/古建筑/文物保护相关专业在读或应届</span>
@@ -534,7 +586,8 @@
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">北京清城睿现数字科技研究院（清华控股·国企） — 规划实习生 / 建筑设计实习生</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 本科大三及以上，文保/考古/历史/建筑等专业（研0/硕士优先）</span>
@@ -543,14 +596,15 @@
             <span>💰 150-200 元/天，参与文化遗产数字化项目，清华系国企实习证明</span>
           </div>
           <div class="job-link">
-            <a href="http://mp.weixin.qq.com/s?__biz=MzkyMTQ2NzU1NA==&mid=2247580287&idx=5&sn=c9ffdc12e960d2177d3c308d3795fa13" target="_blank" rel="noopener">🔗 招聘公告详情</a>
+            <a href="http://mp.weixin.qq.com/s?__biz=MzkyMTQ2NzU1NA==&mid=2247580287&idx=5&sn=c9ffdc12e960d2177d3c308d3795fa13" target="_blank" rel="noopener">🔗 招聘公告详情</a> <span class="source-note">C级来源</span>
           </div>
         </div>
         <div class="job-item">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">河北复典文保科技有限公司 — 勘探发掘实习生 / 发掘勘探资料实习生</span>
-            
+            <span class="status-badge status-check">待核截止</span>
+
           </div>
           <div class="job-meta">
             <span>🎓 专科及以上（考古学、文物与博物馆学、文物考古技术等专业）</span>
@@ -559,16 +613,16 @@
             <span>💰 2K-4K/月，可积累田野考古与资料整理实操经验</span>
           </div>
           <div class="job-link">
-            <a href="http://www.fudian-crcr.cn/kantanfajue" target="_blank" rel="noopener">🔗 企业官网</a>
+            <a href="http://www.fudian-crcr.cn/kantanfajue" target="_blank" rel="noopener">🔗 企业官网</a> <span class="source-note">C级来源</span>
           </div>
         </div>
     </div>
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文，本页面仅做信息聚合。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="about.html">关于本站</a></p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 </body>

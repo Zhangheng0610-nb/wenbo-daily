@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:')location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博资讯月报 | 2026年7月</title>
 <meta property="og:title" content="文博资讯月报 | 2026年7月">
 <meta property="og:description" content="2026年7月 文博资讯月报，共 10 条要闻">
@@ -173,6 +173,38 @@
   }
   #share-btn:hover { border-color: var(--accent); }
   .share-tip { display: block; color: var(--muted); font-size: .75em; margin-top: 6px; opacity: .7; }
+  .quality-banner {
+    background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+    border-radius: 10px; padding: 12px 14px; margin: 14px 0 20px; font-size: .88em;
+  }
+  .quality-banner.legacy { border-left-color: #b45309; }
+  .quality-banner strong { color: var(--text); }
+  .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
+    border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
+  .source-chip b { font-size: .82em; margin-right: 2px; }
+  .source-chip a { text-decoration: none; word-break: normal; }
+  .source-a { background: #e8f5e9; color: #216e39; }
+  .source-b { background: #fff7ed; color: #9a3412; }
+  .source-c { background: #fef2f2; color: #b91c1c; }
+  @media (prefers-color-scheme: dark) {
+    .source-a { background: #16351f; color: #86efac; }
+    .source-b { background: #3b2516; color: #fdba74; }
+    .source-c { background: #3f1d1d; color: #fca5a5; }
+  }
+  .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
+  .digest-sources li { margin: 3px 0; font-size: .86em; }
+  .digest-evidence-title { font-weight: 600; }
+  .status-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: .72em; font-weight: 600; }
+  .status-open { color: #216e39; background: #e8f5e9; }
+  .status-closed { color: #991b1b; background: #fee2e2; }
+  .status-check { color: #92400e; background: #fef3c7; }
+  @media (prefers-color-scheme: dark) {
+    .status-open { color: #86efac; background: #16351f; }
+    .status-closed { color: #fca5a5; background: #3f1d1d; }
+    .status-check { color: #fcd34d; background: #3b2a12; }
+  }
 </style>
 </head>
 <body>
@@ -185,6 +217,8 @@
 
 <h2 class="section">📊 本期概览</h2>
 
+
+<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 6 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title"><strong>景德镇手工瓷业遗存列入世界遗产</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml" target="_blank" rel="noopener">央视</a></span></li><li><span class="digest-evidence-title"><strong>七部门揭榜挂帅首次纳入文物保护装备</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/30/art_2318_48458.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>"博物馆里读中国"99项展览推介公布</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>马首铜像入闽 + XR沉浸展</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>世界互联网大会发布《文化遗产数字化案例集》</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>三星堆祭祀坑40周年：意外失火说+象牙保护突破</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>八大山人诞辰400周年特展</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>国际文物归还浪潮：玻利维亚、哥伦比亚、叙利亚、土耳其</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>良渚VR展走进亚美尼亚 + 大足石刻展登陆纽约</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>多瑙河干涸暴露猛犸遗骸</strong></span> <span class="status-badge status-check">待补原始来源</span></li></ol></div>
 
 <h2 class="section">🔟 七月十大文博新闻</h2>
 
@@ -285,7 +319,7 @@
 <p><em></em></p>
 
 <footer>
-  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 8:13 自动更新</p>
+  <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 每日早 7:13（北京时间）自动更新 ｜ <a href="../sources.html">信源与方法</a></p>
 </footer>
 
 </body>
