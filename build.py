@@ -2397,6 +2397,12 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <span class="hm-arrow">→</span>
 </a>
 
+<a class="heatmap-card" href="digital-trends.html">
+  <div class="hm-title">📈 文博数字化趋势</div>
+  <div class="hm-sub">国家文物局数字化相关新闻趋势 · 2021至今 · 缩放看月/周/天粒度</div>
+  <span class="hm-arrow">→</span>
+</a>
+
 <div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
 <div class="section-body">
 <div id="daily-list">
@@ -2589,6 +2595,11 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
   </url>''')
     urls.append(f'''  <url>
     <loc>{base}/heatmap.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>''')
+    urls.append(f'''  <url>
+    <loc>{base}/digital-trends.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>''')
@@ -2869,6 +2880,13 @@ def main():
     with open(sitemap_path, 'w', encoding='utf-8') as f:
         f.write(sitemap_xml)
     print(f'Sitemap: {sitemap_path} ({len(daily_reports)} daily + {len(weekly_reports)} weekly + {len(monthly_reports)} monthly)')
+
+    # Build digital trends page (数字化趋势;当日已有数据则只重建页面,不重新抓取)
+    try:
+        import digital_trend
+        digital_trend.main()
+    except Exception as e:
+        print(f'Digital trends: SKIP ({e})')
 
     print('\nDone! Run push to deploy.')
 
