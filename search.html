@@ -281,6 +281,15 @@ function escapeRegExp(value) {
   const special = '.^$*+?()[]{}|' + slash;
   return Array.from(value).map(function(ch) { return special.includes(ch) ? slash + ch : ch; }).join('');
 }
+function cleanText(value) {
+  return String(value || '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/\*\*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 function highlight(value, words) {
   let out = escapeHtml(value);
   words.slice().sort((a, b) => b.length - a.length).forEach(function(word) {
@@ -306,7 +315,7 @@ function matches(text, words) {
   return words.every(function(word) { return lower.includes(word); });
 }
 function snippet(text, words) {
-  const clean = String(text || '').replace(/\s+/g, ' ').trim();
+  const clean = cleanText(text);
   if (!clean) return '';
   const lower = clean.toLowerCase();
   const hit = words.map(function(word) { return lower.indexOf(word); }).filter(function(index) { return index >= 0; }).sort(function(a, b) { return a - b; })[0] || 0;
