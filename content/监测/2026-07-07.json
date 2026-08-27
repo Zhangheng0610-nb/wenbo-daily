@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "date": "2026-07-07",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "no_update",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "success",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260707-cultural-relics-news-0206-2706id112161",
+      "date": "2026-07-07",
+      "title": "数字守护 “石经长城”——北京房山石经拓片数字化保护研究稳步推进",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-07/paperId/22706/id/112161"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "文物保护",
+        "数字化",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260707-museum-association-0209-ntentid14728",
+      "date": "2026-07-07",
+      "title": "佛山市儿童博物馆正式开馆",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=13&contentId=14728"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

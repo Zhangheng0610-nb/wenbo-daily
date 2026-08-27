@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "date": "2026-08-05",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "no_update",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "no_update",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 3,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-05T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260805-museum-association-0369-ntentid14750",
+      "date": "2026-08-05",
+      "title": "2026年中国博物馆协会青年策展人高级研修班圆满结业",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14750"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260805-museum-association-0367-ntentid14748",
+      "date": "2026-08-05",
+      "title": "关于举办第十四期“博物馆系统新入职员工培训班”的通知",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14748"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260805-museum-association-0368-ntentid14749",
+      "date": "2026-08-05",
+      "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公示",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14749"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

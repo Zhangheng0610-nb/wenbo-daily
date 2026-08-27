@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "date": "2026-07-16",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "no_update",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "success",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 2,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-16T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260716-cultural-relics-news-0245-2734id112256",
+      "date": "2026-07-16",
+      "title": "2026年度国家文物政策理论研究课题启动申报",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-16/paperId/22734/id/112256"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260716-cultural-relics-news-0244-2734id112255",
+      "date": "2026-07-16",
+      "title": "文化和旅游部副部长、国家文物局局长会见香港西九文化区管理局行政总裁",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-16/paperId/22734/id/112255"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "香港",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "香港"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "date": "2026-07-14",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "no_update",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "success",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 2,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-14T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260714-cultural-relics-news-0235-2726id112224",
+      "date": "2026-07-14",
+      "title": "国家文物局印发《革命文物保护工程技术导则（试行）》",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-14/paperId/22726/id/112224"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260714-cultural-relics-news-0234-2726id112223",
+      "date": "2026-07-14",
+      "title": "西夏陵世界文化遗产保护与价值阐释系列活动在银川举办",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-14/paperId/22726/id/112223"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260714-museum-association-0239-ntentid14732",
+      "date": "2026-07-14",
+      "title": "晋察冀边区印刷局博物馆开馆",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=13&contentId=14732"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

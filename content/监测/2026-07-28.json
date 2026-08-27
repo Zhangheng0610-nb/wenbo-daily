@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "date": "2026-07-28",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "success",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "success",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 3,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-28T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260728-cctv-wenbo-0299-m260728shtml",
+      "date": "2026-07-28",
+      "title": "辽博年度特展《微笑——文物里的中国精神印记》开展",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博",
+          "url": "https://yangbo.cctv.cn/2026/07/28/ARTIuSMndsnnmNrJeUnFFFVm260728.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-cultural-relics-news-0301-2766id112386",
+      "date": "2026-07-28",
+      "title": "“景德镇手工瓷业遗存”成功列入《世界遗产名录》",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-28/paperId/22766/id/112386"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "国际交流"
+      ],
+      "tags": [
+        "国际交流"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-cultural-relics-news-0302-2766id112387",
+      "date": "2026-07-28",
+      "title": "把“千年瓷都”这张靓丽的名片擦得更亮——文化和旅游部副部长、国家文物局局长饶权详解“景德镇手工瓷业遗存”成功申遗",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-28/paperId/22766/id/112387"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-cultural-relics-news-0300-2766id112385",
+      "date": "2026-07-28",
+      "title": "擦亮中华文明重要名片——习近平文化思想引领中国世界遗产申报保护工作壮阔实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-28/paperId/22766/id/112385"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护",
+        "国际交流"
+      ],
+      "tags": [
+        "文物保护",
+        "国际交流"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260728-ncha-0305-22204016html",
+      "date": "2026-07-28",
+      "title": "国家文物局召开新闻发布会 介绍《国有文物资源数据管理办法》《革命文物保护工程技术...",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/28/art_722_204016.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文物保护",
+        "数字化",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "数字化",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

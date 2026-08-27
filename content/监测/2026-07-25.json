@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "date": "2026-07-25",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "success",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "success",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 4,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-07-25T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260725-cctv-wenbo-0283-4260725shtml",
+      "date": "2026-07-25",
+      "title": "《考古公开课》 20260725 营造北京",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博",
+          "url": "https://tv.cctv.cn/2026/07/25/VIDEGP5IqGAmEZ3xshG2qZJ4260725.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260725-cultural-relics-news-0286-2762id112365",
+      "date": "2026-07-25",
+      "title": "中泰联合考古发现铁器时代海丝贸易新证据",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-25/paperId/22762/id/112365"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260725-cultural-relics-news-0289-2762id112368",
+      "date": "2026-07-25",
+      "title": "全国博物馆建设管理座谈会在天津召开",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-25/paperId/22762/id/112368"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "天津"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260725-cultural-relics-news-0285-2762id112364",
+      "date": "2026-07-25",
+      "title": "山东潍坊获批国家历史文化名城",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-25/paperId/22762/id/112364"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "山东"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260725-cultural-relics-news-0290-2762id112369",
+      "date": "2026-07-25",
+      "title": "山西发布文物系统性保护的实施意见",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-07-25/paperId/22762/id/112369"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "政策行业",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260725-ncha-0291-22203985html",
+      "date": "2026-07-25",
+      "title": "“景德镇手工瓷业遗存”成功列入《世界遗产名录》",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/25/art_722_203985.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "国际交流"
+      ],
+      "tags": [
+        "国际交流"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

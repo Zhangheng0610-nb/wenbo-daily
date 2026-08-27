@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "date": "2026-08-07",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "success",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "no_update",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-07T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260807-ncha-0377-22204196html",
+      "date": "2026-08-07",
+      "title": "第四次全国文物普查领导小组办公室组织完成辽宁省省域整体验收",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/7/art_722_204196.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "辽宁"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "date": "2026-08-12",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "success",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "no_update",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-12T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260812-cctv-wenbo-0404-r260812shtml",
+      "date": "2026-08-12",
+      "title": "《探索·发现》 20260812 高青大墓发掘记（下）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博",
+          "url": "https://tv.cctv.cn/2026/08/12/VIDEtFL812MHwnT9LPtbGcRr260812.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260812-ncha-0405-22204299html",
+      "date": "2026-08-12",
+      "title": "陕西省委书记赵一德在调研文物保护和考古工作时强调 坚定文化自信 勇担使命责任 让...",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/12/art_722_204299.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "文物保护"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

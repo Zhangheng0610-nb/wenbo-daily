@@ -275,9 +275,17 @@ def save_data(items, extra, digest_count, levels):
     return data
 
 
-def main():
-    force = '--force' in sys.argv
-    build_only = '--build-only' in sys.argv
+def main(args=None):
+    """Refresh source data only when explicitly requested.
+
+    ``build.py`` runs every day and should never trigger the five-year source
+    crawl merely because the calendar date changed.  Call ``main(['--force'])``
+    from a separately scheduled maintenance job when the corpus itself needs a
+    refresh; daily builds call ``main(['--build-only'])``.
+    """
+    args = set(sys.argv[1:] if args is None else args)
+    force = '--force' in args
+    build_only = '--build-only' in args
     cache_valid = build_only  # --build-only: 只用现有数据重建页面
     if not force and not build_only and os.path.exists(DATA_PATH):
         try:

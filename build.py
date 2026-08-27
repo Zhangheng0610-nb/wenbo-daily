@@ -3712,7 +3712,9 @@ def main():
     # Build digital trends page (数字化趋势;当日已有数据则只重建页面,不重新抓取)
     try:
         import digital_trend
-        digital_trend.main()
+        # A full five-year NCHA crawl belongs to an explicit maintenance run,
+        # not the daily website build.  This keeps the 7:13 update bounded.
+        digital_trend.main(['--build-only'])
     except Exception as e:
         print(f'Digital trends: SKIP ({e})')
 

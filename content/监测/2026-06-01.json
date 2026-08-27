@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "date": "2026-06-01",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "success",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "no_update",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 14,
+      "note": "中国考古网已回溯核心考古动态、学术活动和发掘简报栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "新华网文博公开页仅稳定提供近期列表，历史索引仍待补齐。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-06-01T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博首页可回溯部分栏目，完整历史索引仍待补齐。"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "backfill-20260601-archaeology-0024-6056004shtml",
+      "date": "2026-06-01",
+      "title": "“考古中国”重大项目重要进展工作会在京召开 2026-06-25 6月25日，国家文物局在京召开“考古中国”重大项目重要进展工作会，发布浙江舟山群岛盐业遗址群、江苏东部沿海地区盐业考古新发现、重庆彭水中堡盐业遗址、山东渤海南岸盐业考古新进展等4项考古研究成果。国家文物局副局长唐炜主持会议。 此次会议聚焦于盐业考古最新研究进展。浙江省舟山群岛盐业遗址群发现有距今约4800年至2500年内不同阶段的制盐遗存，是近年来考...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260625_6056004.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江苏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "政策行业",
+        "江苏"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0015-6049371shtml",
+      "date": "2026-06-01",
+      "title": "好好读读这些信札吧——读《梁思永夏鼐往还书札》 2026-06-08 对于考古学家夏鼐先生，我们是很熟悉的了。《夏鼐日记》是很多考古人的必读书目。还有《夏鼐文集》、《夏鼐传稿》和《夏鼐书信集》等，都可以让我们深入了解这位新中国考古事业的奠基人。那么，对于另一位奠基人梁思永先生，你又知道多少呢？《梁思永夏鼐往还书札》这本书正可以让我们走近这位“考古研究所的灵魂”（夏鼐语）。 正如也担任过中国社会科学院考古研究...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260608_6049371.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0023-6056003shtml",
+      "date": "2026-06-01",
+      "title": "山西万荣乌苏东周墓地出土罕见西戎风格陶器 实证古代民族交流融合 2026-06-25 山西省考古研究院24日发布万荣县乌苏东周墓地考古成果。该墓地出土的陶铲足鬲、双耳罐等陶器具有鲜明西戎文化风格，在山西地区较为少见或属首次发现，为研究历史上民族交流融合提供了重要实物证据。 乌苏墓地位于山西万荣县皇甫乡乌苏村东，2006年4月至5月，为配合运城至稷山的公路建设，考古人员在此共发掘墓葬14座，墓葬形制分为竖穴土坑墓和洞室墓两种类型，出土...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260625_6056003.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0013-6008920shtml",
+      "date": "2026-06-01",
+      "title": "山西太原发现一处新石器遗址 出土大量彩陶 2026-06-03 山西省太原市文物保护研究院协同相关科研机构，近期在太原市阳曲县西盘威村发现一处新石器时代重要遗址——西盘威遗址。该遗址面积约20万平方米，遗存丰富且出土大量彩陶，填补了阳曲地区仰韶文化晚期考古研究的空白。 遗址位置图 西盘威遗址位于山西省太原市阳曲县西盘威村东南200米处，地处系舟山余脉与太原盆地东北部边缘的过渡地带，地势北高南低，遗址所在...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260603_6008920.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "文物保护"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0018-6054531shtml",
+      "date": "2026-06-01",
+      "title": "山西运城发现早商时期小型聚落 2026-06-17 山西省考古研究院近日公布，运城盐湖区寺北遗址考古发掘取得丰富成果。该遗址以早商时期遗存为主，并包含东周、汉代、唐至明清时期遗存，共发掘3000余平方米，清理灰坑、灰沟、墓葬、陶窑等遗迹283处，对研究晋南地区夏商时期聚落变迁等具有重要学术价值。 寺北遗址位于运城市盐湖区大渠街道寺北村东，地处运城盆地腹地，南距盐湖约5公里。发掘表明，该遗址早商时期...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260617_6054531.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0022-6055747shtml",
+      "date": "2026-06-01",
+      "title": "新发现 | 中越边境元江—红河流域2025年至2026年史前考古调查与发掘新收获 2026-06-24 元江发源于中国云南省大理白族自治州，经云南省红河州河口县出境，入越南老街省，称红河，于海防市注入北部湾。元江-红河是连接中越两地早期人类和文化扩散传播的关键通道，早至旧石器时代便有人群在此生息、活动。在元江流域，蒙自市的马鹿洞和河口县的孤山洞是该流域两处重要的旧石器时代遗址，但目前发现的洞穴遗址仅此两处；在红河流域，与中国直接接壤的越南北部山...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260624_6055747.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "云南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0016-6053021shtml",
+      "date": "2026-06-01",
+      "title": "新发现 | 山东海岛考古新突破：大钦岛东村遗址发现打制石器及大汶口聚落制玉线索 2026-06-09 山东是中华文明的重要发祥地之一，地处陆海交汇的关键地带，其海陆文化发展脉络对理解早期中华文明多元一体格局具有不可替代的价值。山东海岛因其特殊的地理环境，成为“海陆互动”的枢纽，是人类适应海洋、开展海洋活动的重要场所，是研究文明起源、海陆关系与跨区域文化交流的珍贵空间。 工作缘起 山东地区的海岛考古始于20世纪80年代。1980年，严文明先生带队...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260609_6053021.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0021-6055461shtml",
+      "date": "2026-06-01",
+      "title": "新发现 | 山西运城盐湖区寺北遗址发掘主要收获 2026-06-23 寺北遗址位于山西省运城市盐湖区大渠街道寺北村东，地处运城盆地腹地，南距盐湖约5公里。为配合盐湖高新区标准地块1永济监狱迁建项目建设，2024年11月至2025年11月，山西省考古研究院对遗址展开发掘，取得了丰富的考古成果。 寺北遗址位置示意图 共发掘3000余平方米，清理灰坑、灰沟、墓葬、陶窑等遗迹共283处，出土有陶、瓷、铜、石、骨等各类器物。发掘区内地...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260623_6055461.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "政策行业",
+        "山西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0025-6056535shtml",
+      "date": "2026-06-01",
+      "title": "新研究：仰韶先民基因在黄河中游连续遗传6200年 2026-06-29 记者27日从河南省文物考古研究院获悉，一项最新研究表明：黄河中游地区人群基因具有高度的遗传连续性，且均可溯源至6200年前的仰韶文化先民。这为探索该地区人群扩散模式与遗传格局演变提供了新视角。 该研究由复旦大学、河南省文物考古研究院、郑州大学等多个单位共同完成，相关论文成果已于6月26日在国际学术期刊《国家科学评论》（英文版）在线发表。 1921年在...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260629_6056535.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "国际交流"
+      ],
+      "tags": [
+        "考古",
+        "国际交流",
+        "河南"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0012-6055468shtml",
+      "date": "2026-06-01",
+      "title": "河北赞皇县北魏李子云夫妇墓发掘简报 2026-06-23",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202606/t20260623_6055468.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河北"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0020-6055270shtml",
+      "date": "2026-06-01",
+      "title": "浙江绍兴首次发现密封马头骨 还原越国高等级祭祀礼制 2026-06-22 据浙江省绍兴市文物考古研究所18日消息，近日，绍兴塔山和畅坊遗址首次发现印纹硬陶坛内放置马头骨，这为研究越国高等级祭祀礼制提供了重要实证。 绍兴塔山和畅坊遗址位于绍兴古城南部，此前已经发现的越国高等级祭祀遗迹，与《越绝书》记载的越王勾践于龟山“炤龟”祭祀活动高度吻合。 6月17日，绍兴塔山和畅坊遗址出土的印纹硬陶坛中，可见马头骨。罗鹏 供图 ...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260622_6055270.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "浙江",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "浙江"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0017-6053498shtml",
+      "date": "2026-06-01",
+      "title": "考古实证商代早期关中盆地已实现小麦规模化、精细化栽培利用 2026-06-11 青铜时代中国北方地区小麦怎样传播扩散？中原腹地的关中盆地小麦种植利用情况如何？这些议题长期以来备受考古学界关注。 还原小麦种植利用历史面貌 中国科学院大学(国科大)考古学与人类学系、中国科学院古脊椎动物与古人类研究所(古脊椎所)、陕西省考古研究院联合团队，最近基于多重科学手段对陕西郑家滩遗址系统开展植物考古研究，实证商代早期(距今3449年-3234...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260611_6053498.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "展览"
+      ],
+      "tags": [
+        "考古",
+        "展览",
+        "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0019-6054538shtml",
+      "date": "2026-06-01",
+      "title": "让考古成为文明对话的纽带——走出国门的中国考古队 2026-06-17 在希腊西部埃托利亚地区的安杰洛卡斯特洛遗址上，中希联合考古队员俯身在探方内作业，小心清理土层，零散陶片从沉积中逐渐显露。这个曾见证古希腊城邦兴衰的遗址，如今有了中国考古团队常驻田野的身影。随着中国古典文明研究院首个田野考古项目正式开工，中国学者开始在古希腊文明研究现场获取一手材料，参与世界古代文明研究的知识生产。 数千公里外，在乌兹别克斯...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260617_6054538.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-archaeology-0014-6010054shtml",
+      "date": "2026-06-01",
+      "title": "陕西集中发布多项考古研究成果 部分发现填补史料空白 2026-06-04 2026年6月3日上午，陕西省考古研究院发布陕西咸阳瓦刘村东汉纪年墓考古研究成果和唐长安县尉范凝墓考古成果。 四座东汉纪年墓填补关中汉墓序列缺环 2020年6月至2022年10月，考古工作者在西安咸阳国际机场三期扩建项目的考古工作中，共发掘墓葬4093座。 瓦刘墓地属于该发掘项目中的第二发掘区，共发现东汉墓葬110座，其中包含4座纪年墓，出土5件带有纪年的朱书...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202606/t20260604_6010054.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "国际交流",
+        "政策行业",
+        "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    },
+    {
+      "recordId": "backfill-20260601-ncha-0026-22202965html",
+      "date": "2026-06-01",
+      "title": "看展览 | 博物馆展讯速览",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/6/1/art_722_202965.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
+}

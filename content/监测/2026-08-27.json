@@ -4,46 +4,77 @@
   "coverage": [
     {
       "sourceId": "ncha",
-      "status": "partial",
+      "status": "success",
       "checkedAt": "2026-08-27T22:00:46+08:00",
-      "candidateCount": 0,
-      "note": "架构迁移当日仅核实入口与域名，未追溯完成全天全部栏目。"
+      "candidateCount": 1,
+      "note": ""
     },
     {
       "sourceId": "cultural-relics-news",
-      "status": "partial",
+      "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": "已确认现行数字报入口，未追溯完成当日全部版面。"
+      "note": ""
     },
     {
       "sourceId": "archaeology",
-      "status": "partial",
+      "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": "已确认中国社会科学院考古研究所入口，未追溯完成全天栏目。"
+      "note": ""
     },
     {
       "sourceId": "museum-association",
-      "status": "partial",
+      "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": "已检查官网首页主要栏目，但迁移当日不追认完整覆盖。"
+      "note": ""
     },
     {
       "sourceId": "xinhua-wenbo",
-      "status": "partial",
+      "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": "已检查新华网文博入口，但迁移当日不追认完整覆盖。"
+      "note": ""
     },
     {
       "sourceId": "cctv-wenbo",
-      "status": "partial",
+      "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": "已确认央视网文博与央博入口，未追溯完成全天栏目。"
+      "note": ""
     }
   ],
-  "items": []
+  "items": [
+    {
+      "recordId": "backfill-20260827-ncha-0460-22204540html",
+      "date": "2026-08-27",
+      "title": "中外联合考古工作会议在长春召开",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/27/art_722_204540.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "国际交流",
+        "政策行业"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill"
+    }
+  ]
 }
