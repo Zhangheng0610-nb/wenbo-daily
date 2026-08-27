@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "date": "2026-08-27",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "架构迁移当日仅核实入口与域名，未追溯完成全天全部栏目。"
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "已确认现行数字报入口，未追溯完成当日全部版面。"
+    },
+    {
+      "sourceId": "archaeology",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "已确认中国社会科学院考古研究所入口，未追溯完成全天栏目。"
+    },
+    {
+      "sourceId": "museum-association",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "已检查官网首页主要栏目，但迁移当日不追认完整覆盖。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "已检查新华网文博入口，但迁移当日不追认完整覆盖。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "status": "partial",
+      "checkedAt": "2026-08-27T22:00:46+08:00",
+      "candidateCount": 0,
+      "note": "已确认央视网文博与央博入口，未追溯完成全天栏目。"
+    }
+  ],
+  "items": []
+}

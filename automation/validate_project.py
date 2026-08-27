@@ -15,10 +15,12 @@ REPORTS = ROOT / 'reports'
 import sys as _sys
 if str(ROOT) not in _sys.path:
     _sys.path.insert(0, str(ROOT))
-from automation.governance import canonical_url, source_info
+from automation.governance import (
+    MAP_SOURCE_PANEL, canonical_url, map_source_id, source_info,
+)
 
 ALLOWED = (
-    'chinawenbao.com.cn', 'chinamuseum.org.cn', 'chinamuseums.org.cn',
+    'chinawenbao.com.cn', 'zhongguowenwubao.com', 'chinamuseum.org.cn', 'chinamuseums.org.cn',
     'kaogu.cn', 'kaogu.cssn.cn', 'ncha.gov.cn', 'news.cn',
     'xinhuanet.com', 'cctv.com', 'people.com.cn', 'chinanews.com.cn',
     'gmw.cn', 'cnr.cn', 'china.org.cn', 'unesco.org', 'whc.unesco.org',
@@ -33,6 +35,16 @@ BANNED = (
     'zhidao.baidu.com', 'zhihu.com/question', 'zhihu.com/topic',
 )
 URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
+MONITORING = CONTENT / '监测'
+MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
+MONITOR_SCOPES = {'province', 'national', 'international', 'unassigned'}
+PROVINCES = {
+    '北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江',
+    '上海', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南',
+    '湖北', '湖南', '广东', '广西', '海南', '重庆', '四川', '贵州',
+    '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆', '台湾',
+    '香港', '澳门',
+}
 
 
 def host_allowed(url):
@@ -65,6 +77,119 @@ def today_cn():
     return datetime.now(timezone(timedelta(hours=8))).date()
 
 
+def check_monitor_record(record, label):
+    errors = []
+    if not record.get('recordId'):
+        errors.append(f'{label}: missing recordId')
+    if not record.get('title'):
+        errors.append(f'{label}: missing title')
+    try:
+        date.fromisoformat(record.get('date', ''))
+    except (TypeError, ValueError):
+        errors.append(f'{label}: invalid date')
+    scope = record.get('scope')
+    if scope not in MONITOR_SCOPES:
+        errors.append(f'{label}: invalid scope {scope!r}')
+    if scope == 'province' and record.get('primaryProvince') not in PROVINCES:
+        errors.append(f'{label}: invalid or missing primaryProvince')
+    if not isinstance(record.get('selectedForDaily'), bool):
+        errors.append(f'{label}: selectedForDaily must be true or false')
+    confidence = record.get('locationConfidence')
+    if not isinstance(confidence, (int, float)) or not 0 <= confidence <= 1:
+        errors.append(f'{label}: invalid locationConfidence')
+    sources = record.get('sources')
+    if not isinstance(sources, list) or not sources:
+        errors.append(f'{label}: missing fixed-panel source')
+        return errors
+    for source in sources:
+        actual_id = map_source_id(source.get('url', ''))
+        if not actual_id:
+            errors.append(f'{label}: source outside fixed panel: {source.get("url", "")}')
+        elif source.get('sourceId') != actual_id:
+            errors.append(f'{label}: sourceId/domain mismatch: {source.get("sourceId", "")}')
+    return errors
+
+
+def check_monitoring(required_date=None):
+    errors = []
+    baseline_path = MONITORING / 'baseline.json'
+    if not baseline_path.exists():
+        return ['missing content/监测/baseline.json']
+    files = [baseline_path] + sorted(MONITORING.glob('????-??-??.json'))
+    if required_date:
+        required = MONITORING / f'{required_date}.json'
+        if not required.exists():
+            errors.append(f'missing daily fixed-panel monitor: content/监测/{required_date}.json')
+    seen_ids, seen_urls = set(), set()
+    for path in files:
+        try:
+            payload = json.loads(path.read_text(encoding='utf-8'))
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f'{path.relative_to(ROOT)}: invalid JSON: {exc}')
+            continue
+        if payload.get('version') != 1:
+            errors.append(f'{path.relative_to(ROOT)}: version must be 1')
+        records = payload.get('records') if path == baseline_path else payload.get('items')
+        if not isinstance(records, list):
+            errors.append(f'{path.relative_to(ROOT)}: records/items must be a list')
+            records = []
+        if path != baseline_path:
+            file_date = path.stem
+            if payload.get('date') != file_date:
+                errors.append(f'{path.relative_to(ROOT)}: date must match filename')
+            coverage = payload.get('coverage')
+            if not isinstance(coverage, list):
+                errors.append(f'{path.relative_to(ROOT)}: coverage must be a list')
+                coverage = []
+            ids = [row.get('sourceId') for row in coverage]
+            if len(ids) != len(set(ids)):
+                errors.append(f'{path.relative_to(ROOT)}: duplicate coverage sourceId')
+            missing = sorted(set(MAP_SOURCE_PANEL) - set(ids))
+            extra = sorted(set(ids) - set(MAP_SOURCE_PANEL))
+            if missing:
+                errors.append(f'{path.relative_to(ROOT)}: missing coverage sources: {", ".join(missing)}')
+            if extra:
+                errors.append(f'{path.relative_to(ROOT)}: unknown coverage sources: {", ".join(extra)}')
+            for row in coverage:
+                if row.get('status') not in MONITOR_STATUSES:
+                    errors.append(f'{path.relative_to(ROOT)}: invalid coverage status for {row.get("sourceId", "?")}')
+                count = row.get('candidateCount')
+                if not isinstance(count, int) or count < 0:
+                    errors.append(f'{path.relative_to(ROOT)}: invalid candidateCount for {row.get("sourceId", "?")}')
+                try:
+                    datetime.fromisoformat(row.get('checkedAt', ''))
+                except (TypeError, ValueError):
+                    errors.append(f'{path.relative_to(ROOT)}: invalid checkedAt for {row.get("sourceId", "?")}')
+                if row.get('status') in {'partial', 'failed'} and not row.get('note'):
+                    errors.append(f'{path.relative_to(ROOT)}: partial/failed coverage needs a note for {row.get("sourceId", "?")}')
+            observed = {source_id: 0 for source_id in MAP_SOURCE_PANEL}
+            for record in records:
+                record_source_ids = {
+                    source.get('sourceId') for source in (record.get('sources') or [])
+                }
+                for source_id in record_source_ids:
+                    if source_id in observed:
+                        observed[source_id] += 1
+            for row in coverage:
+                source_id = row.get('sourceId')
+                if source_id in observed and row.get('candidateCount') != observed[source_id]:
+                    errors.append(f'{path.relative_to(ROOT)}: candidateCount mismatch for {source_id}')
+        for index, record in enumerate(records):
+            label = f'{path.relative_to(ROOT)} record {index + 1}'
+            errors.extend(check_monitor_record(record, label))
+            record_id = record.get('recordId')
+            if record_id in seen_ids:
+                errors.append(f'{label}: duplicate recordId {record_id}')
+            seen_ids.add(record_id)
+            sources = record.get('sources') or []
+            if sources:
+                url = canonical_url(sources[0].get('url', ''))
+                if url in seen_urls:
+                    errors.append(f'{label}: duplicate monitored URL {url}')
+                seen_urls.add(url)
+    return sorted(set(errors))
+
+
 def check_heatmap():
     """Validate the public industry-attention dataset and its source gate."""
     path = ROOT / 'heatmap-data.json'
@@ -75,20 +200,30 @@ def check_heatmap():
     except (OSError, json.JSONDecodeError) as exc:
         return [f'invalid heatmap-data.json: {exc}']
     errors = []
-    if data.get('version') != 2:
-        errors.append('heatmap-data.json must use schema version 2')
+    if data.get('version') != 3:
+        errors.append('heatmap-data.json must use schema version 3')
+    panel_ids = {row.get('id') for row in (data.get('coverage') or {}).get('panel', [])}
+    if panel_ids != set(MAP_SOURCE_PANEL):
+        errors.append('heatmap-data.json fixed source panel does not match governance')
     events = data.get('events')
     if not isinstance(events, list):
         return errors + ['heatmap-data.json events must be a list']
     seen = set()
-    for event in events:
+    all_events = []
+    for bucket in ('events', 'nationalEvents', 'internationalEvents'):
+        rows = data.get(bucket, [])
+        if not isinstance(rows, list):
+            errors.append(f'heatmap-data.json {bucket} must be a list')
+            continue
+        all_events.extend(rows)
+    for event in all_events:
         event_id = event.get('eventId', '')
         if not event_id or event_id in seen:
             errors.append(f'duplicate or missing heatmap event id: {event_id or "<empty>"}')
         seen.add(event_id)
         if event.get('sourceTier') not in ('A', 'B'):
             errors.append(f'non-qualified heatmap event: {event_id}')
-        if not event.get('primaryProvince'):
+        if event.get('scope') == 'province' and not event.get('primaryProvince'):
             errors.append(f'missing primary province: {event_id}')
         confidence = event.get('locationConfidence')
         if not isinstance(confidence, (int, float)) or not 0 < confidence <= 1:
@@ -97,6 +232,8 @@ def check_heatmap():
             info = source_info(source.get('url', ''))
             if info['blocked'] or info['tier'] not in ('A', 'B'):
                 errors.append(f'blocked source leaked into heatmap event {event_id}: {source.get("url", "")}')
+            if source.get('sourceId') != map_source_id(source.get('url', '')):
+                errors.append(f'non-panel source leaked into heatmap event {event_id}: {source.get("url", "")}')
     return sorted(set(errors))
 
 
@@ -120,6 +257,7 @@ def main():
             errors.append(f'missing report HTML: {html_path.relative_to(ROOT)}')
     for path in paths:
         errors.extend(f'{path.relative_to(ROOT)}: {e}' for e in check_daily(path, strict=(not args.all or args.strict_all)))
+    errors.extend(check_monitoring(None if args.all else (args.date or today_cn().isoformat())))
     errors.extend(check_heatmap())
     if errors:
         print('VALIDATION FAILED')

@@ -219,7 +219,11 @@
   .audit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
   .audit-cell { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
   .audit-cell strong { display: block; font-size: 1.25em; }
-  @media (max-width: 520px) { .audit-grid { grid-template-columns: repeat(2, 1fr); } }
+  .panel-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:12px 0; }
+  .panel-card { border:1px solid var(--border); border-radius:10px; padding:13px; background:var(--card); }
+  .panel-card h3 { margin:0 0 4px; font-size:1em; }
+  .panel-card p { margin:3px 0; }
+  @media (max-width: 520px) { .audit-grid { grid-template-columns: repeat(2, 1fr); } .panel-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -232,11 +236,41 @@
 
 <div class="quality-banner legacy"><strong>档案审计：</strong>已检查 48 份日报、442 个来源链接；A级 162 个，B级 50 个，待复核 230 个。历史档案中仍存在未登记来源；它们被保留用于完整记录，但不会进入新的自动发布。</div>
 
+<h2 class="section">🛰️ 地图固定信源池</h2>
+<p>行业关注地图与日报已经分开：地图每天逐一巡检下面 6 个固定来源，收录其中全部符合文博范围的新内容；日报仍从固定池和更广的 A/B 级来源中做编辑精选。地方官网或临时媒体报道不会直接改变地区排名。</p>
+<div class="panel-grid"><div class="panel-card">
+  <h3><a href="https://www.ncha.gov.cn/" target="_blank" rel="noopener">国家文物局</a></h3>
+  <p>国家主管部门</p>
+  <p class="source-note">监测域名：ncha.gov.cn</p>
+</div><div class="panel-card">
+  <h3><a href="https://www.zhongguowenwubao.com/" target="_blank" rel="noopener">中国文物报</a></h3>
+  <p>全国文博行业专业报</p>
+  <p class="source-note">监测域名：zhongguowenwubao.com</p>
+</div><div class="panel-card">
+  <h3><a href="https://kaogu.cssn.cn/" target="_blank" rel="noopener">中国考古网</a></h3>
+  <p>中国社会科学院考古研究所专业平台</p>
+  <p class="source-note">监测域名：kaogu.cssn.cn、kaogu.cn</p>
+</div><div class="panel-card">
+  <h3><a href="https://www.chinamuseum.org.cn/" target="_blank" rel="noopener">中国博物馆协会</a></h3>
+  <p>全国博物馆行业组织</p>
+  <p class="source-note">监测域名：chinamuseum.org.cn</p>
+</div><div class="panel-card">
+  <h3><a href="https://www.news.cn/ci/wb.html" target="_blank" rel="noopener">新华网文博</a></h3>
+  <p>中央重点新闻网站文博栏目</p>
+  <p class="source-note">监测域名：news.cn、xinhuanet.com、xinhuanet.com.cn</p>
+</div><div class="panel-card">
+  <h3><a href="https://style.cctv.com/special/wenbo/lxwm/index.shtml" target="_blank" rel="noopener">央视网文博</a></h3>
+  <p>中央广播电视总台文博报道</p>
+  <p class="source-note">监测域名：cctv.com、cctv.cn</p>
+</div></div>
+<div class="quality-banner"><strong>迁移状态：</strong>监测库现有 69 条固定池记录，其中 69 条来自历史日报迁移，历史覆盖率不可审计；已尝试逐源巡检 1 天，其中 6 源全部完成 0 天。地图会按 7/30/90 日窗口分别显示覆盖率，覆盖不足时不主张严谨地区排名。</div>
+
 <h2 class="section">📚 信源分级</h2>
+<p>以下是日报和其他栏目使用的更广发布白名单，不等同于地图固定信源池。</p>
 <div class="registry-card source-a">
   <h3>A级｜一手/官方</h3>
   <p>政府主管部门、官方机构、博物馆、考古机构和国际专业组织的一手信息。</p>
-  <p class="source-note">登记范围：ncha.gov.cn、chinawenbao.com.cn、chinamuseum.org.cn、chinamuseums.org.cn、kaogu.cn、kaogu.cssn.cn、news.cn、xinhuanet.com、xinhuanet.com.cn、cctv.com、people.com.cn、people.cn、chinanews.com.cn、chinanews.com、gmw.cn、cnr.cn、cctv.cn、mrdx.cn、workercn.cn、china.org.cn、dpm.org.cn、chnmus.net、chnmuseum.cn、shanghaimuseum.net、capitalmuseum.org.cn、namoc.org、cssn.cn、xinhua.org、sxhm.com、sdmuseum.com、unesco.org、whc.unesco.org、iccrom.org、icom.museum、*.gov.cn、*.edu.cn、*.museum、*.museum.cn</p>
+  <p class="source-note">登记范围：ncha.gov.cn、chinawenbao.com.cn、zhongguowenwubao.com、ccrnews.com.cn、chinamuseum.org.cn、chinamuseums.org.cn、kaogu.cn、kaogu.cssn.cn、news.cn、xinhuanet.com、xinhuanet.com.cn、cctv.com、people.com.cn、people.cn、chinanews.com.cn、chinanews.com、gmw.cn、cnr.cn、cctv.cn、mrdx.cn、workercn.cn、china.org.cn、dpm.org.cn、chnmus.net、chnmuseum.cn、shanghaimuseum.net、capitalmuseum.org.cn、namoc.org、cssn.cn、xinhua.org、sxhm.com、sdmuseum.com、unesco.org、whc.unesco.org、iccrom.org、icom.museum、*.gov.cn、*.edu.cn、*.museum、*.museum.cn</p>
 </div><div class="registry-card source-b">
   <h3>B级｜专业补充</h3>
   <p>高质量新闻机构、专业刊物和研究机构；应尽量与A级来源交叉核验。</p>
@@ -254,6 +288,7 @@
   <li>B级来源只作专业补充；找不到可核验原文时宁可不发，不为凑数收录。</li>
   <li>每个事件按 canonical URL、标题和实体去重；只有实质新进展才重复出现。</li>
   <li>事实摘要和编辑判断分开，无法确认的内容标记“待核”，不把推测写成定论。</li>
+  <li>地图先完成固定池全量巡检，再生成日报；没有进入日报的合格固定池内容仍保留在监测库。</li>
 </ol>
 
 <h2 class="section">📊 当前档案统计</h2>

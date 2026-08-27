@@ -1,0 +1,1958 @@
+{
+  "version": 1,
+  "kind": "legacy-baseline",
+  "period": {
+    "start": "2026-07-11",
+    "end": "2026-08-27"
+  },
+  "coverageComplete": false,
+  "note": "由旧日报精选样本迁移，仅保留固定信源池原文；历史覆盖率不可审计。",
+  "records": [
+    {
+      "recordId": "mon-d88a353b9662",
+      "date": "2026-07-11",
+      "title": "上海博物馆美洲文明大展热度持续：首日预售 40 分钟破万张",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "http://www.xinhuanet.com.cn/politics/20260710/3ca98cfa4f3d49d5bf9d853c6bf88032/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-c403ad5121ec",
+      "date": "2026-07-12",
+      "title": "\"实证万年 同根同源——西藏考古成果展\"拉萨开幕",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/11/art_723_203702.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "西藏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-28892fb34169",
+      "date": "2026-07-12",
+      "title": "中国文物数字化保护引世界瞩目：从天龙山到敦煌",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "https://www.news.cn/info/20260703/82ef2b15dd194cdca35d33fb3cb5d5de/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "甘肃",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "数字化",
+        "文化遗产"
+      ],
+      "tags": [
+        "科技",
+        "文化遗产"
+      ],
+      "impact": 66,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-7a0a803040e0",
+      "date": "2026-07-13",
+      "title": "三星堆青铜器矿料溯源：铅同位素实证\"多元一体\"",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "http://www.news.cn/shuhua/20260713/30124dbadc16476ca5bbba3ac685cba5/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "科技",
+        "研究"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-eb74466479ab",
+      "date": "2026-07-13",
+      "title": "丝路考古合作研究中心阿尔泰分中心在俄成立",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/11/art_723_203708.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "body",
+      "locationConfidence": 0.58,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文化遗产"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-32e8beb501ad",
+      "date": "2026-07-13",
+      "title": "国家文物局启动第九批重点科研基地申报",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/6/art_2318_48379.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "数字化",
+        "文化遗产"
+      ],
+      "tags": [
+        "科技",
+        "文化遗产"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-95e34a513631",
+      "date": "2026-07-14",
+      "title": "国博\"重光\"壁画研讨会：44 块晋南元代壁画残片缀合完成",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/4/art_723_203583.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [
+        "山西"
+      ],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "博物馆",
+        "考古",
+        "文化遗产"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-efa713ea99d4",
+      "date": "2026-07-15",
+      "title": "上海博物馆\"世界树之巅\"美洲古代文明大展——近 3000 件文物，全球最大规模",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/local/20260715/0832cd03b1994bee8376a04788e9e50f/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览",
+        "国际展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-78dd923127ea",
+      "date": "2026-07-15",
+      "title": "石峁遗址第一阶段考古成果发布，《石峁》系列图书首发",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/12/art_722_203718.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "出版"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-8a97007bd664",
+      "date": "2026-07-16",
+      "title": "\"十五五\"文化遗产保护密集布局：新规 + 立法 + 专项基金三管齐下",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/14/art_2237_48394.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-cfaeccef92e8",
+      "date": "2026-07-16",
+      "title": "三星堆青铜顶尊跪坐人像：矿料溯源实证\"多元一体\"，祭祀场景首次\"实况还原\"",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "http://www.xinhuanet.com.cn/politics/20260710/9169f9a4b92045e5a84844b216ce7cf8/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "科技",
+        "研究"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-9080dcce8c5c",
+      "date": "2026-07-17",
+      "title": "中突联合考古三年收官：突尼斯本阿鲁斯遗址建成\"小而美\"遗址公园",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "https://www.news.cn/world/20260717/3c8ead2cd4d1436ab243850201613b69/c.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "国际交流"
+      ],
+      "tags": [
+        "考古",
+        "国际合作"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-deff0e3348b7",
+      "date": "2026-07-17",
+      "title": "马鞍山朱然墓漆木器首次合体展出——1700 年前东吴名将的生活拼图",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网安徽",
+          "url": "http://ah.news.cn/20260717/30421a4b91a841caa170b9afddc049a1/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "安徽",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-c6221a40d500",
+      "date": "2026-07-19",
+      "title": "三星堆青铜器为祭祀\"实况记录\"——最新成果颠覆认知",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/20260710/998111ace1d74746b1649792131fd019/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "科技考古"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-9802c1097b07",
+      "date": "2026-07-19",
+      "title": "中突联合考古：本·阿鲁斯遗址保护工程竣工 + 迦太基港口项目启动",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/18/art_1025_203802.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "国际交流"
+      ],
+      "tags": [
+        "考古",
+        "国际合作"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-b08485243e23",
+      "date": "2026-07-19",
+      "title": "国博\"了不起的汉字\"古文字成果展对公众开放",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "https://www.news.cn/expo/20260717/c2c81e58c4774c49b2fce5a1065da7b5/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-dc1fe654a3d0",
+      "date": "2026-07-19",
+      "title": "埃及大埃及博物馆遗产图书馆开馆——1.7 万册藏书对外开放",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网英文版",
+          "url": "https://english.news.cn/20260707/a7cd65a14556480fb45c0f57db8b4022/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "埃及"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-33bb9be5a720",
+      "date": "2026-07-20",
+      "title": "山西夏县发现东汉中晚期家族墓地——5 座砖砌多室墓出土 147 件套文物",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视新闻",
+          "url": "https://news.cctv.com/2026/07/18/ARTI5qj63dyeuE5cV8UQxUtP260718.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "汉代"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-42d8cc16e34c",
+      "date": "2026-07-21",
+      "title": "北京大葆台\"楚宫汉玉\"展——百件西汉楚国文物进京",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/7/art_723_203635.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-18d1063af299",
+      "date": "2026-07-21",
+      "title": "青塘遗址考古发掘十周年——从荒山野洞到国家考古遗址公园",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/20260717/e2fc6fb671db446096822b7ebc903082/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "广东",
+      "relatedProvinces": [],
+      "locationTier": "site",
+      "locationConfidence": 0.78,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "遗址保护"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-72c4c58149f5",
+      "date": "2026-07-22",
+      "title": "景德镇古陶瓷基因库——2000 万枚古瓷片的\"基因解码\"",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "http://www.jx.news.cn/20260721/70fd79a58e5540c684ae40746e0495c0/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古科技",
+        "陶瓷"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-85faf9b1fedf",
+      "date": "2026-07-23",
+      "title": "埃及尼罗河三角洲发现希腊罗马时期大型墓葬群——560 件乌沙布提俑出土",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社英文",
+          "url": "http://english.news.cn/africa//20260722/b06f834f0ace4fecb60b1325bdcd2c52/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "埃及"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-80516164e54a",
+      "date": "2026-07-23",
+      "title": "胶东半岛首座史前城址——莱州吕村遗址系统性考古成果公布",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202607/t20260703_6057530.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "site",
+      "locationConfidence": 0.78,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文明探源"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-f77d54d63974",
+      "date": "2026-07-24",
+      "title": "国家文物局发布文物防汛通知——主汛期拉响警报",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/24/art_722_203943.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "文物保护"
+      ],
+      "tags": [
+        "政策",
+        "文物安全"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-14965efc90af",
+      "date": "2026-07-24",
+      "title": "国家文物局考古科技高级研修班 8 月北大开班——面向全国招生 20 人",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/23/art_2318_48402.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "考古"
+      ],
+      "tags": [
+        "人才培养",
+        "考古科技"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-c083bf94f594",
+      "date": "2026-07-24",
+      "title": "郑州博物馆\"铭铸华夏\"青铜展——200 余件吉金重器讲述两周八百年",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/5/21/art_723_202695.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-ef0923b6504d",
+      "date": "2026-07-25",
+      "title": "\"景德镇手工瓷业遗存\"申遗成功——中国第 61 项世界遗产",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/politics/leaders/20260725/e1b0e99ff2d7471e985ecfe7999f3ce0/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "世界遗产"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-fbe3154dc846",
+      "date": "2026-07-25",
+      "title": "中国恐龙化石首次在印尼大规模展出——569 件展品跨越赤道",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://english.news.cn/20260725/97a250321ffd4ba6bdd902079102b5b7/c.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆",
+        "国际交流"
+      ],
+      "tags": [
+        "博物馆",
+        "国际交流"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-eb7c69a7bba2",
+      "date": "2026-07-28",
+      "title": "上博\"世界树之巅\"美洲文明大展——近3000件文物重构三千年新大陆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/shuhua/20260709/ff8f56c2cfb0403bb6a51a8afeae8e14/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览",
+        "国际展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-f4cc204b0271",
+      "date": "2026-07-28",
+      "title": "国家文物局白瓷起源研究开题——全国首个北方早期白瓷标本数据库启动",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/28/art_723_204012.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "陶瓷研究"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-a90a795952ca",
+      "date": "2026-07-29",
+      "title": "\"玉文化与中华文明\"学术研讨会暨珍藏玉器展在京举行",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "http://www.news.cn/ci/20260729/f73031a22e194acc84c815e872764af5/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [
+        "辽宁"
+      ],
+      "locationTier": "site",
+      "locationConfidence": 0.78,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "学术",
+        "玉器"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-fe6e5d47b558",
+      "date": "2026-07-30",
+      "title": "《国家文物事业发展\"十五五\"规划》印发——11项指标、10大任务，五年蓝图落地",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/29/art_2318_48456.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策",
+        "重磅"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-319087da94f7",
+      "date": "2026-07-30",
+      "title": "海昏侯\"书香海昏\"专题展开放——失传1800年齐《论语》简牍首展",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视新闻",
+          "url": "https://news.cctv.com/2026/07/30/ARTIEXQvupu4jzVsCMtsuuxC260730.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览",
+        "考古"
+      ],
+      "tags": [
+        "展览",
+        "简牍"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-25a7070af52f",
+      "date": "2026-07-31",
+      "title": "七部门揭榜挂帅首次纳入文物保护装备——工信部与国家文物局联合攻关，文保科技进入\"揭榜\"时代",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/30/art_2318_48458.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "数字化"
+      ],
+      "tags": [
+        "政策",
+        "科技"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-c5d18a685ebf",
+      "date": "2026-07-31",
+      "title": "良渚文化VR沉浸展走进亚美尼亚——五千年中华文明以数字方式\"出海\"",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社俄文",
+          "url": "http://russian.xinhuanet.com/20260731/0508e5f98ce742b1887d0d451df4e32c/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "文化遗产",
+        "数字出海"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-824341b85a27",
+      "date": "2026-07-31",
+      "title": "辽博\"微笑\"特展：八千年的中国笑容——38馆300件文物，国内首个以情感为线索的文物展",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "http://www.news.cn/shuhua/20260729/a4e8d855520c469c9c640975b3f990ab/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-bf21d8a750ec",
+      "date": "2026-08-01",
+      "title": "八大山人诞辰400周年特展引爆南昌——\"一展双馆\"129件文物，全城7个配套展同期铺开",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-f219b25e7887",
+      "date": "2026-08-02",
+      "title": "\"博物馆里读中国\"99项展览推介公布——19项重点推介覆盖全国，夏文化探源、长征90周年、文明对话成三大主线",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "展览"
+      ],
+      "tags": [
+        "政策",
+        "展览"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-812584f470d5",
+      "date": "2026-08-02",
+      "title": "宁夏固原2300年前战国古酒成功鉴定——青铜蒜头壶密封保存3.74升粮食酒，黍麦酿造填补宁夏酿酒考古空白",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视新闻",
+          "url": "https://news.cctv.cn/2026/07/31/ARTIrOsmMpz2d213TuJK3GJJ260730.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "宁夏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "科技考古"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-2eb1aa897859",
+      "date": "2026-08-03",
+      "title": "国博\"了不起的汉字\"古文字工程成果展暑期热展——270件展品从甲骨文到简帛讲述汉字三千年",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/21/art_723_203856.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览",
+        "考古"
+      ],
+      "tags": [
+        "展览",
+        "古文字"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-d596e49191fe",
+      "date": "2026-08-03",
+      "title": "洛阳古墓博物馆\"剧本杀+夜游\"沉浸式实验——国内唯一古墓专题馆，把考古现场变成年轻人排队打卡的文化消费场景",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/20260802/b66d9b02c1d8471e99739a501dfdc733/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "创新运营"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-01bb7623fd67",
+      "date": "2026-08-03",
+      "title": "津巴布韦发现2.1亿年前恐龙新物种——双足蜥脚形类，非洲最完整三叠纪恐龙骨架之一",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "http://www.news.cn/20260802/b2d9f138661245cc8ff75f9aa0d5a8f7/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "古生物学"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-050f9c9f167b",
+      "date": "2026-08-04",
+      "title": "\"何以景德镇\"申遗成功后首次系统性大展在京开幕——四大板块讲述千年瓷都从泥土到世界遗产的完整叙事",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "https://city.news.cctv.com/2026/08/03/ARTIrqOcKJqSRWtbVMaMd2gM260803.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览",
+        "文化遗产"
+      ],
+      "tags": [
+        "展览",
+        "世界遗产"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-9a1adaceda31",
+      "date": "2026-08-05",
+      "title": "国家文物局印发《国家文物事业发展\"十五五\"规划》——11项指标十大任务，应县木塔、故宫、三星堆-金沙申遗列入重点工程",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/1/art_722_204100.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策",
+        "顶层设计"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-87d0e27d8e9d",
+      "date": "2026-08-05",
+      "title": "牛河梁遗址\"北斗七星\"红烧土坑新发现——5800年前红山人将宇宙观刻入大地，2026红山文化大会同日启幕",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "https://news.cctv.com/2026/08/04/ARTIE4TroUBTTLCBy72cw7TR260804.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "中华文明探源"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-78063142c137",
+      "date": "2026-08-06",
+      "title": "上博\"世界树之巅\"美洲大展暑期成绩单——10万+观众、文创破千万、2300+款产品，文博经济新标杆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "博物馆经济"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-993e934eb3fd",
+      "date": "2026-08-06",
+      "title": "马王堆\"双帛画\"首次同场地轮换展出——一号墓T形帛画8/16撤展进入10天倒计时，三号墓8/18国内首次省外亮相",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网",
+          "url": "https://www.news.cn/local/20260805/662ba1ae6d5249689e328fb2c58030e5/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "国宝",
+        "博物馆",
+        "马王堆",
+        "上海"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-920dc5c0e5c2",
+      "date": "2026-08-07",
+      "title": "红山文化大会闭幕：牛河梁现北斗七星祭坛，郑家沟将红山下限延后200年，基因实证贯通辽西-冀北走廊",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/politics/20260807/3ee1ddfb2eb24c64a509da3ba9bf07ca/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "红山",
+        "牛河梁",
+        "文明探源"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-21db6b6c4ae6",
+      "date": "2026-08-09",
+      "title": "\"星起河洛\"亮相辽博——河南206件夏商周礼乐重器北上，\"妇好\"鸟足鼎与九鼎八簋首聚东北",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=14&contentId=14754"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [
+        "河南"
+      ],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "展览"
+      ],
+      "tags": [
+        "博物馆",
+        "展览",
+        "夏商周",
+        "辽宁"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-f8e5ad29d8cc",
+      "date": "2026-08-09",
+      "title": "景德镇手工瓷业遗存列入《世界遗产名录》——中国第61项世遗、全球首个\"产业遗产\"瓷主题，11年申遗路填补名录空白",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "世界遗产",
+        "文化遗产",
+        "景德镇"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-d46412e98163",
+      "date": "2026-08-10",
+      "title": "土耳其Aspendos古城发现1800年前医神阿斯克勒庇俄斯父子大理石雕像群",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社英文版",
+          "url": "https://english.news.cn/europe/20260806/388a62fedf3a4d9fa2392b7de18e9d6a/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "国际交流",
+        "考古"
+      ],
+      "tags": [
+        "国际",
+        "考古",
+        "文物"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-a214f137b877",
+      "date": "2026-08-10",
+      "title": "敦煌悬泉置遗址完成1:1数字化复原——\"数字悬泉置\"解锁丝路驿站千年密码",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视新闻",
+          "url": "https://news.cctv.cn/2026/08/10/ARTIs8WsK8RtBFeT7qhj4d97260810.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "甘肃",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "数字化",
+        "文化遗产"
+      ],
+      "tags": [
+        "数字化",
+        "文化遗产",
+        "丝绸之路",
+        "科技"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-8fc8b7869694",
+      "date": "2026-08-13",
+      "title": "内蒙古寨子塔石城出土龙山时期龙凤泥塑——北方最早\"龙凤\"实物组合，具象化上溯至公元前2300年",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "http://www.xinhuanet.com.cn/politics/20260812/ae6bf13433a044908867dfb39a6850ee/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "内蒙古",
+        "龙山文化",
+        "龙凤"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-e3b9e12bfe36",
+      "date": "2026-08-14",
+      "title": "云南耿马芒关岩画铀系测年锁定4220年前——中国西南最早定居人群岩画与\"4.2千年气候事件\"精确对位",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.xinhuanet.com/culture/20260814/0e27216d8f0a458a8566b04647c8be7e/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "岩画",
+        "科技测年",
+        "气候变化"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-2cc99ed4e3b5",
+      "date": "2026-08-14",
+      "title": "土耳其Göbeklitepe出土1万年前房屋——改写\"哥贝克力只是祭祀中心\"的认知，巨石圣地也有人定居",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社英文版",
+          "url": "http://english.news.cn/20260813/6fe773db89cc4a42aa6f45056f18ad74/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "国际交流",
+        "考古"
+      ],
+      "tags": [
+        "国际",
+        "考古",
+        "土耳其",
+        "新石器时代"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-d3acda1d683f",
+      "date": "2026-08-16",
+      "title": "国家文物局发布暑期应急管理紧急通知：大客流、停电、极端天气纳入应急体系",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/10/art_2318_48480.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "博物馆"
+      ],
+      "tags": [
+        "政策",
+        "博物馆安全",
+        "应急管理"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-bac3da41d507",
+      "date": "2026-08-17",
+      "title": "国家文物局发布《文物建筑预防性保护技术导则》——不可移动文物首个预防性保护规范",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/col/col722/index.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "文物保护"
+      ],
+      "tags": [
+        "政策",
+        "文物保护",
+        "预防性保护",
+        "技术规范"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-0e41e6ae2e1c",
+      "date": "2026-08-17",
+      "title": "湖北黄梅张山遗址公布发掘成果：鄂东首次系统性旷野型旧石器遗址",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局一周文物动态摘编",
+          "url": "http://www.ncha.gov.cn/art/2026/8/15/art_722_204356.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "旧石器",
+        "早商",
+        "湖北"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-2c47eb09165c",
+      "date": "2026-08-17",
+      "title": "红山文化新发掘持续推进，补全中华文明实证链条",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/art/2026/8/8/art_722_204245.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "红山文化",
+        "中华文明探源"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-a60276b77e02",
+      "date": "2026-08-18",
+      "title": "国家文物局发布《地下文物埋藏区划定指南》解读：考古前置再添技术底座",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/index.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业",
+        "考古",
+        "文物保护"
+      ],
+      "tags": [
+        "政策",
+        "地下文物",
+        "考古前置",
+        "文物保护"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-f217dcc464ea",
+      "date": "2026-08-18",
+      "title": "央视\"文物大工匠\"聚焦孙亮申：37年\"挖\"出5项全国十大考古新发现",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "https://people.cctv.com/2026/08/17/ARTIBU5seN1Lkkv29f7lnHTj260817.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [
+        "江西"
+      ],
+      "locationTier": "site",
+      "locationConfidence": 0.78,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "田野考古",
+        "人物",
+        "全国十大考古新发现"
+      ],
+      "impact": 90,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-71020e78ef2b",
+      "date": "2026-08-19",
+      "title": "央视《探索·发现》聚焦山东高青大墓：陈庄—唐口遗址二次发掘",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "https://tv.cctv.com/2026/08/12/VIDEtFL812MHwnT9LPtbGcRr260812.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "纪录片",
+        "山东",
+        "两周时期"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-7dd0a9bf37ca",
+      "date": "2026-08-21",
+      "title": "2026中巴文化年推进：国博将办波尔蒂纳里视觉艺术展",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视新闻",
+          "url": "https://news.cctv.com/2026/03/29/ARTIyx38BIfFJoUzpI1FaTc2260329.shtml"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "国际交流"
+      ],
+      "tags": [
+        "国际交流",
+        "巴西"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-6b6de3e15e8d",
+      "date": "2026-08-21",
+      "title": "央视调研长沙\"博物馆奇妙夜\"：暑期博物馆夜游走向常态运营",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "https://news.cctv.com/2026/08/13/ARTI4uCu2fpiIliMjamLIV54260813.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "长沙"
+      ],
+      "impact": 56,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-ccc1035e0dd2",
+      "date": "2026-08-22",
+      "title": "\"和合致美——中华古代文明艺术展\"在吉尔吉斯斯坦开幕：中吉规模最大联合办展",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/21/ARTIvlXx5EmoGngkDXfcz7xE260821.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "tags",
+      "locationConfidence": 0.9,
+      "themes": [
+        "国际交流"
+      ],
+      "tags": [
+        "国际交流",
+        "天津"
+      ],
+      "impact": 48,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-6fcb9f1a2551",
+      "date": "2026-08-23",
+      "title": "土耳其Sayburc新石器遗址拟建露天博物馆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社英文",
+          "url": "http://english.news.cn/20260821/53531595e8624ac5b620194fad037f1d/c.html"
+        }
+      ],
+      "scope": "international",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "outreach",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "土耳其"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-7f51297c36d5",
+      "date": "2026-08-23",
+      "title": "敦煌莫高窟千佛飞天有了\"数字分身\"：323个洞窟完成高精度采集",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "http://www.news.cn/20260820/8ef0a1edc0924a3f8c86c665b3b8e739/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "甘肃",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "数字化"
+      ],
+      "tags": [
+        "数字化",
+        "甘肃"
+      ],
+      "impact": 66,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-bccaefe672c7",
+      "date": "2026-08-24",
+      "title": "河南新郑裴李岗遗址考古成果持续公布：170余座墓葬实证8000年农业定居",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网（2025年度全国十大考古新发现公布）",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202604/t20260429_5985420.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 76,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    },
+    {
+      "recordId": "mon-300e3f610389",
+      "date": "2026-08-26",
+      "title": "中国语言资源保护工程成果展示馆开馆：全球首座语言资源主题馆落子长沙",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华社",
+          "url": "https://www.news.cn/20260824/898810454ad94f3fa2a604da9923fc8a/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.96,
+      "themes": [
+        "博物馆",
+        "数字化"
+      ],
+      "tags": [
+        "博物馆",
+        "数字化",
+        "湖南"
+      ],
+      "impact": 66,
+      "selectedForDaily": true,
+      "origin": "legacy-daily-selection"
+    }
+  ]
+}

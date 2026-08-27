@@ -10,7 +10,8 @@ from urllib.parse import quote
 from datetime import date as _date, datetime, timedelta, timezone
 
 from automation.governance import (
-    SOURCE_GROUPS, canonical_url, source_info, source_link_html,
+    MAP_SOURCE_PANEL, SOURCE_GROUPS, canonical_url, map_source_id,
+    map_source_registry_rows, source_info, source_link_html,
     source_registry_rows, source_stats,
 )
 
@@ -34,6 +35,7 @@ PROJECT_DIR = os.path.join(SITE_DIR, 'content') if os.path.isdir(os.path.join(SI
 MD_DIR = os.path.join(PROJECT_DIR, '日报')
 JOBS_MD = os.path.join(PROJECT_DIR, '招聘', 'jobs.md')
 INTERN_MD = os.path.join(PROJECT_DIR, '招聘', 'intern.md')
+MONITOR_DIR = os.path.join(PROJECT_DIR, '监测')
 
 WEEKDAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
@@ -528,7 +530,7 @@ def theme_of(tags):
     return themes
 
 
-HEATMAP_VERSION = 2
+HEATMAP_VERSION = 3
 LOCATION_CONFIDENCE = {
     'title': 0.96, 'tags': 0.90, 'site': 0.78, 'body': 0.58,
     'national': 0.85, 'outreach': 0.85, 'unassigned': 0.0,
@@ -546,6 +548,7 @@ def _source_grade(item):
             'host': info.get('host', ''),
             'tier': info.get('tier', 'C'),
             'blocked': bool(info.get('blocked')),
+            'sourceId': source.get('sourceId') or map_source_id(source.get('url', '')),
         })
     tiers = {row['tier'] for row in rows}
     best = 'A' if 'A' in tiers else ('B' if 'B' in tiers else 'C')
@@ -719,59 +722,177 @@ def _cluster_events(candidates):
     return events
 
 
-def build_heatmap_data(daily_reports):
-    """Build an auditable industry-attention dataset instead of emoji heat."""
-    dates = sorted({r['date'] for r in daily_reports})
-    as_of = dates[-1] if dates else ''
+def load_monitoring_corpus():
+    """Load the map corpus without consulting the editorial daily reports."""
+    corpus = {
+        'records': [], 'coverage': [], 'dailyFiles': [],
+        'baseline': {'period': {'start': '', 'end': ''}, 'recordCount': 0,
+                     'coverageComplete': False, 'note': ''},
+    }
+    baseline_path = os.path.join(MONITOR_DIR, 'baseline.json')
+    if os.path.isfile(baseline_path):
+        with open(baseline_path, encoding='utf-8') as f:
+            baseline = json.load(f)
+        records = baseline.get('records') or []
+        for record in records:
+            row = dict(record)
+            row.setdefault('origin', 'legacy-daily-selection')
+            corpus['records'].append(row)
+        corpus['baseline'] = {
+            'period': baseline.get('period') or {'start': '', 'end': ''},
+            'recordCount': len(records),
+            'coverageComplete': bool(baseline.get('coverageComplete')),
+            'note': baseline.get('note', ''),
+        }
+
+    pattern = os.path.join(MONITOR_DIR, '????-??-??.json')
+    for path in sorted(glob.glob(pattern)):
+        with open(path, encoding='utf-8') as f:
+            daily = json.load(f)
+        file_date = os.path.splitext(os.path.basename(path))[0]
+        corpus['dailyFiles'].append(file_date)
+        for coverage in daily.get('coverage') or []:
+            row = dict(coverage)
+            row['date'] = daily.get('date') or file_date
+            corpus['coverage'].append(row)
+        for record in daily.get('items') or []:
+            row = dict(record)
+            row.setdefault('date', daily.get('date') or file_date)
+            row.setdefault('origin', 'fixed-panel-monitoring')
+            corpus['records'].append(row)
+
+    # A source URL is an immutable observation key.  If a manual correction
+    # creates a duplicate, keep the newest copy rather than double-counting it.
+    unique = {}
+    for record in corpus['records']:
+        sources = record.get('sources') or []
+        key_url = canonical_url(sources[0].get('url', '')) if sources else ''
+        key = key_url or record.get('recordId') or (
+            record.get('date', '') + '|' + record.get('title', '')
+        )
+        unique[key] = record
+    corpus['records'] = sorted(unique.values(), key=lambda row: (
+        row.get('date', ''), row.get('title', '')
+    ))
+    corpus['baseline']['recordCount'] = sum(
+        1 for row in corpus['records'] if row.get('origin') == 'legacy-daily-selection'
+    )
+    return corpus
+
+
+def _monitor_candidate(record, grade):
+    """Convert an independent monitoring record to the event-cluster schema."""
+    display_title = re.sub(r'^[🔥\s]+', '', record.get('title', '')).strip()
+    scope = record.get('scope', 'province')
+    primary = record.get('primaryProvince', '') if scope == 'province' else ''
+    themes = list(record.get('themes') or theme_of(record.get('tags', [])))
+    confidence = record.get('locationConfidence')
+    location_tier = record.get('locationTier', 'unassigned')
+    if not isinstance(confidence, (int, float)):
+        confidence = LOCATION_CONFIDENCE.get(location_tier, 0.0)
+    impact = record.get('impact')
+    if not isinstance(impact, (int, float)):
+        impact = _impact_score(record)
+    sources = grade['sources']
+    return {
+        'date': record.get('date', ''),
+        'itemId': record.get('recordId', ''),
+        'title': display_title,
+        '_norm': _event_norm(display_title),
+        'url': sources[0]['url'] if sources else '',
+        'primaryProvince': primary,
+        'relatedProvinces': list(record.get('relatedProvinces') or []),
+        'locationTier': location_tier,
+        'locationConfidence': confidence,
+        'themes': themes,
+        'tags': list(record.get('tags') or []),
+        'impact': min(max(float(impact), 0), 100),
+        'sourceTier': grade['tier'],
+        'sources': sources,
+        'scope': scope,
+    }
+
+
+def build_heatmap_data(corpus):
+    """Build the map exclusively from the fixed-panel monitoring corpus."""
+    dates = sorted({r.get('date', '') for r in corpus['records'] if r.get('date')})
+    coverage_dates = sorted({r.get('date', '') for r in corpus['coverage'] if r.get('date')})
+    baseline_end = (corpus.get('baseline', {}).get('period') or {}).get('end', '')
+    all_dates = sorted(set(dates + coverage_dates + ([baseline_end] if baseline_end else [])))
+    as_of = all_dates[-1] if all_dates else ''
     audit = []
     provincial_candidates, national_candidates, international_candidates = [], [], []
-    source_tiers = {'A': 0, 'B': 0, 'C': 0}
-    excluded_c = excluded_blocked = unassigned_eligible = 0
+    excluded_non_panel = unassigned = 0
+    source_records = {source_id: 0 for source_id in MAP_SOURCE_PANEL}
+    operational_records = 0
 
-    for report in daily_reports:
-        rdate = report['date']
-        for item in report['domestic']:
-            grade = _source_grade(item)
-            source_tiers[grade['tier']] += 1
-            att = attribute_item(item)
-            if grade['blocked']:
-                excluded_blocked += 1
-                audit.append(('blocked', rdate, item['id'], item['title'], '-', att['tier']))
-                continue
-            if not grade['eligible']:
-                excluded_c += 1
-                audit.append(('source-c', rdate, item['id'], item['title'], '-', att['tier']))
-                continue
-            if att['provinces']:
-                provincial_candidates.append(_candidate(rdate, item, att, grade))
-                audit.append(('included', rdate, item['id'], item['title'], '/'.join(att['provinces']), att['tier']))
-            elif att['tier'] in ('national', 'outreach'):
-                national_candidates.append(_candidate(rdate, item, att, grade, 'national'))
-                audit.append(('national', rdate, item['id'], item['title'], '-', att['tier']))
-            else:
-                unassigned_eligible += 1
-                audit.append(('unassigned', rdate, item['id'], item['title'], '-', att['tier']))
-
-        for item in report['international']:
-            grade = _source_grade(item)
-            if not grade['eligible']:
-                continue
-            att = {'provinces': [], 'tier': 'outreach'}
-            international_candidates.append(_candidate(rdate, item, att, grade, 'international'))
+    for record in corpus['records']:
+        rdate = record.get('date', '')
+        record_id = record.get('recordId', '')
+        title = record.get('title', '')
+        panel_sources = []
+        for source in record.get('sources') or []:
+            actual_id = map_source_id(source.get('url', ''))
+            declared_id = source.get('sourceId') or actual_id
+            if actual_id and declared_id == actual_id:
+                row = dict(source)
+                row['sourceId'] = actual_id
+                panel_sources.append(row)
+                source_records[actual_id] += 1
+        grade = _source_grade({'sources': panel_sources})
+        if not panel_sources or not grade['eligible']:
+            excluded_non_panel += 1
+            audit.append(('non-panel', rdate, record_id, title, '-', record.get('locationTier', 'unassigned')))
+            continue
+        if record.get('origin') == 'fixed-panel-monitoring':
+            operational_records += 1
+        scope = record.get('scope', 'province')
+        candidate = _monitor_candidate(record, grade)
+        if scope == 'province' and record.get('primaryProvince'):
+            provincial_candidates.append(candidate)
+            provinces = [record.get('primaryProvince')] + list(record.get('relatedProvinces') or [])
+            audit.append(('included', rdate, record_id, title, '/'.join(provinces), candidate['locationTier']))
+        elif scope == 'national':
+            national_candidates.append(candidate)
+            audit.append(('national', rdate, record_id, title, '-', candidate['locationTier']))
+        elif scope == 'international':
+            international_candidates.append(candidate)
+            audit.append(('international', rdate, record_id, title, '-', candidate['locationTier']))
+        else:
+            unassigned += 1
+            audit.append(('unassigned', rdate, record_id, title, '-', candidate['locationTier']))
 
     events = _cluster_events(provincial_candidates)
     national_events = _cluster_events(national_candidates)
     international_events = _cluster_events(international_candidates)
+    good_statuses = {'success', 'no_update'}
+    coverage_statuses = {'success': 0, 'no_update': 0, 'partial': 0, 'failed': 0}
+    coverage_by_date = {}
+    for row in corpus['coverage']:
+        status = row.get('status', '')
+        if status in coverage_statuses:
+            coverage_statuses[status] += 1
+        coverage_by_date.setdefault(row.get('date', ''), {})[row.get('sourceId', '')] = status
+    complete_coverage_days = sum(
+        1 for day in coverage_by_date.values()
+        if all(day.get(source_id) in good_statuses for source_id in MAP_SOURCE_PANEL)
+    )
     stats = {
-        'totalDomesticReports': sum(len(r['domestic']) for r in daily_reports),
-        'includedProvincialReports': len(provincial_candidates),
+        'totalMonitoredRecords': len(corpus['records']),
+        'includedProvincialRecords': len(provincial_candidates),
         'provincialEvents': len(events),
         'nationalEvents': len(national_events),
         'internationalEvents': len(international_events),
-        'excludedC': excluded_c,
-        'excludedBlocked': excluded_blocked,
-        'unassignedEligible': unassigned_eligible,
-        'sourceTiers': source_tiers,
+        'legacyBaselineRecords': corpus['baseline']['recordCount'],
+        'operationalRecords': operational_records,
+        'excludedNonPanel': excluded_non_panel,
+        'unassigned': unassigned,
+        'panelSourceCount': len(MAP_SOURCE_PANEL),
+        'coverageDays': len(set(coverage_dates)),
+        'completeCoverageDays': complete_coverage_days,
+        'successfulSourceChecks': sum(1 for row in corpus['coverage'] if row.get('status') in good_statuses),
+        'coverageStatuses': coverage_statuses,
+        'recordsBySource': source_records,
     }
     samples = [{
         'reason': kind, 'date': rdate, 'title': title, 'tier': tier,
@@ -783,10 +904,18 @@ def build_heatmap_data(daily_reports):
         'start': dates[0] if dates else '',
         'decay': DECAY,
         'methodology': {
-            'name': '行业关注指数',
+            'name': '固定权威信源行业关注指数',
             'weights': {'impact': 35, 'evidence': 30, 'breadth': 20, 'recency': 15},
-            'sourceGate': '仅 A/B 级来源；C 级与禁止来源不进入指数',
+            'sourceGate': '仅固定权威信源池原文进入指数；日报编辑选择不影响收录',
+            'corpus': '每日先完整巡检固定信源，再从候选中精选日报',
             'geography': '主要发生地计分，关联地区仅展示，不重复分摊',
+            'comparability': '按所选时间窗的信源日覆盖率判断是否适合地区横向比较',
+        },
+        'coverage': {
+            'panel': map_source_registry_rows(),
+            'checks': corpus['coverage'],
+            'monitoringStart': coverage_dates[0] if coverage_dates else '',
+            'baseline': corpus['baseline'],
         },
         'stats': stats,
         'events': events,
@@ -801,14 +930,13 @@ def _audit_print(audit):
     """Print quality-gate and attribution diagnostics for every build."""
     included = sum(1 for a in audit if a[0] == 'included')
     national = sum(1 for a in audit if a[0] == 'national')
-    source_c = sum(1 for a in audit if a[0] == 'source-c')
-    blocked = sum(1 for a in audit if a[0] == 'blocked')
+    non_panel = sum(1 for a in audit if a[0] == 'non-panel')
     unassigned = sum(1 for a in audit if a[0] == 'unassigned')
-    print(f'[HEATMAP V2] 纳入 {included} 条 | 全国性 {national} 条 | C级隔离 {source_c} 条 | 禁止来源隔离 {blocked} 条 | 地理待核 {unassigned} 条')
-    print('[HEATMAP V2] 抽检重点(低置信地域/多地区/被隔离):')
+    print(f'[HEATMAP V3] 纳入 {included} 条 | 全国性 {national} 条 | 非固定池隔离 {non_panel} 条 | 地理待核 {unassigned} 条')
+    print('[HEATMAP V3] 抽检重点(低置信地域/多地区/被隔离):')
     shown = 0
     for kind, rdate, iid, title, provs, tier in audit:
-        if kind in ('blocked', 'source-c', 'unassigned') or tier in ('site', 'body') or '/' in provs:
+        if kind in ('non-panel', 'unassigned') or tier in ('site', 'body') or '/' in provs:
             print(f'  [{kind}/{tier}] {rdate} #{iid} {title[:36]} → {provs}')
             shown += 1
             if shown >= 36:
@@ -909,9 +1037,20 @@ def build_heatmap_html():
   .scope-item a { color:var(--text); text-decoration:none; font-size:.86em; }
   .scope-item span { display:block; color:var(--muted); font-size:.7em; }
   .quality { margin-top:16px; padding:16px; border:1px solid var(--border); border-left:4px solid var(--good); border-radius:12px; background:var(--card); }
+  .quality[data-state="partial"] { border-left-color:var(--warn); }
+  .quality[data-state="insufficient"] { border-left-color:var(--bad); }
   .quality h2 { font-size:.95em; }
   .quality p { margin-top:6px; color:var(--muted); font-size:.78em; }
   .quality strong { color:var(--text); }
+  .coverage-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:12px; }
+  .coverage-cell { padding:10px; border:1px solid var(--border); border-radius:9px; background:var(--tag); }
+  .coverage-cell strong { display:block; font-size:1.15em; }
+  .coverage-cell span { color:var(--muted); font-size:.7em; }
+  .panel-details { margin-top:10px; color:var(--muted); font-size:.76em; }
+  .panel-details summary { cursor:pointer; color:var(--text); font-weight:650; }
+  .panel-source { display:flex; justify-content:space-between; gap:10px; padding:7px 0; border-bottom:1px dashed var(--border); }
+  .panel-source:last-child { border-bottom:0; }
+  .panel-source small { color:var(--muted); }
   .formula { margin-top:10px; padding:10px 12px; border-radius:9px; background:var(--tag); color:var(--muted); font-size:.75em; }
   .err { padding:34px 18px; color:var(--muted); text-align:center; }
   footer { margin-top:24px; padding:22px 0; color:var(--muted); text-align:center; font-size:.75em; border-top:1px solid var(--border); }
@@ -926,6 +1065,7 @@ def build_heatmap_html():
     header { padding-top:20px; }
     .stats { grid-template-columns:repeat(2,1fr); }
     .event-list,.secondary-grid { grid-template-columns:1fr; }
+    .coverage-grid { grid-template-columns:repeat(2,1fr); }
     .toolbar { align-items:flex-start; }
     .theme-control { width:100%; justify-content:space-between; }
     .theme-control select { flex:1; max-width:none; }
@@ -939,14 +1079,14 @@ def build_heatmap_html():
   <header>
     <a class="back" href="./">← 返回首页</a>
     <h1>文博行业关注地图</h1>
-    <p class="lede">从权威公开报道中识别独立事件，观察各地区近期值得行业从业者关注的考古、博物馆、展览、保护与数字化动向。</p>
+    <p class="lede">独立巡检固定权威信源池，识别其中全部文博相关新事件；日报是否选中，不再影响地图收录。</p>
     <p class="meta" id="meta">正在读取事件索引…</p>
   </header>
   <div class="method-strip">
-    <span><strong>口径</strong> 独立事件，不重复累计连续报道</span>
-    <span><strong>信源</strong> 仅 A/B 级进入指数</span>
+    <span><strong>口径</strong> 先完整巡检，再做日报精选</span>
+    <span><strong>信源</strong> 固定 6 个全国权威来源</span>
     <span><strong>地域</strong> 主要发生地计分，关联地区只作说明</span>
-    <span><strong>性质</strong> 本站行业关注指数，不代表社会舆情</span>
+    <span><strong>性质</strong> 权威信源关注度，不等同真实行业活动总量</span>
   </div>
   <div class="toolbar">
     <div class="win-tabs" aria-label="时间范围">
@@ -961,17 +1101,17 @@ def build_heatmap_html():
   <section class="stats" aria-label="当前窗口概况">
     <div class="stat"><strong id="s-events">—</strong><span>独立地域事件</span></div>
     <div class="stat"><strong id="s-provinces">—</strong><span>有有效事件的地区</span></div>
-    <div class="stat"><strong id="s-a">—</strong><span>A 级证据事件</span></div>
-    <div class="stat"><strong id="s-reports">—</strong><span>合格报道证据</span></div>
+    <div class="stat"><strong id="s-a">—</strong><span>覆盖到的固定信源</span></div>
+    <div class="stat"><strong id="s-reports">—</strong><span>监测记录</span></div>
   </section>
   <section class="workspace">
     <div class="panel map-panel">
-      <div class="panel-head"><h2>地区关注分布</h2><span>相对指数 0—100</span></div>
+      <div class="panel-head"><h2>固定信源关注分布</h2><span>样本内相对指数 0—100</span></div>
       <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-      <p class="map-note">颜色越深，表示当前时间范围内的事件影响、证据强度、独立来源与时效综合值越高。无色不等于没有文博活动，只表示本站没有足够的合格证据。</p>
+      <p class="map-note">颜色越深，只表示固定信源池在当前时间范围内给予该地区较多关注。无色不等于没有文博活动；覆盖率不足时不得据此判断地区真实活跃度。</p>
     </div>
     <div class="panel rank-panel">
-      <div class="panel-head"><h2>地区关注排名</h2><span id="rank-note">点击地区查看证据</span></div>
+      <div class="panel-head"><h2>样本内地区排序</h2><span id="rank-note">正在核算覆盖率</span></div>
       <div class="rank-scroll">
         <table>
           <thead><tr><th>#</th><th>地区</th><th>指数</th><th>事件</th><th>证据</th><th>趋势</th></tr></thead>
@@ -991,10 +1131,18 @@ def build_heatmap_html():
     <details class="box"><summary>全国性政策与对外合作 <span id="national-count"></span></summary><div class="scope-list" id="national-list"></div></details>
     <details class="box"><summary>国际文博观察 <span id="international-count"></span></summary><div class="scope-list" id="international-list"></div></details>
   </section>
-  <section class="quality">
-    <h2>数据质量与审计</h2>
+  <section class="quality" id="quality" data-state="insufficient">
+    <h2>固定信源巡检与可比性</h2>
+    <p id="coverage-status">正在核算所选窗口的信源日覆盖率…</p>
+    <div class="coverage-grid">
+      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>信源日覆盖率</span></div>
+      <div class="coverage-cell"><strong id="c-days">—</strong><span>完整巡检天数</span></div>
+      <div class="coverage-cell"><strong id="c-sources">—</strong><span>固定信源数量</span></div>
+      <div class="coverage-cell"><strong id="c-window">—</strong><span>当前时间窗口</span></div>
+    </div>
+    <details class="panel-details"><summary>查看固定信源池与逐源覆盖</summary><div id="panel-list"></div></details>
     <p id="quality-text">正在计算信源与地域质量…</p>
-    <div class="formula"><strong>指数公式：</strong>事件影响 35% + 证据强度 30% + 独立来源 20% + 时效 15%。同一事件的后续报道合并，标题中的“🔥”不再参与计算。<a href="sources.html">查看信源与方法</a></div>
+    <div class="formula"><strong>指数公式：</strong>事件影响 35% + 证据强度 30% + 独立来源 20% + 时效 15%。只有固定信源池原文进入指数；同一事件的后续报道合并。<a href="sources.html">查看完整口径</a></div>
   </section>
   <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
@@ -1011,7 +1159,7 @@ var SHORT2GEO = {
 };
 var GEO2SHORT = {};
 for (var s in SHORT2GEO) GEO2SHORT[SHORT2GEO[s]] = s;
-var RAW=null, VIEW=[], PREVIOUS=[], chart=null, MAP_READY=false;
+var RAW=null, VIEW=[], PREVIOUS=[], chart=null, MAP_READY=false, CUR_COVERAGE=null, PREVIOUS_COVERAGE=null;
 var CUR_WINDOW={label:'近30天',days:30}, CUR_THEME='';
 var AS_OF_UTC=0, AS_OF_STR='';
 function parseUTC(s) {
@@ -1074,7 +1222,7 @@ function eventCard(entry) {
   h.appendChild(link); article.appendChild(h);
   var badges=document.createElement('div'); badges.className='badges';
   badges.appendChild(badge(event.impactLabel+'影响','impact'));
-  badges.appendChild(badge(event.sourceTier+'级证据',event.sourceTier.toLowerCase()));
+  badges.appendChild(badge('固定池证据','a'));
   badges.appendChild(badge(event.primaryTheme));
   badges.appendChild(badge('指数 '+entry.score.toFixed(0)));
   article.appendChild(badges);
@@ -1095,13 +1243,14 @@ function eventCard(entry) {
 function showDetail(name) {
   var row=findProvince(name), box=document.getElementById('detail');
   if(!row){box.classList.remove('show');return;}
-  document.getElementById('d-name').textContent=row.name+'｜行业关注指数 '+row.index.toFixed(0);
-  document.getElementById('d-metrics').textContent=row.eventCount+' 个独立事件 · '+row.reportCount+' 条合格报道 · '+row.evidenceCount+' 个来源证据 · 平均地理置信度 '+Math.round(row.confidence*100)+'%';
+  document.getElementById('d-name').textContent=row.name+'｜样本内关注指数 '+row.index.toFixed(0);
+  document.getElementById('d-metrics').textContent=row.eventCount+' 个独立事件 · '+row.reportCount+' 条监测记录 · '+row.evidenceCount+' 个固定池来源证据 · 平均地理置信度 '+Math.round(row.confidence*100)+'%';
   var list=document.getElementById('d-events'); list.innerHTML=''; row.events.forEach(function(entry){list.appendChild(eventCard(entry));});
   box.classList.add('show'); box.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function trendFor(row) {
   var span=document.createElement('span');
+  if(!CUR_COVERAGE||!CUR_COVERAGE.ready||!PREVIOUS_COVERAGE||!PREVIOUS_COVERAGE.ready){span.className='trend-flat';span.textContent='样本不足';return span;}
   var archiveDays=RAW.start?Math.floor((AS_OF_UTC-parseUTC(RAW.start))/86400000)+1:0;
   if(archiveDays<CUR_WINDOW.days*2){span.className='trend-flat';span.textContent='基线不足';return span;}
   var old=null; for(var i=0;i<PREVIOUS.length;i++) if(PREVIOUS[i].name===row.name) old=PREVIOUS[i];
@@ -1127,15 +1276,16 @@ function renderMap() {
   var p=palette(),el=document.getElementById('map');if(chart)chart.dispose();chart=echarts.init(el);
   var data=VIEW.map(function(row){return{name:SHORT2GEO[row.name]||row.name,value:+row.index.toFixed(1),events:row.eventCount,evidence:row.evidenceCount};});
   chart.setOption({
-    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>行业关注指数：'+row.index.toFixed(0)+'<br/>独立事件：'+row.eventCount+'<br/>来源证据：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无合格事件';}},
+    tooltip:{trigger:'item',backgroundColor:p.tooltipBg,borderColor:p.border,textStyle:{color:p.tooltipText,fontSize:13},formatter:function(params){var row=findProvince(GEO2SHORT[params.name]||params.name);return row?'<b>'+row.name+'</b><br/>样本内关注指数：'+row.index.toFixed(0)+'<br/>独立事件：'+row.eventCount+'<br/>固定池证据：'+row.evidenceCount:'<b>'+params.name+'</b><br/>当前筛选下暂无监测事件';}},
     visualMap:{min:0,max:100,left:14,bottom:8,text:['高','低'],calculable:false,inRange:{color:p.colors},textStyle:{color:p.label}},
     series:[{type:'map',map:'china',roam:false,selectedMode:false,data:data,label:{show:false},itemStyle:{areaColor:p.empty,borderColor:p.border,borderWidth:.8},emphasis:{label:{show:true,color:p.tooltipText,fontWeight:700},itemStyle:{areaColor:p.colors[p.colors.length-1]}}}]
   });
   chart.off('click');chart.on('click',function(params){if(params&&params.name)showDetail(GEO2SHORT[params.name]||params.name);});
 }
 function renderStats() {
-  var events=VIEW.reduce(function(n,x){return n+x.eventCount;},0),reports=VIEW.reduce(function(n,x){return n+x.reportCount;},0),a=VIEW.reduce(function(n,x){return n+x.aCount;},0);
-  document.getElementById('s-events').textContent=events;document.getElementById('s-provinces').textContent=VIEW.length;document.getElementById('s-a').textContent=a;document.getElementById('s-reports').textContent=reports;
+  var events=VIEW.reduce(function(n,x){return n+x.eventCount;},0),reports=VIEW.reduce(function(n,x){return n+x.reportCount;},0),sources={};
+  VIEW.forEach(function(row){row.events.forEach(function(entry){(entry.event.sources||[]).forEach(function(source){if(source.sourceId)sources[source.sourceId]=true;});});});
+  document.getElementById('s-events').textContent=events;document.getElementById('s-provinces').textContent=VIEW.length;document.getElementById('s-a').textContent=Object.keys(sources).length;document.getElementById('s-reports').textContent=reports;
 }
 function renderScope(events,id,countId) {
   var list=(events||[]).filter(function(e){return eventInRange(e,CUR_WINDOW.days,false)&&(CUR_THEME?(e.themes||[]).indexOf(CUR_THEME)!==-1:true);}).slice(0,12);
@@ -1143,16 +1293,42 @@ function renderScope(events,id,countId) {
   if(!list.length){box.textContent='当前筛选下暂无合格事件。';return;}
   list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
 }
+function coverageForWindow(days, previous) {
+  var panel=(RAW.coverage&&RAW.coverage.panel)||[],checks=(RAW.coverage&&RAW.coverage.checks)||[],good={success:true,no_update:true},byKey={},sourceGood={};
+  var start=previous?days:0;
+  checks.forEach(function(row){var age=(AS_OF_UTC-parseUTC(row.date))/86400000;if(age>=start&&age<start+days&&panel.some(function(p){return p.id===row.sourceId;}))byKey[row.date+'|'+row.sourceId]=row;});
+  Object.keys(byKey).forEach(function(key){var row=byKey[key];if(good[row.status])sourceGood[row.sourceId]=(sourceGood[row.sourceId]||0)+1;});
+  var completeDays=0;
+  for(var i=0;i<days;i++){
+    var date=new Date(AS_OF_UTC-(start+i)*86400000).toISOString().slice(0,10),complete=panel.length>0;
+    panel.forEach(function(source){var row=byKey[date+'|'+source.id];if(!row||!good[row.status])complete=false;});
+    if(complete)completeDays++;
+  }
+  var planned=days*panel.length,successful=Object.keys(byKey).filter(function(key){return good[byKey[key].status];}).length,rate=planned?successful/planned:0;
+  return {panel:panel,byKey:byKey,sourceGood:sourceGood,completeDays:completeDays,successful:successful,planned:planned,rate:rate,ready:rate>=.90&&completeDays>=Math.ceil(days*.8),state:rate>=.90?'ready':(rate>=.60?'partial':'insufficient')};
+}
+function renderCoverage() {
+  CUR_COVERAGE=coverageForWindow(CUR_WINDOW.days,false);PREVIOUS_COVERAGE=coverageForWindow(CUR_WINDOW.days,true);var c=CUR_COVERAGE,quality=document.getElementById('quality');quality.setAttribute('data-state',c.state);
+  document.getElementById('c-coverage').textContent=Math.round(c.rate*100)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
+  var status=document.getElementById('coverage-status');
+  if(c.ready)status.innerHTML='<strong>覆盖达标：</strong>当前窗口可用于比较固定权威信源对各地区的相对关注。仍不能解释为各地真实文博活动总量。';
+  else if(c.successful)status.innerHTML='<strong>覆盖尚未达标：</strong>当前只有 '+c.successful+'/'+c.planned+' 个信源日完成巡检，地图保留为过渡观察，不作严谨地区横向结论。';
+  else status.innerHTML='<strong>口径迁移期：</strong>独立完整巡检将从下一次自动更新开始累积；当前地图仅展示固定信源的历史编辑样本，不作地区横向结论。';
+  document.getElementById('rank-note').textContent=c.ready?'覆盖达标｜点击查看证据':'过渡样本｜暂不作严谨排名';
+  var list=document.getElementById('panel-list');list.innerHTML='';c.panel.forEach(function(source){
+    var row=document.createElement('div');row.className='panel-source';var left=document.createElement('span'),link=document.createElement('a');link.href=(source.entryUrls||[])[0]||'#';link.target='_blank';link.rel='noopener';link.textContent=source.name;left.appendChild(link);var role=document.createElement('small');role.textContent=' · '+source.role;left.appendChild(role);var right=document.createElement('small');right.textContent=(c.sourceGood[source.id]||0)+'/'+CUR_WINDOW.days+' 天';row.appendChild(left);row.appendChild(right);list.appendChild(row);
+  });
+}
 function renderQuality() {
-  var s=RAW.stats,excluded=s.excludedC+s.excludedBlocked;
-  document.getElementById('quality-text').innerHTML='全档案共检查 <strong>'+s.totalDomesticReports+'</strong> 条国内报道；<strong>'+s.includedProvincialReports+'</strong> 条合格地域报道聚合为 <strong>'+s.provincialEvents+'</strong> 个独立事件。<strong>'+s.excludedC+'</strong> 条 C 级与 <strong>'+s.excludedBlocked+'</strong> 条禁止来源已隔离，不参与指数；另保留 <strong>'+s.nationalEvents+'</strong> 个全国性事件。';
+  var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
+  document.getElementById('quality-text').innerHTML='独立监测库现有 <strong>'+s.totalMonitoredRecords+'</strong> 条固定池记录，其中 <strong>'+s.includedProvincialRecords+'</strong> 条地域记录聚合为 <strong>'+s.provincialEvents+'</strong> 个独立事件；另有 <strong>'+s.nationalEvents+'</strong> 个全国性事件。历史迁移基线 <strong>'+s.legacyBaselineRecords+'</strong> 条，覆盖率不可审计；正式逐源巡检记录 <strong>'+s.operationalRecords+'</strong> 条。';
 }
 function updateMeta() {
-  var label=CUR_THEME?' · '+CUR_THEME:'';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · 指数按当前窗口内最高地区归一为 100';
+  var label=CUR_THEME?' · '+CUR_THEME:'',quality=CUR_COVERAGE&&CUR_COVERAGE.ready?'覆盖达标':'覆盖不足';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · '+quality+' · 样本内最高地区归一为 100';
 }
 function refresh() {
   if(!RAW)return;VIEW=computeView(CUR_WINDOW.days,false);PREVIOUS=computeView(CUR_WINDOW.days,true);
-  renderStats();renderRanking();renderMap();renderScope(RAW.nationalEvents,'national-list','national-count');renderScope(RAW.internationalEvents,'international-list','international-count');renderQuality();updateMeta();
+  renderCoverage();renderStats();renderRanking();renderMap();renderScope(RAW.nationalEvents,'national-list','national-count');renderScope(RAW.internationalEvents,'international-list','international-count');renderQuality();updateMeta();
   document.getElementById('detail').classList.remove('show');
 }
 document.querySelectorAll('.win-tab').forEach(function(btn){
@@ -1177,7 +1353,7 @@ fetch('lib/china.json').then(function(r){
 fetch('heatmap-data.json').then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(d){
-  if(!d||d.version<2||!Array.isArray(d.events))throw new Error('schema');
+  if(!d||d.version<3||!Array.isArray(d.events)||!d.coverage)throw new Error('schema');
   RAW=d;AS_OF_STR=d.asOf;AS_OF_UTC=d.asOf?parseUTC(d.asOf):0;
   var themes={};d.events.forEach(function(e){(e.themes||[]).forEach(function(t){themes[t]=true;});});
   Object.keys(themes).sort().forEach(function(t){var option=document.createElement('option');option.value=t;option.textContent=t;document.getElementById('theme').appendChild(option);});
@@ -3144,7 +3320,7 @@ def build_about_html():
 </header>
 
 <h2 class="section">📖 这是什么</h2>
-<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，每天精选约 6–10 条国内外要闻，附带专业点评与趋势总结。内容由 AI 自动采集、筛选并编撰，宁缺毋滥，不以凑数为目标。</p>
+<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，每天精选约 4–8 条国内外要闻，附带专业点评与趋势总结。内容由 AI 自动采集、筛选并编撰，宁缺毋滥，不以凑数为目标。</p>
 
 <h2 class="section">🕐 更新节奏</h2>
 <table>
@@ -3160,7 +3336,7 @@ def build_about_html():
 
 <h2 class="section">🤖 AI 编撰流程与声明</h2>
 <blockquote><strong>重要声明：</strong>本站内容由 AI 自动生成，未经人工逐条核实。AI 可能出错——请务必以文末附带的原始来源链接为准，重要信息请查证官方原文后再引用。</blockquote>
-<p>流程：定向检索登记来源 → 核对原文日期、数量和事件状态 → 按实质增量和行业价值筛选 → 与近 30 天内容去重 → 分开生成事实摘要和编辑判断 → 构建页面并执行质量门禁。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题，供搜索和趋势地图使用。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
+<p>流程分为两条：行业地图先逐一巡检固定的 6 个全国权威信源，把符合文博范围的全部新内容写入独立监测库；日报再从监测库和更广的 A/B 级来源中按实质增量与行业价值精选。两者分别去重、核验和执行质量门禁，因此一条内容没有进入日报，不会从地图样本中消失；地方媒体数量变化也不会直接改变地区排名。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
 
 <h2 class="section">🔒 隐私</h2>
 <p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。你只是阅读，我们只是展示。</p>
@@ -3174,9 +3350,19 @@ def build_about_html():
     return html
 
 
-def build_sources_html(daily_reports):
+def build_sources_html(daily_reports, heat_data=None):
     """Generate a reader-facing source registry and archive audit page."""
     stats = source_stats(daily_reports)
+    heat_data = heat_data or {}
+    heat_stats = heat_data.get('stats') or {}
+    panel_cards = []
+    for row in map_source_registry_rows():
+        entry = row['entryUrls'][0] if row['entryUrls'] else '#'
+        panel_cards.append(f'''<div class="panel-card">
+  <h3><a href="{entry}" target="_blank" rel="noopener">{row['name']}</a></h3>
+  <p>{row['role']}</p>
+  <p class="source-note">监测域名：{'、'.join(row['domains'])}</p>
+</div>''')
     tier_cards = []
     for row in source_registry_rows():
         tier = row['tier']
@@ -3210,7 +3396,11 @@ def build_sources_html(daily_reports):
   .audit-grid {{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }}
   .audit-cell {{ background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }}
   .audit-cell strong {{ display: block; font-size: 1.25em; }}
-  @media (max-width: 520px) {{ .audit-grid {{ grid-template-columns: repeat(2, 1fr); }} }}
+  .panel-grid {{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:12px 0; }}
+  .panel-card {{ border:1px solid var(--border); border-radius:10px; padding:13px; background:var(--card); }}
+  .panel-card h3 {{ margin:0 0 4px; font-size:1em; }}
+  .panel-card p {{ margin:3px 0; }}
+  @media (max-width: 520px) {{ .audit-grid {{ grid-template-columns: repeat(2, 1fr); }} .panel-grid {{ grid-template-columns:1fr; }} }}
 </style>
 </head>
 <body>
@@ -3223,7 +3413,13 @@ def build_sources_html(daily_reports):
 
 <div class="quality-banner{audit_class}"><strong>档案审计：</strong>已检查 {len(daily_reports)} 份日报、{stats['total']} 个来源链接；A级 {stats['A']} 个，B级 {stats['B']} 个，待复核 {stats['C']} 个。{audit_text}</div>
 
+<h2 class="section">🛰️ 地图固定信源池</h2>
+<p>行业关注地图与日报已经分开：地图每天逐一巡检下面 6 个固定来源，收录其中全部符合文博范围的新内容；日报仍从固定池和更广的 A/B 级来源中做编辑精选。地方官网或临时媒体报道不会直接改变地区排名。</p>
+<div class="panel-grid">{''.join(panel_cards)}</div>
+<div class="quality-banner"><strong>迁移状态：</strong>监测库现有 {heat_stats.get('totalMonitoredRecords', 0)} 条固定池记录，其中 {heat_stats.get('legacyBaselineRecords', 0)} 条来自历史日报迁移，历史覆盖率不可审计；已尝试逐源巡检 {heat_stats.get('coverageDays', 0)} 天，其中 6 源全部完成 {heat_stats.get('completeCoverageDays', 0)} 天。地图会按 7/30/90 日窗口分别显示覆盖率，覆盖不足时不主张严谨地区排名。</div>
+
 <h2 class="section">📚 信源分级</h2>
+<p>以下是日报和其他栏目使用的更广发布白名单，不等同于地图固定信源池。</p>
 {''.join(tier_cards)}
 
 <h2 class="section">🧪 发布门槛</h2>
@@ -3233,6 +3429,7 @@ def build_sources_html(daily_reports):
   <li>B级来源只作专业补充；找不到可核验原文时宁可不发，不为凑数收录。</li>
   <li>每个事件按 canonical URL、标题和实体去重；只有实质新进展才重复出现。</li>
   <li>事实摘要和编辑判断分开，无法确认的内容标记“待核”，不把推测写成定论。</li>
+  <li>地图先完成固定池全量巡检，再生成日报；没有进入日报的合格固定池内容仍保留在监测库。</li>
 </ol>
 
 <h2 class="section">📊 当前档案统计</h2>
@@ -3371,13 +3568,14 @@ def main():
             'items': r.get('items', []),
         })
 
-    # Build heatmap data + page (仅国内,国际段排除;资源缺失仅 WARN 不中断)
-    heat_data, heat_audit = build_heatmap_data(daily_reports)
+    # The map corpus is independent from the 4–8 editorial daily selections.
+    monitoring_corpus = load_monitoring_corpus()
+    heat_data, heat_audit = build_heatmap_data(monitoring_corpus)
     heat_path = os.path.join(SITE_DIR, 'heatmap-data.json')
     with open(heat_path, 'w', encoding='utf-8') as f:
         json.dump(heat_data, f, ensure_ascii=False, indent=2)
     st = heat_data['stats']
-    print(f'Heatmap data V2: {heat_path} | 国内 {st["totalDomesticReports"]} 条,纳入地域 {st["includedProvincialReports"]} 条/{st["provincialEvents"]} 个事件,C级隔离 {st["excludedC"]} 条,禁止来源隔离 {st["excludedBlocked"]} 条')
+    print(f'Heatmap data V3: {heat_path} | 固定池 {st["totalMonitoredRecords"]} 条,纳入地域 {st["includedProvincialRecords"]} 条/{st["provincialEvents"]} 个事件,巡检尝试 {st["coverageDays"]} 天/完整 {st["completeCoverageDays"]} 天')
     _audit_print(heat_audit)
     heat_html = build_heatmap_html()
     heat_html_path = os.path.join(SITE_DIR, 'heatmap.html')
@@ -3478,7 +3676,7 @@ def main():
         f.write(about_html)
     print(f'About: {about_path}')
 
-    sources_html = build_sources_html(daily_reports)
+    sources_html = build_sources_html(daily_reports, heat_data)
     sources_path = os.path.join(SITE_DIR, 'sources.html')
     with open(sources_path, 'w', encoding='utf-8') as f:
         f.write(sources_html)

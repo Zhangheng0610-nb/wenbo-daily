@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "date": "YYYY-MM-DD",
+  "coverage": [
+    {"sourceId": "ncha", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""},
+    {"sourceId": "cultural-relics-news", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""},
+    {"sourceId": "archaeology", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""},
+    {"sourceId": "museum-association", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""},
+    {"sourceId": "xinhua-wenbo", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""},
+    {"sourceId": "cctv-wenbo", "status": "no_update", "checkedAt": "YYYY-MM-DDTHH:MM:SS+08:00", "candidateCount": 0, "note": ""}
+  ],
+  "items": []
+}
