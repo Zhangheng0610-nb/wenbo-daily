@@ -28,7 +28,6 @@
   header { padding:30px 0 20px; }
   .back { display:inline-block; margin-bottom:14px; color:var(--accent); text-decoration:none; font-size:.86em; }
   h1 { font-size:clamp(1.55rem,3vw,2.15rem); letter-spacing:-.02em; }
-  .lede { max-width:760px; margin-top:8px; color:var(--muted); font-size:.94em; }
   .meta { margin-top:12px; color:var(--muted); font-size:.8em; }
   .method-strip { display:flex; flex-wrap:wrap; gap:8px 18px; margin:0 0 18px; padding:12px 15px; border:1px solid var(--border); border-radius:12px; background:var(--card); color:var(--muted); font-size:.78em; }
   .method-strip strong { color:var(--text); }
@@ -117,12 +116,13 @@
     .wrap { padding:0 14px 40px; }
     header { padding-top:20px; }
     header .meta,.method-strip,.stats { display:none; }
-    .mobile-guide { display:block; margin:-2px 0 14px; padding:12px 13px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:10px; background:var(--card); font-size:.8em; }
+    .mobile-guide { display:block; margin:-2px 0 9px; padding:10px 13px; border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:10px; background:var(--card); font-size:.8em; }
     .mobile-guide strong { color:var(--text); }
-    .mobile-guide p { margin-top:3px; color:var(--muted); line-height:1.55; }
+    .mobile-guide p { color:var(--muted); line-height:1.5; }
+    .mobile-guide p + p { margin-top:2px; }
     .event-list,.secondary-grid { grid-template-columns:1fr; }
     .coverage-grid { grid-template-columns:repeat(2,1fr); }
-    .toolbar { align-items:flex-start; }
+    .toolbar { align-items:flex-start; margin-bottom:9px; }
     .theme-control { width:100%; justify-content:space-between; }
     .theme-control select { flex:1; max-width:none; }
     #map { height:370px; }
@@ -137,7 +137,6 @@
   <header>
     <a class="back" href="./">← 返回首页</a>
     <h1>文博行业关注地图</h1>
-    <p class="lede">每天检查 6 个固定的权威来源，记录其中所有值得关注的文博动态；一条新闻有没有进入日报，不影响它是否出现在地图里。</p>
     <p class="meta" id="meta">正在读取事件索引…</p>
   </header>
   <div class="method-strip">
@@ -146,6 +145,10 @@
     <span><strong>地区</strong> 一件事只归到主要发生地</span>
     <span><strong>提醒</strong> 反映报道关注，不等同实际活动总量</span>
   </div>
+  <section class="mobile-guide" aria-label="地图阅读提示">
+    <p>颜色越深，表示权威来源近期关注更集中；点击省份查看事项。</p>
+    <p id="mobile-guide-status">资料积累中，仅作线索参考。</p>
+  </section>
   <div class="toolbar">
     <div class="win-tabs" aria-label="时间范围">
       <button class="win-tab" data-days="7">近7天</button>
@@ -156,11 +159,6 @@
       <select id="theme"><option value="">全部主题</option></select>
     </label>
   </div>
-  <section class="mobile-guide" aria-label="地图阅读提示">
-    <strong>先看地图</strong>
-    <p>颜色越深，代表本页追踪的权威来源近期更集中地报道了该地区。点地图上的省份，可以查看具体事项和原文。</p>
-    <p id="mobile-guide-status">正在准备本页资料说明…</p>
-  </section>
   <section class="stats" aria-label="当前窗口概况">
     <div class="stat"><strong id="s-events">—</strong><span>本期重点事项</span></div>
     <div class="stat"><strong id="s-provinces">—</strong><span>涉及地区</span></div>
@@ -331,6 +329,21 @@ function renderRanking() {
     var btn=document.createElement('button');btn.className='province-btn';btn.textContent=row.name;btn.onclick=function(){showDetail(row.name);};tr.children[1].appendChild(btn);tr.children[5].appendChild(trendFor(row));body.appendChild(tr);
   });
 }
+var lastMapTapName='', lastMapTapAt=0;
+function openProvinceNews(name) {
+  var row=findProvince(name);
+  if(!row||!row.events.length||!row.events[0].event.reports.length) return;
+  var url=row.events[0].event.reports[0].url;
+  if(url) window.location.href=url;
+}
+function handleMapTap(name) {
+  if(!window.matchMedia || !window.matchMedia('(max-width:620px)').matches){showDetail(name);return;}
+  var now=Date.now();
+  if(lastMapTapName===name && now-lastMapTapAt<5000){lastMapTapName='';openProvinceNews(name);return;}
+  lastMapTapName=name;lastMapTapAt=now;showDetail(name);
+  var hint=document.getElementById('mobile-guide-status');
+  if(hint) hint.textContent='已显示 '+name+' 的事项；再次点击打开最新原文。';
+}
 function renderMap() {
   if(!window.echarts||!MAP_READY){
     document.getElementById('map-fallback').textContent='地图组件暂时不可用，可使用地区排名查看全部数据。';
@@ -343,7 +356,7 @@ function renderMap() {
     visualMap:{min:0,max:100,left:14,bottom:8,text:['高','低'],calculable:false,inRange:{color:p.colors},textStyle:{color:p.label}},
     series:[{type:'map',map:'china',roam:false,selectedMode:false,data:data,label:{show:false},itemStyle:{areaColor:p.empty,borderColor:p.border,borderWidth:.8},emphasis:{label:{show:true,color:p.tooltipText,fontWeight:700},itemStyle:{areaColor:p.colors[p.colors.length-1]}}}]
   });
-  chart.off('click');chart.on('click',function(params){if(params&&params.name)showDetail(GEO2SHORT[params.name]||params.name);});
+  chart.off('click');chart.on('click',function(params){if(params&&params.name)handleMapTap(GEO2SHORT[params.name]||params.name);});
 }
 function renderStats() {
   var events=VIEW.reduce(function(n,x){return n+x.eventCount;},0),reports=VIEW.reduce(function(n,x){return n+x.reportCount;},0),sources={};
@@ -378,8 +391,8 @@ function renderCoverage() {
   else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前已完成 '+c.successful+'/'+c.planned+' 次来源检查。地图可供浏览，但暂不适合拿来比较不同地区。';
   else status.innerHTML='<strong>资料刚开始积累：</strong>从下一次自动更新起，网站会每天检查固定的权威来源。当前展示的是从旧日报整理出的历史资料，只供了解，不用于比较不同地区。';
   var mobileGuide=document.getElementById('mobile-guide-status');
-  if(c.ready)mobileGuide.textContent='资料已经比较充分，可以用地图看这些权威来源近期更关注哪里。';
-  else mobileGuide.textContent='资料还在积累，先把地图当作了解行业动态的线索，不拿它比较哪个地区更活跃。';
+  if(c.ready)mobileGuide.textContent='资料较充分，可用地图比较近期报道关注。';
+  else mobileGuide.textContent='资料积累中，仅作行业线索参考。';
   document.getElementById('rank-note').textContent=c.ready?'资料充足｜点击查看来源':'资料积累中｜暂不比较地区';
   var list=document.getElementById('panel-list');list.innerHTML='';c.panel.forEach(function(source){
     var row=document.createElement('div');row.className='panel-source';var left=document.createElement('span'),link=document.createElement('a');link.href=(source.entryUrls||[])[0]||'#';link.target='_blank';link.rel='noopener';link.textContent=source.name;left.appendChild(link);var role=document.createElement('small');role.textContent=' · '+source.role;left.appendChild(role);var right=document.createElement('small');right.textContent='已检查 '+(c.sourceGood[source.id]||0)+'/'+CUR_WINDOW.days+' 天';row.appendChild(left);row.appendChild(right);list.appendChild(row);
