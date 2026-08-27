@@ -66,6 +66,9 @@
   p { margin: 8px 0; }
   a { color: var(--accent); word-break: break-all; }
   a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
   blockquote {
     border-left: 3px solid var(--accent); padding: 6px 14px;
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
@@ -198,6 +201,16 @@
   }
   .quality-banner.legacy { border-left-color: #b45309; }
   .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
   .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
     border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
   .source-chip b { font-size: .82em; margin-right: 2px; }
@@ -211,7 +224,9 @@
     .source-c { background: #3f1d1d; color: #fca5a5; }
   }
   .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
-  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
   .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
   .digest-sources li { margin: 3px 0; font-size: .86em; }
   .digest-evidence-title { font-weight: 600; }
@@ -250,11 +265,6 @@
       <li><a href="#item8">蒙古国文化遗产周+英国利兹"成吉思汗：蒙古人如何改变世界"特展——草原文明的双轨国际传播</a></li>
     </ol>
   </details>
-</div>
-
-<div class="quality-banner legacy">
-  <strong>🧭 来源透明度：</strong>本期 8 个来源中，A级 1 个、B级 0 个、待复核 7 个。
-  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
 </div>
 
 <h2 class="section">🇨🇳 国内要闻</h2>
@@ -331,6 +341,12 @@ Paestum是意大利南部最著名的考古遗址之一，以三座保存完好�
 <tr><td><strong>中小博物馆的馆际合作网络正在织密</strong></td><td>芜湖市博引进固原400件文物；固原青铜器之前已报道过战国古酒——中小馆之间的"文物交换+联合策展"模式日趋成熟</td><td>地市级博物馆提升自身能见度的内生动力+省级大馆的辐射带动+文物交流政策的便利化</td><td>中小博物馆的"抱团取暖"可能催生一批比省级大馆更有锐度的专题展览——因为小馆没有"面面俱到"的包袱</td></tr>
 </table>
 
+
+<details class="quality-banner legacy">
+  <summary><strong>🧭 来源与核验</strong><span class="source-summary">A级 1 · B级 0 · 待复核 7</span></summary>
+  <p>本期属于历史档案，仍保留原始发布记录；待复核来源不会进入新的自动发布。</p>
+  <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
+</details>
 
 <hr>
 

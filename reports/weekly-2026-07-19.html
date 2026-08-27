@@ -47,6 +47,9 @@
   p { margin: 8px 0; }
   a { color: var(--accent); word-break: break-all; }
   a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
   blockquote {
     border-left: 3px solid var(--accent); padding: 6px 14px;
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
@@ -179,6 +182,16 @@
   }
   .quality-banner.legacy { border-left-color: #b45309; }
   .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
   .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
     border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
   .source-chip b { font-size: .82em; margin-right: 2px; }
@@ -192,7 +205,9 @@
     .source-c { background: #3f1d1d; color: #fca5a5; }
   }
   .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
-  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
   .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
   .digest-sources li { margin: 3px 0; font-size: .86em; }
   .digest-evidence-title { font-weight: 600; }
@@ -227,8 +242,6 @@
 <tr><td>下周关注</td><td>世界遗产大会表决结果、暑期博物馆客流高峰</td></tr>
 </table>
 
-
-<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 5 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title">石峁遗址正式确认为 4000 年前中国北方区域政体中心</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">三星堆最新成果颠覆认知：青铜器不是神话，是祭祀"实况记录"</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">第 48 届世界遗产大会釜山开幕——多个争议案例进入投票</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.bssnews.net/international/406684" target="_blank" rel="noopener">BSS News</a></span></li><li><span class="digest-evidence-title">国博"了不起的汉字"古文字成果展——270 件展品讲述汉字五千年</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/expo/20260717/c2c81e58c4774c49b2fce5a1065da7b5/c.html" target="_blank" rel="noopener">新华网</a></span></li><li><span class="digest-evidence-title">中突联合考古三年收官：从本·阿鲁斯到迦太基港口</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">全球文物追索浪潮：法国、瑞士、荷德、土耳其密集行动</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">"云鸮"专项行动两个月：追缴涉案文物 2700 余件</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">山西汾阳村民猪圈旁挖出北齐佛首——身首合璧在即</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.globaltimes.cn/page/202607/1365808.shtml" target="_blank" rel="noopener">Global Times</a></span></li><li><span class="digest-evidence-title">上海"永不消失的黑水城"沉浸式大展：180° 穹顶 × 实物 × 数字三位一体</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.sh.chinanews.com.cn/wenhua/2026-07-17/147744.shtml" target="_blank" rel="noopener">中新网上海</a></span></li><li><span class="digest-evidence-title">上海博物馆"世界树之巅"美洲文明大展——近 3000 件文物，全球最大规模</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/local/20260715/0832cd03b1994bee8376a04788e9e50f/c.html" target="_blank" rel="noopener">新华社</a></span></li></ol></div>
 
 <h2 class="section">🔟 本期要闻</h2>
 
@@ -310,6 +323,8 @@
 
 
 
+
+<details class="digest-sources"><summary><span>🔎 本期来源与证据索引</span><span class="status-badge status-check">5 条待补</span></summary><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 5 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title">石峁遗址正式确认为 4000 年前中国北方区域政体中心</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">三星堆最新成果颠覆认知：青铜器不是神话，是祭祀"实况记录"</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">第 48 届世界遗产大会釜山开幕——多个争议案例进入投票</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.bssnews.net/international/406684" target="_blank" rel="noopener">BSS News</a></span></li><li><span class="digest-evidence-title">国博"了不起的汉字"古文字成果展——270 件展品讲述汉字五千年</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/expo/20260717/c2c81e58c4774c49b2fce5a1065da7b5/c.html" target="_blank" rel="noopener">新华网</a></span></li><li><span class="digest-evidence-title">中突联合考古三年收官：从本·阿鲁斯到迦太基港口</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">全球文物追索浪潮：法国、瑞士、荷德、土耳其密集行动</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">"云鸮"专项行动两个月：追缴涉案文物 2700 余件</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">山西汾阳村民猪圈旁挖出北齐佛首——身首合璧在即</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.globaltimes.cn/page/202607/1365808.shtml" target="_blank" rel="noopener">Global Times</a></span></li><li><span class="digest-evidence-title">上海"永不消失的黑水城"沉浸式大展：180° 穹顶 × 实物 × 数字三位一体</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.sh.chinanews.com.cn/wenhua/2026-07-17/147744.shtml" target="_blank" rel="noopener">中新网上海</a></span></li><li><span class="digest-evidence-title">上海博物馆"世界树之巅"美洲文明大展——近 3000 件文物，全球最大规模</span><br><span class="source-chip source-a"><b>A</b> <a href="https://www.news.cn/local/20260715/0832cd03b1994bee8376a04788e9e50f/c.html" target="_blank" rel="noopener">新华社</a></span></li></ol></details>
 
 <hr>
 

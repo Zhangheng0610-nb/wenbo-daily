@@ -47,6 +47,9 @@
   p { margin: 8px 0; }
   a { color: var(--accent); word-break: break-all; }
   a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
   blockquote {
     border-left: 3px solid var(--accent); padding: 6px 14px;
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
@@ -179,6 +182,16 @@
   }
   .quality-banner.legacy { border-left-color: #b45309; }
   .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
   .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
     border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
   .source-chip b { font-size: .82em; margin-right: 2px; }
@@ -192,7 +205,9 @@
     .source-c { background: #3f1d1d; color: #fca5a5; }
   }
   .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
-  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
   .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
   .digest-sources li { margin: 3px 0; font-size: .86em; }
   .digest-evidence-title { font-weight: 600; }
@@ -217,8 +232,6 @@
 
 <h2 class="section">📊 本期概览</h2>
 
-
-<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 6 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title"><strong>景德镇手工瓷业遗存列入世界遗产</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml" target="_blank" rel="noopener">央视</a></span></li><li><span class="digest-evidence-title"><strong>七部门揭榜挂帅首次纳入文物保护装备</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/30/art_2318_48458.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>"博物馆里读中国"99项展览推介公布</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>马首铜像入闽 + XR沉浸展</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>世界互联网大会发布《文化遗产数字化案例集》</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>三星堆祭祀坑40周年：意外失火说+象牙保护突破</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>八大山人诞辰400周年特展</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>国际文物归还浪潮：玻利维亚、哥伦比亚、叙利亚、土耳其</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>良渚VR展走进亚美尼亚 + 大足石刻展登陆纽约</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>多瑙河干涸暴露猛犸遗骸</strong></span> <span class="status-badge status-check">待补原始来源</span></li></ol></div>
 
 <h2 class="section">🔟 七月十大文博新闻</h2>
 
@@ -313,6 +326,8 @@
 <p><em>本月报由 Claude 采集编撰 | 2026年8月1日 | 基于7月22期日报 + 3期周报 | 涵盖国内国际文博重大事件</em></p>
 
 
+
+<details class="digest-sources"><summary><span>🔎 本期来源与证据索引</span><span class="status-badge status-check">6 条待补</span></summary><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 6 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title"><strong>景德镇手工瓷业遗存列入世界遗产</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml" target="_blank" rel="noopener">央视</a></span></li><li><span class="digest-evidence-title"><strong>七部门揭榜挂帅首次纳入文物保护装备</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/30/art_2318_48458.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>"博物馆里读中国"99项展览推介公布</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>马首铜像入闽 + XR沉浸展</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>世界互联网大会发布《文化遗产数字化案例集》</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>三星堆祭祀坑40周年：意外失火说+象牙保护突破</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>八大山人诞辰400周年特展</strong></span><br><span class="source-chip source-a"><b>A</b> <a href="http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html" target="_blank" rel="noopener">国家文物局</a></span></li><li><span class="digest-evidence-title"><strong>国际文物归还浪潮：玻利维亚、哥伦比亚、叙利亚、土耳其</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>良渚VR展走进亚美尼亚 + 大足石刻展登陆纽约</strong></span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title"><strong>多瑙河干涸暴露猛犸遗骸</strong></span> <span class="status-badge status-check">待补原始来源</span></li></ol></details>
 
 <hr>
 

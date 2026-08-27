@@ -47,6 +47,9 @@
   p { margin: 8px 0; }
   a { color: var(--accent); word-break: break-all; }
   a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
   blockquote {
     border-left: 3px solid var(--accent); padding: 6px 14px;
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
@@ -179,6 +182,16 @@
   }
   .quality-banner.legacy { border-left-color: #b45309; }
   .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
   .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
     border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
   .source-chip b { font-size: .82em; margin-right: 2px; }
@@ -192,7 +205,9 @@
     .source-c { background: #3f1d1d; color: #fca5a5; }
   }
   .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
-  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
   .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
   .digest-sources li { margin: 3px 0; font-size: .86em; }
   .digest-evidence-title { font-weight: 600; }
@@ -217,8 +232,6 @@
 
 <h2 class="section">📊 本期概览</h2>
 
-
-<div class="digest-sources"><h3>🔎 本期证据索引</h3><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 2 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title">1. 山西昔阳钟村发现迄今最高等级夏代贵族墓葬：46㎡双椁三棺墓主通体朱砂</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.cqcb.com/news/13/2026-08-21/6204271.html" target="_blank" rel="noopener">上游新闻</a></span></li><li><span class="digest-evidence-title">2. 河北阳原新庙庄遗址发现莫斯特技术石器：华北腹地首现尼安德特人文化迹象</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://www.zjknews.com/news/wenhualishi/zjk/202608/21/490146.html" target="_blank" rel="noopener">张家口新闻网</a></span></li><li><span class="digest-evidence-title">3. 故宫国宝《韩熙载夜宴图》首次亮相浙博：时隔15年"出宫"来杭州</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">4. 马王堆汉墓研究获系列新进展：T形帛画现改绘痕迹，确认全球最早丝质坐垫</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://cj.sina.cn/articles/view/7879923104/1d5ae15a006801hvk2?froms=ggmp&vt=4" target="_blank" rel="noopener">新浪财经</a></span></li><li><span class="digest-evidence-title">5. 中国考古机构首次赴南美洲联合考古：与秘鲁共研卡拉尔文明</span> <span class="status-badge status-check">待补原始来源</span></li></ol></div>
 
 
 
@@ -304,6 +317,8 @@
 <p>三条主线交汇于一个共同的底层逻辑：文博行业正在从"资源驱动"转向"制度驱动+技术驱动+叙事驱动"。谁能在这三个维度上同时建立能力，谁就能在下一个周期占据主动。</p>
 
 
+
+<details class="digest-sources"><summary><span>🔎 本期来源与证据索引</span><span class="status-badge status-check">2 条待补</span></summary><p class="source-note">优先展示日报中可回溯的原始来源； 仍有 2 条要闻未能从日报回溯来源。</p><ol><li><span class="digest-evidence-title">1. 山西昔阳钟村发现迄今最高等级夏代贵族墓葬：46㎡双椁三棺墓主通体朱砂</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://www.cqcb.com/news/13/2026-08-21/6204271.html" target="_blank" rel="noopener">上游新闻</a></span></li><li><span class="digest-evidence-title">2. 河北阳原新庙庄遗址发现莫斯特技术石器：华北腹地首现尼安德特人文化迹象</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="http://www.zjknews.com/news/wenhualishi/zjk/202608/21/490146.html" target="_blank" rel="noopener">张家口新闻网</a></span></li><li><span class="digest-evidence-title">3. 故宫国宝《韩熙载夜宴图》首次亮相浙博：时隔15年"出宫"来杭州</span> <span class="status-badge status-check">待补原始来源</span></li><li><span class="digest-evidence-title">4. 马王堆汉墓研究获系列新进展：T形帛画现改绘痕迹，确认全球最早丝质坐垫</span><br><span class="source-chip source-c" title="历史内容：该来源尚未纳入本站白名单"><b>C</b> <a href="https://cj.sina.cn/articles/view/7879923104/1d5ae15a006801hvk2?froms=ggmp&vt=4" target="_blank" rel="noopener">新浪财经</a></span></li><li><span class="digest-evidence-title">5. 中国考古机构首次赴南美洲联合考古：与秘鲁共研卡拉尔文明</span> <span class="status-badge status-check">待补原始来源</span></li></ol></details>
 
 <hr>
 

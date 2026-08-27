@@ -199,6 +199,9 @@ CSS = """<style>
   p { margin: 8px 0; }
   a { color: var(--accent); word-break: break-all; }
   a:visited { color: var(--muted); }
+  a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+    outline: 3px solid var(--accent); outline-offset: 3px;
+  }
   blockquote {
     border-left: 3px solid var(--accent); padding: 6px 14px;
     margin: 10px 0; background: var(--tag-bg); border-radius: 0 6px 6px 0;
@@ -331,6 +334,16 @@ CSS = """<style>
   }
   .quality-banner.legacy { border-left-color: #b45309; }
   .quality-banner strong { color: var(--text); }
+  .quality-banner summary, .digest-sources summary {
+    cursor: pointer; user-select: none; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .quality-banner summary::-webkit-details-marker, .digest-sources summary::-webkit-details-marker { display: none; }
+  .quality-banner summary::after, .digest-sources summary::after {
+    content: '＋'; color: var(--muted); font-size: 1.1em; flex: 0 0 auto;
+  }
+  .quality-banner[open] summary::after, .digest-sources[open] summary::after { content: '−'; }
+  .source-summary { color: var(--muted); font-size: .9em; text-align: right; }
   .source-chip { display: inline-block; margin: 2px 5px 4px 0; padding: 2px 7px;
     border-radius: 10px; font-size: .76em; border: 1px solid var(--border); }
   .source-chip b { font-size: .82em; margin-right: 2px; }
@@ -344,7 +357,9 @@ CSS = """<style>
     .source-c { background: #3f1d1d; color: #fca5a5; }
   }
   .source-note { color: var(--muted); font-size: .78em; margin-top: 4px; }
-  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 18px 0; }
+  .digest-sources { background: var(--tag-bg); border-radius: 10px; padding: 12px 14px; margin: 22px 0 18px; }
+  .digest-sources summary { font-weight: 600; color: var(--accent); }
+  .digest-sources summary + p { margin-top: 10px; }
   .digest-sources h3 { margin: 0 0 6px; font-size: .98em; }
   .digest-sources li { margin: 3px 0; font-size: .86em; }
   .digest-evidence-title { font-weight: 600; }
@@ -1171,15 +1186,17 @@ def build_report_html(data, prev_report=None, next_report=None):
     total = data['domestic_count'] + data['international_count']
     report_source_stats = source_stats([data])
     if report_source_stats['C']:
-        quality_html = f'''<div class="quality-banner legacy">
-  <strong>🧭 来源透明度：</strong>本期 {report_source_stats['total']} 个来源中，A级 {report_source_stats['A']} 个、B级 {report_source_stats['B']} 个、待复核 {report_source_stats['C']} 个。
-  <div class="source-note">本期属于历史档案；待复核来源不会进入新的自动发布。</div>
-</div>'''
+        quality_html = f'''<details class="quality-banner legacy">
+  <summary><strong>🧭 来源与核验</strong><span class="source-summary">A级 {report_source_stats['A']} · B级 {report_source_stats['B']} · 待复核 {report_source_stats['C']}</span></summary>
+  <p>本期属于历史档案，仍保留原始发布记录；待复核来源不会进入新的自动发布。</p>
+  <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
+</details>'''
     else:
-        quality_html = f'''<div class="quality-banner">
-  <strong>✅ 来源透明度：</strong>本期 {report_source_stats['total']} 个来源全部通过本站 A/B 级发布门槛。
-  <div class="source-note">A级为官方/一手来源，B级为专业补充来源；点击来源名称核对原文。</div>
-</div>'''
+        quality_html = f'''<details class="quality-banner">
+  <summary><strong>🧭 来源与核验</strong><span class="source-summary">本期 {report_source_stats['total']} 个来源均通过 A/B 门槛</span></summary>
+  <p>本期来源全部通过本站 A/B 级发布门槛。</p>
+  <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
+</details>'''
 
     toc_html = '<div class="toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
     for item in data['toc_items']:
@@ -1296,11 +1313,11 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 {toc_html}
 
-{quality_html}
-
 {domestic_html}
 {international_html}
 {trends_html}{notes_html}
+
+{quality_html}
 
 <hr>
 
@@ -2145,9 +2162,12 @@ def build_digest_html(data, daily_reports=None):
     evidence_html = ''
     if evidence_rows:
         warning = f' 仍有 {missing_evidence} 条要闻未能从日报回溯来源。' if missing_evidence else ''
-        evidence_html = (f'<div class="digest-sources"><h3>🔎 本期证据索引</h3>'
+        evidence_state = (f'<span class="status-badge status-check">{missing_evidence} 条待补</span>'
+                          if missing_evidence else '<span class="status-badge status-open">全部可回溯</span>')
+        evidence_html = (f'<details class="digest-sources">'
+                         f'<summary><span>🔎 本期来源与证据索引</span>{evidence_state}</summary>'
                          f'<p class="source-note">优先展示日报中可回溯的原始来源；{warning}</p>'
-                         f'<ol>' + ''.join(evidence_rows) + '</ol></div>')
+                         f'<ol>' + ''.join(evidence_rows) + '</ol></details>')
 
     # Upcoming / forecast
     upcoming_html = ''
@@ -2217,8 +2237,6 @@ def build_digest_html(data, daily_reports=None):
 
 {overview_html}
 
-{evidence_html}
-
 {items_html}
 
 {upcoming_html}
@@ -2226,6 +2244,8 @@ def build_digest_html(data, daily_reports=None):
 {trends_html}
 
 {rich_html}
+
+{evidence_html}
 
 <hr>
 
@@ -2250,6 +2270,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
         monthly_reports = []
 
     daily_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)
+    latest_daily_href = f"reports/{daily_reports[0]['date']}.html" if daily_reports else "#daily-list"
 
     # Daily cards — build list, limit to latest 3 by default
     DAILY_LIMIT = 2
@@ -2383,8 +2404,9 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
     margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
     border: 1px solid var(--border);
     display: block; text-decoration: none; color: var(--text);
-    transition: transform .15s;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
   }
+  a.day-card:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(60,40,20,.10); border-color: var(--accent); }
   a.day-card:active { transform: scale(.98); }
   a.day-card.hidden { display: none; }
   a.day-card .date { font-weight: 700; font-size: 1.1em; color: var(--accent); }
@@ -2445,7 +2467,18 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   .heatmap-card .hm-sub { font-size: .8em; opacity: .9; margin-top: 3px; }
   .heatmap-card .hm-arrow { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 1.3em; opacity: .85; }
   .governance-card { background: linear-gradient(135deg, #315b63, #1d3e49); box-shadow: 0 3px 12px rgba(29,62,73,.18); }
-  .home-note { color: var(--muted); font-size: .84em; margin: -6px 0 18px; text-align: center; }
+  .quick-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 18px; }
+  .quick-nav a { display: inline-block; padding: 5px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--text); text-decoration: none; font-size: .8em; transition: border-color .15s, color .15s, background .15s; }
+  .quick-nav a:hover { border-color: var(--accent); color: var(--accent); background: var(--tag-bg); }
+  .quick-nav a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .home-note { color: var(--muted); font-size: .84em; margin: -4px 0 18px; text-align: center; }
+  @media (max-width: 520px) {
+    body { padding: 12px; }
+    header { padding-top: 24px; }
+    header h1 { font-size: 1.4em; }
+    .quick-nav { justify-content: flex-start; }
+    a.day-card { padding: 15px 16px; }
+  }
 </style>"""
 
     # Build section blocks
@@ -2545,7 +2578,16 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 
 <main>
 
-<p class="home-note">每天只保留值得核验的行业信息；来源、方法和历史档案状态均公开。</p>
+<nav class="quick-nav" aria-label="主要栏目">
+  <a class="primary" href="{latest_daily_href}">今日精选</a>
+  <a href="#daily-list">日报档案</a>
+  <a href="heatmap.html">热点地图</a>
+  <a href="digital-trends.html">数字趋势</a>
+  <a href="jobs.html">招聘</a>
+  <a href="sources.html">来源规则</a>
+</nav>
+
+<p class="home-note">每天几分钟，读懂文博行业今天真正发生了什么。</p>
 
 <div class="search-wrap">
   <input type="search" id="search" placeholder="🔍 搜索新闻…" autocomplete="off" aria-label="搜索新闻">
