@@ -41,16 +41,21 @@ def build_page(html_path, data_path):
     categorized_n = len(categorized_urls)
     uncategorized_n = max(0, unique_n - categorized_n)
     topic_rows = []
-    for topic in topic_info:
+    for topic_index, topic in enumerate(topic_info):
         name = topic.get('name', '')
         count = topic_counts.get(name, 0)
         width = round(count / topic_max * 100) if topic_max else 0
+        detail_id = f'topic-detail-{topic_index}'
         topic_rows.append(
-            f'<button type="button" class="topic-row" data-topic="{escape(name, quote=True)}">'
+            f'<div class="topic-entry">'
+            f'<button type="button" class="topic-row" data-topic="{escape(name, quote=True)}" '
+            f'aria-expanded="false" aria-controls="{detail_id}">'
             f'<div class="topic-copy"><b>{escape(name)}</b>'
             f'<span>{escape(topic.get("description", ""))}</span></div>'
             f'<div class="topic-value"><strong>{count}</strong><small>独立原文</small></div>'
             f'<div class="topic-track"><i style="width:{width}%"></i></div></button>'
+            f'<div class="topic-detail" id="{detail_id}" data-topic-detail="{escape(name, quote=True)}" hidden></div>'
+            f'</div>'
         )
     topic_html = ''.join(topic_rows)
     rng = data['range']
@@ -105,8 +110,16 @@ def build_page(html_path, data_path):
   .topics-head h2 {{ font-size: 1.05em; }}
   .topics-head span {{ color: var(--muted); font-size: .78em; }}
   .topic-row {{ display: grid; grid-template-columns: minmax(250px, 1fr) 70px minmax(120px, 1.15fr); gap: 12px; align-items: center; width: 100%; padding: 9px 0; border: 0; border-top: 1px solid #f0ece6; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }}
+  .topic-entry {{ border-top: 1px solid #f0ece6; }}
+  .topics-head + .topic-entry {{ border-top: 0; }}
+  .topic-entry .topic-row {{ border-top: 0; }}
   .topic-row:hover {{ background: #f7fbfa; }}
   .topic-row:focus-visible {{ outline: 2px solid var(--accent2); outline-offset: 2px; }}
+  .topic-detail {{ padding: 0 12px 10px; background: #fafcfb; border-radius: 0 0 9px 9px; }}
+  .topic-detail-head {{ display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 5px 0 7px; color: var(--muted); font-size: .78em; }}
+  .topic-detail .p-item {{ padding-left: 0; padding-right: 0; }}
+  .detail-close {{ border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 6px; padding: 4px 8px; font: inherit; cursor: pointer; white-space: nowrap; }}
+  .detail-close:hover {{ color: var(--accent); border-color: var(--accent); }}
   .topic-copy {{ min-width: 0; }}
   .topic-copy b {{ display: block; font-size: .9em; }}
   .topic-copy span {{ display: block; color: var(--muted); font-size: .75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
@@ -135,7 +148,7 @@ def build_page(html_path, data_path):
 
   .list-card {{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-top: 18px; box-shadow: var(--shadow); overflow: hidden; }}
   .list-head {{ display: flex; justify-content: space-between; align-items: center; padding: 13px 18px; border-bottom: 1px solid var(--line); background: #faf8f5; }}
-  .list-head h2 {{ font-size: 1.05em; }}
+  .list-head h2 {{ flex: 1; min-width: 0; font-size: 1.05em; }}
   .list-head .tag {{ color: var(--muted); font-size: .82em; }}
   #period-list {{ padding: 6px 0; }}
   .p-item {{ display: flex; gap: 12px; align-items: baseline; padding: 10px 18px; border-bottom: 1px dashed var(--line); }}
@@ -170,6 +183,9 @@ def build_page(html_path, data_path):
     .topics-card {{ padding: 12px 12px 8px; margin-top: 12px; }}
     .topics-head {{ align-items: flex-start; flex-direction: column; gap: 1px; margin-bottom: 4px; }}
     .topic-row {{ grid-template-columns: minmax(0, 1fr) 58px; gap: 7px; padding: 8px 0; }}
+    .topic-detail {{ padding-left: 8px; padding-right: 8px; }}
+    .topic-detail-head {{ font-size: .7em; }}
+    .detail-close {{ padding: 3px 7px; }}
     .topic-copy b {{ font-size: .78em; }}
     .topic-copy span {{ font-size: .67em; }}
     .topic-track {{ grid-column: 1 / -1; height: 6px; }}
@@ -188,6 +204,9 @@ def build_page(html_path, data_path):
     .p-item {{ gap: 7px; padding: 9px 10px; align-items: flex-start; }}
     .p-date {{ font-size: .7em; }}
     .p-level {{ font-size: .65em; padding: 1px 5px; }}
+    .list-head {{ flex-wrap: wrap; gap: 6px; padding: 11px 10px; }}
+    .list-head h2 {{ flex-basis: 100%; font-size: .92em; }}
+    .list-head .tag {{ font-size: .7em; }}
     .method {{ padding: 13px 14px; font-size: .8em; }}
   }}
 </style>
@@ -215,6 +234,11 @@ def build_page(html_path, data_path):
     {topic_html}
   </section>
 
+  <div class="chart-card annual-card">
+    <div class="chart-head"><h2>年度趋势</h2><span>看长期变化，不受月度波动干扰</span></div>
+    <div id="annual-chart"></div>
+  </div>
+
   <div class="controls">
     <div class="chart-legend-note"><b>蓝线：独立原文数</b> · <em>绿线：占全部文物新闻比例</em></div>
     <div class="range-buttons" aria-label="时间范围">
@@ -230,13 +254,8 @@ def build_page(html_path, data_path):
     <div class="hint">缩放或选择时间范围；跨度会自动切换月 / 周 / 天粒度。点击数据点查看该周期明细。</div>
   </div>
 
-  <div class="chart-card annual-card">
-    <div class="chart-head"><h2>年度趋势</h2><span>看长期变化，不受月度波动干扰</span></div>
-    <div id="annual-chart"></div>
-  </div>
-
   <div class="list-card">
-    <div class="list-head"><h2 id="period-title">📋 点击年度、行业方向或趋势点查看文章</h2><span class="tag" id="period-count"></span></div>
+    <div class="list-head"><h2 id="period-title">📋 点击年度或趋势点查看文章</h2><span class="tag" id="period-count"></span><button type="button" class="detail-close" id="detail-close" hidden>收起明细</button></div>
     <div id="period-list"><div class="empty">点击上方行业方向、年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化原文。</div></div>
   </div>
 
@@ -383,16 +402,8 @@ function init(data) {{
     return 'day';
   }}
 
-  function averageValue(values) {{
-    var nonEmpty = values.filter(function(v){{ return v > 0; }});
-    if (!nonEmpty.length) return 0;
-    return Math.round(nonEmpty.reduce(function(a, b){{ return a + b; }}, 0) / nonEmpty.length * 100) / 100;
-  }}
-
   function optionFor(gran, zoomStart, zoomEnd) {{
     var s = seriesCache[gran];
-    var countMarkData = (gran === 'month' || gran === 'year') ? [{{ yAxis: averageValue(s.countVals), name: '数量平均' }}] : [];
-    var shareMarkData = (gran === 'month' || gran === 'year') ? [{{ yAxis: averageValue(s.shareVals), name: '占比平均' }}] : [];
     var start = zoomStart === undefined ? 0 : zoomStart;
     var end = zoomEnd === undefined ? s.keys.length - 1 : zoomEnd;
     return {{
@@ -410,7 +421,9 @@ function init(data) {{
           return label + '<br/>独立原文数：<b>' + count + '</b> 个<br/>占全部文物新闻：<b>' + share + '%</b>';
         }}
       }},
-      legend: {{ top: 0, right: 8, itemWidth: 16, itemHeight: 8, textStyle: {{ fontSize: 11 }} }},
+      legend: {{ top: 0, right: 8, itemWidth: 16, itemHeight: 8, textStyle: {{ fontSize: 11 }},
+        formatter: function(name){{ return name === '占全部文物新闻比例' ? '占比' : '数量'; }}
+      }},
       grid: {{ left: 48, right: 58, top: 34, bottom: 60 }},
       xAxis: {{
         type: 'category', data: s.cats, boundaryGap: false,
@@ -424,7 +437,7 @@ function init(data) {{
           axisLabel: {{ fontSize: 11, formatter: '{{value}}' }},
           splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
         }},
-        {{ type: 'value', name: '比例（%）', nameLocation: 'middle', nameGap: 38, min: 0,
+        {{ type: 'value', name: '', min: 0,
           nameTextStyle: {{ color: '#0d9488', fontSize: 10 }},
           axisLabel: {{ fontSize: 11, formatter: '{{value}}%' }},
           splitLine: {{ show: false }}
@@ -442,23 +455,13 @@ function init(data) {{
         itemStyle: {{ color: '#2563eb' }},
         areaStyle: {{ color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {{ offset: 0, color: 'rgba(37,99,235,.28)' }}, {{ offset: 1, color: 'rgba(37,99,235,0)' }}
-        ]) }},
-        markLine: {{
-          silent: true, symbol: 'none', data: countMarkData,
-          lineStyle: {{ color: '#d97706', type: 'dashed' }},
-          label: {{ formatter: function(p){{ return '数量平均 ' + p.value; }}, fontSize: 10, color: '#d97706' }}
-        }}
+        ]) }}
       }}, {{
         name: '占全部文物新闻比例', type: 'line', yAxisIndex: 1, data: s.shareVals,
         connectNulls: false, smooth: gran === 'month' || gran === 'year',
         symbolSize: 6,
         lineStyle: {{ width: 2, color: '#0d9488' }},
-        itemStyle: {{ color: '#0d9488' }},
-        markLine: {{
-          silent: true, symbol: 'none', data: shareMarkData,
-          lineStyle: {{ color: '#7c3aed', type: 'dashed' }},
-          label: {{ formatter: function(p){{ return '占比平均 ' + p.value + '%'; }}, fontSize: 10, color: '#7c3aed' }}
-        }}
+        itemStyle: {{ color: '#0d9488' }}
       }}]
     }};
   }}
@@ -536,15 +539,8 @@ function init(data) {{
     }});
   }}
 
-  function renderArticleList(title, meta, items, emptyText) {{
-    document.getElementById('period-title').textContent = title;
-    document.getElementById('period-count').textContent = meta;
-    var box = document.getElementById('period-list');
-    if (!items.length) {{
-      box.innerHTML = '<div class="empty">' + escapeHtml(emptyText) + '</div>';
-      return;
-    }}
-    box.innerHTML = items.map(function(it) {{
+  function articleMarkup(items) {{
+    return items.map(function(it) {{
       return '<div class="p-item">' +
         '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
         '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(it.t) + '</a></span>' +
@@ -553,10 +549,31 @@ function init(data) {{
     }}).join('');
   }}
 
+  function renderArticleList(title, meta, items, emptyText) {{
+    document.getElementById('period-title').textContent = title;
+    document.getElementById('period-count').textContent = meta;
+    document.getElementById('detail-close').hidden = false;
+    var box = document.getElementById('period-list');
+    if (!items.length) {{
+      box.innerHTML = '<div class="empty">' + escapeHtml(emptyText) + '</div>';
+      return;
+    }}
+    box.innerHTML = articleMarkup(items);
+  }}
+
+  function collapseArticleList() {{
+    document.getElementById('period-title').textContent = '📋 点击年度或趋势点查看文章';
+    document.getElementById('period-count').textContent = '';
+    document.getElementById('period-list').innerHTML = '<div class="empty">点击上方年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化原文。</div>';
+    document.getElementById('detail-close').hidden = true;
+  }}
+
   function showArticleList(title, meta, items, emptyText) {{
     renderArticleList(title, meta, items, emptyText);
     document.getElementById('period-list').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
   }}
+
+  document.getElementById('detail-close').addEventListener('click', collapseArticleList);
 
   chart.on('click', function(params) {{
     var gran = currentGran;
@@ -574,9 +591,30 @@ function init(data) {{
   document.querySelectorAll('.topic-row').forEach(function(button){{
     button.addEventListener('click', function(){{
       var topic = this.dataset.topic;
+      var detail = this.nextElementSibling;
+      if (!detail) return;
+      if (!detail.hidden) {{
+        detail.hidden = true;
+        this.setAttribute('aria-expanded', 'false');
+        return;
+      }}
+      document.querySelectorAll('.topic-detail').forEach(function(other){{
+        if (other !== detail) {{
+          other.hidden = true;
+          if (other.previousElementSibling) other.previousElementSibling.setAttribute('aria-expanded', 'false');
+        }}
+      }});
       var items = indexValues(topicItems, topic);
-      showArticleList('📚 ' + topic + ' · 对应文章',
-        '独立原文 ' + items.length + ' 篇', items, '该行业方向目前暂无可展示的独立原文。');
+      detail.innerHTML = '<div class="topic-detail-head"><span>独立原文 ' + items.length + ' 篇</span>' +
+        '<button type="button" class="detail-close topic-detail-close">收起</button></div>' +
+        (items.length ? articleMarkup(items) : '<div class="empty">该行业方向目前暂无可展示的独立原文。</div>');
+      detail.hidden = false;
+      this.setAttribute('aria-expanded', 'true');
+      detail.querySelector('.topic-detail-close').addEventListener('click', function(event){{
+        event.stopPropagation();
+        detail.hidden = true;
+        button.setAttribute('aria-expanded', 'false');
+      }});
     }});
   }});
 
