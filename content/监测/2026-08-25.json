@@ -7,42 +7,48 @@
       "status": "no_update",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "cultural-relics-news",
       "status": "no_update",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "archaeology",
       "status": "success",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 3,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "museum-association",
       "status": "partial",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 0,
-      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "xinhua-wenbo",
       "status": "partial",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 0,
-      "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
+      "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "cctv-wenbo",
       "status": "partial",
       "checkedAt": "2026-08-25T12:00:00+08:00",
       "candidateCount": 0,
-      "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
+      "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+      "mode": "archive-backfill"
     }
   ],
   "items": [
@@ -125,5 +131,6 @@
       "selectedForDaily": false,
       "origin": "archive-backfill"
     }
-  ]
+  ],
+  "mode": "archive-backfill"
 }

@@ -454,8 +454,8 @@ def as_record(row: dict, order: int) -> dict:
 
 def empty_day(day: date) -> dict:
     checked_at = datetime.combine(day, datetime.min.time(), tzinfo=TZ).replace(hour=12).isoformat()
-    return {"version": 1, "date": day.isoformat(), "coverage": [
-        {"sourceId": source_id, "status": "partial", "checkedAt": checked_at, "candidateCount": 0,
+    return {"version": 1, "date": day.isoformat(), "mode": "archive-backfill", "coverage": [
+        {"sourceId": source_id, "mode": "archive-backfill", "status": "partial", "checkedAt": checked_at, "candidateCount": 0,
          "note": "历史回溯处理中，尚未确认完整覆盖。"}
         for source_id, _crawler in CRAWLERS
     ], "items": []}
@@ -543,6 +543,7 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             payload = empty_day(day)
         payload.setdefault("version", 1)
         payload["date"] = day.isoformat()
+        payload.setdefault("mode", "archive-backfill")
         existing = {}
         for item in payload.get("items", []):
             if not item.get("sources"):
@@ -583,6 +584,12 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             complete, note = outcomes[source_id]
             status = "success" if complete and counts[source_id] else ("no_update" if complete else "partial")
             prior = current.get(source_id, {})
+            # Historical recovery must never rewrite an explicitly operational
+            # check, even when both observations have the same date or the
+            # operational run recorded a partial/failed result.
+            if prior.get("mode") == "operational":
+                refreshed.append(dict(prior, sourceId=source_id, mode="operational"))
+                continue
             # Preserve a later operational check timestamp if present.
             prior_checked = prior.get("checkedAt", "")
             # A historical backfill is allowed to add records, but it must
@@ -593,7 +600,9 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
                 status = prior["status"]
                 note = prior.get("note", "")
             refreshed.append({
-                "sourceId": source_id, "status": status,
+                "sourceId": source_id,
+                "mode": prior.get("mode") or payload.get("mode") or "archive-backfill",
+                "status": status,
                 "checkedAt": prior_checked if prior_checked > checked_at else checked_at,
                 "candidateCount": counts[source_id],
                 "note": "" if complete else note,

@@ -7,42 +7,48 @@
       "status": "success",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 1,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "cultural-relics-news",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "archaeology",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 2,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "museum-association",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "xinhua-wenbo",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     },
     {
       "sourceId": "cctv-wenbo",
       "status": "no_update",
       "checkedAt": "2026-08-27T22:00:46+08:00",
       "candidateCount": 0,
-      "note": ""
+      "note": "",
+      "mode": "archive-backfill"
     }
   ],
   "items": [
@@ -129,5 +135,6 @@
       "selectedForDaily": false,
       "origin": "archive-backfill"
     }
-  ]
+  ],
+  "mode": "archive-backfill"
 }

@@ -37,6 +37,8 @@ BANNED = (
 URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
 MONITORING = CONTENT / '监测'
 MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
+MONITOR_MODES = {'archive-backfill', 'operational'}
+MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
 MONITOR_SCOPES = {'province', 'national', 'international', 'unassigned'}
 PROVINCES = {
     '北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江',
@@ -137,6 +139,9 @@ def check_monitoring(required_date=None):
             file_date = path.stem
             if payload.get('date') != file_date:
                 errors.append(f'{path.relative_to(ROOT)}: date must match filename')
+            mode = payload.get('mode')
+            if mode not in MONITOR_MODES:
+                errors.append(f'{path.relative_to(ROOT)}: mode must be archive-backfill or operational')
             coverage = payload.get('coverage')
             if not isinstance(coverage, list):
                 errors.append(f'{path.relative_to(ROOT)}: coverage must be a list')
@@ -151,6 +156,10 @@ def check_monitoring(required_date=None):
             if extra:
                 errors.append(f'{path.relative_to(ROOT)}: unknown coverage sources: {", ".join(extra)}')
             for row in coverage:
+                if row.get('mode') not in MONITOR_MODES:
+                    errors.append(f'{path.relative_to(ROOT)}: invalid coverage mode for {row.get("sourceId", "?")}')
+                elif mode in MONITOR_MODES and row.get('mode') != mode:
+                    errors.append(f'{path.relative_to(ROOT)}: coverage mode mismatch for {row.get("sourceId", "?")}')
                 if row.get('status') not in MONITOR_STATUSES:
                     errors.append(f'{path.relative_to(ROOT)}: invalid coverage status for {row.get("sourceId", "?")}')
                 count = row.get('candidateCount')
@@ -176,6 +185,15 @@ def check_monitoring(required_date=None):
                     errors.append(f'{path.relative_to(ROOT)}: candidateCount mismatch for {source_id}')
         for index, record in enumerate(records):
             label = f'{path.relative_to(ROOT)} record {index + 1}'
+            origin = record.get('origin')
+            if origin not in MONITOR_ORIGINS:
+                errors.append(f'{label}: invalid origin {origin}')
+            elif path == baseline_path and origin != 'legacy-daily-selection':
+                errors.append(f'{label}: baseline origin must be legacy-daily-selection')
+            elif path != baseline_path and payload.get('mode') in MONITOR_MODES:
+                expected_origin = 'archive-backfill' if payload['mode'] == 'archive-backfill' else 'fixed-panel-monitoring'
+                if origin != expected_origin:
+                    errors.append(f'{label}: origin does not match mode {payload["mode"]}')
             errors.extend(check_monitor_record(record, label))
             record_id = record.get('recordId')
             if record_id in seen_ids:

@@ -728,15 +728,45 @@ def load_monitoring_corpus():
             daily = json.load(f)
         file_date = os.path.splitext(os.path.basename(path))[0]
         corpus['dailyFiles'].append(file_date)
+        daily_mode = daily.get('mode') or daily.get('monitoringMode') or ''
+        if daily_mode not in {'archive-backfill', 'operational'}:
+            item_origins = {item.get('origin') for item in (daily.get('items') or [])}
+            daily_mode = 'archive-backfill' if 'archive-backfill' in item_origins else 'unknown'
         for coverage in daily.get('coverage') or []:
             row = dict(coverage)
             row['date'] = daily.get('date') or file_date
+            row.setdefault('mode', daily_mode)
             corpus['coverage'].append(row)
         for record in daily.get('items') or []:
             row = dict(record)
             row.setdefault('date', daily.get('date') or file_date)
-            row.setdefault('origin', 'fixed-panel-monitoring')
+            row.setdefault('origin', daily_mode if daily_mode in {
+                'archive-backfill', 'fixed-panel-monitoring'
+            } else 'fixed-panel-monitoring')
             corpus['records'].append(row)
+
+    # Coverage is keyed by source and observation date.  Keep the newest
+    # observation; if timestamps tie, prefer the more conservative status.
+    coverage_status_rank = {'no_update': 1, 'success': 2, 'partial': 3, 'failed': 4}
+    unique_coverage = {}
+    for row in corpus['coverage']:
+        key = (row.get('date', ''), row.get('sourceId', ''))
+        old = unique_coverage.get(key)
+        if old is None:
+            unique_coverage[key] = row
+            continue
+        old_checked = old.get('checkedAt', '') or ''
+        new_checked = row.get('checkedAt', '') or ''
+        if new_checked > old_checked or (
+            new_checked == old_checked and
+            coverage_status_rank.get(row.get('status', ''), 0) >
+            coverage_status_rank.get(old.get('status', ''), 0)
+        ):
+            unique_coverage[key] = row
+    corpus['coverage'] = sorted(
+        unique_coverage.values(),
+        key=lambda row: (row.get('date', ''), row.get('sourceId', ''))
+    )
 
     # A source URL is an immutable observation key.  If a manual correction
     # creates a duplicate, keep the newest copy rather than double-counting it.
@@ -803,9 +833,19 @@ def build_heatmap_data(corpus):
     provincial_candidates, national_candidates, international_candidates = [], [], []
     excluded_non_panel = unassigned = 0
     source_records = {source_id: 0 for source_id in MAP_SOURCE_PANEL}
-    operational_records = 0
+    provenance_records = {
+        'legacy-daily-selection': 0,
+        'archive-backfill': 0,
+        'fixed-panel-monitoring': 0,
+    }
+    other_provenance_records = {}
 
     for record in corpus['records']:
+        origin = record.get('origin', 'unknown')
+        if origin in provenance_records:
+            provenance_records[origin] += 1
+        else:
+            other_provenance_records[origin] = other_provenance_records.get(origin, 0) + 1
         rdate = record.get('date', '')
         record_id = record.get('recordId', '')
         title = record.get('title', '')
@@ -823,8 +863,6 @@ def build_heatmap_data(corpus):
             excluded_non_panel += 1
             audit.append(('non-panel', rdate, record_id, title, '-', record.get('locationTier', 'unassigned')))
             continue
-        if record.get('origin') == 'fixed-panel-monitoring':
-            operational_records += 1
         scope = record.get('scope', 'province')
         candidate = _monitor_candidate(record, grade)
         if scope == 'province' and record.get('primaryProvince'):
@@ -847,23 +885,50 @@ def build_heatmap_data(corpus):
     good_statuses = {'success', 'no_update'}
     coverage_statuses = {'success': 0, 'no_update': 0, 'partial': 0, 'failed': 0}
     coverage_by_date = {}
+    coverage_by_mode = {}
     for row in corpus['coverage']:
         status = row.get('status', '')
         if status in coverage_statuses:
             coverage_statuses[status] += 1
         coverage_by_date.setdefault(row.get('date', ''), {})[row.get('sourceId', '')] = status
+        mode = row.get('mode', 'unknown')
+        mode_stats = coverage_by_mode.setdefault(mode, {'checks': 0, 'good': 0, 'dates': set()})
+        mode_stats['checks'] += 1
+        mode_stats['dates'].add(row.get('date', ''))
+        if status in good_statuses:
+            mode_stats['good'] += 1
     complete_coverage_days = sum(
         1 for day in coverage_by_date.values()
         if all(day.get(source_id) in good_statuses for source_id in MAP_SOURCE_PANEL)
     )
+    coverage_by_mode = {
+        mode: {'checks': values['checks'], 'good': values['good'],
+               'days': len({day for day in values['dates'] if day})}
+        for mode, values in coverage_by_mode.items()
+    }
+    mode_dates = {}
+    for row in corpus['coverage']:
+        mode_dates.setdefault(row.get('mode', 'unknown'), set()).add(row.get('date', ''))
+    mode_dates = {
+        mode: sorted(day for day in dates if day)
+        for mode, dates in mode_dates.items()
+    }
+    legacy_records = provenance_records['legacy-daily-selection']
+    archive_records = provenance_records['archive-backfill']
+    operational_records = provenance_records['fixed-panel-monitoring']
     stats = {
         'totalMonitoredRecords': len(corpus['records']),
         'includedProvincialRecords': len(provincial_candidates),
         'provincialEvents': len(events),
         'nationalEvents': len(national_events),
         'internationalEvents': len(international_events),
-        'legacyBaselineRecords': corpus['baseline']['recordCount'],
+        'legacyBaselineRecords': legacy_records,
+        'archiveBackfillRecords': archive_records,
+        'fixedPanelMonitoringRecords': operational_records,
         'operationalRecords': operational_records,
+        'provenanceRecords': provenance_records,
+        'otherProvenanceRecords': other_provenance_records,
+        'provenanceReconciled': sum(provenance_records.values()) + sum(other_provenance_records.values()) == len(corpus['records']),
         'excludedNonPanel': excluded_non_panel,
         'unassigned': unassigned,
         'panelSourceCount': len(MAP_SOURCE_PANEL),
@@ -871,6 +936,11 @@ def build_heatmap_data(corpus):
         'completeCoverageDays': complete_coverage_days,
         'successfulSourceChecks': sum(1 for row in corpus['coverage'] if row.get('status') in good_statuses),
         'coverageStatuses': coverage_statuses,
+        'coverageByMode': coverage_by_mode,
+        'archiveBackfillCoverageChecks': coverage_by_mode.get('archive-backfill', {}).get('checks', 0),
+        'operationalCoverageChecks': coverage_by_mode.get('operational', {}).get('checks', 0),
+        'archiveBackfillCoverageDays': coverage_by_mode.get('archive-backfill', {}).get('days', 0),
+        'operationalCoverageDays': coverage_by_mode.get('operational', {}).get('days', 0),
         'recordsBySource': source_records,
     }
     samples = [{
@@ -900,6 +970,8 @@ def build_heatmap_data(corpus):
             'panel': map_source_registry_rows(),
             'checks': corpus['coverage'],
             'monitoringStart': coverage_dates[0] if coverage_dates else '',
+            'archiveBackfillStart': (mode_dates.get('archive-backfill') or [''])[0],
+            'operationalStart': (mode_dates.get('operational') or [''])[0],
             'baseline': corpus['baseline'],
         },
         'stats': stats,

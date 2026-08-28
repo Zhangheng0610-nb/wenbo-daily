@@ -363,7 +363,7 @@ def aggregate(items, source_items):
     for it in items:
         ym = it['date'].strftime('%Y-%m')
         iso = it['date'].isocalendar()
-        wk = f"{it['date'].strftime('%Y')}-W{iso[1]:02d}"
+        wk = f"{iso.year}-W{iso.week:02d}"
         year = str(it['date'].year)
         by_month[ym].append(it)
         by_week[wk].append(it)
@@ -372,7 +372,7 @@ def aggregate(items, source_items):
     for it in source_items:
         ym = it['date'].strftime('%Y-%m')
         iso = it['date'].isocalendar()
-        wk = f"{it['date'].strftime('%Y')}-W{iso[1]:02d}"
+        wk = f"{iso.year}-W{iso.week:02d}"
         year = str(it['date'].year)
         source_by_month[ym].append(it)
         source_by_week[wk].append(it)
