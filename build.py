@@ -2989,6 +2989,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 <nav class="quick-nav" aria-label="主要栏目">
   <a class="primary" href="{latest_daily_href}">今日精选</a>
   <a href="#daily-list">日报档案</a>
+  <a href="command-center/">🛰️ 数字驾驶舱</a>
   <a href="heatmap.html">行业关注地图</a>
   <a href="digital-trends.html">数字趋势</a>
   <a href="intern.html">实习</a>
@@ -3017,7 +3018,7 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 </main>
 
 <footer>
-  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
+  <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ <a href="command-center/">数字驾驶舱</a> ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
 <button id="collapse-floating" class="collapse-floating" type="button" onclick="collapseActiveSection()" aria-label="收起已展开的历史栏目">↑ 收起本栏</button>
@@ -3337,6 +3338,11 @@ def build_sitemap(daily_reports, weekly_reports=None, monthly_reports=None):
   </url>''')
     urls.append(f'''  <url>
     <loc>{base}/digital-trends.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>''')
+    urls.append(f'''  <url>
+    <loc>{base}/command-center/</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>''')
@@ -3794,6 +3800,13 @@ def main():
         digital_trend.main(['--build-only'])
     except Exception as e:
         print(f'Digital trends: SKIP ({e})')
+
+    # Build the independent dashboard after the data artifacts are ready.
+    try:
+        import build_command_center
+        build_command_center.main()
+    except Exception as e:
+        print(f'Command center: SKIP ({e})')
 
     print('\nDone! Run push to deploy.')
 
