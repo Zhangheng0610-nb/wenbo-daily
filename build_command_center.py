@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build the independent visual command-center page.
 
-The page reads the site's existing JSON outputs at runtime. It has its own
-HTML/CSS/JS surface and can later move to a separate repo or subdomain.
+The dashboard reads the main site's existing JSON outputs at runtime. Its
+interaction state and visual shell are independent from the editorial pages.
 """
 from pathlib import Path
 
@@ -21,198 +21,190 @@ HTML = r'''<!doctype html>
   <meta name="description" content="每日文博资讯文博行业数字驾驶舱：数字化趋势与行业关注地图。">
   <title>文博行业数字驾驶舱｜每日文博资讯</title>
   <style>
-    :root { --bg:#050b16; --panel:#0b1525; --line:#1b3953; --cyan:#54d7ff; --blue:#3b8dff; --gold:#ffc857; --mint:#45e0b1; --text:#eaf5ff; --muted:#86a0b7; --danger:#ff7f79; }
+    :root { --bg:#050a14; --panel:#0b1525; --panel-2:#0e1c2f; --line:#1d3c57; --line-soft:rgba(133,172,201,.17); --cyan:#57dcff; --blue:#4b8dff; --gold:#ffc857; --mint:#43dfae; --text:#edf7ff; --muted:#8aa7bd; --dim:#58748a; --danger:#ff8982; }
     * { box-sizing:border-box; }
-    html,body { margin:0; min-height:100%; background:radial-gradient(circle at 50% -20%,#17304e 0,#081120 35%,#050b16 72%); color:var(--text); font-family:Inter,"Microsoft YaHei","PingFang SC",sans-serif; }
+    html,body { margin:0; min-height:100%; background:radial-gradient(circle at 50% -18%,#1a3553 0,#081221 33%,#050a14 72%); color:var(--text); font-family:Inter,"Microsoft YaHei","PingFang SC",sans-serif; }
     body { padding:20px; }
     a { color:inherit; }
-    .shell { width:min(1700px,100%); margin:auto; }
-    .topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; padding:10px 2px 18px; border-bottom:1px solid rgba(84,215,255,.28); }
+    button,select { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1720px,100%); margin:auto; }
+    .topbar { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; padding:9px 2px 18px; border-bottom:1px solid rgba(87,220,255,.32); }
     .eyebrow { color:var(--cyan); font-size:11px; letter-spacing:.24em; text-transform:uppercase; }
-    h1 { margin:6px 0 0; font-size:clamp(25px,3vw,44px); letter-spacing:.08em; font-weight:700; text-shadow:0 0 18px rgba(84,215,255,.42); }
-    .top-actions { display:flex; align-items:center; gap:12px; color:var(--muted); font-size:13px; text-align:right; }
-    .top-actions a,.top-actions button { border:1px solid var(--line); border-radius:5px; background:#0d1b2c; color:var(--text); padding:8px 12px; text-decoration:none; cursor:pointer; }
+    h1 { margin:6px 0 0; font-size:clamp(27px,3vw,46px); letter-spacing:.08em; font-weight:750; text-shadow:0 0 18px rgba(87,220,255,.38); }
+    .top-actions { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:12px; text-align:right; }
+    .top-actions a,.top-actions button { border:1px solid var(--line); border-radius:5px; background:#0d1b2c; color:var(--text); padding:8px 12px; text-decoration:none; }
     .top-actions a:hover,.top-actions button:hover { border-color:var(--cyan); color:var(--cyan); }
     .status { color:var(--mint); white-space:nowrap; }
-    .kpis { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:16px 0; }
-    .kpi,.panel { position:relative; overflow:hidden; border:1px solid var(--line); background:linear-gradient(145deg,rgba(16,34,56,.94),rgba(7,16,29,.94)); box-shadow:inset 0 0 28px rgba(40,115,165,.08),0 10px 35px rgba(0,0,0,.16); }
-    .kpi { min-height:96px; padding:14px 16px; }
-    .kpi:before,.panel:before { position:absolute; content:""; top:0; left:0; width:58px; height:2px; background:var(--cyan); box-shadow:0 0 12px var(--cyan); }
+    .toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:15px 0 12px; padding:11px 12px; border:1px solid var(--line); background:rgba(10,25,42,.68); }
+    .toolbar-label { color:var(--muted); font-size:12px; }
+    .segmented { display:flex; gap:3px; padding:3px; border:1px solid var(--line); background:#071321; border-radius:6px; }
+    .segmented button { border:0; border-radius:4px; padding:6px 11px; color:var(--muted); background:transparent; font-size:12px; }
+    .segmented button.active,.segmented button:hover { color:#03101b; background:var(--cyan); }
+    .filter { min-width:140px; border:1px solid var(--line); border-radius:5px; padding:7px 9px; color:var(--text); background:#0a1727; }
+    .filter:focus { outline:1px solid var(--cyan); }
+    .reset { border:1px solid rgba(255,200,87,.45); border-radius:5px; padding:7px 11px; color:var(--gold); background:transparent; }
+    .reset:hover { background:rgba(255,200,87,.1); }
+    .selection-copy { margin-left:auto; color:var(--muted); font-size:12px; }
+    .selection-copy strong { color:var(--cyan); font-weight:500; }
+    .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:14px; }
+    .kpi,.panel { position:relative; overflow:hidden; border:1px solid var(--line); background:linear-gradient(145deg,rgba(16,35,58,.95),rgba(7,15,28,.97)); box-shadow:inset 0 0 28px rgba(40,115,165,.08),0 10px 35px rgba(0,0,0,.18); }
+    .kpi { min-height:92px; padding:13px 16px; }
+    .kpi:before,.panel:before { position:absolute; content:""; top:0; left:0; width:64px; height:2px; background:var(--cyan); box-shadow:0 0 12px var(--cyan); }
     .kpi-label { color:var(--muted); font-size:12px; }
-    .kpi-value { margin-top:8px; font:700 clamp(25px,3vw,37px)/1 "Arial Narrow",Inter,sans-serif; letter-spacing:.04em; color:#f6fbff; }
+    .kpi-value { margin-top:8px; font:700 clamp(25px,3vw,38px)/1 "Arial Narrow",Inter,sans-serif; letter-spacing:.04em; color:#f6fbff; }
     .kpi-unit { margin-left:4px; color:var(--cyan); font-size:12px; }
-    .grid-main { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr); gap:14px; }
-    .panel { padding:16px; }
-    .panel-title { display:flex; justify-content:space-between; gap:10px; align-items:baseline; margin-bottom:12px; color:#e8f5ff; font-weight:700; letter-spacing:.08em; }
+    .kpi-note { margin-top:6px; color:var(--dim); font-size:10px; }
+    .main-grid { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(360px,.75fr); gap:14px; }
+    .panel { padding:15px; }
+    .panel-title { display:flex; justify-content:space-between; gap:10px; align-items:baseline; margin-bottom:11px; color:#e8f5ff; font-weight:700; letter-spacing:.08em; }
     .panel-title small { color:var(--muted); font-size:11px; font-weight:400; letter-spacing:0; }
-    #map { height:520px; width:100%; }
-    .map-note { color:var(--muted); font-size:11px; line-height:1.7; margin:0; }
-    .event-list { height:520px; overflow:auto; padding-right:4px; }
-    .event { padding:12px 0; border-bottom:1px solid rgba(134,160,183,.16); }
+    .panel-help { color:var(--dim); font-size:11px; line-height:1.7; }
+    #map { height:505px; width:100%; }
+    .map-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:5px; color:var(--muted); font-size:11px; }
+    .map-foot strong { color:var(--gold); font-weight:500; }
+    .event-list { height:505px; overflow:auto; padding-right:4px; }
+    .event { padding:10px 0; border-bottom:1px solid var(--line-soft); }
     .event:last-child { border-bottom:0; }
-    .event-title { display:block; color:#f0f8ff; text-decoration:none; font-size:14px; line-height:1.55; }
+    .event summary { cursor:pointer; list-style:none; }
+    .event summary::-webkit-details-marker { display:none; }
+    .event summary:after { content:"＋"; float:right; color:var(--cyan); font-size:14px; }
+    .event[open] summary:after { content:"－"; }
+    .event-title { display:block; color:#f0f8ff; text-decoration:none; font-size:13px; line-height:1.55; padding-right:16px; }
     .event-title:hover { color:var(--cyan); }
-    .event-meta { display:flex; flex-wrap:wrap; gap:6px 10px; margin-top:7px; color:var(--muted); font-size:11px; }
+    .event-meta { display:flex; flex-wrap:wrap; gap:5px 10px; margin-top:6px; color:var(--muted); font-size:11px; }
     .tag { color:var(--gold); }
-    .charts { display:grid; grid-template-columns:1.25fr .75fr; gap:14px; margin-top:14px; }
-    .chart { height:310px; }
-    .topic-list { display:grid; gap:10px; margin-top:15px; }
-    .topic-row { display:grid; grid-template-columns:1fr 44px; gap:10px; align-items:center; color:#d9e9f5; font-size:12px; }
-    .topic-bar { height:7px; margin-top:5px; border-radius:99px; background:#14263a; overflow:hidden; }
+    .event-detail { margin:8px 0 0; padding:8px 10px; border-left:2px solid var(--blue); background:rgba(25,61,91,.22); color:#b9cddd; font-size:11px; line-height:1.75; }
+    .event-detail a { color:var(--cyan); text-decoration:none; }
+    .event-detail a:hover { text-decoration:underline; }
+    .lower-grid { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(330px,.88fr); gap:14px; margin-top:14px; }
+    .chart { height:330px; }
+    .trend-head { display:flex; align-items:baseline; justify-content:space-between; gap:8px; }
+    .trend-mode button { border:0; background:none; color:var(--muted); padding:2px 4px; font-size:11px; }
+    .trend-mode button.active { color:var(--cyan); }
+    .topic-list { display:grid; gap:7px; }
+    .topic-row { display:grid; grid-template-columns:minmax(0,1fr) 42px; gap:10px; align-items:center; padding:8px 9px; border:1px solid transparent; border-radius:4px; color:#dcecf7; font-size:12px; background:rgba(8,22,38,.42); }
+    .topic-row:hover,.topic-row.active { border-color:rgba(87,220,255,.5); background:rgba(25,74,103,.35); }
+    .topic-row button { display:block; width:100%; border:0; padding:0; color:inherit; text-align:left; background:none; }
+    .topic-bar { height:6px; margin-top:6px; border-radius:99px; background:#14263a; overflow:hidden; }
     .topic-bar i { display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--blue),var(--cyan)); box-shadow:0 0 9px rgba(84,215,255,.6); }
     .topic-count { color:var(--cyan); text-align:right; }
+    .coverage-grid { display:grid; gap:8px; }
+    .coverage-row { display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; padding:8px 9px; border-bottom:1px solid var(--line-soft); color:#d8eaf5; font-size:12px; }
+    .coverage-row small { color:var(--muted); }
+    .coverage-row .ok { color:var(--mint); }
     .detail { margin-top:14px; display:none; }
     .detail.show { display:block; }
-    .detail-body { max-height:300px; overflow:auto; }
+    .detail-title { color:var(--cyan); }
+    .detail-body { max-height:340px; overflow:auto; }
     .empty { color:var(--muted); padding:34px 0; text-align:center; }
-    .footnote { margin:15px 2px 0; color:var(--muted); font-size:11px; line-height:1.8; }
+    .footnote { margin:14px 2px 0; color:var(--muted); font-size:11px; line-height:1.8; }
     .footnote strong { color:#c6d9e8; }
     .error { color:var(--danger); padding:40px; text-align:center; }
-    @media (max-width:980px) { body{padding:12px}.kpis{grid-template-columns:repeat(3,1fr)}.grid-main,.charts{grid-template-columns:1fr}#map,.event-list{height:430px} }
-    @media (max-width:600px) { .topbar{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:space-between;text-align:left}.kpis{grid-template-columns:repeat(2,1fr);gap:8px}.kpi{padding:12px;min-height:86px}.kpi-value{font-size:25px}.panel{padding:12px}.chart{height:280px}h1{letter-spacing:.04em} }
+    @media (max-width:1020px) { body{padding:12px}.kpis{grid-template-columns:repeat(2,1fr)}.main-grid,.lower-grid{grid-template-columns:1fr}#map,.event-list{height:430px}.selection-copy{width:100%;margin-left:0} }
+    @media (max-width:600px) { .topbar{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:space-between;text-align:left;flex-wrap:wrap}.toolbar{align-items:flex-start}.filter{flex:1;min-width:130px}.kpis{gap:8px}.kpi{padding:12px;min-height:82px}.kpi-value{font-size:25px}.panel{padding:12px}.chart{height:285px}h1{letter-spacing:.04em} }
   </style>
 </head>
 <body>
 <div class="shell">
   <header class="topbar">
-    <div>
-      <div class="eyebrow">WENBO DAILY · DATA COMMAND CENTER</div>
-      <h1>文博行业数字驾驶舱</h1>
-    </div>
-    <div class="top-actions">
-      <span class="status">● 数据链路正常</span>
-      <span id="updated">读取数据中</span>
-      <a href="../index.html">返回每日文博资讯</a>
-      <button type="button" id="fullscreen">全屏</button>
-    </div>
+    <div><div class="eyebrow">WENBO DAILY · DATA COMMAND CENTER</div><h1>文博行业数字驾驶舱</h1></div>
+    <div class="top-actions"><span class="status">● 数据链路正常</span><span id="updated">读取数据中</span><a href="../index.html">返回每日文博资讯</a><button type="button" id="fullscreen">全屏</button></div>
   </header>
 
+  <section class="toolbar" aria-label="驾驶舱筛选条件">
+    <span class="toolbar-label">观察窗口</span>
+    <div class="segmented" id="window-buttons"><button data-days="30">近30天</button><button data-days="90" class="active">近90天</button><button data-days="365">近一年</button><button data-days="all">全部</button></div>
+    <select id="province-filter" class="filter" aria-label="地区筛选"><option value="">全部地区</option></select>
+    <select id="topic-filter" class="filter" aria-label="行业方向筛选"><option value="">全部数字化方向</option></select>
+    <button type="button" class="reset" id="reset">重置筛选</button>
+    <span class="selection-copy" id="selection-copy">当前显示：<strong>近90天全部样本</strong></span>
+  </section>
+
   <section class="kpis" aria-label="核心指标">
-    <div class="kpi"><div class="kpi-label">数字化独立原文</div><div class="kpi-value" id="k-unique">—</div></div>
-    <div class="kpi"><div class="kpi-label">数字化报道占比</div><div class="kpi-value" id="k-share">—<span class="kpi-unit">%</span></div></div>
-    <div class="kpi"><div class="kpi-label">近90天地区事件</div><div class="kpi-value" id="k-events">—</div></div>
-    <div class="kpi"><div class="kpi-label">固定权威信源</div><div class="kpi-value" id="k-sources">—<span class="kpi-unit">个</span></div></div>
-    <div class="kpi"><div class="kpi-label">数据覆盖范围</div><div class="kpi-value" id="k-range" style="font-size:21px">—</div></div>
+    <div class="kpi"><div class="kpi-label">窗口内数字化独立原文</div><div class="kpi-value" id="k-digital">—</div><div class="kpi-note">按原文 URL 去重</div></div>
+    <div class="kpi"><div class="kpi-label">数字化报道占比</div><div class="kpi-value" id="k-share">—<span class="kpi-unit">%</span></div><div class="kpi-note" id="k-share-note">同窗口国家文物局文物新闻分母</div></div>
+    <div class="kpi"><div class="kpi-label">窗口内重点事项</div><div class="kpi-value" id="k-events">—</div><div class="kpi-note">固定权威信源独立事件</div></div>
+    <div class="kpi"><div class="kpi-label">当前覆盖来源</div><div class="kpi-value" id="k-sources">—<span class="kpi-unit">个</span></div><div class="kpi-note" id="k-source-note">固定信源池</div></div>
   </section>
 
   <main>
-    <div class="grid-main">
+    <div class="main-grid">
       <section class="panel">
-        <div class="panel-title"><span>全国行业关注分布</span><small>固定权威信源 · 近30天样本</small></div>
+        <div class="panel-title"><span>全国行业关注分布</span><small id="map-window">固定权威信源 · 近90天样本</small></div>
         <div id="map"></div>
-        <p class="map-note">颜色深浅表示固定信源近期报道关注的相对集中度，不代表各地区真实活动总量。点击省份查看对应事项；地图数据与日报精选相互独立。</p>
+        <div class="map-foot"><span>颜色深浅表示样本内相对关注集中度，不等于地区真实活动量。</span><strong id="map-hint">点击省份查看事项</strong></div>
       </section>
       <section class="panel">
-        <div class="panel-title"><span>近期重点事项</span><small id="event-summary">—</small></div>
+        <div class="panel-title"><span>重点事项研判</span><small id="event-summary">—</small></div>
         <div class="event-list" id="events"><div class="empty">正在读取监测记录…</div></div>
       </section>
     </div>
 
-    <div class="charts">
+    <div class="lower-grid">
       <section class="panel">
-        <div class="panel-title"><span>数字化年度趋势</span><small>独立原文数 + 占比</small></div>
-        <div id="year-chart" class="chart"></div>
+        <div class="trend-head"><div class="panel-title"><span>数字化趋势</span><small id="trend-note">独立原文数 + 占比</small></div><div class="trend-mode" id="trend-mode"><button data-mode="year" class="active">年度</button><button data-mode="month">月份</button></div></div>
+        <div id="trend-chart" class="chart"></div>
       </section>
       <section class="panel">
-        <div class="panel-title"><span>数字化行业方向</span><small>按独立原文统计</small></div>
-        <div id="topics" class="topic-list"></div>
+        <div class="panel-title"><span>数字化行业方向</span><small>点击方向筛选文章</small></div>
+        <div class="topic-list" id="topics"></div>
       </section>
     </div>
 
-    <section class="panel detail" id="detail">
-      <div class="panel-title"><span id="detail-title">地区事项</span><small>点击标题打开原文</small></div>
-      <div class="detail-body" id="detail-body"></div>
-    </section>
-  </main>
+    <div class="lower-grid">
+      <section class="panel">
+        <div class="panel-title"><span>数字化报道明细</span><small id="digital-summary">—</small></div>
+        <div class="event-list" id="digital-list" style="height:360px"><div class="empty">正在读取趋势文章…</div></div>
+      </section>
+      <section class="panel">
+        <div class="panel-title"><span>固定信源覆盖</span><small>窗口内检查状态</small></div>
+        <div class="coverage-grid" id="coverage"></div>
+        <p class="panel-help" id="coverage-note" style="margin-top:12px">覆盖率仅描述本页监测记录是否完整，不代表信源内容数量。</p>
+      </section>
+    </div>
 
-  <p class="footnote"><strong>口径提示：</strong>数字化趋势来自国家文物局“文物新闻”栏目中的关键词筛选，并按原文 URL 去重；行业关注地图来自固定权威信源的独立事件监测。驾驶舱用于发现线索，不替代原文核验，也不把样本量解释为行业真实总量。</p>
+    <section class="panel detail" id="detail"><div class="panel-title"><span class="detail-title" id="detail-title">当前选择</span><small>点击标题打开原文</small></div><div class="detail-body" id="detail-body"></div></section>
+  </main>
+  <p class="footnote"><strong>口径提示：</strong>数字化趋势来自国家文物局“文物新闻”栏目关键词筛选，并按原文 URL 去重；行业关注来自固定权威信源的独立事件监测。筛选、图表与文章明细只在现有数据范围内联动，不把样本量解释为行业真实总量。</p>
 </div>
 <script src="../echarts.min.js"></script>
 <script>
-  const articleUrl = (url) => url && url.startsWith('/') ? 'https://www.ncha.gov.cn' + url : (url || '#');
-  const $ = (id) => document.getElementById(id);
-  const dateValue = (s) => Date.parse((s || '') + 'T00:00:00+08:00');
-  const escapeHtml = (s) => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const $ = id => document.getElementById(id);
+  const dateValue = s => Date.parse((s || '') + 'T00:00:00+08:00');
   const ageDays = (s, asOf) => Math.max(0, (dateValue(asOf) - dateValue(s)) / 86400000);
-  let heat = null, digital = null, mapChart = null;
+  const escapeHtml = s => String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const articleUrl = url => url && url.startsWith('/') ? 'https://www.ncha.gov.cn' + url : (url || '#');
   const shortToGeo = {'北京':'北京市','天津':'天津市','河北':'河北省','山西':'山西省','内蒙古':'内蒙古自治区','辽宁':'辽宁省','吉林':'吉林省','黑龙江':'黑龙江省','上海':'上海市','江苏':'江苏省','浙江':'浙江省','安徽':'安徽省','福建':'福建省','江西':'江西省','山东':'山东省','河南':'河南省','湖北':'湖北省','湖南':'湖南省','广东':'广东省','广西':'广西壮族自治区','海南':'海南省','重庆':'重庆市','四川':'四川省','贵州':'贵州省','云南':'云南省','西藏':'西藏自治区','陕西':'陕西省','甘肃':'甘肃省','青海':'青海省','宁夏':'宁夏回族自治区','新疆':'新疆维吾尔自治区','台湾':'台湾省','香港':'香港特别行政区','澳门':'澳门特别行政区'};
+  let digital = null, heat = null, mapChart = null, trendChart = null;
+  let state = {days:90, province:'', topic:'', trendMode:'year', trendPeriod:''};
 
-  function eventScore(event, asOf) {
-    const recency = 100 * Math.pow((heat && heat.decay) || .93, ageDays(event.lastDate, asOf));
-    return (+event.impact || 0) * .35 + (+event.evidence || 0) * .30 + (+event.breadth || 0) * .20 + recency * .15;
-  }
-  function inLast30(event) { return ageDays(event.lastDate, heat.asOf) < 30; }
-  function provinceRows() {
-    const rows = {};
-    (heat.events || []).filter(inLast30).forEach(event => {
-      if (!event.primaryProvince) return;
-      const p = event.primaryProvince;
-      if (!rows[p]) rows[p] = {name:p, raw:0, events:[], count:0};
-      rows[p].raw += eventScore(event, heat.asOf); rows[p].events.push(event); rows[p].count++;
-    });
-    const max = Math.max(0, ...Object.values(rows).map(x => x.raw));
-    return Object.values(rows).map(x => ({...x, index:max ? x.raw / max * 100 : 0})).sort((a,b) => b.raw-a.raw);
-  }
-  function renderKpis(rows) {
-    const s = digital.stats || {}, hs = heat.stats || {};
-    $('k-unique').textContent = s.unique_source_pages ?? '—';
-    $('k-share').firstChild.textContent = s.overall_share ?? '—';
-    $('k-events').textContent = hs.provincialEvents ?? rows.reduce((n,x)=>n+x.count,0);
-    $('k-sources').firstChild.textContent = hs.panelSourceCount ?? (heat.coverage && heat.coverage.panel || []).length;
-    $('k-range').textContent = (digital.range && digital.range.start || '—') + '—' + (digital.range && digital.range.end || '—');
-    $('updated').textContent = '更新于 ' + (digital.generated || heat.generated || '—');
-    $('event-summary').textContent = rows.length + ' 个地区 · ' + rows.reduce((n,x)=>n+x.count,0) + ' 件事项';
-  }
-  function renderEvents(events, target) {
-    const list = (events || []).slice().sort((a,b)=>eventScore(b,heat.asOf)-eventScore(a,heat.asOf)).slice(0,14);
-    if (!list.length) { target.innerHTML = '<div class="empty">当前监测窗口暂无合格事项。</div>'; return; }
-    target.innerHTML = list.map(e => {
-      const r = e.reports && e.reports[0] || {};
-      return '<article class="event"><a class="event-title" href="'+escapeHtml(r.url || '#')+'" target="_blank" rel="noopener">'+escapeHtml(e.title)+'</a><div class="event-meta"><span>'+escapeHtml(e.lastDate)+'</span><span class="tag">'+escapeHtml(e.primaryProvince || '全国性')+'</span><span>'+escapeHtml(e.primaryTheme || (e.themes||[])[0] || '行业动态')+'</span><span>指数 '+eventScore(e,heat.asOf).toFixed(0)+'</span></div></article>';
-    }).join('');
-  }
-  function renderDetail(row) {
-    const box = $('detail');
-    if (!row) { box.classList.remove('show'); return; }
-    $('detail-title').textContent = row.name + ' · ' + row.count + ' 件事项';
-    $('detail-body').innerHTML = row.events.sort((a,b)=>eventScore(b,heat.asOf)-eventScore(a,heat.asOf)).map(e => {
-      const r = e.reports && e.reports[0] || {};
-      return '<article class="event"><a class="event-title" href="'+escapeHtml(r.url || '#')+'" target="_blank" rel="noopener">'+escapeHtml(e.title)+'</a><div class="event-meta"><span>'+escapeHtml(e.lastDate)+'</span><span>'+escapeHtml(e.primaryTheme || (e.themes||[])[0] || '行业动态')+'</span><span>'+escapeHtml((e.sources||[]).map(s=>s.name).join('、'))+'</span></div></article>';
-    }).join('');
-    box.classList.add('show'); box.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
-  function renderMap(rows, geo) {
-    if (!window.echarts) { $('map').innerHTML='<div class="error">图表组件不可用，请打开网络或使用桌面浏览器。</div>'; return; }
-    const geoFeatures = (geo.features || []).filter(f => f.properties && f.properties.name);
-    echarts.registerMap('wenbo-china', {...geo, features:geoFeatures});
-    mapChart = echarts.init($('map'));
-    const values = rows.map(r => ({name:shortToGeo[r.name] || r.name, value:+r.index.toFixed(1), count:r.count}));
-    mapChart.setOption({backgroundColor:'transparent',tooltip:{trigger:'item',backgroundColor:'#0b1525',borderColor:'#2a6484',textStyle:{color:'#eaf5ff'},formatter:p=>{const row=rows.find(r=>(shortToGeo[r.name]||r.name)===p.name);return '<b>'+p.name+'</b><br/>关注指数：'+(row?row.index.toFixed(0):'—')+'<br/>近30天事项：'+(row?row.count:0);}},visualMap:{min:0,max:100,left:12,bottom:4,text:['高','低'],textStyle:{color:'#86a0b7'},inRange:{color:['#102238','#155174','#2f9fc8','#8bdcff']},calculable:false},series:[{type:'map',map:'wenbo-china',roam:true,zoom:1.08,data:values,label:{show:false},itemStyle:{areaColor:'#0d1c2d',borderColor:'#315872',borderWidth:1},emphasis:{label:{show:true,color:'#fff'},itemStyle:{areaColor:'#38bce9'}}}]});
-    mapChart.on('click', p => { const row=rows.find(r=>(shortToGeo[r.name]||r.name)===p.name); renderDetail(row); });
-    window.addEventListener('resize',()=>mapChart && mapChart.resize());
-  }
-  function renderYearChart() {
-    const years = digital.by_year || [];
-    const labels = years.map(x=>x.key + (x.key === String(new Date().getFullYear()) ? ' YTD' : ''));
-    const count = years.map(x=>x.unique_count ?? x.count ?? 0), share = years.map(x=>x.share ?? 0);
-    const chart=echarts.init($('year-chart'));
-    chart.setOption({grid:{left:45,right:48,top:24,bottom:28},tooltip:{trigger:'axis',backgroundColor:'#0b1525',borderColor:'#2a6484',textStyle:{color:'#eaf5ff'}},legend:{top:0,textStyle:{color:'#a9c0d2'},data:['独立原文数','占比']},xAxis:{type:'category',data:labels,axisLabel:{color:'#86a0b7'},axisLine:{lineStyle:{color:'#29475d'}}},yAxis:[{type:'value',name:'篇',nameTextStyle:{color:'#86a0b7'},axisLabel:{color:'#86a0b7'},splitLine:{lineStyle:{color:'rgba(134,160,183,.12)'}}},{type:'value',name:'%',max:Math.max(10,Math.ceil(Math.max(...share)/5)*5),axisLabel:{color:'#86a0b7'},splitLine:{show:false}}],series:[{name:'独立原文数',type:'line',smooth:true,symbol:'circle',symbolSize:7,data:count,lineStyle:{width:3,color:'#54d7ff'},itemStyle:{color:'#54d7ff'},areaStyle:{color:'rgba(84,215,255,.1)'}},{name:'占比',type:'line',smooth:true,yAxisIndex:1,symbol:'circle',symbolSize:6,data:share,lineStyle:{width:2,color:'#ffc857'},itemStyle:{color:'#ffc857'}}]});
-    window.addEventListener('resize',()=>chart.resize());
-  }
-  function renderTopics() {
-    const entries=Object.entries((digital.stats && digital.stats.topic_unique_counts)||{}).sort((a,b)=>b[1]-a[1]);
-    const max=Math.max(1,...entries.map(x=>x[1]));
-    $('topics').innerHTML=entries.map(([name,count])=>'<div class="topic-row"><div>'+escapeHtml(name)+'<div class="topic-bar"><i style="width:'+Math.round(count/max*100)+'%"></i></div></div><div class="topic-count">'+count+'</div></div>').join('');
-  }
-  async function init() {
-    try {
-      [digital,heat] = await Promise.all([fetch('../digital-data.json').then(r=>r.json()),fetch('../heatmap-data.json').then(r=>r.json())]);
-      const rows=provinceRows(); renderKpis(rows); renderEvents((heat.events||[]).filter(inLast30),$('events')); renderTopics(); renderYearChart();
-      const geo=await fetch('../lib/china.json').then(r=>r.json()); renderMap(rows,geo);
-    } catch (err) { console.error(err); document.querySelector('main').innerHTML='<div class="panel error">驾驶舱数据加载失败。请返回每日文博资讯，确认数据文件可访问后重试。</div>'; }
-  }
-  $('fullscreen').addEventListener('click',()=>document.documentElement.requestFullscreen && document.documentElement.requestFullscreen());
-  init();
+  function eventScore(e) { const recency=100*Math.pow((heat&&heat.decay)||.93,ageDays(e.lastDate,heat.asOf)); return (+e.impact||0)*.35+(+e.evidence||0)*.30+(+e.breadth||0)*.20+recency*.15; }
+  function inWindow(date, days=state.days) { return days==='all' || ageDays(date,heat.asOf) < days; }
+  function eventMatches(e) { return inWindow(e.lastDate) && (!state.province || e.primaryProvince===state.province); }
+  function digitalInContext(item) { return inWindow(item.d) && (!state.trendPeriod || item.d.startsWith(state.trendPeriod)); }
+  function digitalMatches(item) { return digitalInContext(item) && (!state.topic || (item.topics||[]).includes(state.topic)); }
+  function uniqueDigitalItems() { const seen=new Set(), out=[]; (digital.items||[]).filter(digitalMatches).sort((a,b)=>dateValue(b.d)-dateValue(a.d)).forEach(item=>{const key=item.u||item.t+'|'+item.d;if(!seen.has(key)){seen.add(key);out.push(item);}}); return out; }
+  function filteredEvents() { return (heat.events||[]).concat(heat.nationalEvents||[]).filter(eventMatches).sort((a,b)=>eventScore(b)-eventScore(a)); }
+  function provinceRows() { const rows={}; (heat.events||[]).filter(eventMatches).forEach(e=>{const p=e.primaryProvince;if(!p)return;if(!rows[p])rows[p]={name:p,raw:0,count:0,events:[]};rows[p].raw+=eventScore(e);rows[p].count++;rows[p].events.push(e);});const max=Math.max(0,...Object.values(rows).map(x=>x.raw));return Object.values(rows).map(x=>({...x,index:max?x.raw/max*100:0})).sort((a,b)=>b.raw-a.raw); }
+  function renderKpis(rows, events, articles) { const s=digital.stats||{}, hs=heat.stats||{}; $('k-digital').textContent=articles.length; $('k-digital').nextElementSibling.textContent=state.province?'地区筛选只影响地图与事项':'按原文 URL 去重'; const dailyRows=(digital.by_day||[]).filter(x=>state.days==='all'||inWindow(x.key));let share='—';if(!state.topic&&!state.province){if(state.days==='all')share=s.overall_share;else{const n=dailyRows.reduce((a,x)=>a+(x.unique_count||0),0),d=dailyRows.reduce((a,x)=>a+(x.source_unique_count||0),0);share=d?(n/d*100).toFixed(2):'—';}}$('k-share').firstChild.textContent=share;$('k-share-note').textContent=state.topic||state.province?'当前筛选无可比总分母':'同窗口国家文物局文物新闻分母';$('k-events').textContent=events.length;$('k-sources').firstChild.textContent=hs.panelSourceCount||6;$('k-source-note').textContent='固定信源池 · '+sourceIds(events).length+' 个有相关事项';$('event-summary').textContent=events.length+' 件事项 · '+rows.length+' 个地区';$('digital-summary').textContent=articles.length+' 篇独立原文'+(state.province?' · 地区筛选不影响此列表':'');$('selection-copy').innerHTML='当前显示：<strong>'+windowLabel()+(state.province?' · '+escapeHtml(state.province):'')+(state.topic?' · '+escapeHtml(state.topic):'')+(state.trendPeriod?' · '+escapeHtml(state.trendPeriod):'')+'</strong>'; }
+  function sourceIds(events) { const ids={};events.forEach(e=>(e.sources||[]).forEach(s=>{if(s.sourceId)ids[s.sourceId]=true;}));return Object.keys(ids); }
+  function windowLabel() { return state.days==='all'?'全部历史':'近'+state.days+'天'; }
+  function eventHtml(e, detail=false) { const r=(e.reports&&e.reports[0])||{}, sources=(e.sources||[]).map(s=>s.name).join('、')||'固定信源';const body='<div class="event-detail">'+escapeHtml(e.impactLabel||'关注')+'事项 · 来源：'+escapeHtml(sources)+' · 地点明确度 '+Math.round((e.locationConfidence||0)*100)+'% · '+(e.reportCount||1)+' 条关联报道<br><a href="'+escapeHtml(r.url||'#')+'" target="_blank" rel="noopener">打开原文 →</a></div>';return '<details class="event"'+(detail?' open':'')+'><summary><span class="event-title">'+escapeHtml(e.title)+'</span><div class="event-meta"><span>'+escapeHtml(e.lastDate)+'</span><span class="tag">'+escapeHtml(e.primaryProvince||'全国性')+'</span><span>'+escapeHtml(e.primaryTheme||(e.themes||[])[0]||'行业动态')+'</span><span>指数 '+eventScore(e).toFixed(0)+'</span></div></summary>'+body+'</details>'; }
+  function articleHtml(item) { const topics=(item.topics||[]).join('、')||'待归类';return '<details class="event"><summary><span class="event-title">'+escapeHtml(item.t)+'</span><div class="event-meta"><span>'+escapeHtml(item.d)+'</span><span class="tag">'+escapeHtml(topics)+'</span><span>命中：'+escapeHtml(item.w||'关键词')+'</span></div></summary><div class="event-detail">该文章进入数字化趋势样本，当前方向：'+escapeHtml(topics)+'<br><a href="'+escapeHtml(articleUrl(item.u))+'" target="_blank" rel="noopener">打开国家文物局原文 →</a></div></details>'; }
+  function renderEvents(events) { const list=events.slice(0,18);$('events').innerHTML=list.length?list.map(e=>eventHtml(e)).join(''):'<div class="empty">当前筛选下暂无合格事项。</div>'; }
+  function renderDigital(articles) { $('digital-list').innerHTML=articles.length?articles.slice(0,24).map(articleHtml).join(''):'<div class="empty">当前筛选下暂无数字化文章。</div>'; }
+  function renderDetail(row) { const box=$('detail');if(!row){box.classList.remove('show');return;}$('detail-title').textContent=row.name+' · '+row.count+' 件事项';$('detail-body').innerHTML=row.events.sort((a,b)=>eventScore(b)-eventScore(a)).map(e=>eventHtml(e,true)).join('');box.classList.add('show');box.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  function renderTopics() { const counts={};(digital.items||[]).filter(digitalInContext).forEach(x=>(x.topics||[]).forEach(t=>counts[t]=(counts[t]||0)+1));const names=(digital.topic_info||[]).map(x=>x.name);const entries=[...new Set(names.concat(Object.keys(counts)))].map(name=>[name,counts[name]||0]).sort((a,b)=>b[1]-a[1]);const max=Math.max(1,...entries.map(x=>x[1]));$('topics').innerHTML=entries.map(([name,count])=>'<div class="topic-row '+(state.topic===name?'active':'')+'"><button type="button" data-topic="'+escapeHtml(name)+'">'+escapeHtml(name)+'<div class="topic-bar"><i style="width:'+Math.round(count/max*100)+'%"></i></div></button><div class="topic-count">'+count+'</div></div>').join('');document.querySelectorAll('[data-topic]').forEach(b=>b.addEventListener('click',()=>{state.topic=state.topic===b.dataset.topic?'':b.dataset.topic;state.trendPeriod='';$('topic-filter').value=state.topic;refresh();})); }
+  function renderCoverage() { const panel=(heat.coverage&&heat.coverage.panel)||[],checks=(heat.coverage&&heat.coverage.checks)||[], days=state.days==='all'?Math.floor(ageDays(heat.start,heat.asOf))+1:state.days;const rows=panel.map(src=>{const c=checks.filter(x=>x.sourceId===src.id&&inWindow(x.date));const ok=c.filter(x=>x.status==='success'||x.status==='no_update').length;return {name:src.name,ok,total:c.length,rate:c.length?Math.round(ok/c.length*100):0};});$('coverage').innerHTML=rows.map(x=>'<div class="coverage-row"><span>'+escapeHtml(x.name)+'</span><small>'+x.ok+'/'+(x.total||days)+'天</small><span class="ok">'+x.rate+'%</span></div>').join('');const total=rows.reduce((a,x)=>a+x.ok,0),planned=rows.reduce((a,x)=>a+(x.total||days),0);$('coverage-note').textContent='当前窗口信源日覆盖率 '+(planned?(total/planned*100).toFixed(1):'0')+'%；“无更新”也计为成功检查。'; }
+  function renderMap(rows) { if(!window.echarts){$('map').innerHTML='<div class="error">图表组件不可用，请使用桌面浏览器重试。</div>';return;}if(mapChart)mapChart.dispose();mapChart=echarts.init($('map'));const data=rows.map(r=>({name:shortToGeo[r.name]||r.name,value:+r.index.toFixed(1),count:r.count}));mapChart.setOption({tooltip:{trigger:'item',backgroundColor:'#0b1525',borderColor:'#2a6484',textStyle:{color:'#eaf5ff'},formatter:p=>{const r=rows.find(x=>(shortToGeo[x.name]||x.name)===p.name);return '<b>'+p.name+'</b><br>关注指数：'+(r?r.index.toFixed(0):'—')+'<br>窗口事项：'+(r?r.count:0);}},visualMap:{min:0,max:100,left:12,bottom:4,text:['高','低'],textStyle:{color:'#8aa7bd'},inRange:{color:['#102238','#155174','#2f9fc8','#8bdcff']},calculable:false},series:[{type:'map',map:'wenbo-china',roam:true,zoom:1.08,data,label:{show:false},itemStyle:{areaColor:'#0d1c2d',borderColor:'#315872',borderWidth:1},emphasis:{label:{show:true,color:'#fff'},itemStyle:{areaColor:'#38bce9'}}}]});mapChart.on('click',p=>{const r=rows.find(x=>(shortToGeo[x.name]||x.name)===p.name);renderDetail(r);});$('map-window').textContent='固定权威信源 · '+windowLabel()+'样本';$('map-hint').textContent=state.province?'已筛选 '+state.province:'点击省份查看事项'; }
+  function trendRows() { if(state.trendMode==='month')return (digital.by_month||[]).filter(x=>state.days==='all'||inWindow(x.key+'-15'));return (digital.by_year||[]).filter(x=>state.days==='all'||x.key===String(new Date(heat.asOf).getFullYear())||dateValue(x.key+'-12-31')>=dateValue(heat.asOf)-state.days*86400000); }
+  function renderTrend() { if(!window.echarts)return;const rows=trendRows(),labels=rows.map(x=>x.key+(state.trendMode==='year'&&x.key===String(new Date(heat.asOf).getFullYear())?' YTD':''));const count=rows.map(x=>{if(!state.topic)return x.unique_count??x.count??0;const matches=(digital.items||[]).filter(i=>i.d.startsWith(x.key)&&(!state.topic||(i.topics||[]).includes(state.topic)));return new Set(matches.map(i=>i.u||i.t+'|'+i.d)).size;});const share=rows.map(x=>x.share??0);if(trendChart)trendChart.dispose();trendChart=echarts.init($('trend-chart'));const series=[{name:'独立原文数',type:'line',smooth:true,symbol:'circle',symbolSize:7,data:count,lineStyle:{width:3,color:'#54d7ff'},itemStyle:{color:'#54d7ff'},areaStyle:{color:'rgba(84,215,255,.1)'}}];if(!state.topic&&!state.province)series.push({name:'占比',type:'line',smooth:true,yAxisIndex:1,symbol:'circle',symbolSize:6,data:share,lineStyle:{width:2,color:'#ffc857'},itemStyle:{color:'#ffc857'}});trendChart.setOption({grid:{left:46,right:48,top:30,bottom:30},tooltip:{trigger:'axis',backgroundColor:'#0b1525',borderColor:'#2a6484',textStyle:{color:'#eaf5ff'}},legend:{top:0,textStyle:{color:'#a9c0d2'},data:series.map(x=>x.name)},xAxis:{type:'category',data:labels,axisLabel:{color:'#86a0b7',interval:state.trendMode==='month'?2:0},axisLine:{lineStyle:{color:'#29475d'}}},yAxis:[{type:'value',name:'篇',nameTextStyle:{color:'#86a0b7'},axisLabel:{color:'#86a0b7'},splitLine:{lineStyle:{color:'rgba(134,160,183,.12)'}}},{type:'value',name:'%',max:Math.max(10,Math.ceil(Math.max(...share,0)/5)*5),axisLabel:{color:'#86a0b7'},splitLine:{show:false}}],series});trendChart.on('click',p=>{if(p&&p.name){state.trendPeriod=p.name.replace(' YTD','');refresh();}});$('trend-note').textContent=state.topic||state.province?'当前筛选仅显示独立原文数':'独立原文数 + 占比'; }
+  function fillFilters() { const provinces=[...new Set((heat.events||[]).map(e=>e.primaryProvince).filter(Boolean))].sort();$('province-filter').innerHTML='<option value="">全部地区</option>'+provinces.map(p=>'<option value="'+escapeHtml(p)+'">'+escapeHtml(p)+'</option>').join('');const topics=[...(digital.topic_info||[]).map(x=>x.name)];$('topic-filter').innerHTML='<option value="">全部数字化方向</option>'+topics.map(t=>'<option value="'+escapeHtml(t)+'">'+escapeHtml(t)+'</option>').join(''); }
+  function refresh() { const events=filteredEvents(),rows=provinceRows(),articles=uniqueDigitalItems();renderKpis(rows,events,articles);renderEvents(events);renderDigital(articles);renderTopics();renderCoverage();renderMap(rows);renderTrend(); }
+  async function init() { try { [digital,heat]=await Promise.all([fetch('../digital-data.json').then(r=>r.json()),fetch('../heatmap-data.json').then(r=>r.json())]);const geo=await fetch('../lib/china.json').then(r=>r.json());const features=(geo.features||[]).filter(f=>f.properties&&f.properties.name);echarts.registerMap('wenbo-china',{...geo,features});fillFilters();$('updated').textContent='更新于 '+(digital.generated||heat.generated||'—');refresh();window.addEventListener('resize',()=>{if(mapChart)mapChart.resize();if(trendChart)trendChart.resize();}); } catch(err) { console.error(err);document.querySelector('main').innerHTML='<div class="panel error">驾驶舱数据加载失败，请返回每日文博资讯后重试。</div>'; } }
+  document.querySelectorAll('#window-buttons button').forEach(b=>b.addEventListener('click',()=>{state.days=b.dataset.days==='all'?'all':Number(b.dataset.days);state.trendPeriod='';document.querySelectorAll('#window-buttons button').forEach(x=>x.classList.remove('active'));b.classList.add('active');refresh();}));
+  $('province-filter').addEventListener('change',e=>{state.province=e.target.value;state.trendPeriod='';refresh();});$('topic-filter').addEventListener('change',e=>{state.topic=e.target.value;state.trendPeriod='';refresh();});$('reset').addEventListener('click',()=>{state={days:90,province:'',topic:'',trendMode:'year',trendPeriod:''};$('province-filter').value='';$('topic-filter').value='';document.querySelectorAll('#window-buttons button').forEach(x=>x.classList.toggle('active',x.dataset.days==='90'));document.querySelectorAll('#trend-mode button').forEach(x=>x.classList.toggle('active',x.dataset.mode==='year'));refresh();});document.querySelectorAll('#trend-mode button').forEach(b=>b.addEventListener('click',()=>{state.trendMode=b.dataset.mode;state.trendPeriod='';document.querySelectorAll('#trend-mode button').forEach(x=>x.classList.toggle('active',x===b));refresh();}));$('fullscreen').addEventListener('click',()=>document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen());init();
 </script>
 </body>
 </html>'''
