@@ -91,8 +91,7 @@ def fetch_all_titles():
     while True:
         html = fetch(PROXY_TMPL.format(p=page))
         if not html:
-            print(f'  [warn] page {page} 抓取失败,停止翻页')
-            break
+            raise RuntimeError(f'国家文物局分页第 {page} 页抓取失败，已停止保存，避免用不完整数据覆盖旧趋势。')
         records = re.findall(r"<record><!\[CDATA\[(.*?)\]\]></record>", html, re.S)
         if not records:
             print(f'  [info] page {page} 无记录,停止')
@@ -109,12 +108,12 @@ def fetch_all_titles():
             except ValueError:
                 continue
             if d < START_DATE:
-                # 已越过起点,收集完本页后停止
-                page_items.append({'date': d, 'title': title, 'url': url})
+                # 已越过起点；不要把同页中起点以前的记录写入窗口。
                 items.extend(page_items)
                 print(f'  [info] 第{page}页出现 {d} 早于起点,抓取结束')
                 return items
-            page_items.append({'date': d, 'title': title, 'url': url})
+            if d <= END_DATE:
+                page_items.append({'date': d, 'title': title, 'url': url})
         items.extend(page_items)
         print(f'  page {page}: {len(page_items)} 条, 最新 {page_items[0]["date"] if page_items else "?"} ~ 最老 {page_items[-1]["date"] if page_items else "?"} | 累计 {len(items)}')
         page += 1
@@ -180,10 +179,12 @@ def fetch_digest_bodies(items):
     """对标题含摘编特征的文章抓正文,提取数字化小标题作为补充口径。"""
     digests = [it for it in items if DIGEST_PATTERN.search(it['title'])]
     extra = []
+    failed = 0
     print(f'  摘编类文章 {len(digests)} 篇,开始抓正文提取数字化条目...')
     for i, dg in enumerate(digests):
         body = fetch(BASE + dg['url'])
         if not body:
+            failed += 1
             continue
         # 提取正文纯文本(粗略:去 script/style/标签)
         text = re.sub(r'<script[\s\S]*?</script>', ' ', body)
@@ -196,7 +197,7 @@ def fetch_digest_bodies(items):
         if (i + 1) % 25 == 0:
             print(f'    进度 {i+1}/{len(digests)}, 已提取 {len(extra)} 条')
         time.sleep(0.15)
-    return extra
+    return extra, failed
 
 
 def dedup_and_filter(items):
@@ -221,11 +222,19 @@ def dedup_and_filter(items):
     return keep
 
 
-def aggregate(items):
-    """生成 月/周/天 三套粒度聚合数据。items 为已匹配命中列表(含 date)。"""
+def aggregate(items, source_items):
+    """生成趋势聚合数据。
+
+    count 是关键词命中的记录数，unique_count 是去重后的原文 URL 数；
+    source_count/source_unique_count 用于计算数字化报道在国家文物局全部文物
+    新闻中的占比，避免把整体发稿量变化误当成数字化趋势变化。
+    """
     by_month = defaultdict(list)
     by_week = defaultdict(list)
     by_day = defaultdict(list)
+    source_by_month = defaultdict(list)
+    source_by_week = defaultdict(list)
+    source_by_day = defaultdict(list)
     for it in items:
         ym = it['date'].strftime('%Y-%m')
         iso = it['date'].isocalendar()
@@ -233,26 +242,47 @@ def aggregate(items):
         by_month[ym].append(it)
         by_week[wk].append(it)
         by_day[it['date'].isoformat()].append(it)
+    for it in source_items:
+        ym = it['date'].strftime('%Y-%m')
+        iso = it['date'].isocalendar()
+        wk = f"{it['date'].strftime('%Y')}-W{iso[1]:02d}"
+        source_by_month[ym].append(it)
+        source_by_week[wk].append(it)
+        source_by_day[it['date'].isoformat()].append(it)
 
-    def to_series(group):
-        return [{'key': k, 'count': len(v), 'items': [
-            {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']} for x in v
-        ]} for k, v in sorted(group.items())]
+    def to_series(group, source_group):
+        keys = sorted(set(group) | set(source_group))
+        out = []
+        for k in keys:
+            v = group.get(k, [])
+            source_v = source_group.get(k, [])
+            unique_count = len({x['url'] for x in v})
+            source_unique_count = len({x['url'] for x in source_v})
+            share = round(unique_count / source_unique_count * 100, 2) if source_unique_count else 0
+            out.append({'key': k, 'count': len(v), 'unique_count': unique_count,
+                        'source_count': len(source_v),
+                        'source_unique_count': source_unique_count,
+                        'share': share, 'items': [
+                {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']} for x in v
+            ]})
+        return out
 
     return {
-        'by_month': to_series(by_month),
-        'by_week': to_series(by_week),
-        'by_day': to_series(by_day),
+        'by_month': to_series(by_month, source_by_month),
+        'by_week': to_series(by_week, source_by_week),
+        'by_day': to_series(by_day, source_by_day),
     }
 
 
-def save_data(items, extra, digest_count, levels):
+def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     items = dedup_and_filter(items)
     levels = defaultdict(int)
     for it in items:
         levels[it['level']] += 1
-    agg = aggregate(items)
+    agg = aggregate(items, source_items)
     extra_n = len(extra) if isinstance(extra, (list, tuple)) else extra
+    unique_urls = len({x['url'] for x in items})
+    source_unique_urls = len({x['url'] for x in source_items})
     data = {
         'generated': date.today().isoformat(),
         'source': '国家文物局官网「文物新闻」栏目',
@@ -263,6 +293,15 @@ def save_data(items, extra, digest_count, levels):
             'digest_extra': extra_n,
             'levels': {k: v for k, v in sorted(levels.items())},
             'digest_articles': digest_count,
+            'unique_source_pages': unique_urls,
+            'source_article_total': len(source_items),
+            'source_unique_pages': source_unique_urls,
+            'overall_share': round(unique_urls / source_unique_urls * 100, 2) if source_unique_urls else 0,
+        },
+        'quality': {
+            'source_fetch_complete': True,
+            'digest_fetch_failed': digest_failed,
+            'note': '主趋势保留现有关键词统计；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
         },
         'items': [
             {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
@@ -315,7 +354,7 @@ def main(args=None):
         print(f'标题命中数字化相关: {len(hit)} 条 (核心 {levels["core"]} / 技术 {levels["tech"]} / 扩展 {levels["ext"]})')
 
         print('=== 步骤3: 摘编正文补充提取 ===')
-        extra = fetch_digest_bodies(all_items)
+        extra, digest_failed = fetch_digest_bodies(all_items)
         # 按标题去重(与标题命中项及摘编内部)
         seen_titles = set(it['title'] for it in hit)
         digest_count = sum(1 for it in all_items if DIGEST_PATTERN.search(it['title']))
@@ -334,7 +373,7 @@ def main(args=None):
         print(f'最终命中列表: {len(hit)} 条 (核心 {levels["core"]} / 技术 {levels["tech"]} / 扩展 {levels["ext"]})')
 
         print('=== 步骤4: 聚合与保存 ===')
-        save_data(hit, extra, digest_count, levels)
+        save_data(hit, extra, digest_count, digest_failed, levels, all_items)
         print(f'数据已保存: {DATA_PATH}')
 
     print('=== 步骤5: 生成趋势页面 ===')

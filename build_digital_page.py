@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build_digital_page.py — 生成「文博数字化趋势」交互页面 digital-trends.html
+build_digital_page.py — 生成「数字化趋势」交互页面 digital-trends.html
 
 数据来自 digital-data.json(ECharts 5 + dataZoom 缩放联动粒度切换:月→周→天)。
 """
@@ -19,6 +19,10 @@ def build_page(html_path, data_path):
 
     stats = data['stats']
     total = stats['total']
+    unique_n = stats.get('unique_source_pages', total)
+    source_total = stats.get('source_article_total', 0)
+    source_unique = stats.get('source_unique_pages', source_total)
+    overall_share = stats.get('overall_share', 0)
     core_n = stats['levels'].get('core', 0)
     tech_n = stats['levels'].get('tech', 0)
     ext_n = stats['levels'].get('ext', 0)
@@ -36,11 +40,11 @@ def build_page(html_path, data_path):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文博数字化趋势 | 每日文博资讯</title>
+<title>数字化趋势 | 每日文博资讯</title>
 <meta name="description" content="国家文物局「数字化」相关新闻趋势 — {rng['start']} 至 {rng['end']}，共 {total} 条。按年月周天粒度自由缩放查看。">
 <meta name="keywords" content="文博数字化,智慧博物馆,数字藏品,数字化趋势,文博趋势,数据可视化">
 <link rel="canonical" href="https://zhangheng666.top/digital-trends.html">
-<meta property="og:title" content="文博数字化趋势 | 每日文博资讯">
+<meta property="og:title" content="数字化趋势 | 每日文博资讯">
 <meta property="og:description" content="国家文物局数字化相关新闻 {total} 条 · {rng['start']} 至 {rng['end']}">
 <meta property="og:url" content="https://zhangheng666.top/digital-trends.html">
 <meta property="og:type" content="website">
@@ -67,6 +71,14 @@ def build_page(html_path, data_path):
   .stat.ext b {{ color: var(--accent3); }}
   .years {{ text-align: center; color: var(--muted); font-size: .88em; margin: 8px 0 4px; }}
   .years b {{ color: var(--ink); }}
+
+  .insight {{ background: #eef5ff; border: 1px solid #cfe0ff; border-radius: 12px; padding: 12px 16px; margin-top: 16px; color: #23446f; font-size: .92em; }}
+  .insight strong {{ color: #174ea6; }}
+  .controls {{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; font-size: .84em; color: var(--muted); }}
+  .controls label {{ font-weight: 600; color: var(--ink); }}
+  .controls select, .range-buttons button {{ border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 7px; padding: 6px 9px; font: inherit; cursor: pointer; }}
+  .range-buttons {{ display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }}
+  .range-buttons button.active {{ background: var(--accent); border-color: var(--accent); color: #fff; }}
 
   .chart-card {{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 14px 10px; margin-top: 16px; box-shadow: var(--shadow); }}
   #chart {{ width: 100%; height: 420px; }}
@@ -97,27 +109,66 @@ def build_page(html_path, data_path):
 
   footer {{ text-align: center; color: var(--muted); font-size: .84em; margin-top: 26px; }}
   footer a {{ color: var(--accent); text-decoration: none; }}
+  @media (max-width: 620px) {{
+    .wrap {{ padding: 14px 10px 38px; }}
+    h1 {{ font-size: 1.35em; }}
+    .sub {{ font-size: .78em; line-height: 1.45; }}
+    .stats {{ gap: 7px; margin-top: 14px; }}
+    .stat {{ min-width: 0; flex: 1 1 29%; padding: 9px 5px; border-radius: 9px; }}
+    .stat b {{ font-size: 1.25em; }}
+    .stat span {{ font-size: .7em; }}
+    .years {{ font-size: .75em; line-height: 1.5; }}
+    .controls {{ align-items: flex-start; }}
+    .range-buttons {{ margin-left: 0; width: 100%; }}
+    .range-buttons button {{ flex: 1; }}
+    #chart {{ height: 330px; }}
+    .chart-card {{ padding: 10px 6px 6px; margin-top: 12px; }}
+    .hint {{ font-size: .72em; }}
+    .p-item {{ gap: 7px; padding: 9px 10px; align-items: flex-start; }}
+    .p-date {{ font-size: .7em; }}
+    .p-level {{ font-size: .65em; padding: 1px 5px; }}
+    .method {{ padding: 13px 14px; font-size: .8em; }}
+  }}
 </style>
 <script src="echarts.min.js"></script>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>📈 文博数字化趋势</h1>
-    <div class="sub">数据源：<a href="https://www.ncha.gov.cn/col/col722/index.html" target="_blank">国家文物局 · 文物新闻</a> ｜ {rng['start']} 至 {rng['end']} ｜ 按维护任务定期刷新</div>
+    <h1>📈 数字化趋势</h1>
+    <div class="sub">数据源：<a href="https://www.ncha.gov.cn/col/col722/index.html" target="_blank">国家文物局 · 文物新闻</a> ｜ {rng['start']} 至 {rng['end']} ｜ 单一权威信源观察，按维护任务定期刷新</div>
   </header>
 
   <div class="stats">
-    <div class="stat"><b>{total}</b><span>数字化相关新闻</span></div>
+    <div class="stat"><b>{unique_n}</b><span>独立原文</span></div>
+    <div class="stat"><b>{total}</b><span>关键词命中记录</span></div>
+    <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻</span></div>
     <div class="stat core"><b>{core_n}</b><span>核心词命中</span></div>
     <div class="stat tech"><b>{tech_n}</b><span>技术词命中</span></div>
     <div class="stat ext"><b>{ext_n}</b><span>场景词命中</span></div>
   </div>
   <div class="years">年度分布：{year_html}</div>
 
+  <div class="insight" id="insight">正在生成近一年趋势摘要……</div>
+
+  <div class="controls">
+    <label for="metric-select">图表指标</label>
+    <select id="metric-select">
+      <option value="unique_count">独立原文数</option>
+      <option value="count">关键词命中记录</option>
+      <option value="share">占全部文物新闻比例</option>
+    </select>
+    <div class="range-buttons" aria-label="时间范围">
+      <button type="button" data-range="90d">近90天</button>
+      <button type="button" data-range="12m" class="active">近12个月</button>
+      <button type="button" data-range="3y">近3年</button>
+      <button type="button" data-range="all">全部历史</button>
+    </div>
+  </div>
+
   <div class="chart-card">
     <div id="chart"></div>
-    <div class="hint">🖱️ 滚轮缩放 · 拖拽平移 · 双击回到全部 ｜ 缩放跨度会自动切换 <kbd>月</kbd> / <kbd>周</kbd> / <kbd>天</kbd> 粒度 ｜ 点击数据点查看该周期新闻明细</div>
+    <div class="hint">缩放或选择时间范围；跨度会自动切换月 / 周 / 天粒度。点击数据点查看该周期明细。</div>
   </div>
 
   <div class="list-card">
@@ -130,8 +181,9 @@ def build_page(html_path, data_path):
     <ul>
       <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今，约 1.2 万条），非抽样。</li>
       <li><b>判定</b>：标题命中「核心词（数字化/数字藏品/智慧博物馆等）」「技术词（AI/大数据/元宇宙/VR 等）」「场景词（云展览/沉浸式/信息化等）」任一即计入；另对每周「文物动态摘编」正文做补充提取（条目需标题含数字化词，或正文命中数字化核心表达），标题完全相同的跨周转载已去重。</li>
-      <li><b>口径</b>：计的是「新闻条数」，同一新闻可能因系列报道在列表中多次出现，趋势反映的是行业报道热度。</li>
-      <li><b>局限</b>：关键词法存在少量漏判/误判；2021 年前部分数据未纳入；标注来源的条目可点击跳转原文核验。</li>
+      <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；比例指标为数字化原文占国家文物局全部文物新闻原文的比例。</li>
+      <li><b>解读</b>：这是一条“国家文物局报道中的数字化动向”曲线，不等于全国所有文博机构的真实项目数量；摘编补充项仍保留，但会在同一原文下合并观察。</li>
+      <li><b>局限</b>：关键词法存在少量漏判/误判；2021 年前部分数据未纳入；所有条目均可点击跳转原文核验。</li>
     </ul>
   </div>
 
@@ -150,7 +202,7 @@ fetch(DATA_URL).then(function(r){{ return r.json(); }}).then(function(data){{
 }});
 
 function init(data) {{
-  // 构建各粒度索引: key -> {{count, items[]}}
+  // 构建各粒度索引: key -> {{count, unique_count, share, items[]}}
   var byMonth = {{}}, byWeek = {{}}, byDay = {{}};
   data.by_month.forEach(function(s){{ byMonth[s.key] = s; }});
   data.by_week.forEach(function(s){{ byWeek[s.key] = s; }});
@@ -182,8 +234,8 @@ function init(data) {{
     d = addDays(d, -day);
     var end = new Date(rangeEnd + 'T00:00:00');
     while (d <= end) {{
-      var iso = getISOWeek(d);
-      var key = d.getFullYear() + '-W' + pad(iso.week);
+    var iso = getISOWeek(d);
+      var key = iso.year + '-W' + pad(iso.week);
       if (out.indexOf(key) === -1) out.push(key);
       d = addDays(d, 7);
     }}
@@ -208,13 +260,16 @@ function init(data) {{
     return out;
   }}
 
+  var metric = 'unique_count';
+  var METRIC_NAMES = {{ unique_count: '独立原文数', count: '关键词命中记录', share: '占全部文物新闻比例' }};
+
   // 生成某粒度 series: xAxis 全轴, 空数据用 0(连续折线)
   function buildSeries(keys, map, displayFmt) {{
     var cats = [], vals = [];
     keys.forEach(function(k) {{
       cats.push(displayFmt(k));
       var s = map[k];
-      vals.push(s ? s.count : 0);
+      vals.push(s ? (metric === 'share' ? s.share : (s[metric] || 0)) : 0);
     }});
     return {{ cats: cats, vals: vals, keys: keys }};
   }}
@@ -223,15 +278,21 @@ function init(data) {{
   function weekFmt(k) {{ return k; }}
   function dayFmt(k) {{ return k.slice(5); }}
 
-  var seriesCache = {{
-    month: buildSeries(monthKeys(), byMonth, monthFmt),
-    week: buildSeries(weekKeys(), byWeek, weekFmt),
-    day: buildSeries(dayKeys(), byDay, dayFmt)
-  }};
+  function rebuildSeriesCache() {{
+    return {{
+      month: buildSeries(monthKeys(), byMonth, monthFmt),
+      week: buildSeries(weekKeys(), byWeek, weekFmt),
+      day: buildSeries(dayKeys(), byDay, dayFmt)
+    }};
+  }}
+  var seriesCache = rebuildSeriesCache();
   var GRAN = {{ month: '月', week: '周', day: '天' }};
 
   var chart = echarts.init(document.getElementById('chart'));
   var currentGran = 'month';
+  var activeStart = Math.max(0, seriesCache.month.keys.length - 13);
+  var activeEnd = seriesCache.month.keys.length - 1;
+  var switching = false;
 
   function granForRange(days) {{
     if (days > 180) return 'month';
@@ -239,8 +300,18 @@ function init(data) {{
     return 'day';
   }}
 
-  function optionFor(gran) {{
+  function averageValue(values) {{
+    var nonEmpty = values.filter(function(v){{ return v > 0; }});
+    if (!nonEmpty.length) return 0;
+    return Math.round(nonEmpty.reduce(function(a, b){{ return a + b; }}, 0) / nonEmpty.length * 100) / 100;
+  }}
+
+  function optionFor(gran, zoomStart, zoomEnd) {{
     var s = seriesCache[gran];
+    var isShare = metric === 'share';
+    var markData = gran === 'month' ? [{{ yAxis: averageValue(s.vals), name: '平均' }}] : [];
+    var start = zoomStart === undefined ? 0 : zoomStart;
+    var end = zoomEnd === undefined ? s.keys.length - 1 : zoomEnd;
     return {{
       backgroundColor: '#fff',
       tooltip: {{
@@ -248,7 +319,8 @@ function init(data) {{
         confine: true,
         formatter: function(params) {{
           var p = params[0];
-          return p.axisValue + '<br/>数字化相关新闻：<b>' + (p.value || 0) + '</b> 条';
+          var value = p.value || 0;
+          return p.axisValue + '<br/>' + METRIC_NAMES[metric] + '：<b>' + value + '</b>' + (isShare ? '%' : ' 条');
         }}
       }},
       grid: {{ left: 46, right: 20, top: 30, bottom: 60 }},
@@ -259,16 +331,16 @@ function init(data) {{
         axisTick: {{ show: false }}
       }},
       yAxis: {{
-        type: 'value', minInterval: 1, name: '新闻条数',
-        axisLabel: {{ fontSize: 11 }},
+        type: 'value', minInterval: isShare ? 0.1 : 1, name: isShare ? '占比（%）' : '数量',
+        axisLabel: {{ fontSize: 11, formatter: isShare ? '{{value}}%' : '{{value}}' }},
         splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
       }},
       dataZoom: [
-        {{ type: 'inside', startValue: 0, endValue: 100, filterMode: 'none' }},
-        {{ type: 'slider', height: 22, bottom: 10, filterMode: 'none' }}
+        {{ type: 'inside', startValue: start, endValue: end, filterMode: 'none' }},
+        {{ type: 'slider', height: 22, bottom: 10, startValue: start, endValue: end, filterMode: 'none' }}
       ],
       series: [{{
-        name: '数字化新闻', type: 'line', data: s.vals,
+        name: METRIC_NAMES[metric], type: 'line', data: s.vals,
         connectNulls: false, smooth: gran === 'month',
         symbolSize: 7,
         lineStyle: {{ width: 2.4, color: '#2563eb' }},
@@ -277,19 +349,24 @@ function init(data) {{
           {{ offset: 0, color: 'rgba(37,99,235,.28)' }}, {{ offset: 1, color: 'rgba(37,99,235,0)' }}
         ]) }},
         markLine: {{
-          silent: true, symbol: 'none',
-          data: [{{ yAxis: Math.round(data.stats.total / ((rangeEnd.slice(0,4)-rangeStart.slice(0,4))*12 + (rangeEnd.slice(5,7)-rangeStart.slice(5,7)) + 1)), name: '月均' }}],
+          silent: true, symbol: 'none', data: markData,
           lineStyle: {{ color: '#d97706', type: 'dashed' }},
-          label: {{ formatter: '月均 {{c}}', fontSize: 10, color: '#d97706' }}
+          label: {{ formatter: function(p){{ return '平均 ' + p.value + (isShare ? '%' : ' 条'); }}, fontSize: 10, color: '#d97706' }}
         }}
       }}]
     }};
   }}
 
-  chart.setOption(optionFor('month'));
+  function renderChart(gran, start, end) {{
+    currentGran = gran;
+    activeStart = start;
+    activeEnd = end;
+    chart.setOption(optionFor(gran, start, end), true);
+  }}
+
+  chart.setOption(optionFor('month', activeStart, activeEnd));
 
   // 粒度切换:根据缩放跨度
-  var switching = false;
   function maybeSwitch(startIndex, endIndex) {{
     var s = seriesCache[currentGran];
     if (!s.keys[startIndex] || !s.keys[endIndex]) return;
@@ -308,10 +385,10 @@ function init(data) {{
     // week: yyyy-Wnn → 周一
     var parts = key.split('-W');
     var y = +parts[0], w = +parts[1];
-    var jan1 = new Date(y, 0, 1);
-    var day = (jan1.getDay() + 6) % 7;
-    var start = addDays(jan1, -day);
-    return addDays(start, (w - 1) * 7);
+    var jan4 = new Date(y, 0, 4);
+    var day = (jan4.getDay() + 6) % 7;
+    var isoWeek1 = addDays(jan4, -day);
+    return addDays(isoWeek1, (w - 1) * 7);
   }}
 
   function applyGran(gran, startDate, endDate) {{
@@ -324,16 +401,8 @@ function init(data) {{
     }});
     if (si === -1) si = 0;
     if (ei === -1) ei = s.keys.length - 1;
-    currentGran = gran;
     switching = true;
-    chart.setOption({{
-      xAxis: {{ data: s.cats }},
-      series: [{{ data: s.vals, smooth: gran === 'month' }}],
-      dataZoom: [
-        {{ startValue: si, endValue: ei, filterMode: 'none' }},
-        {{ startValue: si, endValue: ei, filterMode: 'none' }}
-      ]
-    }});
+    renderChart(gran, si, ei);
     setTimeout(function() {{ switching = false; }}, 50);
   }}
 
@@ -347,9 +416,15 @@ function init(data) {{
   }});
 
   // 点击数据点 → 展示该周期新闻明细
-  function periodItems(gran, key) {{
+  function periodGroup(gran, key) {{
     var map = {{ month: byMonth, week: byWeek, day: byDay }}[gran];
-    return (map[key] || {{ items: [] }}).items;
+    return map[key] || {{ items: [], count: 0, unique_count: 0, share: 0 }};
+  }}
+
+  function escapeHtml(value) {{
+    return String(value).replace(/[&<>\"']/g, function(ch){{
+      return {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' }}[ch];
+    }});
   }}
 
   chart.on('click', function(params) {{
@@ -358,9 +433,10 @@ function init(data) {{
     if (params.dataIndex == null || !s) return;
     var key = s.keys[params.dataIndex];
     var label = s.cats[params.dataIndex];
-    var items = periodItems(gran, key);
-    document.getElementById('period-title').textContent = '📋 ' + label + ' · 数字化相关新闻 ' + items.length + ' 条';
-    document.getElementById('period-count').textContent = '粒度：' + GRAN[gran];
+    var group = periodGroup(gran, key);
+    var items = group.items || [];
+    document.getElementById('period-title').textContent = '📋 ' + label + ' · 数字化明细';
+    document.getElementById('period-count').textContent = '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%';
     var box = document.getElementById('period-list');
     if (!items.length) {{
       box.innerHTML = '<div class="empty">该周期暂无数字化相关新闻。</div>';
@@ -368,12 +444,48 @@ function init(data) {{
     }}
     box.innerHTML = items.map(function(it) {{
       return '<div class="p-item">' +
-        '<span class="p-date">' + it.d + '</span>' +
-        '<span class="p-title"><a href="https://www.ncha.gov.cn' + it.u + '" target="_blank" rel="noopener">' + it.t + '</a></span>' +
-        '<span class="p-level ' + it.l + '">' + (LEVEL_NAMES[it.l] || it.l) + '</span>' +
+        '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
+        '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(it.t) + '</a></span>' +
+        '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' +
         '</div>';
     }}).join('');
   }});
+
+  function renderInsight() {{
+    var months = data.by_month;
+    var recent = months.slice(-12);
+    var previous = months.slice(-24, -12);
+    var recentTotal = recent.reduce(function(sum, s){{ return sum + (s.unique_count || 0); }}, 0);
+    var previousTotal = previous.reduce(function(sum, s){{ return sum + (s.unique_count || 0); }}, 0);
+    var change = previousTotal ? Math.round((recentTotal - previousTotal) / previousTotal * 100) : null;
+    var peak = recent.reduce(function(best, s){{ return (s.unique_count || 0) > (best.unique_count || 0) ? s : best; }}, recent[0] || {{ key: '', unique_count: 0 }});
+    var changeText = change === null ? '暂无上一年度同期可比数据' : (change >= 0 ? '较前12个月上升 ' + change + '%' : '较前12个月下降 ' + Math.abs(change) + '%');
+    document.getElementById('insight').innerHTML = '近12个月共记录 <strong>' + recentTotal + ' 个独立原文</strong>，' + changeText + '；单月最高为 <strong>' + (peak.key || '暂无') + '</strong>（' + (peak.unique_count || 0) + ' 个）。这反映的是国家文物局相关报道热度。';
+  }}
+
+  function setPreset(name) {{
+    seriesCache = rebuildSeriesCache();
+    var gran = 'month', start = 0, end = seriesCache.month.keys.length - 1;
+    if (name === '90d') {{
+      gran = 'day'; start = Math.max(0, seriesCache.day.keys.length - 91); end = seriesCache.day.keys.length - 1;
+    }} else if (name === '12m') {{
+      start = Math.max(0, seriesCache.month.keys.length - 13);
+    }} else if (name === '3y') {{
+      start = Math.max(0, seriesCache.month.keys.length - 37);
+    }}
+    renderChart(gran, start, end);
+    document.querySelectorAll('.range-buttons button').forEach(function(btn){{ btn.classList.toggle('active', btn.dataset.range === name); }});
+  }}
+
+  document.getElementById('metric-select').addEventListener('change', function(){{
+    metric = this.value;
+    seriesCache = rebuildSeriesCache();
+    renderChart(currentGran, Math.min(activeStart, seriesCache[currentGran].keys.length - 1), Math.min(activeEnd, seriesCache[currentGran].keys.length - 1));
+  }});
+  document.querySelectorAll('.range-buttons button').forEach(function(btn){{
+    btn.addEventListener('click', function(){{ setPreset(this.dataset.range); }});
+  }});
+  renderInsight();
 
   window.addEventListener('resize', function() {{ chart.resize(); }});
 }}
