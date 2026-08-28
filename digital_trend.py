@@ -16,6 +16,7 @@ digital_trend.py — 国家文物局「数字化」新闻趋势数据抓取与�
 用法: python digital_trend.py          # 完整抓取+生成
       python digital_trend.py --force  # 强制重新抓取
       python digital_trend.py --build-only  # 只用已有数据重新生成页面
+      python digital_trend.py --relabel-only  # 只为已有记录补充行业方向分类
 """
 import os, re, json, sys, time
 import urllib.request
@@ -65,6 +66,42 @@ KEYWORDS_EXT = [
 ]
 
 LEVEL_NAME = {'core': '核心', 'tech': '技术', 'ext': '扩展'}
+
+# 关键词仍然只负责“是否纳入趋势库”；页面展示改用行业方向。
+# 一条记录可以命中多个方向，便于表达数字保护、技术、展陈等交叉实践。
+TOPIC_INFO = [
+    ('数字保护与数字采集', '记录、保存、修复和数字化采集文物与遗址'),
+    ('AI、三维扫描与科技考古', '人工智能、三维建模、遥感和数据分析等技术'),
+    ('数字展览与沉浸式体验', '数字展示、虚拟现实、沉浸式空间和数字复原'),
+    ('数字博物馆与公共服务', '智慧博物馆、数字导览、云展览和线上公共服务'),
+    ('数字档案、数据库与知识平台', '数字档案、数据库、知识库和数字资源管理'),
+    ('数字传播与国际交流', '数字内容传播、线上推广和文化遗产数字出海'),
+]
+
+TOPIC_RULES = {
+    # 以下是页面展示分类，不是新的纳入关键词；使用标题中的行业语义词，
+    # 让“数字化”总括性标题也能在有足够语境时进入合适方向。
+    '数字保护与数字采集': ('数字化保护', '文物数字化', '数字保护', '数字化采集',
+                           '数字采集', '数字回归', '数字化记录', '数字化存档', '数字化建档',
+                           '数字化测绘', '数字孪生', '保护修复', '保护与数字化', '预防性保护'),
+    'AI、三维扫描与科技考古': ('人工智能', 'AI', '大数据', '机器学习', '算法', '遥感',
+                              '三维扫描', '3D扫描', '三维建模', '三维数据', '三维数字化',
+                              '数字人', '数字孪生', '科技考古', '空间信息', '数据集', '科技赋能',
+                              '科技创新', '技术装备'),
+    '数字展览与沉浸式体验': ('数字化展示', '数字展示', '数字体验', '沉浸式', '虚拟现实',
+                            'VR', '增强现实', 'AR', '混合现实', '全息', '虚拟展厅',
+                            '数字复原', '云展览', '线上展览', '线上展播', '展览', '展馆',
+                            '展厅', '展出', '亮相', '巡展', '体验'),
+    '数字博物馆与公共服务': ('数字博物馆', '智慧博物馆', '智慧文博', '数字服务', '智慧服务',
+                            '智慧导览', '掌上博物馆', '云游', '云端', '云上', '线上服务',
+                            '博物馆', '博物院', '平台上线', '上线', '公众', '开放'),
+    '数字档案、数据库与知识平台': ('数字档案', '数字资源', '数字资产', '数字平台', '数据平台',
+                                  '数据库', '知识库', '数据资源', '数字出版', '数字化管理', '信息化',
+                                  '数据', '档案', '资源', '文献', '图像', '知识', '素材库', '数据集'),
+    '数字传播与国际交流': ('数字传播', '数字文化', '数字出海', '国际交流', '国际传播',
+                          '线上直播', '线上展播', '网络', '宣传', '传播', '全球', '海外',
+                          '国际', '交流互鉴', '文明交流', '论坛', '大会'),
+}
 
 # 摘编类标题(正文含多条目聚合,需要正文补充提取)
 DIGEST_PATTERN = re.compile(r'一周.{0,2}(文物|各地文物)动态摘编|一周文物动态')
@@ -135,6 +172,36 @@ def match_keywords(title):
         if w in title:
             return ('ext', w)
     return None
+
+
+def classify_topics(title, level=''):
+    """把已纳入趋势库的记录映射到行业方向，不改变关键词准入口径。"""
+    text = title or ''
+    topics = [name for name, _ in TOPIC_INFO
+              if any(word in text for word in TOPIC_RULES.get(name, ()))]
+    # 仅命中“数字化”等总括词的文章无法安全细分，不强行归入具体方向。
+    return topics
+
+
+def topics_for_record(record):
+    """读取记录上的方向标签；兼容旧数据并在缺失时即时分类。"""
+    topics = record.get('topics')
+    if topics is not None:
+        return topics
+    return classify_topics(record.get('title', record.get('t', '')),
+                           record.get('level', record.get('l', '')))
+
+
+def topic_counts_for_records(records):
+    """按原文 URL 统计各行业方向，方向是多标签，合计可能超过总原文数。"""
+    urls_by_topic = defaultdict(set)
+    for record in records:
+        url = record.get('url', record.get('u', ''))
+        if not url:
+            continue
+        for topic in topics_for_record(record):
+            urls_by_topic[topic].add(url)
+    return {name: len(urls_by_topic[name]) for name, _ in TOPIC_INFO}
 
 
 def extract_digest_items(body, url, pub_date):
@@ -276,6 +343,8 @@ def aggregate(items, source_items):
 
 def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     items = dedup_and_filter(items)
+    for it in items:
+        it['topics'] = classify_topics(it['title'], it.get('level', ''))
     levels = defaultdict(int)
     for it in items:
         levels[it['level']] += 1
@@ -297,18 +366,50 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
             'source_article_total': len(source_items),
             'source_unique_pages': source_unique_urls,
             'overall_share': round(unique_urls / source_unique_urls * 100, 2) if source_unique_urls else 0,
+            'topic_unique_counts': topic_counts_for_records(items),
         },
         'quality': {
             'source_fetch_complete': True,
             'digest_fetch_failed': digest_failed,
-            'note': '主趋势保留现有关键词统计；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
+            'note': '关键词只负责纳入趋势库；页面按六类行业方向展示。unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
         },
+        'topic_info': [{'name': name, 'description': description} for name, description in TOPIC_INFO],
         'items': [
             {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
-             'w': x.get('word', '')} for x in items
+             'w': x.get('word', ''), 'topics': x.get('topics', [])} for x in items
         ],
         **agg,
     }
+    with open(DATA_PATH, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=1)
+    return data
+
+
+def relabel_existing_data():
+    """给旧版 digital-data.json 补方向分类，不重新请求国家文物局。"""
+    if not os.path.exists(DATA_PATH):
+        raise RuntimeError('找不到已有 digital-data.json，无法执行 --relabel-only。')
+    with open(DATA_PATH, encoding='utf-8') as f:
+        data = json.load(f)
+
+    items = data.get('items', [])
+    for item in items:
+        item['topics'] = classify_topics(item.get('t', ''), item.get('l', ''))
+
+    for granularity in ('by_month', 'by_week', 'by_day'):
+        for group in data.get(granularity, []):
+            group_items = group.get('items', [])
+            group.pop('topic_counts', None)
+            for item in group_items:
+                item.pop('topics', None)
+
+    stats = data.setdefault('stats', {})
+    stats['topic_unique_counts'] = topic_counts_for_records(items)
+    data['topic_info'] = [{'name': name, 'description': description}
+                          for name, description in TOPIC_INFO]
+    quality = data.setdefault('quality', {})
+    quality['topic_taxonomy'] = '六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。'
+
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
     return data
@@ -325,6 +426,16 @@ def main(args=None):
     args = set(sys.argv[1:] if args is None else args)
     force = '--force' in args
     build_only = '--build-only' in args
+    relabel_only = '--relabel-only' in args
+    if relabel_only:
+        print('=== 为现有趋势记录补充六类行业方向分类 ===')
+        relabel_existing_data()
+        print(f'分类已补充: {DATA_PATH}')
+        print('=== 生成趋势页面 ===')
+        import build_digital_page
+        build_digital_page.build_page(HTML_PATH, DATA_PATH)
+        print(f'页面已生成: {HTML_PATH}')
+        return
     cache_valid = build_only  # --build-only: 只用现有数据重建页面
     if not force and not build_only and os.path.exists(DATA_PATH):
         try:

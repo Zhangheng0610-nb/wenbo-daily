@@ -26,6 +26,31 @@ def build_page(html_path, data_path):
     core_n = stats['levels'].get('core', 0)
     tech_n = stats['levels'].get('tech', 0)
     ext_n = stats['levels'].get('ext', 0)
+    topic_info = data.get('topic_info', [
+        {'name': '数字保护与数字采集', 'description': '记录、保存、修复和数字化采集文物与遗址'},
+        {'name': 'AI、三维扫描与科技考古', 'description': '人工智能、三维建模、遥感和数据分析等技术'},
+        {'name': '数字展览与沉浸式体验', 'description': '数字展示、虚拟现实、沉浸式空间和数字复原'},
+        {'name': '数字博物馆与公共服务', 'description': '智慧博物馆、数字导览、云展览和线上公共服务'},
+        {'name': '数字档案、数据库与知识平台', 'description': '数字档案、数据库、知识库和数字资源管理'},
+        {'name': '数字传播与国际交流', 'description': '数字内容传播、线上推广和文化遗产数字出海'},
+    ])
+    topic_counts = stats.get('topic_unique_counts', {})
+    topic_max = max(topic_counts.values(), default=1)
+    categorized_urls = {it['u'] for it in data.get('items', []) if it.get('topics')}
+    categorized_n = len(categorized_urls)
+    uncategorized_n = max(0, unique_n - categorized_n)
+    topic_rows = []
+    for topic in topic_info:
+        name = topic.get('name', '')
+        count = topic_counts.get(name, 0)
+        width = round(count / topic_max * 100) if topic_max else 0
+        topic_rows.append(
+            f'<div class="topic-row"><div class="topic-copy"><b>{name}</b>'
+            f'<span>{topic.get("description", "")}</span></div>'
+            f'<div class="topic-value"><strong>{count}</strong><small>独立原文</small></div>'
+            f'<div class="topic-track"><i style="width:{width}%"></i></div></div>'
+        )
+    topic_html = ''.join(topic_rows)
     rng = data['range']
 
     # 年度分布(用于统计卡片)
@@ -66,17 +91,31 @@ def build_page(html_path, data_path):
   .stat {{ background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 22px; box-shadow: var(--shadow); text-align: center; min-width: 130px; }}
   .stat b {{ display: block; font-size: 1.7em; color: var(--accent); }}
   .stat span {{ font-size: .82em; color: var(--muted); }}
-  .stat.core b {{ color: var(--accent); }}
-  .stat.tech b {{ color: var(--accent2); }}
-  .stat.ext b {{ color: var(--accent3); }}
+  .keyword-summary {{ text-align: center; color: var(--muted); font-size: .78em; margin: 7px 0 4px; }}
+  .keyword-summary b {{ color: var(--ink); font-weight: 600; }}
   .years {{ text-align: center; color: var(--muted); font-size: .88em; margin: 8px 0 4px; }}
   .years b {{ color: var(--ink); }}
 
   .insight {{ background: #eef5ff; border: 1px solid #cfe0ff; border-radius: 12px; padding: 12px 16px; margin-top: 16px; color: #23446f; font-size: .92em; }}
   .insight strong {{ color: #174ea6; }}
+  .topics-card {{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 15px 18px 12px; margin-top: 16px; box-shadow: var(--shadow); }}
+  .topics-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }}
+  .topics-head h2 {{ font-size: 1.05em; }}
+  .topics-head span {{ color: var(--muted); font-size: .78em; }}
+  .topic-row {{ display: grid; grid-template-columns: minmax(250px, 1fr) 70px minmax(120px, 1.15fr); gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid #f0ece6; }}
+  .topic-copy {{ min-width: 0; }}
+  .topic-copy b {{ display: block; font-size: .9em; }}
+  .topic-copy span {{ display: block; color: var(--muted); font-size: .75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
+  .topic-value {{ text-align: right; white-space: nowrap; }}
+  .topic-value strong {{ color: var(--accent2); font-size: 1.1em; margin-right: 3px; }}
+  .topic-value small {{ color: var(--muted); font-size: .68em; }}
+  .topic-track {{ height: 7px; background: #edf3f2; border-radius: 99px; overflow: hidden; }}
+  .topic-track i {{ display: block; height: 100%; background: linear-gradient(90deg, #75cfc5, var(--accent2)); border-radius: inherit; }}
   .controls {{ display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 0; font-size: .84em; color: var(--muted); }}
-  .controls label {{ font-weight: 600; color: var(--ink); }}
-  .controls select, .range-buttons button {{ border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 7px; padding: 6px 9px; font: inherit; cursor: pointer; }}
+  .chart-legend-note {{ color: var(--muted); font-size: .82em; }}
+  .chart-legend-note b {{ color: var(--accent); }}
+  .chart-legend-note em {{ color: var(--accent2); font-style: normal; }}
+  .range-buttons button {{ border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 7px; padding: 6px 9px; font: inherit; cursor: pointer; }}
   .range-buttons {{ display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }}
   .range-buttons button.active {{ background: var(--accent); border-color: var(--accent); color: #fff; }}
 
@@ -117,7 +156,16 @@ def build_page(html_path, data_path):
     .stat {{ min-width: 0; flex: 1 1 29%; padding: 9px 5px; border-radius: 9px; }}
     .stat b {{ font-size: 1.25em; }}
     .stat span {{ font-size: .7em; }}
+    .keyword-summary {{ font-size: .68em; line-height: 1.5; }}
     .years {{ font-size: .75em; line-height: 1.5; }}
+    .topics-card {{ padding: 12px 12px 8px; margin-top: 12px; }}
+    .topics-head {{ align-items: flex-start; flex-direction: column; gap: 1px; margin-bottom: 4px; }}
+    .topic-row {{ grid-template-columns: minmax(0, 1fr) 58px; gap: 7px; padding: 8px 0; }}
+    .topic-copy b {{ font-size: .78em; }}
+    .topic-copy span {{ font-size: .67em; }}
+    .topic-track {{ grid-column: 1 / -1; height: 6px; }}
+    .topic-value strong {{ font-size: 1em; }}
+    .topic-value small {{ font-size: .62em; }}
     .controls {{ align-items: flex-start; }}
     .range-buttons {{ margin-left: 0; width: 100%; }}
     .range-buttons button {{ flex: 1; }}
@@ -143,21 +191,19 @@ def build_page(html_path, data_path):
     <div class="stat"><b>{unique_n}</b><span>独立原文</span></div>
     <div class="stat"><b>{total}</b><span>关键词命中记录</span></div>
     <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻</span></div>
-    <div class="stat core"><b>{core_n}</b><span>核心词命中</span></div>
-    <div class="stat tech"><b>{tech_n}</b><span>技术词命中</span></div>
-    <div class="stat ext"><b>{ext_n}</b><span>场景词命中</span></div>
   </div>
+  <div class="keyword-summary"><b>筛选方法（不等于行业分类）</b>：核心词 {core_n} · 技术词 {tech_n} · 场景词 {ext_n}；关键词口径保持不变</div>
   <div class="years">年度分布：{year_html}</div>
 
   <div class="insight" id="insight">正在生成近一年趋势摘要……</div>
 
+  <section class="topics-card">
+    <div class="topics-head"><h2>行业方向分布</h2><span>覆盖 {categorized_n}/{unique_n} 个独立原文 · 可多标签归类</span></div>
+    {topic_html}
+  </section>
+
   <div class="controls">
-    <label for="metric-select">图表指标</label>
-    <select id="metric-select">
-      <option value="unique_count">独立原文数</option>
-      <option value="count">关键词命中记录</option>
-      <option value="share">占全部文物新闻比例</option>
-    </select>
+    <div class="chart-legend-note"><b>蓝线：独立原文数</b> · <em>绿线：占全部文物新闻比例</em></div>
     <div class="range-buttons" aria-label="时间范围">
       <button type="button" data-range="90d">近90天</button>
       <button type="button" data-range="12m" class="active">近12个月</button>
@@ -180,10 +226,11 @@ def build_page(html_path, data_path):
     <h3>📌 统计口径说明</h3>
     <ul>
       <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今，约 1.2 万条），非抽样。</li>
-      <li><b>判定</b>：标题命中「核心词（数字化/数字藏品/智慧博物馆等）」「技术词（AI/大数据/元宇宙/VR 等）」「场景词（云展览/沉浸式/信息化等）」任一即计入；另对每周「文物动态摘编」正文做补充提取（条目需标题含数字化词，或正文命中数字化核心表达），标题完全相同的跨周转载已去重。</li>
+      <li><b>纳入</b>：沿用现有核心词、技术词、场景词规则；标题命中任一关键词即计入，另对每周「文物动态摘编」正文做补充提取。关键词只负责筛选，标题完全相同的跨周转载已去重。</li>
+      <li><b>行业方向</b>：页面用“数字保护与数字采集”“AI、三维扫描与科技考古”“数字展览与沉浸式体验”“数字博物馆与公共服务”“数字档案、数据库与知识平台”“数字传播与国际交流”六类方向解读文章；同一原文可多标签归类。</li>
       <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；比例指标为数字化原文占国家文物局全部文物新闻原文的比例。</li>
       <li><b>解读</b>：这是一条“国家文物局报道中的数字化动向”曲线，不等于全国所有文博机构的真实项目数量；摘编补充项仍保留，但会在同一原文下合并观察。</li>
-      <li><b>局限</b>：关键词法存在少量漏判/误判；2021 年前部分数据未纳入；所有条目均可点击跳转原文核验。</li>
+      <li><b>局限</b>：六类方向是对已纳入原文的编辑性归类，不是互斥统计；2021 年前部分数据未纳入；所有条目均可点击跳转原文核验。</li>
     </ul>
   </div>
 
@@ -260,18 +307,16 @@ function init(data) {{
     return out;
   }}
 
-  var metric = 'unique_count';
-  var METRIC_NAMES = {{ unique_count: '独立原文数', count: '关键词命中记录', share: '占全部文物新闻比例' }};
-
-  // 生成某粒度 series: xAxis 全轴, 空数据用 0(连续折线)
+  // 生成某粒度的两条线:独立原文数 + 占全部文物新闻比例。
   function buildSeries(keys, map, displayFmt) {{
-    var cats = [], vals = [];
+    var cats = [], countVals = [], shareVals = [];
     keys.forEach(function(k) {{
       cats.push(displayFmt(k));
       var s = map[k];
-      vals.push(s ? (metric === 'share' ? s.share : (s[metric] || 0)) : 0);
+      countVals.push(s ? (s.unique_count || 0) : 0);
+      shareVals.push(s ? (s.share || 0) : 0);
     }});
-    return {{ cats: cats, vals: vals, keys: keys }};
+    return {{ cats: cats, countVals: countVals, shareVals: shareVals, keys: keys }};
   }}
 
   function monthFmt(k) {{ return k.slice(0, 4) + '-' + k.slice(5); }}
@@ -308,8 +353,8 @@ function init(data) {{
 
   function optionFor(gran, zoomStart, zoomEnd) {{
     var s = seriesCache[gran];
-    var isShare = metric === 'share';
-    var markData = gran === 'month' ? [{{ yAxis: averageValue(s.vals), name: '平均' }}] : [];
+    var countMarkData = gran === 'month' ? [{{ yAxis: averageValue(s.countVals), name: '数量平均' }}] : [];
+    var shareMarkData = gran === 'month' ? [{{ yAxis: averageValue(s.shareVals), name: '占比平均' }}] : [];
     var start = zoomStart === undefined ? 0 : zoomStart;
     var end = zoomEnd === undefined ? s.keys.length - 1 : zoomEnd;
     return {{
@@ -318,29 +363,41 @@ function init(data) {{
         trigger: 'axis',
         confine: true,
         formatter: function(params) {{
-          var p = params[0];
-          var value = p.value || 0;
-          return p.axisValue + '<br/>' + METRIC_NAMES[metric] + '：<b>' + value + '</b>' + (isShare ? '%' : ' 条');
+          var label = params[0] ? params[0].axisValue : '';
+          var count = 0, share = 0;
+          params.forEach(function(p) {{
+            if (p.seriesName === '独立原文数') count = p.value || 0;
+            if (p.seriesName === '占全部文物新闻比例') share = p.value || 0;
+          }});
+          return label + '<br/>独立原文数：<b>' + count + '</b> 个<br/>占全部文物新闻：<b>' + share + '%</b>';
         }}
       }},
-      grid: {{ left: 46, right: 20, top: 30, bottom: 60 }},
+      legend: {{ top: 0, right: 8, itemWidth: 16, itemHeight: 8, textStyle: {{ fontSize: 11 }} }},
+      grid: {{ left: 48, right: 58, top: 34, bottom: 60 }},
       xAxis: {{
         type: 'category', data: s.cats, boundaryGap: false,
         axisLabel: {{ fontSize: 11 }},
         axisLine: {{ lineStyle: {{ color: '#999' }} }},
         axisTick: {{ show: false }}
       }},
-      yAxis: {{
-        type: 'value', minInterval: isShare ? 0.1 : 1, name: isShare ? '占比（%）' : '数量',
-        axisLabel: {{ fontSize: 11, formatter: isShare ? '{{value}}%' : '{{value}}' }},
-        splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
-      }},
+      yAxis: [
+        {{ type: 'value', name: '独立原文数', minInterval: 1,
+          nameTextStyle: {{ color: '#2563eb', fontSize: 10 }},
+          axisLabel: {{ fontSize: 11, formatter: '{{value}}' }},
+          splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
+        }},
+        {{ type: 'value', name: '占比（%）', min: 0,
+          nameTextStyle: {{ color: '#0d9488', fontSize: 10 }},
+          axisLabel: {{ fontSize: 11, formatter: '{{value}}%' }},
+          splitLine: {{ show: false }}
+        }}
+      ],
       dataZoom: [
         {{ type: 'inside', startValue: start, endValue: end, filterMode: 'none' }},
         {{ type: 'slider', height: 22, bottom: 10, startValue: start, endValue: end, filterMode: 'none' }}
       ],
       series: [{{
-        name: METRIC_NAMES[metric], type: 'line', data: s.vals,
+        name: '独立原文数', type: 'line', yAxisIndex: 0, data: s.countVals,
         connectNulls: false, smooth: gran === 'month',
         symbolSize: 7,
         lineStyle: {{ width: 2.4, color: '#2563eb' }},
@@ -349,9 +406,20 @@ function init(data) {{
           {{ offset: 0, color: 'rgba(37,99,235,.28)' }}, {{ offset: 1, color: 'rgba(37,99,235,0)' }}
         ]) }},
         markLine: {{
-          silent: true, symbol: 'none', data: markData,
+          silent: true, symbol: 'none', data: countMarkData,
           lineStyle: {{ color: '#d97706', type: 'dashed' }},
-          label: {{ formatter: function(p){{ return '平均 ' + p.value + (isShare ? '%' : ' 条'); }}, fontSize: 10, color: '#d97706' }}
+          label: {{ formatter: function(p){{ return '数量平均 ' + p.value; }}, fontSize: 10, color: '#d97706' }}
+        }}
+      }}, {{
+        name: '占全部文物新闻比例', type: 'line', yAxisIndex: 1, data: s.shareVals,
+        connectNulls: false, smooth: gran === 'month',
+        symbolSize: 6,
+        lineStyle: {{ width: 2, color: '#0d9488' }},
+        itemStyle: {{ color: '#0d9488' }},
+        markLine: {{
+          silent: true, symbol: 'none', data: shareMarkData,
+          lineStyle: {{ color: '#7c3aed', type: 'dashed' }},
+          label: {{ formatter: function(p){{ return '占比平均 ' + p.value + '%'; }}, fontSize: 10, color: '#7c3aed' }}
         }}
       }}]
     }};
@@ -477,11 +545,6 @@ function init(data) {{
     document.querySelectorAll('.range-buttons button').forEach(function(btn){{ btn.classList.toggle('active', btn.dataset.range === name); }});
   }}
 
-  document.getElementById('metric-select').addEventListener('change', function(){{
-    metric = this.value;
-    seriesCache = rebuildSeriesCache();
-    renderChart(currentGran, Math.min(activeStart, seriesCache[currentGran].keys.length - 1), Math.min(activeEnd, seriesCache[currentGran].keys.length - 1));
-  }});
   document.querySelectorAll('.range-buttons button').forEach(function(btn){{
     btn.addEventListener('click', function(){{ setPreset(this.dataset.range); }});
   }});
