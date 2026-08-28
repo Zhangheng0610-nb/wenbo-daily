@@ -3047,8 +3047,6 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
   <a class="primary" href="{latest_daily_href}">今日精选</a>
   <a href="#daily-list">日报档案</a>
   <a href="command-center/">🛰️ 数字驾驶舱</a>
-  <a href="heatmap.html">行业关注地图</a>
-  <a href="digital-trends.html">数字趋势</a>
   <a href="intern.html">实习</a>
   <a href="jobs.html">招聘</a>
 </nav>
