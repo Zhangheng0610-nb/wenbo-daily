@@ -5,6 +5,7 @@ build_digital_page.py — 生成「数字化趋势」交互页面 digital-trends
 数据来自 digital-data.json(ECharts 5 + dataZoom 缩放联动粒度切换:月→周→天)。
 """
 import os, json, sys
+from html import escape
 
 if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8':
     try:
@@ -45,10 +46,11 @@ def build_page(html_path, data_path):
         count = topic_counts.get(name, 0)
         width = round(count / topic_max * 100) if topic_max else 0
         topic_rows.append(
-            f'<div class="topic-row"><div class="topic-copy"><b>{name}</b>'
-            f'<span>{topic.get("description", "")}</span></div>'
+            f'<button type="button" class="topic-row" data-topic="{escape(name, quote=True)}">'
+            f'<div class="topic-copy"><b>{escape(name)}</b>'
+            f'<span>{escape(topic.get("description", ""))}</span></div>'
             f'<div class="topic-value"><strong>{count}</strong><small>独立原文</small></div>'
-            f'<div class="topic-track"><i style="width:{width}%"></i></div></div>'
+            f'<div class="topic-track"><i style="width:{width}%"></i></div></button>'
         )
     topic_html = ''.join(topic_rows)
     rng = data['range']
@@ -102,7 +104,9 @@ def build_page(html_path, data_path):
   .topics-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 8px; }}
   .topics-head h2 {{ font-size: 1.05em; }}
   .topics-head span {{ color: var(--muted); font-size: .78em; }}
-  .topic-row {{ display: grid; grid-template-columns: minmax(250px, 1fr) 70px minmax(120px, 1.15fr); gap: 12px; align-items: center; padding: 9px 0; border-top: 1px solid #f0ece6; }}
+  .topic-row {{ display: grid; grid-template-columns: minmax(250px, 1fr) 70px minmax(120px, 1.15fr); gap: 12px; align-items: center; width: 100%; padding: 9px 0; border: 0; border-top: 1px solid #f0ece6; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }}
+  .topic-row:hover {{ background: #f7fbfa; }}
+  .topic-row:focus-visible {{ outline: 2px solid var(--accent2); outline-offset: 2px; }}
   .topic-copy {{ min-width: 0; }}
   .topic-copy b {{ display: block; font-size: .9em; }}
   .topic-copy span {{ display: block; color: var(--muted); font-size: .75em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
@@ -232,8 +236,8 @@ def build_page(html_path, data_path):
   </div>
 
   <div class="list-card">
-    <div class="list-head"><h2 id="period-title">📋 点击图表数据点查看明细</h2><span class="tag" id="period-count"></span></div>
-    <div id="period-list"><div class="empty">上方图表中点击任意数据点，这里会列出该周期内所有数字化相关新闻。</div></div>
+    <div class="list-head"><h2 id="period-title">📋 点击年度、行业方向或趋势点查看文章</h2><span class="tag" id="period-count"></span></div>
+    <div id="period-list"><div class="empty">点击上方行业方向、年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化原文。</div></div>
   </div>
 
   <div class="method">
@@ -269,6 +273,22 @@ function init(data) {{
   data.by_week.forEach(function(s){{ byWeek[s.key] = s; }});
   data.by_day.forEach(function(s){{ byDay[s.key] = s; }});
   (data.by_year || []).forEach(function(s){{ byYear[s.key] = s; }});
+
+  // 建立“行业方向 / 年份 → 独立原文”的索引，点击后复用同一明细区。
+  var topicItems = {{}}, yearItems = {{}};
+  function addUnique(index, key, item) {{
+    if (!key || !item.u) return;
+    if (!index[key]) index[key] = {{}};
+    if (!index[key][item.u]) index[key][item.u] = item;
+  }}
+  (data.items || []).forEach(function(item) {{
+    (item.topics || []).forEach(function(topic){{ addUnique(topicItems, topic, item); }});
+    addUnique(yearItems, item.d.slice(0, 4), item);
+  }});
+
+  function indexValues(index, key) {{
+    return Object.keys(index[key] || {{}}).map(function(url){{ return index[key][url]; }});
+  }}
 
   var rangeStart = data.range.start, rangeEnd = data.range.end;
 
@@ -516,19 +536,12 @@ function init(data) {{
     }});
   }}
 
-  chart.on('click', function(params) {{
-    var gran = currentGran;
-    var s = seriesCache[gran];
-    if (params.dataIndex == null || !s) return;
-    var key = s.keys[params.dataIndex];
-    var label = s.cats[params.dataIndex];
-    var group = periodGroup(gran, key);
-    var items = group.items || [];
-    document.getElementById('period-title').textContent = '📋 ' + label + ' · 数字化明细';
-    document.getElementById('period-count').textContent = '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%';
+  function renderArticleList(title, meta, items, emptyText) {{
+    document.getElementById('period-title').textContent = title;
+    document.getElementById('period-count').textContent = meta;
     var box = document.getElementById('period-list');
     if (!items.length) {{
-      box.innerHTML = '<div class="empty">该周期暂无数字化相关新闻。</div>';
+      box.innerHTML = '<div class="empty">' + escapeHtml(emptyText) + '</div>';
       return;
     }}
     box.innerHTML = items.map(function(it) {{
@@ -538,6 +551,44 @@ function init(data) {{
         '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' +
         '</div>';
     }}).join('');
+  }}
+
+  function showArticleList(title, meta, items, emptyText) {{
+    renderArticleList(title, meta, items, emptyText);
+    document.getElementById('period-list').scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+  }}
+
+  chart.on('click', function(params) {{
+    var gran = currentGran;
+    var s = seriesCache[gran];
+    if (params.dataIndex == null || !s) return;
+    var key = s.keys[params.dataIndex];
+    var label = s.cats[params.dataIndex];
+    var group = periodGroup(gran, key);
+    var items = group.items || [];
+    renderArticleList('📋 ' + label + ' · 数字化明细',
+      '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%',
+      items, '该周期暂无数字化相关新闻。');
+  }});
+
+  document.querySelectorAll('.topic-row').forEach(function(button){{
+    button.addEventListener('click', function(){{
+      var topic = this.dataset.topic;
+      var items = indexValues(topicItems, topic);
+      showArticleList('📚 ' + topic + ' · 对应文章',
+        '独立原文 ' + items.length + ' 篇', items, '该行业方向目前暂无可展示的独立原文。');
+    }});
+  }});
+
+  annualChart.on('click', function(params) {{
+    var s = seriesCache.year;
+    if (params.dataIndex == null || !s || !s.keys[params.dataIndex]) return;
+    var year = s.keys[params.dataIndex];
+    var group = byYear[year] || {{ count: 0, unique_count: 0, share: 0 }};
+    var items = indexValues(yearItems, year);
+    showArticleList('📋 ' + year + '年 · 数字化明细',
+      '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%',
+      items, '该年度暂无数字化相关新闻。');
   }});
 
   function renderInsight() {{
