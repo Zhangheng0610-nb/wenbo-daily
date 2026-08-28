@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "date": "2026-08-29",
+  "mode": "operational",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对国家文物局登记入口及当日公开列表，无合格新增项。"
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对中国文物报数字报入口及当日版面，无合格新增项。"
+    },
+    {
+      "sourceId": "archaeology",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对中国考古网核心栏目入口及当日公开列表，无合格新增项。"
+    },
+    {
+      "sourceId": "museum-association",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对中国博物馆协会资讯、行业资讯、公告和展览入口，无合格新增项。"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对新华网文博与文化频道入口，无合格新增项。"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "mode": "operational",
+      "status": "no_update",
+      "checkedAt": "2026-08-29T12:00:00+08:00",
+      "candidateCount": 0,
+      "note": "已核对央博、央视新闻及专题入口，无合格新增项。"
+    }
+  ],
+  "items": []
+}

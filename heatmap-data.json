@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-08-28",
-  "asOf": "2026-08-28",
+  "generated": "2026-08-29",
+  "asOf": "2026-08-29",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -5016,11 +5016,65 @@
         "note": "",
         "mode": "archive-backfill",
         "date": "2026-08-28"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对中国考古网核心栏目入口及当日公开列表，无合格新增项。",
+        "date": "2026-08-29"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对央博、央视新闻及专题入口，无合格新增项。",
+        "date": "2026-08-29"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对中国文物报数字报入口及当日版面，无合格新增项。",
+        "date": "2026-08-29"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对中国博物馆协会资讯、行业资讯、公告和展览入口，无合格新增项。",
+        "date": "2026-08-29"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对国家文物局登记入口及当日公开列表，无合格新增项。",
+        "date": "2026-08-29"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "status": "no_update",
+        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "candidateCount": 0,
+        "note": "已核对新华网文博与文化频道入口，无合格新增项。",
+        "date": "2026-08-29"
       }
     ],
     "monitoringStart": "2026-05-30",
     "archiveBackfillStart": "2026-05-30",
-    "operationalStart": "",
+    "operationalStart": "2026-08-29",
     "baseline": {
       "period": {
         "start": "2026-07-11",
@@ -5056,12 +5110,12 @@
     "excludedNonPanel": 0,
     "unassigned": 251,
     "panelSourceCount": 6,
-    "coverageDays": 91,
-    "completeCoverageDays": 2,
-    "successfulSourceChecks": 279,
+    "coverageDays": 92,
+    "completeCoverageDays": 3,
+    "successfulSourceChecks": 285,
     "coverageStatuses": {
       "success": 136,
-      "no_update": 143,
+      "no_update": 149,
       "partial": 267,
       "failed": 0
     },
@@ -5070,12 +5124,17 @@
         "checks": 546,
         "good": 279,
         "days": 91
+      },
+      "operational": {
+        "checks": 6,
+        "good": 6,
+        "days": 1
       }
     },
     "archiveBackfillCoverageChecks": 546,
-    "operationalCoverageChecks": 0,
+    "operationalCoverageChecks": 6,
     "archiveBackfillCoverageDays": 91,
-    "operationalCoverageDays": 0,
+    "operationalCoverageDays": 1,
     "recordsBySource": {
       "ncha": 71,
       "cultural-relics-news": 103,
