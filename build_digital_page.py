@@ -161,6 +161,7 @@ def build_page(html_path, data_path):
   .p-title {{ flex: 1; }}
   .p-title a {{ color: var(--ink); text-decoration: none; }}
   .p-title a:hover {{ color: var(--accent); text-decoration: underline; }}
+  .p-source {{ display: block; margin-top: 2px; color: var(--muted); font-size: .78em; }}
   .p-level {{ font-size: .72em; border-radius: 4px; padding: 1px 7px; color: #fff; white-space: nowrap; }}
   .p-level.core {{ background: var(--accent); }}
   .p-level.tech {{ background: var(--accent2); }}
@@ -547,10 +548,16 @@ function init(data) {{
     return items.map(function(it) {{
       var digestHits = it.digest_hits || [];
       if (it.digest_title) digestHits = [{{ title: it.digest_title, evidence_snippet: it.evidence_snippet || '' }}];
-      var evidence = digestHits.length ? '<div class="p-evidence">摘编条目：' + digestHits.map(function(hit) {{
-        return '<div><strong>' + escapeHtml(hit.title || '') + '</strong>' +
-          (hit.evidence_snippet ? '：' + escapeHtml(hit.evidence_snippet) : '') + '</div>';
-      }}).join('') + '</div>' : '';
+      if (digestHits.length) return digestHits.map(function(hit) {{
+        var digestTitle = hit.title || it.t || '摘编内条目';
+        var evidence = hit.evidence_snippet ? '<span class="p-evidence"><strong>证据：</strong>' + escapeHtml(hit.evidence_snippet) + '</span>' : '';
+        return '<div class="p-item p-digest-item">' +
+          '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
+          '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(digestTitle) + '</a>' +
+          '<small class="p-source">摘编内条目 · 来源：' + escapeHtml(it.t || '一周文物动态摘编') + '</small></span>' +
+          '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' + evidence +
+          '</div>';
+      }}).join('');
       return '<div class="p-item">' +
         '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
         '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(it.t) + '</a></span>' +
