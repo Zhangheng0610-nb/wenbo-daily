@@ -2277,7 +2277,7 @@ def build_jobs_html(data, page_type='jobs'):
 {sections_html}
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对官方原文。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。收录范围：省级及以上博物馆、考古院所、设有考古/文博专业的高校。</p>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对原文和投递入口。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。招聘/实习允许使用真实有效的招聘平台和学校就业网链接，但必须能核对岗位并完成投递；日报的 A/B 级新闻标准不直接套用于本栏目。</p>
 
 <footer>
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
