@@ -1457,7 +1457,7 @@ def parse_md(filepath):
             continue
 
         # Source links line
-        src_match = re.findall(r'📎\s*\[(.+?)\]\((.+?)\)', line)
+        src_match = re.findall(r'(?:📎\s*|\|\s*)\[(.+?)\]\((.+?)\)', line)
         if src_match and current_item:
             current_item['sources'] = [{'name': s[0], 'url': s[1]} for s in src_match]
             i += 1
@@ -1850,7 +1850,7 @@ def parse_digest(filepath, dtype='weekly'):
             continue
 
         # Source links (at end of item, after blockquote or body)
-        src_match = re.findall(r'📎\s*\[(.+?)\]\((.+?)\)', line)
+        src_match = re.findall(r'(?:📎\s*|\|\s*)\[(.+?)\]\((.+?)\)', line)
         if src_match and current_item:
             current_item['sources'] = [{'name': s[0], 'url': s[1]} for s in src_match]
             i += 1
