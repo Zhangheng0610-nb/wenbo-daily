@@ -40,7 +40,7 @@
 - 国内 A 级：国家文物局 `ncha.gov.cn`、新华社 `news.cn`/`xinhuanet.com`、央视 `cctv.com`、中国文物报 `chinawenbao.com.cn`、中国博物馆协会 `chinamuseum.org.cn`、中国考古网/社科院考古 `kaogu.cn`/`kaogu.cssn.cn`。
 - 国内补充：人民日报、光明网、中国新闻网、央广网；澎湃只作少量补充，地方媒体只有在直接报道机构公告且能被官方信息交叉核验时才可使用。
 - 国际 A 级：UNESCO、世界遗产中心、ICOM、ICCROM。
-- 国际补充：AP、Reuters、BBC、Archaeology Magazine、The Art Newspaper。
+- 国际补充：AP、Reuters、BBC、RTVE（西班牙国家公共电视台）、EFE（西班牙通讯社）、Archaeology Magazine、The Art Newspaper。
 - 展览一手来源：指定博物馆官网及 `.museum` / `.museum.cn` 官方域名。
 
 公众号、搜狗微信跳转、百度百科/知道、百家号、搜狐号、头条号、网易、搜索引擎跳转链接和不明聚合站均不得作为最终来源。找不到 A/B 级原文就舍弃，不要为了凑数收录。

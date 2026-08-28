@@ -29,7 +29,7 @@ SOURCE_GROUPS = OrderedDict([
         "label": "B级｜专业补充",
         "description": "高质量新闻机构、专业刊物和研究机构；应尽量与A级来源交叉核验。",
         "domains": (
-            "apnews.com", "reuters.com", "bbc.com", "archaeology.org",
+            "apnews.com", "reuters.com", "bbc.com", "rtve.es", "efe.com", "archaeology.org",
             "theartnewspaper.com", "thepaper.cn", "chinadaily.com.cn",
             "cri.cn", "nationalgeographic.com", "artnews.com", "ap.org",
             "nature.com", "shobserver.cn", "nfnews.com", "bjnews.com.cn",
