@@ -298,7 +298,7 @@
 
 <header>
   <h1>💼 文博招聘信息</h1>
-  <p class="meta">2026-08-28 更新 ｜ 共 29 个岗位 ｜ 可申请 10 ｜ 已截止 0</p>
+  <p class="meta">2026-08-28 更新 ｜ 共 29 个岗位 ｜ 可申请 <span id="job-open-count">10</span> ｜ 已截止 <span id="job-closed-count">0</span></p>
   <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
 </header>
 
@@ -306,9 +306,9 @@
 
 <div class="stats-bar">
   <div class="stat-item">📋 总岗位数：<strong>29</strong></div>
-  <div class="stat-item">🟢 可申请：<strong>10</strong></div>
-  <div class="stat-item">⏰ 3天内截止：<strong>5</strong></div>
-  <div class="stat-item">🔴 已截止：<strong>0</strong></div>
+  <div class="stat-item">🟢 可申请：<strong id="job-open-stat">10</strong></div>
+  <div class="stat-item">⏰ 3天内截止：<strong id="job-urgent-stat">5</strong></div>
+  <div class="stat-item">🔴 已截止：<strong id="job-closed-stat">0</strong></div>
   <div class="stat-item">🧭 待核截止：<strong>19</strong></div>
   <div class="stat-item">🔄 每两天更新一次</div>
 </div>
@@ -317,11 +317,11 @@
     <div class="job-section">
       <h2 class="section">🏛️ 博物馆 <span class="count-badge">15 岗</span></h2>
 
-        <div class="job-item urgent-row">
+        <div class="job-item urgent-row" data-deadline-at="2026-08-28T17:00:00+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">国家自然博物馆（北京） — 2026年度院内选聘：展览策划 / 教育课程研发与实施 / 项目管理</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
              <span class="closing-badge">8月28日截止</span>
           </div>
           <div class="job-meta">
@@ -331,14 +331,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.bjast.ac.cn/tzgg/400edf8aa020c55a01a0221b98f20004.shtml" target="_blank" rel="noopener">🔗 北京科技研究院公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.bjast.ac.cn/tzgg/400edf8aa020c55a01a0221b98f20004.shtml" target="_blank" rel="noopener">🔗 北京科技研究院公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item urgent-row">
+        <div class="job-item urgent-row" data-deadline-at="2026-08-28T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#5</span>
             <span class="job-title">湖北省博物馆 — 博士后研究人员 1 名（碑帖与地方文书研究）</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
              <span class="closing-badge">8月28日截止</span>
           </div>
           <div class="job-meta">
@@ -348,14 +348,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.hbww.org.cn/xwdt/p/12993.html" target="_blank" rel="noopener">🔗 招聘详情</a> <span class="source-note">C级来源</span>
+            <a href="https://www.hbww.org.cn/xwdt/p/12993.html" target="_blank" rel="noopener">🔗 招聘详情</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item urgent-row">
+        <div class="job-item urgent-row" data-deadline-at="2026-08-30T14:00:00+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">长影旧址博物馆（长春） — 文化传播官 20 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
              <span class="closing-badge">8月30日截止</span>
           </div>
           <div class="job-meta">
@@ -365,14 +365,14 @@
 
           </div>
           <div class="job-link">
-            <a href="http://www.offcn.com/sydw/2026/0821/1174946.html" target="_blank" rel="noopener">🔗 中公公告</a> <span class="source-note">C级来源</span>
+            <a href="http://www.offcn.com/sydw/2026/0821/1174946.html" target="_blank" rel="noopener">🔗 中公公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="2026-09-11T17:00:00+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#6</span>
             <span class="job-title">上海博物馆 — 公开招聘工作人员 4 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
 
           </div>
           <div class="job-meta">
@@ -382,14 +382,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://rsj.sh.gov.cn/tzpgg_17408/20260825/t0035_1443267.html" target="_blank" rel="noopener">🔗 上海市人力资源和社会保障局公告</a> <span class="source-note">A级来源</span>
+            <a href="https://rsj.sh.gov.cn/tzpgg_17408/20260825/t0035_1443267.html" target="_blank" rel="noopener">🔗 上海市人力资源和社会保障局公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="2026-12-31T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#4</span>
             <span class="job-title">上海博物馆 — 博士后研究人员 2 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
 
           </div>
           <div class="job-meta">
@@ -399,14 +399,14 @@
 
           </div>
           <div class="job-link">
-            <a href="http://www.offcn.com/sydw/2026/0808/1171199.html" target="_blank" rel="noopener">🔗 中公公告</a> <span class="source-note">C级来源</span>
+            <a href="http://www.offcn.com/sydw/2026/0808/1171199.html" target="_blank" rel="noopener">🔗 中公公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="2026-12-31T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#15</span>
             <span class="job-title">湖南省博物馆 — 博士研究岗 2 名（古代文物研究展示 / 语言类藏品研究展示）</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
 
           </div>
           <div class="job-meta">
@@ -416,14 +416,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.hnmuseum.com/zh-hans/aboutus/%E3%80%90%E5%85%AC%E5%91%8A%E3%80%91%E6%B9%96%E5%8D%97%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%862026%E5%B9%B4%E5%85%AC%E5%BC%80%E6%8B%9B%E8%81%98%E5%85%AC%E5%91%8A" target="_blank" rel="noopener">🔗 湖南省博物馆官网公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.hnmuseum.com/zh-hans/aboutus/%E3%80%90%E5%85%AC%E5%91%8A%E3%80%91%E6%B9%96%E5%8D%97%E7%9C%81%E5%8D%9A%E7%89%A9%E9%A6%862026%E5%B9%B4%E5%85%AC%E5%BC%80%E6%8B%9B%E8%81%98%E5%85%AC%E5%91%8A" target="_blank" rel="noopener">🔗 湖南省博物馆官网公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">上海世界技能博物馆 — 中文讲解员 1 名 + 中英双语讲解员 1 名</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -433,14 +433,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyfnf3kkjxKiZfTwZFJYm7QVqXa8Fplpd9AEFXChXayp8GMkecFTVTcv-YLezhzXh4J-xoemsxdy-bI0pjJUkDg5DjN65xZ7DT4CqUwC4wydD2tNGGy-WuK3zOrqL20dNwYJBjXmDia01jcwaLKB6wiZvRK1hevwx7tj5URmzcfKiACsW8amXO98fQ9NEzxpCkpsvHPsUWdMxj32-j2KiwUw..&type=2" target="_blank" rel="noopener">🔗 招聘简章（微信）</a> <span class="source-note">C级来源</span>
+            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyfnf3kkjxKiZfTwZFJYm7QVqXa8Fplpd9AEFXChXayp8GMkecFTVTcv-YLezhzXh4J-xoemsxdy-bI0pjJUkDg5DjN65xZ7DT4CqUwC4wydD2tNGGy-WuK3zOrqL20dNwYJBjXmDia01jcwaLKB6wiZvRK1hevwx7tj5URmzcfKiACsW8amXO98fQ9NEzxpCkpsvHPsUWdMxj32-j2KiwUw..&type=2" target="_blank" rel="noopener">🔗 招聘简章（微信）</a> <span class="source-note">🔎 二手线索</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#7</span>
             <span class="job-title">中国国家博物馆 — 2026届校园招聘·博物馆讲解员</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -450,14 +450,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.quanzhi.com/notice/6a2351d31433e769ad66a135" target="_blank" rel="noopener">🔗 全职招聘网公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.quanzhi.com/notice/6a2351d31433e769ad66a135" target="_blank" rel="noopener">🔗 全职招聘网公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#8</span>
             <span class="job-title">文化和旅游部直属事业单位（故宫博物院 / 中国国家博物馆 / 中国旅游研究院） — 社会人员招聘（三）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -467,14 +467,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.shiyebian.com/xinxi/38450.html" target="_blank" rel="noopener">🔗 事业单位招聘网公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.shiyebian.com/xinxi/38450.html" target="_blank" rel="noopener">🔗 事业单位招聘网公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#9</span>
             <span class="job-title">中国文物交流中心 — 2026年公开招聘专业技术人员</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -484,14 +484,14 @@
 
           </div>
           <div class="job-link">
-            <a href="http://www.aec1971.org.cn/art/2026/8/10/art_1327_37665.html" target="_blank" rel="noopener">🔗 中心官网公告</a> <span class="source-note">C级来源</span>
+            <a href="http://www.aec1971.org.cn/art/2026/8/10/art_1327_37665.html" target="_blank" rel="noopener">🔗 中心官网公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#10</span>
             <span class="job-title">中国历史研究院·中国考古博物馆 — 中文讲解员 1 名（非事业编制）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -501,14 +501,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.cssn.cn/ggzp/202603/t20260303_5974800.shtml" target="_blank" rel="noopener">🔗 中国社会科学网公告</a> <span class="source-note">A级来源</span>
+            <a href="https://www.cssn.cn/ggzp/202603/t20260303_5974800.shtml" target="_blank" rel="noopener">🔗 中国社会科学网公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#11</span>
             <span class="job-title">汉景帝阳陵博物院 — 2026年讲解员招聘启事（合同制）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -518,14 +518,14 @@
 
           </div>
           <div class="job-link">
-            <a href="http://www.hylmuseum.cn/index.php?ac=article&at=read&did=3245" target="_blank" rel="noopener">🔗 博物院官网启事</a> <span class="source-note">C级来源</span>
+            <a href="http://www.hylmuseum.cn/index.php?ac=article&at=read&did=3245" target="_blank" rel="noopener">🔗 博物院官网启事</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#12</span>
             <span class="job-title">秦始皇帝陵博物院 — 计划外合同制讲解员 / 电教员 若干名</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -535,14 +535,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyrgVbae7E2CFfTwZFJYm7QVqXa8Fplpd9ItOwnnuADSQw8tMb7frME-zX4hHf0TopX-61celeHix1IWk4IJX6KQEdZ0fvE8hSr8OX3M5A5vSM_7sIg0yLyB7bTg2gmarP28-sY6K8KVTc-qmZhXu8oxU4hFxi-uu8Q6DwS3Vch-v-B4UeCA3TjCdvhc2kinVuMT7VOyIAPy8GX_iHL9MadA..&type=2" target="_blank" rel="noopener">🔗 招聘公告（微信）</a> <span class="source-note">C级来源</span>
+            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyrgVbae7E2CFfTwZFJYm7QVqXa8Fplpd9ItOwnnuADSQw8tMb7frME-zX4hHf0TopX-61celeHix1IWk4IJX6KQEdZ0fvE8hSr8OX3M5A5vSM_7sIg0yLyB7bTg2gmarP28-sY6K8KVTc-qmZhXu8oxU4hFxi-uu8Q6DwS3Vch-v-B4UeCA3TjCdvhc2kinVuMT7VOyIAPy8GX_iHL9MadA..&type=2" target="_blank" rel="noopener">🔗 招聘公告（微信）</a> <span class="source-note">🔎 二手线索</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#13</span>
             <span class="job-title">上海博物馆 — 社会讲解员公开招募</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -552,14 +552,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.bianzhia.com/shanghai/20260527/254389.html" target="_blank" rel="noopener">🔗 编制招聘网公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.bianzhia.com/shanghai/20260527/254389.html" target="_blank" rel="noopener">🔗 编制招聘网公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#14</span>
             <span class="job-title">📍 宁波天一阁博物院 — 古籍修复师 1 名</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -569,18 +569,18 @@
 
           </div>
           <div class="job-link">
-            <a href="https://ycyg.nbhr.org.cn/Article/Info?ClassGuid=45c2f5bb-5221-45a5-a7cc-da6eb580e79d&InfoGuid=98b1ee7c-c469-4360-afee-f46002517914" target="_blank" rel="noopener">🔗 宁波市人力资源服务平台公告</a> <span class="source-note">C级来源</span>
+            <a href="https://ycyg.nbhr.org.cn/Article/Info?ClassGuid=45c2f5bb-5221-45a5-a7cc-da6eb580e79d&InfoGuid=98b1ee7c-c469-4360-afee-f46002517914" target="_blank" rel="noopener">🔗 宁波市人力资源服务平台公告</a> <span class="source-note">🎓 高校/就业平台</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏗️ 考古所 <span class="count-badge">5 岗</span></h2>
 
-        <div class="job-item urgent-row">
+        <div class="job-item urgent-row" data-deadline-at="2026-08-28T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">张家口市文物考古研究所（察哈尔都统署博物馆） — 专技A岗 1 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
              <span class="closing-badge">8月28日截止</span>
           </div>
           <div class="job-meta">
@@ -590,14 +590,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.gaoxiaojob.com/job/detail/2308228.html" target="_blank" rel="noopener">🔗 高校人才网</a> <span class="source-note">C级来源</span>
+            <a href="https://www.gaoxiaojob.com/job/detail/2308228.html" target="_blank" rel="noopener">🔗 高校人才网</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item urgent-row">
+        <div class="job-item urgent-row" data-deadline-at="2026-08-31T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">辽宁省文物考古研究院 — 2026年面向社会公开招聘高层次及急需紧缺人才</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
              <span class="closing-badge">8月31日截止</span>
           </div>
           <div class="job-meta">
@@ -607,14 +607,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.lnrsks.com/html/sydw_zhaopingonggao/7598.html" target="_blank" rel="noopener">🔗 辽宁人事考试网</a> <span class="source-note">C级来源</span>
+            <a href="https://www.lnrsks.com/html/sydw_zhaopingonggao/7598.html" target="_blank" rel="noopener">🔗 辽宁人事考试网</a> <span class="source-note">🔎 二手线索</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">四川省文物考古研究院 — 博士后 7 名</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -624,14 +624,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.gaoxiaojob.com/announcement/job-list?id=413805" target="_blank" rel="noopener">🔗 招聘公告</a> <span class="source-note">C级来源</span>
+            <a href="https://www.gaoxiaojob.com/announcement/job-list?id=413805" target="_blank" rel="noopener">🔗 招聘公告</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#4</span>
             <span class="job-title">中国社会科学院考古研究所 — 2026年非事业编制人员招聘（4人）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -641,14 +641,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://cssn.cn/ggzp/202606/t20260601_5999874.shtml" target="_blank" rel="noopener">🔗 中国社会科学网公告</a> <span class="source-note">A级来源</span>
+            <a href="https://cssn.cn/ggzp/202606/t20260601_5999874.shtml" target="_blank" rel="noopener">🔗 中国社会科学网公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#5</span>
             <span class="job-title">重庆市文物考古研究院（重庆文化遗产保护中心） — 公众考古中心·数字传播与数据管理岗</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -658,18 +658,18 @@
 
           </div>
           <div class="job-link">
-            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyhHo8aAYaCJZfTwZFJYm7QVqXa8Fplpd9xi1Qp_z9J2gWk9dUYil6Kjn-_qaOSS-9qswSL_hgZgeILe-o7MCbayDrnU0pzxGQWRCBCX3foxsHUHIO83jvPlwM8QV0pU4JUNWJBRSw-WzsR4ejJa1v8szAkFjWjoMuYmvvyvLkTMpjtcnM4dMFq_PNHsoqXGVGdT0-D4N2O6byPfCoem7FzA..&type=2" target="_blank" rel="noopener">🔗 招聘公告（微信）</a> <span class="source-note">C级来源</span>
+            <a href="https://weixin.sogou.com/link?url=dn9a_-gY295K0Rci_xozVXfdMkSQTLW6cwJThYulHEtVjXrGTiVgS_T9akJK5yMyhHo8aAYaCJZfTwZFJYm7QVqXa8Fplpd9xi1Qp_z9J2gWk9dUYil6Kjn-_qaOSS-9qswSL_hgZgeILe-o7MCbayDrnU0pzxGQWRCBCX3foxsHUHIO83jvPlwM8QV0pU4JUNWJBRSw-WzsR4ejJa1v8szAkFjWjoMuYmvvyvLkTMpjtcnM4dMFq_PNHsoqXGVGdT0-D4N2O6byPfCoem7FzA..&type=2" target="_blank" rel="noopener">🔗 招聘公告（微信）</a> <span class="source-note">🔎 二手线索</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏢 市场化企业 · 浙江 <span class="count-badge">3 岗</span></h2>
 
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="2026-12-31T23:59:59+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">📍 浙江思睿观通展览展示有限公司（浙大文创全资子公司） — 空间设计 / 平面设计 / 项目管理 各 1 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
 
           </div>
           <div class="job-meta">
@@ -679,14 +679,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.zggqzp.com/2026/zpxx_0629/400602.html" target="_blank" rel="noopener">🔗 公告详情</a> <span class="source-note">C级来源</span>
+            <a href="https://www.zggqzp.com/2026/zpxx_0629/400602.html" target="_blank" rel="noopener">🔗 公告详情</a> <span class="source-note">🔎 二手线索</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 杭州访古迹文化发展有限公司 — 考古报告员</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -696,14 +696,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.zhaopin.com/jobdetail/CCL1525193220J40873529709.htm" target="_blank" rel="noopener">🔗 智联招聘投递</a> <span class="source-note">C级来源</span>
+            <a href="https://www.zhaopin.com/jobdetail/CCL1525193220J40873529709.htm" target="_blank" rel="noopener">🔗 智联招聘投递</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">📍 杭州博物文化传播有限公司 — 内容采编（文博方向）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -713,18 +713,18 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.career.zju.edu.cn/jyxt/sczp/zpztgl/ckZpgwXq.zf?zpxxbh=4F53A6B198E65C26E0653A68DD0E9B18" target="_blank" rel="noopener">🔗 招聘参考</a> <span class="source-note">A级来源</span>
+            <a href="https://www.career.zju.edu.cn/jyxt/sczp/zpztgl/ckZpgwXq.zf?zpxxbh=4F53A6B198E65C26E0653A68DD0E9B18" target="_blank" rel="noopener">🔗 招聘参考</a> <span class="source-note">🎓 高校/就业平台</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏢 市场化企业 · 上海 <span class="count-badge">2 岗</span></h2>
 
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 宽创国际 — 博物馆展陈策划 / 设计岗（在招 91 个职位）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -734,14 +734,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.zhipin.com/gongsi/8aa7705a86cd65091j62tu1Eg~~.html" target="_blank" rel="noopener">🔗 BOSS直聘官方主页</a> <span class="source-note">C级来源</span>
+            <a href="https://www.zhipin.com/gongsi/8aa7705a86cd65091j62tu1Eg~~.html" target="_blank" rel="noopener">🔗 BOSS直聘官方主页</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">📍 风语筑（A 股上市） — 策展策划 / 创意设计师</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -751,18 +751,18 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.liepin.com/s/03cfc76068ad861bcc6d455808f6739f/pn4/" target="_blank" rel="noopener">🔗 猎聘投递</a> <span class="source-note">C级来源</span>
+            <a href="https://www.liepin.com/s/03cfc76068ad861bcc6d455808f6739f/pn4/" target="_blank" rel="noopener">🔗 猎聘投递</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🏢 市场化企业 · 其他地区 <span class="count-badge">3 岗</span></h2>
 
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">青海闻见学行研学教育科技有限公司（服务青海省博物馆） — 博物馆讲解员</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -772,14 +772,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.zhipin.com/zhaopin/ac7345437bd390aa03F429q4/" target="_blank" rel="noopener">🔗 BOSS直聘详情</a> <span class="source-note">C级来源</span>
+            <a href="https://www.zhipin.com/zhaopin/ac7345437bd390aa03F429q4/" target="_blank" rel="noopener">🔗 BOSS直聘详情</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#2</span>
             <span class="job-title">恒达文博科技股份有限公司 — 博物馆讲解员（派驻首都博物馆）</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -789,14 +789,14 @@
 
           </div>
           <div class="job-link">
-            <a href="https://news.culr.edu.cn/jyzdzx/zpxx/zphd/6c71bc9c4e9e4f449ff74d4a2ea310f7.htm" target="_blank" rel="noopener">🔗 校招公告</a> <span class="source-note">A级来源</span>
+            <a href="https://news.culr.edu.cn/jyzdzx/zpxx/zphd/6c71bc9c4e9e4f449ff74d4a2ea310f7.htm" target="_blank" rel="noopener">🔗 校招公告</a> <span class="source-note">🎓 高校/就业平台</span>
           </div>
         </div>
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="" data-static-status="check">
           <div class="job-header">
             <span class="job-number">#3</span>
             <span class="job-title">广州云照汉唐国际文化传播有限公司 — 博物馆讲解员</span>
-            <span class="status-badge status-check">待核截止</span>
+            <span class="status-badge job-status status-check">待核截止</span>
 
           </div>
           <div class="job-meta">
@@ -806,18 +806,18 @@
 
           </div>
           <div class="job-link">
-            <a href="https://www.ncss.cn/student/jobs/AAdkYYqnkMqv4eXJ9wXXKA/detail.html" target="_blank" rel="noopener">🔗 国家大学生就业服务平台</a> <span class="source-note">C级来源</span>
+            <a href="https://www.ncss.cn/student/jobs/AAdkYYqnkMqv4eXJ9wXXKA/detail.html" target="_blank" rel="noopener">🔗 国家大学生就业服务平台</a> <span class="source-note">💼 主流招聘平台</span>
           </div>
         </div>
     </div>
     <div class="job-section">
       <h2 class="section">🌍 国际机会 <span class="count-badge">1 岗</span></h2>
 
-        <div class="job-item">
+        <div class="job-item" data-deadline-at="2026-09-13T17:00:00+08:00" data-static-status="open">
           <div class="job-header">
             <span class="job-number">#1</span>
             <span class="job-title">📍 Brighton & Hove Museums（英国） — Curator 策展人 2 名</span>
-            <span class="status-badge status-open">可申请</span>
+            <span class="status-badge job-status status-open">可申请</span>
 
           </div>
           <div class="job-meta">
@@ -827,17 +827,54 @@
 
           </div>
           <div class="job-link">
-            <a href="https://brightonmuseums.org.uk/job-opportunity-curator-x2/" target="_blank" rel="noopener">🔗 Brighton & Hove Museums 官方招聘公告</a> <span class="source-note">C级来源</span>
+            <a href="https://brightonmuseums.org.uk/job-opportunity-curator-x2/" target="_blank" rel="noopener">🔗 Brighton & Hove Museums 官方招聘公告</a> <span class="source-note">🏛️ 官方来源</span>
           </div>
         </div>
     </div>
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对原文和投递入口。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。招聘/实习允许使用真实有效的招聘平台和学校就业网链接，但必须能核对岗位并完成投递；日报的 A/B 级新闻标准不直接套用于本栏目。</p>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 状态按北京时间动态更新，精确到公告给出的截止时刻；申请前仍请核对原文和投递入口。本页保留已截止条目作为档案，“待核截止”表示公告未给出标准日期或需人工确认。来源标签采用“官方来源 / 高校·就业平台 / 主流招聘平台 / 二手线索”，不与日报 A/B/C 新闻等级混用。</p>
 
 <footer>
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
+
+<script>
+(function() {
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.job-item'));
+  function beijingNow() {
+    var parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }).formatToParts(new Date());
+    var out = {}; parts.forEach(function(p) { if (p.type !== 'literal') out[p.type] = p.value; });
+    return new Date(out.year + '-' + out.month + '-' + out.day + 'T' + out.hour + ':' + out.minute + ':' + out.second + '+08:00');
+  }
+  function refreshStatuses() {
+    var now = beijingNow(), open = 0, closed = 0, urgent = 0;
+    rows.forEach(function(row) {
+      var status = row.querySelector('.job-status'), deadline = row.getAttribute('data-deadline-at');
+      var isOpen = row.getAttribute('data-static-status') === 'open';
+      var isClosed = row.getAttribute('data-static-status') === 'closed';
+      if (deadline) {
+        var end = new Date(deadline);
+        isClosed = now >= end;
+        isOpen = !isClosed;
+        if (isOpen && end - now <= 3 * 86400000) urgent += 1;
+      }
+      if (status && (deadline || isOpen || isClosed)) {
+        status.textContent = isClosed ? '已截止' : '可申请';
+        status.className = 'status-badge job-status ' + (isClosed ? 'status-closed' : 'status-open');
+      }
+      row.classList.toggle('closed-row', isClosed);
+      if (isClosed) row.classList.remove('urgent-row');
+      if (isOpen) open += 1;
+      if (isClosed) closed += 1;
+    });
+    var set = function(id, value) { var node = document.getElementById(id); if (node) node.textContent = value; };
+    set('job-open-count', open); set('job-open-stat', open); set('job-closed-count', closed); set('job-closed-stat', closed); set('job-urgent-stat', urgent);
+  }
+  refreshStatuses();
+  window.setInterval(refreshStatuses, 60000);
+})();
+</script>
 
 </body>
 </html>

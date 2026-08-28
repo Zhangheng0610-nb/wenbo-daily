@@ -12,7 +12,7 @@ from datetime import date as _date, datetime, timedelta, timezone
 from automation.governance import (
     MAP_SOURCE_PANEL, SOURCE_GROUPS, canonical_url, map_source_id,
     map_source_registry_rows, source_info, source_link_html,
-    source_registry_rows, source_stats,
+    source_registry_rows, source_stats, recruitment_source_info,
 )
 from automation.theme_rules import classify_themes
 
@@ -885,6 +885,12 @@ def build_heatmap_data(corpus):
         'methodology': {
             'name': '固定权威信源行业关注指数',
             'weights': {'impact': 35, 'evidence': 30, 'breadth': 20, 'recency': 15},
+            'impactRubric': {
+                '重大': '国家级政策、世界遗产、重大考古发现、一级文物和文物安全事件',
+                '重要': '一般考古发现、文物返还追索、重要保护工程',
+                '关注': '数字化、科技保护、重要展览和开馆等行业项目',
+                '一般': '讲座、报名、征集、常规宣传和一般活动',
+            },
             'sourceGate': '仅固定权威信源池原文进入指数；日报编辑选择不影响收录',
             'corpus': '每日先完整巡检固定信源，再从候选中精选日报',
             'geography': '主要发生地计分，关联地区仅展示，不重复分摊',
@@ -1130,7 +1136,8 @@ def build_heatmap_html():
     </div>
     <details class="panel-details"><summary>查看我们每天检查哪些来源</summary><div id="panel-list"></div></details>
     <p id="quality-text">正在计算信源与地域质量…</p>
-    <div class="formula"><strong>关注度如何计算：</strong>事情的重要程度占 35%，来源可靠程度占 30%，是否有不同来源印证占 20%，发布时间新近程度占 15%。同一件事的后续报道会合并计算；只收录本页列出的固定权威来源。<a href="sources.html">查看来源与方法</a></div>
+    <div class="formula"><strong>关注度如何计算：</strong>事情的重要程度占 35%，来源可靠程度占 30%，是否有不同来源印证占 20%，发布时间新近程度占 15%。同一件事的后续报道会合并计算；只收录本页列出的固定权威来源。</div>
+    <div class="formula"><strong>重要性分档：</strong>重大＝国家级政策、世界遗产、重大考古、一级文物或文物安全；重要＝一般考古、文物返还追索或重要保护工程；关注＝数字化、科技保护、重要展览或开馆；一般＝讲座、报名、征集和常规活动。分档由标题与标签规则触发，可在<a href="sources.html">信源与方法</a>复核。</div>
   </section>
   <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
@@ -1523,6 +1530,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     """
     total = data['domestic_count'] + data['international_count']
     report_source_stats = source_stats([data])
+    is_legacy_report = bool(data.get('date')) and data['date'] < '2026-08-28'
     if report_source_stats['C']:
         quality_html = f'''<details class="quality-banner legacy">
   <summary><strong>🧭 来源与核验</strong><span class="source-summary">A级 {report_source_stats['A']} · B级 {report_source_stats['B']} · 待复核 {report_source_stats['C']}</span></summary>
@@ -1645,6 +1653,7 @@ def build_report_html(data, prev_report=None, next_report=None):
   <h1>🏛️ 每日文博资讯</h1>
   <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
+  {('<div class="quality-banner legacy" style="text-align:left;margin:12px 0 0"><strong>历史档案：</strong>本日报生成于现行信源分级规则启用前，页面中的来源等级为后续审计标注；请以原文为准。</div>') if is_legacy_report else ''}
 </header>
 
 <main>
@@ -1939,6 +1948,29 @@ def extract_deadline_date(text):
     matches = re.findall(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or '')
     return matches[-1] if matches else None
 
+
+def extract_deadline_datetime(text):
+    """Return an ISO-8601 Beijing deadline, or None when the text is vague.
+
+    Date-only deadlines close at 23:59:59 Beijing time. Chinese prose such as
+    “2026年6月18日发布” is deliberately not treated as a deadline because it
+    describes the announcement date rather than an application closing time.
+    """
+    matches = list(re.finditer(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or ''))
+    if not matches:
+        return None
+    match = matches[-1]
+    y, m, d = (int(value) for value in match.groups())
+    tail = (text or '')[match.end():match.end() + 80]
+    time_match = re.search(r'(\d{1,2}):([0-5]\d)', tail)
+    hour, minute, second = (int(time_match.group(1)), int(time_match.group(2)), 0) if time_match else (23, 59, 59)
+    if hour > 23:
+        return None
+    try:
+        return f'{y:04d}-{m:02d}-{d:02d}T{hour:02d}:{minute:02d}:{second:02d}+08:00'
+    except ValueError:
+        return None
+
 def parse_jobs(filepath):
     """Parse recruitment markdown file and return structured data.
 
@@ -2017,6 +2049,7 @@ def parse_jobs(filepath):
                 'link_url': '',
                 'link_text': '招聘公告',
                 'days_left': None,
+                'deadline_at': None,
                 'note': '',
                 'status': 'check'
             }
@@ -2079,6 +2112,7 @@ def parse_jobs(filepath):
                             item['status'] = 'open'
                         if 0 <= item['days_left'] <= 3:
                             item['urgent'] = True
+                        item['deadline_at'] = extract_deadline_datetime(dl)
                     except (ValueError, KeyError):
                         pass
 
@@ -2130,17 +2164,19 @@ def build_jobs_html(data, page_type='jobs'):
             else:
                 status_badge = '<span class="status-badge status-check">待核截止</span>'
             if item.get('link_url', '').startswith(('http://', 'https://')):
-                link_info = source_info(item['link_url'])
-                link_badge = f' <span class="source-note">{link_info["tier"]}级来源</span>'
+                link_info = recruitment_source_info(item['link_url'])
+                link_badge = f' <span class="source-note">{link_info["label"]}</span>'
             else:
                 link_badge = ''
 
+            deadline_attr = item.get('deadline_at') or ''
+            static_status = item.get('status', 'check')
             items_html += f'''
-        <div class="job-item{row_class}">
+        <div class="job-item{row_class}" data-deadline-at="{deadline_attr}" data-static-status="{static_status}">
           <div class="job-header">
             <span class="job-number">#{item['number']}</span>
             <span class="job-title">{item['institution']} — {item['position']}</span>
-            {status_badge}
+            {status_badge.replace('status-badge ', 'status-badge job-status ', 1)}
             {urgent_badge}
           </div>
           <div class="job-meta">
@@ -2259,7 +2295,7 @@ def build_jobs_html(data, page_type='jobs'):
 
 <header>
   <h1>{page_title}</h1>
-  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'} ｜ 可申请 {active_count} ｜ 已截止 {closed_count}</p>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'} ｜ 可申请 <span id="job-open-count">{active_count}</span> ｜ 已截止 <span id="job-closed-count">{closed_count}</span></p>
   <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
 </header>
 
@@ -2267,9 +2303,9 @@ def build_jobs_html(data, page_type='jobs'):
 
 <div class="stats-bar">
   <div class="stat-item">📋 总岗位数：<strong>{total}</strong></div>
-  <div class="stat-item">🟢 可申请：<strong>{active_count}</strong></div>
-  <div class="stat-item">⏰ 3天内截止：<strong>{urgent_count}</strong></div>
-  <div class="stat-item">🔴 已截止：<strong>{closed_count}</strong></div>
+  <div class="stat-item">🟢 可申请：<strong id="job-open-stat">{active_count}</strong></div>
+  <div class="stat-item">⏰ 3天内截止：<strong id="job-urgent-stat">{urgent_count}</strong></div>
+  <div class="stat-item">🔴 已截止：<strong id="job-closed-stat">{closed_count}</strong></div>
   <div class="stat-item">🧭 待核截止：<strong>{check_count}</strong></div>
   <div class="stat-item">🔄 每两天更新一次</div>
 </div>
@@ -2277,11 +2313,48 @@ def build_jobs_html(data, page_type='jobs'):
 {sections_html}
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 申请前请务必核对原文和投递入口。本页保留已截止条目作为档案，但不代表仍可申请；“待核截止”表示公告未给出标准日期或需人工确认。招聘/实习允许使用真实有效的招聘平台和学校就业网链接，但必须能核对岗位并完成投递；日报的 A/B 级新闻标准不直接套用于本栏目。</p>
+<p style="font-size:.82em; color: var(--muted);">⚠️ 状态按北京时间动态更新，精确到公告给出的截止时刻；申请前仍请核对原文和投递入口。本页保留已截止条目作为档案，“待核截止”表示公告未给出标准日期或需人工确认。来源标签采用“官方来源 / 高校·就业平台 / 主流招聘平台 / 二手线索”，不与日报 A/B/C 新闻等级混用。</p>
 
 <footer>
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
+
+<script>
+(function() {{
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.job-item'));
+  function beijingNow() {{
+    var parts = new Intl.DateTimeFormat('en-CA', {{ timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }}).formatToParts(new Date());
+    var out = {{}}; parts.forEach(function(p) {{ if (p.type !== 'literal') out[p.type] = p.value; }});
+    return new Date(out.year + '-' + out.month + '-' + out.day + 'T' + out.hour + ':' + out.minute + ':' + out.second + '+08:00');
+  }}
+  function refreshStatuses() {{
+    var now = beijingNow(), open = 0, closed = 0, urgent = 0;
+    rows.forEach(function(row) {{
+      var status = row.querySelector('.job-status'), deadline = row.getAttribute('data-deadline-at');
+      var isOpen = row.getAttribute('data-static-status') === 'open';
+      var isClosed = row.getAttribute('data-static-status') === 'closed';
+      if (deadline) {{
+        var end = new Date(deadline);
+        isClosed = now >= end;
+        isOpen = !isClosed;
+        if (isOpen && end - now <= 3 * 86400000) urgent += 1;
+      }}
+      if (status && (deadline || isOpen || isClosed)) {{
+        status.textContent = isClosed ? '已截止' : '可申请';
+        status.className = 'status-badge job-status ' + (isClosed ? 'status-closed' : 'status-open');
+      }}
+      row.classList.toggle('closed-row', isClosed);
+      if (isClosed) row.classList.remove('urgent-row');
+      if (isOpen) open += 1;
+      if (isClosed) closed += 1;
+    }});
+    var set = function(id, value) {{ var node = document.getElementById(id); if (node) node.textContent = value; }};
+    set('job-open-count', open); set('job-open-stat', open); set('job-closed-count', closed); set('job-closed-stat', closed); set('job-urgent-stat', urgent);
+  }}
+  refreshStatuses();
+  window.setInterval(refreshStatuses, 60000);
+}})();
+</script>
 
 </body>
 </html>'''
@@ -2412,6 +2485,9 @@ def build_digest_html(data, daily_reports=None):
     """Generate HTML for a weekly or monthly digest."""
     dtype = data['type']
     emoji = '📰' if dtype == 'weekly' else '📊'
+    monthly_reading_note = ''
+    if dtype == 'monthly':
+        monthly_reading_note = '''<div class="quality-banner"><strong>阅读提示：</strong>本月报把“事实盘点”和“AI趋势观察”分开呈现。前者用于回看本月收录事件；后者是基于本站样本的编辑性归纳，不代表全国行业统计结论。</div>'''
 
     # Overview
     overview_html = f'<h2 class="section">📊 本期概览</h2>\n'
@@ -2427,7 +2503,7 @@ def build_digest_html(data, daily_reports=None):
     # Items
     if dtype == 'monthly' and data['items']:
         # Monthly report: render top 10 as a styled ranking table
-        items_html = '<h2 class="section">🔟 七月十大文博新闻</h2>\n\n'
+        items_html = f'<h2 class="section">🔟 事实盘点 · {data["date_range"]}十大文博新闻</h2>\n\n'
         items_html += '<p>本月文博领域重大事件精选，按重要性和影响力综合排序。</p>\n'
         items_html += '<table class="top10-table">\n'
         items_html += '<thead><tr><th>#</th><th>新闻</th><th>日期</th><th>为什么重要</th></tr></thead>\n<tbody>\n'
@@ -2531,7 +2607,8 @@ def build_digest_html(data, daily_reports=None):
     if data.get('rich_sections'):
         for sec in data['rich_sections']:
             # Title already includes emoji, don't duplicate
-            rich_html += f'<h2 class="section">{sec["title"]}</h2>\n\n'
+            title = f'AI趋势观察 · {sec["title"]}' if dtype == 'monthly' else sec['title']
+            rich_html += f'<h2 class="section">{title}</h2>\n\n'
             rich_html += _render_md_block(sec['raw_lines'])
             rich_html += '\n'
 
@@ -2574,6 +2651,8 @@ def build_digest_html(data, daily_reports=None):
 </header>
 
 {overview_html}
+
+{monthly_reading_note}
 
 {items_html}
 
@@ -3326,7 +3405,7 @@ def build_about_html():
 </header>
 
 <h2 class="section">📖 这是什么</h2>
-<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，每天精选约 4–8 条国内外要闻，附带专业点评与趋势总结。内容由 AI 自动采集、筛选并编撰，宁缺毋滥，不以凑数为目标。</p>
+<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，通常精选约 4–8 条国内外要闻，内容充足时适当增加，新闻不足时宁缺毋滥，附带专业点评与趋势总结。内容由 AI 自动采集、筛选并编撰，不以凑数为目标。</p>
 
 <h2 class="section">🕐 更新节奏</h2>
 <table>
@@ -3342,7 +3421,7 @@ def build_about_html():
 
 <h2 class="section">🤖 AI 编撰流程与声明</h2>
 <blockquote><strong>重要声明：</strong>本站内容由 AI 自动生成，未经人工逐条核实。AI 可能出错——请务必以文末附带的原始来源链接为准，重要信息请查证官方原文后再引用。</blockquote>
-<p>流程分为两条：行业地图先逐一巡检固定的 6 个全国权威信源，把符合文博范围的全部新内容写入独立监测库；日报再从监测库和更广的 A/B 级来源中按实质增量与行业价值精选。两者分别去重、核验和执行质量门禁，因此一条内容没有进入日报，不会从地图样本中消失；地方媒体数量变化也不会直接改变地区排名。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
+<p>流程分为两条：行业地图先逐一巡检固定的 6 个全国权威信源，把符合文博范围的全部新内容写入独立监测库；日报再从监测库和更广的 A/B 级来源中按实质增量与行业价值精选。两者分别去重、核验和执行质量门禁，因此一条内容没有进入日报，不会从地图样本中消失；地方媒体数量变化也不会直接改变地区排名。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题。招聘和实习使用独立的来源标签，不与新闻 A/B/C 等级混用。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
 
 <h2 class="section">🔒 隐私</h2>
 <p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。你只是阅读，我们只是展示。</p>
@@ -3428,6 +3507,9 @@ def build_sources_html(daily_reports, heat_data=None):
 <p>以下是日报和其他栏目使用的更广发布白名单，不等同于地图固定信源池。</p>
 {''.join(tier_cards)}
 
+<h2 class="section">💼 招聘与实习来源标签</h2>
+<p>招聘栏目不使用新闻 A/B/C 等级，而按投递可靠性显示“官方来源”“高校/就业平台”“主流招聘平台”“二手线索”。无论来源标签如何，申请前都应打开原文确认岗位仍在招收，并以原公告的截止时间和投递方式为准。</p>
+
 <h2 class="section">🧪 发布门槛</h2>
 <ol>
   <li>搜索引擎只负责发现候选，最终链接必须指向登记来源。</li>
@@ -3437,6 +3519,9 @@ def build_sources_html(daily_reports, heat_data=None):
   <li>事实摘要和编辑判断分开，无法确认的内容标记“待核”，不把推测写成定论。</li>
   <li>地图先完成固定池全量巡检，再生成日报；没有进入日报的合格固定池内容仍保留在监测库。</li>
 </ol>
+
+<h2 class="section">🗺️ 地图事项重要性分档</h2>
+<p>地图的“事项级别”不是模型自由评分，而是由标题和标签命中规则触发：<strong>重大</strong>包括国家级政策、世界遗产、重大考古、一级文物或文物安全；<strong>重要</strong>包括一般考古、文物返还追索或重要保护工程；<strong>关注</strong>包括数字化、科技保护、重要展览或开馆；讲座、报名、征集和常规活动归为<strong>一般</strong>。它只说明本页样本中的关注优先级，不等于事件的社会价值排名。</p>
 
 <h2 class="section">📊 当前档案统计</h2>
 <div class="audit-grid">

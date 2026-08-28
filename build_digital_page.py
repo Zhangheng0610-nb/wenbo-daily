@@ -60,12 +60,14 @@ def build_page(html_path, data_path):
     topic_html = ''.join(topic_rows)
     rng = data['range']
 
-    # 年度分布(用于统计卡片)
-    year_cnt = {}
-    for it in data['items']:
-        y = it['d'][:4]
-        year_cnt[y] = year_cnt.get(y, 0) + 1
-    year_html = ' · '.join(f'{y}年 <b>{c}</b>' for y, c in sorted(year_cnt.items()))
+    # 年度分布与年度图统一使用 URL 去重后的独立原文数。
+    annual_rows = data.get('by_year') or []
+    year_html = ' · '.join(
+        f'{row["key"]}年' + (' YTD' if row["key"] == data['range']['end'][:4] else '') +
+        f' <b>{row.get("unique_count", 0)}</b>'
+        for row in annual_rows
+    )
+    current_year_note = f'{data["range"]["end"][:4]} YTD（截至 {data["range"]["end"]}）'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -73,11 +75,11 @@ def build_page(html_path, data_path):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数字化趋势 | 每日文博资讯</title>
-<meta name="description" content="国家文物局「数字化」相关新闻趋势 — {rng['start']} 至 {rng['end']}，共 {total} 条。按年月周天粒度自由缩放查看。">
+<meta name="description" content="国家文物局「数字化」相关新闻趋势 — {rng['start']} 至 {rng['end']}，共 {unique_n} 篇独立原文。按年月周天粒度自由缩放查看。">
 <meta name="keywords" content="文博数字化,智慧博物馆,数字藏品,数字化趋势,文博趋势,数据可视化">
 <link rel="canonical" href="https://zhangheng666.top/digital-trends.html">
 <meta property="og:title" content="数字化趋势 | 每日文博资讯">
-<meta property="og:description" content="国家文物局数字化相关新闻 {total} 条 · {rng['start']} 至 {rng['end']}">
+<meta property="og:description" content="国家文物局数字化相关新闻 {unique_n} 篇独立原文 · {rng['start']} 至 {rng['end']}">
 <meta property="og:url" content="https://zhangheng666.top/digital-trends.html">
 <meta property="og:type" content="website">
 <style>
@@ -222,10 +224,10 @@ def build_page(html_path, data_path):
   <div class="stats">
     <div class="stat"><b>{unique_n}</b><span>独立原文</span></div>
     <div class="stat"><b>{total}</b><span>关键词命中记录</span></div>
-    <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻</span></div>
+    <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻（独立原文）</span></div>
   </div>
   <div class="keyword-summary"><b>筛选方法（不等于行业分类）</b>：核心词 {core_n} · 技术词 {tech_n} · 场景词 {ext_n}；关键词口径保持不变</div>
-  <div class="years">年度分布：{year_html}</div>
+  <div class="years">年度独立原文分布：{year_html}</div>
 
   <div class="insight" id="insight">正在生成近一年趋势摘要……</div>
 
@@ -235,7 +237,7 @@ def build_page(html_path, data_path):
   </section>
 
   <div class="chart-card annual-card">
-    <div class="chart-head"><h2>年度趋势</h2><span>看长期变化，不受月度波动干扰</span></div>
+    <div class="chart-head"><h2>年度趋势</h2><span>独立原文数 · {current_year_note}</span></div>
     <div id="annual-chart"></div>
   </div>
 
@@ -262,10 +264,10 @@ def build_page(html_path, data_path):
   <div class="method">
     <h3>📌 统计口径说明</h3>
     <ul>
-      <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今，约 1.2 万条），非抽样。</li>
+      <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今）。原始抓取记录 {source_total:,} 条，按原文 URL 去重后为 {source_unique:,} 篇独立原文。</li>
       <li><b>纳入</b>：沿用现有核心词、技术词、场景词规则；标题命中任一关键词即计入，另对每周「文物动态摘编」正文做补充提取。关键词只负责筛选，标题完全相同的跨周转载已去重。</li>
       <li><b>行业方向</b>：页面用“数字保护与数字采集”“AI、三维扫描与科技考古”“数字展览与沉浸式体验”“数字博物馆与公共服务”“数字档案、数据库与知识平台”“数字传播与国际交流”六类方向解读文章；同一原文可多标签归类。</li>
-      <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；比例指标为数字化原文占国家文物局全部文物新闻原文的比例。</li>
+      <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；当前 {overall_share}% = {unique_n} 篇数字化独立原文 ÷ {source_unique:,} 篇全部文物新闻独立原文。年度图和月/周/日图均优先展示独立原文数。</li>
       <li><b>解读</b>：这是一条“国家文物局报道中的数字化动向”曲线，不等于全国所有文博机构的真实项目数量；摘编补充项仍保留，但会在同一原文下合并观察。</li>
       <li><b>局限</b>：六类方向是对已纳入原文的编辑性归类，不是互斥统计；2021 年前部分数据未纳入；所有条目均可点击跳转原文核验。</li>
     </ul>
@@ -376,7 +378,7 @@ function init(data) {{
   function monthFmt(k) {{ return k.slice(0, 4) + '-' + k.slice(5); }}
   function weekFmt(k) {{ return k; }}
   function dayFmt(k) {{ return k.slice(5); }}
-  function yearFmt(k) {{ return k + '年'; }}
+  function yearFmt(k) {{ return k === rangeEnd.slice(0, 4) ? k + '年 YTD' : k + '年'; }}
 
   function rebuildSeriesCache() {{
     return {{

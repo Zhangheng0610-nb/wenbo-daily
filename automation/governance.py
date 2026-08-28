@@ -22,6 +22,11 @@ SOURCE_GROUPS = OrderedDict([
             "china.org.cn", "dpm.org.cn", "chnmus.net", "chnmuseum.cn",
             "shanghaimuseum.net", "capitalmuseum.org.cn", "namoc.org",
             "cssn.cn", "xinhua.org", "sxhm.com", "sdmuseum.com",
+            # Official institutional sites that appear in the recruitment and
+            # internship boards. They are primary sources even without a
+            # .gov.cn/.edu.cn suffix.
+            "mplus.org.hk", "hbww.org.cn", "hnmuseum.com", "hylmuseum.cn",
+            "aec1971.org.cn", "bjast.ac.cn", "brightonmuseums.org.uk",
             "unesco.org", "whc.unesco.org", "iccrom.org", "icom.museum",
         ),
     }),
@@ -156,6 +161,34 @@ def source_info(url):
         if tier == "A" and (host.endswith(".museum") or host.endswith(".museum.cn")):
             return {"tier": "A", "label": "A级｜博物馆官方", "host": host, "blocked": False}
     return {"tier": "C", "label": "C级｜待登记来源", "host": host, "blocked": False}
+
+
+# Recruitment is a practical service, not a news publishing tier. A valid
+# job-board link can be useful even when it is not a newsroom or government
+# domain, so the UI uses human-readable provenance labels instead of A/B/C.
+RECRUITMENT_PLATFORM_DOMAINS = (
+    "gaoxiaojob.com", "zhaopin.com", "zhipin.com", "liepin.com", "51job.com",
+    "597.com", "offcn.com", "shiyebian.com", "zgsydw.com", "bianzhia.com",
+    "wondercv.com", "fenbi.com", "ncss.cn", "quanzhi.com", "jrzp.com",
+)
+RECRUITMENT_EMPLOYMENT_DOMAINS = (
+    "nbhr.org.cn", "career.zju.edu.cn", "culr.edu.cn",
+)
+
+
+def recruitment_source_info(url):
+    """Return a plain-language provenance label for a job listing link."""
+    host = _host(url)
+    if not host:
+        return {"label": "🔎 二手线索", "kind": "lead", "host": ""}
+    if any(host_matches(host, domain) for domain in RECRUITMENT_EMPLOYMENT_DOMAINS):
+        return {"label": "🎓 高校/就业平台", "kind": "employment", "host": host}
+    if any(host_matches(host, domain) for domain in RECRUITMENT_PLATFORM_DOMAINS):
+        return {"label": "💼 主流招聘平台", "kind": "platform", "host": host}
+    info = source_info(url)
+    if info["tier"] == "A":
+        return {"label": "🏛️ 官方来源", "kind": "official", "host": host}
+    return {"label": "🔎 二手线索", "kind": "lead", "host": host}
 
 
 def map_source_id(url):
