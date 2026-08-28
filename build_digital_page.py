@@ -155,6 +155,8 @@ def build_page(html_path, data_path):
   #period-list {{ padding: 6px 0; }}
   .p-item {{ display: flex; gap: 12px; align-items: baseline; padding: 10px 18px; border-bottom: 1px dashed var(--line); }}
   .p-item:last-child {{ border-bottom: none; }}
+  .p-evidence {{ flex: 1 0 100%; color: #64748b; font-size: 12px; line-height: 1.65; }}
+  .p-evidence strong {{ color: #475569; font-weight: 600; }}
   .p-date {{ color: var(--muted); font-size: .8em; white-space: nowrap; }}
   .p-title {{ flex: 1; }}
   .p-title a {{ color: var(--ink); text-decoration: none; }}
@@ -226,7 +228,7 @@ def build_page(html_path, data_path):
     <div class="stat"><b>{total}</b><span>关键词命中记录</span></div>
     <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻（独立原文）</span></div>
   </div>
-  <div class="keyword-summary"><b>筛选方法（不等于行业分类）</b>：核心词 {core_n} · 技术词 {tech_n} · 场景词 {ext_n}；关键词口径保持不变</div>
+  <div class="keyword-summary"><b>筛选方法（不等于行业分类）</b>：强数字信号 {core_n} · 技术信号 {tech_n} · 语境信号 {ext_n}；弱词需同文出现明确数字技术信号</div>
   <div class="years">年度独立原文分布：{year_html}</div>
 
   <div class="insight" id="insight">正在生成近一年趋势摘要……</div>
@@ -265,7 +267,7 @@ def build_page(html_path, data_path):
     <h3>📌 统计口径说明</h3>
     <ul>
       <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今）。原始抓取记录 {source_total:,} 条，按原文 URL 去重后为 {source_unique:,} 篇独立原文。</li>
-      <li><b>纳入</b>：沿用现有核心词、技术词、场景词规则；标题命中任一关键词即计入，另对每周「文物动态摘编」正文做补充提取。关键词只负责筛选，标题完全相同的跨周转载已去重。</li>
+      <li><b>纳入</b>：强数字信号可单独纳入；“大数据”“沉浸式”“科技赋能”“云端/云上”“信息化”等语境词，只有在同一普通文章正文或同一摘编小条目内同时出现明确数字技术/数字系统信号才纳入。摘编先按“粗体小标题—正文段落”拆分，再在本条目内匹配，避免相邻条目串词。关键词只负责筛选，行业方向另行分类。</li>
       <li><b>行业方向</b>：页面用“数字保护与数字采集”“AI、三维扫描与科技考古”“数字展览与沉浸式体验”“数字博物馆与公共服务”“数字档案、数据库与知识平台”“数字传播与国际交流”六类方向解读文章；同一原文可多标签归类。</li>
       <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；当前 {overall_share}% = {unique_n} 篇数字化独立原文 ÷ {source_unique:,} 篇全部文物新闻独立原文。年度图和月/周/日图均优先展示独立原文数。</li>
       <li><b>解读</b>：这是一条“国家文物局报道中的数字化动向”曲线，不等于全国所有文博机构的真实项目数量；摘编补充项仍保留，但会在同一原文下合并观察。</li>
@@ -302,7 +304,7 @@ function init(data) {{
     if (!index[key]) index[key] = {{}};
     if (!index[key][item.u]) index[key][item.u] = item;
   }}
-  (data.items || []).forEach(function(item) {{
+  (data.articles || data.items || []).forEach(function(item) {{
     (item.topics || []).forEach(function(topic){{ addUnique(topicItems, topic, item); }});
     addUnique(yearItems, item.d.slice(0, 4), item);
   }});
@@ -543,10 +545,16 @@ function init(data) {{
 
   function articleMarkup(items) {{
     return items.map(function(it) {{
+      var digestHits = it.digest_hits || [];
+      if (it.digest_title) digestHits = [{{ title: it.digest_title, evidence_snippet: it.evidence_snippet || '' }}];
+      var evidence = digestHits.length ? '<div class="p-evidence">摘编条目：' + digestHits.map(function(hit) {{
+        return '<div><strong>' + escapeHtml(hit.title || '') + '</strong>' +
+          (hit.evidence_snippet ? '：' + escapeHtml(hit.evidence_snippet) : '') + '</div>';
+      }}).join('') + '</div>' : '';
       return '<div class="p-item">' +
         '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
         '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(it.t) + '</a></span>' +
-        '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' +
+        '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' + evidence +
         '</div>';
     }}).join('');
   }}

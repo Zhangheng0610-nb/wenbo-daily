@@ -19,6 +19,7 @@ digital_trend.py — 国家文物局「数字化」新闻趋势数据抓取与�
       python digital_trend.py --relabel-only  # 只为已有记录补充行业方向分类
 """
 import os, re, json, sys, time
+from html.parser import HTMLParser
 import urllib.request
 from collections import defaultdict
 from datetime import datetime, date
@@ -64,6 +65,22 @@ KEYWORDS_EXT = [
     '云直播', '云端', '云上', '线上展览', '线上展播', '虚拟展厅', '掌上博物馆',
     '沉浸式', '交互体验', '信息化', '科技赋能', '线上直播', '智能导览',
 ]
+
+# 弱/语境型词不能单独把文章纳入数字化趋势。它们需要在同一篇普通文章，
+# 或同一个摘编小条目中，同时出现一个明确的数字技术/数字系统信号。
+WEAK_KEYWORDS = (
+    '大数据', '云端', '云上', '云直播', '线上直播', '线上展播',
+    '沉浸式', '交互体验', '信息化', '科技赋能', '数据资源',
+)
+
+# 强词允许单独准入；其余现有关键词保持为明确的数字技术、数字系统或数字
+# 应用表达。用集合派生可以避免维护第二份容易漂移的长清单。
+STRONG_KEYWORDS = tuple(dict.fromkeys(
+    KEYWORDS_CORE + [word for word in KEYWORDS_TECH + KEYWORDS_EXT
+                     if word not in WEAK_KEYWORDS]
+))
+
+LATIN_KEYWORDS = {'AI', 'VR', 'AR', '5G', '3D', '3D扫描'}
 
 LEVEL_NAME = {'core': '核心', 'tech': '技术', 'ext': '扩展'}
 
@@ -160,25 +177,76 @@ def fetch_all_titles():
     return items
 
 
-def match_keywords(title):
-    """返回 (level, word) 或 None。标题命中任一层即算。"""
-    for w in KEYWORDS_CORE:
-        if w in title:
-            return ('core', w)
-    for w in KEYWORDS_TECH:
-        if w in title:
-            return ('tech', w)
-    for w in KEYWORDS_EXT:
-        if w in title:
-            return ('ext', w)
-    return None
+def contains_keyword(text, word):
+    """Match Chinese phrases directly and Latin abbreviations by token boundary."""
+    text = text or ''
+    if word in LATIN_KEYWORDS:
+        if word == '3D扫描':
+            return bool(re.search(r'(?<![A-Za-z0-9])3D扫描', text, re.I))
+        text = text.replace('３', '3').replace('Ｄ', 'D')
+        return bool(re.search(r'(?<![A-Za-z0-9])' + re.escape(word) + r'(?![A-Za-z0-9])', text))
+    return word in text
+
+
+def keyword_matches(text):
+    """Return all distinct configured keyword matches with strength metadata."""
+    found = []
+    for level, words in (('core', KEYWORDS_CORE), ('tech', KEYWORDS_TECH),
+                         ('ext', KEYWORDS_EXT)):
+        for word in words:
+            if contains_keyword(text, word) and word not in [item['word'] for item in found]:
+                found.append({'level': level, 'word': word,
+                              'strength': 'weak' if word in WEAK_KEYWORDS else 'strong'})
+    return found
+
+
+def admission_for_record(title, body='', allow_body_only=False):
+    """Apply the admission gate without letting topic rules admit records.
+
+    Strong title signals admit directly. A weak title signal needs a strong
+    signal in the same article body (or in the same digest item body).
+    """
+    title = title or ''
+    body = body or ''
+    title_matches = keyword_matches(title)
+    body_matches = keyword_matches(body)
+    strong_title = [item for item in title_matches if item['strength'] == 'strong']
+    strong_body = [item for item in body_matches if item['strength'] == 'strong']
+    weak_title = [item for item in title_matches if item['strength'] == 'weak']
+    if strong_title:
+        chosen = strong_title[0]
+        reason = 'strong-title'
+    elif (weak_title and strong_body) or (allow_body_only and strong_body):
+        chosen = strong_body[0]
+        reason = 'weak-title-plus-strong-body' if weak_title else 'strong-body'
+    else:
+        return None
+    matches = []
+    for item in title_matches + body_matches:
+        if item['word'] not in [match['word'] for match in matches]:
+            matches.append(item)
+    return {
+        'level': chosen['level'],
+        'word': chosen['word'],
+        'matched_keywords': [item['word'] for item in matches],
+        'weak_keywords': [item['word'] for item in matches if item['strength'] == 'weak'],
+        'strong_keywords': [item['word'] for item in matches if item['strength'] == 'strong'],
+        'reason': reason,
+        'evidence_snippet': evidence_snippet(body, [item['word'] for item in strong_body]),
+    }
+
+
+def match_keywords(title, body=''):
+    """Backward-compatible (level, word) result using the new admission gate."""
+    admission = admission_for_record(title, body)
+    return (admission['level'], admission['word']) if admission else None
 
 
 def classify_topics(title, level=''):
     """把已纳入趋势库的记录映射到行业方向，不改变关键词准入口径。"""
     text = title or ''
     topics = [name for name, _ in TOPIC_INFO
-              if any(word in text for word in TOPIC_RULES.get(name, ()))]
+              if any(contains_keyword(text, word) for word in TOPIC_RULES.get(name, ()))]
     # 仅命中“数字化”等总括词的文章无法安全细分，不强行归入具体方向。
     return topics
 
@@ -204,6 +272,75 @@ def topic_counts_for_records(records):
     return {name: len(urls_by_topic[name]) for name, _ in TOPIC_INFO}
 
 
+def record_match_text(record):
+    """Return only the text belonging to this trend record.
+
+    Digest records carry a source-page title plus one separately parsed item
+    block.  Classification and filtering must use that item's own title/body,
+    never the neighbouring digest items.
+    """
+    if record.get('from_digest'):
+        return ' '.join(filter(None, [
+            record.get('digest_title', record.get('item_title', '')),
+            record.get('digest_body', ''),
+            record.get('evidence_snippet', ''),
+        ]))
+    return record.get('title', record.get('t', ''))
+
+
+def all_keyword_matches(text):
+    """Return every distinct configured keyword found in *text*."""
+    return keyword_matches(text)
+
+
+def evidence_snippet(body, keywords, limit=180):
+    """Keep a short body-only excerpt containing an actual matched keyword."""
+    text = ' '.join((body or '').split())
+    if not text:
+        return ''
+    def match_index(word):
+        if word in LATIN_KEYWORDS:
+            if word == '3D扫描':
+                found = re.search(r'(?<![A-Za-z0-9])3D扫描', text, re.I)
+            else:
+                found = re.search(r'(?<![A-Za-z0-9])' + re.escape(word) + r'(?![A-Za-z0-9])', text)
+            return found.start() if found else -1
+        return text.find(word)
+    index = next((match_index(word) for word in keywords if match_index(word) >= 0), -1)
+    if index < 0:
+        return ''
+    if len(text) <= limit:
+        return text
+    start = max(0, index - limit // 3)
+    end = min(len(text), start + limit)
+    start = max(0, end - limit)
+    prefix = '…' if start else ''
+    suffix = '…' if end < len(text) else ''
+    return prefix + text[start:end] + suffix
+
+
+def html_to_text(html):
+    """Small, dependency-free body extractor for weak title candidates."""
+    text = re.sub(r'<script[\s\S]*?</script>', ' ', html or '', flags=re.I)
+    text = re.sub(r'<style[\s\S]*?</style>', ' ', text, flags=re.I)
+    text = re.sub(r'<[^>]+>', '\n', text)
+    text = re.sub(r'&(?:nbsp|amp|lt|gt|quot|#39);', ' ', text, flags=re.I)
+    return ' '.join(text.split())
+
+
+def enrich_weak_title_candidate(item):
+    """Fetch one ordinary article body only when its title is weak-only."""
+    title_matches = keyword_matches(item.get('title', ''))
+    if not any(match['strength'] == 'weak' for match in title_matches):
+        return admission_for_record(item.get('title', ''))
+    body_html = fetch(BASE + item['url'])
+    body = html_to_text(body_html) if body_html else ''
+    admission = admission_for_record(item.get('title', ''), body)
+    if admission:
+        admission['body'] = body
+    return admission
+
+
 def article_entities(records):
     """Merge trend records into canonical article entities by original URL.
 
@@ -215,7 +352,7 @@ def article_entities(records):
     by_url = {}
     for record in records:
         url = record.get('url', record.get('u', ''))
-        title = record.get('title', record.get('t', ''))
+        title = record.get('source_page_title') or record.get('title', record.get('t', ''))
         item_date = record.get('date', record.get('d', ''))
         if hasattr(item_date, 'isoformat'):
             item_date = item_date.isoformat()
@@ -230,7 +367,9 @@ def article_entities(records):
                 'l': record.get('level', record.get('l', '')),
                 'topics': [],
                 'matched_keywords': [],
+                'evidence_snippets': [],
                 'digest_snippets': [],
+                'digest_hits': [],
                 'matched_titles': [],
                 'record_count': 0,
             }
@@ -238,63 +377,158 @@ def article_entities(records):
         article['record_count'] += 1
         if item_date and (not article['d'] or item_date < article['d']):
             article['d'] = item_date
-            article['t'] = title or article['t']
             article['l'] = record.get('level', record.get('l', '')) or article['l']
         for topic in topics_for_record(record):
             if topic not in article['topics']:
                 article['topics'].append(topic)
-        keyword = record.get('word', record.get('w', ''))
-        if keyword and keyword not in article['matched_keywords']:
-            article['matched_keywords'].append(keyword)
-        if title and title not in article['matched_titles']:
-            article['matched_titles'].append(title)
-        if record.get('from_digest') and title and title not in article['digest_snippets']:
-            article['digest_snippets'].append(title)
+        keywords = record.get('matched_keywords') or []
+        if not keywords:
+            keyword = record.get('word', record.get('w', ''))
+            keywords = [keyword] if keyword else []
+        for keyword in keywords:
+            if keyword and keyword not in article['matched_keywords']:
+                article['matched_keywords'].append(keyword)
+        snippet = record.get('evidence_snippet', '')
+        if snippet and snippet not in article['evidence_snippets']:
+            article['evidence_snippets'].append(snippet)
+        if record.get('from_digest'):
+            digest_title = record.get('digest_title') or record.get('item_title') or ''
+            hit = {
+                'title': digest_title,
+                'matched_keywords': keywords,
+                'evidence_snippet': record.get('evidence_snippet', ''),
+                'topics': topics_for_record(record),
+            }
+            if digest_title and hit not in article['digest_hits']:
+                article['digest_hits'].append(hit)
+            if digest_title and digest_title not in article['digest_snippets']:
+                article['digest_snippets'].append(digest_title)
+            if digest_title and digest_title not in article['matched_titles']:
+                article['matched_titles'].append(digest_title)
 
     for article in by_url.values():
-        # Primary title is already displayed separately.  Keep every merged
-        # hit title for evidence drill-down; the UI must disclose any paging
-        # rather than silently trimming evidence.
-        article['matched_titles'] = [title for title in article['matched_titles']
-                                     if title != article['t']]
+        # Digest hit titles are evidence below the source-page title, never the
+        # primary article title.  Keep the legacy arrays for compatibility.
+        article['digest_hits'].sort(key=lambda hit: (hit['title'], hit['evidence_snippet']))
     return sorted(by_url.values(), key=lambda item: (item.get('d', ''), item.get('u', '')), reverse=True)
 
 
-def extract_digest_items(body, url, pub_date):
-    """从摘编正文提取数字化相关条目。
+class DigestHTMLParser(HTMLParser):
+    """Read the real NCHA digest paragraph structure without cross-item bleed."""
 
-    摘编正文格式:每条目 = 「标题行 + 正文段落(可含换行)」,地区行(如'北京')穿插其间。
-    策略:逐行扫描,短行(≤60字且不含句末标点)视为"条目标题"候选;
-    任一行命中关键词时,若该行本身是标题行则直接用,否则向上回溯最近的标题行作为条目标题。
+    VOID_TAGS = {'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input',
+                 'link', 'meta', 'param', 'source', 'track', 'wbr'}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.depth = 0
+        self.in_content = False
+        self.current = None
+        self.paragraphs = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if not self.in_content and tag == 'div' and attrs.get('id') == 'zw':
+            self.in_content = True
+            self.depth = 1
+            return
+        if not self.in_content:
+            return
+        if tag == 'p':
+            self.current = {'text': [], 'strong_text': [], 'strong_depth': 0}
+        elif tag == 'strong' and self.current is not None:
+            self.current['strong_depth'] += 1
+        if tag not in self.VOID_TAGS:
+            self.depth += 1
+
+    def handle_startendtag(self, tag, attrs):
+        # Images and other self-closing nodes do not create paragraph text.
+        if self.in_content and tag == 'p':
+            self.current = {'text': [], 'strong_text': [], 'strong_depth': 0}
+            self.finish_paragraph()
+
+    def handle_endtag(self, tag):
+        if not self.in_content:
+            return
+        if tag == 'p':
+            self.finish_paragraph()
+        elif tag == 'strong' and self.current is not None:
+            self.current['strong_depth'] = max(0, self.current['strong_depth'] - 1)
+        if tag not in self.VOID_TAGS:
+            self.depth = max(0, self.depth - 1)
+            if self.depth == 0:
+                self.in_content = False
+
+    def handle_data(self, data):
+        if self.current is None or not self.in_content:
+            return
+        self.current['text'].append(data)
+        if self.current['strong_depth']:
+            self.current['strong_text'].append(data)
+
+    def finish_paragraph(self):
+        if self.current is None:
+            return
+        text = ' '.join(''.join(self.current['text']).split())
+        strong = ' '.join(''.join(self.current['strong_text']).split())
+        if text:
+            self.paragraphs.append({'text': text, 'strong': strong})
+        self.current = None
+
+
+def extract_digest_items(html, url, pub_date, source_page_title=''):
+    """Extract and match each NCHA digest item inside its own HTML block.
+
+    A bold paragraph starts a new item; following paragraphs belong only to
+    that item until the next bold heading or region label. This prevents a
+    keyword in one item from being attributed to a neighbouring item.
     """
     region_names = set(['北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江',
                         '上海', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南',
                         '湖北', '湖南', '广东', '广西', '海南', '重庆', '四川', '贵州',
                         '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新疆'])
-    lines = [l.strip() for l in body.split('\n') if l.strip()]
-    found = []
-    title_candidates = []
-    title_re = re.compile(r'^[^\n。！？，,；;]{4,60}$')
+    parser = DigestHTMLParser()
+    parser.feed(html or '')
+    blocks = []
+    current = None
+    for paragraph in parser.paragraphs:
+        text = paragraph['text']
+        strong = paragraph['strong']
+        if text in region_names:
+            if current:
+                blocks.append(current)
+            current = None
+            continue
+        is_heading = bool(strong) and strong == text and 4 <= len(text) <= 100
+        if is_heading:
+            if current:
+                blocks.append(current)
+            current = {'title': text, 'body': []}
+        elif current:
+            current['body'].append(text)
+    if current:
+        blocks.append(current)
 
-    for line in lines:
-        is_title_like = bool(title_re.match(line)) and not DIGEST_PATTERN.search(line)
-        if is_title_like and line not in region_names:
-            title_candidates.append(line)
-        m = match_keywords(line)
-        if not m:
+    found = []
+    for block in blocks:
+        body = ' '.join(block['body']).strip()
+        admission = admission_for_record(block['title'], body, allow_body_only=True)
+        if not admission:
             continue
-        # 命中关键词:确定条目标题
-        if is_title_like:
-            item_title = line
-        elif title_candidates:
-            item_title = title_candidates[-1]
-        else:
-            continue  # 正文命中但无标题上下文,跳过
-        if len(item_title) > 60:
-            continue
-        if item_title not in (f['title'] for f in found):
-            found.append({'title': item_title, 'date': pub_date, 'url': url,
-                          'level': m[0], 'word': m[1], 'from_digest': True})
+        found.append({
+            'title': source_page_title or url.rsplit('/', 1)[-1],
+            'source_page_title': source_page_title,
+            'digest_title': block['title'],
+            'digest_body': body,
+            'date': pub_date,
+            'url': url,
+            'level': admission['level'],
+            'word': admission['word'],
+            'matched_keywords': admission['matched_keywords'],
+            'admission_reason': admission['reason'],
+            'evidence_snippet': admission['evidence_snippet'],
+            'from_digest': True,
+        })
     return found
 
 
@@ -309,13 +543,7 @@ def fetch_digest_bodies(items):
         if not body:
             failed += 1
             continue
-        # 提取正文纯文本(粗略:去 script/style/标签)
-        text = re.sub(r'<script[\s\S]*?</script>', ' ', body)
-        text = re.sub(r'<style[\s\S]*?</style>', ' ', text)
-        text = re.sub(r'<[^>]+>', '\n', text)
-        text = re.sub(r'&[a-z]+;', ' ', text)
-        text = re.sub(r'\n+', '\n', text)
-        for item in extract_digest_items(text, dg['url'], dg['date']):
+        for item in extract_digest_items(body, dg['url'], dg['date'], dg['title']):
             extra.append(item)
         if (i + 1) % 25 == 0:
             print(f'    进度 {i+1}/{len(digests)}, 已提取 {len(extra)} 条')
@@ -324,23 +552,26 @@ def fetch_digest_bodies(items):
 
 
 def dedup_and_filter(items):
-    """质量门禁:
-    1) 标题完全一致的条目去重(跨摘编转载),保留最早日期。
-    2) 两级过滤: 标题含数字化词 → 保留; 标题无词但正文命中"核心词" → 保留;
-       正文仅命中扩展/技术词 → 剔除(弱关联噪声,如"某馆开馆"(正文顺带提科技赋能))。
-    """
+    """Deduplicate source records and apply the same admission gate again."""
     seen = {}
     for it in items:
-        if it['title'] not in seen or it['date'] < seen[it['title']]['date']:
-            seen[it['title']] = it
+        key = ((it.get('url', ''), it.get('digest_title', ''))
+               if it.get('from_digest') else (it.get('url', ''), it.get('title', '')))
+        if key not in seen or it['date'] < seen[key]['date']:
+            seen[key] = it
     keep = []
     for v in seen.values():
-        if match_keywords(v['title']):
+        title = v.get('digest_title') if v.get('from_digest') else v.get('title', '')
+        body = v.get('digest_body', '') if v.get('from_digest') else v.get('body', '')
+        admission = admission_for_record(title, body, allow_body_only=v.get('from_digest', False))
+        if admission:
+            v['level'] = admission['level']
+            v['word'] = admission['word']
+            v['matched_keywords'] = admission['matched_keywords']
+            v['admission_reason'] = admission['reason']
+            if admission.get('evidence_snippet'):
+                v['evidence_snippet'] = admission['evidence_snippet']
             keep.append(v)
-        elif v['level'] == 'core':
-            keep.append(v)
-        else:
-            continue
     keep.sort(key=lambda x: x['date'])
     return keep
 
@@ -394,7 +625,11 @@ def aggregate(items, source_items):
                    'share': share}
             if include_items:
                 row['items'] = [
-                    {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']} for x in v
+                    {'t': x.get('source_page_title') or x['title'],
+                     'digest_title': x.get('digest_title', ''),
+                     'evidence_snippet': x.get('evidence_snippet', ''),
+                     'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']}
+                    for x in v
                 ]
             out.append(row)
         return out
@@ -410,7 +645,7 @@ def aggregate(items, source_items):
 def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     items = dedup_and_filter(items)
     for it in items:
-        it['topics'] = classify_topics(it['title'], it.get('level', ''))
+        it['topics'] = classify_topics(record_match_text(it), it.get('level', ''))
     levels = defaultdict(int)
     for it in items:
         levels[it['level']] += 1
@@ -446,7 +681,11 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
         'items': [
             {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
              'w': x.get('word', ''), 'topics': x.get('topics', []),
-             'from_digest': bool(x.get('from_digest'))} for x in items
+             'matched_keywords': x.get('matched_keywords', []),
+             'from_digest': bool(x.get('from_digest')),
+             'digest_title': x.get('digest_title', ''),
+             'evidence_snippet': x.get('evidence_snippet', ''),
+             'admission_reason': x.get('admission_reason', '')} for x in items
         ],
         'articles': articles,
         **agg,
@@ -465,7 +704,13 @@ def relabel_existing_data():
 
     items = data.get('items', [])
     for item in items:
-        item['topics'] = classify_topics(item.get('t', ''), item.get('l', ''))
+        item_record = {
+            'title': item.get('t', ''),
+            'from_digest': item.get('from_digest', False),
+            'digest_title': item.get('digest_title', ''),
+            'evidence_snippet': item.get('evidence_snippet', ''),
+        }
+        item['topics'] = classify_topics(record_match_text(item_record), item.get('l', ''))
 
     for granularity in ('by_month', 'by_week', 'by_day'):
         for group in data.get(granularity, []):
@@ -544,24 +789,50 @@ def main(args=None):
         print('=== 步骤2: 标题关键词筛选 ===')
         hit = []
         levels = defaultdict(int)
+        weak_title_candidates = 0
+        weak_title_failed = 0
         for it in all_items:
-            m = match_keywords(it['title'])
-            if m:
-                it['level'], it['word'] = m
+            title_matches = keyword_matches(it['title'])
+            if not title_matches:
+                continue
+            if any(match['strength'] == 'weak' for match in title_matches) and not any(
+                    match['strength'] == 'strong' for match in title_matches):
+                weak_title_candidates += 1
+                admission = enrich_weak_title_candidate(it)
+            else:
+                admission = admission_for_record(it['title'])
+            if admission:
+                it['level'], it['word'] = admission['level'], admission['word']
+                it['matched_keywords'] = admission['matched_keywords']
+                it['admission_reason'] = admission['reason']
+                if admission.get('body'):
+                    # Keep the fetched body in memory for the final quality
+                    # gate; it is intentionally not written into JSON.
+                    it['body'] = admission['body']
+                if admission.get('evidence_snippet'):
+                    it['evidence_snippet'] = admission['evidence_snippet']
                 it['from_digest'] = False
                 hit.append(it)
-                levels[m[0]] += 1
-        print(f'标题命中数字化相关: {len(hit)} 条 (核心 {levels["core"]} / 技术 {levels["tech"]} / 扩展 {levels["ext"]})')
+                levels[admission['level']] += 1
+            elif title_matches:
+                weak_title_failed += 1
+        print(f'标题候选: {len(hit) + weak_title_failed} 条,弱词单独候选 {weak_title_candidates} 条,'
+              f'弱词无第二数字信号剔除 {weak_title_failed} 条')
+        print(f'标题准入: {len(hit)} 条 (核心 {levels["core"]} / 技术 {levels["tech"]} / 扩展 {levels["ext"]})')
 
         print('=== 步骤3: 摘编正文补充提取 ===')
         extra, digest_failed = fetch_digest_bodies(all_items)
-        # 按标题去重(与标题命中项及摘编内部)
-        seen_titles = set(it['title'] for it in hit)
+        # 普通文章按原文 URL 去重；摘编按 source page + 小条目去重，
+        # 防止不同小条目因共享摘编 URL 被错误合并。
+        seen_keys = set((it.get('url', ''), it.get('digest_title', ''))
+                        if it.get('from_digest') else (it.get('url', ''), it.get('title', ''))
+                        for it in hit)
         digest_count = sum(1 for it in all_items if DIGEST_PATTERN.search(it['title']))
         added = 0
         for x in extra:
-            if x['title'] not in seen_titles:
-                seen_titles.add(x['title'])
+            key = (x.get('url', ''), x.get('digest_title', ''))
+            if key not in seen_keys:
+                seen_keys.add(key)
                 hit.append(x)
                 added += 1
         # 重新统计去重后各层计数
