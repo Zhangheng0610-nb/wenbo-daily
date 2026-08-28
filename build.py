@@ -839,6 +839,10 @@ def build_heatmap_data(corpus):
         'fixed-panel-monitoring': 0,
     }
     other_provenance_records = {}
+    analysis_provenance_records = {
+        'archive-backfill': 0,
+        'fixed-panel-monitoring': 0,
+    }
 
     for record in corpus['records']:
         origin = record.get('origin', 'unknown')
@@ -846,6 +850,11 @@ def build_heatmap_data(corpus):
             provenance_records[origin] += 1
         else:
             other_provenance_records[origin] = other_provenance_records.get(origin, 0) + 1
+        # The legacy daily-selection corpus is retained for audit and evidence
+        # provenance only. Its editorial selection bias must not affect map
+        # scoring, event clustering, or regional comparisons.
+        if origin == 'legacy-daily-selection':
+            continue
         rdate = record.get('date', '')
         record_id = record.get('recordId', '')
         title = record.get('title', '')
@@ -863,6 +872,8 @@ def build_heatmap_data(corpus):
             excluded_non_panel += 1
             audit.append(('non-panel', rdate, record_id, title, '-', record.get('locationTier', 'unassigned')))
             continue
+        if origin in analysis_provenance_records:
+            analysis_provenance_records[origin] += 1
         scope = record.get('scope', 'province')
         candidate = _monitor_candidate(record, grade)
         if scope == 'province' and record.get('primaryProvince'):
@@ -929,6 +940,8 @@ def build_heatmap_data(corpus):
         'provenanceRecords': provenance_records,
         'otherProvenanceRecords': other_provenance_records,
         'provenanceReconciled': sum(provenance_records.values()) + sum(other_provenance_records.values()) == len(corpus['records']),
+        'analysisRecords': sum(analysis_provenance_records.values()),
+        'analysisProvenanceRecords': analysis_provenance_records,
         'excludedNonPanel': excluded_non_panel,
         'unassigned': unassigned,
         'panelSourceCount': len(MAP_SOURCE_PANEL),
