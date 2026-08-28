@@ -26,13 +26,15 @@
    "数字博物馆与公共服务": 65,
    "数字档案、数据库与知识平台": 26,
    "数字传播与国际交流": 35
-  }
+  },
+  "classified_article_count": 128,
+  "unclassified_article_count": 30
  },
  "quality": {
   "source_fetch_complete": true,
   "digest_fetch_failed": 0,
   "note": "主趋势保留现有关键词统计；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
-  "topic_taxonomy": "六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。"
+  "topic_taxonomy": "六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。articles按原文URL聚合，用于方向和趋势主统计。"
  },
  "items": [
   {
@@ -24759,6 +24761,2566 @@
    "source_count": 540,
    "source_unique_count": 280,
    "share": 9.64
+  }
+ ],
+ "articles": [
+  {
+   "u": "/art/2026/8/23/art_722_204479.html",
+   "t": "武汉大学团队获马来西亚首个国外考古发掘执照",
+   "d": "2026-08-23",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/8/15/art_722_204356.html",
+   "t": "广西实现三项考古新突破",
+   "d": "2026-08-15",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "第四届“元明清藏文文献、图像所见民族交流史”研讨会在拉萨举办"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/8/9/art_722_204249.html",
+   "t": "“繁星计划”落地广东",
+   "d": "2026-08-09",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字服务"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/8/1/art_722_204100.html",
+   "t": "国家文物局召开新闻发布会 介绍《国有文物资源数据管理办法》《革命文物保护工程技术导则（试行）》等情况",
+   "d": "2026-08-01",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "信息化",
+    "数字敦煌"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "七部门办公厅（办公室）印发《关于开展2026年工业和信息化领域创新任务揭榜挂帅工作的通知》",
+    "泉州府文庙实现数字“孪生”",
+    "西藏壁画学术研讨会暨“西藏壁画全集”丛书出版座谈会召开",
+    "敦煌研究院已完成323个洞窟的数据采集 有序实现数据对外开放"
+   ],
+   "record_count": 5
+  },
+  {
+   "u": "/art/2026/7/26/art_722_204000.html",
+   "t": "2026年文物建筑保护技术培训班在曲阜开班",
+   "d": "2026-07-26",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "数智时代的文化遗产保护与传承论坛在西安举办",
+    "敦煌研究院首个院属专家工作室成立"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2026/7/12/art_722_203718.html",
+   "t": "2026国际古城墙（堡）联盟交流活动在荆州举行",
+   "d": "2026-07-12",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/7/5/art_722_203591.html",
+   "t": "里耶秦简研究院高质量发展专题座谈会召开",
+   "d": "2026-07-05",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字科技"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "“美美与共·共筑未来”——国际文化遗产保护活动周相关活动在山西太原举办",
+    "中国—东盟文化遗产对话活动在敦煌举办"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2026/6/28/art_722_203469.html",
+   "t": "千年晋祠与百年厦大共探文化遗产保护新路径",
+   "d": "2026-06-28",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "中意文化遗产保护传承国际学术研讨会在西安召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/6/21/art_722_203361.html",
+   "t": "《福建省华侨历史文化遗存保护条例》出台",
+   "d": "2026-06-21",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字赋能",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "布达拉宫贝叶经等古籍文献保护利用项目取得阶段性成果"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/6/15/art_722_203282.html",
+   "t": "晋北区域中小型石窟寺保护研究中心成立",
+   "d": "2026-06-15",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "重庆历史文化名城测绘建档数字化研讨会召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/6/7/art_722_203068.html",
+   "t": "白沙壁画焕新开放",
+   "d": "2026-06-07",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/5/31/art_722_202961.html",
+   "t": "新、粤两地携手 百名博物馆馆长开展研修交流",
+   "d": "2026-05-31",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/5/24/art_722_202761.html",
+   "t": "龙门石窟保护传承传播工作座谈会召开",
+   "d": "2026-05-24",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "第三届长江考古联盟学术研讨会在湖北天门召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/5/17/art_722_202638.html",
+   "t": "北京大学规划建设海外藏中国青铜器电子数据库",
+   "d": "2026-05-17",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台",
+    "数字传播与国际交流",
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "AI"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "陕西首部文博AI漫剧让千年文物“活”起来"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/5/9/art_722_202512.html",
+   "t": "中华诗词博物馆扬州馆开馆迎客",
+   "d": "2026-05-09",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字技术",
+    "数字化",
+    "数字展示"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "齐长城文化博物馆开馆试运行",
+    "中国新疆文物艺术展走进希腊"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2026/5/3/art_722_202406.html",
+   "t": "2026年山西壁画保护与科技创新研讨会在晋中召开",
+   "d": "2026-05-03",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "《运城市蒲津渡与蒲州故城遗址保护条例》5月1日起施行"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/4/26/art_722_202308.html",
+   "t": "中国灾害防御协会文化遗产专委会2026年年会在杭州召开",
+   "d": "2026-04-26",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/4/19/art_722_202179.html",
+   "t": "朔门古港考古遗址公园开园",
+   "d": "2026-04-19",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字影像"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/4/5/art_722_201997.html",
+   "t": "温州博物馆恢复开放",
+   "d": "2026-04-05",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/3/29/art_722_201873.html",
+   "t": "隋唐长安城布政坊遗址考古成果公布",
+   "d": "2026-03-29",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/3/22/art_722_201770.html",
+   "t": "甘肃民勤瑞安堡完成数字化保护",
+   "d": "2026-03-22",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/3/15/art_722_201696.html",
+   "t": "全国两会期间 文博领域代表委员建言献策",
+   "d": "2026-03-15",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/3/8/art_722_201538.html",
+   "t": "《北京市长城保护条例》施行",
+   "d": "2026-03-08",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字科技"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "威海市博物馆升级开放"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2026/3/7/art_722_201527.html",
+   "t": "代表委员专访 | 梅亦代表：建议以科技赋能不可移动文物安全保护",
+   "d": "2026-03-07",
+   "l": "ext",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "科技赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/2/15/art_722_201342.html",
+   "t": "春节期间各地将推出丰富多彩文博活动",
+   "d": "2026-02-15",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字科技"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/1/25/art_722_200916.html",
+   "t": "西吴壁商代祭祀坑实现毫米级数字化存档",
+   "d": "2026-01-25",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2026/1/18/art_722_200806.html",
+   "t": "中国人民革命军事博物馆北京通州分馆启动建设",
+   "d": "2026-01-18",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/12/28/art_722_200509.html",
+   "t": "故宫博物院养心殿正式向公众开放",
+   "d": "2025-12-28",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/12/21/art_722_200382.html",
+   "t": "国家文物局公布2025年度国家文物政策理论研究课题立项名单",
+   "d": "2025-12-21",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字资源",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "2025北京策展人交流活动在京举办",
+    "马蹄寺石窟群抢救性保护完成",
+    "吐鲁番博物馆启动文物3D数字化采集"
+   ],
+   "record_count": 4
+  },
+  {
+   "u": "/art/2025/12/14/art_722_200234.html",
+   "t": "山西五台山为文物建“数字档案”",
+   "d": "2025-12-14",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字档案"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/11/30/art_722_199927.html",
+   "t": "新疆首个草原石人专题研究项目在特克斯启动",
+   "d": "2025-11-30",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/11/23/art_722_199719.html",
+   "t": "“BesTV上海博物馆”正式上线",
+   "d": "2025-11-23",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字孪生",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "中国敦煌石窟保护研究基金会成立30周年座谈会召开",
+    "2025年龟兹文化遗产保护传承实践活动在库车举办"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2025/11/16/art_722_199619.html",
+   "t": "“十五五”文化遗产创新发展策略座谈会在新疆沙雅县举办",
+   "d": "2025-11-16",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/11/10/art_722_199487.html",
+   "t": "2025年世界互联网大会乌镇峰会“文化遗产数字化保护与传承”分论坛举办",
+   "d": "2025-11-10",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/11/9/art_722_199481.html",
+   "t": "“空间信息技术在考古学中的应用”学术研讨会举办",
+   "d": "2025-11-09",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "第三届汉文化论坛在徐州举办",
+    "山地革命文物保护实验室揭牌"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2025/11/2/art_722_199338.html",
+   "t": "何以中国｜壁画里的中国网络主题宣传活动启动",
+   "d": "2025-11-02",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字科技",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "圆明园研究与保护2025学术研讨会在京举办",
+    "云冈石窟第7、8窟重新开放",
+    "第五届“咸丰·世遗唐崖论坛”举办",
+    "里耶古城遗址和秦简博物馆焕新开放"
+   ],
+   "record_count": 5
+  },
+  {
+   "u": "/art/2025/10/26/art_722_199238.html",
+   "t": "洛阳出台《全面提升龙门石窟保护利用水平行动方案》",
+   "d": "2025-10-26",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字赋能",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "四川推进运用地质科技加强文物保护"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/10/22/art_722_199155.html",
+   "t": "西安数字赋能焕发城墙新生 智慧管理守护文化遗产",
+   "d": "2025-10-22",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/10/18/art_722_199109.html",
+   "t": "国家文物局向湖南省博物馆划拨长沙子弹库战国帛书入藏仪式举行",
+   "d": "2025-10-18",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/9/28/art_722_198851.html",
+   "t": "“何以中国·理想都城”网络主题宣传活动启动",
+   "d": "2025-09-28",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "第八届丝绸之路（敦煌）国际文化博览会举办"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/9/24/art_722_198749.html",
+   "t": "2025北京文化论坛“保护传承：数字化赋能文化遗产”平行论坛在京举办",
+   "d": "2025-09-24",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/9/23/art_722_198701.html",
+   "t": "文博日历丨把秋收现场装进画卷 和古人一起沉浸式收割晒谷",
+   "d": "2025-09-23",
+   "l": "ext",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/9/11/art_722_198486.html",
+   "t": "科技赋能·智汇文博——2025服贸会文博展区打造智慧文化体验新场景",
+   "d": "2025-09-11",
+   "l": "ext",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "科技赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/9/1/art_722_198297.html",
+   "t": "冰天雪地铸忠魂——东北抗联遗址出土文物特展的沉浸式叙事",
+   "d": "2025-09-01",
+   "l": "ext",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/8/31/art_722_198293.html",
+   "t": "2025年上海市文博领域人工智能应用场景对接交流会举办",
+   "d": "2025-08-31",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "人工智能",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "潮湿环境砂岩石窟保护与数字化重庆市重点实验室成立"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/8/23/art_722_198132.html",
+   "t": "海洋博物馆联盟在天津成立",
+   "d": "2025-08-23",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "中国及东盟多国文博机构共商文化遗产数字化转型"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/8/17/art_722_198019.html",
+   "t": "542片在欧甲骨实现数字化采集",
+   "d": "2025-08-17",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/8/10/art_722_197878.html",
+   "t": "泉州世界遗产数字化保护工程启动",
+   "d": "2025-08-10",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "庐山抗战博物馆焕新开放"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/8/3/art_722_197725.html",
+   "t": "广东海上丝绸之路博物馆焕新开馆",
+   "d": "2025-08-03",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/7/20/art_722_197401.html",
+   "t": "《儋州市东坡文化资源保护利用规定》施行",
+   "d": "2025-07-20",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/6/29/art_722_196838.html",
+   "t": "山东出台23条措施加强文化遗产保护传承",
+   "d": "2025-06-29",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/6/8/art_722_196339.html",
+   "t": "中国人民大学线上家书博物馆向公众开放",
+   "d": "2025-06-08",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字博物馆",
+    "数字化",
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "山西立法推动文物事业高质量发展",
+    "2025年江西省博物馆总分馆制试点工作会召开",
+    "甘肃敦煌发布“数字藏经洞”数据库平台"
+   ],
+   "record_count": 4
+  },
+  {
+   "u": "/art/2025/6/1/art_722_196226.html",
+   "t": "2025文化强国建设高峰论坛举办“加强文化遗产保护传承”等多场平行论坛",
+   "d": "2025-06-01",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字技术",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "无锡鸿山遗址博物馆焕新开馆"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/5/11/art_722_195856.html",
+   "t": "“中华古籍智慧化服务平台”上线试运行",
+   "d": "2025-05-11",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "陶寺国家考古遗址公园正式开放"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/5/4/art_722_195743.html",
+   "t": "﻿“五一”文博游火热 观众沉浸式感受中华传统文化",
+   "d": "2025-05-04",
+   "l": "ext",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/5/2/art_722_195727.html",
+   "t": "新闻联播丨【文化中国行】文博游火热 沉浸式感受中华传统文化",
+   "d": "2025-05-02",
+   "l": "ext",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/4/27/art_722_195606.html",
+   "t": "第三届联合国教科文组织国际博物馆高级别论坛举行",
+   "d": "2025-04-27",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字传播与国际交流",
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字技术",
+    "人工智能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "“文物考古人工智能应用实验室”成立"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/4/20/art_722_195437.html",
+   "t": "辽宁考古博物馆开馆试运行",
+   "d": "2025-04-20",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字体验",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "南京大报恩寺启动全球文物征集"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2025/3/30/art_722_194999.html",
+   "t": "西北师范大学联合甘肃简牍博物馆推出DeepJiandu数据集",
+   "d": "2025-03-30",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/3/23/art_722_194895.html",
+   "t": "山西省发布关于加快数字贸易发展的实施意见",
+   "d": "2025-03-23",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/3/9/art_722_194601.html",
+   "t": "﻿两会期间文博界代表委员积极建言献策",
+   "d": "2025-03-09",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/3/6/art_722_194532.html",
+   "t": "代表委员专访丨黄林代表：建议支持实施仙佛寺石窟数字化保护 让文物活起来",
+   "d": "2025-03-06",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/3/2/art_722_194404.html",
+   "t": "北京、天津、河北、山西、湖南召开文物局长会议",
+   "d": "2025-03-02",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2025/1/12/art_722_193512.html",
+   "t": "加强文物资源数字化开发利用会商座谈会召开",
+   "d": "2025-01-12",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/12/31/art_722_193346.html",
+   "t": "“芥子纳须弥——云冈石窟艺术特展”“行舟·运河——中国大运河博物馆沉浸式舟楫文化展”在台湾开幕",
+   "d": "2024-12-31",
+   "l": "ext",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/12/22/art_722_193183.html",
+   "t": "文物保护技术装备供需对接研讨会在京举办",
+   "d": "2024-12-22",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/12/15/art_722_193074.html",
+   "t": "山西古建院与哈佛大学中国艺术实验室签署合作备忘录",
+   "d": "2024-12-15",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/11/10/art_722_192277.html",
+   "t": "希腊重磅文物展将于明年亮相三星堆博物馆",
+   "d": "2024-11-10",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/11/2/art_722_192086.html",
+   "t": "新质生产力背景下传统村落的保护利用与乡村振兴学术研讨会召开",
+   "d": "2024-11-02",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "西藏累计投入3.2亿元加强可移动文物保护"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/10/20/art_722_191852.html",
+   "t": "新闻联播 | 【文化中国行】科技赋能 长城万里有新篇",
+   "d": "2024-10-20",
+   "l": "ext",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "科技赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/10/6/art_722_191623.html",
+   "t": "仰韶文化博物馆焕新开馆",
+   "d": "2024-10-06",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/9/24/art_722_191420.html",
+   "t": "纪念国际哲学与人文科学理事会成立75周年国际学术会议分论坛“数字人文：文化遗产保护的新质生产力”在京举办",
+   "d": "2024-09-24",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字人"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/9/15/art_722_191310.html",
+   "t": "沧源崖画数字化记录全面完成",
+   "d": "2024-09-15",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字体验"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "秦兵马俑考古发掘50周年暨秦始皇陵大遗址保护研究国际会议召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/9/10/art_722_191206.html",
+   "t": "我国古籍数字资源发布总量已达13.9万部（件）",
+   "d": "2024-09-10",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/9/2/art_722_191073.html",
+   "t": "郑州博物馆以新质生产力提升管理效能推动智慧博物馆实现新跨越",
+   "d": "2024-09-02",
+   "l": "ext",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "智慧博物馆"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/8/18/art_722_190856.html",
+   "t": "新闻联播 | 【新思想引领新征程】更好守护中华文脉 科技赋能文物事业高质量发展",
+   "d": "2024-08-18",
+   "l": "ext",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "科技赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/8/4/art_722_190571.html",
+   "t": "全球世界遗产教育创新案例奖（AWHEIC）获奖名单揭晓",
+   "d": "2024-08-04",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流",
+    "数字保护与数字采集",
+    "AI、三维扫描与科技考古",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字科技",
+    "数字孪生"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "杨家岭革命旧址数字孪生预防性保护系统上线"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/7/28/art_722_190467.html",
+   "t": "《关于推进文物分布区域类别划分工作的指导意见》印发",
+   "d": "2024-07-28",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/7/21/art_722_190325.html",
+   "t": "2024文化遗产保护数字化国际论坛举办",
+   "d": "2024-07-21",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "龟兹魏晋古墓遗址博物馆开放"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/7/14/art_722_190219.html",
+   "t": "移动数字技术助力保护和利用开平碉楼",
+   "d": "2024-07-14",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/6/23/art_722_189836.html",
+   "t": "《曾侯乙尊盘三维数字化复原》研究成果发布",
+   "d": "2024-06-23",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/6/1/art_722_189152.html",
+   "t": "数字文物创新应用试验区（试验园）申报启动",
+   "d": "2024-06-01",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字文物",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "HIST西安分中心成立"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/5/26/art_722_189038.html",
+   "t": "2023年度浙江省文物事业高质量发展案例名单公布",
+   "d": "2024-05-26",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字影像",
+    "数字人"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "福建文物保护研讨会及创新发展成果展举办",
+    "“辛追夫人3D数字人”动态形式亮相"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2024/5/19/art_722_188954.html",
+   "t": "天龙山石窟数字复原展走进希腊",
+   "d": "2024-05-19",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字保护与数字采集",
+    "AI、三维扫描与科技考古",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字孪生"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "长城文化遗产数字化保护研学活动举行",
+    "香港首个城市级文物建筑AI数字孪生平台上线"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2024/5/10/art_722_188768.html",
+   "t": "传承“莫高精神”  凝聚青春力量——记第28届“中国青年五四奖章集体”敦煌研究院文物数字化保护团队",
+   "d": "2024-05-10",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/5/6/art_722_188638.html",
+   "t": "文物行业多个个人、集体获全国表彰",
+   "d": "2024-05-06",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "沉浸式"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "天津创新艺术展览沉浸式体验波兰琥珀文化",
+    "“智慧应县木塔”方案发布"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2024/4/30/art_722_188550.html",
+   "t": "敦煌研究院文物数字化保护团队等被授予第28届“中国青年五四奖章”",
+   "d": "2024-04-30",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/4/26/art_722_188514.html",
+   "t": "流失海外敦煌文物国际学术研讨会举行",
+   "d": "2024-04-26",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/4/7/art_722_188101.html",
+   "t": "秦始皇帝陵博物院发布境外融合服务平台",
+   "d": "2024-04-07",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/3/31/art_722_187977.html",
+   "t": "2024博物馆创新力建设研讨会召开",
+   "d": "2024-03-31",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字赋能",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "重庆“四普”工作推进会议暨文物局长会议召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/3/24/art_722_187819.html",
+   "t": "浙江大学推出“数博策展平台”",
+   "d": "2024-03-24",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/3/10/art_722_187622.html",
+   "t": "两会期间文博界代表委员积极建言献策",
+   "d": "2024-03-10",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/3/6/art_722_187473.html",
+   "t": "代表委员专访 | 汪万福代表：破解“数据孤岛” 加强文物数字化标准建设与资源共享",
+   "d": "2024-03-06",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/3/2/art_722_187421.html",
+   "t": "河姆渡遗址博物馆焕新回归",
+   "d": "2024-03-02",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "掌上遍览广州革命文物 “花城红图”上线"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/2/24/art_722_187264.html",
+   "t": "专题研究部署敦煌文化遗产保护传承工作",
+   "d": "2024-02-24",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2024/2/5/art_722_186976.html",
+   "t": "荆州纪南城发现战国早期古城墙",
+   "d": "2024-02-05",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字文化",
+    "数字博物馆",
+    "数字体验"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "大足石刻推出数字博物馆",
+    "广安市博物馆开馆试运行"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2024/1/20/art_722_186658.html",
+   "t": "江苏出台红色资源保护利用条例",
+   "d": "2024-01-20",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字赋能",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "敦煌研究院文物保护团队荣膺“国家卓越工程师团队”称号"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2024/1/14/art_722_186520.html",
+   "t": "2023北京中轴线文化遗产传承与创新大赛落幕",
+   "d": "2024-01-14",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字科技",
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "湖南博物院开放马王堆文物数字资源"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/12/30/art_722_186282.html",
+   "t": "丝绸之路·长城文化博物馆开馆",
+   "d": "2023-12-30",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/12/16/art_722_186004.html",
+   "t": "中国国家博物馆推出“华彩万象——石窟艺术沉浸体验”",
+   "d": "2023-12-16",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字影像"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/12/2/art_722_185638.html",
+   "t": "贵州举办“馆藏金属文物保护修复技术培训班”",
+   "d": "2023-12-02",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/11/26/art_722_185524.html",
+   "t": "2023北京中轴线文化遗产传承与创新大赛“数字中轴”赛道项目终评举行",
+   "d": "2023-11-26",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字影像"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/11/20/art_722_185388.html",
+   "t": "故宫博物院加强社会化合作，构建“数字文物”产学研用体系",
+   "d": "2023-11-20",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字文物"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/11/19/art_722_185384.html",
+   "t": "“数字藏经洞（国际版）”发布",
+   "d": "2023-11-19",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字敦煌"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/11/5/art_722_185040.html",
+   "t": "中华文明云展试点上线",
+   "d": "2023-11-05",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字孪生",
+    "数字资产"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "敦煌石窟数字资产管理平台构建完成"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/10/28/art_722_184881.html",
+   "t": "吉林大学“古文字古文物人工智能重点实验室”揭牌",
+   "d": "2023-10-28",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "人工智能",
+    "数字展示",
+    "数字体验",
+    "数字赋能"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "中国丝绸博物馆开启环球巡展",
+    "长征国家文化公园（贵州）论坛召开",
+    "中华文明探源元谋论坛举办"
+   ],
+   "record_count": 4
+  },
+  {
+   "u": "/art/2023/10/20/art_722_184746.html",
+   "t": "第五届全国藏文古籍文献整理与研究高层论坛举行",
+   "d": "2023-10-20",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/10/1/art_722_184431.html",
+   "t": "天龙山石窟数字复原国际巡展(埃及站)开幕",
+   "d": "2023-10-01",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/9/30/art_722_184429.html",
+   "t": "数字敦煌开放素材库 助力文物资源全民共享",
+   "d": "2023-09-30",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字敦煌"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/9/20/art_722_184179.html",
+   "t": "第45届世界遗产大会“数字化赋能文化遗产”主题边会成功举办",
+   "d": "2023-09-20",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/9/20/art_722_184155.html",
+   "t": "敦煌莫高窟第285窟首次对外虚拟开放 上新“寻境敦煌”VR沉浸展",
+   "d": "2023-09-20",
+   "l": "tech",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "VR"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/9/12/art_722_183972.html",
+   "t": "古籍数字资源发布座谈会在国图召开",
+   "d": "2023-09-12",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字资源"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/9/8/art_722_183954.html",
+   "t": "云冈文化遗产智慧数据与数字人文研究论坛举办",
+   "d": "2023-09-08",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字档案、数据库与知识平台",
+    "数字传播与国际交流",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字人",
+    "数字体验"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "中国京杭大运河博物馆焕新开馆"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/9/3/art_722_183808.html",
+   "t": "浙江省博物馆之江馆开馆",
+   "d": "2023-09-03",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/8/26/art_722_183720.html",
+   "t": "绍兴启动创建“博物馆之城”",
+   "d": "2023-08-26",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "AI、三维扫描与科技考古",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "《馆藏器物类文物三维数据采集技术规范》地方标准获批实施"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/8/20/art_722_183575.html",
+   "t": "“千年敦煌绘新卷”主题宣传活动启动",
+   "d": "2023-08-20",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/8/11/art_722_183446.html",
+   "t": "南京博物院召开加强开放服务工作媒体见面会",
+   "d": "2023-08-11",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/8/8/art_722_183400.html",
+   "t": "中国丝绸博物馆：丝绸之路数字文物共享平台  促进文明交流互鉴",
+   "d": "2023-08-08",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字文物"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/8/5/art_722_183355.html",
+   "t": "中国百家博物馆2023文创产品展览会举办",
+   "d": "2023-08-05",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/7/29/art_722_183205.html",
+   "t": "“古籍保护与活化公益项目”启动",
+   "d": "2023-07-29",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "长城沿线博物馆、纪念馆、乡村博物馆建设研讨班举办"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/7/22/art_722_183098.html",
+   "t": "故宫博物院公开首批300余件甲骨高清影像",
+   "d": "2023-07-22",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "山西探索利用政府一般债券保护低级别不可移动文物"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/7/15/art_722_182968.html",
+   "t": "第十二届苏州文博会开幕",
+   "d": "2023-07-15",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/7/12/art_722_182905.html",
+   "t": "敦煌研究院文物数字化研究所副所长丁晓宏：数字赋能敦煌文化的保护与传播",
+   "d": "2023-07-12",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/7/8/art_722_182818.html",
+   "t": "“何以文明”全球巡展在纽约联合国总部启动",
+   "d": "2023-07-08",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字技术"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "第四届联合国教科文组织名录遗产与可持续发展黄山对话会举办"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/7/2/art_722_182683.html",
+   "t": "大同·博物馆可持续发展论坛举行",
+   "d": "2023-07-02",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字博物馆"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "山西文物数字博物馆上线"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/6/17/art_722_182374.html",
+   "t": "三星堆博物馆与腾讯签署战略合作协议",
+   "d": "2023-06-17",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字影像"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "甘肃为72处岩画文物构建数字影像数据库"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/6/12/art_722_182247.html",
+   "t": "上海市历史博物馆与俄罗斯国家历史博物馆签订友好合作备忘录",
+   "d": "2023-06-12",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字资源",
+    "智慧博物馆",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "湖南省博物馆学会智慧博物馆专业委员会成立",
+    "第十九届文博会开幕"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2023/5/20/art_722_181732.html",
+   "t": "“北京博物馆云”小程序上线",
+   "d": "2023-05-20",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/5/13/art_722_181570.html",
+   "t": "北京中轴线数字资源库成果发布",
+   "d": "2023-05-13",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字资源",
+    "数字博物馆"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "江西省文物工作电视电话会议召开"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/4/29/art_722_181327.html",
+   "t": "数智文创“让文物活起来”文博创新高峰论坛举办",
+   "d": "2023-04-29",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/4/22/art_722_181168.html",
+   "t": "敦煌“数字藏经洞”上线",
+   "d": "2023-04-22",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字孪生"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/4/15/art_722_181025.html",
+   "t": "“科技赋能文物艺术品交易”研讨会举办",
+   "d": "2023-04-15",
+   "l": "ext",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字展览与沉浸式体验",
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "科技赋能",
+    "数字化",
+    "数字博物馆",
+    "AI"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "福建省爱国主义教育数字展馆升级上线",
+    "济南打造乡村地名数字博物馆",
+    "陕西一高校用AI技术首次完整复原《富春山居图》"
+   ],
+   "record_count": 4
+  },
+  {
+   "u": "/art/2023/4/7/art_722_180894.html",
+   "t": "陈独秀生平事迹陈列馆开馆试运行",
+   "d": "2023-04-07",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/4/1/art_722_180722.html",
+   "t": "北京五家“类博物馆”挂牌开放",
+   "d": "2023-04-01",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字藏品",
+    "数字化",
+    "云游"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "湖北武当山五龙宫同步开展遗址发掘与数字化复原",
+    "“云游长城”（香港版）媒体发布会举行"
+   ],
+   "record_count": 3
+  },
+  {
+   "u": "/art/2023/3/24/art_722_180518.html",
+   "t": "西藏博物馆开展文物三维数据采集工作",
+   "d": "2023-03-24",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字博物馆与公共服务",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/3/11/art_722_180249.html",
+   "t": "曾侯乙编钟复制件音源首次被数字化保存",
+   "d": "2023-03-11",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化",
+    "数字文化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "三星堆探索人机协同智能文物修复"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/3/8/art_722_180196.html",
+   "t": "代表委员专访 | 都海江委员：加快数字博物馆建设",
+   "d": "2023-03-08",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字博物馆"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/3/6/art_722_180117.html",
+   "t": "代表委员专访 | 王瑞霞代表：进一步推进文物数字化保护",
+   "d": "2023-03-06",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/3/4/art_722_180044.html",
+   "t": "代表委员专访 | 何毓灵代表：做好甲骨文保护研究与活化利用 推动甲骨文数字化工程建设",
+   "d": "2023-03-04",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/2/25/art_722_179926.html",
+   "t": "北京公开博物馆之城建设蓝图",
+   "d": "2023-02-25",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字文化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/2/18/art_722_179812.html",
+   "t": "年内北京将有一批博物馆、文化公园“上新”",
+   "d": "2023-02-18",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/2/11/art_722_179679.html",
+   "t": "《永乐大典》高清影像数据库及《国家珍贵古籍名录》知识库发布",
+   "d": "2023-02-11",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/2/4/art_722_179571.html",
+   "t": "法海寺壁画艺术馆开馆试营业",
+   "d": "2023-02-04",
+   "l": "core",
+   "topics": [],
+   "matched_keywords": [
+    "数字技术",
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "重庆市革命文物保护中心揭牌成立"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2023/1/21/art_722_179235.html",
+   "t": "龙门石窟流散文物数据聚合成果专题展洛阳开展",
+   "d": "2023-01-21",
+   "l": "core",
+   "topics": [
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2023/1/7/art_722_179003.html",
+   "t": "大足石刻研究院展建院70周年系列成果",
+   "d": "2023-01-07",
+   "l": "core",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "数字展示",
+    "数字人"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "全国首个“八路军”虚拟数字人亮相西安"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2022/12/31/art_722_178907.html",
+   "t": "第五届山西文博会线上开幕",
+   "d": "2022-12-31",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [
+    "河南安阳：将对全球各地约16万片甲骨进行数字化采集"
+   ],
+   "record_count": 2
+  },
+  {
+   "u": "/art/2022/12/24/art_722_178847.html",
+   "t": "“唐十八陵雕塑艺术网络平台”正式上线",
+   "d": "2022-12-24",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/12/8/art_722_178590.html",
+   "t": "南昌流动数字博物馆赋能文博新发展",
+   "d": "2022-12-08",
+   "l": "core",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "数字博物馆"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/12/3/art_722_178541.html",
+   "t": "重庆云上博物馆试运行上线",
+   "d": "2022-12-03",
+   "l": "ext",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "云上"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/11/26/art_722_178451.html",
+   "t": "“云游博物馆”线上长见识",
+   "d": "2022-11-26",
+   "l": "ext",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "云游"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/11/8/art_722_178063.html",
+   "t": "“数字敦煌”入选2022年世界互联网大会精品案例",
+   "d": "2022-11-08",
+   "l": "core",
+   "topics": [
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字敦煌"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/8/5/art_722_176232.html",
+   "t": "《深厚的滋养——革命文物资源服务党史学习教育大数据分析与案例探究》出版发行",
+   "d": "2022-08-05",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "大数据"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/6/12/art_722_175360.html",
+   "t": "“云游长城”上线 高精度数字还原长城",
+   "d": "2022-06-12",
+   "l": "ext",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "云游"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/4/14/art_722_173773.html",
+   "t": "第三届（2021）全国革命文物保护利用十佳案例——中国工农红军强渡大渡河纪念馆“互联网+长征”数字化展示与传播项目",
+   "d": "2022-04-14",
+   "l": "core",
+   "topics": [
+    "数字展览与沉浸式体验",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2022/3/23/art_722_173491.html",
+   "t": "用好文物资源 讲好红色故事（大数据观察）",
+   "d": "2022-03-23",
+   "l": "tech",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字档案、数据库与知识平台"
+   ],
+   "matched_keywords": [
+    "大数据"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2021/3/12/art_722_166394.html",
+   "t": "代表委员专访 | 吕建中代表：建议加快推进 文物艺术品数字化保护利用",
+   "d": "2021-03-12",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2021/3/9/art_722_166323.html",
+   "t": "代表委员专访 | 吕建中代表：建议加快推进文物艺术品数字化保护利用",
+   "d": "2021-03-09",
+   "l": "core",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
+  },
+  {
+   "u": "/art/2021/2/8/art_722_165782.html",
+   "t": "学习强国“博物馆说”专题上线 邀您云端共享“文化大餐”",
+   "d": "2021-02-08",
+   "l": "ext",
+   "topics": [
+    "数字博物馆与公共服务"
+   ],
+   "matched_keywords": [
+    "云端"
+   ],
+   "digest_snippets": [],
+   "matched_titles": [],
+   "record_count": 1
   }
  ]
 }

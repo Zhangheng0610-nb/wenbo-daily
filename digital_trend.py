@@ -204,6 +204,62 @@ def topic_counts_for_records(records):
     return {name: len(urls_by_topic[name]) for name, _ in TOPIC_INFO}
 
 
+def article_entities(records):
+    """Merge trend records into canonical article entities by original URL.
+
+    ``items`` keeps every keyword/digest hit for auditability.  Consumers that
+    display trends, topics, or evidence should use ``articles`` so one source
+    article can never be counted twice in the same direction.  A single
+    article may still carry several direction labels.
+    """
+    by_url = {}
+    for record in records:
+        url = record.get('url', record.get('u', ''))
+        title = record.get('title', record.get('t', ''))
+        item_date = record.get('date', record.get('d', ''))
+        if hasattr(item_date, 'isoformat'):
+            item_date = item_date.isoformat()
+        key = url or f'{title}|{item_date}'
+        if not key:
+            continue
+        if key not in by_url:
+            by_url[key] = {
+                'u': url,
+                't': title,
+                'd': item_date,
+                'l': record.get('level', record.get('l', '')),
+                'topics': [],
+                'matched_keywords': [],
+                'digest_snippets': [],
+                'matched_titles': [],
+                'record_count': 0,
+            }
+        article = by_url[key]
+        article['record_count'] += 1
+        if item_date and (not article['d'] or item_date < article['d']):
+            article['d'] = item_date
+            article['t'] = title or article['t']
+            article['l'] = record.get('level', record.get('l', '')) or article['l']
+        for topic in topics_for_record(record):
+            if topic not in article['topics']:
+                article['topics'].append(topic)
+        keyword = record.get('word', record.get('w', ''))
+        if keyword and keyword not in article['matched_keywords']:
+            article['matched_keywords'].append(keyword)
+        if title and title not in article['matched_titles']:
+            article['matched_titles'].append(title)
+        if record.get('from_digest') and title and title not in article['digest_snippets']:
+            article['digest_snippets'].append(title)
+
+    for article in by_url.values():
+        # Primary title is already displayed separately.  Keep every merged
+        # hit title for evidence drill-down; the UI must disclose any paging
+        # rather than silently trimming evidence.
+        article['matched_titles'] = [title for title in article['matched_titles']
+                                     if title != article['t']]
+    return sorted(by_url.values(), key=lambda item: (item.get('d', ''), item.get('u', '')), reverse=True)
+
+
 def extract_digest_items(body, url, pub_date):
     """从摘编正文提取数字化相关条目。
 
@@ -360,7 +416,8 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
         levels[it['level']] += 1
     agg = aggregate(items, source_items)
     extra_n = len(extra) if isinstance(extra, (list, tuple)) else extra
-    unique_urls = len({x['url'] for x in items})
+    articles = article_entities(items)
+    unique_urls = len(articles)
     source_unique_urls = len({x['url'] for x in source_items})
     data = {
         'generated': date.today().isoformat(),
@@ -376,18 +433,22 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
             'source_article_total': len(source_items),
             'source_unique_pages': source_unique_urls,
             'overall_share': round(unique_urls / source_unique_urls * 100, 2) if source_unique_urls else 0,
-            'topic_unique_counts': topic_counts_for_records(items),
+            'topic_unique_counts': topic_counts_for_records(articles),
+            'classified_article_count': sum(1 for article in articles if article['topics']),
+            'unclassified_article_count': sum(1 for article in articles if not article['topics']),
         },
         'quality': {
             'source_fetch_complete': True,
             'digest_fetch_failed': digest_failed,
-            'note': '关键词只负责纳入趋势库；页面按六类行业方向展示。unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
+            'note': '关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
         },
         'topic_info': [{'name': name, 'description': description} for name, description in TOPIC_INFO],
         'items': [
             {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
-             'w': x.get('word', ''), 'topics': x.get('topics', [])} for x in items
+             'w': x.get('word', ''), 'topics': x.get('topics', []),
+             'from_digest': bool(x.get('from_digest'))} for x in items
         ],
+        'articles': articles,
         **agg,
     }
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
@@ -427,11 +488,16 @@ def relabel_existing_data():
     data['by_year'] = [annual[key] for key in sorted(annual)]
 
     stats = data.setdefault('stats', {})
-    stats['topic_unique_counts'] = topic_counts_for_records(items)
+    articles = article_entities(items)
+    data['articles'] = articles
+    stats['unique_source_pages'] = len(articles)
+    stats['topic_unique_counts'] = topic_counts_for_records(articles)
+    stats['classified_article_count'] = sum(1 for article in articles if article['topics'])
+    stats['unclassified_article_count'] = sum(1 for article in articles if not article['topics'])
     data['topic_info'] = [{'name': name, 'description': description}
                           for name, description in TOPIC_INFO]
     quality = data.setdefault('quality', {})
-    quality['topic_taxonomy'] = '六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。'
+    quality['topic_taxonomy'] = '六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。articles按原文URL聚合，用于方向和趋势主统计。'
 
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)

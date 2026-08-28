@@ -1141,6 +1141,7 @@ def build_heatmap_html():
   </section>
   <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
+<script src="lib/wenbo-analysis.js"></script>
 <script src="lib/echarts.min.js"></script>
 <script>
 var SHORT2GEO = {
@@ -1172,37 +1173,15 @@ function palette() {
   };
 }
 function eventScore(event) {
-  var age=Math.max(0,(AS_OF_UTC-parseUTC(event.lastDate))/86400000);
-  var recency=100*Math.pow(RAW.decay||.93,age);
-  return event.impact*.35+event.evidence*.30+event.breadth*.20+recency*.15;
+  return window.WenboAnalysis.eventScore(event, RAW.asOf, RAW.decay);
 }
 function eventInRange(event, days, previous) {
-  var age=(AS_OF_UTC-parseUTC(event.lastDate))/86400000;
-  var start=previous?days:0, end=previous?days*2:days;
-  return age>=start && age<end;
+  return window.WenboAnalysis.eventInRange(event, RAW.asOf, days, previous);
 }
 function computeView(days, previous) {
-  var byName = {};
-  (RAW.events||[]).forEach(function(event){
-    if (!eventInRange(event,days,previous)) return;
-    if (CUR_THEME && (event.themes||[]).indexOf(CUR_THEME)===-1) return;
-    var name=event.primaryProvince;
-    if (!name) return;
-    if (!byName[name]) byName[name]={name:name,raw:0,eventCount:0,reportCount:0,evidenceCount:0,aCount:0,confidenceTotal:0,events:[]};
-    var row=byName[name], score=eventScore(event);
-    row.raw+=score; row.eventCount+=1; row.reportCount+=event.reportCount;
-    row.evidenceCount+=event.sourceCount; row.aCount+=event.sourceTier==='A'?1:0;
-    row.confidenceTotal+=event.locationConfidence; row.events.push({event:event,score:score});
+  return window.WenboAnalysis.provinceRows(RAW.events||[], {
+    asOf:RAW.asOf, decay:RAW.decay, days:days, previous:previous, theme:CUR_THEME
   });
-  var list=Object.keys(byName).map(function(k){ return byName[k]; });
-  var maxRaw=list.reduce(function(m,x){return Math.max(m,x.raw);},0);
-  list.forEach(function(row){
-    row.index=maxRaw?row.raw/maxRaw*100:0;
-    row.confidence=row.eventCount?row.confidenceTotal/row.eventCount:0;
-    row.events.sort(function(a,b){return b.score-a.score;});
-  });
-  list.sort(function(a,b){return b.raw-a.raw;});
-  return list;
 }
 function findProvince(name) {
   for (var i=0;i<VIEW.length;i++) if (VIEW[i].name===name) return VIEW[i];
@@ -1304,18 +1283,11 @@ function renderScope(events,id,countId) {
   list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
 }
 function coverageForWindow(days, previous) {
-  var panel=(RAW.coverage&&RAW.coverage.panel)||[],checks=(RAW.coverage&&RAW.coverage.checks)||[],good={success:true,no_update:true},byKey={},sourceGood={};
-  var start=previous?days:0;
-  checks.forEach(function(row){var age=(AS_OF_UTC-parseUTC(row.date))/86400000;if(age>=start&&age<start+days&&panel.some(function(p){return p.id===row.sourceId;}))byKey[row.date+'|'+row.sourceId]=row;});
-  Object.keys(byKey).forEach(function(key){var row=byKey[key];if(good[row.status])sourceGood[row.sourceId]=(sourceGood[row.sourceId]||0)+1;});
-  var completeDays=0;
-  for(var i=0;i<days;i++){
-    var date=new Date(AS_OF_UTC-(start+i)*86400000).toISOString().slice(0,10),complete=panel.length>0;
-    panel.forEach(function(source){var row=byKey[date+'|'+source.id];if(!row||!good[row.status])complete=false;});
-    if(complete)completeDays++;
-  }
-  var planned=days*panel.length,successful=Object.keys(byKey).filter(function(key){return good[byKey[key].status];}).length,rate=planned?successful/planned:0;
-  return {panel:panel,byKey:byKey,sourceGood:sourceGood,completeDays:completeDays,successful:successful,planned:planned,rate:rate,ready:rate>=.90&&completeDays>=Math.ceil(days*.8),state:rate>=.90?'ready':(rate>=.60?'partial':'insufficient')};
+  var coverage=window.WenboAnalysis.coverageForWindow(RAW.coverage, RAW.asOf, days, previous);
+  coverage.sourceGood={};
+  coverage.rows.forEach(function(row){coverage.sourceGood[row.id]=row.good;});
+  coverage.ready=coverage.state==='ready';
+  return coverage;
 }
 function renderCoverage() {
   CUR_COVERAGE=coverageForWindow(CUR_WINDOW.days,false);PREVIOUS_COVERAGE=coverageForWindow(CUR_WINDOW.days,true);var c=CUR_COVERAGE,quality=document.getElementById('quality');quality.setAttribute('data-state',c.state);
