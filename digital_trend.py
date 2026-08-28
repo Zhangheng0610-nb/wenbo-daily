@@ -299,25 +299,31 @@ def aggregate(items, source_items):
     by_month = defaultdict(list)
     by_week = defaultdict(list)
     by_day = defaultdict(list)
+    by_year = defaultdict(list)
     source_by_month = defaultdict(list)
     source_by_week = defaultdict(list)
     source_by_day = defaultdict(list)
+    source_by_year = defaultdict(list)
     for it in items:
         ym = it['date'].strftime('%Y-%m')
         iso = it['date'].isocalendar()
         wk = f"{it['date'].strftime('%Y')}-W{iso[1]:02d}"
+        year = str(it['date'].year)
         by_month[ym].append(it)
         by_week[wk].append(it)
         by_day[it['date'].isoformat()].append(it)
+        by_year[year].append(it)
     for it in source_items:
         ym = it['date'].strftime('%Y-%m')
         iso = it['date'].isocalendar()
         wk = f"{it['date'].strftime('%Y')}-W{iso[1]:02d}"
+        year = str(it['date'].year)
         source_by_month[ym].append(it)
         source_by_week[wk].append(it)
         source_by_day[it['date'].isoformat()].append(it)
+        source_by_year[year].append(it)
 
-    def to_series(group, source_group):
+    def to_series(group, source_group, include_items=True):
         keys = sorted(set(group) | set(source_group))
         out = []
         for k in keys:
@@ -326,18 +332,22 @@ def aggregate(items, source_items):
             unique_count = len({x['url'] for x in v})
             source_unique_count = len({x['url'] for x in source_v})
             share = round(unique_count / source_unique_count * 100, 2) if source_unique_count else 0
-            out.append({'key': k, 'count': len(v), 'unique_count': unique_count,
-                        'source_count': len(source_v),
-                        'source_unique_count': source_unique_count,
-                        'share': share, 'items': [
-                {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']} for x in v
-            ]})
+            row = {'key': k, 'count': len(v), 'unique_count': unique_count,
+                   'source_count': len(source_v),
+                   'source_unique_count': source_unique_count,
+                   'share': share}
+            if include_items:
+                row['items'] = [
+                    {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']} for x in v
+                ]
+            out.append(row)
         return out
 
     return {
         'by_month': to_series(by_month, source_by_month),
         'by_week': to_series(by_week, source_by_week),
         'by_day': to_series(by_day, source_by_day),
+        'by_year': to_series(by_year, source_by_year, include_items=False),
     }
 
 
@@ -402,6 +412,19 @@ def relabel_existing_data():
             group.pop('topic_counts', None)
             for item in group_items:
                 item.pop('topics', None)
+
+    annual = {}
+    for group in data.get('by_month', []):
+        year = group.get('key', '')[:4]
+        if not year:
+            continue
+        row = annual.setdefault(year, {'key': year, 'count': 0, 'unique_count': 0,
+                                       'source_count': 0, 'source_unique_count': 0})
+        for field in ('count', 'unique_count', 'source_count', 'source_unique_count'):
+            row[field] += group.get(field, 0) or 0
+    for row in annual.values():
+        row['share'] = round(row['unique_count'] / row['source_unique_count'] * 100, 2) if row['source_unique_count'] else 0
+    data['by_year'] = [annual[key] for key in sorted(annual)]
 
     stats = data.setdefault('stats', {})
     stats['topic_unique_counts'] = topic_counts_for_records(items)

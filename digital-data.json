@@ -24710,5 +24710,55 @@
    "name": "数字传播与国际交流",
    "description": "数字内容传播、线上推广和文化遗产数字出海"
   }
+ ],
+ "by_year": [
+  {
+   "key": "2021",
+   "count": 3,
+   "unique_count": 3,
+   "source_count": 3235,
+   "source_unique_count": 1157,
+   "share": 0.26
+  },
+  {
+   "key": "2022",
+   "count": 11,
+   "unique_count": 10,
+   "source_count": 2256,
+   "source_unique_count": 752,
+   "share": 1.33
+  },
+  {
+   "key": "2023",
+   "count": 69,
+   "unique_count": 47,
+   "source_count": 2904,
+   "source_unique_count": 968,
+   "share": 4.86
+  },
+  {
+   "key": "2024",
+   "count": 51,
+   "unique_count": 34,
+   "source_count": 2757,
+   "source_unique_count": 919,
+   "share": 3.7
+  },
+  {
+   "key": "2025",
+   "count": 60,
+   "unique_count": 37,
+   "source_count": 2073,
+   "source_unique_count": 691,
+   "share": 5.35
+  },
+  {
+   "key": "2026",
+   "count": 45,
+   "unique_count": 27,
+   "source_count": 540,
+   "source_unique_count": 280,
+   "share": 9.64
+  }
  ]
 }

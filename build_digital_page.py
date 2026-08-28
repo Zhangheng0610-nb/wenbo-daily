@@ -121,6 +121,11 @@ def build_page(html_path, data_path):
 
   .chart-card {{ background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 14px 10px; margin-top: 16px; box-shadow: var(--shadow); }}
   #chart {{ width: 100%; height: 420px; }}
+  .annual-card {{ margin-top: 14px; }}
+  .chart-head {{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 0 4px 4px; }}
+  .chart-head h2 {{ font-size: 1.05em; }}
+  .chart-head span {{ color: var(--muted); font-size: .78em; }}
+  #annual-chart {{ width: 100%; height: 310px; }}
   .hint {{ color: var(--muted); font-size: .8em; text-align: center; padding: 4px 0 8px; }}
   .hint kbd {{ background: #eee; border: 1px solid #ccc; border-radius: 4px; padding: 0 6px; font-size: .9em; }}
 
@@ -170,7 +175,11 @@ def build_page(html_path, data_path):
     .range-buttons {{ margin-left: 0; width: 100%; }}
     .range-buttons button {{ flex: 1; }}
     #chart {{ height: 330px; }}
+    #annual-chart {{ height: 270px; }}
     .chart-card {{ padding: 10px 6px 6px; margin-top: 12px; }}
+    .chart-head {{ padding: 0 2px 2px; }}
+    .chart-head h2 {{ font-size: .95em; }}
+    .chart-head span {{ font-size: .68em; }}
     .hint {{ font-size: .72em; }}
     .p-item {{ gap: 7px; padding: 9px 10px; align-items: flex-start; }}
     .p-date {{ font-size: .7em; }}
@@ -217,6 +226,11 @@ def build_page(html_path, data_path):
     <div class="hint">缩放或选择时间范围；跨度会自动切换月 / 周 / 天粒度。点击数据点查看该周期明细。</div>
   </div>
 
+  <div class="chart-card annual-card">
+    <div class="chart-head"><h2>年度趋势</h2><span>看长期变化，不受月度波动干扰</span></div>
+    <div id="annual-chart"></div>
+  </div>
+
   <div class="list-card">
     <div class="list-head"><h2 id="period-title">📋 点击图表数据点查看明细</h2><span class="tag" id="period-count"></span></div>
     <div id="period-list"><div class="empty">上方图表中点击任意数据点，这里会列出该周期内所有数字化相关新闻。</div></div>
@@ -250,10 +264,11 @@ fetch(DATA_URL).then(function(r){{ return r.json(); }}).then(function(data){{
 
 function init(data) {{
   // 构建各粒度索引: key -> {{count, unique_count, share, items[]}}
-  var byMonth = {{}}, byWeek = {{}}, byDay = {{}};
+  var byMonth = {{}}, byWeek = {{}}, byDay = {{}}, byYear = {{}};
   data.by_month.forEach(function(s){{ byMonth[s.key] = s; }});
   data.by_week.forEach(function(s){{ byWeek[s.key] = s; }});
   data.by_day.forEach(function(s){{ byDay[s.key] = s; }});
+  (data.by_year || []).forEach(function(s){{ byYear[s.key] = s; }});
 
   var rangeStart = data.range.start, rangeEnd = data.range.end;
 
@@ -322,18 +337,21 @@ function init(data) {{
   function monthFmt(k) {{ return k.slice(0, 4) + '-' + k.slice(5); }}
   function weekFmt(k) {{ return k; }}
   function dayFmt(k) {{ return k.slice(5); }}
+  function yearFmt(k) {{ return k + '年'; }}
 
   function rebuildSeriesCache() {{
     return {{
       month: buildSeries(monthKeys(), byMonth, monthFmt),
       week: buildSeries(weekKeys(), byWeek, weekFmt),
-      day: buildSeries(dayKeys(), byDay, dayFmt)
+      day: buildSeries(dayKeys(), byDay, dayFmt),
+      year: buildSeries(Object.keys(byYear).sort(), byYear, yearFmt)
     }};
   }}
   var seriesCache = rebuildSeriesCache();
   var GRAN = {{ month: '月', week: '周', day: '天' }};
 
   var chart = echarts.init(document.getElementById('chart'));
+  var annualChart = echarts.init(document.getElementById('annual-chart'));
   var currentGran = 'month';
   var activeStart = Math.max(0, seriesCache.month.keys.length - 13);
   var activeEnd = seriesCache.month.keys.length - 1;
@@ -353,8 +371,8 @@ function init(data) {{
 
   function optionFor(gran, zoomStart, zoomEnd) {{
     var s = seriesCache[gran];
-    var countMarkData = gran === 'month' ? [{{ yAxis: averageValue(s.countVals), name: '数量平均' }}] : [];
-    var shareMarkData = gran === 'month' ? [{{ yAxis: averageValue(s.shareVals), name: '占比平均' }}] : [];
+    var countMarkData = (gran === 'month' || gran === 'year') ? [{{ yAxis: averageValue(s.countVals), name: '数量平均' }}] : [];
+    var shareMarkData = (gran === 'month' || gran === 'year') ? [{{ yAxis: averageValue(s.shareVals), name: '占比平均' }}] : [];
     var start = zoomStart === undefined ? 0 : zoomStart;
     var end = zoomEnd === undefined ? s.keys.length - 1 : zoomEnd;
     return {{
@@ -386,19 +404,19 @@ function init(data) {{
           axisLabel: {{ fontSize: 11, formatter: '{{value}}' }},
           splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
         }},
-        {{ type: 'value', name: '占比（%）', min: 0,
+        {{ type: 'value', name: '比例（%）', nameLocation: 'middle', nameGap: 38, min: 0,
           nameTextStyle: {{ color: '#0d9488', fontSize: 10 }},
           axisLabel: {{ fontSize: 11, formatter: '{{value}}%' }},
           splitLine: {{ show: false }}
         }}
       ],
-      dataZoom: [
+      dataZoom: gran === 'year' ? [] : [
         {{ type: 'inside', startValue: start, endValue: end, filterMode: 'none' }},
         {{ type: 'slider', height: 22, bottom: 10, startValue: start, endValue: end, filterMode: 'none' }}
       ],
       series: [{{
         name: '独立原文数', type: 'line', yAxisIndex: 0, data: s.countVals,
-        connectNulls: false, smooth: gran === 'month',
+        connectNulls: false, smooth: gran === 'month' || gran === 'year',
         symbolSize: 7,
         lineStyle: {{ width: 2.4, color: '#2563eb' }},
         itemStyle: {{ color: '#2563eb' }},
@@ -412,7 +430,7 @@ function init(data) {{
         }}
       }}, {{
         name: '占全部文物新闻比例', type: 'line', yAxisIndex: 1, data: s.shareVals,
-        connectNulls: false, smooth: gran === 'month',
+        connectNulls: false, smooth: gran === 'month' || gran === 'year',
         symbolSize: 6,
         lineStyle: {{ width: 2, color: '#0d9488' }},
         itemStyle: {{ color: '#0d9488' }},
@@ -433,6 +451,9 @@ function init(data) {{
   }}
 
   chart.setOption(optionFor('month', activeStart, activeEnd));
+  if (seriesCache.year.keys.length) {{
+    annualChart.setOption(optionFor('year', 0, seriesCache.year.keys.length - 1));
+  }}
 
   // 粒度切换:根据缩放跨度
   function maybeSwitch(startIndex, endIndex) {{
@@ -550,7 +571,7 @@ function init(data) {{
   }});
   renderInsight();
 
-  window.addEventListener('resize', function() {{ chart.resize(); }});
+  window.addEventListener('resize', function() {{ chart.resize(); annualChart.resize(); }});
 }}
 </script>
 </body>
