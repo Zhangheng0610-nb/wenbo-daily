@@ -18,7 +18,7 @@ digital_trend.py — 国家文物局「数字化」新闻趋势数据抓取与�
       python digital_trend.py --build-only  # 只用已有数据重新生成页面
       python digital_trend.py --relabel-only  # 只为已有记录补充行业方向分类
 """
-import os, re, json, sys, time
+import os, re, json, sys, time, hashlib
 from html.parser import HTMLParser
 import urllib.request
 from collections import defaultdict
@@ -382,15 +382,12 @@ def topics_for_record(record):
 
 
 def topic_counts_for_records(records):
-    """按原文 URL 统计各行业方向，方向是多标签，合计可能超过总原文数。"""
-    urls_by_topic = defaultdict(set)
+    """按内容条目统计各行业方向；同一条目同一方向只计一次。"""
+    counts = defaultdict(int)
     for record in records:
-        url = record.get('url', record.get('u', ''))
-        if not url:
-            continue
         for topic in topics_for_record(record):
-            urls_by_topic[topic].add(url)
-    return {name: len(urls_by_topic[name]) for name, _ in TOPIC_INFO}
+            counts[topic] += 1
+    return {name: counts[name] for name, _ in TOPIC_INFO}
 
 
 def record_match_text(record):
@@ -469,76 +466,85 @@ def enrich_weak_title_candidate(item):
     return admission
 
 
-def article_entities(records):
-    """Merge trend records into canonical article entities by original URL.
+def _digest_identity(title):
+    normalized = re.sub(r'\s+', '', title or '')
+    normalized = re.sub(r'[「」“”"‘’‘’、，。；：！？（）()【】\[\]《》〈〉—_\-]', '', normalized)
+    return hashlib.sha1(normalized.encode('utf-8')).hexdigest()[:12]
 
-    ``items`` keeps every keyword/digest hit for auditability.  Consumers that
-    display trends, topics, or evidence should use ``articles`` so one source
-    article can never be counted twice in the same direction.  A single
-    article may still carry several direction labels.
+
+def content_item_entities(records):
+    """Build the canonical content-item layer from matched records.
+
+    A standalone article uses its source URL as identity.  A digest item uses
+    the source URL plus a normalized digest-title hash; repeated same-title
+    items receive a deterministic occurrence suffix.  Keyword hits therefore
+    enrich one item instead of creating extra items.
     """
-    by_url = {}
+    counts = defaultdict(int)
+    entities = []
     for record in records:
         url = record.get('url', record.get('u', ''))
-        title = record.get('source_page_title') or record.get('title', record.get('t', ''))
+        is_digest = bool(record.get('from_digest'))
+        digest_title = record.get('digest_title', '') if is_digest else ''
+        title = digest_title or record.get('title', record.get('t', ''))
         item_date = record.get('date', record.get('d', ''))
         if hasattr(item_date, 'isoformat'):
             item_date = item_date.isoformat()
-        key = url or f'{title}|{item_date}'
+        base_key = (url, _digest_identity(digest_title)) if is_digest else (url, '')
+        counts[base_key] += 1
+        suffix = f'-{counts[base_key]}' if counts[base_key] > 1 else ''
+        item_id = (f'{url}#digest-{base_key[1]}{suffix}' if is_digest
+                   else url or f'article-{_digest_identity(title)}')
+        entities.append({
+            'content_item_id': item_id,
+            'display_title': title,
+            'source_url': url,
+            'source_page_title': record.get('source_page_title') or record.get('title', record.get('t', '')),
+            'digest_title': digest_title,
+            'date': item_date,
+            'level': record.get('level', record.get('l', '')),
+            'matched_keywords': list(record.get('matched_keywords') or []),
+            'evidence_snippet': record.get('evidence_snippet', ''),
+            'topics': list(topics_for_record(record)),
+            'is_digest_item': is_digest,
+        })
+    return entities
+
+
+def source_page_entities(content_items):
+    """Build source-page entities without inheriting child-item topics."""
+    by_url = {}
+    for item in content_items:
+        url = item.get('source_url', '')
+        key = url or f"{item.get('source_page_title', '')}|{item.get('date', '')}"
         if not key:
             continue
         if key not in by_url:
             by_url[key] = {
-                'u': url,
-                't': title,
-                'd': item_date,
-                'l': record.get('level', record.get('l', '')),
-                'topics': [],
-                'matched_keywords': [],
-                'evidence_snippets': [],
-                'digest_snippets': [],
-                'digest_hits': [],
-                'matched_titles': [],
-                'record_count': 0,
+                'source_page_id': url or key,
+                'source_url': url,
+                'source_page_title': item.get('source_page_title', ''),
+                'date': item.get('date', ''),
+                'is_digest_page': bool(item.get('is_digest_item')),
+                'content_item_ids': [],
+                'content_item_count': 0,
+                'digest_content_item_count': 0,
+                'standalone_content_item_count': 0,
             }
-        article = by_url[key]
-        article['record_count'] += 1
-        if item_date and (not article['d'] or item_date < article['d']):
-            article['d'] = item_date
-            article['l'] = record.get('level', record.get('l', '')) or article['l']
-        for topic in topics_for_record(record):
-            if topic not in article['topics']:
-                article['topics'].append(topic)
-        keywords = record.get('matched_keywords') or []
-        if not keywords:
-            keyword = record.get('word', record.get('w', ''))
-            keywords = [keyword] if keyword else []
-        for keyword in keywords:
-            if keyword and keyword not in article['matched_keywords']:
-                article['matched_keywords'].append(keyword)
-        snippet = record.get('evidence_snippet', '')
-        if snippet and snippet not in article['evidence_snippets']:
-            article['evidence_snippets'].append(snippet)
-        if record.get('from_digest'):
-            digest_title = record.get('digest_title') or record.get('item_title') or ''
-            hit = {
-                'title': digest_title,
-                'matched_keywords': keywords,
-                'evidence_snippet': record.get('evidence_snippet', ''),
-                'topics': topics_for_record(record),
-            }
-            if digest_title and hit not in article['digest_hits']:
-                article['digest_hits'].append(hit)
-            if digest_title and digest_title not in article['digest_snippets']:
-                article['digest_snippets'].append(digest_title)
-            if digest_title and digest_title not in article['matched_titles']:
-                article['matched_titles'].append(digest_title)
+        page = by_url[key]
+        page['content_item_ids'].append(item['content_item_id'])
+        page['content_item_count'] += 1
+        if item.get('is_digest_item'):
+            page['is_digest_page'] = True
+            page['digest_content_item_count'] += 1
+        else:
+            page['standalone_content_item_count'] += 1
+    return sorted(by_url.values(), key=lambda item: (item.get('date', ''), item.get('source_url', '')), reverse=True)
 
-    for article in by_url.values():
-        # Digest hit titles are evidence below the source-page title, never the
-        # primary article title.  Keep the legacy arrays for compatibility.
-        article['digest_hits'].sort(key=lambda hit: (hit['title'], hit['evidence_snippet']))
-    return sorted(by_url.values(), key=lambda item: (item.get('d', ''), item.get('u', '')), reverse=True)
+
+def article_entities(records):
+    """Backward-compatible alias returning source-page entities."""
+    return source_page_entities(content_item_entities(records))
 
 
 class DigestHTMLParser(HTMLParser):
@@ -707,9 +713,8 @@ def dedup_and_filter(items):
 def aggregate(items, source_items):
     """生成趋势聚合数据。
 
-    count 是关键词命中的记录数，unique_count 是去重后的原文 URL 数；
-    source_count/source_unique_count 用于计算数字化报道在国家文物局全部文物
-    新闻中的占比，避免把整体发稿量变化误当成数字化趋势变化。
+    趋势数量以 content item 为单位；source_page_count 和 share 仍然是
+    来源页面层指标，避免把两个统计单位相除。
     """
     by_month = defaultdict(list)
     by_week = defaultdict(list)
@@ -720,22 +725,24 @@ def aggregate(items, source_items):
     source_by_day = defaultdict(list)
     source_by_year = defaultdict(list)
     for it in items:
-        ym = it['date'].strftime('%Y-%m')
-        iso = it['date'].isocalendar()
+        item_date = it['date'] if hasattr(it['date'], 'strftime') else datetime.fromisoformat(it['date']).date()
+        ym = item_date.strftime('%Y-%m')
+        iso = item_date.isocalendar()
         wk = f"{iso.year}-W{iso.week:02d}"
-        year = str(it['date'].year)
+        year = str(item_date.year)
         by_month[ym].append(it)
         by_week[wk].append(it)
-        by_day[it['date'].isoformat()].append(it)
+        by_day[item_date.isoformat()].append(it)
         by_year[year].append(it)
     for it in source_items:
-        ym = it['date'].strftime('%Y-%m')
-        iso = it['date'].isocalendar()
+        source_date = it['date'] if hasattr(it['date'], 'strftime') else datetime.fromisoformat(it['date']).date()
+        ym = source_date.strftime('%Y-%m')
+        iso = source_date.isocalendar()
         wk = f"{iso.year}-W{iso.week:02d}"
-        year = str(it['date'].year)
+        year = str(source_date.year)
         source_by_month[ym].append(it)
         source_by_week[wk].append(it)
-        source_by_day[it['date'].isoformat()].append(it)
+        source_by_day[source_date.isoformat()].append(it)
         source_by_year[year].append(it)
 
     def to_series(group, source_group, include_items=True):
@@ -744,19 +751,26 @@ def aggregate(items, source_items):
         for k in keys:
             v = group.get(k, [])
             source_v = source_group.get(k, [])
-            unique_count = len({x['url'] for x in v})
+            source_page_count = len({x.get('source_url', x.get('url', '')) for x in v if x.get('source_url', x.get('url', ''))})
             source_unique_count = len({x['url'] for x in source_v})
-            share = round(unique_count / source_unique_count * 100, 2) if source_unique_count else 0
-            row = {'key': k, 'count': len(v), 'unique_count': unique_count,
+            share = round(source_page_count / source_unique_count * 100, 2) if source_unique_count else 0
+            row = {'key': k, 'count': len(v), 'content_item_count': len(v),
+                   'source_page_count': source_page_count, 'unique_count': source_page_count,
                    'source_count': len(source_v),
                    'source_unique_count': source_unique_count,
                    'share': share}
             if include_items:
                 row['items'] = [
-                    {'t': x.get('source_page_title') or x['title'],
-                     'digest_title': x.get('digest_title', ''),
-                     'evidence_snippet': x.get('evidence_snippet', ''),
-                     'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level']}
+                    {'content_item_id': x['content_item_id'],
+                     'display_title': x['display_title'],
+                     'source_url': x['source_url'],
+                     'source_page_title': x['source_page_title'],
+                     'digest_title': x['digest_title'],
+                     'is_digest_item': x['is_digest_item'],
+                     'evidence_snippet': x['evidence_snippet'],
+                     'matched_keywords': x['matched_keywords'],
+                     'topics': x['topics'],
+                     'd': x['date'], 'u': x['source_url'], 't': x['display_title'], 'l': x['level']}
                     for x in v
                 ]
             out.append(row)
@@ -770,6 +784,61 @@ def aggregate(items, source_items):
     }
 
 
+def aggregate_existing_source_maps(content_items, old_data):
+    """Rebuild content-item series while preserving stored source-page denominators."""
+    groups = {name: defaultdict(list) for name in ('by_month', 'by_week', 'by_day', 'by_year')}
+    for item in content_items:
+        item_date = item['date']
+        groups['by_month'][item_date[:7]].append(item)
+        parsed = datetime.fromisoformat(item_date).date()
+        iso = parsed.isocalendar()
+        groups['by_week'][f'{iso.year}-W{iso.week:02d}'].append(item)
+        groups['by_day'][item_date].append(item)
+        groups['by_year'][item_date[:4]].append(item)
+
+    def row_items(values):
+        return [
+            {'content_item_id': x['content_item_id'], 'display_title': x['display_title'],
+             'source_url': x['source_url'], 'source_page_title': x['source_page_title'],
+             'digest_title': x['digest_title'], 'is_digest_item': x['is_digest_item'],
+             'evidence_snippet': x['evidence_snippet'], 'matched_keywords': x['matched_keywords'],
+             'topics': x['topics'], 'd': x['date'], 'u': x['source_url'],
+             't': x['display_title'], 'l': x['level']}
+            for x in values
+        ]
+
+    def rebuild(name, include_items=True):
+        old_rows = {row.get('key'): row for row in old_data.get(name, [])}
+        current = groups[name]
+        out = []
+        for key in sorted(set(current) | set(old_rows)):
+            values = current.get(key, [])
+            old = old_rows.get(key, {})
+            source_page_count = len({x['source_url'] for x in values if x['source_url']})
+            source_unique_count = old.get('source_unique_count', 0) or 0
+            row = {
+                'key': key,
+                'count': len(values),
+                'content_item_count': len(values),
+                'source_page_count': source_page_count,
+                'unique_count': source_page_count,
+                'source_count': old.get('source_count', 0) or 0,
+                'source_unique_count': source_unique_count,
+                'share': round(source_page_count / source_unique_count * 100, 2) if source_unique_count else 0,
+            }
+            if include_items:
+                row['items'] = row_items(values)
+            out.append(row)
+        return out
+
+    return {
+        'by_month': rebuild('by_month'),
+        'by_week': rebuild('by_week'),
+        'by_day': rebuild('by_day'),
+        'by_year': rebuild('by_year', include_items=False),
+    }
+
+
 def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     items = dedup_and_filter(items)
     for it in items:
@@ -777,10 +846,11 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     levels = defaultdict(int)
     for it in items:
         levels[it['level']] += 1
-    agg = aggregate(items, source_items)
+    content_items = content_item_entities(items)
+    source_pages = source_page_entities(content_items)
+    agg = aggregate(content_items, source_items)
     extra_n = len(extra) if isinstance(extra, (list, tuple)) else extra
-    articles = article_entities(items)
-    unique_urls = len(articles)
+    source_page_n = len(source_pages)
     source_unique_urls = len({x['url'] for x in source_items})
     data = {
         'generated': date.today().isoformat(),
@@ -788,34 +858,50 @@ def save_data(items, extra, digest_count, digest_failed, levels, source_items):
         'range': {'start': START_DATE.isoformat(), 'end': END_DATE.isoformat()},
         'stats': {
             'total': len(items),
+            'matched_record_count': len(items),
+            'content_item_count': len(content_items),
+            'digest_content_item_count': sum(1 for x in content_items if x['is_digest_item']),
+            'standalone_content_item_count': sum(1 for x in content_items if not x['is_digest_item']),
             'title_hit': sum(1 for x in items if match_keywords(x['title'])),
             'digest_extra': extra_n,
             'levels': {k: v for k, v in sorted(levels.items())},
             'digest_articles': digest_count,
-            'unique_source_pages': unique_urls,
+            'digital_source_pages': source_page_n,
+            'digest_source_pages': sum(1 for x in source_pages if x['is_digest_page']),
+            'standalone_source_pages': sum(1 for x in source_pages if not x['is_digest_page']),
+            'unique_source_pages': source_page_n,
             'source_article_total': len(source_items),
             'source_unique_pages': source_unique_urls,
-            'overall_share': round(unique_urls / source_unique_urls * 100, 2) if source_unique_urls else 0,
-            'topic_unique_counts': topic_counts_for_records(articles),
-            'classified_article_count': sum(1 for article in articles if article['topics']),
-            'unclassified_article_count': sum(1 for article in articles if not article['topics']),
+            'overall_share': round(source_page_n / source_unique_urls * 100, 2) if source_unique_urls else 0,
+            'topic_content_item_counts': topic_counts_for_records(content_items),
+            'topic_unique_counts': topic_counts_for_records(content_items),
+            'classified_content_item_count': sum(1 for item in content_items if item['topics']),
+            'unclassified_content_item_count': sum(1 for item in content_items if not item['topics']),
+            'classified_article_count': sum(1 for item in content_items if item['topics']),
+            'unclassified_article_count': sum(1 for item in content_items if not item['topics']),
         },
         'quality': {
             'source_fetch_complete': True,
             'digest_fetch_failed': digest_failed,
-            'note': '关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。',
+            'note': '关键词只负责纳入趋势库；content_items 是真正的数字化内容条目，按 source_url + digest_title（普通文章仅 source_url）建立身份；source_pages 是来源页层。六方向、趋势数量按 content_items，overall_share 按数字化 source_pages / 同期全部文物新闻 source_pages 计算。',
         },
         'topic_info': [{'name': name, 'description': description} for name, description in TOPIC_INFO],
         'items': [
-            {'t': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
+            {'content_item_id': content_items[index]['content_item_id'],
+             'display_title': content_items[index]['display_title'],
+             'source_url': content_items[index]['source_url'],
+             'source_page_title': content_items[index]['source_page_title'],
+             'is_digest_item': content_items[index]['is_digest_item'],
+             't': x['title'], 'd': x['date'].isoformat(), 'u': x['url'], 'l': x['level'],
              'w': x.get('word', ''), 'topics': x.get('topics', []),
              'matched_keywords': x.get('matched_keywords', []),
              'from_digest': bool(x.get('from_digest')),
              'digest_title': x.get('digest_title', ''),
              'evidence_snippet': x.get('evidence_snippet', ''),
-             'admission_reason': x.get('admission_reason', '')} for x in items
+             'admission_reason': x.get('admission_reason', '')} for index, x in enumerate(items)
         ],
-        'articles': articles,
+        'content_items': content_items,
+        'source_pages': source_pages,
         **agg,
     }
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
@@ -841,37 +927,33 @@ def relabel_existing_data():
         }
         item['topics'] = classify_topics(record_match_text(item_record), item.get('l', ''))
 
-    for granularity in ('by_month', 'by_week', 'by_day'):
-        for group in data.get(granularity, []):
-            group_items = group.get('items', [])
-            group.pop('topic_counts', None)
-            for item in group_items:
-                item.pop('topics', None)
-
-    annual = {}
-    for group in data.get('by_month', []):
-        year = group.get('key', '')[:4]
-        if not year:
-            continue
-        row = annual.setdefault(year, {'key': year, 'count': 0, 'unique_count': 0,
-                                       'source_count': 0, 'source_unique_count': 0})
-        for field in ('count', 'unique_count', 'source_count', 'source_unique_count'):
-            row[field] += group.get(field, 0) or 0
-    for row in annual.values():
-        row['share'] = round(row['unique_count'] / row['source_unique_count'] * 100, 2) if row['source_unique_count'] else 0
-    data['by_year'] = [annual[key] for key in sorted(annual)]
-
     stats = data.setdefault('stats', {})
-    articles = article_entities(items)
-    data['articles'] = articles
-    stats['unique_source_pages'] = len(articles)
-    stats['topic_unique_counts'] = topic_counts_for_records(articles)
-    stats['classified_article_count'] = sum(1 for article in articles if article['topics'])
-    stats['unclassified_article_count'] = sum(1 for article in articles if not article['topics'])
+    content_items = content_item_entities(items)
+    source_pages = source_page_entities(content_items)
+    data.pop('articles', None)
+    data['content_items'] = content_items
+    data['source_pages'] = source_pages
+    data.update(aggregate_existing_source_maps(content_items, data))
+    source_page_n = len(source_pages)
+    stats['matched_record_count'] = len(items)
+    stats['content_item_count'] = len(content_items)
+    stats['digest_content_item_count'] = sum(1 for x in content_items if x['is_digest_item'])
+    stats['standalone_content_item_count'] = sum(1 for x in content_items if not x['is_digest_item'])
+    stats['digital_source_pages'] = source_page_n
+    stats['digest_source_pages'] = sum(1 for x in source_pages if x['is_digest_page'])
+    stats['standalone_source_pages'] = sum(1 for x in source_pages if not x['is_digest_page'])
+    stats['unique_source_pages'] = source_page_n
+    stats['overall_share'] = round(source_page_n / stats.get('source_unique_pages', 0) * 100, 2) if stats.get('source_unique_pages') else 0
+    stats['topic_content_item_counts'] = topic_counts_for_records(content_items)
+    stats['topic_unique_counts'] = topic_counts_for_records(content_items)
+    stats['classified_content_item_count'] = sum(1 for item in content_items if item['topics'])
+    stats['unclassified_content_item_count'] = sum(1 for item in content_items if not item['topics'])
+    stats['classified_article_count'] = stats['classified_content_item_count']
+    stats['unclassified_article_count'] = stats['unclassified_content_item_count']
     data['topic_info'] = [{'name': name, 'description': description}
                           for name, description in TOPIC_INFO]
     quality = data.setdefault('quality', {})
-    quality['topic_taxonomy'] = '六类行业方向为页面展示分类；关键词口径未改变；同一原文可归入多个方向。articles按原文URL聚合，用于方向和趋势主统计。'
+    quality['topic_taxonomy'] = '六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。'
 
     with open(DATA_PATH, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)

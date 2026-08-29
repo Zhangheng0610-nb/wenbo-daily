@@ -20,7 +20,10 @@ def build_page(html_path, data_path):
 
     stats = data['stats']
     total = stats['total']
-    unique_n = stats.get('unique_source_pages', total)
+    content_n = stats.get('content_item_count', total)
+    source_page_n = stats.get('digital_source_pages', stats.get('unique_source_pages', 0))
+    digest_source_page_n = stats.get('digest_source_pages', 0)
+    standalone_source_page_n = stats.get('standalone_source_pages', 0)
     source_total = stats.get('source_article_total', 0)
     source_unique = stats.get('source_unique_pages', source_total)
     overall_share = stats.get('overall_share', 0)
@@ -35,11 +38,10 @@ def build_page(html_path, data_path):
         {'name': '数字档案、数据库与知识平台', 'description': '数字档案、数据库、知识库和数字资源管理'},
         {'name': '数字传播与国际交流', 'description': '数字内容传播、线上推广和文化遗产数字出海'},
     ])
-    topic_counts = stats.get('topic_unique_counts', {})
+    topic_counts = stats.get('topic_content_item_counts', stats.get('topic_unique_counts', {}))
     topic_max = max(topic_counts.values(), default=1)
-    categorized_urls = {it['u'] for it in data.get('items', []) if it.get('topics')}
-    categorized_n = len(categorized_urls)
-    uncategorized_n = max(0, unique_n - categorized_n)
+    categorized_n = stats.get('classified_content_item_count', 0)
+    uncategorized_n = stats.get('unclassified_content_item_count', 0)
     topic_rows = []
     for topic_index, topic in enumerate(topic_info):
         name = topic.get('name', '')
@@ -52,7 +54,7 @@ def build_page(html_path, data_path):
             f'aria-expanded="false" aria-controls="{detail_id}">'
             f'<div class="topic-copy"><b>{escape(name)}</b>'
             f'<span>{escape(topic.get("description", ""))}</span></div>'
-            f'<div class="topic-value"><strong>{count}</strong><small>独立原文</small></div>'
+            f'<div class="topic-value"><strong>{count}</strong><small>内容条目</small></div>'
             f'<div class="topic-track"><i style="width:{width}%"></i></div></button>'
             f'<div class="topic-detail" id="{detail_id}" data-topic-detail="{escape(name, quote=True)}" hidden></div>'
             f'</div>'
@@ -60,11 +62,11 @@ def build_page(html_path, data_path):
     topic_html = ''.join(topic_rows)
     rng = data['range']
 
-    # 年度分布与年度图统一使用 URL 去重后的独立原文数。
+    # 年度分布与年度图使用 content item 数量；来源页占比仍单独按 URL 计算。
     annual_rows = data.get('by_year') or []
     year_html = ' · '.join(
         f'{row["key"]}年' + (' YTD' if row["key"] == data['range']['end'][:4] else '') +
-        f' <b>{row.get("unique_count", 0)}</b>'
+        f' <b>{row.get("content_item_count", row.get("count", 0))}</b>'
         for row in annual_rows
     )
     current_year_note = f'{data["range"]["end"][:4]} YTD（截至 {data["range"]["end"]}）'
@@ -75,11 +77,11 @@ def build_page(html_path, data_path):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>数字化趋势 | 每日文博资讯</title>
-<meta name="description" content="国家文物局「数字化」相关新闻趋势 — {rng['start']} 至 {rng['end']}，共 {unique_n} 篇独立原文。按年月周天粒度自由缩放查看。">
+<meta name="description" content="国家文物局「数字化」内容条目趋势 — {rng['start']} 至 {rng['end']}，共 {content_n} 条内容条目。按年月周天粒度自由缩放查看。">
 <meta name="keywords" content="文博数字化,智慧博物馆,数字藏品,数字化趋势,文博趋势,数据可视化">
 <link rel="canonical" href="https://zhangheng666.top/digital-trends.html">
 <meta property="og:title" content="数字化趋势 | 每日文博资讯">
-<meta property="og:description" content="国家文物局数字化相关新闻 {unique_n} 篇独立原文 · {rng['start']} 至 {rng['end']}">
+<meta property="og:description" content="国家文物局数字化相关内容条目 {content_n} 条 · 涉及来源页 {source_page_n} 个 · {rng['start']} 至 {rng['end']}">
 <meta property="og:url" content="https://zhangheng666.top/digital-trends.html">
 <meta property="og:type" content="website">
 <style>
@@ -225,27 +227,27 @@ def build_page(html_path, data_path):
   </header>
 
   <div class="stats">
-    <div class="stat"><b>{unique_n}</b><span>独立原文</span></div>
-    <div class="stat"><b>{total}</b><span>关键词命中记录</span></div>
-    <div class="stat"><b>{overall_share}%</b><span>占全部文物新闻（独立原文）</span></div>
+    <div class="stat"><b>{content_n}</b><span>数字化相关内容条目</span></div>
+    <div class="stat"><b>{source_page_n}</b><span>涉及数字化的独立来源页</span></div>
+    <div class="stat"><b>{overall_share}%</b><span>来源页占同期全部文物新闻</span></div>
   </div>
   <div class="keyword-summary"><b>筛选方法（不等于行业分类）</b>：强数字信号 {core_n} · 技术信号 {tech_n} · 语境信号 {ext_n}；弱词需同文出现明确数字技术信号</div>
-  <div class="years">年度独立原文分布：{year_html}</div>
+  <div class="years">年度内容条目分布：{year_html}</div>
 
   <div class="insight" id="insight">正在生成近一年趋势摘要……</div>
 
   <section class="topics-card">
-    <div class="topics-head"><h2>行业方向分布</h2><span>覆盖 {categorized_n}/{unique_n} 个独立原文 · 可多标签归类</span></div>
+    <div class="topics-head"><h2>行业方向分布</h2><span>覆盖 {categorized_n}/{content_n} 个内容条目 · 可多标签归类</span></div>
     {topic_html}
   </section>
 
   <div class="chart-card annual-card">
-    <div class="chart-head"><h2>年度趋势</h2><span>独立原文数 · {current_year_note}</span></div>
+    <div class="chart-head"><h2>年度趋势</h2><span>内容条目数 · {current_year_note}</span></div>
     <div id="annual-chart"></div>
   </div>
 
   <div class="controls">
-    <div class="chart-legend-note"><b>蓝线：独立原文数</b> · <em>绿线：占全部文物新闻比例</em></div>
+    <div class="chart-legend-note"><b>蓝线：数字化内容条目数</b> · <em>绿线：涉及数字化的来源页占比</em></div>
     <div class="range-buttons" aria-label="时间范围">
       <button type="button" data-range="90d">近90天</button>
       <button type="button" data-range="12m" class="active">近12个月</button>
@@ -260,19 +262,19 @@ def build_page(html_path, data_path):
   </div>
 
   <div class="list-card">
-    <div class="list-head"><h2 id="period-title">📋 点击年度或趋势点查看文章</h2><span class="tag" id="period-count"></span><button type="button" class="detail-close" id="detail-close" hidden>收起明细</button></div>
-    <div id="period-list"><div class="empty">点击上方行业方向、年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化原文。</div></div>
+    <div class="list-head"><h2 id="period-title">📋 点击年度或趋势点查看内容条目</h2><span class="tag" id="period-count"></span><button type="button" class="detail-close" id="detail-close" hidden>收起明细</button></div>
+    <div id="period-list"><div class="empty">点击上方行业方向、年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化内容条目。</div></div>
   </div>
 
   <div class="method">
     <h3>📌 统计口径说明</h3>
     <ul>
-      <li><b>信源</b>：国家文物局官网「文物新闻」栏目全部文章（2021-01 至今）。原始抓取记录 {source_total:,} 条，按原文 URL 去重后为 {source_unique:,} 篇独立原文。</li>
+      <li><b>来源页</b>：国家文物局官网「文物新闻」栏目全部页面（2021-01 至今）。原始页面记录 {source_total:,} 条，按原文 URL 去重后为 {source_unique:,} 个来源页；当前涉及数字化的来源页为 {source_page_n} 个，其中摘编页 {digest_source_page_n} 个、普通独立文章页 {standalone_source_page_n} 个。</li>
       <li><b>纳入</b>：强数字信号可单独纳入；“大数据”“沉浸式”“科技赋能”“云端/云上”“信息化”等语境词，只有在同一普通文章正文或同一摘编小条目内同时出现明确数字技术/数字系统信号才纳入。摘编先按“粗体小标题—正文段落”拆分，再在本条目内匹配，避免相邻条目串词。关键词只负责筛选，行业方向另行分类。</li>
-      <li><b>行业方向</b>：页面用“数字保护与数字采集”“AI、三维扫描与科技考古”“数字展览与沉浸式体验”“数字博物馆与公共服务”“数字档案、数据库与知识平台”“数字传播与国际交流”六类方向解读文章；同一原文可多标签归类。</li>
-      <li><b>口径</b>：主指标按原文 URL 去重，辅助指标保留关键词命中记录数；当前 {overall_share}% = {unique_n} 篇数字化独立原文 ÷ {source_unique:,} 篇全部文物新闻独立原文。年度图和月/周/日图均优先展示独立原文数。</li>
-      <li><b>解读</b>：这是一条“国家文物局报道中的数字化动向”曲线，不等于全国所有文博机构的真实项目数量；摘编补充项仍保留，但会在同一原文下合并观察。</li>
-      <li><b>局限</b>：六类方向是对已纳入原文的编辑性归类，不是互斥统计；2021 年前部分数据未纳入；所有条目均可点击跳转原文核验。</li>
+      <li><b>行业方向</b>：六类方向按 content item（实际报道或摘编内条目）统计；同一内容条目可以多标签，摘编父页面不会继承其他小条目的方向。</li>
+      <li><b>口径</b>：当前 {overall_share}% = {source_page_n} 个涉及数字化的独立来源页 ÷ {source_unique:,} 个同期全部文物新闻独立来源页。趋势图数量按内容条目统计，第二条线仍是来源页占比，不把内容条目与来源页相除。</li>
+      <li><b>解读</b>：这是一条“国家文物局页面中数字化相关内容的发布时间分布”曲线，不等于全国所有文博机构的真实项目数量；摘编内条目日期继承父级来源页发布日期，不代表项目实际发生日期。</li>
+      <li><b>局限</b>：六类方向是对已纳入内容条目的编辑性归类，不是互斥统计；2021 年前部分数据未纳入；所有条目均可点击跳转父级原文核验。</li>
     </ul>
   </div>
 
@@ -291,27 +293,28 @@ fetch(DATA_URL).then(function(r){{ return r.json(); }}).then(function(data){{
 }});
 
 function init(data) {{
-  // 构建各粒度索引: key -> {{count, unique_count, share, items[]}}
+  // 构建各粒度索引: key -> {{content_item_count, source_page_count, share, items[]}}
   var byMonth = {{}}, byWeek = {{}}, byDay = {{}}, byYear = {{}};
   data.by_month.forEach(function(s){{ byMonth[s.key] = s; }});
   data.by_week.forEach(function(s){{ byWeek[s.key] = s; }});
   data.by_day.forEach(function(s){{ byDay[s.key] = s; }});
   (data.by_year || []).forEach(function(s){{ byYear[s.key] = s; }});
 
-  // 建立“行业方向 / 年份 → 独立原文”的索引，点击后复用同一明细区。
+  // 建立“行业方向 / 年份 → 内容条目”的索引，点击后复用同一明细区。
   var topicItems = {{}}, yearItems = {{}};
   function addUnique(index, key, item) {{
-    if (!key || !item.u) return;
+    var itemKey = item.content_item_id || item.u;
+    if (!key || !itemKey) return;
     if (!index[key]) index[key] = {{}};
-    if (!index[key][item.u]) index[key][item.u] = item;
+    if (!index[key][itemKey]) index[key][itemKey] = item;
   }}
-  (data.articles || data.items || []).forEach(function(item) {{
+  (data.content_items || data.items || []).forEach(function(item) {{
     (item.topics || []).forEach(function(topic){{ addUnique(topicItems, topic, item); }});
     addUnique(yearItems, item.d.slice(0, 4), item);
   }});
 
   function indexValues(index, key) {{
-    return Object.keys(index[key] || {{}}).map(function(url){{ return index[key][url]; }});
+    return Object.keys(index[key] || {{}}).map(function(itemKey){{ return index[key][itemKey]; }});
   }}
 
   var rangeStart = data.range.start, rangeEnd = data.range.end;
@@ -366,13 +369,13 @@ function init(data) {{
     return out;
   }}
 
-  // 生成某粒度的两条线:独立原文数 + 占全部文物新闻比例。
+  // 生成某粒度的两条线:内容条目数 + 来源页占比。
   function buildSeries(keys, map, displayFmt) {{
     var cats = [], countVals = [], shareVals = [];
     keys.forEach(function(k) {{
       cats.push(displayFmt(k));
       var s = map[k];
-      countVals.push(s ? (s.unique_count || 0) : 0);
+      countVals.push(s ? (s.content_item_count || s.count || 0) : 0);
       shareVals.push(s ? (s.share || 0) : 0);
     }});
     return {{ cats: cats, countVals: countVals, shareVals: shareVals, keys: keys }};
@@ -420,14 +423,14 @@ function init(data) {{
           var label = params[0] ? params[0].axisValue : '';
           var count = 0, share = 0;
           params.forEach(function(p) {{
-            if (p.seriesName === '独立原文数') count = p.value || 0;
-            if (p.seriesName === '占全部文物新闻比例') share = p.value || 0;
+            if (p.seriesName === '数字化内容条目数') count = p.value || 0;
+            if (p.seriesName === '来源页占比') share = p.value || 0;
           }});
-          return label + '<br/>独立原文数：<b>' + count + '</b> 个<br/>占全部文物新闻：<b>' + share + '%</b>';
+          return label + '<br/>数字化内容条目：<b>' + count + '</b> 条<br/>涉及数字化的来源页占比：<b>' + share + '%</b>';
         }}
       }},
       legend: {{ top: 0, right: 8, itemWidth: 16, itemHeight: 8, textStyle: {{ fontSize: 11 }},
-        formatter: function(name){{ return name === '占全部文物新闻比例' ? '占比' : '数量'; }}
+        formatter: function(name){{ return name === '来源页占比' ? '来源页占比' : '内容条目'; }}
       }},
       grid: {{ left: 48, right: 58, top: 34, bottom: 60 }},
       xAxis: {{
@@ -437,7 +440,7 @@ function init(data) {{
         axisTick: {{ show: false }}
       }},
       yAxis: [
-        {{ type: 'value', name: '独立原文数', minInterval: 1,
+        {{ type: 'value', name: '数字化内容条目数', minInterval: 1,
           nameTextStyle: {{ color: '#2563eb', fontSize: 10 }},
           axisLabel: {{ fontSize: 11, formatter: '{{value}}' }},
           splitLine: {{ lineStyle: {{ color: '#f0ece6' }} }}
@@ -453,7 +456,7 @@ function init(data) {{
         {{ type: 'slider', height: 22, bottom: 10, startValue: start, endValue: end, filterMode: 'none' }}
       ],
       series: [{{
-        name: '独立原文数', type: 'line', yAxisIndex: 0, data: s.countVals,
+        name: '数字化内容条目数', type: 'line', yAxisIndex: 0, data: s.countVals,
         connectNulls: false, smooth: gran === 'month' || gran === 'year',
         symbolSize: 7,
         lineStyle: {{ width: 2.4, color: '#2563eb' }},
@@ -462,7 +465,7 @@ function init(data) {{
           {{ offset: 0, color: 'rgba(37,99,235,.28)' }}, {{ offset: 1, color: 'rgba(37,99,235,0)' }}
         ]) }}
       }}, {{
-        name: '占全部文物新闻比例', type: 'line', yAxisIndex: 1, data: s.shareVals,
+        name: '来源页占比', type: 'line', yAxisIndex: 1, data: s.shareVals,
         connectNulls: false, smooth: gran === 'month' || gran === 'year',
         symbolSize: 6,
         lineStyle: {{ width: 2, color: '#0d9488' }},
@@ -535,7 +538,7 @@ function init(data) {{
   // 点击数据点 → 展示该周期新闻明细
   function periodGroup(gran, key) {{
     var map = {{ month: byMonth, week: byWeek, day: byDay }}[gran];
-    return map[key] || {{ items: [], count: 0, unique_count: 0, share: 0 }};
+    return map[key] || {{ items: [], count: 0, content_item_count: 0, source_page_count: 0, share: 0 }};
   }}
 
   function escapeHtml(value) {{
@@ -546,21 +549,15 @@ function init(data) {{
 
   function articleMarkup(items) {{
     return items.map(function(it) {{
-      var digestHits = it.digest_hits || [];
-      if (it.digest_title) digestHits = [{{ title: it.digest_title, evidence_snippet: it.evidence_snippet || '' }}];
-      if (digestHits.length) return digestHits.map(function(hit) {{
-        var digestTitle = hit.title || it.t || '摘编内条目';
-        var evidence = hit.evidence_snippet ? '<span class="p-evidence"><strong>证据：</strong>' + escapeHtml(hit.evidence_snippet) + '</span>' : '';
-        return '<div class="p-item p-digest-item">' +
-          '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
-          '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(digestTitle) + '</a>' +
-          '<small class="p-source">摘编内条目 · 来源：' + escapeHtml(it.t || '一周文物动态摘编') + '</small></span>' +
-          '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' + evidence +
-          '</div>';
-      }}).join('');
-      return '<div class="p-item">' +
+      var isDigest = Boolean(it.is_digest_item || it.digest_title);
+      var title = it.display_title || it.digest_title || it.t || '未命名内容条目';
+      var source = isDigest ? '摘编内条目 · 来源：' + (it.source_page_title || it.t || '一周文物动态摘编') + ' · 国家文物局 · ' + it.d
+        : '来源：国家文物局 · ' + it.d;
+      var evidence = it.evidence_snippet ? '<span class="p-evidence"><strong>证据：</strong>' + escapeHtml(it.evidence_snippet) + '</span>' : '';
+      return '<div class="p-item ' + (isDigest ? 'p-digest-item' : '') + '">' +
         '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
-        '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u) + '" target="_blank" rel="noopener">' + escapeHtml(it.t) + '</a></span>' +
+        '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u || it.source_url || '') + '" target="_blank" rel="noopener">' + escapeHtml(title) + '</a>' +
+        '<small class="p-source">' + escapeHtml(source) + '</small></span>' +
         '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' + evidence +
         '</div>';
     }}).join('');
@@ -579,9 +576,9 @@ function init(data) {{
   }}
 
   function collapseArticleList() {{
-    document.getElementById('period-title').textContent = '📋 点击年度或趋势点查看文章';
+    document.getElementById('period-title').textContent = '📋 点击年度或趋势点查看内容条目';
     document.getElementById('period-count').textContent = '';
-    document.getElementById('period-list').innerHTML = '<div class="empty">点击上方年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化原文。</div>';
+    document.getElementById('period-list').innerHTML = '<div class="empty">点击上方年度趋势或月 / 周 / 天数据点，这里会列出对应的数字化内容条目。</div>';
     document.getElementById('detail-close').hidden = true;
   }}
 
@@ -600,8 +597,8 @@ function init(data) {{
     var label = s.cats[params.dataIndex];
     var group = periodGroup(gran, key);
     var items = group.items || [];
-    renderArticleList('📋 ' + label + ' · 数字化明细',
-      '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%',
+    renderArticleList('📋 ' + label + ' · 数字化内容明细',
+      '内容条目 ' + (group.content_item_count || group.count || 0) + ' ｜ 涉及来源页 ' + (group.source_page_count || 0) + ' ｜ 来源页占比 ' + (group.share || 0) + '%',
       items, '该周期暂无数字化相关新闻。');
   }});
 
@@ -622,9 +619,9 @@ function init(data) {{
         }}
       }});
       var items = indexValues(topicItems, topic);
-      detail.innerHTML = '<div class="topic-detail-head"><span>独立原文 ' + items.length + ' 篇</span>' +
+      detail.innerHTML = '<div class="topic-detail-head"><span>内容条目 ' + items.length + ' 条</span>' +
         '<button type="button" class="detail-close topic-detail-close">收起</button></div>' +
-        (items.length ? articleMarkup(items) : '<div class="empty">该行业方向目前暂无可展示的独立原文。</div>');
+        (items.length ? articleMarkup(items) : '<div class="empty">该行业方向目前暂无可展示的内容条目。</div>');
       detail.hidden = false;
       this.setAttribute('aria-expanded', 'true');
       detail.querySelector('.topic-detail-close').addEventListener('click', function(event){{
@@ -639,23 +636,23 @@ function init(data) {{
     var s = seriesCache.year;
     if (params.dataIndex == null || !s || !s.keys[params.dataIndex]) return;
     var year = s.keys[params.dataIndex];
-    var group = byYear[year] || {{ count: 0, unique_count: 0, share: 0 }};
+    var group = byYear[year] || {{ count: 0, content_item_count: 0, source_page_count: 0, share: 0 }};
     var items = indexValues(yearItems, year);
-    showArticleList('📋 ' + year + '年 · 数字化明细',
-      '独立原文 ' + (group.unique_count || 0) + ' ｜ 记录 ' + (group.count || 0) + ' ｜ 占比 ' + (group.share || 0) + '%',
-      items, '该年度暂无数字化相关新闻。');
+    showArticleList('📋 ' + year + '年 · 数字化内容明细',
+      '内容条目 ' + (group.content_item_count || group.count || 0) + ' ｜ 涉及来源页 ' + (group.source_page_count || 0) + ' ｜ 来源页占比 ' + (group.share || 0) + '%',
+      items, '该年度暂无数字化内容条目。');
   }});
 
   function renderInsight() {{
     var months = data.by_month;
     var recent = months.slice(-12);
     var previous = months.slice(-24, -12);
-    var recentTotal = recent.reduce(function(sum, s){{ return sum + (s.unique_count || 0); }}, 0);
-    var previousTotal = previous.reduce(function(sum, s){{ return sum + (s.unique_count || 0); }}, 0);
+    var recentTotal = recent.reduce(function(sum, s){{ return sum + (s.content_item_count || s.count || 0); }}, 0);
+    var previousTotal = previous.reduce(function(sum, s){{ return sum + (s.content_item_count || s.count || 0); }}, 0);
     var change = previousTotal ? Math.round((recentTotal - previousTotal) / previousTotal * 100) : null;
-    var peak = recent.reduce(function(best, s){{ return (s.unique_count || 0) > (best.unique_count || 0) ? s : best; }}, recent[0] || {{ key: '', unique_count: 0 }});
+    var peak = recent.reduce(function(best, s){{ return (s.content_item_count || s.count || 0) > (best.content_item_count || best.count || 0) ? s : best; }}, recent[0] || {{ key: '', content_item_count: 0 }});
     var changeText = change === null ? '暂无上一年度同期可比数据' : (change >= 0 ? '较前12个月上升 ' + change + '%' : '较前12个月下降 ' + Math.abs(change) + '%');
-    document.getElementById('insight').innerHTML = '近12个月共记录 <strong>' + recentTotal + ' 个独立原文</strong>，' + changeText + '；单月最高为 <strong>' + (peak.key || '暂无') + '</strong>（' + (peak.unique_count || 0) + ' 个）。这反映的是国家文物局相关报道热度。';
+    document.getElementById('insight').innerHTML = '近12个月共记录 <strong>' + recentTotal + ' 条数字化内容</strong>，' + changeText + '；单月最高为 <strong>' + (peak.key || '暂无') + '</strong>（' + (peak.content_item_count || peak.count || 0) + ' 条）。这反映的是国家文物局页面中的内容分布。';
   }}
 
   function setPreset(name) {{
