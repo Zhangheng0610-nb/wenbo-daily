@@ -40,6 +40,10 @@ SOURCE_GROUPS = OrderedDict([
             "nature.com", "shobserver.cn", "nfnews.com", "bjnews.com.cn",
             "zjol.com.cn", "dayoo.com", "cqcb.com", "caixin.com",
             "globaltimes.cn", "cnn.com", "bbc.co.uk",
+            # Recognized mainstream media domains added to avoid false C-level
+            # classification during broad daily discovery; they remain B-level
+            # supplementary evidence and should be cross-checked when material.
+            "asahi.com", "bjd.com.cn", "nmgnews.com.cn",
         ),
     }),
     ("C", {
@@ -48,6 +52,36 @@ SOURCE_GROUPS = OrderedDict([
         "domains": (),
     }),
 ])
+
+
+# A WeChat article URL does not prove who operates the account.  Accounts are
+# therefore opt-in: add a stable __biz value only after recording the account
+# identity, institution type, official-site backlink, and original-publishing
+# evidence.  An empty registry is intentional; unknown accounts remain
+# blocked as final evidence until a human verifies them.
+OFFICIAL_WECHAT_ACCOUNTS = {}
+
+
+# Explainable institutional suffixes for reputable non-Chinese university and
+# research-organization sites.  They are still evidence requiring ordinary
+# article-level checks; this rule only avoids treating every foreign official
+# university page as an unregistered C-level domain.
+INSTITUTIONAL_EDU_SUFFIXES = (
+    '.edu', '.ac.uk', '.edu.au', '.edu.hk', '.ac.jp', '.edu.sg',
+    '.ac.nz', '.edu.ca',
+)
+
+
+# These are discovery layers, not extra map sources and not automatic A-level
+# evidence.  The named industry radars are intentionally discovery-only.
+DAILY_DISCOVERY_LAYERS = OrderedDict([
+    ('central_professional', ('国家文物局', '中国文物报', '中国博物馆协会', '中国考古网')),
+    ('local_authorities', ('各省级文物局', '各省级文旅厅文物频道', '重要城市文物主管部门')),
+    ('institutions', ('国家级博物馆', '省级及重点一级博物馆', '重要考古院所', '文保研究机构')),
+    ('industry_radars', ('文博圈', '博物馆圈', '博物馆头条')),
+    ('international', ('UNESCO', 'World Heritage Centre', 'ICOM', 'ICCROM', 'ICOMOS', '重要博物馆与大学')),
+])
+RECRUITMENT_DISCOVERY_RADARS = ('文博人才', '博物馆官网', '考古院官网', '高校就业网', '人社部门', '正规招聘平台')
 
 
 # The public regional map deliberately uses a much smaller, fixed panel than
@@ -141,11 +175,33 @@ def canonical_url(url):
         return url
 
 
+def official_wechat_account(url):
+    """Return a verified account record, or None for an unknown account."""
+    if _host(url) != 'mp.weixin.qq.com':
+        return None
+    try:
+        query = dict(parse_qsl(urlsplit(url).query, keep_blank_values=True))
+    except ValueError:
+        return None
+    account = OFFICIAL_WECHAT_ACCOUNTS.get(query.get('__biz', ''))
+    if not account:
+        return None
+    required = ('accountName', 'institution', 'institutionType',
+                'verifiedEvidence', 'officialSite', 'originalOnly')
+    return account if all(account.get(key) for key in required) else None
+
+
 def source_info(url):
     """Return a stable, display-ready source classification."""
     host = _host(url)
     if not host:
         return {"tier": "C", "label": "C级｜无效链接", "host": "", "blocked": True}
+    if host == 'mp.weixin.qq.com':
+        account = official_wechat_account(url)
+        if account:
+            return {"tier": "A", "label": "A级｜已核验机构公众号", "host": host,
+                    "blocked": False, "wechatAccount": account}
+        return {"tier": "C", "label": "C级｜未核验公众号", "host": host, "blocked": True}
     if any(host_matches(host, blocked) for blocked in BLOCKED_HOSTS):
         return {"tier": "C", "label": "C级｜禁止作为最终来源", "host": host, "blocked": True}
     # Chinese government and university domains are institution-controlled
@@ -155,6 +211,8 @@ def source_info(url):
         return {"tier": "A", "label": "A级｜政府官方", "host": host, "blocked": False}
     if host.endswith(".edu.cn") or host == "edu.cn":
         return {"tier": "A", "label": "A级｜高校官方", "host": host, "blocked": False}
+    if any(host.endswith(suffix) for suffix in INSTITUTIONAL_EDU_SUFFIXES):
+        return {"tier": "A", "label": "A级｜海外高校/研究机构官方", "host": host, "blocked": False}
     for tier, spec in SOURCE_GROUPS.items():
         if any(host_matches(host, domain) for domain in spec["domains"]):
             return {"tier": tier, "label": spec["label"], "host": host, "blocked": False}
