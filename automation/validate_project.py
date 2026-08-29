@@ -18,6 +18,7 @@ if str(ROOT) not in _sys.path:
 from automation.governance import (
     MAP_SOURCE_PANEL, canonical_url, map_source_id, source_info,
 )
+from build import parse_md
 
 ALLOWED = (
     'chinawenbao.com.cn', 'zhongguowenwubao.com', 'chinamuseum.org.cn', 'chinamuseums.org.cn',
@@ -53,6 +54,81 @@ def host_allowed(url):
     return source_info(url)['tier'] in ('A', 'B')
 
 
+def _daily_html_metrics(path):
+    """Read only deterministic structure markers from a generated report."""
+    text = path.read_text(encoding='utf-8')
+    card_ids = re.findall(r'<h3\s+id="(item\d+)"', text)
+    toc_ids = re.findall(r'href="#(item\d+)"', text)
+    meta = re.search(r'共\s+(\d+)\s+条（国内\s+(\d+)\s*\+\s*国际\s+(\d+)\s*）', text)
+    ld_match = re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', text, re.S)
+    ld = {}
+    if ld_match:
+        try:
+            ld = json.loads(ld_match.group(1))
+        except json.JSONDecodeError:
+            pass
+    ld_count = re.search(r'共\s+(\d+)\s+条', str(ld.get('description', '')))
+    return {
+        'cards': card_ids,
+        'toc': toc_ids,
+        'meta': tuple(int(x) for x in meta.groups()) if meta else None,
+        'ld_count': int(ld_count.group(1)) if ld_count else None,
+    }
+
+
+def check_daily_structure(path):
+    """Check Markdown, parser output, and generated HTML agree on item shape."""
+    errors = []
+    text = path.read_text(encoding='utf-8')
+    markdown_count = len(re.findall(r'^###\s+\d+\.\s+.+$', text, re.M))
+    data = parse_md(path)
+    items = data['domestic'] + data['international']
+    if markdown_count != len(items):
+        errors.append(f'Markdown news headers {markdown_count} != parsed items {len(items)}')
+    ids = [item.get('id') for item in items]
+    if len(ids) != len(set(ids)):
+        errors.append('daily item IDs must be unique')
+    for item in items:
+        if not item.get('sources'):
+            errors.append(f'daily item {item.get("id", "?")} has no source')
+        if re.search(r'^###\s+\d+\.\s+', item.get('body', ''), re.M):
+            errors.append(f'daily item {item.get("id", "?")} body contains another news header')
+    html_path = REPORTS / f'{data["date"]}.html'
+    if not html_path.exists():
+        errors.append(f'missing generated report HTML: {html_path.relative_to(ROOT)}')
+        return errors
+    metrics = _daily_html_metrics(html_path)
+    if len(metrics['cards']) != len(items):
+        errors.append(f'HTML news cards {len(metrics["cards"])} != parsed items {len(items)}')
+    if len(metrics['toc']) != len(items):
+        errors.append(f'HTML TOC items {len(metrics["toc"])} != parsed items {len(items)}')
+    if len(metrics['cards']) != len(set(metrics['cards'])):
+        errors.append('HTML news card IDs must be unique')
+    if metrics['meta'] != (len(items), data['domestic_count'], data['international_count']):
+        errors.append(
+            f'HTML metadata count {metrics["meta"]} != parsed count '
+            f'{(len(items), data["domestic_count"], data["international_count"])}'
+        )
+    if metrics['ld_count'] != len(items):
+        errors.append(f'NewsArticle count {metrics["ld_count"]} != parsed items {len(items)}')
+    return errors
+
+
+def daily_structure_warnings(path):
+    """Report suspicious cross-item source reuse without guessing semantics."""
+    data = parse_md(path)
+    by_url = {}
+    for item in data['domestic'] + data['international']:
+        for source in item.get('sources') or []:
+            normalized = canonical_url(source.get('url', ''))
+            by_url.setdefault(normalized, []).append(item.get('title', ''))
+    return [
+        f'source URL shared by distinct daily items: {url} ({" / ".join(titles)})'
+        for url, titles in by_url.items()
+        if url and len(set(titles)) > 1
+    ]
+
+
 def check_daily(path, strict=True):
     errors = []
     if not path.exists() or path.stat().st_size == 0:
@@ -72,6 +148,7 @@ def check_daily(path, strict=True):
         seen.add(normalized)
     if text.count('### ') and len(urls) < text.count('### '):
         errors.append('each news item must include at least one source link')
+    errors.extend(check_daily_structure(path))
     return sorted(set(errors))
 
 
@@ -262,6 +339,7 @@ def main():
     ap.add_argument('--strict-all', action='store_true', help='treat legacy archive source gaps as failures')
     args = ap.parse_args()
     errors = []
+    warnings = []
     for required in (CONTENT / '日报', CONTENT / '招聘', ROOT / 'build.py'):
         if not required.exists():
             errors.append(f'missing required path: {required.relative_to(ROOT)}')
@@ -275,12 +353,16 @@ def main():
             errors.append(f'missing report HTML: {html_path.relative_to(ROOT)}')
     for path in paths:
         errors.extend(f'{path.relative_to(ROOT)}: {e}' for e in check_daily(path, strict=(not args.all or args.strict_all)))
+        warnings.extend(f'{path.relative_to(ROOT)}: WARNING: {e}' for e in daily_structure_warnings(path))
     errors.extend(check_monitoring(None if args.all else (args.date or today_cn().isoformat())))
     errors.extend(check_heatmap())
     if errors:
         print('VALIDATION FAILED')
         print('\n'.join(sorted(set(errors))))
         return 1
+    if warnings:
+        print('VALIDATION WARNINGS')
+        print('\n'.join(sorted(set(warnings))))
     print(f'VALIDATION OK: {len(paths)} daily report(s), source allowlist passed')
     return 0
 

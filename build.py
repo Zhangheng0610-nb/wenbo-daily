@@ -1436,6 +1436,20 @@ fetch('heatmap-data.json').then(function(r){
 </html>'''
 
 
+def _classify_daily_section(heading):
+    """Classify a level-2 daily heading without depending on one exact label."""
+    text = re.sub(r'^[^\u4e00-\u9fffA-Za-z0-9]+', '', heading or '').strip()
+    if not text:
+        return None
+    if any(token in text for token in ('目录', '今日趋势', '趋势总结', '方法说明', '信源与方法', '免责声明')):
+        return 'nonnews'
+    if any(token in text for token in ('国际', '海外', '区域')) and any(token in text for token in ('要闻', '新闻', '动态', '交流', '观察')):
+        return 'international'
+    if any(token in text for token in ('国内', '中国')) and any(token in text for token in ('要闻', '新闻', '动态', '观察')):
+        return 'domestic'
+    return None
+
+
 def parse_md(filepath):
     """Parse a daily markdown report and return structured data."""
     with open(filepath, 'r', encoding='utf-8') as f:
@@ -1467,25 +1481,26 @@ def parse_md(filepath):
     while i < len(lines):
         line = lines[i]
 
-        # Section headers
-        if line.startswith('## 🇨🇳 国内要闻'):
-            current_section = 'domestic'
+        # Section headers.  A new level-2 section always ends the previous
+        # item; otherwise a renamed international section can swallow the
+        # next item's source/body into the preceding domestic item.
+        if line.startswith('## '):
+            heading = line[3:].strip()
+            classified = _classify_daily_section(heading)
+            if classified in ('domestic', 'international'):
+                current_section = classified
+            elif '趋势' in heading:
+                current_section = 'trends'
+            elif '目录' in heading:
+                current_section = 'toc'
+            else:
+                current_section = None
+            current_item = None
             i += 1
             continue
-        elif line.startswith('## 🌍 国际要闻'):
-            current_section = 'international'
-            i += 1
-            continue
-        elif line.startswith('## 📊 今日趋势总结'):
-            current_section = 'trends'
-            i += 1
-            continue
-        elif line.startswith('## 📑 目录'):
-            current_section = 'toc'
-            i += 1
-            continue
-        elif line.startswith('## ') or line.startswith('# '):
+        elif line.startswith('# '):
             current_section = None
+            current_item = None
             i += 1
             continue
 
@@ -1539,9 +1554,7 @@ def parse_md(filepath):
             continue
 
         # Blockquote: 点评 (within a news item) or standalone note (e.g. 编辑说明
-        # after the trends table). current_item is NOT reset on section change, so
-        # only attach to it inside 国内/国际 sections; otherwise a trailing
-        # blockquote would overwrite the last item's commentary.
+        # after the trends table).
         if line.startswith('> '):
             bq_text = line.lstrip('> ').strip()
             bq_text = re.sub(r'\*\*点评[：:]\*\*\s*', '', bq_text)
