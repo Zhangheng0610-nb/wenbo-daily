@@ -1647,7 +1647,7 @@ def build_report_html(data, prev_report=None, next_report=None):
         return html
 
     domestic_html = render_items(data['domestic'], '🇨🇳 国内要闻')
-    international_html = render_items(data['international'], '🌍 国际要闻')
+    international_html = render_items(data['international'], '🌏 国际/区域交流')
 
     trends_html = '<h2 class="section">📊 今日趋势总结</h2>\n\n<table>\n'
     for i, row in enumerate(data['trends']):
@@ -1687,11 +1687,11 @@ def build_report_html(data, prev_report=None, next_report=None):
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | {data['date']}</title>
-<meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
+<meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,{data['date']}">
 <link rel="canonical" href="https://zhangheng666.top/reports/{data['date']}.html">
 <meta property="og:title" content="每日文博资讯 | {data['date']}">
-<meta property="og:description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）">
+<meta property="og:description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）">
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -1721,7 +1721,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 <header>
   <h1>🏛️ 每日文博资讯</h1>
-  <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际 {data['international_count']}）</p>
+  <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
   {('<div class="quality-banner legacy" style="text-align:left;margin:12px 0 0"><strong>历史档案：</strong>本日报生成于现行信源分级规则启用前，页面中的来源等级为后续审计标注；请以原文为准。</div>') if is_legacy_report else ''}
 </header>

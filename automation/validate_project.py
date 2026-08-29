@@ -59,7 +59,7 @@ def _daily_html_metrics(path):
     text = path.read_text(encoding='utf-8')
     card_ids = re.findall(r'<h3\s+id="(item\d+)"', text)
     toc_ids = re.findall(r'href="#(item\d+)"', text)
-    meta = re.search(r'共\s+(\d+)\s+条（国内\s+(\d+)\s*\+\s*国际\s+(\d+)\s*）', text)
+    meta = re.search(r'共\s+(\d+)\s+条（国内\s+(\d+)\s*\+\s*国际(?:/区域)?\s+(\d+)\s*）', text)
     ld_match = re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', text, re.S)
     ld = {}
     if ld_match:
