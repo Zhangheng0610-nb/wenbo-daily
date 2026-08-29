@@ -18,6 +18,7 @@ if str(ROOT) not in _sys.path:
 from automation.governance import (
     MAP_SOURCE_PANEL, canonical_url, map_source_id, source_info,
 )
+from automation.validate_candidates import validate as validate_candidate_ledger
 from build import parse_md
 
 ALLOWED = (
@@ -332,6 +333,15 @@ def check_heatmap():
     return sorted(set(errors))
 
 
+def check_candidate_ledger(required_date):
+    """Make the daily candidate ledger a required editorial quality gate."""
+    ledger_path = CONTENT / '候选' / f'{required_date}.json'
+    report_path = CONTENT / '日报' / f'{required_date}.md'
+    if not ledger_path.exists():
+        return [f'missing daily candidate ledger: {ledger_path.relative_to(ROOT)}']
+    return validate_candidate_ledger(ledger_path, report_path=report_path)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', help='YYYY-MM-DD; defaults to Asia/Shanghai today')
@@ -356,6 +366,12 @@ def main():
         warnings.extend(f'{path.relative_to(ROOT)}: WARNING: {e}' for e in daily_structure_warnings(path))
     errors.extend(check_monitoring(None if args.all else (args.date or today_cn().isoformat())))
     errors.extend(check_heatmap())
+    if not args.all:
+        required_date = args.date or today_cn().isoformat()
+        errors.extend(
+            f'content/候选/{required_date}.json: {e}'
+            for e in check_candidate_ledger(required_date)
+        )
     if errors:
         print('VALIDATION FAILED')
         print('\n'.join(sorted(set(errors))))

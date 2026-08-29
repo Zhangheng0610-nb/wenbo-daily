@@ -4,6 +4,7 @@
   "scope": "daily-editorial",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
+  "internationalDiscoveryStatus": "checked",
   "internationalDiscoveryNote": "已检查 UNESCO 文化遗产新闻页及国际机构公开新闻；仅纳入有直接官方证据且对行业有明确信息增量的内容。",
   "candidates": [
     {
@@ -25,11 +26,14 @@
       "tags": ["全国", "制度建设"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_policy_change",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "制度性新规，事实和施行日期均有官方依据。"
+      "notes": "制度性新规，事实和施行日期均有官方依据。",
+      "dailyItemNumber": 1,
+      "dailyItemTitle": "文化和旅游部修订《博物馆藏品管理办法》：六章六十三条，11月1日起施行"
     },
     {
       "candidateId": "daily-20260829-002",
@@ -49,11 +53,14 @@
       "tags": ["北京", "VR", "博物馆"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_digital_practice",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "保留新华网原文，不与其他候选共用来源。"
+      "notes": "保留新华网原文，不与其他候选共用来源。",
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "VR进入博物馆规模化应用阶段：专家讨论文化服务与展陈边界重构"
     },
     {
       "candidateId": "daily-20260829-003",
@@ -73,11 +80,14 @@
       "tags": ["吉林", "联合考古"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_industry_event",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "官方镜像注明消息来源和发布时间，记录为国内行业动态。"
+      "notes": "官方镜像注明消息来源和发布时间，记录为国内行业动态。",
+      "dailyItemNumber": 3,
+      "dailyItemTitle": "中外联合考古工作会议在长春召开"
     },
     {
       "candidateId": "daily-20260829-004",
@@ -97,11 +107,14 @@
       "tags": ["北京", "展览审核"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_policy_implementation",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "地方主管部门对全国性通知的落地安排，具有制度执行信息增量。"
+      "notes": "地方主管部门对全国性通知的落地安排，具有制度执行信息增量。",
+      "dailyItemNumber": 4,
+      "dailyItemTitle": "北京市文物局转发加强博物馆陈列展览内容审核工作的通知"
     },
     {
       "candidateId": "daily-20260829-005",
@@ -121,11 +134,14 @@
       "tags": ["北京", "官网"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_institutional_change",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "国家级馆官方平台变化，属于机构数字公共服务动态。"
+      "notes": "国家级馆官方平台变化，属于机构数字公共服务动态。",
+      "dailyItemNumber": 5,
+      "dailyItemTitle": "中国国家博物馆中文官网焕新亮相"
     },
     {
       "candidateId": "daily-20260829-006",
@@ -141,15 +157,18 @@
         {"name": "福建省文化和旅游厅", "url": "https://wlt.fujian.gov.cn/wldt/btdt/202608/t20260826_7204530.htm", "tier": "A", "role": "official"}
       ],
       "evidenceTier": "A",
-      "topic": ["展览", "国际交流"],
+      "topic": ["展览", "馆际合作"],
       "tags": ["福建", "宁夏", "馆际合作"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "selected",
       "decisionReason": "selected_cross_region_exhibition",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "省级主管部门公开的跨区域合作展，含展品规模和主办信息。"
+      "notes": "省级主管部门公开的跨区域合作展，含展品规模和主办信息。",
+      "dailyItemNumber": 6,
+      "dailyItemTitle": "闽宁传统工艺精品展在宁夏银川开展"
     },
     {
       "candidateId": "daily-20260829-007",
@@ -168,12 +187,15 @@
       "topic": ["展览", "国际交流"],
       "tags": ["香港", "陕西", "馆际合作"],
       "domestic": false,
-      "international": true,
+      "international": false,
+      "scope": "regional",
       "decision": "selected",
       "decisionReason": "selected_regional_exchange",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "香港与内地文博机构合作展，按国际与区域交流栏目呈现。"
+      "notes": "香港与内地文博机构合作展，按国际与区域交流栏目呈现。",
+      "dailyItemNumber": 7,
+      "dailyItemTitle": "香港推出“青春向延安”专题展：陕西革命文物首次在港集中展出"
     },
     {
       "candidateId": "daily-20260829-008",
@@ -193,11 +215,14 @@
       "tags": ["国际", "文物返还", "能力建设"],
       "domestic": false,
       "international": true,
+      "scope": "international",
       "decision": "selected",
       "decisionReason": "selected_international_policy",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "国际组织直接发布，涉及文物返还和保护能力建设。"
+      "notes": "国际组织直接发布，涉及文物返还和保护能力建设。",
+      "dailyItemNumber": 8,
+      "dailyItemTitle": "UNESCO与合作伙伴为文化财产返还与保护能力建设提供支持"
     },
     {
       "candidateId": "daily-20260829-009",
@@ -215,6 +240,7 @@
       "tags": ["北京"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "routine_promotion",
       "selectedForDaily": false,
@@ -237,6 +263,7 @@
       "tags": ["北京"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "low_professional_value",
       "selectedForDaily": false,
@@ -259,6 +286,7 @@
       "tags": ["北京"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "low_professional_value",
       "selectedForDaily": false,
@@ -281,6 +309,7 @@
       "tags": ["北京"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "routine_promotion",
       "selectedForDaily": false,
@@ -303,6 +332,7 @@
       "tags": ["北京"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "routine_promotion",
       "selectedForDaily": false,
@@ -319,12 +349,13 @@
       "discoveryUrl": "https://www.dunhuangcaves.org/info/1018/7856.htm",
       "publisher": "敦煌研究院",
       "institution": "敦煌研究院",
-      "evidenceSources": [{"name": "敦煌研究院官网", "url": "https://www.dunhuangcaves.org/info/1018/7856.htm", "tier": "A", "role": "official"}],
-      "evidenceTier": "A",
+      "evidenceSources": [],
+      "evidenceTier": "not_verified",
       "topic": ["招聘"],
       "tags": ["招聘"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "rejected",
       "decisionReason": "recruitment_not_daily",
       "selectedForDaily": false,
@@ -347,6 +378,7 @@
       "tags": ["西藏", "行业组织"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "needs_verification",
       "decisionReason": "insufficient_evidence",
       "selectedForDaily": false,
@@ -369,6 +401,7 @@
       "tags": ["北京", "出版"],
       "domestic": true,
       "international": false,
+      "scope": "domestic",
       "decision": "deferred",
       "decisionReason": "event_not_new",
       "selectedForDaily": false,
@@ -391,6 +424,7 @@
       "tags": ["黑山", "遗产教育"],
       "domestic": false,
       "international": true,
+      "scope": "international",
       "decision": "rejected",
       "decisionReason": "low_professional_value",
       "selectedForDaily": false,
