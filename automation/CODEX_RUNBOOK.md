@@ -91,6 +91,8 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 
 周/月报可以回链到日报条目和原始来源；报告中的综合判断属于本站样本内观察，至少需要两个独立事实支点，不能把单纯展览规模或传播热度写成行业趋势。
 
+周期报告采用“确定性数据层 + editorial layer”两层流程。Python 只计算周期事件量、覆盖日、范围、主题、节奏、比较基础数字、日报链接和证据；Codex 必须读取本周期数据和代表性日报，先生成 `content/报告/weekly-YYYY-MM-DD-editorial.json` 或 `content/报告/monthly-YYYY-MM-editorial.json`，再运行周期报告生成器。editorial layer 至少提供一句话、重点事项及逐条 `itemKey` 理由、主题板块观察、数字文博观察、比较说明和已公布的下期节点。每个引用必须属于本周期日报；趋势性判断至少绑定两个独立事件。正式周/月报缺少 editorial layer 时必须失败，不能退回固定模板。月末数据不完整时只能使用 `editorialStatus: preview` 的月报预览，正式月报必须使用完整自然月数据。
+
 日报筛选规则：
 
 1. 只选近 7 天内发布或有明确新进展的内容；展览和活动必须核对当前状态。

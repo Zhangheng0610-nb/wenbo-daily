@@ -80,17 +80,6 @@ def _primary_topic(item, scope):
     return "其他行业动态"
 
 
-def _why(topic):
-    return {
-        "政策与治理": "它影响机构的日常治理、制度执行或行业协作方式。",
-        "考古与文物保护": "它为年代、区域社会或保护研究提供了新的具体材料。",
-        "博物馆与公共文化": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
-        "数字化与创新": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
-        "国际与区域": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
-        "其他行业动态": "它补充了本周文博行业的其他重要动态。",
-    }[topic]
-
-
 def _item_record(report, item, section):
     topic = _primary_topic(item, _scope(item, section))
     body = item.get("body", "")
@@ -99,7 +88,6 @@ def _item_record(report, item, section):
         "key": f"{report['date']}#{item.get('id', '')}",
         "title": item.get("title", ""),
         "summary": _compact(summary, 120),
-        "why": _why(topic),
         "topic": topic,
         "scope": _scope(item, section),
         "date": report["date"],
@@ -152,28 +140,6 @@ def _metrics(rows, expected_days, available_days):
     }
 
 
-def _select_highlights(rows, limit):
-    weights = {"政策与治理": 7, "考古与文物保护": 6, "数字化与创新": 5, "国际与区域": 5, "博物馆与公共文化": 4, "其他行业动态": 2}
-    ranked = sorted(rows, key=lambda row: (weights.get(row["topic"], 0), len(row["sources"]), row["date"]), reverse=True)
-    chosen = []
-    used_topics = set()
-    used_keys = set()
-    for row in ranked:
-        if row["key"] in used_keys:
-            continue
-        if len(chosen) < limit and row["topic"] not in used_topics:
-            chosen.append(row)
-            used_topics.add(row["topic"])
-            used_keys.add(row["key"])
-    for row in ranked:
-        if len(chosen) >= limit:
-            break
-        if row["key"] not in used_keys:
-            chosen.append(row)
-            used_keys.add(row["key"])
-    return chosen
-
-
 def _topic_distribution(rows):
     counts = Counter(row["topic"] for row in rows)
     return [{"topic": topic, "label": TOPIC_LABELS[topic], "count": counts.get(topic, 0)} for topic in TOPICS if counts.get(topic, 0)]
@@ -189,11 +155,18 @@ def _comparison(current, previous):
     if not previous:
         return {"available": False, "note": "暂无可比较的上一周期数据。"}
     fields = ("publishedEvents", "digital", "domestic", "regional", "international")
+    comparable = bool(current.get("coverageComplete") and previous.get("coverageComplete"))
+    note = "数量变化仅作样本对照；小样本不自动推导行业趋势。"
+    if not comparable:
+        note = "上一周期数据不完整，仅作已有样本参考，不与完整周期直接比较。"
     return {
         "available": True,
+        "comparable": comparable,
+        "previousCoveredDays": previous.get("coveredDays", 0),
+        "previousExpectedDays": previous.get("expectedDays", 0),
         "current": {field: current.get(field, 0) for field in fields},
         "previous": {field: previous.get(field, 0) for field in fields},
-        "note": "数量变化仅作样本对照；小样本不自动推导行业趋势。",
+        "note": note,
     }
 
 
@@ -217,14 +190,6 @@ def _weekly_rollup(rows, start, end):
 
 
 def _sections(rows):
-    summaries = {
-        "政策与治理": "政策文件、制度执行和机构治理安排，是本期观察到的主要制度线索。",
-        "考古与文物保护": "考古发现与保护实践构成本期样本的主要专业信息来源。",
-        "博物馆与公共文化": "博物馆开放、展览和公共文化服务呈现出多样的机构实践。",
-        "数字化与创新": "数字化案例主要落在保护、展示、研究和公共参与等具体场景。",
-        "国际与区域": "跨境合作、区域交流和国际文博治理构成本期的外部观察线索。",
-        "其他行业动态": "以下内容补充本期样本中的其他行业动态。",
-    }
     sections = []
     for topic in TOPICS:
         subset = [row for row in rows if row["topic"] == topic]
@@ -233,8 +198,8 @@ def _sections(rows):
         sections.append({
             "topic": topic,
             "title": TOPIC_LABELS[topic],
-            "summary": summaries[topic],
-            "items": subset[:5],
+            "summary": "",
+            "items": subset,
         })
     return sections
 
@@ -263,29 +228,16 @@ def build_periodic_model(daily_reports, period_type, period_key, *, existing=Non
     if period_type == "weekly":
         previous_start = start - timedelta(days=7)
         previous_rows = _flatten_reports(daily_reports, previous_start, start - timedelta(days=1))
-        highlight_limit = 3
         period_label = f"{start.isoformat()} — {end.isoformat()}"
         title = "文博行业周报"
     else:
         previous_start = date(start.year - (start.month == 1), 12 if start.month == 1 else start.month - 1, 1)
         previous_end = start - timedelta(days=1)
         previous_rows = _flatten_reports(daily_reports, previous_start, previous_end)
-        highlight_limit = 5
         period_label = f"{start.isoformat()} — {end.isoformat()}"
         title = f"文博行业月报 · {start.year}年{start.month}月"
 
     previous_metrics = _metrics(previous_rows, (start - previous_start).days, sorted({row["date"] for row in previous_rows})) if previous_rows else None
-    topic_counts = Counter(row["topic"] for row in rows)
-    lead_topics = [topic for topic, _count in topic_counts.most_common(2)]
-    if lead_topics:
-        one_liner = f"本期样本主要集中在“{lead_topics[0]}”"
-        if len(lead_topics) > 1:
-            one_liner += f"和“{lead_topics[1]}”"
-        one_liner += "；以下判断均限于本站已收录日报，不代表全国行业总量。"
-    else:
-        one_liner = "本期暂无足够日报样本形成结构性判断，以下内容仅作已收录信息回看。"
-
-    highlights = _select_highlights(rows, highlight_limit)
     digital_rows = [row for row in rows if "数字化" in row["tags"] or row["topic"] == "数字化与创新"]
     quality_notes = ["周期统计以实际存在的日报为准；未覆盖日期不外推。"]
     if not metrics["coverageComplete"]:
@@ -316,20 +268,20 @@ def build_periodic_model(daily_reports, period_type, period_key, *, existing=Non
         "date_range": period_label,
         "ref_date": end.isoformat() if period_type == "weekly" else f"{start.year}-{start.month:02d}-28",
         "preview": bool(preview or not metrics["coverageComplete"]),
-        "overview": one_liner,
-        "oneLiner": one_liner,
+        "overview": "",
+        "oneLiner": "",
         "metrics": metrics,
         "topicDistribution": _topic_distribution(rows),
         "dailyCounts": _daily_counts(rows, start, end),
-        "highlights": highlights,
-        "items": highlights,
+        "highlights": [],
+        "items": rows,
         "sections": _sections(rows),
         "weeklyRollup": _weekly_rollup(rows, start, end) if period_type == "monthly" else [],
         "comparison": _comparison(metrics, previous_metrics),
         "digitalObservation": {
             "count": len(digital_rows),
-            "items": digital_rows[:4],
-            "note": "本模块只从本期日报中的数字化相关样本提取案例，不代表全国数字化项目总量。" if digital_rows else "本期没有足够数字化相关日报样本形成单独观察。",
+            "items": digital_rows,
+            "note": "",
         },
         "upcoming": existing_upcoming,
         "evidence": _evidence(rows),
@@ -338,27 +290,84 @@ def build_periodic_model(daily_reports, period_type, period_key, *, existing=Non
     }
 
 
+def apply_editorial(model, editorial):
+    """Merge a Codex-authored editorial layer onto deterministic period data."""
+    if not editorial:
+        return model
+    rows = {row.get("key"): row for row in model.get("items", []) if row.get("key")}
+
+    def with_reason(ref):
+        row = dict(rows[ref["itemKey"]])
+        row["whyImportant"] = ref.get("whyImportant", "")
+        return row
+
+    model["editorial"] = editorial
+    model["editorialStatus"] = editorial.get("editorialStatus", "")
+    model["overview"] = editorial.get("oneLiner", "")
+    model["oneLiner"] = editorial.get("oneLiner", "")
+    model["highlights"] = [with_reason(ref) for ref in editorial.get("highlights", []) if ref.get("itemKey") in rows]
+
+    section_by_topic = {section.get("topic"): section for section in model.get("sections", [])}
+    for insight in editorial.get("sectionInsights", []):
+        section = section_by_topic.get(insight.get("topic"))
+        if not section:
+            continue
+        section["summary"] = insight.get("insight", "")
+        section["items"] = [dict(rows[key]) for key in insight.get("itemKeys", []) if key in rows]
+
+    digital = editorial.get("digitalInsight", {})
+    model["digitalObservation"] = {
+        "count": sum(1 for row in rows.values() if "数字化" in row.get("tags", []) or row.get("topic") == "数字化与创新"),
+        "items": [dict(rows[key]) for key in digital.get("itemKeys", []) if key in rows],
+        "note": digital.get("text", ""),
+    }
+    comparison_insight = editorial.get("comparisonInsight", {})
+    if comparison_insight and model.get("comparison"):
+        model["comparison"]["note"] = comparison_insight.get("text", model["comparison"].get("note", ""))
+
+    model["upcoming"] = editorial.get("upcoming", [])
+    return model
+
+
+def load_editorial(root, period_type, period_key, *, preview=False):
+    root = Path(root)
+    suffix = "-editorial.json"
+    filename = f"weekly-{period_key}{suffix}" if period_type == "weekly" else f"monthly-{period_key}{suffix}"
+    path = root / "content" / "报告" / filename
+    if not path.exists():
+        return None
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    return payload
+
+
 def _source_link(source):
     name = html.escape(source.get("name", "原始来源"))
     url = html.escape(source.get("url", ""), quote=True)
     return f'<a href="{url}" target="_blank" rel="noopener">{name}</a>'
 
 
-def _item_card(row, *, highlight=False):
+def _item_card(row, *, highlight=False, include_why=False):
     cls = "periodic-highlight" if highlight else "periodic-item"
     tags = " ".join(f'<span class="periodic-tag">{html.escape(tag)}</span>' for tag in row.get("tags", [])[:3])
     sources = " ".join(_source_link(source) for source in row.get("sources", [])[:3])
+    why_html = f'<p class="periodic-why"><strong>为什么值得注意：</strong>{html.escape(row.get("whyImportant", ""))}</p>' if include_why and row.get("whyImportant") else ""
+    sources_html = f'<p class="periodic-sources">证据：{sources}</p>' if sources else '<p class="periodic-sources muted">暂无可回溯原始来源</p>'
     return f'''<article class="{cls}">
   <div class="periodic-item-head"><span class="periodic-topic">{html.escape(row.get("topic", ""))}</span><span class="periodic-date">{html.escape(row.get("date", ""))}</span></div>
   <h3>{html.escape(row.get("title", ""))}</h3>
   <p>{html.escape(row.get("summary", ""))}</p>
-  <p class="periodic-why"><strong>为什么值得注意：</strong>{html.escape(row.get("why", ""))}</p>
+{why_html}
   <p class="periodic-links"><a href="../{html.escape(row.get('report', ''), quote=True)}">{html.escape(row.get("reportLabel", "对应日报"))}</a>{(' · ' + tags) if tags else ''}</p>
-  {('<p class="periodic-sources">证据：' + sources + '</p>') if sources else '<p class="periodic-sources muted">暂无可回溯原始来源</p>'}
+{sources_html}
 </article>'''
 
 
 def build_periodic_html(data):
+    if not data.get("editorial") or data.get("editorialStatus") not in ("final", "preview"):
+        raise ValueError("周期报告缺少 editorial layer；正式报告不得退回模板化判断")
     dtype = data.get("type", "weekly")
     label = "周报" if dtype == "weekly" else "月报"
     period_word = "本周" if dtype == "weekly" else "本月"
@@ -385,7 +394,7 @@ def build_periodic_html(data):
     max_day = max((row["count"] for row in cadence), default=1)
     cadence_html = "".join((f'''<a class="periodic-day" href="../{html.escape(row["report"], quote=True)}"><span>{html.escape(row["date"][5:])}</span><i style="height:{max(4, round(row["count"] / max_day * 100))}%"></i><b>{row["count"]}</b></a>''' if row.get("report") else f'''<div class="periodic-day unavailable"><span>{html.escape(row["date"][5:])}</span><i style="height:4%"></i><b>—</b></div>''') for row in cadence)
 
-    highlight_html = "".join(_item_card(row, highlight=True) for row in data.get("highlights", [])) or '<p class="muted">本期暂无可展示重点。</p>'
+    highlight_html = "".join(_item_card(row, highlight=True, include_why=True) for row in data.get("highlights", [])) or '<p class="muted">本期暂无可展示重点。</p>'
     section_html = ""
     for section in data.get("sections", []):
         cards = "".join(_item_card(row) for row in section.get("items", []))
@@ -393,9 +402,11 @@ def build_periodic_html(data):
 
     comparison = data.get("comparison", {})
     comparison_html = f'<p class="muted">{html.escape(comparison.get("note", "暂无可比较数据"))}</p>'
-    if comparison.get("available"):
+    if comparison.get("available") and comparison.get("comparable", True):
         fields = (("publishedEvents", "总事件量"), ("digital", "数字化相关"), ("domestic", "国内"), ("regional", "区域"), ("international", "国际"))
         comparison_html = '<div class="periodic-compare">' + "".join(f'<div><span>{title}</span><strong>{comparison["previous"][key]} → {comparison["current"][key]}</strong></div>' for key, title in fields) + '</div><p class="muted">' + html.escape(comparison.get("note", "")) + '</p>'
+    elif comparison.get("available"):
+        comparison_html = '<p class="muted">上一自然周期仅覆盖 ' + html.escape(str(comparison.get("previousCoveredDays", 0))) + '/' + html.escape(str(comparison.get("previousExpectedDays", 0))) + ' 天；当前周期覆盖 ' + html.escape(str(metrics.get("coveredDays", 0))) + '/' + html.escape(str(metrics.get("expectedDays", 0))) + ' 天。' + html.escape(comparison.get("note", "数据不完整，不进行完整周期比较。")) + '</p>'
 
     digital = data.get("digitalObservation", {})
     digital_html = ''.join(_item_card(row) for row in digital.get("items", [])) or '<p class="muted">本期没有足够数字化相关样本。</p>'
@@ -407,9 +418,12 @@ def build_periodic_html(data):
     upcoming_html = ""
     if data.get("upcoming"):
         rows = []
-        for i, row in enumerate(data["upcoming"]):
-            cells = ''.join(f'<{("th" if i == 0 else "td")}>{html.escape(str(cell))}</{("th" if i == 0 else "td") }>' for cell in row)
-            rows.append(f'<tr>{cells}</tr>')
+        for row in data["upcoming"]:
+            item = row.get("itemKey")
+            report = data.get("items", [])
+            source_row = next((candidate for candidate in report if candidate.get("key") == item), None)
+            report_link = f'<a href="../{html.escape(source_row.get("report", ""), quote=True)}">对应日报</a>' if source_row else ''
+            rows.append(f'<tr><td>{html.escape(str(row.get("date", "")))}</td><td>{html.escape(str(row.get("text", "")))}</td><td>{report_link}</td></tr>')
         upcoming_html = '<section class="periodic-section"><h2>下期值得继续关注</h2><table><tbody>' + ''.join(rows) + '</tbody></table><p class="muted">仅保留已有公开确定节点，不对未知事件做预测。</p></section>'
 
     evidence_rows = []
@@ -466,4 +480,7 @@ def load_periodic_data(root, data):
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return None
-    return payload if payload.get("layout") == "periodic-v2" else None
+    if payload.get("layout") != "periodic-v2":
+        return None
+    editorial = load_editorial(root, payload.get("type"), payload.get("periodKey"), preview=payload.get("preview", False))
+    return apply_editorial(payload, editorial) if editorial else payload

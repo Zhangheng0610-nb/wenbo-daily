@@ -15,7 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from build import parse_md
-from automation.periodic_reports import build_periodic_model
+from automation.periodic_reports import build_periodic_model, load_editorial
 
 
 def load_daily():
@@ -27,7 +27,89 @@ def load_daily():
     return rows
 
 
-def check_model(model, expected_type, expected_key, html_path):
+def _all_rows(model):
+    return {row.get("key"): row for row in model.get("items", []) if row.get("key")}
+
+
+def _is_trend_claim(text):
+    return bool(re.search(r"升温|降温|增加|减少|增长|下降|转向|趋于|持续|扩大|收缩|变化|结构", text or ""))
+
+
+def check_editorial(model, editorial, expected_type, expected_key, preview=False):
+    errors = []
+    rows = _all_rows(model)
+    if not editorial:
+        return ["missing editorial layer"]
+    if editorial.get("schema") != "periodic-editorial-v1":
+        errors.append("editorial schema must be periodic-editorial-v1")
+    if editorial.get("type") != expected_type or editorial.get("periodKey") != expected_key:
+        errors.append("editorial period identity does not match model")
+    expected_status = "preview" if preview else "final"
+    if editorial.get("editorialStatus") != expected_status:
+        errors.append(f"editorialStatus must be {expected_status}")
+    if not editorial.get("oneLiner"):
+        errors.append("editorial oneLiner is empty")
+    for key in editorial.get("oneLinerSupportItemKeys", []):
+        if key not in rows:
+            errors.append(f"oneLiner support item missing: {key}")
+    expected_highlights = 3 if expected_type == "weekly" else 5
+    highlights = editorial.get("highlights", [])
+    if len(highlights) != expected_highlights:
+        errors.append("editorial highlight count does not match report type")
+    seen = set()
+    for highlight in highlights:
+        key = highlight.get("itemKey")
+        if key in seen:
+            errors.append(f"duplicate highlight item: {key}")
+        seen.add(key)
+        if key not in rows:
+            errors.append(f"highlight item missing: {key}")
+        if not highlight.get("whyImportant"):
+            errors.append(f"highlight lacks event-level whyImportant: {key}")
+        elif key in rows and not rows[key].get("sources"):
+            errors.append(f"highlight lacks publishable evidence: {key}")
+    valid_topics = {row.get("topic") for row in model.get("sections", [])}
+    for section in editorial.get("sectionInsights", []):
+        topic = section.get("topic")
+        support = section.get("supportItemKeys", [])
+        item_keys = section.get("itemKeys", [])
+        if topic not in valid_topics:
+            errors.append(f"section insight topic missing: {topic}")
+        if not section.get("insight"):
+            errors.append(f"section insight empty: {topic}")
+        if not support:
+            errors.append(f"section insight lacks support: {topic}")
+        if _is_trend_claim(section.get("insight", "")) and len(set(support)) < 2:
+            errors.append(f"trend-like section insight needs two support items: {topic}")
+        for key in set(support + item_keys):
+            if key not in rows:
+                errors.append(f"section item missing: {topic} -> {key}")
+    digital = editorial.get("digitalInsight", {})
+    if not digital.get("text"):
+        errors.append("digital insight is empty")
+    if not digital.get("supportItemKeys"):
+        errors.append("digital insight lacks support")
+    if _is_trend_claim(digital.get("text", "")) and len(set(digital.get("supportItemKeys", []))) < 2:
+        errors.append("trend-like digital insight needs two support items")
+    for key in set(digital.get("supportItemKeys", []) + digital.get("itemKeys", [])):
+        if key not in rows:
+            errors.append(f"digital item missing: {key}")
+    comparison = editorial.get("comparisonInsight", {})
+    if not comparison.get("text"):
+        errors.append("comparison insight is empty")
+    for key in comparison.get("supportItemKeys", []):
+        if key not in rows:
+            errors.append(f"comparison support item missing: {key}")
+    for upcoming in editorial.get("upcoming", []):
+        if not upcoming.get("date") or not upcoming.get("text"):
+            errors.append("upcoming item lacks date/text")
+        if upcoming.get("itemKey") and upcoming["itemKey"] not in rows:
+            errors.append(f"upcoming item missing: {upcoming.get('itemKey')}")
+    return errors
+
+
+def check_model(model, editorial, expected_type, expected_key, html_path, preview=False):
+    errors = check_editorial(model, editorial, expected_type, expected_key, preview)
     errors = []
     if model.get("layout") != "periodic-v2":
         errors.append("layout must be periodic-v2")
@@ -67,10 +149,12 @@ def validate(expected_type, expected_key, model_path, html_path):
         model = json.loads(model_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return [f"invalid model JSON: {exc}"]
-    errors = check_model(model, expected_type, expected_key, html_path)
+    preview = model.get("preview", False)
+    editorial = load_editorial(ROOT, expected_type, expected_key, preview=preview)
+    errors = check_model(model, editorial, expected_type, expected_key, html_path, preview)
     daily = load_daily()
     expected = build_periodic_model(daily, expected_type, expected_key, preview=model.get("preview", False))
-    for key in ("periodStart", "periodEnd", "metrics", "topicDistribution", "dailyCounts"):
+    for key in ("periodStart", "periodEnd", "metrics", "topicDistribution", "dailyCounts", "items"):
         if model.get(key) != expected.get(key):
             errors.append(f"model drift in {key}")
     return errors

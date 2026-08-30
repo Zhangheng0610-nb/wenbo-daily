@@ -22,7 +22,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from build import parse_digest, parse_md
-from automation.periodic_reports import build_periodic_html, build_periodic_model
+from automation.periodic_reports import apply_editorial, build_periodic_html, build_periodic_model, load_editorial
 
 
 def load_daily_reports():
@@ -68,6 +68,10 @@ def main(argv=None):
         existing_path = ROOT / "content" / "日报" / f"weekly-{key}.md"
         if existing_path.exists():
             model = build_periodic_model(daily, "weekly", key, existing=parse_digest(existing_path, "weekly"))
+        editorial = load_editorial(ROOT, "weekly", key)
+        if not editorial:
+            raise SystemExit(f"缺少 editorial layer：content/报告/weekly-{key}-editorial.json")
+        model = apply_editorial(model, editorial)
         output.append(save_json(model, report_dir / f"weekly-{key}.json"))
         if not existing_path.exists():
             existing_path.write_text(
@@ -82,6 +86,10 @@ def main(argv=None):
     elif args.monthly_preview:
         key = month_key(args.monthly_preview)
         model = build_periodic_model(daily, "monthly", key, preview=True)
+        editorial = load_editorial(ROOT, "monthly", key, preview=True)
+        if not editorial:
+            raise SystemExit(f"缺少 editorial layer：content/报告/monthly-{key}-editorial.json")
+        model = apply_editorial(model, editorial)
         data_path = save_json(model, report_dir / f"monthly-{key}-preview.json")
         html_path = ROOT / "reports" / f"monthly-{key}-preview.html"
         html_path.write_text(build_periodic_html(model), encoding="utf-8")
@@ -94,6 +102,10 @@ def main(argv=None):
         if not model["metrics"]["coverageComplete"]:
             missing = model["metrics"]["expectedDays"] - model["metrics"]["coveredDays"]
             raise SystemExit(f"拒绝生成正式月报：仍缺少 {missing} 天日报；请使用 --monthly-preview")
+        editorial = load_editorial(ROOT, "monthly", key)
+        if not editorial:
+            raise SystemExit(f"缺少 editorial layer：content/报告/monthly-{key}-editorial.json")
+        model = apply_editorial(model, editorial)
         output.append(save_json(model, report_dir / f"monthly-{key}.json"))
         source_path = ROOT / "content" / "日报" / f"月报-{key}.md"
         source_path.write_text(

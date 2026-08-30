@@ -3792,11 +3792,11 @@ def main():
             for section in r.get('sections', []):
                 periodic_rows.append(section.get('title', '') + ' ' + section.get('summary', ''))
                 periodic_rows.extend(
-                    row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('why', '')
+                    row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('whyImportant', '')
                     for row in section.get('items', [])
                 )
             periodic_rows.extend(
-                row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('why', '')
+                row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('whyImportant', '')
                 for row in r.get('highlights', [])
             )
             digest_text += ' ' + ' '.join(periodic_rows)
