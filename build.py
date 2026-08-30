@@ -2522,7 +2522,7 @@ def _compact_title(text):
     return re.sub(r'[^0-9a-zA-Z\u4e00-\u9fff]', '', (text or '')).lower()
 
 
-def related_digest_sources(title, daily_reports):
+def related_digest_sources(title, daily_reports, context=''):
     """Recover evidence for legacy weekly/monthly summaries from daily items.
 
     New digest Markdown should carry 📎 links itself. This fallback only links
@@ -2531,7 +2531,23 @@ def related_digest_sources(title, daily_reports):
     if not title or not daily_reports:
         return []
     target = _compact_title(title)
-    if len(target) < 8:
+    context_compact = _compact_title(context)
+    if len(target) < 8 and len(context_compact) < 8:
+        return []
+    if not context_compact:
+        # Preserve the established exact-title fallback for older weekly and
+        # monthly pages. The contextual matching below is only for the new
+        # aggregate weekly headings that carry local paragraph context.
+        for report in daily_reports:
+            for item in report.get('domestic', []) + report.get('international', []):
+                candidate = _compact_title(item.get('title', ''))
+                if not candidate:
+                    continue
+                shared = target in candidate or candidate in target
+                if not shared:
+                    shared = len(target[:12]) >= 8 and target[:12] in candidate
+                if shared:
+                    return (item.get('sources') or [])[:2]
         return []
     matches = []
     for report in daily_reports:
@@ -2543,12 +2559,36 @@ def related_digest_sources(title, daily_reports):
             if not shared:
                 # Long common prefix is safer than a loose keyword match.
                 shared = len(target[:12]) >= 8 and target[:12] in candidate
+            if not shared and context_compact:
+                # Aggregate weekly headings rarely repeat a daily headline
+                # verbatim. Use deterministic four-character evidence
+                # fragments from the daily title, and require two fragments
+                # for short/noisy titles. This is matching, not an AI claim.
+                fragments = {candidate[i:i + 4] for i in range(len(candidate) - 3)}
+                hit_count = sum(fragment in context_compact for fragment in fragments)
+                shared = hit_count >= (2 if len(candidate) < 12 else 3)
             if shared:
-                for source in item.get('sources', []):
-                    matches.append(source)
-                if matches:
-                    return matches[:2]
-    return []
+                score = 2 if target and (target in candidate or candidate in target) else 1
+                if context_compact:
+                    fragments = {candidate[i:i + 4] for i in range(len(candidate) - 3)}
+                    score += sum(fragment in context_compact for fragment in fragments)
+                matches.append((score, item))
+    matches.sort(key=lambda value: value[0], reverse=True)
+    sources = []
+    seen = set()
+    for _score, item in matches[:3]:
+        for source in item.get('sources', []):
+            # A weekly evidence index must not resurrect a blocked or
+            # unapproved historical URL merely because it was attached to an
+            # older daily item. Reuse only sources that are still publishable.
+            info = source_info(source.get('url', ''))
+            if info['blocked'] or info['tier'] not in ('A', 'B'):
+                continue
+            key = canonical_url(source.get('url', ''))
+            if key and key not in seen:
+                seen.add(key)
+                sources.append(source)
+    return sources[:3]
 
 
 def build_digest_html(data, daily_reports=None):
@@ -2621,14 +2661,26 @@ def build_digest_html(data, daily_reports=None):
     if not evidence_targets and data.get('type') == 'weekly':
         # The newer weekly format stores its headline list inside the first
         # rich section (usually “本周重磅”) instead of item records.
-        for line in (data.get('rich_sections') or [{}])[0].get('raw_lines', []):
+        rich_lines = (data.get('rich_sections') or [{}])[0].get('raw_lines', [])
+        for line_index, line in enumerate(rich_lines):
             match = re.match(r'###\s+(.+)', line)
             if match:
-                evidence_targets.append({'title': match.group(1).strip(), 'sources': []})
+                next_heading = next(
+                    (index for index in range(line_index + 1, len(rich_lines))
+                     if rich_lines[index].startswith('### ')),
+                    len(rich_lines),
+                )
+                evidence_targets.append({
+                    'title': match.group(1).strip(),
+                    'sources': [],
+                    'context': '\n'.join(rich_lines[line_index:next_heading]),
+                })
     evidence_rows = []
     missing_evidence = 0
     for item in evidence_targets:
-        sources = item.get('sources') or related_digest_sources(item.get('title', ''), daily_reports or [])
+        sources = item.get('sources') or related_digest_sources(
+            item.get('title', ''), daily_reports or [], item.get('context', '')
+        )
         unique = []
         seen = set()
         for source in sources:

@@ -42,6 +42,8 @@ MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
 MONITOR_MODES = {'archive-backfill', 'operational'}
 MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
 MONITOR_SCOPES = {'province', 'national', 'international', 'unassigned'}
+CN_TZ = timezone(timedelta(hours=8))
+CHECKED_AT_SKEW = timedelta(minutes=5)
 PROVINCES = {
     '北京', '天津', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江',
     '上海', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南',
@@ -243,10 +245,36 @@ def check_monitoring(required_date=None):
                 count = row.get('candidateCount')
                 if not isinstance(count, int) or count < 0:
                     errors.append(f'{path.relative_to(ROOT)}: invalid candidateCount for {row.get("sourceId", "?")}')
-                try:
-                    datetime.fromisoformat(row.get('checkedAt', ''))
-                except (TypeError, ValueError):
-                    errors.append(f'{path.relative_to(ROOT)}: invalid checkedAt for {row.get("sourceId", "?")}')
+                checked_at = row.get('checkedAt')
+                if checked_at in (None, ''):
+                    if row.get('checkedAtStatus') not in {'unknown', 'reconstructed'}:
+                        errors.append(
+                            f'{path.relative_to(ROOT)}: unknown checkedAt needs '
+                            f'checkedAtStatus for {row.get("sourceId", "?")}'
+                        )
+                    if not row.get('checkedAtNote'):
+                        errors.append(
+                            f'{path.relative_to(ROOT)}: unknown checkedAt needs '
+                            f'checkedAtNote for {row.get("sourceId", "?")}'
+                        )
+                else:
+                    try:
+                        checked_dt = datetime.fromisoformat(checked_at)
+                        if checked_dt.tzinfo is None:
+                            raise ValueError('timezone required')
+                        checked_dt = checked_dt.astimezone(CN_TZ)
+                        if mode == 'operational' and checked_dt > datetime.now(CN_TZ) + CHECKED_AT_SKEW:
+                            errors.append(
+                                f'{path.relative_to(ROOT)}: checkedAt is in the future '
+                                f'for {row.get("sourceId", "?")}'
+                            )
+                        if mode == 'archive-backfill' and checked_dt.date().isoformat() != file_date:
+                            errors.append(
+                                f'{path.relative_to(ROOT)}: archive checkedAt date must '
+                                f'match file date for {row.get("sourceId", "?")}'
+                            )
+                    except (TypeError, ValueError):
+                        errors.append(f'{path.relative_to(ROOT)}: invalid checkedAt for {row.get("sourceId", "?")}')
                 if row.get('status') in {'partial', 'failed'} and not row.get('note'):
                     errors.append(f'{path.relative_to(ROOT)}: partial/failed coverage needs a note for {row.get("sourceId", "?")}')
             observed = {source_id: 0 for source_id in MAP_SOURCE_PANEL}
@@ -342,6 +370,71 @@ def check_candidate_ledger(required_date):
     return validate_candidate_ledger(ledger_path, report_path=report_path)
 
 
+def check_weekly_evidence(required_date):
+    """Ensure a weekly evidence index does not silently have no evidence."""
+    path = REPORTS / f'weekly-{required_date}.html'
+    if not path.exists():
+        return []
+    text = path.read_text(encoding='utf-8')
+    match = re.search(r'<details class="digest-sources">.*?</details>', text, re.S)
+    if not match:
+        return []
+    block = match.group(0)
+    titles = re.findall(r'class="digest-evidence-title"', block)
+    if not titles:
+        return []
+    rows = re.findall(r'<li>(.*?)</li>', block, re.S)
+    if rows and len(rows) == len(titles) and all('<a ' not in row for row in rows):
+        return [f'{path.relative_to(ROOT)}: all weekly highlights lack traceable evidence']
+    return []
+
+
+def _fixed_scope_url(source_id, url):
+    """Return whether a URL is in the fixed panel's practical daily scope."""
+    if not map_source_id(url) == source_id:
+        return False
+    if source_id == 'xinhua-wenbo':
+        path = urlparse(url).path.lower()
+        return path.startswith('/ci/') or path.startswith('/culture/')
+    return True
+
+
+def check_daily_monitor_reconciliation(required_date):
+    """Warn only when a same-day fixed-panel URL has no monitor explanation."""
+    ledger_path = CONTENT / '候选' / f'{required_date}.json'
+    monitor_path = MONITORING / f'{required_date}.json'
+    if not ledger_path.exists() or not monitor_path.exists():
+        return []
+    try:
+        ledger = json.loads(ledger_path.read_text(encoding='utf-8'))
+        monitor = json.loads(monitor_path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        return []
+    monitored_urls = {
+        canonical_url(source.get('url', ''))
+        for record in monitor.get('items', [])
+        for source in (record.get('sources') or [])
+    }
+    warnings = []
+    for candidate in ledger.get('candidates', []):
+        if candidate.get('publishedDate') != required_date:
+            continue
+        urls = [candidate.get('discoveryUrl', '')] + [
+            source.get('url', '') for source in candidate.get('evidenceSources') or []
+        ]
+        for url in urls:
+            source_id = map_source_id(url)
+            if not source_id or not _fixed_scope_url(source_id, url):
+                continue
+            if canonical_url(url) not in monitored_urls:
+                warnings.append(
+                    f'{candidate.get("candidateId", "?")}: fixed-panel URL not found in '
+                    f'{required_date} monitoring items ({source_id})'
+                )
+                break
+    return warnings
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', help='YYYY-MM-DD; defaults to Asia/Shanghai today')
@@ -371,6 +464,11 @@ def main():
         errors.extend(
             f'content/候选/{required_date}.json: {e}'
             for e in check_candidate_ledger(required_date)
+        )
+        errors.extend(check_weekly_evidence(required_date))
+        warnings.extend(
+            f'content/候选/{required_date}.json: WARNING: {e}'
+            for e in check_daily_monitor_reconciliation(required_date)
         )
     if errors:
         print('VALIDATION FAILED')

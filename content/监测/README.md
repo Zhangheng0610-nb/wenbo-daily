@@ -46,6 +46,8 @@
 
 历史回溯文件必须使用 `mode: "archive-backfill"`；正式当天逐源巡检必须使用 `mode: "operational"`。`coverage` 条目同步写入相同的 `mode`，不得把回溯的 `success` 或 `no_update` 解释为当日真实运行健康度。
 
+`operational` 文件的 `coverage[].checkedAt` 必须来自实际北京时间运行时刻，不能用目标日期的固定整点代替。无法从原始运行记录恢复的旧文件，应使用 `checkedAt: null`、`checkedAtStatus: "unknown"` 和 `checkedAtNote` 诚实标明未知；`archive-backfill` 的日期内时间仅表示回溯写入时点，不代表系统当日曾连续运行。
+
 ## 记录原则
 
 1. 搜索引擎只负责发现，`url` 必须是固定信源池的原文。
