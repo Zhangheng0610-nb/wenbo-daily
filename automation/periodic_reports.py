@@ -299,6 +299,9 @@ def apply_editorial(model, editorial):
     def with_reason(ref):
         row = dict(rows[ref["itemKey"]])
         row["whyImportant"] = ref.get("whyImportant", "")
+        row["periodRelevance"] = ref.get("periodRelevance", "")
+        row["impactLevel"] = ref.get("impactLevel", "")
+        row["supportItemKeys"] = ref.get("supportItemKeys", [ref["itemKey"]])
         return row
 
     model["editorial"] = editorial

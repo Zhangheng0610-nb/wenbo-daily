@@ -66,8 +66,16 @@ def check_editorial(model, editorial, expected_type, expected_key, preview=False
             errors.append(f"highlight item missing: {key}")
         if not highlight.get("whyImportant"):
             errors.append(f"highlight lacks event-level whyImportant: {key}")
+        if not highlight.get("periodRelevance"):
+            errors.append(f"highlight lacks periodRelevance: {key}")
         elif key in rows and not rows[key].get("sources"):
             errors.append(f"highlight lacks publishable evidence: {key}")
+        support = highlight.get("supportItemKeys", [])
+        if re.search(r"跨周期|前期|此前|延续|回顾|持续|早于本月|早于本期|原始发布", highlight.get("periodRelevance", "")) and not support:
+            errors.append(f"cross-period highlight lacks current-period support: {key}")
+        for support_key in support:
+            if support_key not in rows:
+                errors.append(f"highlight support item missing: {key} -> {support_key}")
     valid_topics = {row.get("topic") for row in model.get("sections", [])}
     for section in editorial.get("sectionInsights", []):
         topic = section.get("topic")
