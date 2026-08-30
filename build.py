@@ -2593,6 +2593,10 @@ def related_digest_sources(title, daily_reports, context=''):
 
 def build_digest_html(data, daily_reports=None):
     """Generate HTML for a weekly or monthly digest."""
+    if data.get('layout') == 'periodic-v2':
+        from automation.periodic_reports import build_periodic_html
+        return build_periodic_html(data)
+
     dtype = data['type']
     emoji = '📰' if dtype == 'weekly' else '📊'
     monthly_reading_note = ''
@@ -3713,6 +3717,10 @@ def main():
             if not data['ref_date']:
                 print('  SKIP: could not parse weekly date')
                 continue
+            from automation.periodic_reports import load_periodic_data
+            override = load_periodic_data(SITE_DIR, data)
+            if override:
+                data = override
             weekly_reports.append(data)
             print(f'  -> parsed weekly-{data["ref_date"]}.html')
 
@@ -3721,6 +3729,10 @@ def main():
             if not data['ref_date']:
                 print('  SKIP: could not parse monthly date')
                 continue
+            from automation.periodic_reports import load_periodic_data
+            override = load_periodic_data(SITE_DIR, data)
+            if override:
+                data = override
             monthly_reports.append(data)
             print(f'  -> parsed monthly-{data["ref_date"]}.html')
 
@@ -3775,6 +3787,19 @@ def main():
         digest_text = ' '.join([r.get('title', ''), r.get('overview', '')])
         digest_text += ' ' + ' '.join(i.get('title', '') + ' ' + i.get('body', '') + ' ' + i.get('progress', '') for i in r.get('items', []))
         digest_text += ' ' + ' '.join(s.get('title', '') + ' ' + ' '.join(s.get('raw_lines', [])) for s in r.get('rich_sections', []))
+        if r.get('layout') == 'periodic-v2':
+            periodic_rows = []
+            for section in r.get('sections', []):
+                periodic_rows.append(section.get('title', '') + ' ' + section.get('summary', ''))
+                periodic_rows.extend(
+                    row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('why', '')
+                    for row in section.get('items', [])
+                )
+            periodic_rows.extend(
+                row.get('title', '') + ' ' + row.get('summary', '') + ' ' + row.get('why', '')
+                for row in r.get('highlights', [])
+            )
+            digest_text += ' ' + ' '.join(periodic_rows)
         prefix = 'weekly' if r['type'] == 'weekly' else 'monthly'
         search_data.append({
             'type': r['type'],

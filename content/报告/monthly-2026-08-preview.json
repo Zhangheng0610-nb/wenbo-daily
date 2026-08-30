@@ -1,0 +1,3207 @@
+{
+  "layout": "periodic-v2",
+  "type": "monthly",
+  "title": "文博行业月报 · 2026年8月",
+  "label": "月报",
+  "periodKey": "2026-08",
+  "periodStart": "2026-08-01",
+  "periodEnd": "2026-08-31",
+  "date_range": "2026-08-01 — 2026-08-31",
+  "ref_date": "2026-08-28",
+  "preview": true,
+  "overview": "本期样本主要集中在“考古与文物保护”和“博物馆与公共文化”；以下判断均限于本站已收录日报，不代表全国行业总量。",
+  "oneLiner": "本期样本主要集中在“考古与文物保护”和“博物馆与公共文化”；以下判断均限于本站已收录日报，不代表全国行业总量。",
+  "metrics": {
+    "publishedEvents": 249,
+    "coveredDays": 30,
+    "expectedDays": 31,
+    "coverageComplete": false,
+    "domestic": 154,
+    "regional": 2,
+    "international": 93,
+    "digital": 28
+  },
+  "topicDistribution": [
+    {
+      "topic": "政策与治理",
+      "label": "政策、制度与行业治理",
+      "count": 21
+    },
+    {
+      "topic": "考古与文物保护",
+      "label": "考古、保护与研究",
+      "count": 111
+    },
+    {
+      "topic": "博物馆与公共文化",
+      "label": "博物馆、展览与公共文化",
+      "count": 53
+    },
+    {
+      "topic": "数字化与创新",
+      "label": "数字化与创新",
+      "count": 24
+    },
+    {
+      "topic": "国际与区域",
+      "label": "国际合作与区域交流",
+      "count": 31
+    },
+    {
+      "topic": "其他行业动态",
+      "label": "其他行业动态",
+      "count": 9
+    }
+  ],
+  "dailyCounts": [
+    {
+      "date": "2026-08-01",
+      "count": 10,
+      "report": "reports/2026-08-01.html"
+    },
+    {
+      "date": "2026-08-02",
+      "count": 9,
+      "report": "reports/2026-08-02.html"
+    },
+    {
+      "date": "2026-08-03",
+      "count": 8,
+      "report": "reports/2026-08-03.html"
+    },
+    {
+      "date": "2026-08-04",
+      "count": 8,
+      "report": "reports/2026-08-04.html"
+    },
+    {
+      "date": "2026-08-05",
+      "count": 9,
+      "report": "reports/2026-08-05.html"
+    },
+    {
+      "date": "2026-08-06",
+      "count": 8,
+      "report": "reports/2026-08-06.html"
+    },
+    {
+      "date": "2026-08-07",
+      "count": 9,
+      "report": "reports/2026-08-07.html"
+    },
+    {
+      "date": "2026-08-08",
+      "count": 9,
+      "report": "reports/2026-08-08.html"
+    },
+    {
+      "date": "2026-08-09",
+      "count": 9,
+      "report": "reports/2026-08-09.html"
+    },
+    {
+      "date": "2026-08-10",
+      "count": 9,
+      "report": "reports/2026-08-10.html"
+    },
+    {
+      "date": "2026-08-11",
+      "count": 8,
+      "report": "reports/2026-08-11.html"
+    },
+    {
+      "date": "2026-08-12",
+      "count": 7,
+      "report": "reports/2026-08-12.html"
+    },
+    {
+      "date": "2026-08-13",
+      "count": 7,
+      "report": "reports/2026-08-13.html"
+    },
+    {
+      "date": "2026-08-14",
+      "count": 8,
+      "report": "reports/2026-08-14.html"
+    },
+    {
+      "date": "2026-08-15",
+      "count": 8,
+      "report": "reports/2026-08-15.html"
+    },
+    {
+      "date": "2026-08-16",
+      "count": 8,
+      "report": "reports/2026-08-16.html"
+    },
+    {
+      "date": "2026-08-17",
+      "count": 9,
+      "report": "reports/2026-08-17.html"
+    },
+    {
+      "date": "2026-08-18",
+      "count": 8,
+      "report": "reports/2026-08-18.html"
+    },
+    {
+      "date": "2026-08-19",
+      "count": 12,
+      "report": "reports/2026-08-19.html"
+    },
+    {
+      "date": "2026-08-20",
+      "count": 8,
+      "report": "reports/2026-08-20.html"
+    },
+    {
+      "date": "2026-08-21",
+      "count": 6,
+      "report": "reports/2026-08-21.html"
+    },
+    {
+      "date": "2026-08-22",
+      "count": 11,
+      "report": "reports/2026-08-22.html"
+    },
+    {
+      "date": "2026-08-23",
+      "count": 10,
+      "report": "reports/2026-08-23.html"
+    },
+    {
+      "date": "2026-08-24",
+      "count": 7,
+      "report": "reports/2026-08-24.html"
+    },
+    {
+      "date": "2026-08-25",
+      "count": 9,
+      "report": "reports/2026-08-25.html"
+    },
+    {
+      "date": "2026-08-26",
+      "count": 9,
+      "report": "reports/2026-08-26.html"
+    },
+    {
+      "date": "2026-08-27",
+      "count": 10,
+      "report": "reports/2026-08-27.html"
+    },
+    {
+      "date": "2026-08-28",
+      "count": 4,
+      "report": "reports/2026-08-28.html"
+    },
+    {
+      "date": "2026-08-29",
+      "count": 8,
+      "report": "reports/2026-08-29.html"
+    },
+    {
+      "date": "2026-08-30",
+      "count": 4,
+      "report": "reports/2026-08-30.html"
+    },
+    {
+      "date": "2026-08-31",
+      "count": 0,
+      "report": ""
+    }
+  ],
+  "highlights": [
+    {
+      "key": "2026-08-13#item1",
+      "title": "🔥🔥 国家文物局推动博物馆\"免预约、刷证即入\"——预约制从常态变为例外，\"随心逛\"成文博惠民新方向",
+      "summary": "国家文物局7月20日印发的《关于做好2026年暑期博物馆开放服务工作的通知》近日持续落地见效。",
+      "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+      "topic": "政策与治理",
+      "scope": "domestic",
+      "date": "2026-08-13",
+      "report": "reports/2026-08-13.html#item1",
+      "reportLabel": "2026-08-13 日报",
+      "tags": [
+        "政策",
+        "博物馆",
+        "公共服务",
+        "免预约"
+      ],
+      "sources": [
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/papers/grrb/2026/08/13/5/news-4.html"
+        },
+        {
+          "name": "新华网·民生观察",
+          "url": "http://news.cnr.cn/native/gd/20260810/t20260810_527756215.shtml"
+        },
+        {
+          "name": "新京报社论",
+          "url": "https://www.bjnews.com.cn/detail/1786372898168729.html"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-09#item1",
+      "title": "🔥🔥 景德镇手工瓷业遗存列入《世界遗产名录》——中国第61项世遗、全球首个\"产业遗产\"瓷主题，11年申遗路填补名录空白",
+      "summary": "当地时间2026年7月25日，在韩国釜山举行的联合国教科文组织第48届世界遗产大会上，中国申报的\"**景德镇手工瓷业遗存**\"顺利通过审议，正式列入《世界遗产名录》。",
+      "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+      "topic": "考古与文物保护",
+      "scope": "domestic",
+      "date": "2026-08-09",
+      "report": "reports/2026-08-09.html#item1",
+      "reportLabel": "2026-08-09 日报",
+      "tags": [
+        "世界遗产",
+        "文化遗产",
+        "景德镇"
+      ],
+      "sources": [
+        {
+          "name": "央视",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://epaper.gmw.cn/gmrb/html/content/202608/06/content_21490.html"
+        },
+        {
+          "name": "中新网",
+          "url": "http://m.chinanews.com/wap/detail/cht/zw/10670712.shtml"
+        },
+        {
+          "name": "福建省文物局",
+          "url": "http://wwj.wlt.fj.gov.cn/xwzx/wbyw/202608/t20260806_7196832.htm"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-11#item7",
+      "title": "🔥🔥 意大利西西里发现2100年前罗马沉船——数百个双耳瓶堆积如山，\"近年来最重要的水下考古发现之一\"",
+      "summary": "两名意大利渔猎潜水员8月初在西西里岛马扎拉德尔瓦洛（Mazara del Vallo）近海46米深处，意外发现了一艘距今约2100年（公元前2-1世纪）的罗马共和时期沉船。",
+      "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+      "topic": "国际与区域",
+      "scope": "international",
+      "date": "2026-08-11",
+      "report": "reports/2026-08-11.html#item7",
+      "reportLabel": "2026-08-11 日报",
+      "tags": [
+        "国际",
+        "水下考古",
+        "罗马",
+        "地中海贸易"
+      ],
+      "sources": [
+        {
+          "name": "CNN",
+          "url": "https://edition.cnn.com/2026/08/10/science/sicily-roman-shipwreck-scli-intl"
+        },
+        {
+          "name": "AP",
+          "url": "https://uat.apnews.com/video/police-video-shows-ancient-roman-shipwreck-with-hundreds-of-amphorae-discovered-off-sicily-31f1298b2642488c8e180007ad258a41"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-02#item5",
+      "title": "青海省博物馆推出《雪域考古奇遇记》VR体验——都兰热水墓群LBE大空间沉浸式，28分钟穿越吐谷浑丝路",
+      "summary": "青海省博物馆于7月31日正式落地运营本土考古题材**LBE大空间VR沉浸式体验项目——《雪域考古奇遇记》**，时长28分钟，这是该馆首次推出此类VR体验。",
+      "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+      "topic": "数字化与创新",
+      "scope": "domestic",
+      "date": "2026-08-02",
+      "report": "reports/2026-08-02.html#item5",
+      "reportLabel": "2026-08-02 日报",
+      "tags": [
+        "数字化",
+        "考古旅游"
+      ],
+      "sources": [
+        {
+          "name": "青海省政府",
+          "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+        },
+        {
+          "name": "青海新闻网",
+          "url": "http://www.qhio.gov.cn/system/2026/08/01/030591728.shtml"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-06#item2",
+      "title": "🔥 上博\"世界树之巅\"美洲大展暑期成绩单——10万+观众、文创破千万、2300+款产品，文博经济新标杆",
+      "summary": "上海博物馆\"世界树之巅：美洲古代文明大展\"自7月9日开展以来，不到一个月已接待**超过10万人次观众**，**文创总营收突破1000万元**。",
+      "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+      "topic": "博物馆与公共文化",
+      "scope": "domestic",
+      "date": "2026-08-06",
+      "report": "reports/2026-08-06.html#item2",
+      "reportLabel": "2026-08-06 日报",
+      "tags": [
+        "展览",
+        "博物馆经济"
+      ],
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html"
+        },
+        {
+          "name": "澎湃新闻",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33607027"
+        },
+        {
+          "name": "上海观察",
+          "url": "https://www.shobserver.cn/sgh/detail?id=4018501"
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "key": "2026-08-13#item1",
+      "title": "🔥🔥 国家文物局推动博物馆\"免预约、刷证即入\"——预约制从常态变为例外，\"随心逛\"成文博惠民新方向",
+      "summary": "国家文物局7月20日印发的《关于做好2026年暑期博物馆开放服务工作的通知》近日持续落地见效。",
+      "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+      "topic": "政策与治理",
+      "scope": "domestic",
+      "date": "2026-08-13",
+      "report": "reports/2026-08-13.html#item1",
+      "reportLabel": "2026-08-13 日报",
+      "tags": [
+        "政策",
+        "博物馆",
+        "公共服务",
+        "免预约"
+      ],
+      "sources": [
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/papers/grrb/2026/08/13/5/news-4.html"
+        },
+        {
+          "name": "新华网·民生观察",
+          "url": "http://news.cnr.cn/native/gd/20260810/t20260810_527756215.shtml"
+        },
+        {
+          "name": "新京报社论",
+          "url": "https://www.bjnews.com.cn/detail/1786372898168729.html"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-09#item1",
+      "title": "🔥🔥 景德镇手工瓷业遗存列入《世界遗产名录》——中国第61项世遗、全球首个\"产业遗产\"瓷主题，11年申遗路填补名录空白",
+      "summary": "当地时间2026年7月25日，在韩国釜山举行的联合国教科文组织第48届世界遗产大会上，中国申报的\"**景德镇手工瓷业遗存**\"顺利通过审议，正式列入《世界遗产名录》。",
+      "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+      "topic": "考古与文物保护",
+      "scope": "domestic",
+      "date": "2026-08-09",
+      "report": "reports/2026-08-09.html#item1",
+      "reportLabel": "2026-08-09 日报",
+      "tags": [
+        "世界遗产",
+        "文化遗产",
+        "景德镇"
+      ],
+      "sources": [
+        {
+          "name": "央视",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://epaper.gmw.cn/gmrb/html/content/202608/06/content_21490.html"
+        },
+        {
+          "name": "中新网",
+          "url": "http://m.chinanews.com/wap/detail/cht/zw/10670712.shtml"
+        },
+        {
+          "name": "福建省文物局",
+          "url": "http://wwj.wlt.fj.gov.cn/xwzx/wbyw/202608/t20260806_7196832.htm"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-11#item7",
+      "title": "🔥🔥 意大利西西里发现2100年前罗马沉船——数百个双耳瓶堆积如山，\"近年来最重要的水下考古发现之一\"",
+      "summary": "两名意大利渔猎潜水员8月初在西西里岛马扎拉德尔瓦洛（Mazara del Vallo）近海46米深处，意外发现了一艘距今约2100年（公元前2-1世纪）的罗马共和时期沉船。",
+      "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+      "topic": "国际与区域",
+      "scope": "international",
+      "date": "2026-08-11",
+      "report": "reports/2026-08-11.html#item7",
+      "reportLabel": "2026-08-11 日报",
+      "tags": [
+        "国际",
+        "水下考古",
+        "罗马",
+        "地中海贸易"
+      ],
+      "sources": [
+        {
+          "name": "CNN",
+          "url": "https://edition.cnn.com/2026/08/10/science/sicily-roman-shipwreck-scli-intl"
+        },
+        {
+          "name": "AP",
+          "url": "https://uat.apnews.com/video/police-video-shows-ancient-roman-shipwreck-with-hundreds-of-amphorae-discovered-off-sicily-31f1298b2642488c8e180007ad258a41"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-02#item5",
+      "title": "青海省博物馆推出《雪域考古奇遇记》VR体验——都兰热水墓群LBE大空间沉浸式，28分钟穿越吐谷浑丝路",
+      "summary": "青海省博物馆于7月31日正式落地运营本土考古题材**LBE大空间VR沉浸式体验项目——《雪域考古奇遇记》**，时长28分钟，这是该馆首次推出此类VR体验。",
+      "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+      "topic": "数字化与创新",
+      "scope": "domestic",
+      "date": "2026-08-02",
+      "report": "reports/2026-08-02.html#item5",
+      "reportLabel": "2026-08-02 日报",
+      "tags": [
+        "数字化",
+        "考古旅游"
+      ],
+      "sources": [
+        {
+          "name": "青海省政府",
+          "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+        },
+        {
+          "name": "青海新闻网",
+          "url": "http://www.qhio.gov.cn/system/2026/08/01/030591728.shtml"
+        }
+      ]
+    },
+    {
+      "key": "2026-08-06#item2",
+      "title": "🔥 上博\"世界树之巅\"美洲大展暑期成绩单——10万+观众、文创破千万、2300+款产品，文博经济新标杆",
+      "summary": "上海博物馆\"世界树之巅：美洲古代文明大展\"自7月9日开展以来，不到一个月已接待**超过10万人次观众**，**文创总营收突破1000万元**。",
+      "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+      "topic": "博物馆与公共文化",
+      "scope": "domestic",
+      "date": "2026-08-06",
+      "report": "reports/2026-08-06.html#item2",
+      "reportLabel": "2026-08-06 日报",
+      "tags": [
+        "展览",
+        "博物馆经济"
+      ],
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html"
+        },
+        {
+          "name": "澎湃新闻",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33607027"
+        },
+        {
+          "name": "上海观察",
+          "url": "https://www.shobserver.cn/sgh/detail?id=4018501"
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "topic": "政策与治理",
+      "title": "政策、制度与行业治理",
+      "summary": "政策文件、制度执行和机构治理安排，是本期观察到的主要制度线索。",
+      "items": [
+        {
+          "key": "2026-08-01#item4",
+          "title": "🔥 浙江\"考古前置\"改革成全国样板——\"四色图\"+白名单，文物与城建不再对立",
+          "summary": "8月1日《人民日报》专题报道浙江省\"考古前置\"改革经验。",
+          "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+          "topic": "政策与治理",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item4",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "政策",
+            "文保制度"
+          ],
+          "sources": [
+            {
+              "name": "人民日报",
+              "url": "https://paper.people.com.cn/rmrb/pc/content/202608/01/content_30172537.html"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item3",
+          "title": "🔥 \"博物馆里读中国\"99项展览推介公布——19项重点推介覆盖全国，夏文化探源、长征90周年、文明对话成三大主线",
+          "summary": "国家文物局、中央网信办于7月26日正式公布2026年度**\"博物馆里读中国——弘扬中华优秀传统文化、培育社会主义核心价值观\"主题展览**征集推介结果，全国**99项**展览入选，其中**前19项予以重点推介**。",
+          "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+          "topic": "政策与治理",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item3",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "政策",
+            "展览"
+          ],
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html"
+            },
+            {
+              "name": "广东省文旅厅",
+              "url": "https://whly.gd.gov.cn/service_new/hdyg/content/post_4936388.html"
+            },
+            {
+              "name": "山西文物局",
+              "url": "http://wwj.shanxi.gov.cn/gzdt/szdt/202607/t20260730_10187022.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-05#item2",
+          "title": "🔥🔥 国家文物局印发《国家文物事业发展\"十五五\"规划》——11项指标十大任务，应县木塔、故宫、三星堆-金沙申遗列入重点工程",
+          "summary": "国家文物局于7月底正式印发《国家文物事业发展\"十五五\"规划》，提出到**2030年**的发展目标，设置**11项发展指标**，明确**十大重点任务**。",
+          "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+          "topic": "政策与治理",
+          "scope": "domestic",
+          "date": "2026-08-05",
+          "report": "reports/2026-08-05.html#item2",
+          "reportLabel": "2026-08-05 日报",
+          "tags": [
+            "政策",
+            "顶层设计"
+          ],
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/8/1/art_722_204100.html"
+            },
+            {
+              "name": "中国政府网",
+              "url": "https://www.gov.cn/zhengce/202607/content_7077208.htm"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-08#item2",
+          "title": "🔥🔥 文物领域首个数据管理专项文件印发——\"国有文物资源数据属于国家所有\"，三类服务场景构建数据开放新范式",
+          "summary": "国家文物局近日印发《**国有文物资源数据管理办法**》（文物科发[2026]17号），这是**文物领域首个数据管理专项文件**，标志着国有文物的\"数据主权\"在法律意义上正式确权。",
+          "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+          "topic": "政策与治理",
+          "scope": "domestic",
+          "date": "2026-08-08",
+          "report": "reports/2026-08-08.html#item2",
+          "reportLabel": "2026-08-08 日报",
+          "tags": [
+            "政策",
+            "数字化",
+            "文物保护"
+          ],
+          "sources": [
+            {
+              "name": "工人日报",
+              "url": "https://www.workercn.cn/c/2026-08-05/8863444.shtml"
+            },
+            {
+              "name": "人民网",
+              "url": "http://ent.people.com.cn/n1/2026/0729/c1012-40770432.html"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-08#item5",
+          "title": "北京中轴线申遗成功两周年——累计实施百余项文保工程，\"最小干预\"为世界遗产城市保护提供中国经验",
+          "summary": "北京中轴线申遗成功两周年宣传展示活动近日举行。",
+          "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+          "topic": "政策与治理",
+          "scope": "domestic",
+          "date": "2026-08-08",
+          "report": "reports/2026-08-08.html#item5",
+          "reportLabel": "2026-08-08 日报",
+          "tags": [
+            "世界遗产",
+            "政策",
+            "北京"
+          ],
+          "sources": [
+            {
+              "name": "光明日报",
+              "url": "https://news.gmw.cn/2026-08/05/content_38927248.htm"
+            },
+            {
+              "name": "人民网",
+              "url": "http://theory.people.com.cn/BIG5/n1/2026/0805/c40531-40774121.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "考古与文物保护",
+      "title": "考古、保护与研究",
+      "summary": "考古发现与保护实践构成本期样本的主要专业信息来源。",
+      "items": [
+        {
+          "key": "2026-08-01#item1",
+          "title": "🔥🔥 三星堆祭祀坑40周年新解：意外失火说颠覆\"仪式焚烧\"假说——象牙保护以\"骨胶原\"注入取得突破",
+          "summary": "2026年是三星堆遗址祭祀坑发现40周年。",
+          "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+          "topic": "考古与文物保护",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item1",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "考古",
+            "方法论"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-01#item5",
+          "title": "中哈联合考古马尔卡科尔湖收官——巴泽雷克文化墓葬出土金箔马具，阿尔泰游牧文明再添新材料",
+          "summary": "2026年度中哈马尔卡科尔湖地区联合考古工作于7月收官。",
+          "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+          "topic": "考古与文物保护",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item5",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "考古",
+            "国际合作"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-01#item10",
+          "title": "湖北十堰恐龙蛋化石群：8600万年3000枚——全球最大恐龙蛋遗址，地下还埋着30万枚",
+          "summary": "湖北十堰青龙山恐龙蛋化石群遗址已发掘出**3000多枚恐龙蛋化石**，经勘探地下还蕴藏约**30万枚原址化石**，距今8600万年，是全球分布最集中、规模最大的恐龙蛋化石群之一。",
+          "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+          "topic": "考古与文物保护",
+          "scope": "international",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item10",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "考古",
+            "古生物"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-02#item1",
+          "title": "🔥🔥 宁夏固原2300年前战国古酒成功鉴定——青铜蒜头壶密封保存3.74升粮食酒，黍麦酿造填补宁夏酿酒考古空白",
+          "summary": "宁夏固原善家堡战国秦人墓地考古取得重大突破。",
+          "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+          "topic": "考古与文物保护",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item1",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "考古",
+            "科技考古"
+          ],
+          "sources": [
+            {
+              "name": "央视新闻",
+              "url": "https://news.cctv.cn/2026/07/31/ARTIrOsmMpz2d213TuJK3GJJ260730.shtml"
+            },
+            {
+              "name": "光明日报",
+              "url": "https://difang.gmw.cn/nx/2026-07/30/content_38917877.htm"
+            },
+            {
+              "name": "中国社会科学网",
+              "url": "https://www.cssn.cn/skgz/bwyc/202607/t20260730_6061544.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item7",
+          "title": "🔥 法国Grand遗址出土500+罗马骰子——\"前所未见\"，古代世界最大骰子收藏改写对罗马游戏文化的认知",
+          "summary": "法国东北部孚日省（Vosges）古罗马城市**Grand遗址**的考古发掘中，出土了**超过500枚骨制骰子**——这是古代世界迄今发现的最大规模骰子集合。",
+          "why": "它为年代、区域社会或保护研究提供了新的具体材料。",
+          "topic": "考古与文物保护",
+          "scope": "international",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item7",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "考古",
+            "古罗马"
+          ],
+          "sources": []
+        }
+      ]
+    },
+    {
+      "topic": "博物馆与公共文化",
+      "title": "博物馆、展览与公共文化",
+      "summary": "博物馆开放、展览和公共文化服务呈现出多样的机构实践。",
+      "items": [
+        {
+          "key": "2026-08-01#item2",
+          "title": "🔥🔥 大足石刻展登陆纽约——铭记博物馆首秀，\"东方美学+数字沉浸\"出海新模式",
+          "summary": "7月31日，\"和合东方——大足石刻特展\"在美国纽约铭记博物馆（Memor Museum）开幕，由大足石刻研究院与美方联合主办。",
+          "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+          "topic": "博物馆与公共文化",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item2",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "展览",
+            "文化出海"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-01#item6",
+          "title": "八大山人诞辰400周年特展引爆南昌——\"一展双馆\"129件文物，全城7个配套展同期铺开",
+          "summary": "由故宫博物院、江西省文旅厅、南昌市政府联合主办的\"高山仰止 墨染千秋——八大山人诞辰400周年特展\"7月10日开幕以来持续火爆，展期至10月10日。",
+          "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+          "topic": "博物馆与公共文化",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item6",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "展览"
+          ],
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item2",
+          "title": "🔥🔥 圆明园四大兽首杭州引爆观展狂潮——单日2.4万人排队4小时，浙博启动限流延时开放",
+          "summary": "7月30日在浙江省博物馆之江馆区开幕的**\"再现圆明园——国宝百年归藏特展\"**在首个周末迎来现象级客流：8月1日单日入馆近**2.4万人**，排队等候时间长达**3-4小时**。",
+          "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+          "topic": "博物馆与公共文化",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item2",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "展览",
+            "公众考古"
+          ],
+          "sources": [
+            {
+              "name": "浙江在线",
+              "url": "https://zjnews.zjol.com.cn/zjnews/202608/t20260802_31821698.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item4",
+          "title": "金中都主题展览亮相北京西站——考古遗址\"搬\"进交通枢纽，北京870年建都史面向每日数十万旅客",
+          "summary": "7月30日，\"金中都——北京都之源\"主题展览在北京西站地下二层地铁东侧通道正式开放。",
+          "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+          "topic": "博物馆与公共文化",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item4",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "展览",
+            "公共考古"
+          ],
+          "sources": [
+            {
+              "name": "人民网",
+              "url": "http://society.people.com.cn/n1/2026/0801/c1008-40772120.html"
+            },
+            {
+              "name": "中新网",
+              "url": "https://www.chinanews.com/cul/shipin/cns-d/2026/07-30/news1063831.shtml"
+            },
+            {
+              "name": "北京市政府",
+              "url": "https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202607/t20260730_4800287.html"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item6",
+          "title": "\"星起河洛\"夏商周礼乐文化特展亮相辽宁省博物馆——河南85件重器首次大规模北上，九鼎八簋编钟编磬成建制呈现",
+          "summary": "8月1日，\"星起河洛——夏商周中原礼乐文化特展\"在辽宁省博物馆三层20号展厅正式开展，展期至10月31日，免费开放。",
+          "why": "它提供了博物馆运营、展陈或公共文化服务的具体样本。",
+          "topic": "博物馆与公共文化",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item6",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "展览"
+          ],
+          "sources": [
+            {
+              "name": "河南省文物局",
+              "url": "https://wwj.henan.gov.cn/2026/08-01/3381469.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "数字化与创新",
+      "title": "数字化与创新",
+      "summary": "数字化案例主要落在保护、展示、研究和公共参与等具体场景。",
+      "items": [
+        {
+          "key": "2026-08-01#item3",
+          "title": "🔥 科技考古与文化遗产保护国际学术研讨会在京举行——早期国家形成、数字遗产、考古伦理三大议题",
+          "summary": "7月31日至8月1日，由中国社会科学院主办的\"科技考古与文化遗产保护国际学术研讨会\"在北京举行，汇聚多国学者围绕**早期国家形成、数字遗产技术、考古伦理与可持续发展**三大核心议题展开讨论。",
+          "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+          "topic": "数字化与创新",
+          "scope": "domestic",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item3",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "学术",
+            "科技"
+          ],
+          "sources": [
+            {
+              "name": "光明日报",
+              "url": "https://politics.gmw.cn/2026-08/01/content_38921783.htm"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-02#item5",
+          "title": "青海省博物馆推出《雪域考古奇遇记》VR体验——都兰热水墓群LBE大空间沉浸式，28分钟穿越吐谷浑丝路",
+          "summary": "青海省博物馆于7月31日正式落地运营本土考古题材**LBE大空间VR沉浸式体验项目——《雪域考古奇遇记》**，时长28分钟，这是该馆首次推出此类VR体验。",
+          "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+          "topic": "数字化与创新",
+          "scope": "domestic",
+          "date": "2026-08-02",
+          "report": "reports/2026-08-02.html#item5",
+          "reportLabel": "2026-08-02 日报",
+          "tags": [
+            "数字化",
+            "考古旅游"
+          ],
+          "sources": [
+            {
+              "name": "青海省政府",
+              "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+            },
+            {
+              "name": "青海新闻网",
+              "url": "http://www.qhio.gov.cn/system/2026/08/01/030591728.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-06#item8",
+          "title": "印度加尔各答博物馆联手IIT启用AI修复文物——数字化保存+AR互动+Google Arts & Culture，南亚博物馆数字化转型加速",
+          "summary": "印度最古老的博物馆——**加尔各答印度博物馆**（Indian Museum, 成立于1814年）近日宣布与**印度理工学院卡拉格普尔分校（IIT-Kharagpur）**合作，正式启动**AI辅助考古文物修复与数字化保存**项目。",
+          "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+          "topic": "数字化与创新",
+          "scope": "international",
+          "date": "2026-08-06",
+          "report": "reports/2026-08-06.html#item8",
+          "reportLabel": "2026-08-06 日报",
+          "tags": [
+            "博物馆",
+            "数字化"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-09#item4",
+          "title": "白鹤梁水下博物馆启动毫米级数字建档——AI大模型病害识别+云端导览，\"世界第一古代水文站\"迈向预防性保护",
+          "summary": "重庆涪陵**白鹤梁水下博物馆**近日透露了下一阶段保护计划：将对水下题刻进行**毫米级精度三维扫描和数字建模**，引入**AI大模型进行病害自动识别**，并最终实现\"**云端看水下遗产**\"的远程导览体验。",
+          "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+          "topic": "数字化与创新",
+          "scope": "domestic",
+          "date": "2026-08-09",
+          "report": "reports/2026-08-09.html#item4",
+          "reportLabel": "2026-08-09 日报",
+          "tags": [
+            "文化遗产",
+            "数字化",
+            "科技",
+            "水下遗产"
+          ],
+          "sources": [
+            {
+              "name": "中新网",
+              "url": "http://www.chinanews.com.cn/sh/shipin/2026/08-07/news1064663.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-10#item1",
+          "title": "🔥🔥 敦煌悬泉置遗址完成1:1数字化复原——\"数字悬泉置\"解锁丝路驿站千年密码",
+          "summary": "敦煌悬泉置遗址\"数字悬泉置\"项目近日取得重要突破。",
+          "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+          "topic": "数字化与创新",
+          "scope": "domestic",
+          "date": "2026-08-10",
+          "report": "reports/2026-08-10.html#item1",
+          "reportLabel": "2026-08-10 日报",
+          "tags": [
+            "数字化",
+            "文化遗产",
+            "丝绸之路",
+            "科技"
+          ],
+          "sources": [
+            {
+              "name": "央视新闻",
+              "url": "https://news.cctv.cn/2026/08/10/ARTIs8WsK8RtBFeT7qhj4d97260810.shtml"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "国际与区域",
+      "title": "国际合作与区域交流",
+      "summary": "跨境合作、区域交流和国际文博治理构成本期的外部观察线索。",
+      "items": [
+        {
+          "key": "2026-08-01#item7",
+          "title": "🔥 阿富汗坎大哈博物馆重开——8000年历史4000件文物，战后文化遗产重建的标志性事件",
+          "summary": "8月1日，经过8个月的修缮，阿富汗坎大哈博物馆正式重新开放。",
+          "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+          "topic": "国际与区域",
+          "scope": "international",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item7",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "文化遗产",
+            "重建"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-01#item8",
+          "title": "🔥 欧洲多瑙河干涸惊现猛犸遗骸——极端干旱成为2026年文化遗产保护最大变量",
+          "summary": "受欧洲持续高温干旱影响，多瑙河水位降至创纪录低位。",
+          "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+          "topic": "国际与区域",
+          "scope": "international",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item8",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "环境",
+            "考古发现"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-01#item9",
+          "title": "广州建城2240年专题展8月登场——大湾区暑期展览全面爆发",
+          "summary": "8月，粤港澳大湾区迎来暑期展览高峰。",
+          "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+          "topic": "国际与区域",
+          "scope": "regional",
+          "date": "2026-08-01",
+          "report": "reports/2026-08-01.html#item9",
+          "reportLabel": "2026-08-01 日报",
+          "tags": [
+            "展览",
+            "大湾区"
+          ],
+          "sources": [
+            {
+              "name": "广州市政府",
+              "url": "https://www.gz.gov.cn/zlgz/wlzx/content/post_10946275.html"
+            },
+            {
+              "name": "广东省文旅厅",
+              "url": "https://whly.gd.gov.cn/service_new/hdyg/content/post_4936388.html"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-04#item6",
+          "title": "🔥 意大利Paestum国家考古博物馆全新开放——40,000年历史全覆盖，馆长亲自导览新展厅",
+          "summary": "8月4日，意大利**帕埃斯图姆（Paestum）国家考古博物馆**以全新姿态向公众开放。",
+          "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+          "topic": "国际与区域",
+          "scope": "international",
+          "date": "2026-08-04",
+          "report": "reports/2026-08-04.html#item6",
+          "reportLabel": "2026-08-04 日报",
+          "tags": [
+            "博物馆",
+            "国际"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-04#item8",
+          "title": "蒙古国文化遗产周+英国利兹\"成吉思汗：蒙古人如何改变世界\"特展——草原文明的双轨国际传播",
+          "summary": "蒙古国本周（8月3日-9日）密集开展多项文化遗产活动：成吉思汗国家博物馆与韩国公州国立大学合作举办第四期\"**文化遗产保护与保存专业人员能力建设**\"培训（8月3-7日）；\"王者之路—2026\"活动串联布尔汗哈勒敦山、哈拉和林、鄂尔浑河谷…",
+          "why": "它提供了跨区域合作、国际治理或文化交流的具体观察样本。",
+          "topic": "国际与区域",
+          "scope": "international",
+          "date": "2026-08-04",
+          "report": "reports/2026-08-04.html#item8",
+          "reportLabel": "2026-08-04 日报",
+          "tags": [
+            "文化遗产",
+            "国际展览"
+          ],
+          "sources": []
+        }
+      ]
+    },
+    {
+      "topic": "其他行业动态",
+      "title": "其他行业动态",
+      "summary": "以下内容补充本期样本中的其他行业动态。",
+      "items": [
+        {
+          "key": "2026-08-14#item5",
+          "title": "🔥🔥 浙博圆明园四兽首原件展引发观展热潮——馆方推动组建\"国宝回家\"联盟，文物追索进入\"制度+民间\"双轮驱动",
+          "summary": "浙江省博物馆之江馆区正在举办的\"**重返圆明园——国宝百年回家**\"特展持续升温，展出的圆明园**虎首、猴首、猪首、牛首四件原件**（展期至10月18日，免费开放）引发观展热潮，观众排队一度超过5小时。",
+          "why": "它补充了本周文博行业的其他重要动态。",
+          "topic": "其他行业动态",
+          "scope": "domestic",
+          "date": "2026-08-14",
+          "report": "reports/2026-08-14.html#item5",
+          "reportLabel": "2026-08-14 日报",
+          "tags": [
+            "文物回归",
+            "追索",
+            "圆明园",
+            "浙江"
+          ],
+          "sources": [
+            {
+              "name": "中新网",
+              "url": "https://m.chinanews.com/wap/detail/chs/zw/10672631.shtml"
+            },
+            {
+              "name": "央视网",
+              "url": "http://big5.cctv.com/gate/big5/style.cctv.com/2026/08/06/ARTI8mKxn9L74XyZVfnmAPfA260806.shtml"
+            }
+          ]
+        },
+        {
+          "key": "2026-08-15#item6",
+          "title": "国家海洋考古博物馆2026年推进内装与展陈，目标2028年试运营",
+          "summary": "国内首家国家级水下考古专题博物馆——国家海洋考古博物馆落户青岛蓝色硅谷核心区。",
+          "why": "它补充了本周文博行业的其他重要动态。",
+          "topic": "其他行业动态",
+          "scope": "domestic",
+          "date": "2026-08-15",
+          "report": "reports/2026-08-15.html#item6",
+          "reportLabel": "2026-08-15 日报",
+          "tags": [
+            "博物馆建设",
+            "水下考古",
+            "青岛"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-15#item7",
+          "title": "🔥 三星堆7号坑出土铁质残片被确认为西南地区最早陨铁文物",
+          "summary": "2026年7月公布的研究确认，三星堆7号坑出土的铁质残片为纯陨铁制品，是中国西南地区迄今发现的最早陨铁文物。",
+          "why": "它补充了本周文博行业的其他重要动态。",
+          "topic": "其他行业动态",
+          "scope": "domestic",
+          "date": "2026-08-15",
+          "report": "reports/2026-08-15.html#item7",
+          "reportLabel": "2026-08-15 日报",
+          "tags": [
+            "考古发现",
+            "三星堆",
+            "科技考古"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-16#item6",
+          "title": "辽宁省文物考古研究院公开招聘高层次及急需紧缺人才",
+          "summary": "辽宁省文物考古研究院8月12日发布面向社会公开招聘高层次及急需紧缺人才公告，同期发布工作人员招聘公告。",
+          "why": "它补充了本周文博行业的其他重要动态。",
+          "topic": "其他行业动态",
+          "scope": "domestic",
+          "date": "2026-08-16",
+          "report": "reports/2026-08-16.html#item6",
+          "reportLabel": "2026-08-16 日报",
+          "tags": [
+            "招聘",
+            "文博人才",
+            "辽宁"
+          ],
+          "sources": []
+        },
+        {
+          "key": "2026-08-17#item6",
+          "title": "南京大屠杀遇难同胞纪念馆新征集史料150余件（套）",
+          "summary": "8月15日，侵华日军南京大屠杀遇难同胞纪念馆公布今年上半年新征集文物史料150余件（套）、文献资料100余件（套），包括日军士兵私人信件、战地明信片、毒气战教育资料等。",
+          "why": "它补充了本周文博行业的其他重要动态。",
+          "topic": "其他行业动态",
+          "scope": "domestic",
+          "date": "2026-08-17",
+          "report": "reports/2026-08-17.html#item6",
+          "reportLabel": "2026-08-17 日报",
+          "tags": [
+            "纪念馆",
+            "文物征集",
+            "抗战史",
+            "南京"
+          ],
+          "sources": [
+            {
+              "name": "财新网汇编",
+              "url": "https://mini.caixin.com/2026-08-16/102474598.html?originReferrer=kimi"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "weeklyRollup": [
+    {
+      "label": "第1周",
+      "start": "2026-08-01",
+      "end": "2026-08-07",
+      "count": 61,
+      "topics": [
+        {
+          "topic": "政策与治理",
+          "label": "政策、制度与行业治理",
+          "count": 3
+        },
+        {
+          "topic": "考古与文物保护",
+          "label": "考古、保护与研究",
+          "count": 29
+        },
+        {
+          "topic": "博物馆与公共文化",
+          "label": "博物馆、展览与公共文化",
+          "count": 17
+        },
+        {
+          "topic": "数字化与创新",
+          "label": "数字化与创新",
+          "count": 3
+        },
+        {
+          "topic": "国际与区域",
+          "label": "国际合作与区域交流",
+          "count": 9
+        }
+      ]
+    },
+    {
+      "label": "第2周",
+      "start": "2026-08-08",
+      "end": "2026-08-14",
+      "count": 57,
+      "topics": [
+        {
+          "topic": "政策与治理",
+          "label": "政策、制度与行业治理",
+          "count": 6
+        },
+        {
+          "topic": "考古与文物保护",
+          "label": "考古、保护与研究",
+          "count": 35
+        },
+        {
+          "topic": "博物馆与公共文化",
+          "label": "博物馆、展览与公共文化",
+          "count": 9
+        },
+        {
+          "topic": "数字化与创新",
+          "label": "数字化与创新",
+          "count": 4
+        },
+        {
+          "topic": "国际与区域",
+          "label": "国际合作与区域交流",
+          "count": 2
+        },
+        {
+          "topic": "其他行业动态",
+          "label": "其他行业动态",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "label": "第3周",
+      "start": "2026-08-15",
+      "end": "2026-08-21",
+      "count": 59,
+      "topics": [
+        {
+          "topic": "政策与治理",
+          "label": "政策、制度与行业治理",
+          "count": 8
+        },
+        {
+          "topic": "考古与文物保护",
+          "label": "考古、保护与研究",
+          "count": 16
+        },
+        {
+          "topic": "博物馆与公共文化",
+          "label": "博物馆、展览与公共文化",
+          "count": 9
+        },
+        {
+          "topic": "数字化与创新",
+          "label": "数字化与创新",
+          "count": 5
+        },
+        {
+          "topic": "国际与区域",
+          "label": "国际合作与区域交流",
+          "count": 13
+        },
+        {
+          "topic": "其他行业动态",
+          "label": "其他行业动态",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "label": "第4周",
+      "start": "2026-08-22",
+      "end": "2026-08-28",
+      "count": 60,
+      "topics": [
+        {
+          "topic": "政策与治理",
+          "label": "政策、制度与行业治理",
+          "count": 1
+        },
+        {
+          "topic": "考古与文物保护",
+          "label": "考古、保护与研究",
+          "count": 28
+        },
+        {
+          "topic": "博物馆与公共文化",
+          "label": "博物馆、展览与公共文化",
+          "count": 16
+        },
+        {
+          "topic": "数字化与创新",
+          "label": "数字化与创新",
+          "count": 9
+        },
+        {
+          "topic": "国际与区域",
+          "label": "国际合作与区域交流",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "label": "第5周",
+      "start": "2026-08-29",
+      "end": "2026-08-31",
+      "count": 12,
+      "topics": [
+        {
+          "topic": "政策与治理",
+          "label": "政策、制度与行业治理",
+          "count": 3
+        },
+        {
+          "topic": "考古与文物保护",
+          "label": "考古、保护与研究",
+          "count": 3
+        },
+        {
+          "topic": "博物馆与公共文化",
+          "label": "博物馆、展览与公共文化",
+          "count": 2
+        },
+        {
+          "topic": "数字化与创新",
+          "label": "数字化与创新",
+          "count": 3
+        },
+        {
+          "topic": "国际与区域",
+          "label": "国际合作与区域交流",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "available": true,
+    "current": {
+      "publishedEvents": 249,
+      "digital": 28,
+      "domestic": 154,
+      "regional": 2,
+      "international": 93
+    },
+    "previous": {
+      "publishedEvents": 209,
+      "digital": 6,
+      "domestic": 107,
+      "regional": 0,
+      "international": 102
+    },
+    "note": "数量变化仅作样本对照；小样本不自动推导行业趋势。"
+  },
+  "digitalObservation": {
+    "count": 28,
+    "items": [
+      {
+        "key": "2026-08-01#item3",
+        "title": "🔥 科技考古与文化遗产保护国际学术研讨会在京举行——早期国家形成、数字遗产、考古伦理三大议题",
+        "summary": "7月31日至8月1日，由中国社会科学院主办的\"科技考古与文化遗产保护国际学术研讨会\"在北京举行，汇聚多国学者围绕**早期国家形成、数字遗产技术、考古伦理与可持续发展**三大核心议题展开讨论。",
+        "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+        "topic": "数字化与创新",
+        "scope": "domestic",
+        "date": "2026-08-01",
+        "report": "reports/2026-08-01.html#item3",
+        "reportLabel": "2026-08-01 日报",
+        "tags": [
+          "学术",
+          "科技"
+        ],
+        "sources": [
+          {
+            "name": "光明日报",
+            "url": "https://politics.gmw.cn/2026-08/01/content_38921783.htm"
+          }
+        ]
+      },
+      {
+        "key": "2026-08-02#item5",
+        "title": "青海省博物馆推出《雪域考古奇遇记》VR体验——都兰热水墓群LBE大空间沉浸式，28分钟穿越吐谷浑丝路",
+        "summary": "青海省博物馆于7月31日正式落地运营本土考古题材**LBE大空间VR沉浸式体验项目——《雪域考古奇遇记》**，时长28分钟，这是该馆首次推出此类VR体验。",
+        "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+        "topic": "数字化与创新",
+        "scope": "domestic",
+        "date": "2026-08-02",
+        "report": "reports/2026-08-02.html#item5",
+        "reportLabel": "2026-08-02 日报",
+        "tags": [
+          "数字化",
+          "考古旅游"
+        ],
+        "sources": [
+          {
+            "name": "青海省政府",
+            "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+          },
+          {
+            "name": "青海新闻网",
+            "url": "http://www.qhio.gov.cn/system/2026/08/01/030591728.shtml"
+          }
+        ]
+      },
+      {
+        "key": "2026-08-06#item8",
+        "title": "印度加尔各答博物馆联手IIT启用AI修复文物——数字化保存+AR互动+Google Arts & Culture，南亚博物馆数字化转型加速",
+        "summary": "印度最古老的博物馆——**加尔各答印度博物馆**（Indian Museum, 成立于1814年）近日宣布与**印度理工学院卡拉格普尔分校（IIT-Kharagpur）**合作，正式启动**AI辅助考古文物修复与数字化保存**项目。",
+        "why": "它把数字技术放进保护、研究、展陈或公共服务的真实场景。",
+        "topic": "数字化与创新",
+        "scope": "international",
+        "date": "2026-08-06",
+        "report": "reports/2026-08-06.html#item8",
+        "reportLabel": "2026-08-06 日报",
+        "tags": [
+          "博物馆",
+          "数字化"
+        ],
+        "sources": []
+      },
+      {
+        "key": "2026-08-08#item2",
+        "title": "🔥🔥 文物领域首个数据管理专项文件印发——\"国有文物资源数据属于国家所有\"，三类服务场景构建数据开放新范式",
+        "summary": "国家文物局近日印发《**国有文物资源数据管理办法**》（文物科发[2026]17号），这是**文物领域首个数据管理专项文件**，标志着国有文物的\"数据主权\"在法律意义上正式确权。",
+        "why": "它影响机构的日常治理、制度执行或行业协作方式。",
+        "topic": "政策与治理",
+        "scope": "domestic",
+        "date": "2026-08-08",
+        "report": "reports/2026-08-08.html#item2",
+        "reportLabel": "2026-08-08 日报",
+        "tags": [
+          "政策",
+          "数字化",
+          "文物保护"
+        ],
+        "sources": [
+          {
+            "name": "工人日报",
+            "url": "https://www.workercn.cn/c/2026-08-05/8863444.shtml"
+          },
+          {
+            "name": "人民网",
+            "url": "http://ent.people.com.cn/n1/2026/0729/c1012-40770432.html"
+          }
+        ]
+      }
+    ],
+    "note": "本模块只从本期日报中的数字化相关样本提取案例，不代表全国数字化项目总量。"
+  },
+  "upcoming": [],
+  "evidence": [
+    {
+      "title": "🔥 科技考古与文化遗产保护国际学术研讨会在京举行——早期国家形成、数字遗产、考古伦理三大议题",
+      "report": "reports/2026-08-01.html#item3",
+      "reportLabel": "2026-08-01 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://politics.gmw.cn/2026-08/01/content_38921783.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙江\"考古前置\"改革成全国样板——\"四色图\"+白名单，文物与城建不再对立",
+      "report": "reports/2026-08-01.html#item4",
+      "reportLabel": "2026-08-01 日报",
+      "sources": [
+        {
+          "name": "人民日报",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/01/content_30172537.html"
+        }
+      ]
+    },
+    {
+      "title": "八大山人诞辰400周年特展引爆南昌——\"一展双馆\"129件文物，全城7个配套展同期铺开",
+      "report": "reports/2026-08-01.html#item6",
+      "reportLabel": "2026-08-01 日报",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/1/art_723_204055.html"
+        }
+      ]
+    },
+    {
+      "title": "广州建城2240年专题展8月登场——大湾区暑期展览全面爆发",
+      "report": "reports/2026-08-01.html#item9",
+      "reportLabel": "2026-08-01 日报",
+      "sources": [
+        {
+          "name": "广州市政府",
+          "url": "https://www.gz.gov.cn/zlgz/wlzx/content/post_10946275.html"
+        },
+        {
+          "name": "广东省文旅厅",
+          "url": "https://whly.gd.gov.cn/service_new/hdyg/content/post_4936388.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 宁夏固原2300年前战国古酒成功鉴定——青铜蒜头壶密封保存3.74升粮食酒，黍麦酿造填补宁夏酿酒考古空白",
+      "report": "reports/2026-08-02.html#item1",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "央视新闻",
+          "url": "https://news.cctv.cn/2026/07/31/ARTIrOsmMpz2d213TuJK3GJJ260730.shtml"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://difang.gmw.cn/nx/2026-07/30/content_38917877.htm"
+        },
+        {
+          "name": "中国社会科学网",
+          "url": "https://www.cssn.cn/skgz/bwyc/202607/t20260730_6061544.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 圆明园四大兽首杭州引爆观展狂潮——单日2.4万人排队4小时，浙博启动限流延时开放",
+      "report": "reports/2026-08-02.html#item2",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "浙江在线",
+          "url": "https://zjnews.zjol.com.cn/zjnews/202608/t20260802_31821698.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 \"博物馆里读中国\"99项展览推介公布——19项重点推介覆盖全国，夏文化探源、长征90周年、文明对话成三大主线",
+      "report": "reports/2026-08-02.html#item3",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/26/art_2318_48456.html"
+        },
+        {
+          "name": "广东省文旅厅",
+          "url": "https://whly.gd.gov.cn/service_new/hdyg/content/post_4936388.html"
+        },
+        {
+          "name": "山西文物局",
+          "url": "http://wwj.shanxi.gov.cn/gzdt/szdt/202607/t20260730_10187022.shtml"
+        }
+      ]
+    },
+    {
+      "title": "金中都主题展览亮相北京西站——考古遗址\"搬\"进交通枢纽，北京870年建都史面向每日数十万旅客",
+      "report": "reports/2026-08-02.html#item4",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "人民网",
+          "url": "http://society.people.com.cn/n1/2026/0801/c1008-40772120.html"
+        },
+        {
+          "name": "中新网",
+          "url": "https://www.chinanews.com/cul/shipin/cns-d/2026/07-30/news1063831.shtml"
+        },
+        {
+          "name": "北京市政府",
+          "url": "https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202607/t20260730_4800287.html"
+        }
+      ]
+    },
+    {
+      "title": "青海省博物馆推出《雪域考古奇遇记》VR体验——都兰热水墓群LBE大空间沉浸式，28分钟穿越吐谷浑丝路",
+      "report": "reports/2026-08-02.html#item5",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "青海省政府",
+          "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+        },
+        {
+          "name": "青海新闻网",
+          "url": "http://www.qhio.gov.cn/system/2026/08/01/030591728.shtml"
+        }
+      ]
+    },
+    {
+      "title": "\"星起河洛\"夏商周礼乐文化特展亮相辽宁省博物馆——河南85件重器首次大规模北上，九鼎八簋编钟编磬成建制呈现",
+      "report": "reports/2026-08-02.html#item6",
+      "reportLabel": "2026-08-02 日报",
+      "sources": [
+        {
+          "name": "河南省文物局",
+          "url": "https://wwj.henan.gov.cn/2026/08-01/3381469.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 辽宁红山文化考古系统性突破——牛河梁九座台基+中轴对称+北庙南坛王陵，5800年前古国都城格局浮现",
+      "report": "reports/2026-08-03.html#item1",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://news.gmw.cn/2026-08/03/content_38922920.htm"
+        },
+        {
+          "name": "辽宁省政府",
+          "url": "https://www.ln.gov.cn/web/ywdt/jrln/wzxx2018/2026080306261191497/index.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国博\"了不起的汉字\"古文字工程成果展暑期热展——270件展品从甲骨文到简帛讲述汉字三千年",
+      "report": "reports/2026-08-03.html#item2",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/7/21/art_723_203856.html"
+        },
+        {
+          "name": "中国国家博物馆",
+          "url": "https://www.chnmuseum.cn/zx/gbxw/202607/t20260714_280481.shtml"
+        },
+        {
+          "name": "新华网",
+          "url": "https://app.xinhuanet.com/news/article.html?articleId=20260722c89f141d5a3c4a4badb2d081c588c0ed"
+        }
+      ]
+    },
+    {
+      "title": "洛阳古墓博物馆\"剧本杀+夜游\"沉浸式实验——国内唯一古墓专题馆，把考古现场变成年轻人排队打卡的文化消费场景",
+      "report": "reports/2026-08-03.html#item3",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "https://www.news.cn/20260802/b66d9b02c1d8471e99739a501dfdc733/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 埃及Saqqara发现三座新王国岩凿墓——军事指挥官+首席商人+王室管家，铭文提及远征叙利亚北境",
+      "report": "reports/2026-08-03.html#item5",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "ARTnews",
+          "url": "https://www.artnews.com/art-news/news/new-kingdom-tombs-offer-insights-ancient-egyptian-society-1234793170/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 德国Hohle Fels出土4万年前鸟形象牙微雕——拇指大小，冰河时期最小具象艺术品改写对旧石器艺术的理解",
+      "report": "reports/2026-08-03.html#item6",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "Nature",
+          "url": "https://www.nature.com/articles/d41586-026-02312-y"
+        },
+        {
+          "name": "Archaeology Magazine",
+          "url": "https://archaeology.org/news/2026/07/31/tiny-paleolithic-bird-carvings-unearthed-in-germany/"
+        }
+      ]
+    },
+    {
+      "title": "津巴布韦发现2.1亿年前恐龙新物种——双足蜥脚形类，非洲最完整三叠纪恐龙骨架之一",
+      "report": "reports/2026-08-03.html#item8",
+      "reportLabel": "2026-08-03 日报",
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "http://www.news.cn/20260802/b2d9f138661245cc8ff75f9aa0d5a8f7/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 \"何以景德镇\"申遗成功后首次系统性大展在京开幕——四大板块讲述千年瓷都从泥土到世界遗产的完整叙事",
+      "report": "reports/2026-08-04.html#item2",
+      "reportLabel": "2026-08-04 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "https://city.news.cctv.com/2026/08/03/ARTIrqOcKJqSRWtbVMaMd2gM260803.shtml"
+        },
+        {
+          "name": "江西日报",
+          "url": "http://rf.jiangxi.gov.cn/jxsgfdybgs/szfyw123/list/content/content_2083709076104716288.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 \"青铜之路\"固原北方青铜文化特展芜湖开展——400余件先秦文物，长城沿线游牧文明南下长三角",
+      "report": "reports/2026-08-04.html#item3",
+      "reportLabel": "2026-08-04 日报",
+      "sources": [
+        {
+          "name": "芜湖市文旅局",
+          "url": "https://ct.wuhu.gov.cn/xwzx/tzgg/8945597.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 牛河梁遗址\"北斗七星\"红烧土坑新发现——5800年前红山人将宇宙观刻入大地，2026红山文化大会同日启幕",
+      "report": "reports/2026-08-05.html#item1",
+      "reportLabel": "2026-08-05 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "https://news.cctv.com/2026/08/04/ARTIE4TroUBTTLCBy72cw7TR260804.shtml"
+        },
+        {
+          "name": "光明网",
+          "url": "https://m.gmw.cn/2026-08/04/content_1304542706.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 国家文物局印发《国家文物事业发展\"十五五\"规划》——11项指标十大任务，应县木塔、故宫、三星堆-金沙申遗列入重点工程",
+      "report": "reports/2026-08-05.html#item2",
+      "reportLabel": "2026-08-05 日报",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/1/art_722_204100.html"
+        },
+        {
+          "name": "中国政府网",
+          "url": "https://www.gov.cn/zhengce/202607/content_7077208.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙博\"太平年·天下同宁\"吴越国大展——近百家机构近千件五代文物首度集结，国博三件五代珍藏助阵",
+      "report": "reports/2026-08-05.html#item3",
+      "reportLabel": "2026-08-05 日报",
+      "sources": [
+        {
+          "name": "国博官网",
+          "url": "https://www.chnmuseum.cn/zx/gbxw/202608/t20260804_281322.shtml"
+        },
+        {
+          "name": "澎湃新闻",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33652327"
+        }
+      ]
+    },
+    {
+      "title": "🔥 张九龄之妻董韶容墓文物全国首展8月7日韶关开幕——21件出土文物填补唐代名相婚姻研究空白，金银平脱镜领衔",
+      "report": "reports/2026-08-05.html#item4",
+      "reportLabel": "2026-08-05 日报",
+      "sources": [
+        {
+          "name": "韶关市政府",
+          "url": "https://www.sg.gov.cn/xw/ztjj/cjgjlswhmc/content/post_2869853.html"
+        }
+      ]
+    },
+    {
+      "title": "山东三城考古成果展联袂推出——滕州288件+肥城115件+聊城近百件，覆盖后李文化至明清万年文脉",
+      "report": "reports/2026-08-05.html#item5",
+      "reportLabel": "2026-08-05 日报",
+      "sources": [
+        {
+          "name": "山东宣传网",
+          "url": "https://www.sdxc.gov.cn/fzgg/fzggsy/202608/t20260804_17991692.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 马王堆\"双帛画\"首次同场地轮换展出——一号墓T形帛画8/16撤展进入10天倒计时，三号墓8/18国内首次省外亮相",
+      "report": "reports/2026-08-06.html#item1",
+      "reportLabel": "2026-08-06 日报",
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "https://www.news.cn/local/20260805/662ba1ae6d5249689e328fb2c58030e5/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 上博\"世界树之巅\"美洲大展暑期成绩单——10万+观众、文创破千万、2300+款产品，文博经济新标杆",
+      "report": "reports/2026-08-06.html#item2",
+      "reportLabel": "2026-08-06 日报",
+      "sources": [
+        {
+          "name": "新华网",
+          "url": "https://www.news.cn/expo/20260803/3f559807d3c94d35a70d232842380de6/c.html"
+        },
+        {
+          "name": "澎湃新闻",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33607027"
+        },
+        {
+          "name": "上海观察",
+          "url": "https://www.shobserver.cn/sgh/detail?id=4018501"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙博圆明园四大兽首展8/6起单独预约限流——单日1万人次，兽首热持续升温",
+      "report": "reports/2026-08-06.html#item3",
+      "reportLabel": "2026-08-06 日报",
+      "sources": [
+        {
+          "name": "浙江在线",
+          "url": "https://zjnews.zjol.com.cn/zjnews/202608/t20260802_31821698.shtml"
+        }
+      ]
+    },
+    {
+      "title": "三星堆祭祀坑发现40周年学术研讨会——近2万件文物出土，多学科融合范式确立，三大未解之谜待破解",
+      "report": "reports/2026-08-06.html#item4",
+      "reportLabel": "2026-08-06 日报",
+      "sources": [
+        {
+          "name": "新华每日电讯",
+          "url": "http://mrdx.cn/content/20260806/Articel07005NR.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 红山文化大会闭幕：牛河梁现北斗七星祭坛，郑家沟将红山下限延后200年，基因实证贯通辽西-冀北走廊",
+      "report": "reports/2026-08-07.html#item1",
+      "reportLabel": "2026-08-07 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "https://www.news.cn/politics/20260807/3ee1ddfb2eb24c64a509da3ba9bf07ca/c.html"
+        },
+        {
+          "name": "新华网",
+          "url": "https://www.news.cn/ci/20260807/2099c2376d2144c5a4b38884f0e379b1/c.html"
+        },
+        {
+          "name": "央广网",
+          "url": "https://www.cnr.cn/sx/rwft/20260807/t20260807_527751797.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙博兽首展\"挤到道歉\"——周末5.7万人排队5小时，馆方致歉并推分时预约，拟组建\"国宝回家\"联盟",
+      "report": "reports/2026-08-07.html#item4",
+      "reportLabel": "2026-08-07 日报",
+      "sources": [
+        {
+          "name": "中国新闻网",
+          "url": "http://www.zj.chinanews.com.cn/xwl/2026-08-06/detail-ihfhytzk9165596.shtml"
+        },
+        {
+          "name": "CCTV",
+          "url": "http://big5.cctv.com/gate/big5/style.cctv.com/2026/08/06/ARTI8mKxn9L74XyZVfnmAPfA260806.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 文物领域首个数据管理专项文件印发——\"国有文物资源数据属于国家所有\"，三类服务场景构建数据开放新范式",
+      "report": "reports/2026-08-08.html#item2",
+      "reportLabel": "2026-08-08 日报",
+      "sources": [
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/c/2026-08-05/8863444.shtml"
+        },
+        {
+          "name": "人民网",
+          "url": "http://ent.people.com.cn/n1/2026/0729/c1012-40770432.html"
+        }
+      ]
+    },
+    {
+      "title": "花山岩画申遗成功十周年——AI智能监测+全域数字化总库，中外专家崇左共商岩画保护\"中国方案\"",
+      "report": "reports/2026-08-08.html#item4",
+      "reportLabel": "2026-08-08 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://news.gmw.cn/2026-08/05/content_38927248.htm"
+        }
+      ]
+    },
+    {
+      "title": "北京中轴线申遗成功两周年——累计实施百余项文保工程，\"最小干预\"为世界遗产城市保护提供中国经验",
+      "report": "reports/2026-08-08.html#item5",
+      "reportLabel": "2026-08-08 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://news.gmw.cn/2026-08/05/content_38927248.htm"
+        },
+        {
+          "name": "人民网",
+          "url": "http://theory.people.com.cn/BIG5/n1/2026/0805/c40531-40774121.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 埃及萨卡拉出土三座新王国岩窟墓——军事指挥官碑文记功远征叙利亚，大商人墓铭揭示精英家族生活",
+      "report": "reports/2026-08-08.html#item6",
+      "reportLabel": "2026-08-08 日报",
+      "sources": [
+        {
+          "name": "ARTnews",
+          "url": "https://www.artnews.com/art-news/news/new-kingdom-tombs-offer-insights-ancient-egyptian-society-1234793170/"
+        },
+        {
+          "name": "The Art Newspaper",
+          "url": "https://www.theartnewspaper.com/2026/07/23/three-ancient-egyptian-tombs-with-significant-inscriptions-discovered-in-saqqara-necropolis"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 澳博物馆归还复活节岛18具先祖遗骸——1882年德国舰队掠走的Ivi Tupuna，馆长道歉称\"道德责任\"",
+      "report": "reports/2026-08-08.html#item7",
+      "reportLabel": "2026-08-08 日报",
+      "sources": [
+        {
+          "name": "The Art Newspaper",
+          "url": "https://www.theartnewspaper.com/2026/08/04/australian-museum-repatriates-rapa-nui-remains-easter-island"
+        },
+        {
+          "name": "ARTnews",
+          "url": "https://www.artnews.com/art-news/news/australian-museum-returns-rapa-nui-ancestral-remains-easter-island-1234794357/"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 景德镇手工瓷业遗存列入《世界遗产名录》——中国第61项世遗、全球首个\"产业遗产\"瓷主题，11年申遗路填补名录空白",
+      "report": "reports/2026-08-09.html#item1",
+      "reportLabel": "2026-08-09 日报",
+      "sources": [
+        {
+          "name": "央视",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/05/ARTIuGlsZVZP1XaI3HUYWbrE260805.shtml"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://epaper.gmw.cn/gmrb/html/content/202608/06/content_21490.html"
+        },
+        {
+          "name": "中新网",
+          "url": "http://m.chinanews.com/wap/detail/cht/zw/10670712.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 马王堆\"双帛画\"首次同场地轮换——一号墓T形帛画8月16日撤展后长期\"休眠\"，三号墓帛画18日接棒国内首展",
+      "report": "reports/2026-08-09.html#item2",
+      "reportLabel": "2026-08-09 日报",
+      "sources": [
+        {
+          "name": "澎湃新闻",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33720450"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://m.gmw.cn/2026-08/06/content_1304544253.htm"
+        }
+      ]
+    },
+    {
+      "title": "白鹤梁水下博物馆启动毫米级数字建档——AI大模型病害识别+云端导览，\"世界第一古代水文站\"迈向预防性保护",
+      "report": "reports/2026-08-09.html#item4",
+      "reportLabel": "2026-08-09 日报",
+      "sources": [
+        {
+          "name": "中新网",
+          "url": "http://www.chinanews.com.cn/sh/shipin/2026/08-07/news1064663.shtml"
+        }
+      ]
+    },
+    {
+      "title": "\"星起河洛\"亮相辽博——河南206件夏商周礼乐重器北上，\"妇好\"鸟足鼎与九鼎八簋首聚东北",
+      "report": "reports/2026-08-09.html#item5",
+      "reportLabel": "2026-08-09 日报",
+      "sources": [
+        {
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=14&contentId=14754"
+        },
+        {
+          "name": "河南省文物局",
+          "url": "https://wwj.henan.gov.cn/2026/08-01/3381469.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 敦煌悬泉置遗址完成1:1数字化复原——\"数字悬泉置\"解锁丝路驿站千年密码",
+      "report": "reports/2026-08-10.html#item1",
+      "reportLabel": "2026-08-10 日报",
+      "sources": [
+        {
+          "name": "央视新闻",
+          "url": "https://news.cctv.cn/2026/08/10/ARTIs8WsK8RtBFeT7qhj4d97260810.shtml"
+        }
+      ]
+    },
+    {
+      "title": "\"守望——廊桥保护三年行动成果展\"在京开幕——2193座廊桥家底首次系统呈现",
+      "report": "reports/2026-08-10.html#item3",
+      "reportLabel": "2026-08-10 日报",
+      "sources": [
+        {
+          "name": "人民网",
+          "url": "http://ent.people.com.cn/n1/2026/0810/c1012-40776444.html"
+        }
+      ]
+    },
+    {
+      "title": "笔架山潮州窑遗址考古成果展巡展至珠海——宋代海上瓷路再入公众视野",
+      "report": "reports/2026-08-10.html#item5",
+      "reportLabel": "2026-08-10 日报",
+      "sources": [
+        {
+          "name": "潮州市政府",
+          "url": "https://www.chaozhou.gov.cn/slhwz/czxw/content/post_4000972.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 土耳其Aspendos古城发现1800年前医神阿斯克勒庇俄斯父子大理石雕像群",
+      "report": "reports/2026-08-10.html#item6",
+      "reportLabel": "2026-08-10 日报",
+      "sources": [
+        {
+          "name": "新华社英文版",
+          "url": "https://english.news.cn/europe/20260806/388a62fedf3a4d9fa2392b7de18e9d6a/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 殷墟申遗成功20周年——三千年文明正青春，博物馆新馆年接待突破500万",
+      "report": "reports/2026-08-11.html#item1",
+      "reportLabel": "2026-08-11 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://news.gmw.cn/2026-08/10/content_38934094.htm"
+        },
+        {
+          "name": "新华社",
+          "url": "https://www.news.cn/20260807/6c4ab0c2fea24584bd80097d1d8c359f/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 人民日报时评关注辽博\"微笑\"文物展——300件文物为何一起微笑？博物馆策展的\"情绪转向\"",
+      "report": "reports/2026-08-11.html#item2",
+      "reportLabel": "2026-08-11 日报",
+      "sources": [
+        {
+          "name": "人民日报（国际在线转载）",
+          "url": "https://big5.cri.cn/gate/big5/news.cri.cn/20260811/7d2b91df-c659-4fbf-ac40-ee6e50e8c366.html"
+        },
+        {
+          "name": "央广网",
+          "url": "https://www.cnr.cn/ln/tpxw/20260727/t20260727_527731838.shtml"
+        }
+      ]
+    },
+    {
+      "title": "盘龙城遗址博物院\"寻绎夏商\"大展开展——34家文博单位163件文物共绘夏商文明图景",
+      "report": "reports/2026-08-11.html#item3",
+      "reportLabel": "2026-08-11 日报",
+      "sources": [
+        {
+          "name": "人民日报海外版",
+          "url": "https://paper.people.com.cn/rmrbhwb/pc/content/202608/11/content_30174179.html"
+        }
+      ]
+    },
+    {
+      "title": "三星堆文物保护修复中心揭秘——郭汉中40年修复6000余件文物，象牙保护技术全球领先",
+      "report": "reports/2026-08-11.html#item4",
+      "reportLabel": "2026-08-11 日报",
+      "sources": [
+        {
+          "name": "China.org.cn",
+          "url": "http://www.china.org.cn/2026-08/10/content_118641385.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 意大利西西里发现2100年前罗马沉船——数百个双耳瓶堆积如山，\"近年来最重要的水下考古发现之一\"",
+      "report": "reports/2026-08-11.html#item7",
+      "reportLabel": "2026-08-11 日报",
+      "sources": [
+        {
+          "name": "CNN",
+          "url": "https://edition.cnn.com/2026/08/10/science/sicily-roman-shipwreck-scli-intl"
+        },
+        {
+          "name": "AP",
+          "url": "https://uat.apnews.com/video/police-video-shows-ancient-roman-shipwreck-with-hundreds-of-amphorae-discovered-off-sicily-31f1298b2642488c8e180007ad258a41"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 国家文物局\"十五五\"规划全文公布——三星堆-金沙冲刺申遗、应县木塔启动研究性保护、AI赋能文物安全写入纲领",
+      "report": "reports/2026-08-12.html#item1",
+      "reportLabel": "2026-08-12 日报",
+      "sources": [
+        {
+          "name": "国家文物局（地方转载）",
+          "url": "https://www.xifeng.gov.cn/zwgk/zdlygk/ggwhfw_5741620/zcfg_5741622/202608/t20260807_90714331.html"
+        },
+        {
+          "name": "澎湃新闻·苏州",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33698151"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 古文字工程\"十四五\"成果展亮相国博——270件甲骨青铜简牍集中亮相，全球最大甲骨文摹本大系问世",
+      "report": "reports/2026-08-12.html#item2",
+      "reportLabel": "2026-08-12 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://politics.gmw.cn/2026-08/12/content_38939114.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 博物馆数字化多点突破——避暑山庄\"魔墙\"三维交互、龙门石窟AR复原、青海省博VR大空间考古体验",
+      "report": "reports/2026-08-12.html#item3",
+      "reportLabel": "2026-08-12 日报",
+      "sources": [
+        {
+          "name": "青海省博",
+          "url": "http://www.qinghai.gov.cn/zwgk/system/2026/08/01/030105503.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 国家文物局推动博物馆\"免预约、刷证即入\"——预约制从常态变为例外，\"随心逛\"成文博惠民新方向",
+      "report": "reports/2026-08-13.html#item1",
+      "reportLabel": "2026-08-13 日报",
+      "sources": [
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/papers/grrb/2026/08/13/5/news-4.html"
+        },
+        {
+          "name": "新华网·民生观察",
+          "url": "http://news.cnr.cn/native/gd/20260810/t20260810_527756215.shtml"
+        },
+        {
+          "name": "新京报社论",
+          "url": "https://www.bjnews.com.cn/detail/1786372898168729.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 内蒙古寨子塔石城出土龙山时期龙凤泥塑——北方最早\"龙凤\"实物组合，具象化上溯至公元前2300年",
+      "report": "reports/2026-08-13.html#item3",
+      "reportLabel": "2026-08-13 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "http://www.xinhuanet.com.cn/politics/20260812/ae6bf13433a044908867dfb39a6850ee/c.html"
+        },
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/papers/grrb/2026/08/13/3/news-4.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 云南耿马芒关岩画铀系测年锁定4220年前——中国西南最早定居人群岩画与\"4.2千年气候事件\"精确对位",
+      "report": "reports/2026-08-14.html#item1",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "https://www.xinhuanet.com/culture/20260814/0e27216d8f0a458a8566b04647c8be7e/c.html"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://m.gmw.cn/2026-08/13/content_1304547731.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 首都博物馆\"全城一展\"——馆台联合让展览走进九大商圈，\"没有围墙的博物馆\"探索博物馆之城新路径",
+      "report": "reports/2026-08-14.html#item2",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "人民网",
+          "url": "http://ent-app.people.cn/n1/2026/0812/c1012-40777807.html"
+        },
+        {
+          "name": "光明日报",
+          "url": "https://news.gmw.cn/2026-08/12/content_38938597.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙博首座县级分馆仙居县博物馆开馆——北宋金龙等镇馆之宝首秀，\"大馆带小馆\"总分馆制落地",
+      "report": "reports/2026-08-14.html#item3",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "浙江省文物局",
+          "url": "http://wwj.zj.gov.cn/col/col1639077/art/2026/art_e00d1c0f7f6bee7788a8c5ddc8447191.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 惠州\"贞观天下\"特展——五馆联展27件国家一级文物，昭陵、甘肃、固原、镇江文物首聚岭南",
+      "report": "reports/2026-08-14.html#item4",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "南方网",
+          "url": "https://www.nfnews.com/content/96qKv2Y2yM.html"
+        },
+        {
+          "name": "南方网·27件一级文物",
+          "url": "https://www.nfnews.com/content/v6JNpmpd6G.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 浙博圆明园四兽首原件展引发观展热潮——馆方推动组建\"国宝回家\"联盟，文物追索进入\"制度+民间\"双轮驱动",
+      "report": "reports/2026-08-14.html#item5",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "中新网",
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10672631.shtml"
+        },
+        {
+          "name": "央视网",
+          "url": "http://big5.cctv.com/gate/big5/style.cctv.com/2026/08/06/ARTI8mKxn9L74XyZVfnmAPfA260806.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥🔥 土耳其Göbeklitepe出土1万年前房屋——改写\"哥贝克力只是祭祀中心\"的认知，巨石圣地也有人定居",
+      "report": "reports/2026-08-14.html#item6",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "新华社英文版",
+          "url": "http://english.news.cn/20260813/6fe773db89cc4a42aa6f45056f18ad74/c.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 土耳其Tralleis古城出土2000年前罗马马赛克——波塞冬海马纹，浴场-体育馆复合建筑再添新证",
+      "report": "reports/2026-08-14.html#item7",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "Archaeology Magazine",
+          "url": "https://archaeology.org/news/2026/07/30/hippocampus-mosaic-uncovered-in-turkey/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 埃及Bahariya绿洲发现三座古墓——人面棺盖与罗马集体墓葬，绿洲千年葬俗连续层",
+      "report": "reports/2026-08-14.html#item8",
+      "reportLabel": "2026-08-14 日报",
+      "sources": [
+        {
+          "name": "ARTnews",
+          "url": "https://www.artnews.com/art-news/news/archaeologists-uncover-three-ancient-tombs-at-bahariya-oasis-1234794927/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国家文物局发文规范暑期开放：取消预约限制、打击黄牛囤票",
+      "report": "reports/2026-08-15.html#item1",
+      "reportLabel": "2026-08-15 日报",
+      "sources": [
+        {
+          "name": "中国城市报/人民日报",
+          "url": "http://paper.people.com.cn/zgcsb/pc/content/202608/03/content_30172879.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国博\"双星耀世——三星堆-金沙古蜀文明展\"8月18日闭幕",
+      "report": "reports/2026-08-15.html#item2",
+      "reportLabel": "2026-08-15 日报",
+      "sources": [
+        {
+          "name": "国家博物馆展览专题页",
+          "url": "https://www.chnmuseum.cn/portals/0/web/zt/202601shxysh/"
+        }
+      ]
+    },
+    {
+      "title": "陕西历史博物馆\"古今智鉴\"获第十届博博会最佳数字展示案例",
+      "report": "reports/2026-08-15.html#item3",
+      "reportLabel": "2026-08-15 日报",
+      "sources": [
+        {
+          "name": "陕西历史博物馆官网",
+          "url": "https://www.sxhm.com/info/news/detail/16310.html"
+        }
+      ]
+    },
+    {
+      "title": "江西省博物馆\"数智江博\"实现全业务智慧化管理",
+      "report": "reports/2026-08-15.html#item4",
+      "reportLabel": "2026-08-15 日报",
+      "sources": [
+        {
+          "name": "澎湃新闻",
+          "url": "https://www.thepaper.cn/newsDetail_forward_20278468"
+        }
+      ]
+    },
+    {
+      "title": "洛阳两项目入选世界互联网大会《文化遗产数字化案例集（2026）》",
+      "report": "reports/2026-08-15.html#item5",
+      "reportLabel": "2026-08-15 日报",
+      "sources": [
+        {
+          "name": "人民网河南频道",
+          "url": "http://ha.people.com.cn/n2/2026/0727/c378397-41651296.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国家文物局发布暑期应急管理紧急通知：大客流、停电、极端天气纳入应急体系",
+      "report": "reports/2026-08-16.html#item1",
+      "reportLabel": "2026-08-16 日报",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/10/art_2318_48480.html"
+        }
+      ]
+    },
+    {
+      "title": "观台西磁州窑址考古再发现：六十载资料系统整理，揭示元代外销网络",
+      "report": "reports/2026-08-16.html#item2",
+      "reportLabel": "2026-08-16 日报",
+      "sources": [
+        {
+          "name": "光明日报",
+          "url": "https://epaper.gmw.cn/gmrb/html/content/202608/16/content_22314.html"
+        }
+      ]
+    },
+    {
+      "title": "广东民间工艺博物馆\"塑造万象\"馆藏雕塑展8月15日开幕",
+      "report": "reports/2026-08-16.html#item3",
+      "reportLabel": "2026-08-16 日报",
+      "sources": [
+        {
+          "name": "广州日报",
+          "url": "https://news.dayoo.com/guangdong/202607/30/139996_54985717.htm"
+        }
+      ]
+    },
+    {
+      "title": "法国简化文物返还程序：非法所得外国文物归还或将提速",
+      "report": "reports/2026-08-16.html#item7",
+      "reportLabel": "2026-08-16 日报",
+      "sources": [
+        {
+          "name": "人民网国际",
+          "url": "https://world.people.com.cn/n1/2026/0420/c1002-40704242.html"
+        }
+      ]
+    },
+    {
+      "title": "湖北黄梅张山遗址公布发掘成果：鄂东首次系统性旷野型旧石器遗址",
+      "report": "reports/2026-08-17.html#item2",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "国家文物局一周文物动态摘编",
+          "url": "http://www.ncha.gov.cn/art/2026/8/15/art_722_204356.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 山西吕梁明代古城墙\"拆旧建新\"引发调查：条石城砖被当废弃物倾倒",
+      "report": "reports/2026-08-17.html#item3",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "财新网",
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html?originReferrer=kimi"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局发布《文物建筑预防性保护技术导则》——不可移动文物首个预防性保护规范",
+      "report": "reports/2026-08-17.html#item4",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/col/col722/index.html"
+        }
+      ]
+    },
+    {
+      "title": "红山文化新发掘持续推进，补全中华文明实证链条",
+      "report": "reports/2026-08-17.html#item5",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/art/2026/8/8/art_722_204245.html"
+        }
+      ]
+    },
+    {
+      "title": "南京大屠杀遇难同胞纪念馆新征集史料150余件（套）",
+      "report": "reports/2026-08-17.html#item6",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "财新网汇编",
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html?originReferrer=kimi"
+        }
+      ]
+    },
+    {
+      "title": "乌克兰敖德萨世界遗产\"历史中心\"6座文化遗产建筑在袭击中受损",
+      "report": "reports/2026-08-17.html#item7",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "财新网",
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html?originReferrer=kimi"
+        }
+      ]
+    },
+    {
+      "title": "中乌布哈拉联合考古发掘正式启动，研究丝绸之路文明演进",
+      "report": "reports/2026-08-17.html#item8",
+      "reportLabel": "2026-08-17 日报",
+      "sources": [
+        {
+          "name": "北京大学考古文博学院",
+          "url": "https://archaeology.pku.edu.cn/info/1043/43385.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 央视\"文物大工匠\"聚焦孙亮申：37年\"挖\"出5项全国十大考古新发现",
+      "report": "reports/2026-08-18.html#item1",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "https://people.cctv.com/2026/08/17/ARTIBU5seN1Lkkv29f7lnHTj260817.shtml"
+        }
+      ]
+    },
+    {
+      "title": "中国国家博物馆公示2026年度社会招聘入围面试人员名单",
+      "report": "reports/2026-08-18.html#item2",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "中国国家博物馆官网",
+          "url": "https://www.chnmuseum.cn/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国家文物局解读《国有文物资源数据管理办法》：文物数据资产化管理提速",
+      "report": "reports/2026-08-18.html#item3",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/index.html"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局发布《地下文物埋藏区划定指南》解读：考古前置再添技术底座",
+      "report": "reports/2026-08-18.html#item4",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "国家文物局官网",
+          "url": "http://www.ncha.gov.cn/index.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 故宫数字文物库上线\"藏古文字数字平台\"，古文字活化利用加速",
+      "report": "reports/2026-08-18.html#item5",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "故宫博物院数字文物库",
+          "url": "https://digicol.dpm.org.cn/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 第48届世界遗产委员会会议7月底在韩国落幕：年度遗产治理收官",
+      "report": "reports/2026-08-18.html#item6",
+      "reportLabel": "2026-08-18 日报",
+      "sources": [
+        {
+          "name": "UNESCO",
+          "url": "https://www.unesco.org/zh"
+        }
+      ]
+    },
+    {
+      "title": "🔥 国博\"双星耀世\"古蜀文明展8月18日落幕，金沙文物开启\"特种兵式\"出差",
+      "report": "reports/2026-08-19.html#item1",
+      "reportLabel": "2026-08-19 日报",
+      "sources": [
+        {
+          "name": "中国国家博物馆",
+          "url": "https://www.chnmuseum.cn/zx/gbxw/202608/t20260815_281973.shtml"
+        },
+        {
+          "name": "央视网",
+          "url": "https://yangbo.cctv.cn/2026/01/19/ARTI9tfTeuutpC4tqvtqHSCK260119.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 中埃联合考古新突破：阿齐兹遗址发现神庙遗迹",
+      "report": "reports/2026-08-19.html#item4",
+      "reportLabel": "2026-08-19 日报",
+      "sources": [
+        {
+          "name": "西北大学",
+          "url": "https://www.nwu.edu.cn/info/1064/21936.htm"
+        }
+      ]
+    },
+    {
+      "title": "央视《探索·发现》聚焦山东高青大墓：陈庄—唐口遗址二次发掘",
+      "report": "reports/2026-08-19.html#item7",
+      "reportLabel": "2026-08-19 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "https://tv.cctv.com/2026/08/12/VIDEtFL812MHwnT9LPtbGcRr260812.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 博物馆错字风波升级：国家文物局发文要求全国展陈内容专项核查",
+      "report": "reports/2026-08-20.html#item1",
+      "reportLabel": "2026-08-20 日报",
+      "sources": [
+        {
+          "name": "光明网",
+          "url": "https://m.gmw.cn/2026-08/20/content_1304550876.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 浙江衢州姑蔑考古遗址公园开放：1000余件出土文物九成首次亮相",
+      "report": "reports/2026-08-20.html#item2",
+      "reportLabel": "2026-08-20 日报",
+      "sources": [
+        {
+          "name": "工人日报",
+          "url": "https://www.workercn.cn/c/2026-08-17/8871637.shtml"
+        }
+      ]
+    },
+    {
+      "title": "辽宁三燕文物赴郑州：140余件精品再现\"龙城\"风华",
+      "report": "reports/2026-08-20.html#item4",
+      "reportLabel": "2026-08-20 日报",
+      "sources": [
+        {
+          "name": "中新网",
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10679888.shtml"
+        }
+      ]
+    },
+    {
+      "title": "宁夏发现2300年前战国秦酒：多学科分析还原先秦酿酒工艺",
+      "report": "reports/2026-08-20.html#item5",
+      "reportLabel": "2026-08-20 日报",
+      "sources": [
+        {
+          "name": "西北大学",
+          "url": "https://www.nwu.edu.cn/info/1064/22005.htm"
+        }
+      ]
+    },
+    {
+      "title": "南非归还纳米比亚84具先民遗骸：逾百年\"伪科学\"收藏的迟来修复",
+      "report": "reports/2026-08-20.html#item7",
+      "reportLabel": "2026-08-20 日报",
+      "sources": [
+        {
+          "name": "中国网",
+          "url": "http://www.china.org.cn/world/Off_the_Wire/2026-08/20/content_118655763.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 央视调研长沙\"博物馆奇妙夜\"：暑期博物馆夜游走向常态运营",
+      "report": "reports/2026-08-21.html#item2",
+      "reportLabel": "2026-08-21 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "https://news.cctv.com/2026/08/13/ARTI4uCu2fpiIliMjamLIV54260813.shtml"
+        }
+      ]
+    },
+    {
+      "title": "2026中巴文化年推进：国博将办波尔蒂纳里视觉艺术展",
+      "report": "reports/2026-08-21.html#item4",
+      "reportLabel": "2026-08-21 日报",
+      "sources": [
+        {
+          "name": "央视新闻",
+          "url": "https://news.cctv.com/2026/03/29/ARTIyx38BIfFJoUzpI1FaTc2260329.shtml"
+        }
+      ]
+    },
+    {
+      "title": "2026爱尔兰国家遗产周收官周：全民参与的遗产\"开放季\"",
+      "report": "reports/2026-08-21.html#item6",
+      "reportLabel": "2026-08-21 日报",
+      "sources": [
+        {
+          "name": "National Heritage Week 2026",
+          "url": "https://www.chinadaily.com.cn/a/202606/17/WS6a326f5ba310986e2b4608fb_6.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 山西昔阳钟村发现迄今最高等级夏代贵族墓葬：46㎡双椁三棺墓主通体朱砂",
+      "report": "reports/2026-08-22.html#item1",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "上游新闻",
+          "url": "https://www.cqcb.com/news/13/2026-08-21/6204271.html"
+        },
+        {
+          "name": "央视新闻",
+          "url": "https://big5.cctv.com/gate/big5/news.cctv.cn/2026/08/22/ARTI1dB6MRyZ8fE84jONmYfH260822.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 河北阳原新庙庄遗址发现莫斯特技术石器：华北腹地首现尼安德特人文化迹象",
+      "report": "reports/2026-08-22.html#item2",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "阳原县文广旅局",
+          "url": "http://www.zjkwmw.gov.cn/contents/1057/19702.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 故宫国宝《韩熙载夜宴图》首次亮相浙博：8月22日开展",
+      "report": "reports/2026-08-22.html#item3",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "上观新闻",
+          "url": "https://www.shobserver.cn/staticsg/res/html/web/newsDetail.html?id=1162415&sid=11"
+        }
+      ]
+    },
+    {
+      "title": "🔥 \"太阳神鸟\"出差结束返蓉：108件金沙文物从国博撤展回家",
+      "report": "reports/2026-08-22.html#item4",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "人民网四川",
+          "url": "http://sc.people.com.cn/n2/2026/0821/c379470-41673471.html"
+        }
+      ]
+    },
+    {
+      "title": "\"和合致美——中华古代文明艺术展\"在吉尔吉斯斯坦开幕：中吉规模最大联合办展",
+      "report": "reports/2026-08-22.html#item7",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "央视网",
+          "url": "http://big5.cctv.com/gate/big5/arts.cctv.cn/2026/08/21/ARTIvlXx5EmoGngkDXfcz7xE260821.shtml"
+        }
+      ]
+    },
+    {
+      "title": "秘鲁瓦卡普克拉纳遗址发现祭祀遗骸",
+      "report": "reports/2026-08-22.html#item10",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "AP News",
+          "url": "https://apnews.com/article/peru-lima-huaca-pucllana-pyramid-discovery-archaeology-ac44172ab29425029ca7b3ecf5819691"
+        }
+      ]
+    },
+    {
+      "title": "安哥拉凯凯水电站考古：恩东戈王国文明遗迹现世",
+      "report": "reports/2026-08-22.html#item11",
+      "reportLabel": "2026-08-22 日报",
+      "sources": [
+        {
+          "name": "人民网",
+          "url": "http://world-app.people.cn/n1/2026/0821/c1002-40783856.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 中国考古机构首次赴南美洲开展联合考古：与秘鲁共研卡拉尔文明",
+      "report": "reports/2026-08-23.html#item1",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "光明网",
+          "url": "https://m.gmw.cn/2026-08/22/content_1304552022.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 大足石刻保护项目获亚太旅游协会\"最高大奖\"",
+      "report": "reports/2026-08-23.html#item2",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "人民网重庆",
+          "url": "http://cq.people.com.cn/BIG5/n2/2026/0822/c365402-41674743.html"
+        }
+      ]
+    },
+    {
+      "title": "🔥 广州\"城脉千年\"专题展开幕：410余件藏品讲述2240年城市史",
+      "report": "reports/2026-08-23.html#item3",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "广州日报大洋网",
+          "url": "https://news.dayoo.com/guangzhou/202608/22/139995_54993718.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 内蒙古博物院元上都遗址数字沉浸特展：XR技术\"重返\"元上都",
+      "report": "reports/2026-08-23.html#item4",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "新华网内蒙古",
+          "url": "http://www.neimenggu.xinhua.org/20260822/fc6590ec60904ad48d4b517ea0df476e/c.html"
+        }
+      ]
+    },
+    {
+      "title": "广西蒙山发现汉代古墓：抢救性发掘出土文物19件",
+      "report": "reports/2026-08-23.html#item6",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "中国新闻网广西",
+          "url": "http://www.gx.chinanews.com.cn/kjwt/wh/2026-08-22/detail-ihfimfee7180996.shtml"
+        }
+      ]
+    },
+    {
+      "title": "敦煌莫高窟千佛飞天有了\"数字分身\"：323个洞窟完成高精度采集",
+      "report": "reports/2026-08-23.html#item7",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "http://www.news.cn/20260820/8ef0a1edc0924a3f8c86c665b3b8e739/c.html"
+        }
+      ]
+    },
+    {
+      "title": "土耳其Sayburc新石器遗址拟建露天博物馆",
+      "report": "reports/2026-08-23.html#item9",
+      "reportLabel": "2026-08-23 日报",
+      "sources": [
+        {
+          "name": "新华社英文",
+          "url": "http://english.news.cn/20260821/53531595e8624ac5b620194fad037f1d/c.html"
+        }
+      ]
+    },
+    {
+      "title": "河南新郑裴李岗遗址考古成果持续公布：170余座墓葬实证8000年农业定居",
+      "report": "reports/2026-08-24.html#item1",
+      "reportLabel": "2026-08-24 日报",
+      "sources": [
+        {
+          "name": "中国考古网（2025年度全国十大考古新发现公布）",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202604/t20260429_5985420.shtml"
+        }
+      ]
+    },
+    {
+      "title": "江口沉银博物馆首次亮相：全国唯一金银器主题考古博物馆",
+      "report": "reports/2026-08-24.html#item2",
+      "reportLabel": "2026-08-24 日报",
+      "sources": [
+        {
+          "name": "澎湃新闻",
+          "url": "https://www.thepaper.cn/newsDetail_forward_32697111"
+        }
+      ]
+    },
+    {
+      "title": "🔥 上海世界技能博物馆\"CHINA白\"特展开幕：德化白瓷100余件珍品+0.2毫米薄纱瓷塑",
+      "report": "reports/2026-08-25.html#item1",
+      "reportLabel": "2026-08-25 日报",
+      "sources": [
+        {
+          "name": "光明网",
+          "url": "https://m.gmw.cn/2026-08/25/content_1304553435.htm"
+        }
+      ]
+    },
+    {
+      "title": "🔥 马王堆三号墓T形帛画国内首次跨省展出：迄今最大汉代彩绘帛画亮相上海",
+      "report": "reports/2026-08-25.html#item2",
+      "reportLabel": "2026-08-25 日报",
+      "sources": [
+        {
+          "name": "澎湃新闻",
+          "url": "https://www.thepaper.cn/newsDetail_forward_33836679"
+        }
+      ]
+    },
+    {
+      "title": "🔥 云冈石窟\"光谱指纹\"项目：全球首个3D高光谱石质文物数字化平台",
+      "report": "reports/2026-08-25.html#item3",
+      "reportLabel": "2026-08-25 日报",
+      "sources": [
+        {
+          "name": "澎湃新闻（据科技日报）",
+          "url": "https://m.thepaper.cn/newsDetail_forward_33845410"
+        }
+      ]
+    },
+    {
+      "title": "🔥 中乌联合奥佐德墓地考古发掘启动：直指月氏—贵霜关系之谜",
+      "report": "reports/2026-08-26.html#item2",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "中新网",
+          "url": "https://m.chinanews.com/wap/detail/chs/zw/10684087.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 中国语言资源保护工程成果展示馆开馆：全球首座语言资源主题馆落子长沙",
+      "report": "reports/2026-08-26.html#item3",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "新华社",
+          "url": "https://www.news.cn/20260824/898810454ad94f3fa2a604da9923fc8a/c.html"
+        }
+      ]
+    },
+    {
+      "title": "国博\"华彩万象\"石窟沉浸展登陆淄博：五大石窟数字活化×琉璃跨界",
+      "report": "reports/2026-08-26.html#item4",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "中国国家博物馆",
+          "url": "https://www.chnmuseum.cn/zx/gbxw/202608/t20260824_282431.shtml"
+        }
+      ]
+    },
+    {
+      "title": "中国水墨艺术AI巡展亮相贝尔格莱德：16位艺术家探索水墨×人工智能",
+      "report": "reports/2026-08-26.html#item5",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "中国网",
+          "url": "http://www.china.org.cn/world/Off_the_Wire/2026-08/25/content_118662401.shtml"
+        }
+      ]
+    },
+    {
+      "title": "🔥 维米尔《戴珍珠耳环的少女》大阪展出：14年后再访日本或为告别之旅",
+      "report": "reports/2026-08-26.html#item6",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "朝日新闻",
+          "url": "https://www.asahi.com/ajw/articles/16825477"
+        }
+      ]
+    },
+    {
+      "title": "秘鲁瓦卡斯·德·莫切遗址发现莫切文化儿童墓葬",
+      "report": "reports/2026-08-26.html#item9",
+      "reportLabel": "2026-08-26 日报",
+      "sources": [
+        {
+          "name": "Archaeology Magazine",
+          "url": "https://archaeology.org/news/2026/08/25/childs-burial-excavated-at-huacas-de-moche/"
+        }
+      ]
+    },
+    {
+      "title": "🔥 宁夏博物馆大空间VR《寻梦西夏陵》正式开放：VR里\"穿越\"西夏王朝",
+      "report": "reports/2026-08-27.html#item1",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "国际在线：大空间VR沉浸式体验产品亮相宁夏博物馆",
+          "url": "https://news.cri.cn/n/20260827/06e72112-63ae-4f7c-bed7-5121a8f3e056.html"
+        }
+      ]
+    },
+    {
+      "title": "第十届内蒙古文博会开幕：AR眼镜、裸眼3D与\"文博新语\"集中亮相",
+      "report": "reports/2026-08-27.html#item2",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "内蒙古新闻网：十年文博盛会 彰显文化活力",
+          "url": "https://m.nmgnews.com.cn/nmgxw/system/2026/08/27/030391455.shtml"
+        }
+      ]
+    },
+    {
+      "title": "\"盈寸千里\"内画艺术传承创新展：鼻烟壶非遗走向可穿戴文创",
+      "report": "reports/2026-08-27.html#item3",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "北京日报客户端：\"盈寸千里\"内画艺术展在中国工艺美术馆开幕",
+          "url": "https://xinwen.bjd.com.cn/content/s6a8ce02ee4b03fa51a83572b.html"
+        }
+      ]
+    },
+    {
+      "title": "第二届粤港澳大湾区（广东）文创联盟换届：130余家成员、7大专委会",
+      "report": "reports/2026-08-27.html#item4",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "南方网：七大专委会、130多家成员单位，第二届粤港澳大湾区（广东）文创联盟成立",
+          "url": "https://www.nfnews.com/content/53859pGG6B.html"
+        }
+      ]
+    },
+    {
+      "title": "广西博物馆\"尚武精神\"挂包走红：网友喊话复刻，馆方回应\"安排\"",
+      "report": "reports/2026-08-27.html#item5",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "上游新闻：广西博物馆馆藏\"尚武精神\"挂包走红，网友喊话原样复刻",
+          "url": "https://www.cqcb.com/news/16/2026-08-21/6203848.html"
+        }
+      ]
+    },
+    {
+      "title": "意大利托斯卡纳发掘双线告捷：24只巨型储罐原址保存，实证希腊化经济中心",
+      "report": "reports/2026-08-27.html#item8",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "University at Buffalo",
+          "url": "https://www.buffalo.edu/home/story-repository.host.html/content/shared/university/news/ub-reporter-articles/stories/2026/08/italy-archeological-excavations.detail.html"
+        }
+      ]
+    },
+    {
+      "title": "埃及卢克索出土\"唱诗女祭司\"Merit墓：30具猫木乃伊与10具彩棺",
+      "report": "reports/2026-08-27.html#item10",
+      "reportLabel": "2026-08-27 日报",
+      "sources": [
+        {
+          "name": "National Geographic",
+          "url": "https://www.nationalgeographic.com/history/article/egyptian-chantress-merit"
+        }
+      ]
+    },
+    {
+      "title": "上海文学馆正式向公众开放：五大常设展区与城市阅读空间联动",
+      "report": "reports/2026-08-28.html#item1",
+      "reportLabel": "2026-08-28 日报",
+      "sources": [
+        {
+          "name": "新华网：上海文学馆正式向公众开放",
+          "url": "https://www.news.cn/20260827/aac450d221924c8884cc3c6ef7aabdfb/c.html"
+        }
+      ]
+    },
+    {
+      "title": "恭王府博物馆推出中法马主题文化展：200余件（套）展品展开文明对话",
+      "report": "reports/2026-08-28.html#item2",
+      "reportLabel": "2026-08-28 日报",
+      "sources": [
+        {
+          "name": "央视网：和而不同 美美与共——中法马主题文化展在恭王府博物馆展出",
+          "url": "https://arts.cctv.com/2026/08/25/ARTIB5XQSY0dJybO8749YDDK260825.shtml"
+        }
+      ]
+    },
+    {
+      "title": "首都博物馆开幕“笔墨中国·征途壮歌”全国美术作品展",
+      "report": "reports/2026-08-28.html#item3",
+      "reportLabel": "2026-08-28 日报",
+      "sources": [
+        {
+          "name": "央视网央博：笔墨中国·征途壮歌——纪念中国工农红军长征胜利90周年全国美术作品展",
+          "url": "https://yangbo.cctv.com/2026/08/24/ARTIBQc3KQdR8ssTDd6oPSY4260824.shtml"
+        }
+      ]
+    },
+    {
+      "title": "西班牙比列纳博物馆遭窃：青铜时代黄金文物失踪，警方展开调查",
+      "report": "reports/2026-08-28.html#item4",
+      "reportLabel": "2026-08-28 日报",
+      "sources": [
+        {
+          "name": "RTVE（西班牙国家公共电视台）",
+          "url": "https://www.rtve.es/noticias/20260827/roban-museo-del-tesoro-villena-uno-mas-valiosos-edad-bronce-europa/17203413.shtml"
+        },
+        {
+          "name": "EFE（西班牙通讯社）",
+          "url": "https://efe.com/cultura/2026-08-27/robo-tesoro-villena-edad-bronce/"
+        },
+        {
+          "name": "新华网（交叉核验）",
+          "url": "https://www.news.cn/20260827/b8a117ea4e9e485c85df8a1c4aa745cb/c.html"
+        }
+      ]
+    },
+    {
+      "title": "文化和旅游部修订《博物馆藏品管理办法》：六章六十三条，11月1日起施行",
+      "report": "reports/2026-08-29.html#item1",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "文化和旅游部：政策解读",
+          "url": "https://zwgk.mct.gov.cn/zfxxgkml/zcfg/zcjd/202608/t20260827_966973.html"
+        },
+        {
+          "name": "新华网：文化和旅游部公布《博物馆藏品管理办法》",
+          "url": "https://www.news.cn/politics/20260828/857cbabb69c04986b65e5a2e052ad71d/c.html"
+        }
+      ]
+    },
+    {
+      "title": "VR进入博物馆规模化应用阶段：专家讨论文化服务与展陈边界重构",
+      "report": "reports/2026-08-29.html#item2",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "新华网：中国电影博物馆举办“VR与博物馆的变革”学术沙龙",
+          "url": "https://www.news.cn/ci/20260828/952e481ee6b24e74b77935144c3dd225/c.html"
+        }
+      ]
+    },
+    {
+      "title": "中外联合考古工作会议在长春召开",
+      "report": "reports/2026-08-29.html#item3",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "郑州市文物局：中外联合考古工作会议在长春召开",
+          "url": "https://wwj.zhengzhou.gov.cn/wwyw/10222851.jhtml"
+        }
+      ]
+    },
+    {
+      "title": "北京市文物局转发加强博物馆陈列展览内容审核工作的通知",
+      "report": "reports/2026-08-29.html#item4",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "北京市人民政府：北京市文物局关于转发相关通知的通知",
+          "url": "https://www.beijing.gov.cn/zhengce/zhengcefagui/202608/t20260826_4838226.html"
+        }
+      ]
+    },
+    {
+      "title": "中国国家博物馆中文官网焕新亮相",
+      "report": "reports/2026-08-29.html#item5",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "中国国家博物馆：中国国家博物馆中文官网焕新亮相",
+          "url": "https://www.chnmuseum.cn/zx/gbxw/202608/t20260826_282445.shtml"
+        }
+      ]
+    },
+    {
+      "title": "闽宁传统工艺精品展在宁夏银川开展",
+      "report": "reports/2026-08-29.html#item6",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "福建省文化和旅游厅：武夷风·贺兰韵——闽宁传统工艺精品展在宁夏银川开展",
+          "url": "https://wlt.fujian.gov.cn/wldt/btdt/202608/t20260826_7204530.htm"
+        }
+      ]
+    },
+    {
+      "title": "香港推出“青春向延安”专题展：陕西革命文物首次在港集中展出",
+      "report": "reports/2026-08-29.html#item7",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "新华网：香港推出“青春向延安——抗战时期的爱国青年”专题展览",
+          "url": "https://www.news.cn/20260827/3959a6f1f3d74c87a6c380c853e2438e/c.html"
+        }
+      ]
+    },
+    {
+      "title": "UNESCO与合作伙伴为文化财产返还与保护能力建设提供支持",
+      "report": "reports/2026-08-29.html#item8",
+      "reportLabel": "2026-08-29 日报",
+      "sources": [
+        {
+          "name": "UNESCO：为文化财产返还与归还建立专业能力",
+          "url": "https://www.unesco.org/en/articles/unesco-and-partners-build-expertise-return-and-restitution-cultural-property?hub=66973"
+        }
+      ]
+    },
+    {
+      "title": "中国农业博物馆二十四节气系列文化活动启幕",
+      "report": "reports/2026-08-30.html#item1",
+      "reportLabel": "2026-08-30 日报",
+      "sources": [
+        {
+          "name": "新华社：中国农业博物馆二十四节气系列文化活动启幕",
+          "url": "https://www.news.cn/politics/20260829/0609eba8442d4b7899f5314c07d4854f/c.html"
+        }
+      ]
+    },
+    {
+      "title": "故宫博物院“典则：唐宋书画展”将于9月1日起展出",
+      "report": "reports/2026-08-30.html#item2",
+      "reportLabel": "2026-08-30 日报",
+      "sources": [
+        {
+          "name": "故宫博物院：典则：唐宋书画展展览快讯",
+          "url": "https://www.dpm.org.cn/show/379510.html"
+        }
+      ]
+    },
+    {
+      "title": "中国国家博物馆举办“包容与创新：中国古代佛教艺术流变”专题讲座",
+      "report": "reports/2026-08-30.html#item3",
+      "reportLabel": "2026-08-30 日报",
+      "sources": [
+        {
+          "name": "中国国家博物馆：包容与创新：中国古代佛教艺术流变",
+          "url": "https://www.chnmuseum.cn/yj/kydt/202608/t20260828_282466.shtml"
+        }
+      ]
+    },
+    {
+      "title": "维也纳一博物馆发生抢劫盗窃：名贵钻石项链被盗",
+      "report": "reports/2026-08-30.html#item4",
+      "reportLabel": "2026-08-30 日报",
+      "sources": [
+        {
+          "name": "新华社：维也纳一博物馆发生抢劫盗窃",
+          "url": "https://www.news.cn/20260829/9e894aec6e4943ecac0fde4bb5931997/c.html"
+        }
+      ]
+    }
+  ],
+  "qualityNotes": [
+    "周期统计以实际存在的日报为准；未覆盖日期不外推。",
+    "当前为月报不完整预览：缺少 2026-08-31 的日报。",
+    "候选账本只从 2026-08-29 起建立；本周期不展示候选发现量或采用率作为整期指标。",
+    "摘编/日报中的事件按日报收录条目统计，不等同于整个行业发生量。"
+  ],
+  "source": "日报档案与可回溯原始来源"
+}

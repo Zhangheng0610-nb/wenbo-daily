@@ -62,6 +62,35 @@
 5. 扩大检索地域和岗位类型：全国博物馆、考古队/研究所、高校文博岗位、文物保护修复、展览与公共教育、数字文博、文化遗产项目及相关企业均可纳入；按真实性、仍可投递和信息完整度排序，不按来源等级机械排除。
 6. 同一岗位合并重复信息，优先保留官方投递入口，同时可附招聘平台链接用于补充；找不到有效投递方式就不收录。
 
+### 周报 2.0 / 月报 1.0 周期报告
+
+周报和月报共用 `automation/periodic_reports.py` 的周期数据模型与页面组件，但只消费已经生成的日报，不重新采集新闻，也不改变日报、地图或数字趋势口径。周报在周日运行：
+
+```text
+python automation/generate_periodic_reports.py --weekly YYYY-MM-DD
+```
+
+每月 1 日先确认上月每一天的日报都存在，再生成正式月报；脚本会在月份不完整时拒绝正式输出：
+
+```text
+python automation/generate_periodic_reports.py --monthly YYYY-MM
+```
+
+月末数据尚未齐全时，只能使用明确标记为本地预览的命令，预览不进入正式月报档案：
+
+```text
+python automation/generate_periodic_reports.py --monthly-preview YYYY-MM
+```
+
+周期报告的事件量、主题分布和时间节奏只统计实际存在的日报。候选账本从 2026-08-29 才建立，因此在历史周期不展示候选发现量或采用率 KPI。正式月报的时间范围严格使用上月 1 日至月末，不把当月 1 日日报混入上月。发布前运行：
+
+```text
+python automation/validate_periodic_reports.py --type weekly --key YYYY-MM-DD
+python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
+```
+
+周/月报可以回链到日报条目和原始来源；报告中的综合判断属于本站样本内观察，至少需要两个独立事实支点，不能把单纯展览规模或传播热度写成行业趋势。
+
 日报筛选规则：
 
 1. 只选近 7 天内发布或有明确新进展的内容；展览和活动必须核对当前状态。
