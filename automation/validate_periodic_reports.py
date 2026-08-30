@@ -11,6 +11,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ALLOWED_IMPACT_LEVELS = {"high", "medium", "low"}
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -70,6 +71,9 @@ def check_editorial(model, editorial, expected_type, expected_key, preview=False
             errors.append(f"highlight lacks periodRelevance: {key}")
         elif key in rows and not rows[key].get("sources"):
             errors.append(f"highlight lacks publishable evidence: {key}")
+        impact_level = highlight.get("impactLevel")
+        if impact_level not in ALLOWED_IMPACT_LEVELS:
+            errors.append(f"highlight impactLevel must be one of {sorted(ALLOWED_IMPACT_LEVELS)}: {key}")
         support = highlight.get("supportItemKeys", [])
         if re.search(r"跨周期|前期|此前|延续|回顾|持续|早于本月|早于本期|原始发布", highlight.get("periodRelevance", "")) and not support:
             errors.append(f"cross-period highlight lacks current-period support: {key}")
@@ -118,7 +122,6 @@ def check_editorial(model, editorial, expected_type, expected_key, preview=False
 
 def check_model(model, editorial, expected_type, expected_key, html_path, preview=False):
     errors = check_editorial(model, editorial, expected_type, expected_key, preview)
-    errors = []
     if model.get("layout") != "periodic-v2":
         errors.append("layout must be periodic-v2")
     if model.get("type") != expected_type:
