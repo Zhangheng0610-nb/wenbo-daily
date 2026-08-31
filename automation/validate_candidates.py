@@ -19,11 +19,66 @@ REQUIRED = {
     'selectedForDaily', 'dedupStatus', 'notes',
 }
 DECISIONS = {'selected', 'rejected', 'deferred', 'needs_verification'}
+# Keep the two earlier ledger vocabularies readable; new discovery audits use
+# the explicit event-level values below.  Historical ledgers are not silently
+# rewritten just to satisfy the newer validator.
+DUPLICATE_STATUSES = {'unique_event', 'same_day_duplicate', 'historical_duplicate', 'new_development', 'possible_duplicate', 'unique_opportunity', 'unresolved', 'not_selected'}
+DISCOVERY_AUDIT_REQUIRED_FROM = date(2026, 8, 31)
 
 
 def valid_url(value):
     parsed = urlparse(value or '')
     return parsed.scheme in {'http', 'https'} and bool(parsed.netloc)
+
+
+def validate_discovery_audit(ledger_path, payload):
+    """Validate the separate broad-discovery audit without mixing it into map data."""
+    errors = []
+    try:
+        ledger_date = date.fromisoformat(payload.get('date', ''))
+    except (TypeError, ValueError):
+        return ['cannot validate discovery audit for invalid ledger date']
+    ref = payload.get('discoveryAuditPath')
+    if ledger_date >= DISCOVERY_AUDIT_REQUIRED_FROM and not ref:
+        return ['daily ledger needs discoveryAuditPath from 2026-08-31 onward']
+    if not ref:
+        return errors
+    audit_path = (ROOT / ref).resolve()
+    if ROOT not in audit_path.parents or not audit_path.exists():
+        return [f'discovery audit missing: {ref}']
+    try:
+        audit = json.loads(audit_path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f'invalid discovery audit: {exc}']
+    if audit.get('schema') != 'daily-discovery-v1':
+        errors.append('discovery audit schema must be daily-discovery-v1')
+    if audit.get('date') != payload.get('date'):
+        errors.append('discovery audit date does not match ledger')
+    scans = audit.get('sourceScans')
+    if not isinstance(scans, list) or not scans:
+        errors.append('discovery audit needs sourceScans')
+    else:
+        for scan in scans:
+            if scan.get('status') == 'no_update':
+                errors.append(f'discovery scan cannot use no_update: {scan.get("sourceId", "?")}')
+            if scan.get('status') not in {'checked', 'fetch_failed', 'parse_failed', 'blocked'}:
+                errors.append(f'invalid discovery scan status: {scan.get("sourceId", "?")}')
+    if not isinstance(audit.get('queryFamilies'), list) or not audit.get('queryFamilies'):
+        errors.append('discovery audit needs queryFamilies')
+    records = audit.get('records')
+    if not isinstance(records, list):
+        errors.append('discovery audit records must be a list')
+    else:
+        for index, record in enumerate(records, 1):
+            status = record.get('duplicateStatus', 'unique_event')
+            if status not in DUPLICATE_STATUSES:
+                errors.append(f'discovery record {index}: invalid duplicateStatus')
+            if status in {'same_day_duplicate', 'historical_duplicate', 'possible_duplicate'} and not record.get('duplicateOf'):
+                errors.append(f'discovery record {index}: duplicateOf required for {status}')
+    summary = audit.get('summary') or {}
+    if isinstance(records, list) and summary.get('rawResults') != len(records):
+        errors.append('discovery summary rawResults does not match records')
+    return errors
 
 
 def validate(path, report_path=None):
@@ -43,8 +98,9 @@ def validate(path, report_path=None):
         errors.append('discoveryCompleted must be true')
     if payload.get('internationalDiscoveryChecked') is not True:
         errors.append('internationalDiscoveryChecked must be true')
-    if payload.get('internationalDiscoveryStatus') != 'checked':
-        errors.append('internationalDiscoveryStatus must be checked')
+    if payload.get('internationalDiscoveryStatus') not in {'checked', 'partial', 'failed'}:
+        errors.append('internationalDiscoveryStatus must be checked, partial, or failed')
+    errors.extend(validate_discovery_audit(path, payload))
     ids = set()
     for index, candidate in enumerate(candidates, 1):
         label = f'candidate {index}'
@@ -57,6 +113,10 @@ def validate(path, report_path=None):
         ids.add(candidate_id)
         if candidate.get('decision') not in DECISIONS:
             errors.append(f'{label}: invalid decision')
+        if candidate.get('dedupStatus', 'unique_event') not in DUPLICATE_STATUSES:
+            errors.append(f'{label}: invalid dedupStatus')
+        if candidate.get('dedupStatus') in {'same_day_duplicate', 'historical_duplicate', 'possible_duplicate'} and not candidate.get('duplicateOf'):
+            errors.append(f'{label}: duplicateOf required for {candidate.get("dedupStatus")}')
         if not isinstance(candidate.get('selectedForDaily'), bool):
             errors.append(f'{label}: selectedForDaily must be boolean')
         elif candidate['selectedForDaily'] != (candidate.get('decision') == 'selected'):

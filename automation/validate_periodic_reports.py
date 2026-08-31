@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from build import parse_md
+from automation.governance import canonical_url
 from automation.periodic_reports import build_periodic_model, load_editorial
 
 
@@ -140,8 +141,14 @@ def check_model(model, editorial, expected_type, expected_key, html_path, previe
             errors.append(f"highlight lacks report/evidence: {row.get('title', '')}")
         elif not (ROOT / row["report"].split("#", 1)[0]).exists():
             errors.append(f"highlight report missing: {row.get('report', '')}")
-        if not any(evidence.get("title") == row.get("title") for evidence in model.get("evidence", [])):
+        matching_evidence = [evidence for evidence in model.get("evidence", []) if evidence.get("title") == row.get("title")]
+        if not matching_evidence:
             errors.append(f"highlight absent from evidence index: {row.get('title', '')}")
+        else:
+            row_sources = {canonical_url(source.get("url", "")) for source in row.get("sources", []) if source.get("url")}
+            evidence_sources = {canonical_url(source.get("url", "")) for source in matching_evidence[0].get("sources", []) if source.get("url")}
+            if row_sources and not row_sources.intersection(evidence_sources):
+                errors.append(f"highlight evidence does not belong to item: {row.get('title', '')}")
     if len(model.get("highlights", [])) != (3 if expected_type == "weekly" else 5):
         errors.append("highlight count does not match report type")
     if not html_path.exists() or html_path.stat().st_size == 0:

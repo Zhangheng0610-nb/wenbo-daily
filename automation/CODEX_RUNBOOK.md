@@ -109,7 +109,15 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 2. 读取当天已有监测文件和日报、近 30 天去重索引及必要的上一期栏目。
 3. 先完成固定池巡检。先运行 `python automation/backfill_monitoring.py --end YYYY-MM-DD --days 1 --write`；再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
 4. 再做日报搜索：先按发现层广泛建立候选账本，再回溯 A/B 级证据，最后按专业价值精选。不得先选日报再反填监测库。
-5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。
+   现在必须执行独立的 broad discovery 审计：
+
+   ```text
+   python automation/daily_discovery.py --date YYYY-MM-DD --window-days 7 --write
+   ```
+
+   该命令只写 `content/发现/YYYY-MM-DD.json`，不写入 `content/监测/`，也不改变地图数据。它主动扫描国家文物局文物新闻/政策入口、新华网、中国新闻网、UNESCO 和 Archaeology Magazine 等可重复入口；Codex 还必须逐项执行 `daily_discovery.py` 中的国内/国际 query family，并把实际 query、结果数、失败状态和发现链接补入同日 discovery audit。发现来源只负责扩大召回，证据来源必须另行核验。
+   候选账本必须引用 `discoveryAuditPath`。每条候选保留 `discoveredVia`、`discoveryQuery`、`duplicateStatus`、`duplicateOf`、`duplicateReason` 和 `newDevelopment`（未知时使用 `possible_duplicate` / `needs_verification`，不得静默删除）。
+5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。去重顺序是：广泛发现 → 当天事件聚类 → 近 7—14 天历史事件核对 → evidence 核验 → editorial selection。当天同一事件只保留 canonical event；历史转载记录保留在 discovery audit 中并写明 `duplicateOf`；有明确新增事实的记录标记 `new_development`，不能因标题相似被误杀。
 6. 按日期判断是否执行招聘、周报、月报；不要把所有栏目都重复搜一遍。
 7. 运行 `python build.py`。
 8. 运行 `python automation/validate_project.py --date YYYY-MM-DD`；该检查会强制要求当日 6 源覆盖登记和固定池域名匹配。历史档案可用 `--all` 检查，`--strict-all` 仅用于专项清理。

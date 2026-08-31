@@ -2574,6 +2574,15 @@ def related_digest_sources(title, daily_reports, context=''):
                     score += sum(fragment in context_compact for fragment in fragments)
                 matches.append((score, item))
     matches.sort(key=lambda value: value[0], reverse=True)
+    # A contextual aggregate is only a safe match when it has the strongest
+    # identity evidence.  Previously the best title match could have no
+    # publishable source, after which the code fell through to weaker matches
+    # from unrelated stories and borrowed their URLs (the 2026-08-23
+    # Ma-wang-dui/Sicily error).  If the strongest match is unresolved, keep
+    # it unresolved instead of attaching a less certain article's evidence.
+    if matches:
+        best_score = matches[0][0]
+        matches = [match for match in matches if match[0] == best_score]
     sources = []
     seen = set()
     for _score, item in matches[:3]:

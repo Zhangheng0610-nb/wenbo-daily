@@ -1,0 +1,351 @@
+{
+  "schema": "daily-discovery-v1",
+  "date": "2026-08-31",
+  "windowStart": "2026-08-25",
+  "windowEnd": "2026-08-31",
+  "cutoffTimezone": "Asia/Shanghai",
+  "sourceScans": [
+    {
+      "sourceId": "ncha-wenwu-news",
+      "name": "国家文物局文物新闻栏目",
+      "scope": "domestic",
+      "url": "http://www.ncha.gov.cn/module/jslib/jquery/jpage/dataproxy.jsp?appid=1&webid=1&path=/&columnid=722&unitid=8000&webname=%E5%9B%BD%E5%AE%B6%E6%96%87%E7%89%A9%E5%B1%80&permissiontype=0&page=1",
+      "status": "checked",
+      "linksSeen": 300,
+      "datedLinks": 300,
+      "outsideWindow": 296,
+      "undatedLinks": 0,
+      "rawResults": 300,
+      "windowResults": 4,
+      "note": ""
+    },
+    {
+      "sourceId": "ncha-policy-news",
+      "name": "国家文物局政策/工作动态栏目",
+      "scope": "domestic",
+      "url": "http://www.ncha.gov.cn/module/jslib/jquery/jpage/dataproxy.jsp?appid=1&webid=1&path=/&columnid=1879&unitid=8000&webname=%E5%9B%BD%E5%AE%B6%E6%96%87%E7%89%A9%E5%B1%80&permissiontype=0&page=1",
+      "status": "checked",
+      "linksSeen": 300,
+      "datedLinks": 300,
+      "outsideWindow": 296,
+      "undatedLinks": 0,
+      "rawResults": 300,
+      "windowResults": 4,
+      "note": ""
+    },
+    {
+      "sourceId": "xinhua-cultural",
+      "name": "新华网文化/文博栏目",
+      "scope": "domestic",
+      "url": "https://www.news.cn/ci/wb.html",
+      "status": "checked",
+      "linksSeen": 29,
+      "datedLinks": 16,
+      "outsideWindow": 9,
+      "undatedLinks": 13,
+      "rawResults": 16,
+      "windowResults": 7,
+      "note": ""
+    },
+    {
+      "sourceId": "chinanews-cultural",
+      "name": "中国新闻网文化栏目",
+      "scope": "domestic",
+      "url": "https://www.chinanews.com.cn/cul/",
+      "status": "checked",
+      "linksSeen": 0,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 0,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "unesco-news",
+      "name": "UNESCO新闻",
+      "scope": "international",
+      "url": "https://www.unesco.org/en/news",
+      "status": "fetch_failed",
+      "linksSeen": 0,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 0,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": "https://www.unesco.org/en/news: HTTP Error 404: Not Found"
+    },
+    {
+      "sourceId": "archaeology-magazine",
+      "name": "Archaeology Magazine新闻",
+      "scope": "international",
+      "url": "https://archaeology.org/news/",
+      "status": "checked",
+      "linksSeen": 0,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 0,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": ""
+    }
+  ],
+  "queryFamilies": [
+    {
+      "id": "policy-governance",
+      "scope": "domestic",
+      "queries": [
+        "文物 政策 管理办法 通知 施行",
+        "博物馆 管理 政策 文物局"
+      ]
+    },
+    {
+      "id": "archaeology-heritage",
+      "scope": "domestic",
+      "queries": [
+        "考古 新发现 遗址 保护 研究成果",
+        "文物保护 工程 遗产 条例"
+      ]
+    },
+    {
+      "id": "museum-public-culture",
+      "scope": "domestic",
+      "queries": [
+        "博物馆 开馆 展览 重要馆藏 官方",
+        "博物馆 安全 声明 重大事件"
+      ]
+    },
+    {
+      "id": "digital-heritage",
+      "scope": "domestic",
+      "queries": [
+        "数字文博 AI 三维 虚拟现实 博物馆",
+        "文物 数字化 数据平台 保护"
+      ]
+    },
+    {
+      "id": "international-heritage",
+      "scope": "international",
+      "queries": [
+        "museum archaeology cultural heritage",
+        "heritage protection museum theft",
+        "repatriation museum policy",
+        "digital heritage museum technology"
+      ]
+    }
+  ],
+  "queryAuditStatus": "not_replayed",
+  "queryResults": [],
+  "records": [
+    {
+      "title": "《金石探文明》今晚播出 解码两千多年前的石刻史诗",
+      "publishedDate": "2026-08-30",
+      "url": "http://www.ncha.gov.cn/art/2026/8/30/art_722_204570.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "一周文物动态摘编（8.22-8.28）",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204565.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "中外联合考古工作会议在长春召开",
+      "publishedDate": "2026-08-27",
+      "url": "http://www.ncha.gov.cn/art/2026/8/27/art_722_204540.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "same event identity",
+      "duplicateOf": "中外联合考古工作会议在长春召开",
+      "newDevelopment": false
+    },
+    {
+      "title": "习近平作出重要指示强调 巩固拓展树立和践行正确政绩观学习教育成果 努力创造经得起...",
+      "publishedDate": "2026-08-25",
+      "url": "http://www.ncha.gov.cn/art/2026/8/25/art_1879_204492.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "same_day_duplicate",
+      "duplicateReason": "same event identity",
+      "duplicateOf": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "newDevelopment": false
+    },
+    {
+      "title": "全国性行业类媒体负责人学习宣传贯彻习近平党建思想专题培训班在京举办",
+      "publishedDate": "2026-08-27",
+      "url": "http://www.ncha.gov.cn/art/2026/8/27/art_1879_204529.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "创造经得起实践、人民、历史检验的实绩——习近平总书记引领全党深入开展树立和践行正...",
+      "publishedDate": "2026-08-27",
+      "url": "http://www.ncha.gov.cn/art/2026/8/27/art_1879_204520.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "首图推出“重走营造学社之路——中国古建筑系列讲座”",
+      "publishedDate": "2026-08-30",
+      "url": "https://www.news.cn/ci/20260830/28d9f2c0a5644edd9db36a007a3bc2c3/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "“歌声中的共同记忆——裕固族口头传统资源建设成果展演活动”在国图举办",
+      "publishedDate": "2026-08-30",
+      "url": "https://www.news.cn/ci/20260830/1518e10868c14cedaa930955de276700/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "中国电影博物馆举办“VR与博物馆的变革”学术沙龙",
+      "publishedDate": "2026-08-28",
+      "url": "https://www.news.cn/ci/20260828/952e481ee6b24e74b77935144c3dd225/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "same canonical URL",
+      "duplicateOf": "VR进入博物馆规模化应用阶段：专家讨论文化服务与展陈边界重构",
+      "newDevelopment": false
+    },
+    {
+      "title": "中国抗战主题纪念馆成为暑期热门目的地",
+      "publishedDate": "2026-08-28",
+      "url": "https://www.news.cn/ci/20260828/a69e1532eeb54582a3af04c1f38d1338/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "文旅消费新体验 圆明园里开了间中医数智小屋",
+      "publishedDate": "2026-08-31",
+      "url": "https://www.news.cn/ci/20260831/45721dacdbba4ccb93fa0bccb34f4166/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "云南海晏村：古村留古韵 文旅促振兴",
+      "publishedDate": "2026-08-31",
+      "url": "https://www.news.cn/ci/20260831/b4b71c49ea524b279a60489c0d14690b/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    },
+    {
+      "title": "中国乡土艺术焕发青春活力",
+      "publishedDate": "2026-08-31",
+      "url": "https://www.news.cn/ci/20260831/d626e7d5ea96420caf83589389ad9f55/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-08-31T14:02:21+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false
+    }
+  ],
+  "summary": {
+    "sourceScansAttempted": 6,
+    "sourceScansSucceeded": 5,
+    "queriesExecuted": 0,
+    "rawResults": 15,
+    "sameDayDuplicates": 1,
+    "historicalDuplicates": 2,
+    "newDevelopments": 0,
+    "deduplicatedResults": 12,
+    "domestic": {
+      "rawResults": 15,
+      "sameDayDuplicates": 1,
+      "historicalDuplicates": 2,
+      "newDevelopments": 0,
+      "deduplicatedResults": 12
+    },
+    "international": {
+      "rawResults": 0,
+      "sameDayDuplicates": 0,
+      "historicalDuplicates": 0,
+      "newDevelopments": 0,
+      "deduplicatedResults": 0
+    }
+  }
+}

@@ -4,8 +4,12 @@ The public site is static, but its quality rules must be executable.  This
 module is deliberately dependency-free so it works on Windows and macOS.
 """
 
+import json
 from collections import OrderedDict
+from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 SOURCE_GROUPS = OrderedDict([
@@ -28,6 +32,10 @@ SOURCE_GROUPS = OrderedDict([
             "mplus.org.hk", "hbww.org.cn", "hnmuseum.com", "hylmuseum.cn",
             "aec1971.org.cn", "bjast.ac.cn", "brightonmuseums.org.uk",
             "unesco.org", "whc.unesco.org", "iccrom.org", "icom.museum",
+            # Official government / police domains used by international
+            # heritage reporting.  They remain article-level evidence, not
+            # blanket approval of every page on the host.
+            "polizei.gv.at",
         ),
     }),
     ("B", {
@@ -44,6 +52,8 @@ SOURCE_GROUPS = OrderedDict([
             # classification during broad daily discovery; they remain B-level
             # supplementary evidence and should be cross-checked when material.
             "asahi.com", "bjd.com.cn", "nmgnews.com.cn",
+            "henandaily.cn", "yzwb.net", "enorth.com.cn", "orf.at",
+            "aa.com.tr",
         ),
     }),
     ("C", {
@@ -58,8 +68,27 @@ SOURCE_GROUPS = OrderedDict([
 # therefore opt-in: add a stable __biz value only after recording the account
 # identity, institution type, official-site backlink, and original-publishing
 # evidence.  An empty registry is intentional; unknown accounts remain
-# blocked as final evidence until a human verifies them.
-OFFICIAL_WECHAT_ACCOUNTS = {}
+# blocked as final evidence until a human verifies them.  Keep the registry
+# outside Python so adding one account is an auditable data change.
+OFFICIAL_WECHAT_REGISTRY_PATH = ROOT / "content" / "候选" / "official-wechat-registry.json"
+
+
+def _load_official_wechat_accounts():
+    try:
+        payload = json.loads(OFFICIAL_WECHAT_REGISTRY_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    accounts = payload.get("accounts") if isinstance(payload, dict) else None
+    if not isinstance(accounts, list):
+        return {}
+    return {
+        account.get("biz"): account
+        for account in accounts
+        if isinstance(account, dict) and account.get("biz")
+    }
+
+
+OFFICIAL_WECHAT_ACCOUNTS = _load_official_wechat_accounts()
 
 
 # Explainable institutional suffixes for reputable non-Chinese university and

@@ -2,10 +2,11 @@
   "version": 1,
   "date": "2026-08-31",
   "scope": "daily-editorial",
+  "discoveryAuditPath": "content/发现/2026-08-31.json",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
-  "internationalDiscoveryStatus": "checked",
-  "internationalDiscoveryNote": "已检查 UNESCO、世界遗产中心、ICOM、ICCROM、ICOMOS 及重要博物馆和考古机构公开新闻；本期未发现近7天内同时具备直接 A/B 级证据和明确行业信息增量的国际事件，因此不硬凑国际栏目。",
+  "internationalDiscoveryStatus": "partial",
+  "internationalDiscoveryNote": "已尝试检查 UNESCO、世界遗产中心、ICOM、ICCROM、ICOMOS 及重要博物馆和考古机构；本次可复现扫描中 UNESCO 请求失败、其他专门入口未返回可解析的窗口文章，历史任务也未保存逐源查询日志，因此国际发现状态记为部分覆盖，不据此断言近7天没有合格国际事件。",
   "candidates": [
     {
       "candidateId": "daily-20260831-001",
@@ -31,7 +32,7 @@
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "8月25日开展，汇集法国尚蒂伊庄园60余件馆藏及国内文博机构200余件（套）相关文物和艺术品，具有明确的中法馆际交流信息增量。",
-      "dailyItemNumber": 1,
+      "dailyItemNumber": 2,
       "dailyItemTitle": "恭王府博物馆推出“驭·鉴——中法马主题文化展”"
     },
     {
@@ -58,7 +59,7 @@
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "会议围绕馆藏大藏经整理保护、版本源流、装帧艺术、数字化和活化利用展开，包含馆藏《永乐北藏》专项整理研究成果。",
-      "dailyItemNumber": 2,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "“文心・艺韵・薪传：馆藏大藏经的多维阐释与当代价值”学术研讨会在中国国家博物馆召开"
     },
     {
@@ -85,7 +86,7 @@
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "108件（套）文物从国博展览返蓉后完成三方点交，报道明确记录了比对核验、称重和后续恒温恒湿库房养护流程。",
-      "dailyItemNumber": 3,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "108件金沙参展文物全部返蓉，太阳神鸟金饰完成点交"
     },
     {
@@ -112,13 +113,43 @@
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "展览以数字形式呈现克孜尔、敦煌、麦积山、云冈和龙门五处石窟，并与淄博馆藏相关实物结合，属于跨机构数字化展示实践。",
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "国博巡展“华彩万象——石窟艺术沉浸体验”在淄博陶瓷琉璃博物馆开幕"
+    },
+    {
+      "candidateId": "daily-20260831-005",
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "publishedDate": "2026-08-29",
+      "discoveredAt": "2026-08-31T07:20:00+08:00",
+      "discoverySource": "国家文物局文物新闻栏目主动巡检",
+      "discoverySourceType": "official-source-scan",
+      "discoveryUrl": "https://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+      "publisher": "国家文物局",
+      "institution": "国家文物局",
+      "evidenceSources": [
+        {"name": "国家文物局：召开树立和践行正确政绩观学习教育总结会", "url": "https://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html", "tier": "A", "role": "official"}
+      ],
+      "evidenceTier": "A",
+      "topic": ["政策与治理"],
+      "tags": ["国家文物局", "治理"],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_national_governance_update",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoveryQuery": "source-scan:ncha-wenwu-news",
+      "newDevelopment": true,
+      "notes": "国家文物局栏目主动扫描发现；用户补充的 art_1879 页面与文物新闻栏目中同一治理动态相互印证。",
+      "dailyItemNumber": 1,
+      "dailyItemTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会"
     }
   ],
   "summary": {
-    "discovered": 4,
-    "selected": 4,
+    "discovered": 5,
+    "selected": 5,
     "rejected": 0,
     "deferred": 0,
     "needsVerification": 0
