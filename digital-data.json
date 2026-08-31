@@ -1,57 +1,63 @@
 {
- "generated": "2026-08-29",
+ "generated": "2026-08-31",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-08-29"
+  "end": "2026-08-31"
  },
  "stats": {
-  "total": 271,
+  "total": 273,
   "title_hit": 26,
-  "digest_extra": 645,
+  "digest_extra": 647,
   "levels": {
-   "core": 216,
+   "core": 218,
    "ext": 12,
    "tech": 43
   },
-  "digest_articles": 510,
-  "unique_source_pages": 155,
-  "source_article_total": 13765,
-  "source_unique_pages": 4767,
-  "overall_share": 3.25,
+  "digest_articles": 511,
+  "unique_source_pages": 156,
+  "source_article_total": 13768,
+  "source_unique_pages": 4770,
+  "overall_share": 3.27,
   "topic_unique_counts": {
-   "数字保护与数字采集": 79,
+   "数字保护与数字采集": 80,
    "AI、三维扫描与科技考古": 73,
-   "数字展览与沉浸式体验": 80,
+   "数字展览与沉浸式体验": 81,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_article_count": 223,
+  "classified_article_count": 225,
   "unclassified_article_count": 48,
-  "matched_record_count": 271,
-  "content_item_count": 271,
-  "digest_content_item_count": 241,
+  "matched_record_count": 273,
+  "content_item_count": 273,
+  "digest_content_item_count": 243,
   "standalone_content_item_count": 30,
-  "digital_source_pages": 155,
-  "digest_source_pages": 125,
+  "digital_source_pages": 156,
+  "digest_source_pages": 126,
   "standalone_source_pages": 30,
   "topic_content_item_counts": {
-   "数字保护与数字采集": 79,
+   "数字保护与数字采集": 80,
    "AI、三维扫描与科技考古": 73,
-   "数字展览与沉浸式体验": 80,
+   "数字展览与沉浸式体验": 81,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_content_item_count": 223,
+  "classified_content_item_count": 225,
   "unclassified_content_item_count": 48
  },
  "quality": {
   "source_fetch_complete": true,
   "digest_fetch_failed": 0,
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
-  "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。"
+  "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
+  "incremental_update_mode": "recent source-page scan",
+  "last_incremental_scan_at": "2026-08-31T15:28:38+08:00",
+  "last_incremental_scan_window": {
+   "start": "2026-08-25",
+   "end": "2026-08-31"
+  }
  },
  "topic_info": [
   {
@@ -5024,6 +5030,53 @@
    "from_digest": true,
    "digest_title": "武汉大学团队获马来西亚首个国外考古发掘执照",
    "evidence_snippet": "…号点”考古发掘执照，这是马来西亚历史上首次向国外考古单位颁发发掘执照。武汉大学将以“丝绸之路汉唐文献与考古资料的新整合与新阐释研究团队”为主体，联合武汉市文物考古研究所及马来西亚当地高校，组建联合考古队。后续工作将综合运用历史文献、田野发掘与数字化技术，科学揭示古吉打地区在海上丝绸之路中的重要历史地位，同时深化中马两国在文化遗产领域的学术交流与人才培养合作。",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+   "display_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+   "source_url": "/art/2026/8/29/art_722_204565.html",
+   "source_page_title": "一周文物动态摘编（8.22-8.28）",
+   "is_digest_item": true,
+   "t": "黑龙江首届“公众考古周”主场活动在塔河举办",
+   "d": "2026-08-29",
+   "u": "/art/2026/8/29/art_722_204565.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字化保护"
+   ],
+   "from_digest": true,
+   "digest_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+   "evidence_snippet": "…公众考古周”主场活动在大兴安岭地区塔河县举办。活动以“探源龙江文明，触摸黑土历史”为主题，旨在通过形式多样的公众考古活动，推动文物保护与考古研究成果传播。活动期间，黑龙江各级文物部门将聚焦文物保护、考古研究、数字化保护、第四次全国文物普查等内容，策划考古研学实践、考古现场体验及展览、讲座等50余项活动，让公众感受深厚文化内涵，激发对文物保护、文化传承的热爱。",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53",
+   "display_title": "中国语言资源保护工程成果展示馆开馆",
+   "source_url": "/art/2026/8/29/art_722_204565.html",
+   "source_page_title": "一周文物动态摘编（8.22-8.28）",
+   "is_digest_item": true,
+   "t": "中国语言资源保护工程成果展示馆开馆",
+   "d": "2026-08-29",
+   "u": "/art/2026/8/29/art_722_204565.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "沉浸式",
+    "科技赋能"
+   ],
+   "from_digest": true,
+   "digest_title": "中国语言资源保护工程成果展示馆开馆",
+   "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
    "admission_reason": "strong-body"
   }
  ],
@@ -11119,13 +11172,13 @@
   },
   {
    "key": "2026-08",
-   "count": 9,
-   "content_item_count": 9,
-   "source_page_count": 4,
-   "unique_count": 4,
-   "source_count": 30,
-   "source_unique_count": 30,
-   "share": 13.33,
+   "count": 11,
+   "content_item_count": 11,
+   "source_page_count": 5,
+   "unique_count": 5,
+   "source_count": 33,
+   "source_unique_count": 33,
+   "share": 15.15,
    "items": [
     {
      "content_item_id": "/art/2026/8/1/art_722_204100.html#digest-b2317fee9442",
@@ -11309,6 +11362,47 @@
      "d": "2026-08-23",
      "u": "/art/2026/8/23/art_722_204479.html",
      "t": "武汉大学团队获马来西亚首个国外考古发掘执照",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+     "display_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "is_digest_item": true,
+     "evidence_snippet": "…公众考古周”主场活动在大兴安岭地区塔河县举办。活动以“探源龙江文明，触摸黑土历史”为主题，旨在通过形式多样的公众考古活动，推动文物保护与考古研究成果传播。活动期间，黑龙江各级文物部门将聚焦文物保护、考古研究、数字化保护、第四次全国文物普查等内容，策划考古研学实践、考古现场体验及展览、讲座等50余项活动，让公众感受深厚文化内涵，激发对文物保护、文化传承的热爱。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53",
+     "display_title": "中国语言资源保护工程成果展示馆开馆",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "中国语言资源保护工程成果展示馆开馆",
+     "is_digest_item": true,
+     "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
+     "matched_keywords": [
+      "数字化",
+      "沉浸式",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "中国语言资源保护工程成果展示馆开馆",
      "l": "core"
     }
    ]
@@ -20186,14 +20280,56 @@
   },
   {
    "key": "2026-W35",
-   "count": 0,
-   "content_item_count": 0,
-   "source_page_count": 0,
-   "unique_count": 0,
-   "source_count": 1,
-   "source_unique_count": 1,
-   "share": 0.0,
-   "items": []
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 4,
+   "source_unique_count": 4,
+   "share": 25.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+     "display_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "is_digest_item": true,
+     "evidence_snippet": "…公众考古周”主场活动在大兴安岭地区塔河县举办。活动以“探源龙江文明，触摸黑土历史”为主题，旨在通过形式多样的公众考古活动，推动文物保护与考古研究成果传播。活动期间，黑龙江各级文物部门将聚焦文物保护、考古研究、数字化保护、第四次全国文物普查等内容，策划考古研学实践、考古现场体验及展览、讲座等50余项活动，让公众感受深厚文化内涵，激发对文物保护、文化传承的热爱。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53",
+     "display_title": "中国语言资源保护工程成果展示馆开馆",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "中国语言资源保护工程成果展示馆开馆",
+     "is_digest_item": true,
+     "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
+     "matched_keywords": [
+      "数字化",
+      "沉浸式",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "中国语言资源保护工程成果展示馆开馆",
+     "l": "core"
+    }
+   ]
   }
  ],
  "by_day": [
@@ -43482,6 +43618,70 @@
    "source_unique_count": 1,
    "share": 0.0,
    "items": []
+  },
+  {
+   "key": "2026-08-29",
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 2,
+   "source_unique_count": 2,
+   "share": 50.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+     "display_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "is_digest_item": true,
+     "evidence_snippet": "…公众考古周”主场活动在大兴安岭地区塔河县举办。活动以“探源龙江文明，触摸黑土历史”为主题，旨在通过形式多样的公众考古活动，推动文物保护与考古研究成果传播。活动期间，黑龙江各级文物部门将聚焦文物保护、考古研究、数字化保护、第四次全国文物普查等内容，策划考古研学实践、考古现场体验及展览、讲座等50余项活动，让公众感受深厚文化内涵，激发对文物保护、文化传承的热爱。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "黑龙江首届“公众考古周”主场活动在塔河举办",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53",
+     "display_title": "中国语言资源保护工程成果展示馆开馆",
+     "source_url": "/art/2026/8/29/art_722_204565.html",
+     "source_page_title": "一周文物动态摘编（8.22-8.28）",
+     "digest_title": "中国语言资源保护工程成果展示馆开馆",
+     "is_digest_item": true,
+     "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
+     "matched_keywords": [
+      "数字化",
+      "沉浸式",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-08-29",
+     "u": "/art/2026/8/29/art_722_204565.html",
+     "t": "中国语言资源保护工程成果展示馆开馆",
+     "l": "core"
+    }
+   ]
+  },
+  {
+   "key": "2026-08-30",
+   "count": 0,
+   "content_item_count": 0,
+   "source_page_count": 0,
+   "unique_count": 0,
+   "source_count": 1,
+   "source_unique_count": 1,
+   "share": 0.0,
+   "items": []
   }
  ],
  "by_year": [
@@ -43537,13 +43737,13 @@
   },
   {
    "key": "2026",
-   "count": 56,
-   "content_item_count": 56,
-   "source_page_count": 27,
-   "unique_count": 27,
-   "source_count": 540,
-   "source_unique_count": 280,
-   "share": 9.64
+   "count": 58,
+   "content_item_count": 58,
+   "source_page_count": 28,
+   "unique_count": 28,
+   "source_count": 543,
+   "source_unique_count": 283,
+   "share": 9.89
   }
  ],
  "content_items": [
@@ -48492,9 +48692,60 @@
    "evidence_snippet": "…号点”考古发掘执照，这是马来西亚历史上首次向国外考古单位颁发发掘执照。武汉大学将以“丝绸之路汉唐文献与考古资料的新整合与新阐释研究团队”为主体，联合武汉市文物考古研究所及马来西亚当地高校，组建联合考古队。后续工作将综合运用历史文献、田野发掘与数字化技术，科学揭示古吉打地区在海上丝绸之路中的重要历史地位，同时深化中马两国在文化遗产领域的学术交流与人才培养合作。",
    "topics": [],
    "is_digest_item": true
+  },
+  {
+   "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+   "display_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+   "source_url": "/art/2026/8/29/art_722_204565.html",
+   "source_page_title": "一周文物动态摘编（8.22-8.28）",
+   "digest_title": "黑龙江首届“公众考古周”主场活动在塔河举办",
+   "date": "2026-08-29",
+   "level": "core",
+   "matched_keywords": [
+    "数字化",
+    "数字化保护"
+   ],
+   "evidence_snippet": "…公众考古周”主场活动在大兴安岭地区塔河县举办。活动以“探源龙江文明，触摸黑土历史”为主题，旨在通过形式多样的公众考古活动，推动文物保护与考古研究成果传播。活动期间，黑龙江各级文物部门将聚焦文物保护、考古研究、数字化保护、第四次全国文物普查等内容，策划考古研学实践、考古现场体验及展览、讲座等50余项活动，让公众感受深厚文化内涵，激发对文物保护、文化传承的热爱。",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "is_digest_item": true
+  },
+  {
+   "content_item_id": "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53",
+   "display_title": "中国语言资源保护工程成果展示馆开馆",
+   "source_url": "/art/2026/8/29/art_722_204565.html",
+   "source_page_title": "一周文物动态摘编（8.22-8.28）",
+   "digest_title": "中国语言资源保护工程成果展示馆开馆",
+   "date": "2026-08-29",
+   "level": "core",
+   "matched_keywords": [
+    "数字化",
+    "沉浸式",
+    "科技赋能"
+   ],
+   "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "is_digest_item": true
   }
  ],
  "source_pages": [
+  {
+   "source_page_id": "/art/2026/8/29/art_722_204565.html",
+   "source_url": "/art/2026/8/29/art_722_204565.html",
+   "source_page_title": "一周文物动态摘编（8.22-8.28）",
+   "date": "2026-08-29",
+   "is_digest_page": true,
+   "content_item_ids": [
+    "/art/2026/8/29/art_722_204565.html#digest-47887adf4321",
+    "/art/2026/8/29/art_722_204565.html#digest-aabe9fcd2e53"
+   ],
+   "content_item_count": 2,
+   "digest_content_item_count": 2,
+   "standalone_content_item_count": 0
+  },
   {
    "source_page_id": "/art/2026/8/23/art_722_204479.html",
    "source_url": "/art/2026/8/23/art_722_204479.html",

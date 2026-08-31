@@ -12,17 +12,19 @@ digital_trend.py — 国家文物局「数字化」新闻趋势数据抓取与�
   3) 聚合生成 月/周/天 三套粒度数据 → digital-data.json
   4) 生成 ECharts 交互趋势页 → digital-trends.html
 
-缓存:digital-data.json 当日已生成则跳过抓取(避免 build.py 每次构建都发 46 次请求)。
+缓存:digital-data.json 由维护模式全量生成；每日模式只扫描近期分页并增量合并。
 用法: python digital_trend.py          # 完整抓取+生成
       python digital_trend.py --force  # 强制重新抓取
+      python digital_trend.py --incremental  # 每日近期增量扫描
+      python digital_trend.py --incremental --date YYYY-MM-DD  # 回放指定日期
       python digital_trend.py --build-only  # 只用已有数据重新生成页面
       python digital_trend.py --relabel-only  # 只为已有记录补充行业方向分类
 """
-import os, re, json, sys, time, hashlib
+import copy, os, re, json, sys, time, hashlib
 from html.parser import HTMLParser
 import urllib.request
 from collections import defaultdict
-from datetime import datetime, date
+from datetime import datetime, date, timedelta, timezone
 
 if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8':
     try:
@@ -33,6 +35,7 @@ if sys.stdout.encoding and sys.stdout.encoding.lower().replace('-', '') != 'utf8
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(SITE_DIR, 'digital-data.json')
 HTML_PATH = os.path.join(SITE_DIR, 'digital-trends.html')
+DIGITAL_MONITOR_DIR = os.path.join(SITE_DIR, 'content', '数字趋势监测')
 
 BASE = 'http://www.ncha.gov.cn'
 PROXY_TMPL = (BASE + '/module/jslib/jquery/jpage/dataproxy.jsp'
@@ -40,6 +43,9 @@ PROXY_TMPL = (BASE + '/module/jslib/jquery/jpage/dataproxy.jsp'
               '&webname=%E5%9B%BD%E5%AE%B6%E6%96%87%E7%89%A9%E5%B1%80&permissiontype=0')
 START_DATE = date(2021, 1, 1)
 END_DATE = date.today()
+CN_TZ = timezone(timedelta(hours=8))
+INCREMENTAL_WINDOW_DAYS = 7
+INCREMENTAL_MAX_PAGES = 5
 
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
 
@@ -839,6 +845,376 @@ def aggregate_existing_source_maps(content_items, old_data):
     }
 
 
+class IncrementalScanError(RuntimeError):
+    """A typed failure so the daily coverage ledger never says no_update."""
+
+    def __init__(self, kind, message):
+        super().__init__(message)
+        self.kind = kind
+
+
+def _parse_source_page_records(html, start_date, end_date):
+    """Parse one recent NCHA pagination response without doing a full crawl."""
+    records = re.findall(r"<record><!\[CDATA\[(.*?)\]\]></record>", html or '', re.S)
+    if not records:
+        raise IncrementalScanError('parse_failed', '国家文物局分页响应没有可解析记录')
+    items = []
+    older_than_window = False
+    for record in records:
+        m_title = re.search(r"href='(/art/\d{4}/\d+/\d+/art_\d+_\d+\.html)'\s+title='([^']*)'", record)
+        m_date = re.search(r'\[(\d{4}-\d{2}-\d{2})\]', record)
+        if not m_title or not m_date:
+            continue
+        try:
+            item_date = datetime.strptime(m_date.group(1), '%Y-%m-%d').date()
+        except ValueError:
+            continue
+        if item_date < start_date:
+            older_than_window = True
+        if start_date <= item_date <= end_date:
+            items.append({'date': item_date, 'title': m_title.group(2), 'url': m_title.group(1)})
+    return items, older_than_window
+
+
+def fetch_recent_titles(end_date, window_days=INCREMENTAL_WINDOW_DAYS,
+                        max_pages=INCREMENTAL_MAX_PAGES):
+    """Scan only the recent NCHA pages needed by the daily incremental mode."""
+    start_date = end_date - timedelta(days=max(1, window_days) - 1)
+    items = []
+    pages_checked = 0
+    for page in range(1, max_pages + 1):
+        pages_checked += 1
+        html = fetch(PROXY_TMPL.format(p=page))
+        if not html:
+            raise IncrementalScanError('fetch_failed', f'国家文物局近期分页第 {page} 页抓取失败')
+        page_items, older_than_window = _parse_source_page_records(html, start_date, end_date)
+        items.extend(page_items)
+        if older_than_window:
+            break
+    unique = {}
+    for item in items:
+        unique[item['url']] = item
+    return sorted(unique.values(), key=lambda item: (item['date'], item['url']), reverse=True), pages_checked
+
+
+def _data_source_end(data):
+    """Return the last source-feed date represented by the stored denominator."""
+    candidates = []
+    for row in data.get('by_day', []) or []:
+        if row.get('key'):
+            try:
+                candidates.append(date.fromisoformat(row['key']))
+            except ValueError:
+                pass
+    if candidates:
+        return max(candidates)
+    try:
+        return date.fromisoformat(data.get('range', {}).get('end', ''))
+    except ValueError:
+        return START_DATE - timedelta(days=1)
+
+
+def _source_bucket_key(item_date, granularity):
+    if granularity == 'month':
+        return item_date.strftime('%Y-%m')
+    if granularity == 'week':
+        iso = item_date.isocalendar()
+        return f'{iso.year}-W{iso.week:02d}'
+    if granularity == 'year':
+        return str(item_date.year)
+    return item_date.isoformat()
+
+
+def _apply_source_denominator_updates(aggregates, new_source_items):
+    """Extend existing page-level denominators with newly scanned source pages."""
+    unique_items = {}
+    for item in new_source_items:
+        unique_items[item['url']] = item
+    for granularity, field in (
+        ('month', 'by_month'), ('week', 'by_week'),
+        ('day', 'by_day'), ('year', 'by_year'),
+    ):
+        rows = {row.get('key'): row for row in aggregates.get(field, [])}
+        for item in unique_items.values():
+            item_date = item['date'] if hasattr(item['date'], 'strftime') else date.fromisoformat(item['date'])
+            key = _source_bucket_key(item_date, granularity)
+            row = rows.get(key)
+            if row is None:
+                row = {
+                    'key': key, 'count': 0, 'content_item_count': 0,
+                    'source_page_count': 0, 'unique_count': 0,
+                    'source_count': 0, 'source_unique_count': 0, 'share': 0,
+                }
+                if granularity != 'year':
+                    row['items'] = []
+                rows[key] = row
+            row['source_count'] = row.get('source_count', 0) + 1
+            row['source_unique_count'] = row.get('source_unique_count', 0) + 1
+        for row in rows.values():
+            denominator = row.get('source_unique_count', 0)
+            row['share'] = round(row.get('source_page_count', 0) / denominator * 100, 2) if denominator else 0
+        aggregates[field] = [rows[key] for key in sorted(rows) if key]
+
+
+def _compact_content_item(entity, record):
+    """Keep the legacy items array compatible while content_items remains canonical."""
+    return {
+        'content_item_id': entity['content_item_id'],
+        'display_title': entity['display_title'],
+        'source_url': entity['source_url'],
+        'source_page_title': entity['source_page_title'],
+        'is_digest_item': entity['is_digest_item'],
+        't': entity['display_title'],
+        'd': entity['date'],
+        'u': entity['source_url'],
+        'l': entity['level'],
+        'w': record.get('word', ''),
+        'topics': entity['topics'],
+        'matched_keywords': entity['matched_keywords'],
+        'from_digest': entity['is_digest_item'],
+        'digest_title': entity['digest_title'],
+        'evidence_snippet': entity['evidence_snippet'],
+        'admission_reason': record.get('admission_reason', ''),
+    }
+
+
+def merge_incremental_data(old_data, new_records, new_source_items, end_date,
+                           checked_at, digest_extra_count=0,
+                           digest_article_count=0, title_hit_count=0):
+    """Merge newly discovered records while preserving source/content semantics."""
+    old_content = list(old_data.get('content_items') or [])
+    if not old_content:
+        old_content = content_item_entities(old_data.get('items') or [])
+    prepared = dedup_and_filter([dict(item) for item in new_records])
+    for item in prepared:
+        item['topics'] = classify_topics(record_match_text(item), item.get('level', ''))
+    proposed = content_item_entities(prepared)
+    existing_ids = {item.get('content_item_id') for item in old_content}
+    fresh = []
+    duplicate_items = 0
+    for entity, record in zip(proposed, prepared):
+        if entity['content_item_id'] in existing_ids:
+            duplicate_items += 1
+            continue
+        existing_ids.add(entity['content_item_id'])
+        fresh.append(entity)
+    content_items = old_content + fresh
+    source_pages = source_page_entities(content_items)
+    aggregates = aggregate_existing_source_maps(content_items, old_data)
+    _apply_source_denominator_updates(aggregates, new_source_items)
+
+    data = copy.deepcopy(old_data)
+    data['generated'] = checked_at[:10]
+    data['range'] = dict(data.get('range') or {})
+    data['range']['start'] = data['range'].get('start') or START_DATE.isoformat()
+    old_end = data['range'].get('end', '')
+    data['range']['end'] = max(old_end, end_date.isoformat())
+    old_stats = dict(data.get('stats') or {})
+    source_urls = {item['url'] for item in new_source_items if item.get('url')}
+    source_total = old_stats.get('source_article_total', 0) + len(source_urls)
+    source_unique = old_stats.get('source_unique_pages', 0) + len(source_urls)
+    levels = defaultdict(int)
+    for item in content_items:
+        levels[item.get('level', '')] += 1
+    stats = {
+        **old_stats,
+        'total': len(content_items),
+        'matched_record_count': len(content_items),
+        'content_item_count': len(content_items),
+        'digest_content_item_count': sum(1 for item in content_items if item.get('is_digest_item')),
+        'standalone_content_item_count': sum(1 for item in content_items if not item.get('is_digest_item')),
+        'title_hit': old_stats.get('title_hit', 0) + title_hit_count,
+        'digest_extra': old_stats.get('digest_extra', 0) + digest_extra_count,
+        'levels': {key: value for key, value in sorted(levels.items()) if key},
+        'digest_articles': old_stats.get('digest_articles', 0) + digest_article_count,
+        'digital_source_pages': len(source_pages),
+        'digest_source_pages': sum(1 for item in source_pages if item.get('is_digest_page')),
+        'standalone_source_pages': sum(1 for item in source_pages if not item.get('is_digest_page')),
+        'unique_source_pages': len(source_pages),
+        'source_article_total': source_total,
+        'source_unique_pages': source_unique,
+        'overall_share': round(len(source_pages) / source_unique * 100, 2) if source_unique else 0,
+        'topic_content_item_counts': topic_counts_for_records(content_items),
+        'topic_unique_counts': topic_counts_for_records(content_items),
+        'classified_content_item_count': sum(1 for item in content_items if item.get('topics')),
+        'unclassified_content_item_count': sum(1 for item in content_items if not item.get('topics')),
+    }
+    stats['classified_article_count'] = stats['classified_content_item_count']
+    stats['unclassified_article_count'] = stats['unclassified_content_item_count']
+    data['stats'] = stats
+    data['content_items'] = content_items
+    data['source_pages'] = source_pages
+    old_legacy = {}
+    old_legacy_items = data.get('items') or []
+    if len(old_legacy_items) == len(old_content):
+        # Older snapshots did not carry content_item_id in their compatibility
+        # array; its order still matches the canonical content_items array.
+        old_legacy.update({entity['content_item_id']: legacy
+                           for entity, legacy in zip(old_content, old_legacy_items)})
+    else:
+        old_legacy.update({item.get('content_item_id'): item for item in old_legacy_items
+                           if item.get('content_item_id')})
+    for entity in old_content:
+        old_legacy.setdefault(entity['content_item_id'], _compact_content_item(entity, {}))
+    for entity, record in zip(proposed, prepared):
+        old_legacy.setdefault(entity['content_item_id'], _compact_content_item(entity, record))
+    data['items'] = [old_legacy[item['content_item_id']] for item in content_items]
+    data.update(aggregates)
+    quality = data.setdefault('quality', {})
+    quality['incremental_update_mode'] = 'recent source-page scan'
+    quality['last_incremental_scan_at'] = checked_at
+    quality['last_incremental_scan_window'] = {
+        'start': (end_date - timedelta(days=INCREMENTAL_WINDOW_DAYS - 1)).isoformat(),
+        'end': end_date.isoformat(),
+    }
+    return data, len(fresh), duplicate_items
+
+
+def _write_incremental_coverage(required_date, checked_at, *, window_start,
+                                 source_pages_checked=0, source_pages_new=0,
+                                 content_items_new=0, duplicates_skipped=0,
+                                 fetch_failed=0, parse_failed=0, status='not_run',
+                                 pages_checked=0, note=''):
+    os.makedirs(DIGITAL_MONITOR_DIR, exist_ok=True)
+    payload = {
+        'version': 1,
+        'date': required_date.isoformat(),
+        'checkedAt': checked_at,
+        'scanMode': 'incremental',
+        'scanWindow': {'start': window_start.isoformat(), 'end': required_date.isoformat()},
+        'sourceColumn': 722,
+        'paginationPagesChecked': pages_checked,
+        'sourcePagesChecked': source_pages_checked,
+        'sourcePagesNew': source_pages_new,
+        'contentItemsNew': content_items_new,
+        'duplicatesSkipped': duplicates_skipped,
+        'fetchFailed': fetch_failed,
+        'parseFailed': parse_failed,
+        'status': status,
+        'note': note,
+    }
+    path = os.path.join(DIGITAL_MONITOR_DIR, f'{required_date.isoformat()}.json')
+    with open(path, 'w', encoding='utf-8') as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=1)
+    return payload
+
+
+def run_incremental(end_date=None, window_days=INCREMENTAL_WINDOW_DAYS):
+    """Scan recent NCHA source pages and merge only new digital content."""
+    end_date = end_date or date.today()
+    checked_at = datetime.now(CN_TZ).isoformat(timespec='seconds')
+    window_days = max(1, int(window_days))
+    window_start = end_date - timedelta(days=window_days - 1)
+    try:
+        recent_items, pages_checked = fetch_recent_titles(end_date, window_days)
+    except IncrementalScanError as exc:
+        payload = _write_incremental_coverage(
+            end_date, checked_at, window_start=window_start,
+            fetch_failed=int(exc.kind == 'fetch_failed'),
+            parse_failed=int(exc.kind == 'parse_failed'),
+            status=exc.kind, note=str(exc),
+        )
+        raise
+    if not os.path.exists(DATA_PATH):
+        payload = _write_incremental_coverage(
+            end_date, checked_at, window_start=window_start,
+            source_pages_checked=len(recent_items), pages_checked=pages_checked,
+            status='parse_failed', note='缺少已有 digital-data.json，无法安全执行增量合并',
+            parse_failed=1,
+        )
+        raise IncrementalScanError('parse_failed', '缺少已有 digital-data.json，无法安全执行增量合并')
+    with open(DATA_PATH, encoding='utf-8') as handle:
+        old_data = json.load(handle)
+    old_source_pages = {
+        item.get('source_url') or item.get('source_page_id')
+        for item in old_data.get('source_pages', [])
+    }
+    old_source_end = _data_source_end(old_data)
+    source_urls = {item['url'] for item in recent_items}
+    new_page_candidates = [item for item in recent_items if item['url'] not in old_source_pages]
+    new_source_items = []
+    seen_source_urls = set()
+    for item in recent_items:
+        if item['date'] > old_source_end and item['url'] not in seen_source_urls:
+            new_source_items.append(item)
+            seen_source_urls.add(item['url'])
+
+    matched_records = []
+    digest_extra_count = 0
+    digest_article_count = sum(1 for item in new_source_items if DIGEST_PATTERN.search(item['title']))
+    title_hit_count = 0
+    fetch_failed = 0
+    parse_failed = 0
+    for item in new_page_candidates:
+        if DIGEST_PATTERN.search(item['title']):
+            body_html = fetch(BASE + item['url'])
+            if not body_html:
+                fetch_failed += 1
+                continue
+            try:
+                extracted = extract_digest_items(body_html, item['url'], item['date'], item['title'])
+            except Exception:
+                parse_failed += 1
+                continue
+            digest_extra_count += len(extracted)
+            matched_records.extend(extracted)
+            continue
+        title_matches = keyword_matches(item['title'])
+        if not title_matches:
+            continue
+        title_hit_count += 1
+        if any(match['strength'] == 'weak' for match in title_matches) and not any(
+                match['strength'] == 'strong' for match in title_matches):
+            body_html = fetch(BASE + item['url'])
+            if not body_html:
+                fetch_failed += 1
+                continue
+            body = html_to_text(body_html)
+            admission = admission_for_record(item['title'], body)
+            if admission:
+                admission['body'] = body
+        else:
+            admission = admission_for_record(item['title'])
+        if admission:
+            item = dict(item)
+            item['level'] = admission['level']
+            item['word'] = admission['word']
+            item['matched_keywords'] = admission['matched_keywords']
+            item['admission_reason'] = admission['reason']
+            item['evidence_snippet'] = admission.get('evidence_snippet', '')
+            item['from_digest'] = False
+            matched_records.append(item)
+
+    data, content_items_new, duplicate_items = merge_incremental_data(
+        old_data, matched_records, new_source_items, end_date, checked_at,
+        digest_extra_count=digest_extra_count,
+        digest_article_count=digest_article_count,
+        title_hit_count=title_hit_count,
+    )
+    source_pages_new = len({item['source_url'] for item in data['content_items'][-content_items_new:]}) if content_items_new else 0
+    known_recent_pages = len(source_urls & old_source_pages)
+    duplicates_skipped = known_recent_pages + duplicate_items
+    if fetch_failed:
+        status = 'fetch_failed'
+    elif parse_failed:
+        status = 'parse_failed'
+    elif source_pages_new or content_items_new:
+        status = 'scan_success_with_update'
+    else:
+        status = 'scan_success_no_update'
+    note = '近期分页扫描完成；未发现新的数字化来源页或内容条目。' if status == 'scan_success_no_update' else ''
+    payload = _write_incremental_coverage(
+        end_date, checked_at, window_start=window_start,
+        source_pages_checked=len(recent_items), source_pages_new=source_pages_new,
+        content_items_new=content_items_new, duplicates_skipped=duplicates_skipped,
+        fetch_failed=fetch_failed, parse_failed=parse_failed, status=status,
+        pages_checked=pages_checked, note=note,
+    )
+    with open(DATA_PATH, 'w', encoding='utf-8') as handle:
+        json.dump(data, handle, ensure_ascii=False, indent=1)
+    return data, payload
+
+
 def save_data(items, extra, digest_count, digest_failed, levels, source_items):
     items = dedup_and_filter(items)
     for it in items:
@@ -961,17 +1337,38 @@ def relabel_existing_data():
 
 
 def main(args=None):
-    """Refresh source data only when explicitly requested.
+    """Refresh source data in maintenance or daily incremental mode.
 
-    ``build.py`` runs every day and should never trigger the five-year source
-    crawl merely because the calendar date changed.  Call ``main(['--force'])``
-    from a separately scheduled maintenance job when the corpus itself needs a
-    refresh; daily builds call ``main(['--build-only'])``.
+    ``--incremental`` scans only recent source pages and writes a daily coverage
+    ledger.  ``--force`` remains the explicit full-crawl maintenance mode;
+    ``--build-only`` only rebuilds the page from existing data.
     """
-    args = set(sys.argv[1:] if args is None else args)
+    raw_args = list(sys.argv[1:] if args is None else args)
+    args = set(raw_args)
     force = '--force' in args
     build_only = '--build-only' in args
+    incremental = '--incremental' in args
     relabel_only = '--relabel-only' in args
+    target_date = date.today()
+    if '--date' in args:
+        try:
+            target_date = date.fromisoformat(raw_args[raw_args.index('--date') + 1])
+        except (ValueError, IndexError):
+            raise ValueError('--date must be followed by YYYY-MM-DD')
+    if incremental:
+        print(f'=== 数字趋势每日增量扫描: {target_date.isoformat()} ===')
+        data, coverage = run_incremental(target_date)
+        print(
+            f"扫描来源页 {coverage['sourcePagesChecked']} 个，新增来源页 "
+            f"{coverage['sourcePagesNew']} 个，新增内容条目 {coverage['contentItemsNew']} 个，"
+            f"重复跳过 {coverage['duplicatesSkipped']} 个，状态 {coverage['status']}"
+        )
+        print(f'数据已更新: {DATA_PATH}')
+        print('=== 生成趋势页面 ===')
+        import build_digital_page
+        build_digital_page.build_page(HTML_PATH, DATA_PATH)
+        print(f'页面已生成: {HTML_PATH}')
+        return
     if relabel_only:
         print('=== 为现有趋势记录补充六类行业方向分类 ===')
         relabel_existing_data()

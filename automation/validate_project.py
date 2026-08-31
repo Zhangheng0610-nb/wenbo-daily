@@ -38,6 +38,7 @@ BANNED = (
 )
 URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
 MONITORING = CONTENT / '监测'
+DIGITAL_MONITORING = CONTENT / '数字趋势监测'
 MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
 MONITOR_MODES = {'archive-backfill', 'operational'}
 MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
@@ -370,6 +371,55 @@ def check_candidate_ledger(required_date):
     return validate_candidate_ledger(ledger_path, report_path=report_path)
 
 
+def check_digital_trend_monitor(required_date):
+    """Require a truthful daily digital-trend scan record."""
+    path = DIGITAL_MONITORING / f'{required_date}.json'
+    if not path.exists():
+        return [f'missing daily digital-trend monitor: {path.relative_to(ROOT)}']
+    try:
+        payload = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f'{path.relative_to(ROOT)}: invalid JSON: {exc}']
+    errors = []
+    if payload.get('version') != 1:
+        errors.append(f'{path.relative_to(ROOT)}: version must be 1')
+    if payload.get('date') != required_date:
+        errors.append(f'{path.relative_to(ROOT)}: date must match requested date')
+    if payload.get('scanMode') != 'incremental':
+        errors.append(f'{path.relative_to(ROOT)}: scanMode must be incremental')
+    status = payload.get('status')
+    allowed = {'scan_success_no_update', 'scan_success_with_update',
+               'fetch_failed', 'parse_failed', 'not_run'}
+    if status not in allowed:
+        errors.append(f'{path.relative_to(ROOT)}: invalid status {status!r}')
+    if status in {'fetch_failed', 'parse_failed', 'not_run'}:
+        errors.append(f'{path.relative_to(ROOT)}: digital-trend scan did not complete ({status})')
+    window = payload.get('scanWindow')
+    if not isinstance(window, dict) or window.get('end') != required_date:
+        errors.append(f'{path.relative_to(ROOT)}: scanWindow must end on requested date')
+    for field in ('sourcePagesChecked', 'sourcePagesNew', 'contentItemsNew',
+                  'duplicatesSkipped', 'fetchFailed', 'parseFailed'):
+        value = payload.get(field)
+        if not isinstance(value, int) or value < 0:
+            errors.append(f'{path.relative_to(ROOT)}: invalid {field}')
+    if status == 'scan_success_no_update' and (
+            payload.get('sourcePagesNew', 0) or payload.get('contentItemsNew', 0)):
+        errors.append(f'{path.relative_to(ROOT)}: no_update cannot contain new data')
+    if status == 'scan_success_with_update' and not (
+            payload.get('sourcePagesNew', 0) or payload.get('contentItemsNew', 0)):
+        errors.append(f'{path.relative_to(ROOT)}: with_update must contain new data')
+    checked_at = payload.get('checkedAt')
+    try:
+        checked_dt = datetime.fromisoformat(checked_at)
+        if checked_dt.tzinfo is None:
+            raise ValueError('timezone required')
+        if checked_dt.astimezone(CN_TZ) > datetime.now(CN_TZ) + CHECKED_AT_SKEW:
+            errors.append(f'{path.relative_to(ROOT)}: checkedAt is in the future')
+    except (TypeError, ValueError):
+        errors.append(f'{path.relative_to(ROOT)}: invalid checkedAt')
+    return sorted(set(errors))
+
+
 def check_weekly_evidence(required_date):
     """Ensure a weekly evidence index does not silently have no evidence."""
     path = REPORTS / f'weekly-{required_date}.html'
@@ -464,6 +514,10 @@ def main():
         errors.extend(
             f'content/候选/{required_date}.json: {e}'
             for e in check_candidate_ledger(required_date)
+        )
+        errors.extend(
+            f'content/数字趋势监测/{required_date}.json: {e}'
+            for e in check_digital_trend_monitor(required_date)
         )
         errors.extend(check_weekly_evidence(required_date))
         warnings.extend(

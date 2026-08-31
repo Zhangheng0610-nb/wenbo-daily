@@ -3946,12 +3946,11 @@ def main():
         f.write(sitemap_xml)
     print(f'Sitemap: {sitemap_path} ({len(daily_reports)} daily + {len(weekly_reports)} weekly + {len(monthly_reports)} monthly)')
 
-    # Build digital trends page (数字化趋势;当日已有数据则只重建页面,不重新抓取)
+    # Refresh the digital-trend data through the daily incremental scan, then
+    # rebuild its page.  --build-only remains available for page-only rebuilds.
     try:
         import digital_trend
-        # A full five-year NCHA crawl belongs to an explicit maintenance run,
-        # not the daily website build.  This keeps the 7:13 update bounded.
-        digital_trend.main(['--build-only'])
+        digital_trend.main(['--incremental'])
     except Exception as e:
         print(f'Digital trends: SKIP ({e})')
 
