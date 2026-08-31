@@ -78,7 +78,7 @@ SOURCE_SCANS = (
         "name": "UNESCO新闻",
         "kind": "source_scan",
         "scope": "international",
-        "url": "https://www.unesco.org/en/news",
+        "url": "https://www.unesco.org/en/newsroom/news",
         "domain": "unesco.org",
     },
     {
@@ -116,6 +116,17 @@ GENERIC_EVENT_WORDS = {
     "plundering", "brazen", "daytime", "heist",
 }
 DEVELOPMENT_WORDS = ("正式施行", "正式开幕", "正式开放", "揭牌", "签约", "完成交接", "追回", "落网", "发布结论", "新发现", "新增", "启动发掘", "落地")
+HIGH_VALUE_TERMS = (
+    "政策", "办法", "条例", "施行", "规范", "改革", "考古", "发掘", "新发现", "遗址", "遗产保护", "保护工程",
+    "保护研究", "研究成果", "揭牌", "合作", "签约", "联合考古", "藏品", "安全", "盗窃", "追回", "调查结论", "总结会",
+    "museum policy", "museum theft", "stolen", "repatriation", "archaeological discovery", "archaeologists",
+    "heritage protection", "conservation", "excavation", "unearthed", "new discovery", "research findings",
+)
+ROUTINE_TERMS = ("报名", "招募", "研学", "常规讲座", "讲座预告", "市集", "音乐季", "周末活动", "打卡", "优惠", "routine", "workshop", "weekend events")
+RELEVANCE_TERMS = (
+    "文物", "博物馆", "考古", "遗址", "文化遗产", "世界遗产", "石窟", "古建筑", "古墓", "古迹", "发掘", "出土",
+    "展览", "藏品", "标本", "保护", "修复", "博物馆", "museum", "archaeology", "heritage", "conservation", "excavation",
+)
 
 
 def now_cn() -> str:
@@ -279,7 +290,14 @@ def event_key(record: dict) -> str:
     structured = [record.get("entity", ""), record.get("eventType", ""), record.get("location", "")]
     if any(structured):
         return "|".join(compact(bit) for bit in structured)
-    bits = [record.get("title", "")]
+    title = record.get("title", "") or ""
+    # Policy documents are often republished by several official or media
+    # pages with different prefixes.  Use the named instrument as the event
+    # identity, while leaving unrelated policy titles on the normal path.
+    policy_match = re.search(r"[\u4e00-\u9fff]{2,16}(?:管理办法|实施办法|保护条例|条例|办法|规定|规程)", title)
+    if policy_match:
+        return "policy|" + compact(policy_match.group(0))
+    bits = [title]
     terms = sorted(meaningful_terms(" ".join(bits)))
     return "|".join(terms[:12])
 
@@ -314,6 +332,90 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
             return ("new_development", "high-overlap event identity with a substantive development marker")
         return ("historical_duplicate", "high-overlap event identity")
     return None
+
+
+def freshness_tier(required_date: date, published_value: str) -> str:
+    try:
+        age = (required_date - date.fromisoformat(published_value)).days
+    except (TypeError, ValueError):
+        return "unknown"
+    if 0 <= age <= 2:
+        return "primary_0_48h"
+    if 3 <= age <= 6:
+        return "backfill_3_7d"
+    return "outside_window"
+
+
+def is_relevant_record(record: dict) -> bool:
+    return any(term.lower() in (record.get("title", "") or "").lower() for term in RELEVANCE_TERMS)
+
+
+def is_high_value_record(record: dict) -> bool:
+    title = (record.get("title", "") or "").lower()
+    return any(term.lower() in title for term in HIGH_VALUE_TERMS)
+
+
+def evaluate_candidate_pool(required_date: date, records: list[dict]) -> dict:
+    """Apply transparent pre-editorial gates; never truncates by count."""
+    evaluated = []
+    for original in records:
+        record = dict(original)
+        tier = freshness_tier(required_date, record.get("publishedDate"))
+        reasons = []
+        disposition = "candidate"
+        if tier == "outside_window":
+            reasons.append("outside_window")
+            disposition = "rejected"
+        if record.get("duplicateStatus") in {"same_day_duplicate", "historical_duplicate"}:
+            reasons.append(record["duplicateStatus"])
+            disposition = "rejected"
+        if not is_relevant_record(record):
+            reasons.append("not_wenbo_relevant")
+            disposition = "rejected"
+        high_value = is_high_value_record(record)
+        routine = any(term.lower() in (record.get("title", "") or "").lower() for term in ROUTINE_TERMS)
+        if disposition != "rejected" and routine and not high_value:
+            reasons.append("routine_or_promotional")
+            disposition = "rejected"
+        if disposition != "rejected" and tier == "backfill_3_7d" and not high_value:
+            reasons.append("backfill_low_priority")
+            disposition = "deferred"
+        direct_url = record.get("url", "")
+        evidence = source_info(direct_url) if direct_url else {"tier": "C", "blocked": True}
+        if disposition == "candidate" and (evidence.get("blocked") or evidence.get("tier") not in {"A", "B"}):
+            reasons.append("discovery_only_needs_evidence_upgrade")
+            disposition = "needs_verification"
+        if disposition == "candidate":
+            disposition = "evidence_qualified"
+        record["freshnessTier"] = tier
+        record["highValueSignal"] = high_value
+        record["filterReasons"] = reasons
+        record["candidateDisposition"] = disposition
+        record["evidenceTierAtDiscovery"] = evidence.get("tier", "C")
+        evaluated.append(record)
+    pool = [r for r in evaluated if r["candidateDisposition"] in {"evidence_qualified", "needs_verification"}]
+    provisional = [
+        r for r in pool
+        if r["candidateDisposition"] == "evidence_qualified" and r["freshnessTier"] == "primary_0_48h" and r["highValueSignal"]
+    ]
+    def counts(rows):
+        from collections import Counter
+        return dict(Counter(r.get("candidateDisposition") for r in rows))
+    return {
+        "records": evaluated,
+        "pool": pool,
+        "provisionalWouldBeSelected": provisional,
+        "summary": {
+            "rawRecords": len(records),
+            "candidateEvaluationPool": len(pool),
+            "evidenceQualified": sum(r["candidateDisposition"] == "evidence_qualified" for r in pool),
+            "needsVerification": sum(r["candidateDisposition"] == "needs_verification" for r in pool),
+            "rejected": sum(r["candidateDisposition"] == "rejected" for r in evaluated),
+            "deferred": sum(r["candidateDisposition"] == "deferred" for r in evaluated),
+            "provisionalWouldBeSelected": len(provisional),
+            "dispositionCounts": counts(evaluated),
+        },
+    }
 
 
 def scan_page(spec: dict, start: date, end: date) -> tuple[dict, list[dict]]:
@@ -417,10 +519,21 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             record.setdefault("duplicateStatus", "unique_event")
             record.setdefault("newDevelopment", False)
         annotated.append(record)
+    evaluation = evaluate_candidate_pool(required_date, annotated)
+    annotated = evaluation["records"]
     domestic = [row for row in annotated if row.get("scope", "domestic") != "international"]
     international = [row for row in annotated if row.get("scope") == "international"]
     def stats(rows):
-        return {"rawResults": len(rows), "sameDayDuplicates": sum(r.get("duplicateStatus") == "same_day_duplicate" for r in rows), "historicalDuplicates": sum(r.get("duplicateStatus") == "historical_duplicate" for r in rows), "newDevelopments": sum(r.get("duplicateStatus") == "new_development" for r in rows), "deduplicatedResults": sum(r.get("duplicateStatus") in {"unique_event", "new_development"} for r in rows)}
+        historical = [r for r in rows if r.get("duplicateStatus") == "historical_duplicate"]
+        return {
+            "rawResults": len(rows),
+            "sameDayDuplicateRecords": sum(r.get("duplicateStatus") == "same_day_duplicate" for r in rows),
+            "historicalDuplicateRecords": len(historical),
+            "historicalDuplicateCanonicalTargets": len({r.get("duplicateOf") for r in historical if r.get("duplicateOf")}),
+            "newDevelopmentRecords": sum(r.get("duplicateStatus") == "new_development" for r in rows),
+            "deduplicatedResults": sum(r.get("duplicateStatus") in {"unique_event", "new_development"} for r in rows),
+        }
+    historical_rows = [r for r in annotated if r.get("duplicateStatus") == "historical_duplicate"]
     return {
         "schema": "daily-discovery-v1",
         "date": required_date.isoformat(),
@@ -433,6 +546,17 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         "queryResults": query_results,
         "queryAudits": query_audits or [],
         "records": annotated,
+        "candidateEvaluation": {
+            "summary": evaluation["summary"],
+            "pool": [
+                {k: row.get(k) for k in ("title", "url", "publishedDate", "scope", "freshnessTier", "candidateDisposition", "evidenceTierAtDiscovery", "filterReasons")}
+                for row in evaluation["pool"]
+            ],
+            "provisionalWouldBeSelected": [
+                {k: row.get(k) for k in ("title", "url", "publishedDate", "scope", "freshnessTier", "candidateDisposition")}
+                for row in evaluation["provisionalWouldBeSelected"]
+            ],
+        },
         "summary": {
             "sourceScansAttempted": len(scan_statuses),
             "sourceScansSucceeded": sum(s.get("status") == "checked" for s in scan_statuses),
@@ -441,9 +565,10 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             "queriesSucceeded": sum(bool(a.get("success")) for a in (query_audits or [])),
             "queriesFailed": sum(not bool(a.get("success")) for a in (query_audits or [])),
             "rawResults": len(annotated),
-            "sameDayDuplicates": same_day,
-            "historicalDuplicates": historical,
-            "newDevelopments": developments,
+            "sameDayDuplicateRecords": same_day,
+            "historicalDuplicateRecords": historical,
+            "historicalDuplicateCanonicalTargets": len({r.get("duplicateOf") for r in historical_rows if r.get("duplicateOf")}),
+            "newDevelopmentRecords": developments,
             "deduplicatedResults": sum(r.get("duplicateStatus") in {"unique_event", "new_development"} for r in annotated),
             "domestic": stats(domestic),
             "international": stats(international),

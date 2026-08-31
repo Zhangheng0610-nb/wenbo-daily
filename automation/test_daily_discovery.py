@@ -20,6 +20,11 @@ class DailyDiscoveryTests(unittest.TestCase):
         new = {"title": "媒体报道某遗址考古情况", "url": "https://b.test/2", "publishedDate": "2026-08-31", "entity": "某遗址", "eventType": "archaeology"}
         self.assertEqual(duplicate_relation(new, old)[0], "historical_duplicate")
 
+    def test_policy_variants_share_named_instrument_identity(self):
+        old = {"title": "文化和旅游部修订《博物馆藏品管理办法》：六章六十三条", "url": "https://a.test/1", "publishedDate": "2026-08-29"}
+        new = {"title": "《博物馆藏品管理办法》政策解读", "url": "https://b.test/2", "publishedDate": "2026-08-31"}
+        self.assertEqual(duplicate_relation(new, old)[0], "historical_duplicate")
+
     def test_new_development_is_not_suppressed(self):
         old = {"title": "某展览即将开展", "url": "https://a.test/1", "publishedDate": "2026-08-30", "entity": "某展览", "eventType": "exhibition"}
         new = {"title": "某展览正式开幕", "url": "https://b.test/2", "publishedDate": "2026-08-31", "entity": "某展览", "eventType": "exhibition"}
