@@ -548,13 +548,50 @@ def _impact_score(item):
         score = max(score, 56)
     if any(k in text for k in ('数字化', '人工智能', 'AI', '保护工程', '修复', '科技保护')):
         score = max(score, 66)
-    if any(k in text for k in ('考古发现', '新发现', '发掘', '遗址', '墓葬', '石窟')):
+    discovery_text = ' '.join([
+        item.get('title', ''), item.get('summary', ''), item.get('description', ''),
+    ])
+    discovery_patterns = (
+        r'(?:新发现|发现|发掘出土|清理).{0,28}(?:遗址|墓葬|墓地|古墓|遗物|文物|遗存)',
+        r'出土.{0,20}(?:文物|器物|遗物|遗存)',
+    )
+    if any(re.search(pattern, discovery_text) for pattern in discovery_patterns):
         score = max(score, 76)
+    elif any(k in text for k in ('考古', '遗址', '墓葬', '石窟')):
+        # Ordinary survey/inspection work remains below the “important
+        # archaeological discovery” tier.
+        score = max(score, 56)
     if any(k in text for k in ('返还', '追索', '被盗', '失窃', '损毁', '火灾', '盗掘', '文物安全')):
         score = max(score, 84)
+    # A national ministry instrument is an industry-level policy event even
+    # when its title does not contain the generic word “国家”.  The generator
+    # records the scope/theme evidence; this keeps rebuild-time scoring aligned
+    # with the fixed-source scanner without naming any one regulation.
+    if (
+        item.get('scope') == 'national'
+        and any(k in text for k in ('政策行业', '办法', '条例', '规章', '规范', '规定', '规程', '部令'))
+        and any(k in text for k in ('文化和旅游部', '国家文物局', '国务院', '国家级'))
+    ):
+        score = max(score, 90)
     if any(k in text for k in ('国家文物局', '条例', '立法', '规划', '国家标准', '世界遗产名录',
                                '全国十大考古新发现', '重大考古发现', '一级文物')):
         score = max(score, 90)
+    # Keep routine training, lectures, recruitment/call-for-submission and
+    # similar public-program items at the rubric's lower level.  Specific
+    # policy/standards/major-special-program context is exempt so a meaningful
+    # sector intervention is not downgraded just because it contains “培训”.
+    routine_terms = ('培训班', '培训会', '讲座', '报名', '征集', '招募', '预告', '常规宣传',
+                     '文创上新', '打卡', '研学')
+    routine_exceptions = ('重大', '重要', '国家级', '全国性', '专项', '制度', '行业制度', '行业培训',
+                          '行业标准', '行业治理', '标准', '政策实施', '政策培训', '改革',
+                          '成果发布', '学术', '部令', '条例', '办法', '规章')
+    semantic_text = ' '.join([
+        item.get('title', ''), item.get('summary', ''), item.get('description', ''),
+    ])
+    if any(term in item.get('title', '') for term in routine_terms) and not any(
+        term in semantic_text for term in routine_exceptions
+    ):
+        score = min(score, 45)
     return min(score, 100)
 
 
@@ -690,7 +727,14 @@ def _cluster_events(candidates):
         event['evidence'] = 100 if tier == 'A' else 72
         event['breadth'] = min(100, 40 + max(0, source_count - 1) * 25)
         event['impactLabel'] = _impact_label(event['impact'])
-        event['primaryTheme'] = event['themes'][0] if event['themes'] else '其他'
+        # For a national-scope record, an explicit policy facet is the more
+        # informative primary label than the institution it regulates.  Keep
+        # all facets unchanged; this only prevents a nationwide instrument
+        # from being presented as an ordinary museum activity.
+        event['primaryTheme'] = (
+            '政策行业' if event['scope'] == 'national' and '政策行业' in event['themes']
+            else event['themes'][0] if event['themes'] else '其他'
+        )
         event['sources'] = sources
         event['reports'].sort(key=lambda x: x['date'], reverse=True)
         del event['_norm']

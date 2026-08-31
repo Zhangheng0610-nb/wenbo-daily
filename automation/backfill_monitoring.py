@@ -17,6 +17,7 @@ Run a preview first, then add --write:
 from __future__ import annotations
 
 import argparse
+import email.utils
 import html
 import json
 import re
@@ -28,8 +29,9 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Iterable
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPSHandler, ProxyHandler, Request, build_opener
+from xml.etree import ElementTree
 
 try:
     from automation.theme_rules import classify_themes
@@ -40,6 +42,7 @@ except ModuleNotFoundError:  # direct execution: python automation/backfill_moni
 ROOT = Path(__file__).resolve().parents[1]
 MONITORING = ROOT / "content" / "监测"
 USER_AGENT = "WenboDailyArchiveBackfill/1.0 (+https://zhangheng666.top/)"
+SEARCH_USER_AGENT = "WenboDailyFixedSourceScan/1.0 (+https://zhangheng666.top/)"
 TZ = timezone(timedelta(hours=8))
 
 # The monitoring panel is made up of Chinese public sources.  Codex itself may
@@ -47,6 +50,10 @@ TZ = timezone(timedelta(hours=8))
 # Clash Verge on this host runs in system-proxy (not TUN) mode, so a proxy-free
 # opener is sufficient and does not affect the rest of Codex.
 DIRECT_OPENER = build_opener(ProxyHandler({}), HTTPSHandler(context=ssl.create_default_context()))
+# Search-engine RSS is a discovery transport for the Xinhua adapter, not a
+# fixed-source origin.  Use the host's normal route here; the article links
+# are still restricted to Xinhua domains before entering the map corpus.
+SEARCH_OPENER = build_opener()
 HTTP_FALLBACK_HOSTS = {"www.ncha.gov.cn", "www.zhongguowenwubao.com", "kaogu.cssn.cn"}
 
 SOURCE_META = {
@@ -66,6 +73,33 @@ PROVINCES = (
 )
 
 NATIONAL_WORDS = ("国家文物局", "全国", "国务院", "部际", "国际博物馆日", "行业", "规划", "标准", "指南", "通知")
+NATIONAL_AUTHORITIES = ("国务院", "文化和旅游部", "国家文物局", "国家文物行政部门")
+POLICY_INSTRUMENTS = ("办法", "条例", "规章", "令", "规范", "标准", "通知", "规划", "规定", "规程")
+NATIONAL_SCOPE_TERMS = ("全国范围内", "适用于全国", "全国博物馆", "全国性", "在全国范围")
+# Archaeological discovery is a separate rubric branch from ordinary field
+# work.  These patterns require a concrete archaeological object/result, so a
+# routine inspection or research visit is not promoted merely by mentioning
+# an archaeological site.
+ARCHAEOLOGY_DISCOVERY_PATTERNS = (
+    re.compile(r"(?:新发现|发现|发掘出土|清理).{0,28}(?:遗址|墓葬|墓地|古墓|遗物|文物|遗存)"),
+    re.compile(r"出土.{0,20}(?:文物|器物|遗物|遗存)"),
+)
+MAJOR_ARCHAEOLOGY_TERMS = (
+    "重大考古发现", "重大考古成果", "全国十大考古新发现", "全国十大考古发现",
+)
+# Routine public programming should remain in the corpus, but it must not be
+# scored like a consequential sector project merely because its title names a
+# museum.  The exception terms keep policy/standards/major-special-program
+# training at the existing higher rubric levels.
+ROUTINE_EVENT_TERMS = (
+    "培训班", "培训会", "讲座", "报名", "征集", "招募", "预告", "常规宣传",
+    "文创上新", "打卡", "研学",
+)
+ROUTINE_EVENT_EXCEPTIONS = (
+    "重大", "重要", "国家级", "全国性", "专项", "制度", "行业制度", "行业培训",
+    "行业标准", "行业治理", "标准", "政策实施", "政策培训", "改革", "成果发布",
+    "学术", "部令", "条例", "办法", "规章",
+)
 # A publication's home page can also carry general current-affairs wire copy.
 # Fixed-source status is necessary but not sufficient: a record still has to
 # be directly about the cultural-heritage / museum field to enter this corpus.
@@ -143,6 +177,112 @@ def date_from_url(url: str) -> date | None:
         except ValueError:
             continue
     return None
+
+
+def xinhua_url(url: str) -> str:
+    """Unwrap a search-result redirect while retaining only its target URL."""
+    query = parse_qs(urlsplit(url).query)
+    target = (query.get("url") or [url])[0]
+    return unquote(html.unescape(target)).strip()
+
+
+def xinhua_host(url: str) -> bool:
+    host = (urlsplit(url).hostname or "").lower()
+    return (
+        host == "news.cn" or host.endswith(".news.cn")
+        or host == "xinhuanet.com" or host.endswith(".xinhuanet.com")
+    )
+
+
+def parse_search_date(value: str) -> date | None:
+    try:
+        parsed = email.utils.parsedate_to_datetime(value)
+    except (TypeError, ValueError, OverflowError):
+        parsed = None
+    if parsed is not None:
+        return parsed.astimezone(TZ).date() if parsed.tzinfo else parsed.date()
+    return date_from_url(value)
+
+
+def xinhua_domain_search(start: date, end: date) -> tuple[list[dict], list[dict]]:
+    """Find recent Xinhua-domain originals missing from rolling channel pages.
+
+    This is still part of the xinhua fixed-source adapter: only Xinhua hosts
+    survive, and the normal map scope gate runs after this discovery step.
+    Queries are generic policy/heritage families rather than article-specific
+    title searches.  URL dates, not search-engine dates, decide the window.
+    """
+    queries = (
+        "site:xinhuanet.com 博物馆 文化和旅游部",
+        "site:xinhuanet.com 文化和旅游部 博物馆",
+        "site:news.cn 博物馆 施行",
+        "site:news.cn 文化和旅游部 博物馆",
+        "site:xinhuanet.com 文物 考古 遗址",
+        "site:news.cn 文化遗产 保护",
+        "site:xinhuanet.com 博物馆 展览 藏品",
+    )
+    found: dict[str, dict] = {}
+    audits = []
+    for query in queries:
+        audit = {"query": query, "success": False, "returnedResultCount": 0, "acceptedCount": 0}
+        try:
+            # ``cc=US`` keeps Bing's RSS response stable on this host; it does
+            # not change the source boundary because the result URL is still
+            # checked against the Xinhua domains below.
+            search_url = "https://www.bing.com/news/search?" + urlencode({
+                "q": query, "format": "rss", "cc": "US", "setlang": "zh-CN",
+            })
+            request = Request(search_url, headers={
+                "User-Agent": SEARCH_USER_AGENT,
+                "Accept": "application/rss+xml, application/xml, text/xml, */*",
+            })
+            with SEARCH_OPENER.open(request, timeout=12) as response:
+                payload = response.read()
+            root = ElementTree.fromstring(payload.decode("utf-8", errors="replace"))
+            items = root.findall(".//item")
+            audit["success"] = True
+            audit["returnedResultCount"] = len(items)
+            for item in items:
+                title = (item.findtext("title") or "").strip()
+                target = xinhua_url((item.findtext("link") or "").strip())
+                published = date_from_url(target) or parse_search_date(target)
+                if not title or not target or not xinhua_host(target) or not target.endswith("/c.html"):
+                    continue
+                if not published or not in_window(published, start, end):
+                    continue
+                found[target] = candidate(
+                    "xinhua-wenbo", published, title, target,
+                    source_section="新华网域内近期补充检索",
+                )
+                audit["acceptedCount"] += 1
+        except Exception as exc:
+            audit["error"] = f"{type(exc).__name__}: {exc}"
+        audits.append(audit)
+    return list(found.values()), audits
+
+
+def enrich_xinhua_context(rows: list[dict]) -> None:
+    """Fetch article text for generic scope/geography/impact inference."""
+    for row in rows:
+        try:
+            page = fetch(row["url"])
+        except RuntimeError:
+            continue
+        context = plain(page)
+        # Xinhua article pages append “related stories” after the body.  Those
+        # links can mention unrelated provinces and must not influence the
+        # geography of the current event.
+        for marker in ("【纠错】", "责任编辑", "阅读下一篇", "相关链接"):
+            context = context.split(marker, 1)[0]
+        row["_contextText"] = context
+
+
+def usable_article_context(row: dict) -> bool:
+    """Reject search stubs, while allowing short but real Xinhua articles."""
+    text = row.get("_contextText", "")
+    if len(text) < 400:
+        return False
+    return not any(marker in text for marker in ("#sdgc", ".list-item", "搜索结果", "相关链接"))
 
 
 def clean_source_title(source_id: str, title: str) -> str:
@@ -349,13 +489,20 @@ def crawl_museum_association(start: date, end: date) -> tuple[list[dict], bool, 
 
 
 def crawl_xinhua(start: date, end: date) -> tuple[list[dict], bool, str]:
-    # The dedicated 文博 channel is the primary feed.  The culture channel's
-    # dated list catches official Xinhua culture/heritage reports that are not
-    # cross-posted into the dedicated channel.
+    # The dedicated 文博 channel is the primary feed.  The broader culture,
+    # politics and home pages catch official Xinhua heritage/policy reports
+    # that are not cross-posted into the dedicated channel.  This remains a
+    # single Xinhua fixed-source scan; the scope gate below keeps general wire
+    # copy out of the map corpus.
     feeds = (
         "https://www.news.cn/ci/wb.html",
+        "https://www.news.cn/ci/",
         "https://www.news.cn/culture/cysj/index.html",
+        "https://www.news.cn/culture/",
+        "https://www.news.cn/politics/",
         "https://www.news.cn/culturepro/",
+        "https://www.news.cn/",
+        "https://www.xinhuanet.com/",
     )
     found: dict[str, dict] = {}
     checked_all = True
@@ -366,14 +513,33 @@ def crawl_xinhua(start: date, end: date) -> tuple[list[dict], bool, str]:
             checked_all = False
             continue
         for text, article_url in links(page, feed_url):
-            if "news.cn" not in article_url or not article_url.endswith("/c.html"):
+            if not xinhua_host(article_url) or not article_url.endswith("/c.html"):
                 continue
             published = date_from_url(article_url)
             if published and in_window(published, start, end):
-                found[article_url] = candidate("xinhua-wenbo", published, text, article_url)
+                found[article_url] = candidate(
+                    "xinhua-wenbo", published, text, article_url,
+                    source_section="新华网公开栏目扫描",
+                )
+    search_rows, search_audits = xinhua_domain_search(start, end)
+    for row in search_rows:
+        found[row["url"]] = row
+    enrich_xinhua_context(list(found.values()))
+    # Domain search occasionally returns an Xinhua result stub rather than
+    # the article body.  Keep rolling-feed rows, but do not let an unverified
+    # stub supply geography/impact data or create a second record for the
+    # same event when a substantive Xinhua page is available.
+    for url, row in list(found.items()):
+        if row.get("sourceSection") == "新华网域内近期补充检索" and not usable_article_context(row):
+            del found[url]
     if start == end:
-        note = "已检查新华网文博、文化频道当日公开列表。"
-        return list(found.values()), checked_all, note if checked_all else "新华网当日部分入口请求失败。"
+        search_failures = sum(not audit.get("success") for audit in search_audits)
+        note = "已检查新华网文博、文化、时政及首页公开列表，并完成新华网域内近期补充检索。"
+        if not checked_all:
+            return list(found.values()), False, "新华网当日部分入口请求失败。"
+        if search_failures:
+            return list(found.values()), False, f"新华网栏目扫描完成，但域内补充检索有 {search_failures} 个查询失败。"
+        return list(found.values()), True, note
     return list(found.values()), False, "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
 
 
@@ -422,23 +588,73 @@ CRAWLERS = (
 )
 
 
-def choose_location(title: str) -> tuple[str, str, float]:
+def row_context(row: dict) -> str:
+    return " ".join(
+        str(row.get(key, "") or "")
+        for key in ("title", "_contextText", "issuingAuthority", "applicability", "policyInstrument")
+    )
+
+
+def is_national_policy(row: dict) -> bool:
+    text = row_context(row)
+    has_authority = any(term in text for term in NATIONAL_AUTHORITIES)
+    has_instrument = any(term in text for term in POLICY_INSTRUMENTS)
+    has_national_scope = any(term in text for term in NATIONAL_SCOPE_TERMS)
+    return has_authority and has_instrument and (has_national_scope or "部令" in text)
+
+
+def is_substantive_archaeology_discovery(row: dict) -> bool:
+    text = row_context(row)
+    if not any(term in text for term in ("考古", "遗址", "墓葬", "墓地", "出土", "发掘")):
+        return False
+    return any(pattern.search(text) for pattern in ARCHAEOLOGY_DISCOVERY_PATTERNS)
+
+
+def choose_location(row: dict) -> tuple[str, str, float]:
+    title = str(row.get("title", "") or "")
+    text = row_context(row)
+    # A ministry-wide instrument takes precedence over province names that
+    # happen to appear in its explanatory text.
+    if is_national_policy(row):
+        return "national", "", 0.92
     matched = [province for province in PROVINCES if province in title]
     if matched:
         return "province", matched[0], 0.90
-    if any(word in title for word in NATIONAL_WORDS):
+    body_matched = [province for province in PROVINCES if province in text]
+    if body_matched and not any(word in title for word in ("全国", "国家", "国务院")):
+        return "province", body_matched[0], 0.62
+    if any(word in text for word in NATIONAL_WORDS):
         return "national", "", 0.85
     return "unassigned", "", 0.0
 
 
-def choose_themes(title: str) -> list[str]:
-    return classify_themes(title=title)
+def choose_themes(row: dict) -> list[str]:
+    return classify_themes(title=row.get("title", ""), body=row.get("_contextText", ""))
 
 
-def impact(title: str) -> int:
+def impact(row: dict) -> int:
+    title = str(row.get("title", "") or "")
+    text = row_context(row)
+    if is_national_policy(row):
+        return 90
+    # Apply the routine-event floor before generic museum/exhibition signals.
+    # Specific policy/standards/major-special-program context is exempt so a
+    # meaningful sector intervention is not downgraded just because it contains
+    # “培训”.
+    if (
+        any(term in title for term in ROUTINE_EVENT_TERMS)
+        and not any(term in text for term in ROUTINE_EVENT_EXCEPTIONS)
+    ):
+        return 45
+    if any(term in text for term in MAJOR_ARCHAEOLOGY_TERMS):
+        return 90
+    if is_substantive_archaeology_discovery(row):
+        # The map rubric defines an ordinary archaeological discovery as
+        # “重要”; only explicit major-national evidence reaches 90 above.
+        return 80
     if any(word in title for word in ("国家", "全国", "世界遗产", "重大", "规划", "标准")):
         return 80
-    if any(word in title for word in ("考古", "遗址", "展览", "博物馆", "保护")):
+    if any(word in text for word in ("考古", "遗址", "展览", "博物馆", "保护")):
         return 60
     return 45
 
@@ -450,11 +666,11 @@ def as_record(
     origin: str = "archive-backfill",
     run_type: str | None = None,
 ) -> dict:
-    scope, province, confidence = choose_location(row["title"])
+    scope, province, confidence = choose_location(row)
     source_id = row["sourceId"]
     source_name, _origin = SOURCE_META[source_id]
     digest = re.sub(r"[^a-z0-9]", "", row["url"].lower())[-12:]
-    themes = choose_themes(row["title"])
+    themes = choose_themes(row)
     record = {
         "recordId": f"{'operational' if origin == 'fixed-panel-monitoring' else 'backfill'}-{row['date'].replace('-', '')}-{source_id}-{order:04d}-{digest}",
         "date": row["date"],
@@ -467,7 +683,7 @@ def as_record(
         "locationConfidence": confidence,
         "themes": themes,
         "tags": themes + ([province] if province else []),
-        "impact": impact(row["title"]),
+        "impact": impact(row),
         "selectedForDaily": False,
         "origin": origin,
     }
@@ -620,6 +836,7 @@ def merge_write(
             # A maintenance backfill must not relabel an already recorded
             # operational observation as archive data.
             payload.setdefault("mode", "archive-backfill")
+        prior_items = list(payload.get("items", []))
         existing = {}
         for item in payload.get("items", []):
             if not item.get("sources"):
@@ -698,29 +915,67 @@ def merge_write(
             }
             if mode == "operational":
                 detail = _outcome_details(outcomes[source_id])
+                accepted_urls = {
+                    candidate["sources"][0].get("url", "").rstrip("/")
+                    for candidate in by_day.get(day.isoformat(), [])
+                    if candidate["sources"][0].get("sourceId") == source_id
+                    and candidate["sources"][0].get("url", "").rstrip("/") not in baseline_urls
+                }
+                accepted_this_run = len(accepted_urls)
+                retained_existing = sum(
+                    1 for item in payload["items"]
+                    if item.get("sources", [{}])[0].get("sourceId") == source_id
+                    and item.get("sources", [{}])[0].get("url", "").rstrip("/") not in accepted_urls
+                    and any(
+                        previous.get("sources", [{}])[0].get("url", "").rstrip("/")
+                        == item.get("sources", [{}])[0].get("url", "").rstrip("/")
+                        for previous in prior_items
+                    )
+                )
                 row_coverage.update({
                     "rawCount": int(detail.get("rawCount", 0)),
                     "eligibleCount": int(detail.get("eligibleCount", 0)),
+                    "acceptedThisRun": accepted_this_run,
+                    "retainedExisting": retained_existing,
+                    "finalItemCount": counts[source_id],
                     "duplicatesSkipped": int(detail.get("duplicatesSkipped", 0)),
                     "scanStatus": detail.get("status", "checked"),
                 })
             refreshed.append(row_coverage)
         payload["coverage"] = refreshed
         if mode == "operational":
-            source_audit = {
-                source_id: {
-                    "rawCount": int(_outcome_details(outcomes[source_id]).get("rawCount", 0)),
-                    "eligibleCount": int(_outcome_details(outcomes[source_id]).get("eligibleCount", 0)),
-                    "acceptedCount": sum(
-                        1 for item in by_day.get(day.isoformat(), [])
-                        if item["sources"][0].get("sourceId") == source_id
-                        and item["sources"][0].get("url", "").rstrip("/") not in baseline_urls
-                    ),
-                    "duplicatesSkipped": int(_outcome_details(outcomes[source_id]).get("duplicatesSkipped", 0)),
-                    "status": _outcome_details(outcomes[source_id]).get("status", "checked"),
+            source_audit = {}
+            for source_id, _crawler in CRAWLERS:
+                detail = _outcome_details(outcomes[source_id])
+                accepted_urls = {
+                    candidate["sources"][0].get("url", "").rstrip("/")
+                    for candidate in by_day.get(day.isoformat(), [])
+                    if candidate["sources"][0].get("sourceId") == source_id
+                    and candidate["sources"][0].get("url", "").rstrip("/") not in baseline_urls
                 }
-                for source_id, _crawler in CRAWLERS
-            }
+                accepted_this_run = len(accepted_urls)
+                retained_existing = sum(
+                    1 for item in payload["items"]
+                    if item.get("sources", [{}])[0].get("sourceId") == source_id
+                    and item.get("sources", [{}])[0].get("url", "").rstrip("/") not in accepted_urls
+                    and any(
+                        previous.get("sources", [{}])[0].get("url", "").rstrip("/")
+                        == item.get("sources", [{}])[0].get("url", "").rstrip("/")
+                        for previous in prior_items
+                    )
+                )
+                source_audit[source_id] = {
+                    "rawCount": int(detail.get("rawCount", 0)),
+                    "eligibleCount": int(detail.get("eligibleCount", 0)),
+                    "acceptedCount": accepted_this_run,
+                    "rawDiscovered": int(detail.get("rawCount", 0)),
+                    "scopeQualified": int(detail.get("eligibleCount", 0)),
+                    "acceptedThisRun": accepted_this_run,
+                    "retainedExisting": retained_existing,
+                    "finalItemCount": counts[source_id],
+                    "duplicatesSkipped": int(detail.get("duplicatesSkipped", 0)),
+                    "status": detail.get("status", "checked"),
+                }
             payload["scanAudit"] = {
                 "scanner": "automation/backfill_monitoring.py",
                 "mode": "operational",

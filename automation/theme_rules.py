@@ -78,7 +78,9 @@ INTERNATIONAL_TERMS = (
 
 POLICY_TERMS = (
     "政策", "行业动态", "国家文物局", "立法", "规划", "标准", "指南", "通知",
-    "人才", "教育", "出版", "文创", "产业", "文旅", "报告", "会议", "论坛",
+    "办法", "条例", "规章", "部令", "规范", "规定", "规程", "施行", "修订",
+    "文化和旅游部", "文化部", "国务院", "人才", "教育", "出版", "文创", "产业", "文旅",
+    "报告", "会议", "论坛",
 )
 
 
@@ -94,7 +96,11 @@ def _is_exhibition(text: str) -> bool:
     return bool(re.search(r"(?<!发)[\u4e00-\u9fff]{1,12}展(?=(?:览|出|厅|对公众|开幕|启幕|亮相|在|于|开放))", text))
 
 
-def classify_themes(title: str = "", tags: Iterable[str] | None = None) -> list[str]:
+def classify_themes(
+    title: str = "",
+    tags: Iterable[str] | None = None,
+    body: str = "",
+) -> list[str]:
     """Return up to three reliable topic facets in display priority order.
 
     Title semantics carry more weight than legacy tags.  Legacy generic tags
@@ -104,7 +110,7 @@ def classify_themes(title: str = "", tags: Iterable[str] | None = None) -> list[
     title_text = str(title or "")
     tag_values = [str(tag or "").strip() for tag in (tags or []) if str(tag or "").strip()]
     tag_text = " ".join(tag_values)
-    text = f"{title_text} {' '.join(tag_values)}"
+    text = f"{title_text} {' '.join(tag_values)} {body or ''}"
 
     exhibition = _is_exhibition(title_text) or any(
         tag in {"展览", "特展", "临展", "巡展", "文物展", "艺术展", "大展"}
