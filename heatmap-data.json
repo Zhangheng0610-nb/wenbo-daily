@@ -5021,174 +5021,234 @@
         "sourceId": "archaeology",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
         "candidateCount": 0,
-        "note": "已核对中国考古网核心栏目入口及当日公开列表，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
         "candidateCount": 0,
-        "note": "已核对央博、央视新闻及专题入口，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
         "candidateCount": 0,
-        "note": "已核对中国文物报数字报入口及当日版面，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "museum-association",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
         "candidateCount": 0,
-        "note": "已核对中国博物馆协会资讯、行业资讯、公告和展览入口，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "ncha",
         "mode": "operational",
-        "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
-        "candidateCount": 0,
-        "note": "已核对国家文物局登记入口及当日公开列表，无合格新增项。",
+        "status": "success",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "candidateCount": 2,
+        "note": "",
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-29T12:00:00+08:00",
+        "checkedAt": "2026-08-31T16:48:39+08:00",
         "candidateCount": 0,
-        "note": "已核对新华网文博与文化频道入口，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-29"
       },
       {
         "sourceId": "archaeology",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
         "candidateCount": 0,
-        "note": "已核对中国考古网核心栏目入口及当日公开列表，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
         "candidateCount": 0,
-        "note": "已核对央视网文博、央博、央视新闻及专题入口，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
         "candidateCount": 0,
-        "note": "已核对中国文物报数字报入口及当日版面，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "museum-association",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
         "candidateCount": 0,
-        "note": "已核对中国博物馆协会资讯、行业资讯、公告和展览入口，无合格新增项。",
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "ncha",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
         "candidateCount": 0,
-        "note": "已核对国家文物局登记入口及当日公开列表，无合格新增项。",
+        "note": "",
+        "rawCount": 1,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
-        "status": "no_update",
-        "checkedAt": null,
-        "checkedAtStatus": "unknown",
-        "checkedAtNote": "原运行记录未保存逐源实际检查时刻；当前仅能确认文件已于当日提交，未据此反推具体时间。",
-        "candidateCount": 0,
-        "note": "已核对新华网文博与文化频道入口，无合格新增项。",
+        "status": "success",
+        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "candidateCount": 1,
+        "note": "",
+        "rawCount": 2,
+        "eligibleCount": 1,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-30"
       },
       {
         "sourceId": "archaeology",
         "mode": "operational",
-        "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
-        "candidateCount": 0,
+        "status": "success",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "candidateCount": 4,
         "note": "",
+        "rawCount": 4,
+        "eligibleCount": 4,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       },
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
         "candidateCount": 0,
         "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       },
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
         "candidateCount": 0,
         "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       },
       {
         "sourceId": "museum-association",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
         "candidateCount": 0,
         "note": "",
+        "rawCount": 1,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       },
       {
         "sourceId": "ncha",
         "mode": "operational",
         "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
         "candidateCount": 0,
         "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       },
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
-        "status": "no_update",
-        "checkedAt": "2026-08-31T07:17:40+08:00",
-        "candidateCount": 0,
+        "status": "success",
+        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "candidateCount": 2,
         "note": "",
+        "rawCount": 5,
+        "eligibleCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
         "date": "2026-08-31"
       }
     ],
@@ -5206,36 +5266,36 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 481,
-    "includedProvincialRecords": 110,
-    "provincialEvents": 91,
-    "nationalEvents": 32,
+    "totalMonitoredRecords": 490,
+    "includedProvincialRecords": 112,
+    "provincialEvents": 93,
+    "nationalEvents": 33,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 412,
-    "fixedPanelMonitoringRecords": 0,
-    "operationalRecords": 0,
+    "fixedPanelMonitoringRecords": 9,
+    "operationalRecords": 9,
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 0
+      "fixed-panel-monitoring": 9
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 412,
+    "analysisRecords": 421,
     "analysisProvenanceRecords": {
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 0
+      "fixed-panel-monitoring": 9
     },
     "excludedNonPanel": 0,
-    "unassigned": 251,
+    "unassigned": 257,
     "panelSourceCount": 6,
     "coverageDays": 94,
     "completeCoverageDays": 5,
     "successfulSourceChecks": 297,
     "coverageStatuses": {
-      "success": 136,
-      "no_update": 161,
+      "success": 140,
+      "no_update": 157,
       "partial": 267,
       "failed": 0
     },
@@ -5256,15 +5316,125 @@
     "archiveBackfillCoverageDays": 91,
     "operationalCoverageDays": 3,
     "recordsBySource": {
-      "ncha": 71,
+      "ncha": 73,
       "cultural-relics-news": 103,
-      "archaeology": 193,
+      "archaeology": 197,
       "museum-association": 27,
-      "xinhua-wenbo": 4,
+      "xinhua-wenbo": 7,
       "cctv-wenbo": 14
     }
   },
   "events": [
+    {
+      "title": "云南海晏村：古村留古韵 文旅促振兴",
+      "firstDate": "2026-08-31",
+      "lastDate": "2026-08-31",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "云南"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-08-31",
+          "title": "云南海晏村：古村留古韵 文旅促振兴",
+          "url": "https://www.news.cn/ci/20260831/b4b71c49ea524b279a60489c0d14690b/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/ci/20260831/b4b71c49ea524b279a60489c0d14690b/c.html",
+              "host": "www.news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b199b9ea6b",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260831/b4b71c49ea524b279a60489c0d14690b/c.html",
+          "host": "www.news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "河北博物院：文创空间丰富暑期生活",
+      "firstDate": "2026-08-31",
+      "lastDate": "2026-08-31",
+      "primaryProvince": "河北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "河北"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-08-31",
+          "title": "河北博物院：文创空间丰富暑期生活",
+          "url": "https://www.news.cn/culture/20260831/088c9561b23046ea91dfa393ea29e440/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260831/088c9561b23046ea91dfa393ea29e440/c.html",
+              "host": "www.news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b73c5cae58",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260831/088c9561b23046ea91dfa393ea29e440/c.html",
+          "host": "www.news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
       "firstDate": "2026-08-27",
@@ -10659,6 +10829,59 @@
     }
   ],
   "nationalEvents": [
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "firstDate": "2026-08-29",
+      "lastDate": "2026-08-29",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-08-29",
+          "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+          "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+              "host": "www.ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-17004802bd",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+          "host": "www.ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
     {
       "title": "国家文物局发布通知进一步加强全国博物馆陈列展览内容审核工作",
       "firstDate": "2026-08-22",

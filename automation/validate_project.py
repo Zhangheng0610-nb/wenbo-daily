@@ -40,6 +40,7 @@ URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
 MONITORING = CONTENT / '监测'
 DIGITAL_MONITORING = CONTENT / '数字趋势监测'
 DIGITAL_MONITORING_START = date(2026, 8, 29)
+FIXED_PANEL_OPERATIONAL_START = date(2026, 8, 29)
 MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
 MONITOR_MODES = {'archive-backfill', 'operational'}
 MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
@@ -291,6 +292,33 @@ def check_monitoring(required_date=None):
                 source_id = row.get('sourceId')
                 if source_id in observed and row.get('candidateCount') != observed[source_id]:
                     errors.append(f'{path.relative_to(ROOT)}: candidateCount mismatch for {source_id}')
+            if mode == 'operational' and date.fromisoformat(file_date) >= FIXED_PANEL_OPERATIONAL_START:
+                scan_audit = payload.get('scanAudit')
+                if not isinstance(scan_audit, dict) or scan_audit.get('completed') is not True:
+                    errors.append(
+                        f'{path.relative_to(ROOT)}: operational monitoring needs a completed scanAudit'
+                    )
+                else:
+                    if scan_audit.get('mode') != 'operational':
+                        errors.append(f'{path.relative_to(ROOT)}: scanAudit mode must be operational')
+                    source_audit = scan_audit.get('sources')
+                    if not isinstance(source_audit, dict):
+                        errors.append(f'{path.relative_to(ROOT)}: scanAudit sources must be an object')
+                    else:
+                        coverage_by_source = {row.get('sourceId'): row for row in coverage}
+                        for source_id in MAP_SOURCE_PANEL:
+                            audit_row = source_audit.get(source_id)
+                            if not isinstance(audit_row, dict):
+                                errors.append(f'{path.relative_to(ROOT)}: scanAudit missing {source_id}')
+                                continue
+                            accepted = audit_row.get('acceptedCount', 0)
+                            if not isinstance(accepted, int) or accepted < 0:
+                                errors.append(f'{path.relative_to(ROOT)}: invalid scanAudit acceptedCount for {source_id}')
+                            if accepted > 0 and coverage_by_source.get(source_id, {}).get('candidateCount') == 0:
+                                errors.append(
+                                    f'{path.relative_to(ROOT)}: scanner found eligible {source_id} records '
+                                    'but candidateCount/items are zero'
+                                )
         for index, record in enumerate(records):
             label = f'{path.relative_to(ROOT)} record {index + 1}'
             origin = record.get('origin')

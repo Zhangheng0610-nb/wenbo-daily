@@ -428,14 +428,14 @@ def impact(title: str) -> int:
     return 45
 
 
-def as_record(row: dict, order: int) -> dict:
+def as_record(row: dict, order: int, *, origin: str = "archive-backfill") -> dict:
     scope, province, confidence = choose_location(row["title"])
     source_id = row["sourceId"]
     source_name, _origin = SOURCE_META[source_id]
     digest = re.sub(r"[^a-z0-9]", "", row["url"].lower())[-12:]
     themes = choose_themes(row["title"])
     return {
-        "recordId": f"backfill-{row['date'].replace('-', '')}-{source_id}-{order:04d}-{digest}",
+        "recordId": f"{'operational' if origin == 'fixed-panel-monitoring' else 'backfill'}-{row['date'].replace('-', '')}-{source_id}-{order:04d}-{digest}",
         "date": row["date"],
         "title": row["title"],
         "sources": [{"sourceId": source_id, "name": source_name, "url": row["url"]}],
@@ -448,7 +448,7 @@ def as_record(row: dict, order: int) -> dict:
         "tags": themes + ([province] if province else []),
         "impact": impact(row["title"]),
         "selectedForDaily": False,
-        "origin": "archive-backfill",
+        "origin": origin,
     }
 
 
@@ -520,7 +520,24 @@ def allowed_backfill_row(row: dict) -> bool:
     return row.get("sourceId") == "archaeology" or is_wenbo_relevant(row.get("title", ""))
 
 
-def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tuple[bool, str]]) -> None:
+def _outcome_details(value) -> dict:
+    """Normalize legacy tuple outcomes and the operational audit shape."""
+    if isinstance(value, dict):
+        return dict(value)
+    complete, note = value
+    return {"complete": complete, "note": note, "status": "checked" if complete else "partial"}
+
+
+def merge_write(
+    start: date,
+    end: date,
+    rows: list[dict],
+    outcomes: dict[str, dict | tuple[bool, str]],
+    *,
+    mode: str = "archive-backfill",
+    checked_at: str | None = None,
+    replay: bool = False,
+) -> None:
     baseline_path = MONITORING / "baseline.json"
     baseline_urls: set[str] = set()
     if baseline_path.exists():
@@ -530,10 +547,13 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
                 if source.get("url"):
                     baseline_urls.add(source["url"].rstrip("/"))
     by_day: dict[str, list[dict]] = defaultdict(list)
-    rows = [row for row in rows if allowed_backfill_row(row)]
+    raw_rows = list(rows)
+    rows = [row for row in raw_rows if allowed_backfill_row(row)]
     row_urls = {row["url"].rstrip("/") for row in rows}
     for index, row in enumerate(sorted(rows, key=lambda value: (value["date"], value["sourceId"], value["url"])), 1):
-        by_day[row["date"]].append(as_record(row, index))
+        by_day[row["date"]].append(as_record(
+            row, index, origin="fixed-panel-monitoring" if mode == "operational" else "archive-backfill"
+        ))
     day = start
     while day <= end:
         path = MONITORING / f"{day.isoformat()}.json"
@@ -543,7 +563,12 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             payload = empty_day(day)
         payload.setdefault("version", 1)
         payload["date"] = day.isoformat()
-        payload.setdefault("mode", "archive-backfill")
+        if mode == "operational":
+            payload["mode"] = "operational"
+        else:
+            # A maintenance backfill must not relabel an already recorded
+            # operational observation as archive data.
+            payload.setdefault("mode", "archive-backfill")
         existing = {}
         for item in payload.get("items", []):
             if not item.get("sources"):
@@ -556,7 +581,10 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
             # A corrected parser may move an old generated observation to its
             # real publication date. Remove the stale copy here; the cleaned
             # row will be inserted into its new date below.
-            if item.get("origin") == "archive-backfill" and item_url.rstrip("/") in row_urls:
+            if (
+                item.get("origin") == "archive-backfill"
+                or (mode == "operational" and item.get("origin") == "fixed-panel-monitoring")
+            ) and item_url.rstrip("/") in row_urls:
                 continue
             if item.get("origin") == "archive-backfill" and not allowed_backfill_row({
                 "sourceId": source.get("sourceId", ""), "title": item.get("title", "")
@@ -579,64 +607,128 @@ def merge_write(start: date, end: date, rows: list[dict], outcomes: dict[str, tu
                 counts[source.get("sourceId", "")] += 1
         current = {entry.get("sourceId"): entry for entry in payload.get("coverage", [])}
         refreshed = []
-        checked_at = datetime.combine(day, datetime.min.time(), tzinfo=TZ).replace(hour=12).isoformat()
+        historical_checked_at = datetime.combine(day, datetime.min.time(), tzinfo=TZ).replace(hour=12).isoformat()
         for source_id, _crawler in CRAWLERS:
-            complete, note = outcomes[source_id]
-            status = "success" if complete and counts[source_id] else ("no_update" if complete else "partial")
+            outcome = _outcome_details(outcomes[source_id])
+            complete = bool(outcome.get("complete", outcome.get("status") not in {"failed", "parse_failed"}))
+            note = outcome.get("note", "")
+            outcome_status = outcome.get("status", "")
+            if outcome_status in {"failed", "parse_failed"}:
+                status = outcome_status
+            else:
+                status = "success" if complete and counts[source_id] else ("no_update" if complete else "partial")
             prior = current.get(source_id, {})
             # Historical recovery must never rewrite an explicitly operational
             # check, even when both observations have the same date or the
             # operational run recorded a partial/failed result.
-            if prior.get("mode") == "operational":
+            if mode != "operational" and prior.get("mode") == "operational":
                 refreshed.append(dict(prior, sourceId=source_id, mode="operational"))
                 continue
             # Preserve a later operational check timestamp if present.
-            prior_checked = prior.get("checkedAt", "")
+            prior_checked = prior.get("checkedAt") or ""
             # A historical backfill is allowed to add records, but it must
             # never downgrade a later same-day live inspection.  Otherwise a
             # 90-day maintenance run could make an already-audited day look
             # partial again in the public coverage meter.
-            if prior_checked > checked_at and prior.get("status") in ("success", "no_update"):
+            if prior_checked > historical_checked_at and prior.get("status") in ("success", "no_update"):
                 status = prior["status"]
                 note = prior.get("note", "")
-            refreshed.append({
+            row_coverage = {
                 "sourceId": source_id,
-                "mode": prior.get("mode") or payload.get("mode") or "archive-backfill",
+                "mode": mode,
                 "status": status,
-                "checkedAt": prior_checked if prior_checked > checked_at else checked_at,
+                "checkedAt": (
+                    checked_at if mode == "operational" and checked_at
+                    else prior_checked if prior_checked > historical_checked_at else historical_checked_at
+                ),
                 "candidateCount": counts[source_id],
                 "note": "" if complete else note,
-            })
+            }
+            if mode == "operational":
+                detail = _outcome_details(outcomes[source_id])
+                row_coverage.update({
+                    "rawCount": int(detail.get("rawCount", 0)),
+                    "eligibleCount": int(detail.get("eligibleCount", 0)),
+                    "duplicatesSkipped": int(detail.get("duplicatesSkipped", 0)),
+                    "scanStatus": detail.get("status", "checked"),
+                })
+            refreshed.append(row_coverage)
         payload["coverage"] = refreshed
+        if mode == "operational":
+            source_audit = {
+                source_id: {
+                    "rawCount": int(_outcome_details(outcomes[source_id]).get("rawCount", 0)),
+                    "eligibleCount": int(_outcome_details(outcomes[source_id]).get("eligibleCount", 0)),
+                    "acceptedCount": sum(
+                        1 for item in by_day.get(day.isoformat(), [])
+                        if item["sources"][0].get("sourceId") == source_id
+                        and item["sources"][0].get("url", "").rstrip("/") not in baseline_urls
+                    ),
+                    "duplicatesSkipped": int(_outcome_details(outcomes[source_id]).get("duplicatesSkipped", 0)),
+                    "status": _outcome_details(outcomes[source_id]).get("status", "checked"),
+                }
+                for source_id, _crawler in CRAWLERS
+            }
+            payload["scanAudit"] = {
+                "scanner": "automation/backfill_monitoring.py",
+                "mode": "operational",
+                "completed": True,
+                "checkedAt": checked_at,
+                "replay": bool(replay),
+                "sources": source_audit,
+            }
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         day += timedelta(days=1)
     normalize_archaeology_backfill()
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Backfill the fixed-source map corpus from source archives.")
+    parser = argparse.ArgumentParser(description="Scan the fixed-source map corpus or backfill its public archives.")
     parser.add_argument("--end", type=date.fromisoformat, default=date.today(), help="inclusive end date (YYYY-MM-DD)")
     parser.add_argument("--days", type=int, default=90, help="number of inclusive days to backfill")
+    parser.add_argument(
+        "--mode", choices=("archive-backfill", "operational"), default="archive-backfill",
+        help="archive recovery (default) or the formal fixed-panel daily scan",
+    )
     parser.add_argument("--write", action="store_true", help="write merged daily monitoring files")
     args = parser.parse_args()
     if args.days < 1:
         parser.error("--days must be positive")
+    if args.mode == "operational" and args.days != 1:
+        parser.error("operational mode requires exactly one observation day")
     start = args.end - timedelta(days=args.days - 1)
     all_rows: list[dict] = []
-    outcomes: dict[str, tuple[bool, str]] = {}
+    outcomes: dict[str, dict] = {}
+    checked_at = datetime.now(TZ).isoformat(timespec="seconds") if args.mode == "operational" else None
     for source_id, crawler in CRAWLERS:
         try:
             rows, complete, note = crawler(start, args.end)
         except Exception as exc:  # keep one source outage from discarding other evidence
-            rows, complete, note = [], False, f"历史回溯请求失败：{exc}"
-        rows = list({row["url"]: row for row in rows}.values())
+            rows, complete, note = [], False, f"固定来源扫描失败：{exc}"
+            status = "failed"
+        else:
+            status = "checked" if complete else "partial"
+        raw_count = len(rows)
+        rows = list({row["url"].rstrip("/"): row for row in rows}.values())
+        duplicate_count = raw_count - len(rows)
+        eligible_count = sum(1 for row in rows if allowed_backfill_row(row))
         all_rows.extend(rows)
-        outcomes[source_id] = (complete, note)
-        print(f"{source_id}: {len(rows)} 条 | {'完整' if complete else '部分'} | {note}")
+        outcomes[source_id] = {
+            "complete": complete,
+            "status": status,
+            "note": note,
+            "rawCount": raw_count,
+            "eligibleCount": eligible_count,
+            "duplicatesSkipped": duplicate_count,
+        }
+        print(f"{source_id}: 原始 {raw_count} 条，符合准入 {eligible_count} 条 | {status} | {note}")
     relevant = [row for row in all_rows if allowed_backfill_row(row)]
     print(f"合计：{len(all_rows)} 条原文候选，其中 {len(relevant)} 条符合文博主题准入，时间范围 {start} 至 {args.end}。")
     if args.write:
-        merge_write(start, args.end, all_rows, outcomes)
+        merge_write(
+            start, args.end, all_rows, outcomes, mode=args.mode,
+            checked_at=checked_at, replay=(args.mode == "operational" and args.end != date.today()),
+        )
         print(f"已合并写入 {MONITORING}。")
     else:
         print("预览模式：未写入。确认后加 --write。")

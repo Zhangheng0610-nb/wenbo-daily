@@ -107,7 +107,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 
 1. 先确认仓库根目录：它应同时包含 `build.py`、`content/`、`reports/` 和 `automation/`。
 2. 读取当天已有监测文件和日报、近 30 天去重索引及必要的上一期栏目。
-3. 先完成固定池巡检。先运行 `python automation/backfill_monitoring.py --end YYYY-MM-DD --days 1 --write`；再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
+3. 先完成固定池巡检。正式每日任务运行 `python automation/backfill_monitoring.py --mode operational --end YYYY-MM-DD --days 1 --write`；历史回溯才使用默认的 `--mode archive-backfill`。再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
 4. 再做日报搜索：先按发现层广泛建立候选账本，再回溯 A/B 级证据，最后按专业价值精选。不得先选日报再反填监测库。
    现在必须执行独立的 broad discovery 审计：
 
