@@ -119,7 +119,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
    候选账本必须引用 `discoveryAuditPath`。每条候选保留 `discoveredVia`、`discoveryQuery`、`duplicateStatus`、`duplicateOf`、`duplicateReason` 和 `newDevelopment`（未知时使用 `possible_duplicate` / `needs_verification`，不得静默删除）。
 5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。去重顺序是：广泛发现 → 当天事件聚类 → 近 7—14 天历史事件核对 → evidence 核验 → editorial selection。当天同一事件只保留 canonical event；历史转载记录保留在 discovery audit 中并写明 `duplicateOf`；有明确新增事实的记录标记 `new_development`，不能因标题相似被误杀。
 6. 按日期判断是否执行招聘、周报、月报；不要把所有栏目都重复搜一遍。
-7. 运行 `python build.py`。该步骤会先调用 `python digital_trend.py --incremental`，扫描国家文物局「文物新闻」近期分页，更新 `digital-data.json`，并写入 `content/数字趋势监测/YYYY-MM-DD.json`；随后重建数字趋势页和驾驶舱。`--build-only` 仅用于不采集数据的页面重建，不得作为每日正式监测路径。
+7. 正式每日任务先运行 `python digital_trend.py --incremental`，扫描国家文物局「文物新闻」近期分页，更新 `digital-data.json`，并写入 `content/数字趋势监测/YYYY-MM-DD.json`；确认扫描成功后再运行 `python build.py` 重建静态页面。普通 `python build.py` 只做页面构建（内部使用 `--build-only`），不联网采集、不更新数字趋势数据或覆盖记录。
 8. 运行 `python automation/validate_project.py --date YYYY-MM-DD`；该检查会强制要求当日 6 源覆盖登记和固定池域名匹配。历史档案可用 `--all` 检查，`--strict-all` 仅用于专项清理。
 9. 检查 `git status`、`git diff --check`、`heatmap-data.json`、`sources.html`、`search-index.json` 和生成文件；确认没有未预期的改动。
 10. 提交并推送：

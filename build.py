@@ -3946,11 +3946,12 @@ def main():
         f.write(sitemap_xml)
     print(f'Sitemap: {sitemap_path} ({len(daily_reports)} daily + {len(weekly_reports)} weekly + {len(monthly_reports)} monthly)')
 
-    # Refresh the digital-trend data through the daily incremental scan, then
-    # rebuild its page.  --build-only remains available for page-only rebuilds.
+    # Ordinary builds are intentionally side-effect-free for data collection.
+    # The formal daily job runs --incremental explicitly before this page-only
+    # rebuild; --build-only remains available for manual page rebuilds.
     try:
         import digital_trend
-        digital_trend.main(['--incremental'])
+        digital_trend.main(['--build-only'])
     except Exception as e:
         print(f'Digital trends: SKIP ({e})')
 

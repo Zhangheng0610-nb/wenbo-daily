@@ -39,6 +39,7 @@ BANNED = (
 URL_RE = re.compile(r'https?://[^\s)<>]+', re.I)
 MONITORING = CONTENT / '监测'
 DIGITAL_MONITORING = CONTENT / '数字趋势监测'
+DIGITAL_MONITORING_START = date(2026, 8, 29)
 MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
 MONITOR_MODES = {'archive-backfill', 'operational'}
 MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
@@ -373,6 +374,16 @@ def check_candidate_ledger(required_date):
 
 def check_digital_trend_monitor(required_date):
     """Require a truthful daily digital-trend scan record."""
+    try:
+        monitor_date = date.fromisoformat(required_date)
+    except ValueError:
+        return [f'digital-trend monitoring date is invalid: {required_date}']
+
+    # Coverage files were introduced when formal daily monitoring began. Do
+    # not fabricate historical records or fail older dates for their absence.
+    if monitor_date < DIGITAL_MONITORING_START:
+        return []
+
     path = DIGITAL_MONITORING / f'{required_date}.json'
     if not path.exists():
         return [f'missing daily digital-trend monitor: {path.relative_to(ROOT)}']
