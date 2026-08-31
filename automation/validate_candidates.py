@@ -65,6 +65,25 @@ def validate_discovery_audit(ledger_path, payload):
                 errors.append(f'invalid discovery scan status: {scan.get("sourceId", "?")}')
     if not isinstance(audit.get('queryFamilies'), list) or not audit.get('queryFamilies'):
         errors.append('discovery audit needs queryFamilies')
+    query_audits = audit.get('queryAudits')
+    if audit.get('queryAuditStatus') == 'checked':
+        if not isinstance(query_audits, list) or not query_audits:
+            errors.append('checked discovery audit needs queryAudits')
+        else:
+            for index, query in enumerate(query_audits, 1):
+                required_query_fields = {'queryFamily', 'actualQuery', 'executedAt', 'success', 'returnedResultCount', 'acceptedRawCount'}
+                missing = sorted(required_query_fields - set(query))
+                if missing:
+                    errors.append(f'query audit {index}: missing fields: {", ".join(missing)}')
+                if not isinstance(query.get('success'), bool):
+                    errors.append(f'query audit {index}: success must be boolean')
+                for field in ('returnedResultCount', 'acceptedRawCount'):
+                    if not isinstance(query.get(field), int) or query[field] < 0:
+                        errors.append(f'query audit {index}: {field} must be a non-negative integer')
+                if query.get('acceptedRawCount', 0) > query.get('returnedResultCount', 0):
+                    errors.append(f'query audit {index}: acceptedRawCount exceeds returnedResultCount')
+    elif query_audits not in (None, [],):
+        errors.append('queryAudits require queryAuditStatus=checked')
     records = audit.get('records')
     if not isinstance(records, list):
         errors.append('discovery audit records must be a list')

@@ -115,7 +115,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
    python automation/daily_discovery.py --date YYYY-MM-DD --window-days 7 --write
    ```
 
-   该命令只写 `content/发现/YYYY-MM-DD.json`，不写入 `content/监测/`，也不改变地图数据。它主动扫描国家文物局文物新闻/政策入口、新华网、中国新闻网、UNESCO 和 Archaeology Magazine 等可重复入口；Codex 还必须逐项执行 `daily_discovery.py` 中的国内/国际 query family，并把实际 query、结果数、失败状态和发现链接补入同日 discovery audit。发现来源只负责扩大召回，证据来源必须另行核验。
+   该命令只写 `content/发现/YYYY-MM-DD.json`，不写入 `content/监测/`，也不改变地图数据。它主动扫描国家文物局文物新闻/政策入口、新华网、中国新闻网、UNESCO 和 Archaeology Magazine 等可重复入口，并默认真实执行 `daily_discovery.py` 中的国内/国际 query family（Bing News RSS + Google News RSS）；每条查询的 `actualQuery`、`executedAt`、成功/失败、返回数和窗口内接纳数都会写入同日 discovery audit。`--no-query-search` 仅供测试使用。发现来源只负责扩大召回，证据来源必须另行核验。
    候选账本必须引用 `discoveryAuditPath`。每条候选保留 `discoveredVia`、`discoveryQuery`、`duplicateStatus`、`duplicateOf`、`duplicateReason` 和 `newDevelopment`（未知时使用 `possible_duplicate` / `needs_verification`，不得静默删除）。
 5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。去重顺序是：广泛发现 → 当天事件聚类 → 近 7—14 天历史事件核对 → evidence 核验 → editorial selection。当天同一事件只保留 canonical event；历史转载记录保留在 discovery audit 中并写明 `duplicateOf`；有明确新增事实的记录标记 `new_development`，不能因标题相似被误杀。
 6. 按日期判断是否执行招聘、周报、月报；不要把所有栏目都重复搜一遍。

@@ -2,18 +2,22 @@
 
 The map's fixed six-source monitoring remains separate.  This module records
 the wider discovery pass used by the daily editor: source-driven scans,
-query-driven search results supplied by Codex, and lightweight event-level
-deduplication.  It deliberately does not decide what should be published.
+real query-driven RSS searches, and lightweight event-level deduplication.  It
+deliberately does not decide what should be published.
 """
 from __future__ import annotations
 
 import argparse
+import email.utils
 import json
 import re
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
+from urllib.request import Request, build_opener
+from xml.etree import ElementTree
 
 if __package__ in (None, ""):
     ROOT = Path(__file__).resolve().parents[1]
@@ -27,11 +31,15 @@ from automation.governance import canonical_url, source_info
 
 TZ = timezone(timedelta(hours=8))
 DISCOVERY_DIR = ROOT / "content" / "发现"
+# Search endpoints are public web services and may require the host's normal
+# HTTP route.  Fixed-source monitoring keeps its proxy-free opener separately;
+# broad discovery must not silently use that network policy.
+SEARCH_OPENER = build_opener()
+SEARCH_USER_AGENT = "WenboDailyDiscovery/1.1 (+https://zhangheng666.top/)"
 
 # These are repeatable source-driven entry points, not additions to the map
 # panel.  A scan can fail independently and must never be recorded as
-# ``no_update``.  Query-driven results are supplied by the Codex run after it
-# executes the listed query families in a search-capable environment.
+# ``no_update``.
 SOURCE_SCANS = (
     {
         "sourceId": "ncha-wenwu-news",
@@ -84,16 +92,28 @@ SOURCE_SCANS = (
 )
 
 QUERY_FAMILIES = (
-    {"id": "policy-governance", "scope": "domestic", "queries": ("文物 政策 管理办法 通知 施行", "博物馆 管理 政策 文物局")},
-    {"id": "archaeology-heritage", "scope": "domestic", "queries": ("考古 新发现 遗址 保护 研究成果", "文物保护 工程 遗产 条例")},
-    {"id": "museum-public-culture", "scope": "domestic", "queries": ("博物馆 开馆 展览 重要馆藏 官方", "博物馆 安全 声明 重大事件")},
+    {"id": "policy-governance", "scope": "domestic", "queries": ("文物 政策 管理办法 通知 施行", "博物馆 管理 政策 文物局", "site:gov.cn 文物 博物馆 政策")},
+    {"id": "archaeology-heritage", "scope": "domestic", "queries": ("考古 新发现 遗址 保护 研究成果", "文物保护 工程 遗产 条例", "site:chinanews.com.cn 考古 遗址 文明", "site:henandaily.cn 考古 文物")},
+    {"id": "museum-public-culture", "scope": "domestic", "queries": ("博物馆 开馆 展览 重要馆藏 官方", "博物馆 安全 声明 重大事件", "site:thepaper.cn 博物馆 文物 安全", "site:gov.cn 博物馆 开馆 展览")},
     {"id": "digital-heritage", "scope": "domestic", "queries": ("数字文博 AI 三维 虚拟现实 博物馆", "文物 数字化 数据平台 保护")},
-    {"id": "international-heritage", "scope": "international", "queries": ("museum archaeology cultural heritage", "heritage protection museum theft", "repatriation museum policy", "digital heritage museum technology")},
+    {"id": "international-heritage", "scope": "international", "queries": ("museum archaeology cultural heritage", "archaeological discovery heritage site", "heritage protection museum theft", "repatriation museum policy", "digital heritage museum technology", "site:polizei.gv.at museum theft", "site:aa.com.tr archaeology heritage", "site:reuters.com museum archaeology heritage", "site:apnews.com museum archaeology heritage")},
+)
+
+QUERY_BACKENDS = (
+    {"id": "bing-news-rss", "name": "Bing News RSS", "base": "https://www.bing.com/news/search", "locale": "zh"},
+    {"id": "google-news-rss", "name": "Google News RSS", "base": "https://news.google.com/rss/search", "locale": "en"},
 )
 
 GENERIC_TITLE_WORDS = {
     "文物", "博物馆", "考古", "文化", "遗址", "发布", "举行", "召开", "相关", "我国", "中国", "国际",
     "正式", "工作", "活动", "项目", "新闻", "报道", "最新", "举行", "开展", "推出", "举办",
+}
+GENERIC_EVENT_WORDS = {
+    "museum", "museums", "archaeology", "archaeological", "heritage", "cultural", "culture", "art",
+    "news", "report", "official", "china", "chinese", "international", "new", "found", "finds",
+    "discovered", "discovery", "research", "study", "event", "theft", "stolen", "steal", "thieves",
+    "from", "with", "before", "in", "the", "of", "and", "to", "a", "an", "on", "for", "buy", "tickets",
+    "plundering", "brazen", "daytime", "heist",
 }
 DEVELOPMENT_WORDS = ("正式施行", "正式开幕", "正式开放", "揭牌", "签约", "完成交接", "追回", "落网", "发布结论", "新发现", "新增", "启动发掘", "落地")
 
@@ -120,12 +140,135 @@ def parse_date(value: str) -> date | None:
     return None
 
 
+def parse_feed_date(value: str) -> date | None:
+    """Parse RSS publication dates without treating an unparseable result as current."""
+    if not value:
+        return None
+    try:
+        parsed = email.utils.parsedate_to_datetime(value)
+    except (TypeError, ValueError, OverflowError):
+        parsed = None
+    if parsed is not None:
+        return parsed.astimezone(TZ).date() if parsed.tzinfo else parsed.date()
+    return parse_date(value)
+
+
+def actual_query(query: str, start: date, end: date) -> str:
+    """Make the requested date window explicit in every real search."""
+    return f'{query} after:{start.isoformat()} before:{(end + timedelta(days=1)).isoformat()}'
+
+
+def search_url(backend: dict, query: str, scope: str = "international") -> str:
+    if backend["id"] == "bing-news-rss":
+        return backend["base"] + "?" + urlencode({"q": query, "format": "rss"})
+    if scope == "domestic":
+        params = {"q": query, "hl": "zh-CN", "gl": "CN", "ceid": "CN:zh-Hans"}
+    else:
+        params = {"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"}
+    return backend["base"] + "?" + urlencode(params)
+
+
+def parse_rss(xml_text: str, *, family: dict, backend: dict, query: str, start: date, end: date) -> tuple[list[dict], int, int]:
+    root = ElementTree.fromstring(xml_text)
+    records = []
+    returned = 0
+    undated = 0
+    for item in root.findall(".//item"):
+        returned += 1
+        def value(tag: str) -> str:
+            node = item.find(tag)
+            return (node.text or "").strip() if node is not None else ""
+        title = value("title")
+        url = value("link")
+        published = parse_feed_date(value("pubDate"))
+        if not published:
+            undated += 1
+            continue
+        if not (start <= published <= end):
+            continue
+        source = item.find("source")
+        source_name = (source.text or "").strip() if source is not None else backend["name"]
+        record = {
+            "title": title,
+            "publishedDate": published.isoformat(),
+            "url": url,
+            "discoveredVia": backend["id"],
+            "discoverySourceType": "query_search",
+            "discoveryQuery": query,
+            "queryFamily": family["id"],
+            "queryBackend": backend["id"],
+            "scope": family["scope"],
+            "sourceDomain": source_name,
+        }
+        records.append(record)
+    return records, returned, undated
+
+
+def _execute_one_query(family: dict, backend: dict, base_query: str, start: date, end: date) -> tuple[list[dict], dict]:
+    query = actual_query(base_query, start, end)
+    audit = {
+        "queryFamily": family["id"],
+        "scope": family["scope"],
+        "backend": backend["id"],
+        "actualQuery": query,
+        "executedAt": now_cn(),
+        "success": False,
+        "failure": None,
+        "returnedResultCount": 0,
+        "acceptedRawCount": 0,
+        "undatedResultCount": 0,
+    }
+    try:
+        request = Request(search_url(backend, query, family["scope"]), headers={
+            "User-Agent": SEARCH_USER_AGENT,
+            "Accept": "application/rss+xml, application/xml, text/xml, */*",
+        })
+        with SEARCH_OPENER.open(request, timeout=8) as response:
+            payload = response.read()
+        found, returned, undated = parse_rss(
+            payload.decode("utf-8", errors="replace"), family=family, backend=backend,
+            query=query, start=start, end=end
+        )
+        audit["success"] = True
+        audit["returnedResultCount"] = returned
+        audit["acceptedRawCount"] = len(found)
+        audit["undatedResultCount"] = undated
+        return found, audit
+    except Exception as exc:  # each query is independently auditable
+        audit["failure"] = f"{type(exc).__name__}: {exc}"
+        return [], audit
+
+
+def execute_queries(required_date: date, start: date, end: date) -> tuple[list[dict], list[dict]]:
+    """Execute every configured query concurrently, retaining one audit row per query."""
+    tasks = [
+        (family, backend, base_query)
+        for family in QUERY_FAMILIES
+        for backend in QUERY_BACKENDS
+        for base_query in family["queries"]
+    ]
+    results = [None] * len(tasks)
+    with ThreadPoolExecutor(max_workers=min(8, len(tasks))) as pool:
+        futures = {
+            pool.submit(_execute_one_query, family, backend, base_query, start, end): index
+            for index, (family, backend, base_query) in enumerate(tasks)
+        }
+        for future in as_completed(futures):
+            results[futures[future]] = future.result()
+    records = []
+    audits = []
+    for found, audit in results:
+        records.extend(found)
+        audits.append(audit)
+    return records, audits
+
+
 def compact(text: str) -> str:
     return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", (text or "").lower())
 
 
 def meaningful_terms(text: str) -> set[str]:
-    terms = set(re.findall(r"[\u4e00-\u9fff]{2,}|[a-z0-9]{2,}", (text or "").lower()))
+    terms = set(re.findall(r"[\u4e00-\u9fff]{2,}|[a-z0-9]+", (text or "").lower()))
     return {term for term in terms if term not in GENERIC_TITLE_WORDS and len(term) >= 2}
 
 
@@ -158,8 +301,15 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     # Similar subject matter is not enough.  Require a substantial overlap
     # plus a shared named anchor, so two different archaeological sites are
     # not silently merged.
-    long_shared = {term for term in shared if len(term) >= 4}
-    if long_shared and len(shared) >= 2 and len(shared) / max(1, min(len(left), len(right))) >= 0.75:
+    named_shared = {term for term in shared if len(term) >= 4 and term not in GENERIC_EVENT_WORDS}
+    close_in_time = False
+    try:
+        close_in_time = abs(date.fromisoformat(current.get("publishedDate", "")) - date.fromisoformat(previous.get("publishedDate", ""))) <= timedelta(days=1)
+    except ValueError:
+        pass
+    if len(named_shared) >= 2 and (
+        len(shared) / max(1, min(len(left), len(right))) >= 0.4 or close_in_time
+    ):
         if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
             return ("new_development", "high-overlap event identity with a substantive development marker")
         return ("historical_duplicate", "high-overlap event identity")
@@ -229,7 +379,7 @@ def load_history(required_date: date) -> list[dict]:
     return rows
 
 
-def build_audit(required_date: date, raw_records: list[dict], scan_statuses: list[dict], query_results: list[dict]) -> dict:
+def build_audit(required_date: date, raw_records: list[dict], scan_statuses: list[dict], query_results: list[dict], query_audits: list[dict] | None = None) -> dict:
     start = required_date - timedelta(days=6)
     history = load_history(required_date)
     combined = []
@@ -279,13 +429,17 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         "cutoffTimezone": "Asia/Shanghai",
         "sourceScans": scan_statuses,
         "queryFamilies": [dict(f, queries=list(f["queries"])) for f in QUERY_FAMILIES],
-        "queryAuditStatus": "checked" if query_results else "not_replayed",
+        "queryAuditStatus": "checked" if query_audits else "not_replayed",
         "queryResults": query_results,
+        "queryAudits": query_audits or [],
         "records": annotated,
         "summary": {
             "sourceScansAttempted": len(scan_statuses),
             "sourceScansSucceeded": sum(s.get("status") == "checked" for s in scan_statuses),
-            "queriesExecuted": len(query_results),
+            "queriesExecuted": sum(bool(a.get("success")) for a in (query_audits or [])),
+            "queriesAttempted": len(query_audits or []),
+            "queriesSucceeded": sum(bool(a.get("success")) for a in (query_audits or [])),
+            "queriesFailed": sum(not bool(a.get("success")) for a in (query_audits or [])),
             "rawResults": len(annotated),
             "sameDayDuplicates": same_day,
             "historicalDuplicates": historical,
@@ -297,21 +451,27 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
     }
 
 
-def run(required_date: date, *, window_days: int = 7, query_results: list[dict] | None = None, write: bool = False) -> dict:
+def run(required_date: date, *, window_days: int = 7, query_results: list[dict] | None = None, query_audits: list[dict] | None = None, execute_query_search: bool = True, write: bool = False, output_path: Path | None = None) -> dict:
     start = required_date - timedelta(days=window_days - 1)
     statuses, raw = [], []
     for spec in SOURCE_SCANS:
         status, rows = scan_page(spec, start, required_date)
         statuses.append(status)
         raw.extend(rows)
-    audit = build_audit(required_date, raw, statuses, query_results or [])
+    if execute_query_search and query_audits is None:
+        searched, audits = execute_queries(required_date, start, required_date)
+        query_results = (query_results or []) + searched
+        query_audits = audits
+    audit = build_audit(required_date, raw, statuses, query_results or [], query_audits or [])
     if write:
         DISCOVERY_DIR.mkdir(parents=True, exist_ok=True)
         (DISCOVERY_DIR / "README.md").write_text(
             "# 日报 broad discovery 审计\n\n此目录只记录日报发现层，不进入 `content/监测/`，也不改变行业关注地图固定六源。未知公众号可以作为 discovery source，但不能直接作为最终 evidence。\n",
             encoding="utf-8",
         )
-        (DISCOVERY_DIR / f"{required_date.isoformat()}.json").write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        target = output_path or (DISCOVERY_DIR / f"{required_date.isoformat()}.json")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return audit
 
 
@@ -320,6 +480,8 @@ def main(argv=None) -> int:
     parser.add_argument("--date", required=True, type=date.fromisoformat)
     parser.add_argument("--window-days", type=int, default=7)
     parser.add_argument("--query-results", type=Path, help="JSON list of Codex-executed search results")
+    parser.add_argument("--no-query-search", action="store_true", help="Skip real RSS query execution (tests/replay only)")
+    parser.add_argument("--output", type=Path, help="Optional audit output path; defaults to content/发现/YYYY-MM-DD.json")
     parser.add_argument("--write", action="store_true")
     args = parser.parse_args(argv)
     if args.window_days < 1:
@@ -327,7 +489,7 @@ def main(argv=None) -> int:
     query_results = load_json(args.query_results, []) if args.query_results else []
     if not isinstance(query_results, list):
         parser.error("--query-results must contain a JSON list")
-    audit = run(args.date, window_days=args.window_days, query_results=query_results, write=args.write)
+    audit = run(args.date, window_days=args.window_days, query_results=query_results, execute_query_search=not args.no_query_search, write=args.write, output_path=args.output)
     print(json.dumps(audit["summary"], ensure_ascii=False, indent=2))
     for status in audit["sourceScans"]:
         print(f'{status["sourceId"]}: {status["status"]} raw={status["rawResults"]} window={status["windowResults"]}')

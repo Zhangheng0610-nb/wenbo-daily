@@ -30,6 +30,11 @@ class DailyDiscoveryTests(unittest.TestCase):
         b = {"title": "乙遗址发现古墓", "url": "https://b.test/2", "publishedDate": "2026-08-31", "entity": "乙遗址", "eventType": "archaeology"}
         self.assertIsNone(duplicate_relation(b, a))
 
+    def test_syndicated_english_titles_are_event_duplicates(self):
+        a = {"title": "Egyptian queen's 673-diamond necklace stolen from Vienna museum", "url": "https://a.test/1", "publishedDate": "2026-08-30"}
+        b = {"title": "Thieves plunder 673 diamond necklace from Vienna Museum", "url": "https://b.test/2", "publishedDate": "2026-08-31"}
+        self.assertEqual(duplicate_relation(b, a)[0], "historical_duplicate")
+
     def test_all_source_scans_run_even_when_early_results_exist(self):
         calls = []
 
@@ -38,7 +43,7 @@ class DailyDiscoveryTests(unittest.TestCase):
             return ({"sourceId": spec["sourceId"], "status": "checked", "rawResults": 0, "windowResults": 0}, [])
 
         with patch("automation.daily_discovery.scan_page", side_effect=fake_scan):
-            audit = run(__import__("datetime").date(2026, 8, 31))
+            audit = run(__import__("datetime").date(2026, 8, 31), execute_query_search=False)
         self.assertEqual(calls, [spec["sourceId"] for spec in SOURCE_SCANS])
         self.assertEqual(audit["summary"]["sourceScansAttempted"], len(SOURCE_SCANS))
 
