@@ -5020,8 +5020,9 @@
       {
         "sourceId": "archaeology",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5033,8 +5034,9 @@
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5046,11 +5048,12 @@
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 0,
         "note": "",
-        "rawCount": 0,
+        "rawCount": 2,
         "eligibleCount": 0,
         "duplicatesSkipped": 0,
         "scanStatus": "checked",
@@ -5059,8 +5062,9 @@
       {
         "sourceId": "museum-association",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5072,8 +5076,9 @@
       {
         "sourceId": "ncha",
         "mode": "operational",
+        "runType": "replay",
         "status": "success",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 2,
         "note": "",
         "rawCount": 2,
@@ -5085,8 +5090,9 @@
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:48:39+08:00",
+        "checkedAt": "2026-08-31T17:06:59+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5098,8 +5104,9 @@
       {
         "sourceId": "archaeology",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5111,8 +5118,9 @@
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5124,8 +5132,9 @@
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5137,8 +5146,9 @@
       {
         "sourceId": "museum-association",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5150,8 +5160,9 @@
       {
         "sourceId": "ncha",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 1,
@@ -5163,8 +5174,9 @@
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "success",
-        "checkedAt": "2026-08-31T16:49:09+08:00",
+        "checkedAt": "2026-08-31T17:07:30+08:00",
         "candidateCount": 1,
         "note": "",
         "rawCount": 2,
@@ -5176,8 +5188,9 @@
       {
         "sourceId": "archaeology",
         "mode": "operational",
+        "runType": "replay",
         "status": "success",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 4,
         "note": "",
         "rawCount": 4,
@@ -5189,8 +5202,9 @@
       {
         "sourceId": "cctv-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5202,8 +5216,9 @@
       {
         "sourceId": "cultural-relics-news",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5215,8 +5230,9 @@
       {
         "sourceId": "museum-association",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 1,
@@ -5228,8 +5244,9 @@
       {
         "sourceId": "ncha",
         "mode": "operational",
+        "runType": "replay",
         "status": "no_update",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5241,8 +5258,9 @@
       {
         "sourceId": "xinhua-wenbo",
         "mode": "operational",
+        "runType": "replay",
         "status": "success",
-        "checkedAt": "2026-08-31T16:49:39+08:00",
+        "checkedAt": "2026-08-31T17:07:58+08:00",
         "candidateCount": 2,
         "note": "",
         "rawCount": 5,
@@ -5275,6 +5293,11 @@
     "archiveBackfillRecords": 412,
     "fixedPanelMonitoringRecords": 9,
     "operationalRecords": 9,
+    "operationalRecordTypes": {
+      "live": 0,
+      "replay": 9,
+      "unknown": 0
+    },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 412,
@@ -5315,6 +5338,17 @@
     "operationalCoverageChecks": 18,
     "archiveBackfillCoverageDays": 91,
     "operationalCoverageDays": 3,
+    "operationalCoverageByRunType": {
+      "replay": {
+        "checks": 18,
+        "good": 18,
+        "days": 3
+      }
+    },
+    "liveOperationalCoverageChecks": 0,
+    "liveOperationalCoverageDays": 0,
+    "replayOperationalCoverageChecks": 18,
+    "replayOperationalCoverageDays": 3,
     "recordsBySource": {
       "ncha": 73,
       "cultural-relics-news": 103,

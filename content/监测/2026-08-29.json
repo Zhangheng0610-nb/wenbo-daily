@@ -6,8 +6,9 @@
     {
       "sourceId": "ncha",
       "mode": "operational",
+      "runType": "replay",
       "status": "success",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 2,
       "note": "",
       "rawCount": 2,
@@ -18,11 +19,12 @@
     {
       "sourceId": "cultural-relics-news",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 0,
       "note": "",
-      "rawCount": 0,
+      "rawCount": 2,
       "eligibleCount": 0,
       "duplicatesSkipped": 0,
       "scanStatus": "checked"
@@ -30,8 +32,9 @@
     {
       "sourceId": "archaeology",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -42,8 +45,9 @@
     {
       "sourceId": "museum-association",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -54,8 +58,9 @@
     {
       "sourceId": "xinhua-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -66,8 +71,9 @@
     {
       "sourceId": "cctv-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:48:39+08:00",
+      "checkedAt": "2026-08-31T17:06:59+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -101,7 +107,8 @@
       ],
       "impact": 45,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260829-ncha-0001-22204552html",
@@ -127,14 +134,16 @@
       ],
       "impact": 80,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     }
   ],
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",
     "mode": "operational",
+    "runType": "replay",
     "completed": true,
-    "checkedAt": "2026-08-31T16:48:39+08:00",
+    "checkedAt": "2026-08-31T17:06:59+08:00",
     "replay": true,
     "sources": {
       "ncha": {
@@ -145,7 +154,7 @@
         "status": "checked"
       },
       "cultural-relics-news": {
-        "rawCount": 0,
+        "rawCount": 2,
         "eligibleCount": 0,
         "acceptedCount": 0,
         "duplicatesSkipped": 0,
@@ -180,5 +189,6 @@
         "status": "checked"
       }
     }
-  }
+  },
+  "runType": "replay"
 }

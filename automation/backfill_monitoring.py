@@ -163,8 +163,23 @@ def clean_source_title(source_id: str, title: str) -> str:
     return value or "未命名文博报道"
 
 
-def candidate(source_id: str, published: date, title: str, url: str) -> dict:
-    return {"sourceId": source_id, "date": published.isoformat(), "title": clean_source_title(source_id, title), "url": url}
+def candidate(
+    source_id: str,
+    published: date,
+    title: str,
+    url: str,
+    *,
+    source_section: str = "",
+) -> dict:
+    row = {
+        "sourceId": source_id,
+        "date": published.isoformat(),
+        "title": clean_source_title(source_id, title),
+        "url": url,
+    }
+    if source_section:
+        row["sourceSection"] = source_section
+    return row
 
 
 def is_wenbo_relevant(title: str) -> bool:
@@ -191,7 +206,7 @@ def crawl_ncha(start: date, end: date) -> tuple[list[dict], bool, str]:
             page_rows += 1
             oldest = min(oldest, published) if oldest else published
             if in_window(published, start, end):
-                found[url] = candidate("ncha", published, text, url)
+                found[url] = candidate("ncha", published, text, url, source_section="文物新闻")
         if oldest and oldest < start:
             return list(found.values()), True, "国家文物局“文物新闻”分页档案已回溯。"
         if page_rows == 0:
@@ -428,13 +443,19 @@ def impact(title: str) -> int:
     return 45
 
 
-def as_record(row: dict, order: int, *, origin: str = "archive-backfill") -> dict:
+def as_record(
+    row: dict,
+    order: int,
+    *,
+    origin: str = "archive-backfill",
+    run_type: str | None = None,
+) -> dict:
     scope, province, confidence = choose_location(row["title"])
     source_id = row["sourceId"]
     source_name, _origin = SOURCE_META[source_id]
     digest = re.sub(r"[^a-z0-9]", "", row["url"].lower())[-12:]
     themes = choose_themes(row["title"])
-    return {
+    record = {
         "recordId": f"{'operational' if origin == 'fixed-panel-monitoring' else 'backfill'}-{row['date'].replace('-', '')}-{source_id}-{order:04d}-{digest}",
         "date": row["date"],
         "title": row["title"],
@@ -450,6 +471,9 @@ def as_record(row: dict, order: int, *, origin: str = "archive-backfill") -> dic
         "selectedForDaily": False,
         "origin": origin,
     }
+    if run_type:
+        record["runType"] = run_type
+    return record
 
 
 def empty_day(day: date) -> dict:
@@ -512,12 +536,34 @@ def normalize_archaeology_backfill() -> None:
         )
 
 
+def scope_reason(row: dict) -> str:
+    """Explain fixed-panel scope without treating a title keyword as the scope.
+
+    The NCHA crawler knows that a row came from its dedicated 文物新闻 column,
+    but that column also carries routine programme/communication notices.  Use
+    that source context first, then apply a small general event-semantic gate;
+    the gate is deliberately not a title special case for any one programme.
+    """
+    source_id = row.get("sourceId")
+    title = plain(row.get("title", ""))
+    if source_id == "archaeology":
+        return "fixed-source-domain"
+    if row.get("sourceSection") == "文物新闻":
+        routine_markers = ("节目", "栏目", "播出", "开播", "纪录片", "专题片")
+        programme_verbs = ("解码", "讲述", "探寻", "揭秘", "聚焦")
+        if any(marker in title for marker in routine_markers) or (
+            title.startswith("《") and any(verb in title for verb in programme_verbs)
+        ):
+            return "routine-program-communication"
+        return "fixed-source-section"
+    if is_wenbo_relevant(title):
+        return "explicit-domain-signal"
+    return ""
+
+
 def allowed_backfill_row(row: dict) -> bool:
-    # The archaeology source is already a domain-specific institute archive;
-    # academic papers from its core sections need not repeat a keyword such as
-    # “考古” in the headline.  Other source feeds still use the strict title
-    # gate to keep general current-affairs items out of the corpus.
-    return row.get("sourceId") == "archaeology" or is_wenbo_relevant(row.get("title", ""))
+    reason = scope_reason(row)
+    return bool(reason) and reason != "routine-program-communication"
 
 
 def _outcome_details(value) -> dict:
@@ -550,9 +596,13 @@ def merge_write(
     raw_rows = list(rows)
     rows = [row for row in raw_rows if allowed_backfill_row(row)]
     row_urls = {row["url"].rstrip("/") for row in rows}
+    run_type = "replay" if mode == "operational" and replay else "live" if mode == "operational" else None
     for index, row in enumerate(sorted(rows, key=lambda value: (value["date"], value["sourceId"], value["url"])), 1):
         by_day[row["date"]].append(as_record(
-            row, index, origin="fixed-panel-monitoring" if mode == "operational" else "archive-backfill"
+            row,
+            index,
+            origin="fixed-panel-monitoring" if mode == "operational" else "archive-backfill",
+            run_type=run_type,
         ))
     day = start
     while day <= end:
@@ -565,6 +615,7 @@ def merge_write(
         payload["date"] = day.isoformat()
         if mode == "operational":
             payload["mode"] = "operational"
+            payload["runType"] = run_type
         else:
             # A maintenance backfill must not relabel an already recorded
             # operational observation as archive data.
@@ -636,6 +687,7 @@ def merge_write(
             row_coverage = {
                 "sourceId": source_id,
                 "mode": mode,
+                **({"runType": run_type} if mode == "operational" else {}),
                 "status": status,
                 "checkedAt": (
                     checked_at if mode == "operational" and checked_at
@@ -672,6 +724,7 @@ def merge_write(
             payload["scanAudit"] = {
                 "scanner": "automation/backfill_monitoring.py",
                 "mode": "operational",
+                "runType": run_type,
                 "completed": True,
                 "checkedAt": checked_at,
                 "replay": bool(replay),
@@ -690,12 +743,17 @@ def main() -> int:
         "--mode", choices=("archive-backfill", "operational"), default="archive-backfill",
         help="archive recovery (default) or the formal fixed-panel daily scan",
     )
+    parser.add_argument("--replay", action="store_true", help="mark an operational run as a controlled historical replay")
     parser.add_argument("--write", action="store_true", help="write merged daily monitoring files")
     args = parser.parse_args()
     if args.days < 1:
         parser.error("--days must be positive")
     if args.mode == "operational" and args.days != 1:
         parser.error("operational mode requires exactly one observation day")
+    if args.mode != "operational" and args.replay:
+        parser.error("--replay requires --mode operational")
+    if args.mode == "operational" and args.end != date.today() and not args.replay:
+        parser.error("historical operational dates require --replay")
     start = args.end - timedelta(days=args.days - 1)
     all_rows: list[dict] = []
     outcomes: dict[str, dict] = {}
@@ -727,7 +785,7 @@ def main() -> int:
     if args.write:
         merge_write(
             start, args.end, all_rows, outcomes, mode=args.mode,
-            checked_at=checked_at, replay=(args.mode == "operational" and args.end != date.today()),
+            checked_at=checked_at, replay=(args.mode == "operational" and args.replay),
         )
         print(f"已合并写入 {MONITORING}。")
     else:

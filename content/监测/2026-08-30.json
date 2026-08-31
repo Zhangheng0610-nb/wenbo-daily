@@ -6,8 +6,9 @@
     {
       "sourceId": "ncha",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 1,
@@ -18,8 +19,9 @@
     {
       "sourceId": "cultural-relics-news",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -30,8 +32,9 @@
     {
       "sourceId": "archaeology",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -42,8 +45,9 @@
     {
       "sourceId": "museum-association",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -54,8 +58,9 @@
     {
       "sourceId": "xinhua-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "success",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 1,
       "note": "",
       "rawCount": 2,
@@ -66,8 +71,9 @@
     {
       "sourceId": "cctv-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:09+08:00",
+      "checkedAt": "2026-08-31T17:07:30+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -101,14 +107,16 @@
       ],
       "impact": 45,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     }
   ],
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",
     "mode": "operational",
+    "runType": "replay",
     "completed": true,
-    "checkedAt": "2026-08-31T16:49:09+08:00",
+    "checkedAt": "2026-08-31T17:07:30+08:00",
     "replay": true,
     "sources": {
       "ncha": {
@@ -154,5 +162,6 @@
         "status": "checked"
       }
     }
-  }
+  },
+  "runType": "replay"
 }

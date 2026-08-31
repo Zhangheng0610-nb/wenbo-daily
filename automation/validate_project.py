@@ -43,6 +43,7 @@ DIGITAL_MONITORING_START = date(2026, 8, 29)
 FIXED_PANEL_OPERATIONAL_START = date(2026, 8, 29)
 MONITOR_STATUSES = {'success', 'no_update', 'partial', 'failed'}
 MONITOR_MODES = {'archive-backfill', 'operational'}
+MONITOR_RUN_TYPES = {'live', 'replay'}
 MONITOR_ORIGINS = {'legacy-daily-selection', 'archive-backfill', 'fixed-panel-monitoring'}
 MONITOR_SCOPES = {'province', 'national', 'international', 'unassigned'}
 CN_TZ = timezone(timedelta(hours=8))
@@ -225,6 +226,9 @@ def check_monitoring(required_date=None):
             mode = payload.get('mode')
             if mode not in MONITOR_MODES:
                 errors.append(f'{path.relative_to(ROOT)}: mode must be archive-backfill or operational')
+            if mode == 'operational' and date.fromisoformat(file_date) >= FIXED_PANEL_OPERATIONAL_START:
+                if payload.get('runType') not in MONITOR_RUN_TYPES:
+                    errors.append(f'{path.relative_to(ROOT)}: operational runType must be live or replay')
             coverage = payload.get('coverage')
             if not isinstance(coverage, list):
                 errors.append(f'{path.relative_to(ROOT)}: coverage must be a list')
@@ -243,6 +247,10 @@ def check_monitoring(required_date=None):
                     errors.append(f'{path.relative_to(ROOT)}: invalid coverage mode for {row.get("sourceId", "?")}')
                 elif mode in MONITOR_MODES and row.get('mode') != mode:
                     errors.append(f'{path.relative_to(ROOT)}: coverage mode mismatch for {row.get("sourceId", "?")}')
+                if mode == 'operational' and row.get('runType') not in MONITOR_RUN_TYPES:
+                    errors.append(f'{path.relative_to(ROOT)}: operational coverage needs runType for {row.get("sourceId", "?")}')
+                elif mode == 'operational' and row.get('runType') != payload.get('runType'):
+                    errors.append(f'{path.relative_to(ROOT)}: coverage runType mismatch for {row.get("sourceId", "?")}')
                 if row.get('status') not in MONITOR_STATUSES:
                     errors.append(f'{path.relative_to(ROOT)}: invalid coverage status for {row.get("sourceId", "?")}')
                 count = row.get('candidateCount')
@@ -301,6 +309,8 @@ def check_monitoring(required_date=None):
                 else:
                     if scan_audit.get('mode') != 'operational':
                         errors.append(f'{path.relative_to(ROOT)}: scanAudit mode must be operational')
+                    if scan_audit.get('runType') != payload.get('runType'):
+                        errors.append(f'{path.relative_to(ROOT)}: scanAudit runType mismatch')
                     source_audit = scan_audit.get('sources')
                     if not isinstance(source_audit, dict):
                         errors.append(f'{path.relative_to(ROOT)}: scanAudit sources must be an object')

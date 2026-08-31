@@ -927,6 +927,26 @@ def build_heatmap_data(corpus):
     legacy_records = provenance_records['legacy-daily-selection']
     archive_records = provenance_records['archive-backfill']
     operational_records = provenance_records['fixed-panel-monitoring']
+    operational_record_types = {'live': 0, 'replay': 0, 'unknown': 0}
+    for record in corpus['records']:
+        if record.get('origin') != 'fixed-panel-monitoring':
+            continue
+        run_type = record.get('runType') or 'unknown'
+        operational_record_types[run_type] = operational_record_types.get(run_type, 0) + 1
+    operational_coverage_by_run_type = {}
+    for row in corpus['coverage']:
+        if row.get('mode') != 'operational':
+            continue
+        run_type = row.get('runType') or 'unknown'
+        bucket = operational_coverage_by_run_type.setdefault(run_type, {'checks': 0, 'good': 0, 'dates': set()})
+        bucket['checks'] += 1
+        bucket['dates'].add(row.get('date', ''))
+        if row.get('status') in good_statuses:
+            bucket['good'] += 1
+    operational_coverage_by_run_type = {
+        run_type: {'checks': value['checks'], 'good': value['good'], 'days': len({d for d in value['dates'] if d})}
+        for run_type, value in operational_coverage_by_run_type.items()
+    }
     stats = {
         'totalMonitoredRecords': len(corpus['records']),
         'includedProvincialRecords': len(provincial_candidates),
@@ -937,6 +957,7 @@ def build_heatmap_data(corpus):
         'archiveBackfillRecords': archive_records,
         'fixedPanelMonitoringRecords': operational_records,
         'operationalRecords': operational_records,
+        'operationalRecordTypes': operational_record_types,
         'provenanceRecords': provenance_records,
         'otherProvenanceRecords': other_provenance_records,
         'provenanceReconciled': sum(provenance_records.values()) + sum(other_provenance_records.values()) == len(corpus['records']),
@@ -954,6 +975,11 @@ def build_heatmap_data(corpus):
         'operationalCoverageChecks': coverage_by_mode.get('operational', {}).get('checks', 0),
         'archiveBackfillCoverageDays': coverage_by_mode.get('archive-backfill', {}).get('days', 0),
         'operationalCoverageDays': coverage_by_mode.get('operational', {}).get('days', 0),
+        'operationalCoverageByRunType': operational_coverage_by_run_type,
+        'liveOperationalCoverageChecks': operational_coverage_by_run_type.get('live', {}).get('checks', 0),
+        'liveOperationalCoverageDays': operational_coverage_by_run_type.get('live', {}).get('days', 0),
+        'replayOperationalCoverageChecks': operational_coverage_by_run_type.get('replay', {}).get('checks', 0),
+        'replayOperationalCoverageDays': operational_coverage_by_run_type.get('replay', {}).get('days', 0),
         'recordsBySource': source_records,
     }
     samples = [{

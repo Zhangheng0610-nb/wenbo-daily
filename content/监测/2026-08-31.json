@@ -6,8 +6,9 @@
     {
       "sourceId": "ncha",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -18,8 +19,9 @@
     {
       "sourceId": "cultural-relics-news",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -30,8 +32,9 @@
     {
       "sourceId": "archaeology",
       "mode": "operational",
+      "runType": "replay",
       "status": "success",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 4,
       "note": "",
       "rawCount": 4,
@@ -42,8 +45,9 @@
     {
       "sourceId": "museum-association",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 1,
@@ -54,8 +58,9 @@
     {
       "sourceId": "xinhua-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "success",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 2,
       "note": "",
       "rawCount": 5,
@@ -66,8 +71,9 @@
     {
       "sourceId": "cctv-wenbo",
       "mode": "operational",
+      "runType": "replay",
       "status": "no_update",
-      "checkedAt": "2026-08-31T16:49:39+08:00",
+      "checkedAt": "2026-08-31T17:07:58+08:00",
       "candidateCount": 0,
       "note": "",
       "rawCount": 0,
@@ -101,7 +107,8 @@
       ],
       "impact": 60,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260831-archaeology-0004-6065258shtml",
@@ -127,7 +134,8 @@
       ],
       "impact": 60,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260831-archaeology-0001-6065242shtml",
@@ -153,7 +161,8 @@
       ],
       "impact": 60,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260831-archaeology-0002-6065279shtml",
@@ -179,7 +188,8 @@
       ],
       "impact": 80,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260831-xinhua-wenbo-0005-d14690bchtml",
@@ -206,7 +216,8 @@
       ],
       "impact": 45,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     },
     {
       "recordId": "operational-20260831-xinhua-wenbo-0006-a29e440chtml",
@@ -235,15 +246,17 @@
       ],
       "impact": 45,
       "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring"
+      "origin": "fixed-panel-monitoring",
+      "runType": "replay"
     }
   ],
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",
     "mode": "operational",
+    "runType": "replay",
     "completed": true,
-    "checkedAt": "2026-08-31T16:49:39+08:00",
-    "replay": false,
+    "checkedAt": "2026-08-31T17:07:58+08:00",
+    "replay": true,
     "sources": {
       "ncha": {
         "rawCount": 0,
@@ -288,5 +301,6 @@
         "status": "checked"
       }
     }
-  }
+  },
+  "runType": "replay"
 }
