@@ -1490,7 +1490,7 @@ fetch('lib/china.json').then(function(r){
 }).catch(function(){
   document.getElementById('map-fallback').textContent='地图数据加载失败，可使用地区排名查看全部数据。';
 });
-fetch('heatmap-data.json').then(function(r){
+fetch('heatmap-data.json',{cache:'no-store'}).then(function(r){
   return r.ok ? r.json() : Promise.reject();
 }).then(function(d){
   if(!d||d.version<3||!Array.isArray(d.events)||!d.coverage)throw new Error('schema');

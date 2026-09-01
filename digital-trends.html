@@ -213,7 +213,7 @@ var DATA_URL = 'digital-data.json';
 var LEVEL_NAMES = { 'core': '核心', 'tech': '技术', 'ext': '场景' };
 var LEVEL_COLORS = { 'core': '#2563eb', 'tech': '#0d9488', 'ext': '#d97706' };
 
-fetch(DATA_URL).then(function(r){ return r.json(); }).then(function(data){
+fetch(DATA_URL,{cache:'no-store'}).then(function(r){ return r.json(); }).then(function(data){
   init(data);
 }).catch(function(e){
   document.getElementById('chart').innerHTML = '<div class="empty">⚠️ 数据加载失败：' + e + '</div>';
