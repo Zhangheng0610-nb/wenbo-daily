@@ -24,6 +24,7 @@ DECISIONS = {'selected', 'rejected', 'deferred', 'needs_verification'}
 # rewritten just to satisfy the newer validator.
 DUPLICATE_STATUSES = {'unique_event', 'same_day_duplicate', 'historical_duplicate', 'new_development', 'possible_duplicate', 'unique_opportunity', 'unresolved', 'not_selected'}
 DISCOVERY_AUDIT_REQUIRED_FROM = date(2026, 8, 31)
+FINAL_EDITORIAL_POOL_REQUIRED_FROM = date(2026, 9, 2)
 
 
 def valid_url(value):
@@ -97,6 +98,117 @@ def validate_discovery_audit(ledger_path, payload):
     summary = audit.get('summary') or {}
     if isinstance(records, list) and summary.get('rawResults') != len(records):
         errors.append('discovery summary rawResults does not match records')
+    evaluation = audit.get('candidateEvaluation') or {}
+    if evaluation:
+        # The finalEditorialPool migration starts on 2026-09-02.  Earlier
+        # production audits may contain the older, report-level
+        # candidateEvaluation shape; validate their discovery coverage above,
+        # but do not reinterpret that historical snapshot with the new
+        # event-level counters and queue schema.
+        if ledger_date < FINAL_EDITORIAL_POOL_REQUIRED_FROM:
+            return errors
+        evaluation_summary = evaluation.get('summary') or {}
+        final_pool = evaluation.get('finalEditorialPool')
+        if ledger_date >= FINAL_EDITORIAL_POOL_REQUIRED_FROM:
+            if not isinstance(final_pool, dict):
+                errors.append('discovery audit needs finalEditorialPool from 2026-09-02 onward')
+            else:
+                final_events = final_pool.get('events')
+                final_ids = [row.get('eventId') for row in final_events or [] if isinstance(row, dict)]
+                if not isinstance(final_events, list):
+                    errors.append('finalEditorialPool.events must be a list')
+                if len(final_ids) != len(set(final_ids)):
+                    errors.append('finalEditorialPool eventIds must be unique')
+                if final_pool.get('canonicalUniqueEvents') != len(set(final_ids)):
+                    errors.append('finalEditorialPool canonicalUniqueEvents does not match events')
+                if not isinstance(final_pool.get('rawQualifiedEvents'), int) or final_pool.get('rawQualifiedEvents', 0) < len(final_events or []):
+                    errors.append('finalEditorialPool rawQualifiedEvents must cover canonical events')
+                if final_pool.get('editoriallyReviewed') != 0:
+                    errors.append('new discovery audit finalEditorialPool must start pending with editoriallyReviewed=0')
+                for index, row in enumerate(final_events or [], 1):
+                    if not row.get('eventId'):
+                        errors.append(f'finalEditorialPool event {index}: eventId required')
+                    if row.get('candidateDisposition') != 'evidence_qualified':
+                        errors.append(f'finalEditorialPool event {index}: event must be evidence_qualified')
+        elif final_pool is not None and not isinstance(final_pool, dict):
+            errors.append('finalEditorialPool must be an object when present')
+        for field in ('candidateEvaluationPool', 'evidenceQualified', 'needsVerification',
+                      'highPriorityCandidates', 'highPriorityEvidenceQueue',
+                      'highPriorityNeedsVerification', 'evidenceUpgradeAttempted',
+                      'rejected', 'deferred'):
+            value = evaluation_summary.get(field)
+            if not isinstance(value, int) or value < 0:
+                errors.append(f'candidate evaluation summary {field} must be a non-negative integer')
+        queue_count = len(evaluation.get('highPriorityEvidenceQueue') or [])
+        if evaluation_summary.get('highPriorityEvidenceQueue') != queue_count:
+            errors.append('candidate evaluation highPriorityEvidenceQueue count does not match queue')
+        if evaluation_summary.get('highPriorityNeedsVerification') != queue_count:
+            errors.append('candidate evaluation highPriorityNeedsVerification count does not match queue')
+        event_candidates = evaluation.get('eventCandidates') or []
+        event_ids = [row.get('eventId') for row in event_candidates]
+        if isinstance(records, list) and evaluation_summary.get('rawRecords') != len(records):
+            errors.append('candidate evaluation rawRecords does not match discovery records')
+        if evaluation_summary.get('eventCandidateCount') != len(event_candidates):
+            errors.append('candidate evaluation eventCandidateCount does not match eventCandidates')
+        event_report_count = sum(row.get('reportCount', 0) for row in event_candidates)
+        if evaluation_summary.get('deduplicatedReports') != event_report_count:
+            errors.append('candidate evaluation deduplicatedReports does not match event reports')
+        if len(event_ids) != len(set(event_ids)):
+            errors.append('candidate evaluation eventIds must be unique')
+        known_event_ids = set(event_ids)
+        for index, row in enumerate(event_candidates, 1):
+            if not row.get('eventId'):
+                errors.append(f'event candidate {index}: eventId required')
+            if not isinstance(row.get('reportCount'), int) or row['reportCount'] < 1:
+                errors.append(f'event candidate {index}: reportCount must be positive')
+            reports = row.get('discoveryReports')
+            if not isinstance(reports, list) or len(reports) != row.get('reportCount'):
+                errors.append(f'event candidate {index}: discoveryReports/reportCount mismatch')
+        for index, row in enumerate(evaluation.get('pool') or [], 1):
+            if row.get('eventId') not in known_event_ids:
+                errors.append(f'candidate evaluation pool {index}: unknown eventId')
+            score = row.get('editorialPriorityScore')
+            label = row.get('editorialPriorityLabel')
+            reasons = row.get('editorialReasons')
+            if not isinstance(score, (int, float)) or not 0 <= score <= 100:
+                errors.append(f'candidate evaluation pool {index}: invalid editorialPriorityScore')
+            if label not in {'high', 'medium', 'low'}:
+                errors.append(f'candidate evaluation pool {index}: invalid editorialPriorityLabel')
+            if not isinstance(reasons, list) or not reasons:
+                errors.append(f'candidate evaluation pool {index}: editorialReasons required')
+            if row.get('evidenceUpgradeAttempted') is True:
+                attempts = row.get('evidenceResolutionAttempts')
+                if not isinstance(attempts, list) or not attempts:
+                    errors.append(f'candidate evaluation pool {index}: evidenceResolutionAttempts required after upgrade')
+                else:
+                    required_attempt_fields = {'method', 'inputUrl', 'resolvedUrl', 'domain', 'fetchStatus', 'articleMatched', 'evidenceTier'}
+                    for attempt_index, attempt in enumerate(attempts, 1):
+                        if not isinstance(attempt, dict):
+                            errors.append(f'candidate evaluation pool {index} evidence attempt {attempt_index}: object required')
+                            continue
+                        missing_attempt_fields = sorted(required_attempt_fields - set(attempt))
+                        if missing_attempt_fields:
+                            errors.append(
+                                f'candidate evaluation pool {index} evidence attempt {attempt_index}: '
+                                f'missing fields: {", ".join(missing_attempt_fields)}'
+                            )
+                        if attempt.get('method') not in {'existing_report', 'redirect_unwrap', 'domain_search', 'official_search', 'broad_search'}:
+                            errors.append(f'candidate evaluation pool {index} evidence attempt {attempt_index}: invalid method')
+                        if not isinstance(attempt.get('articleMatched'), bool):
+                            errors.append(f'candidate evaluation pool {index} evidence attempt {attempt_index}: articleMatched must be boolean')
+        for queue_name in ('highPriorityEvidenceQueue', 'mediumPriorityEvidenceQueue'):
+            queue_ids = [row.get('eventId') for row in (evaluation.get(queue_name) or [])]
+            if len(queue_ids) != len(set(queue_ids)):
+                errors.append(f'{queue_name} must contain unique eventIds')
+            if not set(queue_ids).issubset(known_event_ids):
+                errors.append(f'{queue_name} contains unknown eventId')
+        if evaluation_summary.get('mediumPriorityEvidenceQueueEvents') != len(evaluation.get('mediumPriorityEvidenceQueue') or []):
+            errors.append('candidate evaluation medium queue count does not match queue')
+        pool_rows = evaluation.get('pool') or []
+        if evaluation_summary.get('evidenceQualified') != sum(row.get('candidateDisposition') == 'evidence_qualified' for row in pool_rows):
+            errors.append('candidate evaluation evidenceQualified does not match pool')
+        if evaluation_summary.get('needsVerification') != sum(row.get('candidateDisposition') == 'needs_verification' for row in pool_rows):
+            errors.append('candidate evaluation needsVerification does not match pool')
     return errors
 
 
@@ -163,6 +275,17 @@ def validate(path, report_path=None):
                 errors.append(f'{label}: selected candidate needs dailyItemNumber')
             if not isinstance(candidate.get('dailyItemTitle'), str) or not candidate['dailyItemTitle'].strip():
                 errors.append(f'{label}: selected candidate needs dailyItemTitle')
+        try:
+            ledger_date = date.fromisoformat(payload.get('date', ''))
+        except (TypeError, ValueError):
+            ledger_date = None
+        if ledger_date and ledger_date >= FINAL_EDITORIAL_POOL_REQUIRED_FROM:
+            if not candidate.get('eventId'):
+                errors.append(f'{label}: eventId required from 2026-09-02 onward')
+            if not candidate.get('finalEditorialDecision'):
+                errors.append(f'{label}: finalEditorialDecision required from 2026-09-02 onward')
+            if not candidate.get('finalEditorialReason'):
+                errors.append(f'{label}: finalEditorialReason required from 2026-09-02 onward')
         for source in evidence:
             if not isinstance(source, dict) or not valid_url(source.get('url')):
                 errors.append(f'{label}: invalid evidence source URL')
@@ -186,6 +309,20 @@ def validate(path, report_path=None):
     for key, value in expected.items():
         if summary.get(key) != value:
             errors.append(f'summary {key}={summary.get(key)!r} != {value}')
+    if ledger_date and ledger_date >= FINAL_EDITORIAL_POOL_REQUIRED_FROM and not errors:
+        ref = payload.get('discoveryAuditPath')
+        audit_path = (ROOT / ref).resolve() if ref else None
+        try:
+            audit_payload = json.loads(audit_path.read_text(encoding='utf-8'))
+            pool_events = ((audit_payload.get('candidateEvaluation') or {}).get('finalEditorialPool') or {}).get('events') or []
+            pool_ids = {row.get('eventId') for row in pool_events if isinstance(row, dict)}
+            for candidate in candidates:
+                if candidate.get('eventId') not in pool_ids:
+                    errors.append(f'{candidate.get("candidateId", "candidate")}: eventId is not in finalEditorialPool')
+        except (AttributeError, OSError, json.JSONDecodeError):
+            # The detailed missing/invalid-audit error is emitted by
+            # validate_discovery_audit; avoid masking it with a second error.
+            pass
     if report_path and not errors:
         from build import parse_md
         report = parse_md(report_path)
