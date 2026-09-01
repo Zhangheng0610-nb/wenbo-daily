@@ -34,675 +34,111 @@
 }
 </script>
 <style>
-  :root {
-    --bg: #f5f0eb; --card: #fff; --text: #2c2416; --muted: #8b7355;
-    --accent: #8b4513; --tag-bg: #f0e6d3; --border: #e0d5c1;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1815; --card: #252320; --text: #e8e0d0; --muted: #9b8b7a;
-      --accent: #d4a76a; --tag-bg: #2a2520; --border: #3a3530;
-    }
-  }
+  :root { --bg:#f5f0eb; --card:#fff; --text:#2c2416; --muted:#8b7355; --accent:#8b4513; --tag-bg:#f0e6d3; --border:#e0d5c1; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1815; --card:#252320; --text:#e8e0d0; --muted:#9b8b7a; --accent:#d4a76a; --tag-bg:#2a2520; --border:#3a3530; } }
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.7;
-    padding: 16px; max-width: 720px; margin: 0 auto;
-  }
-  header {
-    text-align: center; padding: 32px 0 20px;
-    border-bottom: 2px solid var(--accent); margin-bottom: 24px;
-  }
-  header h1 { font-size: 1.6em; letter-spacing: .05em; }
-  header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
-  /* Search */
-  .search-wrap { display: flex; gap: 8px; margin-bottom: 20px; }
-  .search-wrap input {
-    flex: 1; min-width: 0; padding: 12px 16px;
-    font-size: .95em; border: 1px solid var(--border);
-    border-radius: 24px; background: var(--card); color: var(--text);
-    outline: none; transition: border-color .2s;
-    -webkit-appearance: none;
-  }
-  .search-wrap input:focus { border-color: var(--accent); }
-  .search-wrap input::placeholder { color: var(--muted); opacity: .7; }
-  .search-submit {
-    flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px;
-    background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer;
-    transition: opacity .15s, transform .15s;
-  }
-  .search-submit:hover { opacity: .88; transform: translateY(-1px); }
-  /* Section headers */
-  .section-header {
-    font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
-    padding-bottom: 8px; border-bottom: 2px solid var(--border);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-header .count-badge {
-    font-size: .75em; background: var(--tag-bg); color: var(--muted);
-    padding: 2px 10px; border-radius: 10px; font-weight: normal;
-  }
-  a.day-card {
-    background: var(--card); border-radius: 10px; padding: 18px 20px;
-    margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    border: 1px solid var(--border);
-    display: block; text-decoration: none; color: var(--text);
-    transition: transform .15s, box-shadow .15s, border-color .15s;
-  }
-  a.day-card:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(60,40,20,.10); border-color: var(--accent); }
-  a.day-card:active { transform: scale(.98); }
-  a.day-card.hidden { display: none; }
-  a.day-card .date { font-weight: 700; font-size: 1.1em; color: var(--accent); }
-  a.day-card .weekday { color: var(--muted); font-size: .85em; margin-left: 8px; }
-  a.day-card .badge {
-    display: inline-block; background: var(--accent); color: #fff;
-    font-size: .72em; padding: 2px 8px; border-radius: 10px;
-    margin-left: 6px; vertical-align: middle;
-  }
-  a.day-card .count { font-size: .82em; color: var(--muted); margin-top: 4px; }
-  a.day-card .match-preview {
-    font-size: .8em; color: var(--muted); margin-top: 4px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  footer {
-    text-align: center; padding: 32px 0 20px;
-    color: var(--muted); font-size: .8em;
-    border-top: 1px solid var(--border); margin-top: 24px;
-  }
-  footer a { color: var(--accent); }
-  .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
-  /* Collapsible sections */
-  .section-header.collapsible {
-    cursor: pointer; user-select: none;
-    position: relative; padding-right: 28px;
-  }
-  .section-header.collapsible:hover { color: var(--text); }
-  .section-header.collapsible::after {
-    content: '▾'; position: absolute; right: 4px; top: 50%;
-    transform: translateY(-50%); font-size: .85em;
-    transition: transform .2s; color: var(--muted);
-  }
-  .section-header.collapsible.collapsed::after {
-    transform: translateY(-50%) rotate(-90deg);
-  }
-  .section-body { transition: opacity .15s; }
-  .section-body.hidden { display: none; }
-  /* Show more button */
-  .show-more-btn {
-    display: block; width: 100%; padding: 10px;
-    background: var(--card); border: 1px dashed var(--border);
-    border-radius: 10px; color: var(--accent); font-size: .88em;
-    cursor: pointer; margin-bottom: 14px; text-align: center;
-    transition: background .15s;
-  }
-  .show-more-btn:hover { background: var(--tag-bg); }
-  .older-cards { }
-  .collapse-floating {
-    display: none; position: fixed; right: max(16px, calc((100vw - 720px) / 2 + 16px)); bottom: 18px;
-    z-index: 20; padding: 9px 14px; border: 1px solid var(--accent); border-radius: 999px;
-    background: var(--accent); color: #fff; font: inherit; font-size: .82em; cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,.22); transition: transform .15s, opacity .15s;
-  }
-  .collapse-floating.show { display: block; }
-  .collapse-floating:hover { transform: translateY(-2px); }
-  .quick-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 18px; }
-  .quick-nav a { display: inline-block; padding: 5px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--text); text-decoration: none; font-size: .8em; transition: border-color .15s, color .15s, background .15s; }
-  .quick-nav a:hover { border-color: var(--accent); color: var(--accent); background: var(--tag-bg); }
-  .quick-nav a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  @media (max-width: 520px) {
-    body { padding: 12px; }
-    header { padding-top: 24px; }
-    header h1 { font-size: 1.4em; }
-    .quick-nav { justify-content: flex-start; }
-    a.day-card { padding: 15px 16px; }
-    .collapse-floating { right: 12px; bottom: 14px; }
-  }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; padding:16px; max-width:720px; margin:0 auto; }
+  header { text-align:center; padding:32px 0 20px; border-bottom:2px solid var(--accent); margin-bottom:24px; }
+  header h1 { font-size:1.6em; letter-spacing:.05em; }
+  header p.sub { color:var(--muted); font-size:.9em; margin-top:4px; }
+  .quick-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:-4px 0 18px; }
+  .quick-nav a { display:inline-block; padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--text); text-decoration:none; font-size:.8em; transition:border-color .15s,color .15s,background .15s; }
+  .quick-nav a:hover { border-color:var(--accent); color:var(--accent); background:var(--tag-bg); }
+  .quick-nav a.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .search-wrap { display:flex; gap:8px; margin-bottom:24px; }
+  .search-wrap input { flex:1; min-width:0; padding:12px 16px; font-size:.95em; border:1px solid var(--border); border-radius:24px; background:var(--card); color:var(--text); outline:none; -webkit-appearance:none; }
+  .search-wrap input:focus { border-color:var(--accent); }
+  .search-wrap input::placeholder { color:var(--muted); opacity:.7; }
+  .search-submit { flex:0 0 auto; min-width:68px; padding:0 16px; border:1px solid var(--accent); border-radius:24px; background:var(--accent); color:#fff; font:inherit; font-size:.88em; cursor:pointer; }
+  .section-header { font-size:1.05em; color:var(--accent); margin:28px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border); display:flex; align-items:center; gap:8px; }
+  .hero { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .hero-heading { display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .hero-title { color:var(--accent); font-size:1.25em; }
+  .badge { display:inline-block; background:var(--accent); color:#fff; font-size:.72em; padding:2px 8px; border-radius:10px; }
+  .hero-list { margin:12px 0 10px 1.2em; }
+  .hero-list li { padding:3px 0; }
+  .hero-list a { color:var(--text); text-decoration:none; }
+  .hero-list a:hover { color:var(--accent); }
+  .hero-meta, .hero-more, .muted { color:var(--muted); font-size:.86em; }
+  .hero-more { display:block; margin-top:2px; }
+  .hero-link { display:inline-block; margin-top:10px; color:var(--accent); font-weight:600; text-decoration:none; }
+  .compact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .compact-card { min-width:0; display:flex; flex-direction:column; gap:3px; padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--text); text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,.04); transition:border-color .15s,transform .15s; }
+  .compact-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .compact-card.unavailable { color:var(--muted); }
+  .compact-kicker { color:var(--accent); font-size:.82em; }
+  .compact-card strong { font-size:1.05em; font-weight:650; }
+  .compact-meta { color:var(--muted); font-size:.8em; overflow-wrap:anywhere; }
+  .archive-summary { margin-top:28px; padding:16px 18px; border:1px solid var(--border); border-radius:10px; background:var(--card); }
+  .archive-summary h2 { color:var(--accent); font-size:1.05em; margin-bottom:5px; }
+  .archive-stats { color:var(--muted); font-size:.86em; }
+  .archive-link { display:inline-block; margin-top:7px; color:var(--accent); font-weight:600; text-decoration:none; }
+  footer { text-align:center; padding:32px 0 20px; color:var(--muted); font-size:.8em; border-top:1px solid var(--border); margin-top:24px; }
+  footer a { color:var(--accent); }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  @media (max-width:520px) { body { padding:12px; } header { padding-top:24px; } header h1 { font-size:1.4em; } .quick-nav { justify-content:flex-start; } .compact-grid { grid-template-columns:1fr; } .hero { padding:16px; } }
 </style>
 </head>
 <body>
-
 <header>
   <h1>🏛️ 每日文博资讯</h1>
-<p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
+  <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
 </header>
-
 <main>
-
 <nav class="quick-nav" aria-label="主要栏目">
   <a class="primary" href="reports/2026-09-01.html">今日精选</a>
-  <a href="#daily-list">日报档案</a>
+  <a href="archive.html">日报档案</a>
   <a href="command-center/">🛰️ 数字驾驶舱</a>
   <a href="intern.html">实习</a>
   <a href="jobs.html">招聘</a>
 </nav>
-
 <form class="search-wrap" action="search.html" method="get" role="search">
   <input type="search" name="q" placeholder="🔍 输入关键词，查看全部相关文章" autocomplete="off" aria-label="搜索新闻" required>
   <button class="search-submit" type="submit">搜索</button>
 </form>
-
-<div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">53 天</span></div>
-<div class="section-body">
-<div id="daily-list">
-
-<a class="day-card" href="reports/2026-09-01.html">
-  <span class="date">📅 2026-09-01</span>
-  <span class="weekday">周二</span>
-<span class="badge">最新</span>
-  <div class="count">📰 共 5 条 ｜ 国内 4 + 国际 1</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-31.html">
-  <span class="date">📅 2026-08-31</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 7 条 ｜ 国内 6 + 国际 1</div>
-</a>
-
-<div class="older-cards" style="display:none;">
-
-<a class="day-card" href="reports/2026-08-30.html">
-  <span class="date">📅 2026-08-30</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 4 条 ｜ 国内 3 + 国际 1</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-29.html">
-  <span class="date">📅 2026-08-29</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 6 + 国际 2</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-28.html">
-  <span class="date">📅 2026-08-28</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 4 条 ｜ 国内 3 + 国际 1</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-27.html">
-  <span class="date">📅 2026-08-27</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 6 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-26.html">
-  <span class="date">📅 2026-08-26</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-25.html">
-  <span class="date">📅 2026-08-25</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 6 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-24.html">
-  <span class="date">📅 2026-08-24</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 7 条 ｜ 国内 5 + 国际 2</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-23.html">
-  <span class="date">📅 2026-08-23</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 7 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-22.html">
-  <span class="date">📅 2026-08-22</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 11 条 ｜ 国内 7 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-21.html">
-  <span class="date">📅 2026-08-21</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 6 条 ｜ 国内 3 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-20.html">
-  <span class="date">📅 2026-08-20</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 5 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-19.html">
-  <span class="date">📅 2026-08-19</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 12 条 ｜ 国内 8 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-18.html">
-  <span class="date">📅 2026-08-18</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 5 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-17.html">
-  <span class="date">📅 2026-08-17</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 6 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-16.html">
-  <span class="date">📅 2026-08-16</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 6 + 国际 2</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-15.html">
-  <span class="date">📅 2026-08-15</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 7 + 国际 1</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-14.html">
-  <span class="date">📅 2026-08-14</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 5 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-13.html">
-  <span class="date">📅 2026-08-13</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 7 条 ｜ 国内 4 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-12.html">
-  <span class="date">📅 2026-08-12</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 7 条 ｜ 国内 4 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-11.html">
-  <span class="date">📅 2026-08-11</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 4 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-10.html">
-  <span class="date">📅 2026-08-10</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-09.html">
-  <span class="date">📅 2026-08-09</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-08.html">
-  <span class="date">📅 2026-08-08</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-07.html">
-  <span class="date">📅 2026-08-07</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-06.html">
-  <span class="date">📅 2026-08-06</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 4 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-05.html">
-  <span class="date">📅 2026-08-05</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-04.html">
-  <span class="date">📅 2026-08-04</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 4 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-03.html">
-  <span class="date">📅 2026-08-03</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 8 条 ｜ 国内 4 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-02.html">
-  <span class="date">📅 2026-08-02</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 6 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-08-01.html">
-  <span class="date">📅 2026-08-01</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 6 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-31.html">
-  <span class="date">📅 2026-07-31</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 7 + 国际 3</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-30.html">
-  <span class="date">📅 2026-07-30</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 11 条 ｜ 国内 6 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-29.html">
-  <span class="date">📅 2026-07-29</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-28.html">
-  <span class="date">📅 2026-07-28</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-27.html">
-  <span class="date">📅 2026-07-27</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-26.html">
-  <span class="date">📅 2026-07-26</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 4 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-25.html">
-  <span class="date">📅 2026-07-25</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 9 条 ｜ 国内 5 + 国际 4</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-24.html">
-  <span class="date">📅 2026-07-24</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-23.html">
-  <span class="date">📅 2026-07-23</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-22.html">
-  <span class="date">📅 2026-07-22</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-21.html">
-  <span class="date">📅 2026-07-21</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-20.html">
-  <span class="date">📅 2026-07-20</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-19.html">
-  <span class="date">📅 2026-07-19</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-18.html">
-  <span class="date">📅 2026-07-18</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-17.html">
-  <span class="date">📅 2026-07-17</span>
-  <span class="weekday">周五</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-16.html">
-  <span class="date">📅 2026-07-16</span>
-  <span class="weekday">周四</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-15.html">
-  <span class="date">📅 2026-07-15</span>
-  <span class="weekday">周三</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-14.html">
-  <span class="date">📅 2026-07-14</span>
-  <span class="weekday">周二</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-13.html">
-  <span class="date">📅 2026-07-13</span>
-  <span class="weekday">周一</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-12.html">
-  <span class="date">📅 2026-07-12</span>
-  <span class="weekday">周日</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-
-<a class="day-card" href="reports/2026-07-11.html">
-  <span class="date">📅 2026-07-11</span>
-  <span class="weekday">周六</span>
-
-  <div class="count">📰 共 10 条 ｜ 国内 5 + 国际 5</div>
-</a>
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📅 展开更早的日报（51 天）" data-collapse-text="📅 收起">📅 展开更早的日报（51 天）</button>
-</div>
-</div>
-
-<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">8 期</span></div>
-<div class="section-body"><div id="weekly-list">
-<a class="day-card weekly-card" href="reports/weekly-2026-08-30.html">
-  <span class="date">📰 2026-08-24 — 2026-08-30</span>
-  <div class="count">📋 共 51 条要闻</div>
-</a>
-
-<div class="older-cards" style="display:none;">
-
-<a class="day-card weekly-card" href="reports/weekly-2026-08-23.html">
-  <span class="date">📰 2026-08-17 — 2026-08-23</span>
-  <div class="count">📋 综合周报</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-08-16.html">
-  <span class="date">📰 2026-08-10 — 2026-08-16</span>
-  <div class="count">📋 综合周报</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-08-09.html">
-  <span class="date">📰 2026-08-03 — 2026-08-09</span>
-  <div class="count">📋 综合周报</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-08-02.html">
-  <span class="date">📰 2026-07-27 — 2026-08-02</span>
-  <div class="count">📋 共 10 条要闻</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-07-26.html">
-  <span class="date">📰 2026-07-20 — 2026-07-26</span>
-  <div class="count">📋 共 10 条要闻</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-07-19.html">
-  <span class="date">📰 2026-07-13 — 2026-07-19</span>
-  <div class="count">📋 共 10 条要闻</div>
-</a>
-
-<a class="day-card weekly-card" href="reports/weekly-2026-07-12.html">
-  <span class="date">📰 2026-07-06 — 2026-07-12</span>
-  <div class="count">📋 共 10 条要闻</div>
-</a>
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📰 展开更早的周报（7 期）" data-collapse-text="📰 收起">📰 展开更早的周报（7 期）</button></div></div>
-
-
-<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">2 期</span></div>
-<div class="section-body"><div id="monthly-list">
-<a class="day-card monthly-card" href="reports/monthly-2026-08-28.html">
-  <span class="date">📊 2026-08-01 — 2026-08-31</span>
-  <div class="count">📋 共 256 条要闻</div>
-</a>
-
-<div class="older-cards" style="display:none;">
-
-<a class="day-card monthly-card" href="reports/monthly-2026-07-28.html">
-  <span class="date">📊 2026年7月</span>
-  <div class="count">📋 共 10 条要闻</div>
-</a>
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📊 展开更早的月报（1 期）" data-collapse-text="📊 收起">📊 展开更早的月报（1 期）</button></div></div>
-
-
-<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">47 个岗位</span></div>
-<div class="section-body">
-<a class="day-card" href="intern.html">
-  <span class="date">🌱 实习招聘</span>
-  <div class="count">🏛️ 博物馆实习 15 条 · 🏗️ 考古所实习 2 条 · 🏢 企业实习 3 条 ｜ 20 个岗位 · 更新于 2026-08-30</div>
-</a>
-<a class="day-card" href="jobs.html">
-  <span class="date">💼 正职招聘</span>
-  <div class="count">🏛️ 博物馆 15 条 · 🏗️ 考古所 4 条 · 🏢 市场化企业 · 浙江 3 条 · 🏢 市场化企业 · 上海 1 条 · 🏢 市场化企业 · 其他地区 3 条 · 🌍 国际机会 1 条 ｜ 27 个岗位 · 更新于 2026-08-30</div>
-</a>
-
-</div>
-
-
+<section class="hero" aria-labelledby="today-heading">
+  <div class="hero-heading">
+    <h2 id="today-heading" class="hero-title">今日精选 · 2026-09-01</h2>
+    <span class="badge">最新</span>
+  </div>
+  <ul class="hero-list"><li><a href="reports/2026-09-01.html#item1">香港“古埃及文明大展”落幕</a></li><li><a href="reports/2026-09-01.html#item2">河北将数字化智能化深度融入文物保护全链条</a></li><li><a href="reports/2026-09-01.html#item3">宁古塔将军驻地旧城遗址考古发掘成果公布</a></li></ul>
+  <span class="hero-more">另外 2 条</span>
+  <div class="hero-meta">共 5 条 · 国内 4 · 区域/国际 1</div>
+  <a class="hero-link" href="reports/2026-09-01.html">阅读今日日报 →</a>
+</section>
+<section aria-labelledby="recent-heading">
+  <div class="section-header" id="recent-heading">最近更新</div>
+  <div class="compact-grid">
+<a class="compact-card" href="reports/weekly-2026-08-30.html">
+  <span class="compact-kicker">📰 最新周报</span>
+  <strong>2026-08-24 — 2026-08-30</strong>
+  <span class="compact-meta">51 条要闻 · 本周重点与变化</span>
+</a>
+<a class="compact-card" href="reports/monthly-2026-08-28.html">
+  <span class="compact-kicker">📊 最新月报</span>
+  <strong>2026-08-01 — 2026-08-31</strong>
+  <span class="compact-meta">256 条要闻 · 月度趋势与观察</span>
+</a>
+<a class="compact-card" href="intern.html">
+  <span class="compact-kicker">🌱 实习机会</span>
+  <strong>20 个岗位</strong>
+  <span class="compact-meta">2026-08-30 · 文博实习</span>
+</a>
+<a class="compact-card" href="jobs.html">
+  <span class="compact-kicker">💼 招聘信息</span>
+  <strong>27 个岗位</strong>
+  <span class="compact-meta">2026-08-30 · 文博招聘</span>
+</a></div>
+</section>
+<section class="archive-summary" aria-labelledby="archive-heading">
+  <h2 id="archive-heading">历史档案</h2>
+  <div class="archive-stats">日报 53 天 · 周报 8 期 · 月报 2 期</div>
+  <a class="archive-link" href="archive.html">浏览全部档案 →</a>
+</section>
 </main>
-
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ <a href="command-center/">数字驾驶舱</a> ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
-
-<button id="collapse-floating" class="collapse-floating" type="button" onclick="collapseActiveSection()" aria-label="收起已展开的历史栏目">↑ 收起本栏</button>
-
-<script>
-let activeOlderButton = null;
-function showCollapseFloating(btn) {
-  activeOlderButton = btn;
-  const floating = document.getElementById('collapse-floating');
-  if (floating) floating.classList.add('show');
-}
-function hideCollapseFloating(btn) {
-  if (btn && activeOlderButton !== btn) return;
-  activeOlderButton = null;
-  const floating = document.getElementById('collapse-floating');
-  if (floating) floating.classList.remove('show');
-}
-function toggleSection(header) {
-  header.classList.toggle('collapsed');
-  const body = header.nextElementSibling;
-  if (body && body.classList.contains('section-body')) {
-    body.classList.toggle('hidden');
-    if (body.classList.contains('hidden') && activeOlderButton && body.contains(activeOlderButton)) {
-      const olderDiv = activeOlderButton.previousElementSibling;
-      if (olderDiv && olderDiv.classList.contains('older-cards')) olderDiv.style.display = 'none';
-      hideCollapseFloating(activeOlderButton);
-    }
-  }
-}
-function toggleOlder(btn) {
-  const olderDiv = btn.previousElementSibling;
-  if (olderDiv && olderDiv.classList.contains('older-cards')) {
-    const isHidden = olderDiv.style.display === 'none';
-    olderDiv.style.display = isHidden ? '' : 'none';
-    if (isHidden) {
-      btn.textContent = btn.getAttribute('data-collapse-text') || '收起 ▲';
-      showCollapseFloating(btn);
-    } else {
-      btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
-      hideCollapseFloating(btn);
-    }
-  }
-}
-function collapseActiveSection() {
-  const btn = activeOlderButton;
-  if (!btn) return;
-  const olderDiv = btn.previousElementSibling;
-  const header = btn.closest('.section-body')?.previousElementSibling;
-  if (olderDiv && olderDiv.classList.contains('older-cards')) {
-    olderDiv.style.display = 'none';
-    btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
-  }
-  hideCollapseFloating(btn);
-  if (header && header.classList.contains('section-header')) {
-    header.scrollIntoView({behavior: 'smooth', block: 'start'});
-  }
-}
-</script>
 </body>
 </html>

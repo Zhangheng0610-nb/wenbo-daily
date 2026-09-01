@@ -8,6 +8,7 @@ import os, re, glob, json, sys, hashlib
 from difflib import SequenceMatcher
 from urllib.parse import quote
 from datetime import date as _date, datetime, timedelta, timezone
+from html import escape
 
 from automation.governance import (
     MAP_SOURCE_PANEL, SOURCE_GROUPS, canonical_url, map_source_id,
@@ -2884,268 +2885,145 @@ def build_digest_html(data, daily_reports=None):
 
 # ───────────────── 首页构建 ─────────────────
 
-def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recruitment_data=None, intern_data=None):
-    """Rebuild index.html with daily, weekly, monthly, and recruitment sections."""
-    if weekly_reports is None:
-        weekly_reports = []
-    if monthly_reports is None:
-        monthly_reports = []
+# ───────────────── 精简首页与独立档案页 ─────────────────
 
-    daily_reports = sorted(daily_reports, key=lambda r: r['date'], reverse=True)
-    latest_daily_href = f"reports/{daily_reports[0]['date']}.html" if daily_reports else "#daily-list"
+def _report_items_in_order(report):
+    """Return daily items in the order used by the report's Markdown/TOC."""
+    items = report.get('toc_items') or []
+    if items:
+        return items
+    fallback = []
+    for section in ('domestic', 'international'):
+        fallback.extend(report.get(section) or [])
+    return fallback
 
-    # Daily cards — build list, limit to latest 3 by default
-    DAILY_LIMIT = 2
-    card_items = []
-    for i, r in enumerate(daily_reports):
-        total = r['domestic_count'] + r['international_count']
-        badge = '<span class="badge">最新</span>' if i == 0 else ''
-        card_items.append(f'''
-<a class="day-card" href="reports/{r['date']}.html">
-  <span class="date">📅 {r['date']}</span>
-  <span class="weekday">{r['weekday']}</span>
-{badge}
-  <div class="count">📰 共 {total} 条 ｜ 国内 {r['domestic_count']} + 国际 {r['international_count']}</div>
+
+def _homepage_compact_card(report, href, kicker, description):
+    """Build a small homepage card without copying report body text."""
+    date_range = str(report.get('date_range') or report.get('date') or '')
+    item_count = len(report.get('items') or [])
+    count_text = f'{item_count} 条要闻' if item_count else '编辑观察'
+    return f'''
+<a class="compact-card" href="{escape(href, quote=True)}">
+  <span class="compact-kicker">{escape(kicker)}</span>
+  <strong>{escape(date_range)}</strong>
+  <span class="compact-meta">{escape(count_text)} · {escape(description)}</span>
+</a>'''
+
+
+def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, recruitment_data=None, intern_data=None):
+    """Build the concise homepage; historical report lists live on archive.html."""
+    daily_reports = sorted(daily_reports or [], key=lambda r: r['date'], reverse=True)
+    weekly_reports = sorted(weekly_reports or [], key=lambda r: r['ref_date'], reverse=True)
+    monthly_reports = sorted(monthly_reports or [], key=lambda r: r['ref_date'], reverse=True)
+
+    latest_daily = daily_reports[0] if daily_reports else None
+    latest_date = str(latest_daily.get('date') or '') if latest_daily else ''
+    latest_href = f'reports/{latest_date}.html' if latest_daily else 'archive.html'
+    latest_domestic = latest_daily.get('domestic_count', 0) if latest_daily else 0
+    latest_regional = latest_daily.get('international_count', 0) if latest_daily else 0
+    latest_total = latest_domestic + latest_regional
+    hero_items = _report_items_in_order(latest_daily)[:3] if latest_daily else []
+    hero_links = []
+    for item in hero_items:
+        item_id = escape(str(item.get('id', '')), quote=True)
+        item_title = escape(str(item.get('title', '')))
+        hero_links.append(f'<li><a href="reports/{escape(latest_date, quote=True)}.html#{item_id}">{item_title}</a></li>')
+    hero_list = ''.join(hero_links) or '<li class="muted">今日暂无已发布日报</li>'
+    remaining = max(0, latest_total - len(hero_items))
+    hero_more = f'<span class="hero-more">另外 {remaining} 条</span>' if remaining else ''
+
+    has_jobs = bool(recruitment_data and recruitment_data.get('sections'))
+    has_intern = bool(intern_data and intern_data.get('sections'))
+    total_jobs = sum(len(section['items']) for section in recruitment_data['sections']) if has_jobs else 0
+    total_intern = sum(len(section['items']) for section in intern_data['sections']) if has_intern else 0
+    jobs_update = str((recruitment_data or {}).get('update_date') or '暂无更新')
+    intern_update = str((intern_data or {}).get('update_date') or '暂无更新')
+
+    compact_cards = []
+    if weekly_reports:
+        report = weekly_reports[0]
+        compact_cards.append(_homepage_compact_card(
+            report, f"reports/weekly-{report['ref_date']}.html", '📰 最新周报', '本周重点与变化'))
+    else:
+        compact_cards.append('''
+<div class="compact-card unavailable">
+  <span class="compact-kicker">📰 最新周报</span>
+  <strong>暂未发布</strong>
+  <span class="compact-meta">周报每周更新</span>
+</div>''')
+    if monthly_reports:
+        report = monthly_reports[0]
+        compact_cards.append(_homepage_compact_card(
+            report, f"reports/monthly-{report['ref_date']}.html", '📊 最新月报', '月度趋势与观察'))
+    else:
+        compact_cards.append('''
+<div class="compact-card unavailable">
+  <span class="compact-kicker">📊 最新月报</span>
+  <strong>暂未发布</strong>
+  <span class="compact-meta">月报每月更新</span>
+</div>''')
+    compact_cards.append(f'''
+<a class="compact-card" href="intern.html">
+  <span class="compact-kicker">🌱 实习机会</span>
+  <strong>{total_intern} 个岗位</strong>
+  <span class="compact-meta">{escape(intern_update)} · 文博实习</span>
 </a>''')
-
-    latest_cards = '\n'.join(card_items[:DAILY_LIMIT])
-    older_cards_html = ''
-    if len(card_items) > DAILY_LIMIT:
-        older_count = len(card_items) - DAILY_LIMIT
-        older_cards_joined = '\n'.join(card_items[DAILY_LIMIT:])
-        older_cards_html = f'''
-<div class="older-cards" style="display:none;">
-{older_cards_joined}
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📅 展开更早的日报（{older_count} 天）" data-collapse-text="📅 收起">📅 展开更早的日报（{older_count} 天）</button>'''
-
-    # Weekly cards — build list, limit to latest 1 by default
-    weekly_card_items = []
-    WEEKLY_LIMIT = 1
-    weekly_reports = sorted(weekly_reports, key=lambda r: r['ref_date'], reverse=True)
-    for r in weekly_reports:
-        w_count = len(r['items'])
-        if w_count == 0 and r.get('rich_sections'):
-            w_count_text = '综合周报'
-        elif w_count > 0:
-            w_count_text = f'共 {w_count} 条要闻'
-        else:
-            w_count_text = ''
-        weekly_card_items.append(f'''
-<a class="day-card weekly-card" href="reports/weekly-{r['ref_date']}.html">
-  <span class="date">📰 {r['date_range']}</span>
-  <div class="count">📋 {w_count_text}</div>
+    compact_cards.append(f'''
+<a class="compact-card" href="jobs.html">
+  <span class="compact-kicker">💼 招聘信息</span>
+  <strong>{total_jobs} 个岗位</strong>
+  <span class="compact-meta">{escape(jobs_update)} · 文博招聘</span>
 </a>''')
-    weekly_latest = '\n'.join(weekly_card_items[:WEEKLY_LIMIT])
-    weekly_older_html = ''
-    if len(weekly_card_items) > WEEKLY_LIMIT:
-        w_older_count = len(weekly_card_items) - WEEKLY_LIMIT
-        weekly_older_html = f'''
-<div class="older-cards" style="display:none;">
-{'\n'.join(weekly_card_items[WEEKLY_LIMIT:])}
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📰 展开更早的周报（{w_older_count} 期）" data-collapse-text="📰 收起">📰 展开更早的周报（{w_older_count} 期）</button>'''
-
-    # Monthly cards — build list, limit to latest 1 by default
-    monthly_card_items = []
-    MONTHLY_LIMIT = 1
-    monthly_reports = sorted(monthly_reports, key=lambda r: r['ref_date'], reverse=True)
-    for r in monthly_reports:
-        monthly_card_items.append(f'''
-<a class="day-card monthly-card" href="reports/monthly-{r['ref_date']}.html">
-  <span class="date">📊 {r['date_range']}</span>
-  <div class="count">📋 共 {len(r['items'])} 条要闻</div>
-</a>''')
-    monthly_latest = '\n'.join(monthly_card_items[:MONTHLY_LIMIT])
-    monthly_older_html = ''
-    if len(monthly_card_items) > MONTHLY_LIMIT:
-        m_older_count = len(monthly_card_items) - MONTHLY_LIMIT
-        monthly_older_html = f'''
-<div class="older-cards" style="display:none;">
-{'\n'.join(monthly_card_items[MONTHLY_LIMIT:])}
-</div>
-<button class="show-more-btn" onclick="toggleOlder(this)" data-expand-text="📊 展开更早的月报（{m_older_count} 期）" data-collapse-text="📊 收起">📊 展开更早的月报（{m_older_count} 期）</button>'''
 
     index_css = """<style>
-  :root {
-    --bg: #f5f0eb; --card: #fff; --text: #2c2416; --muted: #8b7355;
-    --accent: #8b4513; --tag-bg: #f0e6d3; --border: #e0d5c1;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1815; --card: #252320; --text: #e8e0d0; --muted: #9b8b7a;
-      --accent: #d4a76a; --tag-bg: #2a2520; --border: #3a3530;
-    }
-  }
+  :root { --bg:#f5f0eb; --card:#fff; --text:#2c2416; --muted:#8b7355; --accent:#8b4513; --tag-bg:#f0e6d3; --border:#e0d5c1; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1815; --card:#252320; --text:#e8e0d0; --muted:#9b8b7a; --accent:#d4a76a; --tag-bg:#2a2520; --border:#3a3530; } }
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.7;
-    padding: 16px; max-width: 720px; margin: 0 auto;
-  }
-  header {
-    text-align: center; padding: 32px 0 20px;
-    border-bottom: 2px solid var(--accent); margin-bottom: 24px;
-  }
-  header h1 { font-size: 1.6em; letter-spacing: .05em; }
-  header p.sub { color: var(--muted); font-size: .9em; margin-top: 4px; }
-  /* Search */
-  .search-wrap { display: flex; gap: 8px; margin-bottom: 20px; }
-  .search-wrap input {
-    flex: 1; min-width: 0; padding: 12px 16px;
-    font-size: .95em; border: 1px solid var(--border);
-    border-radius: 24px; background: var(--card); color: var(--text);
-    outline: none; transition: border-color .2s;
-    -webkit-appearance: none;
-  }
-  .search-wrap input:focus { border-color: var(--accent); }
-  .search-wrap input::placeholder { color: var(--muted); opacity: .7; }
-  .search-submit {
-    flex: 0 0 auto; padding: 0 16px; border: 1px solid var(--accent); border-radius: 24px;
-    background: var(--accent); color: #fff; font: inherit; font-size: .88em; cursor: pointer;
-    transition: opacity .15s, transform .15s;
-  }
-  .search-submit:hover { opacity: .88; transform: translateY(-1px); }
-  /* Section headers */
-  .section-header {
-    font-size: 1.05em; color: var(--accent); margin: 28px 0 12px;
-    padding-bottom: 8px; border-bottom: 2px solid var(--border);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .section-header .count-badge {
-    font-size: .75em; background: var(--tag-bg); color: var(--muted);
-    padding: 2px 10px; border-radius: 10px; font-weight: normal;
-  }
-  a.day-card {
-    background: var(--card); border-radius: 10px; padding: 18px 20px;
-    margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06);
-    border: 1px solid var(--border);
-    display: block; text-decoration: none; color: var(--text);
-    transition: transform .15s, box-shadow .15s, border-color .15s;
-  }
-  a.day-card:hover { transform: translateY(-2px); box-shadow: 0 5px 14px rgba(60,40,20,.10); border-color: var(--accent); }
-  a.day-card:active { transform: scale(.98); }
-  a.day-card.hidden { display: none; }
-  a.day-card .date { font-weight: 700; font-size: 1.1em; color: var(--accent); }
-  a.day-card .weekday { color: var(--muted); font-size: .85em; margin-left: 8px; }
-  a.day-card .badge {
-    display: inline-block; background: var(--accent); color: #fff;
-    font-size: .72em; padding: 2px 8px; border-radius: 10px;
-    margin-left: 6px; vertical-align: middle;
-  }
-  a.day-card .count { font-size: .82em; color: var(--muted); margin-top: 4px; }
-  a.day-card .match-preview {
-    font-size: .8em; color: var(--muted); margin-top: 4px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  footer {
-    text-align: center; padding: 32px 0 20px;
-    color: var(--muted); font-size: .8em;
-    border-top: 1px solid var(--border); margin-top: 24px;
-  }
-  footer a { color: var(--accent); }
-  .empty { text-align: center; color: var(--muted); padding: 36px 0; font-size: .9em; }
-  /* Collapsible sections */
-  .section-header.collapsible {
-    cursor: pointer; user-select: none;
-    position: relative; padding-right: 28px;
-  }
-  .section-header.collapsible:hover { color: var(--text); }
-  .section-header.collapsible::after {
-    content: '▾'; position: absolute; right: 4px; top: 50%;
-    transform: translateY(-50%); font-size: .85em;
-    transition: transform .2s; color: var(--muted);
-  }
-  .section-header.collapsible.collapsed::after {
-    transform: translateY(-50%) rotate(-90deg);
-  }
-  .section-body { transition: opacity .15s; }
-  .section-body.hidden { display: none; }
-  /* Show more button */
-  .show-more-btn {
-    display: block; width: 100%; padding: 10px;
-    background: var(--card); border: 1px dashed var(--border);
-    border-radius: 10px; color: var(--accent); font-size: .88em;
-    cursor: pointer; margin-bottom: 14px; text-align: center;
-    transition: background .15s;
-  }
-  .show-more-btn:hover { background: var(--tag-bg); }
-  .older-cards { }
-  .collapse-floating {
-    display: none; position: fixed; right: max(16px, calc((100vw - 720px) / 2 + 16px)); bottom: 18px;
-    z-index: 20; padding: 9px 14px; border: 1px solid var(--accent); border-radius: 999px;
-    background: var(--accent); color: #fff; font: inherit; font-size: .82em; cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,.22); transition: transform .15s, opacity .15s;
-  }
-  .collapse-floating.show { display: block; }
-  .collapse-floating:hover { transform: translateY(-2px); }
-  .quick-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: -4px 0 18px; }
-  .quick-nav a { display: inline-block; padding: 5px 11px; border: 1px solid var(--border); border-radius: 999px; background: var(--card); color: var(--text); text-decoration: none; font-size: .8em; transition: border-color .15s, color .15s, background .15s; }
-  .quick-nav a:hover { border-color: var(--accent); color: var(--accent); background: var(--tag-bg); }
-  .quick-nav a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  @media (max-width: 520px) {
-    body { padding: 12px; }
-    header { padding-top: 24px; }
-    header h1 { font-size: 1.4em; }
-    .quick-nav { justify-content: flex-start; }
-    a.day-card { padding: 15px 16px; }
-    .collapse-floating { right: 12px; bottom: 14px; }
-  }
+  html { scroll-behavior:smooth; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; padding:16px; max-width:720px; margin:0 auto; }
+  header { text-align:center; padding:32px 0 20px; border-bottom:2px solid var(--accent); margin-bottom:24px; }
+  header h1 { font-size:1.6em; letter-spacing:.05em; }
+  header p.sub { color:var(--muted); font-size:.9em; margin-top:4px; }
+  .quick-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:-4px 0 18px; }
+  .quick-nav a { display:inline-block; padding:5px 11px; border:1px solid var(--border); border-radius:999px; background:var(--card); color:var(--text); text-decoration:none; font-size:.8em; transition:border-color .15s,color .15s,background .15s; }
+  .quick-nav a:hover { border-color:var(--accent); color:var(--accent); background:var(--tag-bg); }
+  .quick-nav a.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  .search-wrap { display:flex; gap:8px; margin-bottom:24px; }
+  .search-wrap input { flex:1; min-width:0; padding:12px 16px; font-size:.95em; border:1px solid var(--border); border-radius:24px; background:var(--card); color:var(--text); outline:none; -webkit-appearance:none; }
+  .search-wrap input:focus { border-color:var(--accent); }
+  .search-wrap input::placeholder { color:var(--muted); opacity:.7; }
+  .search-submit { flex:0 0 auto; min-width:68px; padding:0 16px; border:1px solid var(--accent); border-radius:24px; background:var(--accent); color:#fff; font:inherit; font-size:.88em; cursor:pointer; }
+  .section-header { font-size:1.05em; color:var(--accent); margin:28px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--border); display:flex; align-items:center; gap:8px; }
+  .hero { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .hero-heading { display:flex; justify-content:space-between; gap:12px; align-items:baseline; flex-wrap:wrap; }
+  .hero-title { color:var(--accent); font-size:1.25em; }
+  .badge { display:inline-block; background:var(--accent); color:#fff; font-size:.72em; padding:2px 8px; border-radius:10px; }
+  .hero-list { margin:12px 0 10px 1.2em; }
+  .hero-list li { padding:3px 0; }
+  .hero-list a { color:var(--text); text-decoration:none; }
+  .hero-list a:hover { color:var(--accent); }
+  .hero-meta, .hero-more, .muted { color:var(--muted); font-size:.86em; }
+  .hero-more { display:block; margin-top:2px; }
+  .hero-link { display:inline-block; margin-top:10px; color:var(--accent); font-weight:600; text-decoration:none; }
+  .compact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  .compact-card { min-width:0; display:flex; flex-direction:column; gap:3px; padding:16px; border:1px solid var(--border); border-radius:10px; background:var(--card); color:var(--text); text-decoration:none; box-shadow:0 1px 3px rgba(0,0,0,.04); transition:border-color .15s,transform .15s; }
+  .compact-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .compact-card.unavailable { color:var(--muted); }
+  .compact-kicker { color:var(--accent); font-size:.82em; }
+  .compact-card strong { font-size:1.05em; font-weight:650; }
+  .compact-meta { color:var(--muted); font-size:.8em; overflow-wrap:anywhere; }
+  .archive-summary { margin-top:28px; padding:16px 18px; border:1px solid var(--border); border-radius:10px; background:var(--card); }
+  .archive-summary h2 { color:var(--accent); font-size:1.05em; margin-bottom:5px; }
+  .archive-stats { color:var(--muted); font-size:.86em; }
+  .archive-link { display:inline-block; margin-top:7px; color:var(--accent); font-weight:600; text-decoration:none; }
+  footer { text-align:center; padding:32px 0 20px; color:var(--muted); font-size:.8em; border-top:1px solid var(--border); margin-top:24px; }
+  footer a { color:var(--accent); }
+  a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  @media (max-width:520px) { body { padding:12px; } header { padding-top:24px; } header h1 { font-size:1.4em; } .quick-nav { justify-content:flex-start; } .compact-grid { grid-template-columns:1fr; } .hero { padding:16px; } }
 </style>"""
 
-    # Build section blocks
-    weekly_block = ''
-    if weekly_card_items:
-        weekly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📰 周报 <span class="count-badge">{len(weekly_reports)} 期</span></div>\n<div class="section-body"><div id="weekly-list">{weekly_latest}\n{weekly_older_html}</div></div>\n'
-    else:
-        weekly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📰 周报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">周报每周日发布，敬请期待</div></div>\n'
-
-    monthly_block = ''
-    if monthly_card_items:
-        monthly_block = f'<div class="section-header collapsible" onclick="toggleSection(this)">📊 月报 <span class="count-badge">{len(monthly_reports)} 期</span></div>\n<div class="section-body"><div id="monthly-list">{monthly_latest}\n{monthly_older_html}</div></div>\n'
-    else:
-        monthly_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">📊 月报 <span class="count-badge">0 期</span></div>\n<div class="section-body hidden"><div class="empty">月报每月 1 日发布，敬请期待</div></div>\n'
-
-    # Recruitment section (正职 + 实习 as sub-sections)
-    recruitment_block = ''
-    has_jobs = recruitment_data and recruitment_data.get('sections')
-    has_intern = intern_data and intern_data.get('sections')
-
-    total_jobs = sum(len(s['items']) for s in recruitment_data['sections']) if has_jobs else 0
-    total_intern = sum(len(s['items']) for s in intern_data['sections']) if has_intern else 0
-    total_all = total_jobs + total_intern
-
-    if has_jobs or has_intern:
-        # Job sub-card
-        jobs_card = ''
-        if has_jobs:
-            section_labels = [f'{s["icon"]} {s["category"]} {len(s["items"])} 条' for s in recruitment_data['sections']]
-            section_summary = ' · '.join(section_labels)
-            jobs_card = f'''<a class="day-card" href="jobs.html">
-  <span class="date">💼 正职招聘</span>
-  <div class="count">{section_summary} ｜ {total_jobs} 个岗位 · 更新于 {recruitment_data['update_date']}</div>
-</a>
-'''
-        # Intern sub-card
-        intern_card = ''
-        if has_intern:
-            intern_labels = [f'{s["icon"]} {s["category"]} {len(s["items"])} 条' for s in intern_data['sections']]
-            intern_summary = ' · '.join(intern_labels)
-            intern_card = f'''<a class="day-card" href="intern.html">
-  <span class="date">🌱 实习招聘</span>
-  <div class="count">{intern_summary} ｜ {total_intern} 个岗位 · 更新于 {intern_data['update_date']}</div>
-</a>
-'''
-        recruitment_block = f'''<div class="section-header collapsible" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">{total_all} 个岗位</span></div>
-<div class="section-body">
-{intern_card}{jobs_card}
-</div>
-'''
-    else:
-        recruitment_block = '<div class="section-header collapsible collapsed" onclick="toggleSection(this)">💼 招聘信息 <span class="count-badge">0 岗位</span></div>\n<div class="section-body hidden"><div class="empty">招聘信息每两日更新，敬请期待</div></div>\n'
-
-    html = f'''<!DOCTYPE html>
+    return f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -3183,108 +3061,177 @@ def build_index(daily_reports, weekly_reports=None, monthly_reports=None, recrui
 {index_css}
 </head>
 <body>
-
 <header>
   <h1>🏛️ 每日文博资讯</h1>
-<p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
+  <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
 </header>
-
 <main>
-
 <nav class="quick-nav" aria-label="主要栏目">
-  <a class="primary" href="{latest_daily_href}">今日精选</a>
-  <a href="#daily-list">日报档案</a>
+  <a class="primary" href="{escape(latest_href, quote=True)}">今日精选</a>
+  <a href="archive.html">日报档案</a>
   <a href="command-center/">🛰️ 数字驾驶舱</a>
   <a href="intern.html">实习</a>
   <a href="jobs.html">招聘</a>
 </nav>
-
 <form class="search-wrap" action="search.html" method="get" role="search">
   <input type="search" name="q" placeholder="🔍 输入关键词，查看全部相关文章" autocomplete="off" aria-label="搜索新闻" required>
   <button class="search-submit" type="submit">搜索</button>
 </form>
-
-<div class="section-header collapsible" onclick="toggleSection(this)">📅 日报 <span class="count-badge">{len(daily_reports)} 天</span></div>
-<div class="section-body">
-<div id="daily-list">
-{latest_cards}
-{older_cards_html}
-</div>
-</div>
-
-{weekly_block}
-
-{monthly_block}
-
-{recruitment_block}
-
+<section class="hero" aria-labelledby="today-heading">
+  <div class="hero-heading">
+    <h2 id="today-heading" class="hero-title">今日精选 · {escape(latest_date or '—')}</h2>
+    <span class="badge">最新</span>
+  </div>
+  <ul class="hero-list">{hero_list}</ul>
+  {hero_more}
+  <div class="hero-meta">共 {latest_total} 条 · 国内 {latest_domestic} · 区域/国际 {latest_regional}</div>
+  <a class="hero-link" href="{escape(latest_href, quote=True)}">阅读今日日报 →</a>
+</section>
+<section aria-labelledby="recent-heading">
+  <div class="section-header" id="recent-heading">最近更新</div>
+  <div class="compact-grid">{''.join(compact_cards)}</div>
+</section>
+<section class="archive-summary" aria-labelledby="archive-heading">
+  <h2 id="archive-heading">历史档案</h2>
+  <div class="archive-stats">日报 {len(daily_reports)} 天 · 周报 {len(weekly_reports)} 期 · 月报 {len(monthly_reports)} 期</div>
+  <a class="archive-link" href="archive.html">浏览全部档案 →</a>
+</section>
 </main>
-
 <footer>
   <p>由 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> 自动生成 ｜ <a href="command-center/">数字驾驶舱</a> ｜ 每日早 7:13（北京时间）更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
-
-<button id="collapse-floating" class="collapse-floating" type="button" onclick="collapseActiveSection()" aria-label="收起已展开的历史栏目">↑ 收起本栏</button>
-
 </body>
 </html>'''
-    # Inject JS (toggles + search)
-    html = html.replace('</body>', '''<script>
-let activeOlderButton = null;
-function showCollapseFloating(btn) {
-  activeOlderButton = btn;
-  const floating = document.getElementById('collapse-floating');
-  if (floating) floating.classList.add('show');
-}
-function hideCollapseFloating(btn) {
-  if (btn && activeOlderButton !== btn) return;
-  activeOlderButton = null;
-  const floating = document.getElementById('collapse-floating');
-  if (floating) floating.classList.remove('show');
-}
-function toggleSection(header) {
-  header.classList.toggle('collapsed');
-  const body = header.nextElementSibling;
-  if (body && body.classList.contains('section-body')) {
-    body.classList.toggle('hidden');
-    if (body.classList.contains('hidden') && activeOlderButton && body.contains(activeOlderButton)) {
-      const olderDiv = activeOlderButton.previousElementSibling;
-      if (olderDiv && olderDiv.classList.contains('older-cards')) olderDiv.style.display = 'none';
-      hideCollapseFloating(activeOlderButton);
-    }
-  }
-}
-function toggleOlder(btn) {
-  const olderDiv = btn.previousElementSibling;
-  if (olderDiv && olderDiv.classList.contains('older-cards')) {
-    const isHidden = olderDiv.style.display === 'none';
-    olderDiv.style.display = isHidden ? '' : 'none';
-    if (isHidden) {
-      btn.textContent = btn.getAttribute('data-collapse-text') || '收起 ▲';
-      showCollapseFloating(btn);
-    } else {
-      btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
-      hideCollapseFloating(btn);
-    }
-  }
-}
-function collapseActiveSection() {
-  const btn = activeOlderButton;
-  if (!btn) return;
-  const olderDiv = btn.previousElementSibling;
-  const header = btn.closest('.section-body')?.previousElementSibling;
-  if (olderDiv && olderDiv.classList.contains('older-cards')) {
-    olderDiv.style.display = 'none';
-    btn.textContent = btn.getAttribute('data-expand-text') || btn.textContent;
-  }
-  hideCollapseFloating(btn);
-  if (header && header.classList.contains('section-header')) {
-    header.scrollIntoView({behavior: 'smooth', block: 'start'});
-  }
-}
+
+
+def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
+    """Build the generated archive page with recent entries visible and older entries expandable."""
+    daily_reports = sorted(daily_reports or [], key=lambda r: r['date'], reverse=True)
+    weekly_reports = sorted(weekly_reports or [], key=lambda r: r['ref_date'], reverse=True)
+    monthly_reports = sorted(monthly_reports or [], key=lambda r: r['ref_date'], reverse=True)
+
+    def daily_card(report, latest=False):
+        report_date = str(report.get('date', ''))
+        total = report.get('domestic_count', 0) + report.get('international_count', 0)
+        badge = ' <span class="badge">最新</span>' if latest else ''
+        return f'''
+<a class="archive-card" href="reports/{escape(report_date, quote=True)}.html">
+  <strong>📅 {escape(report_date)}</strong>{badge}
+  <span class="archive-muted">{escape(str(report.get('weekday', '')))} · 共 {total} 条 · 国内 {report.get('domestic_count', 0)} · 区域/国际 {report.get('international_count', 0)}</span>
+</a>'''
+
+    def periodic_card(report, kind, icon):
+        ref_date = str(report.get('ref_date', ''))
+        date_range = str(report.get('date_range') or ref_date)
+        item_count = len(report.get('items') or [])
+        count_text = f'共 {item_count} 条要闻' if item_count else '综合编辑观察'
+        return f'''
+<a class="archive-card" href="reports/{kind}-{escape(ref_date, quote=True)}.html">
+  <strong>{icon} {escape(date_range)}</strong>
+  <span class="archive-muted">{escape(count_text)}</span>
+</a>'''
+
+    def archive_group(title, entries, visible_count, empty_text):
+        if not entries:
+            return f'<section class="archive-group"><h2>{title}</h2><p class="empty">{empty_text}</p></section>'
+        visible = ''.join(entries[:visible_count])
+        older = ''.join(entries[visible_count:])
+        older_block = ''
+        if older:
+            older_block = f'''
+<details class="older-group">
+  <summary data-expand-text="展开更早记录（{len(entries) - visible_count} 条）">展开更早记录（{len(entries) - visible_count} 条）</summary>
+  {older}
+</details>'''
+        return f'<section class="archive-group"><h2>{title} <span>{len(entries)} 条</span></h2>{visible}{older_block}</section>'
+
+    daily_cards = [daily_card(report, i == 0) for i, report in enumerate(daily_reports)]
+    weekly_cards = [periodic_card(report, 'weekly', '📰') for report in weekly_reports]
+    monthly_cards = [periodic_card(report, 'monthly', '📊') for report in monthly_reports]
+    archive_css = """<style>
+  :root { --bg:#f5f0eb; --card:#fff; --text:#2c2416; --muted:#8b7355; --accent:#8b4513; --tag-bg:#f0e6d3; --border:#e0d5c1; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1a1815; --card:#252320; --text:#e8e0d0; --muted:#9b8b7a; --accent:#d4a76a; --tag-bg:#2a2520; --border:#3a3530; } }
+  * { box-sizing:border-box; }
+  body { margin:0 auto; max-width:720px; padding:16px; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; line-height:1.7; }
+  header { padding:30px 0 18px; border-bottom:2px solid var(--accent); text-align:center; }
+  h1 { margin:0; font-size:1.55em; }
+  header p { margin:6px 0 0; color:var(--muted); font-size:.9em; }
+  .back { display:inline-block; margin:18px 0 4px; color:var(--accent); text-decoration:none; }
+  .archive-group { margin-top:24px; }
+  .archive-group h2 { display:flex; align-items:baseline; gap:8px; margin:0 0 10px; padding-bottom:7px; border-bottom:2px solid var(--border); color:var(--accent); font-size:1.05em; }
+  .archive-group h2 span { color:var(--muted); font-size:.72em; font-weight:normal; }
+  .archive-card { display:flex; flex-wrap:wrap; gap:4px 10px; align-items:baseline; margin:9px 0; padding:13px 15px; border:1px solid var(--border); border-radius:9px; background:var(--card); color:var(--text); text-decoration:none; }
+  .archive-card:hover { border-color:var(--accent); }
+  .archive-muted { color:var(--muted); font-size:.84em; }
+  .badge { color:#fff; background:var(--accent); border-radius:10px; padding:1px 7px; font-size:.7em; }
+  .older-group { margin-top:10px; }
+  .older-group summary { cursor:pointer; min-height:44px; display:flex; align-items:center; padding:9px 12px; border:1px dashed var(--border); border-radius:9px; color:var(--accent); background:var(--card); }
+  .collapse-floating { display:none; position:fixed; right:max(16px,calc((100vw - 720px) / 2 + 16px)); bottom:18px; z-index:20; min-height:44px; padding:8px 14px; border:1px solid var(--accent); border-radius:999px; background:var(--accent); color:#fff; font:inherit; font-size:.88em; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.22); }
+  .collapse-floating.show { display:inline-flex; align-items:center; justify-content:center; }
+  .empty { padding:20px 0; color:var(--muted); }
+  footer { margin-top:30px; padding:24px 0 12px; border-top:1px solid var(--border); text-align:center; color:var(--muted); font-size:.8em; }
+  footer a { color:var(--accent); }
+  a:focus-visible, summary:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  @media (max-width:520px) { body { padding:12px; } header { padding-top:24px; } h1 { font-size:1.35em; } .archive-card { display:block; } .archive-muted { display:block; margin-top:2px; } .collapse-floating { right:12px; bottom:14px; } }
+</style>"""
+    return f'''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文博资讯档案 | 每日文博资讯</title>
+<meta name="description" content="浏览每日文博资讯全部日报、周报和月报历史档案。">
+<link rel="canonical" href="https://zhangheng666.top/archive.html">
+{archive_css}
+</head>
+<body>
+<header>
+  <h1>🏛️ 文博资讯档案</h1>
+  <p>浏览全部日报、周报和月报历史记录</p>
+</header>
+<main>
+  <a class="back" href="index.html">← 返回首页</a>
+  {archive_group('📅 日报', daily_cards, 2, '暂无日报记录')}
+  {archive_group('📰 周报', weekly_cards, 1, '暂无周报记录')}
+  {archive_group('📊 月报', monthly_cards, 1, '暂无月报记录')}
+</main>
+<footer>
+  <p><a href="index.html">每日文博资讯</a> · <a href="search.html">搜索全部档案</a> · <a href="sources.html">信源与方法</a></p>
+</footer>
+<button id="collapse-floating" class="collapse-floating" type="button" aria-label="收起当前展开的档案栏目">↑ 收起本栏</button>
+<script>
+let activeOlderGroup = null;
+const collapseFloating = document.getElementById('collapse-floating');
+
+function hideCollapseFloating(group) {{
+  if (group && activeOlderGroup !== group) return;
+  activeOlderGroup = null;
+  collapseFloating.classList.remove('show');
+}}
+
+function syncOlderGroup(group) {{
+  const summary = group.querySelector('summary');
+  if (group.open) {{
+    activeOlderGroup = group;
+    summary.textContent = '收起本栏';
+    collapseFloating.classList.add('show');
+  }} else {{
+    summary.textContent = summary.getAttribute('data-expand-text') || '展开更早记录';
+    hideCollapseFloating(group);
+  }}
+}}
+
+document.querySelectorAll('.older-group').forEach(group => {{
+  group.addEventListener('toggle', () => syncOlderGroup(group));
+}});
+
+collapseFloating.addEventListener('click', () => {{
+  if (!activeOlderGroup) return;
+  activeOlderGroup.open = false;
+}});
 </script>
-</body>''')
-    return html
+</body>
+</html>'''
 
 
 # ───────────────── 搜索结果页 ─────────────────
@@ -3984,11 +3931,17 @@ def main():
     print(f'Search page: {search_path}')
 
     # Build index with all sections
-    index_html = build_index(daily_reports, weekly_reports, monthly_reports, recruitment_data, intern_data)
+    index_html = build_homepage(daily_reports, weekly_reports, monthly_reports, recruitment_data, intern_data)
     index_path = os.path.join(SITE_DIR, 'index.html')
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_html)
     print(f'Index: {index_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报 + {"招聘" if recruitment_data else "无招聘"} + {"实习" if intern_data else "无实习"})')
+
+    archive_html = build_archive(daily_reports, weekly_reports, monthly_reports)
+    archive_path = os.path.join(SITE_DIR, 'archive.html')
+    with open(archive_path, 'w', encoding='utf-8') as f:
+        f.write(archive_html)
+    print(f'Archive: {archive_path} ({len(daily_reports)} 日报 + {len(weekly_reports)} 周报 + {len(monthly_reports)} 月报)')
 
     # Build about page
     about_html = build_about_html()
