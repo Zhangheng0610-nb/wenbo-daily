@@ -2932,6 +2932,7 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
     hero_list = ''.join(hero_links) or '<li class="muted">今日暂无已发布日报</li>'
     remaining = max(0, latest_total - len(hero_items))
     hero_more = f'<span class="hero-more">另外 {remaining} 条</span>' if remaining else ''
+    hero_more_line = f'  {hero_more}\n' if hero_more else ''
 
     has_jobs = bool(recruitment_data and recruitment_data.get('sections'))
     has_intern = bool(intern_data and intern_data.get('sections'))
@@ -3083,9 +3084,8 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
     <span class="badge">最新</span>
   </div>
   <ul class="hero-list">{hero_list}</ul>
-  {hero_more}
-  <div class="hero-meta">共 {latest_total} 条 · 国内 {latest_domestic} · 区域/国际 {latest_regional}</div>
-  <a class="hero-link" href="{escape(latest_href, quote=True)}">阅读今日日报 →</a>
+{hero_more_line}   <div class="hero-meta">共 {latest_total} 条 · 国内 {latest_domestic} · 区域/国际 {latest_regional}</div>
+   <a class="hero-link" href="{escape(latest_href, quote=True)}">阅读今日日报 →</a>
 </section>
 <section aria-labelledby="recent-heading">
   <div class="section-header" id="recent-heading">最近更新</div>
@@ -3141,7 +3141,7 @@ def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
             older_block = f'''
 <details class="older-group">
   <summary data-expand-text="展开更早记录（{len(entries) - visible_count} 条）">展开更早记录（{len(entries) - visible_count} 条）</summary>
-  {older}
+{older}
 </details>'''
         return f'<section class="archive-group"><h2>{title} <span>{len(entries)} 条</span></h2>{visible}{older_block}</section>'
 
