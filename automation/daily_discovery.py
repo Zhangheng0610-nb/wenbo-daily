@@ -189,6 +189,7 @@ HIGH_VALUE_TERMS = (
     "保护研究", "研究成果", "研究揭示", "成果公布", "揭牌", "合作", "签约", "联合考古", "藏品", "安全", "盗窃", "追回", "调查结论", "总结会", "国家历史文化名城", "历史文化名城",
     "museum policy", "museum theft", "stolen", "repatriation", "archaeological discovery", "archaeologists",
     "heritage protection", "conservation", "excavation", "unearthed", "new discovery", "research findings",
+    "标本受损", "展品受损", "藏品损坏", "化石受损", "人为破坏", "游客破坏", "擅自触摸",
 )
 ROUTINE_TERMS = ("报名", "招募", "研学", "常规讲座", "讲座预告", "市集", "音乐季", "周末活动", "打卡", "优惠", "routine", "workshop", "weekend events")
 RELEVANCE_TERMS = (
@@ -215,6 +216,20 @@ NATIONAL_POLICY_TERMS = ("国家文物局", "文化和旅游部", "全国范围"
 ARCHAEOLOGY_DISCOVERY_TERMS = ("考古发现", "考古发掘", "发掘成果", "成果公布", "研究揭示", "研究成果", "新发现", "新认识", "出土", "墓地发现", "遗址发现")
 MAJOR_DISCOVERY_TERMS = ("重大考古", "重大新发现", "填补", "重要发现", "重大发现")
 SECURITY_PRIORITY_TERMS = ("盗窃", "失窃", "抢劫", "文物安全事件", "追回", "落网", "藏品受损")
+MUSEUM_INSTITUTION_TERMS = (
+    "博物馆", "博物院", "纪念馆", "美术馆", "自然博物馆", "动物博物馆", "科技馆", "收藏展示机构",
+)
+COLLECTION_OBJECT_TERMS = (
+    "藏品", "馆藏", "展品", "标本", "化石", "遗骸", "文物", "艺术品", "科研标本", "展陈实物",
+)
+PUBLIC_INCIDENT_TERMS = (
+    "受损", "损坏", "破坏", "毁损", "打砸", "踢打", "手抓", "抓取", "拿起", "攀爬", "涂写", "泼洒",
+    "擅自触摸", "人为破坏", "游客破坏", "盗窃", "失窃", "抢劫",
+)
+PUBLIC_SALIENCE_LEVELS = {"normal", "cross_media_attention", "sustained_public_attention"}
+PUBLIC_SALIENCE_CENTRAL_DOMAINS = (
+    "news.cn", "xinhuanet.com", "people.com.cn", "cctv.com", "cnr.cn", "chinanews.com.cn", "gmw.cn",
+)
 REPATRIATION_TERMS = ("文物返还", "文物追索", "归还", "交接完成")
 HERITAGE_RECOGNITION_TERMS = ("世界遗产", "国家历史文化名城", "历史文化名城")
 MUSEUM_PROJECT_TERMS = ("重要展览", "大型展览", "大展", "特展", "正式开幕", "正式开放", "闭幕", "开馆")
@@ -1594,6 +1609,7 @@ def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int
         "candidateDisposition",
         "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "newDevelopment", "claimRisk",
         "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons",
+        "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount",
         "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceUpgradeStatus",
         "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceSources",
         "evidenceResolutionAttempts", "discoveryReports",
@@ -1719,6 +1735,111 @@ def classify_evidence_failure(record: dict, checked_sources: list[dict], *,
     return "no_reliable_evidence"
 
 
+def _editorial_context(record: dict) -> str:
+    parts = [str(record.get(key) or "") for key in ("title", "summary", "body", "notes", "institution", "publisher", "entity", "eventType", "location")]
+    for report in record.get("discoveryReports", []) if isinstance(record.get("discoveryReports"), list) else []:
+        if isinstance(report, dict):
+            parts.extend(str(report.get(key) or "") for key in ("title", "publisher", "sourceDomain", "publisherDomain"))
+    for source in record.get("evidenceSources", []) if isinstance(record.get("evidenceSources"), list) else []:
+        if isinstance(source, dict):
+            parts.extend(str(source.get(key) or "") for key in ("name", "publisher", "publisherDomain"))
+    return " ".join(part for part in parts if part).lower()
+
+
+def museum_collection_or_public_incident(record: dict) -> bool:
+    """Recognize a concrete museum collection/public incident by its anchors."""
+    text = _editorial_context(record)
+    return (
+        any(term.lower() in text for term in MUSEUM_INSTITUTION_TERMS)
+        and any(term.lower() in text for term in COLLECTION_OBJECT_TERMS)
+        and any(term.lower() in text for term in PUBLIC_INCIDENT_TERMS)
+    )
+
+
+def _coverage_domain_family(value: str) -> str:
+    text = str(value or "").strip().lower()
+    host = (urlsplit(text).hostname or "").lower() if "://" in text else ""
+    value = host or text
+    value = value.removeprefix("www.").removeprefix("m.")
+    aliases = {
+        "news.xinhuanet.com": "xinhuanet.com",
+        "www.xinhuanet.com": "xinhuanet.com",
+        "www.news.cn": "news.cn",
+        "society.people.com.cn": "people.com.cn",
+        "people.cctv.com": "cctv.com",
+    }
+    value = aliases.get(value, value)
+    if "." in value:
+        parts = value.split(".")
+        if len(parts) >= 3 and parts[-2:] in (("com", "cn"), ("org", "cn"), ("gov", "cn"), ("co", "uk")):
+            return ".".join(parts[-3:])
+        return ".".join(parts[-2:])
+    return compact(value)
+
+
+def _coverage_source_type(row: dict, family: str) -> str:
+    explicit = str(row.get("sourceClass") or row.get("sourceType") or "").strip().lower()
+    if explicit:
+        return explicit
+    text = " ".join(str(row.get(key) or "") for key in ("name", "publisher", "sourceDomain", "publisherDomain", "url")).lower()
+    if any(family == _coverage_domain_family(domain) or family.endswith(domain) for domain in PUBLIC_SALIENCE_CENTRAL_DOMAINS):
+        return "central_media"
+    if any(term in text for term in ("博物馆", "博物院", "文物局", "考古院", "考古所", "gov.cn", ".edu", ".ac.")):
+        return "official_institution"
+    if any(term in text for term in ("thepaper", "考古杂志", "艺术新闻", "专业媒体")):
+        return "professional_media"
+    if any(term in text for term in ("川观", "日报", "新闻网", "地方媒体")):
+        return "local_mainstream"
+    return "other_publisher"
+
+
+def _coverage_rows(record: dict) -> list[dict]:
+    rows = []
+    for key in ("discoveryReports", "evidenceSources"):
+        values = record.get(key)
+        if isinstance(values, list):
+            rows.extend(row for row in values if isinstance(row, dict))
+    if rows:
+        return rows
+    for domain in record.get("publisherDomains", []) if isinstance(record.get("publisherDomains"), list) else []:
+        rows.append({"publisherDomain": domain})
+    return rows
+
+
+def public_salience(record: dict) -> dict:
+    """Measure independent public attention without rewarding raw repost counts."""
+    families = {}
+    dates = set()
+    source_types = set()
+    for row in _coverage_rows(record):
+        origin = str(row.get("canonicalPublisherDomain") or row.get("originalPublisherDomain") or "").strip()
+        value = origin or row.get("publisherDomain") or row.get("sourceDomain") or row.get("publisher") or row.get("url") or ""
+        family = _coverage_domain_family(str(value))
+        if not family:
+            continue
+        families.setdefault(family, row)
+        published = parse_date(str(row.get("publishedDate") or row.get("date") or ""))
+        if published:
+            dates.add(published.isoformat())
+        source_types.add(_coverage_source_type(row, family))
+    independent = len(families)
+    if independent >= 5 or (len(dates) >= 2 and independent >= 2):
+        level = "sustained_public_attention"
+    elif independent >= 3 and len(source_types) >= 2:
+        level = "cross_media_attention"
+    else:
+        level = "normal"
+    return {
+        "level": level,
+        "independentCoverageCount": independent,
+        "publisherDiversity": independent,
+        "sourceTypeDiversity": len(source_types),
+        "coverageDates": sorted(dates),
+        "sourceTypes": sorted(source_types),
+        "reason": level if level != "normal" else "limited_or_unconfirmed_independent_coverage",
+    }
+
+
 def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     """Score news value before evidence qualification, without using source tier."""
     title = record.get("title", "") or ""
@@ -1744,6 +1865,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     major_discovery = hit(MAJOR_DISCOVERY_TERMS)
     archaeology_discovery = hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))
     security = hit(SECURITY_PRIORITY_TERMS)
+    museum_collection_incident = museum_collection_or_public_incident(record)
     repatriation = hit(REPATRIATION_TERMS)
     heritage = hit(HERITAGE_RECOGNITION_TERMS)
     museum_project = hit(MUSEUM_PROJECT_TERMS)
@@ -1764,6 +1886,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
         and (national_cultural_object or museum_object)
         and (cultural_substance or (national_cultural_object and hit(("参观", "访问"))))
     )
+    salience = public_salience(record)
 
     if national_policy:
         score += 58
@@ -1780,6 +1903,10 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     if security:
         score += 43
         reasons.append("museum_or_cultural_property_security_event")
+    if museum_collection_incident:
+        if not security:
+            score += 43
+        reasons.append("museum_collection_or_public_incident")
     if repatriation:
         score += 36
         reasons.append("repatriation_or_recovery_update")
@@ -1801,6 +1928,16 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     if high_level_cultural_diplomacy:
         score += 52
         reasons.append("high_level_cultural_diplomacy")
+    salience_eligible = (
+        museum_collection_incident or security or policy or archaeology_discovery or repatriation
+        or heritage or (museum_project and hit(MUSEUM_SCALE_TERMS)) or digital or cooperation
+    )
+    if salience_eligible and salience["level"] == "cross_media_attention":
+        score += 10
+        reasons.append("cross_media_attention")
+    elif salience_eligible and salience["level"] == "sustained_public_attention":
+        score += 16
+        reasons.append("sustained_public_attention")
     if record.get("newDevelopment") is True:
         score += 12
         reasons.append("new_development")
@@ -1832,6 +1969,9 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
         "label": label,
         "reasons": reasons,
         "highLevelCulturalDiplomacy": high_level_cultural_diplomacy,
+        "museumCollectionOrPublicIncident": museum_collection_incident,
+        "publicSalience": salience,
+        "independentCoverageCount": salience["independentCoverageCount"],
     }
 
 
@@ -1888,6 +2028,9 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         record["editorialPriorityLabel"] = priority["label"]
         record["editorialReasons"] = priority["reasons"]
         record["highLevelCulturalDiplomacy"] = priority["highLevelCulturalDiplomacy"]
+        record["museumCollectionOrPublicIncident"] = priority["museumCollectionOrPublicIncident"]
+        record["publicSalience"] = priority["publicSalience"]
+        record["independentCoverageCount"] = priority["independentCoverageCount"]
         record["editorialPriorityRank"] = rank
         record["evidenceUpgradeStatus"] = "queued" if disposition == "needs_verification" else "not_needed" if disposition == "evidence_qualified" else "not_eligible"
         evaluated.append(record)
@@ -2245,7 +2388,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
                 for row in event_candidates
             ],
             "pool": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "editorialPriorityRank", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount", "editorialPriorityRank", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
                 for row in evaluation["pool"]
             ],
             "highPriorityEvidenceQueue": [

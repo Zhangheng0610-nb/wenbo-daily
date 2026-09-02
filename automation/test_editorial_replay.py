@@ -151,6 +151,42 @@ class EditorialReplayContractTests(unittest.TestCase):
             self.assertIn('editorial replay baseDiscoveryAuditSha256 does not match immutable discovery audit', errors)
             self.assertIn('editorial replay must declare discoveryAuditUnchanged=true', errors)
 
+    def test_historical_editorial_correction_uses_one_replay_pool(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            audit_path, replay_path = make_files(root)
+            replay = base_replay(audit_path, replay_path)
+            replay['revisionType'] = 'historical_editorial_correction'
+            replay['replayReason'] = 'confirmed editorial false negative'
+            replay_path.write_text(json.dumps(replay, ensure_ascii=False), encoding='utf-8')
+            payload = {
+                'date': '2026-09-02',
+                'discoveryAuditPath': 'content/发现/2026-09-02.json',
+                'editorialInputPath': 'content/复核/2026-09-02.json',
+                'revision': {
+                    'revisionType': 'historical_editorial_correction',
+                    'discoveryAuditUnchanged': True,
+                    'editorialInputPath': 'content/复核/2026-09-02.json',
+                },
+            }
+            errors, pool_ids = validate_editorial_input(root / 'content/候选/2026-09-02.json', payload, root)
+            self.assertEqual(errors, [])
+            self.assertEqual(pool_ids, {'event-1'})
+
+    def test_unknown_revision_type_cannot_open_parallel_pool(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            audit_path, replay_path = make_files(root)
+            replay_path.write_text(json.dumps(base_replay(audit_path, replay_path), ensure_ascii=False), encoding='utf-8')
+            payload = {
+                'date': '2026-09-02',
+                'discoveryAuditPath': 'content/发现/2026-09-02.json',
+                'editorialInputPath': 'content/复核/2026-09-02.json',
+                'revision': {'revisionType': 'unknown_revision', 'discoveryAuditUnchanged': True},
+            }
+            errors, _ = validate_editorial_input(root / 'content/候选/2026-09-02.json', payload, root)
+            self.assertTrue(any('same_day_editorial_revision or historical_editorial_correction' in error for error in errors))
+
 
 if __name__ == '__main__':
     unittest.main()

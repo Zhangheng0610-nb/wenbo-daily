@@ -19,9 +19,11 @@ from automation.daily_discovery import (
     has_specific_event_anchor,
     is_relevant_record,
     load_history,
+    museum_collection_or_public_incident,
     metadata_urls,
     parse_date,
     publisher_search_results,
+    public_salience,
     resolve_evidence_attempt,
     run_evidence_upgrade,
     run,
@@ -199,6 +201,112 @@ class DailyDiscoveryTests(unittest.TestCase):
     def test_national_figure_without_wenbo_substance_is_not_cultural_diplomacy(self):
         result = editorial_priority({"title": "国家主席出席国际经济论坛", "publishedDate": "2026-09-01"})
         self.assertFalse(result["highLevelCulturalDiplomacy"])
+
+    def test_museum_collection_public_incident_requires_three_anchors(self):
+        self.assertTrue(museum_collection_or_public_incident({
+            "title": "博物馆科研标本受损，馆方回应",
+        }))
+        self.assertTrue(museum_collection_or_public_incident({
+            "title": "博物馆展厅化石被游客破坏",
+        }))
+        self.assertFalse(museum_collection_or_public_incident({
+            "title": "博物馆周末亲子活动开放报名",
+        }))
+
+    def test_public_incident_gets_high_priority_without_title_specific_rule(self):
+        result = editorial_priority({
+            "title": "两孩子在展厅内手抓、脚踢标本 国家动物博物馆强烈谴责",
+            "publishedDate": "2026-08-30",
+        }, __import__("datetime").date(2026, 9, 1))
+        self.assertTrue(result["museumCollectionOrPublicIncident"])
+        self.assertEqual(result["label"], "high")
+        self.assertIn("museum_collection_or_public_incident", result["reasons"])
+
+    def test_public_salience_counts_independent_publishers_not_report_count(self):
+        reports = [
+            {"title": "同一事件报道", "sourceDomain": "news.cn", "url": "https://news.cn/a"},
+            {"title": "同一事件转载", "sourceDomain": "news.cn", "url": "https://news.cn/b"},
+            {"title": "同一事件镜像", "sourceDomain": "www.news.cn", "url": "https://www.news.cn/c"},
+        ]
+        salience = public_salience({"title": "普通博物馆参观", "discoveryReports": reports})
+        self.assertEqual(salience["independentCoverageCount"], 1)
+        self.assertEqual(salience["level"], "normal")
+
+    def test_public_salience_requires_substantive_wenbo_signal_for_priority_boost(self):
+        record = {
+            "title": "明星参观国家博物馆",
+            "publishedDate": "2026-08-31",
+            "discoveryReports": [
+                {"title": "明星参观国家博物馆", "sourceDomain": "news.cn"},
+                {"title": "明星打卡国家博物馆", "sourceDomain": "people.com.cn"},
+                {"title": "明星现身博物馆", "sourceDomain": "thepaper.cn"},
+                {"title": "明星参观博物馆", "sourceDomain": "川观新闻"},
+                {"title": "明星参观博物馆", "sourceDomain": "cnr.cn"},
+            ],
+        }
+        result = editorial_priority(record, __import__("datetime").date(2026, 9, 1))
+        self.assertEqual(result["publicSalience"]["level"], "sustained_public_attention")
+        self.assertNotIn("sustained_public_attention", result["reasons"])
+        self.assertNotEqual(result["label"], "high")
+
+    def test_cross_media_attention_adds_only_to_substantive_incident(self):
+        result = editorial_priority({
+            "title": "博物馆标本遭游客破坏并受损",
+            "discoveryReports": [
+                {"title": "博物馆标本遭游客破坏", "sourceDomain": "news.cn"},
+                {"title": "标本受损引发讨论", "sourceDomain": "thepaper.cn"},
+                {"title": "游客破坏标本", "sourceDomain": "川观新闻"},
+            ],
+        })
+        self.assertTrue(result["museumCollectionOrPublicIncident"])
+        self.assertEqual(result["publicSalience"]["level"], "cross_media_attention")
+        self.assertIn("cross_media_attention", result["reasons"])
+
+    def test_public_salience_marks_multi_day_follow_up_as_sustained(self):
+        salience = public_salience({
+            "title": "博物馆藏品受损事件",
+            "discoveryReports": [
+                {"title": "事件回应", "sourceDomain": "news.cn", "publishedDate": "2026-08-30"},
+                {"title": "事件进展", "sourceDomain": "thepaper.cn", "publishedDate": "2026-08-31"},
+            ],
+        })
+        self.assertEqual(salience["level"], "sustained_public_attention")
+        self.assertEqual(salience["coverageDates"], ["2026-08-30", "2026-08-31"])
+
+    def test_national_animal_museum_regression_is_not_low(self):
+        result = editorial_priority({
+            "title": "国家动物博物馆就破坏珍贵标本事件发布严正回应",
+            "discoveryReports": [
+                {"title": "两孩子在博物馆不断用手抓、用脚踢标本", "sourceDomain": "川观新闻"},
+                {"title": "家长拒不承认破坏珍贵蛇标本", "sourceDomain": "thepaper.cn"},
+            ],
+            "evidenceSources": [
+                {"name": "人民网：国家动物博物馆回应", "url": "https://people.com.cn/a", "tier": "A"},
+                {"name": "央视：国家动物博物馆回应", "url": "https://cctv.com/a", "tier": "A"},
+                {"name": "央广：国家动物博物馆回应", "url": "https://cnr.cn/a", "tier": "A"},
+            ],
+            "publishedDate": "2026-08-30",
+        }, __import__("datetime").date(2026, 9, 1))
+        self.assertTrue(result["museumCollectionOrPublicIncident"])
+        self.assertEqual(result["publicSalience"]["independentCoverageCount"], 5)
+        self.assertEqual(result["publicSalience"]["level"], "sustained_public_attention")
+        self.assertEqual(result["label"], "high")
+
+    def test_historical_duplicate_cannot_be_rescued_by_public_salience(self):
+        from datetime import date
+        record = {
+            "title": "博物馆藏品受损事件",
+            "publishedDate": "2026-08-31",
+            "duplicateStatus": "historical_duplicate",
+            "duplicateOf": "2026-08-30#item1",
+            "discoveryReports": [
+                {"title": "事件报道", "sourceDomain": "news.cn"},
+                {"title": "事件跟进", "sourceDomain": "thepaper.cn"},
+                {"title": "事件回应", "sourceDomain": "cnr.cn"},
+            ],
+        }
+        evaluated = __import__("automation.daily_discovery", fromlist=["evaluate_candidate_pool"]).evaluate_candidate_pool(date(2026, 9, 1), [record])
+        self.assertEqual(evaluated["records"][0]["candidateDisposition"], "rejected")
 
     def test_syndicated_reports_share_one_event_candidate(self):
         events = aggregate_event_candidates([

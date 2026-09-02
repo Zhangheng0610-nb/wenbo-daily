@@ -59,12 +59,19 @@ def _final_pool_ids(replay):
     return {row.get('eventId') for row in rows if isinstance(row, dict) and row.get('eventId')}
 
 
+EDITORIAL_REPLAY_REVISION_TYPES = {
+    'same_day_editorial_revision',
+    'historical_editorial_correction',
+}
+
+
 def validate_editorial_input(ledger_path, payload, root=None):
     """Validate the single editorial input selected for this ledger.
 
     The immutable morning discovery audit remains independently validated by
-    ``validate_discovery_audit``.  A same-day revision may point the editor at
-    one explicit replay artifact, but it may not silently merge two pools.
+    ``validate_discovery_audit``.  A same-day revision or historical editorial
+    correction may point the editor at one explicit replay artifact, but it
+    may not silently merge two pools.
     """
     root = root or ROOT
     errors = []
@@ -73,15 +80,19 @@ def validate_editorial_input(ledger_path, payload, root=None):
     if not editorial_ref:
         return errors, None
     revision = payload.get('revision') or {}
-    if revision.get('revisionType') == 'same_day_editorial_revision' and not payload.get('editorialInputPath'):
-        errors.append('same_day_editorial_revision needs an explicit editorialInputPath')
+    revision_type = revision.get('revisionType')
+    if revision_type in EDITORIAL_REPLAY_REVISION_TYPES and not payload.get('editorialInputPath'):
+        errors.append(f'{revision_type} needs an explicit editorialInputPath')
     if editorial_ref == discovery_ref:
         return errors, None
-    if revision.get('revisionType') != 'same_day_editorial_revision':
-        errors.append('editorialInputPath may differ from discoveryAuditPath only for same_day_editorial_revision')
+    if revision_type not in EDITORIAL_REPLAY_REVISION_TYPES:
+        errors.append(
+            'editorialInputPath may differ from discoveryAuditPath only for '
+            'same_day_editorial_revision or historical_editorial_correction'
+        )
         return errors, None
     if revision.get('discoveryAuditUnchanged') is not True:
-        errors.append('same-day revision must declare discoveryAuditUnchanged=true')
+        errors.append(f'{revision_type} must declare discoveryAuditUnchanged=true')
     if revision.get('editorialInputPath') not in (None, editorial_ref):
         errors.append('revision editorialInputPath disagrees with ledger')
     replay_path = _resolved_path(root, editorial_ref)
