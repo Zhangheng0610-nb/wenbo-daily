@@ -390,7 +390,7 @@ function renderSearch(data, rawQuery) {
     const items = Array.isArray(record.items) ? record.items : [];
     if (items.length) {
       items.forEach(function(item) {
-        if (!matches(itemText(item), words)) return;
+        if (!matches(itemText(item), groups)) return;
         const key = record.path + '#' + (item.id || compact(item.title));
         if (seen.has(key)) return;
         seen.add(key);
@@ -416,8 +416,15 @@ fetch('search-index.json').then(function(response) {
   if (!response.ok) throw new Error('search index unavailable');
   return response.json();
 }).then(function(data) {
-  renderSearch(data, initialQuery);
-}).catch(function() {
+  try {
+    renderSearch(data, initialQuery);
+  } catch (error) {
+    console.error('Search rendering failed:', error);
+    summary.textContent = '搜索功能运行异常，请刷新重试。';
+    results.innerHTML = '<div class="search-empty">请刷新页面后重试。</div>';
+  }
+}).catch(function(error) {
+  console.error('Search index loading failed:', error);
   summary.textContent = '搜索索引暂时不可用。';
   results.innerHTML = '<div class="search-empty">请稍后刷新重试。</div>';
 });
