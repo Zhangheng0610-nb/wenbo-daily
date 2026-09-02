@@ -2898,6 +2898,39 @@ def _report_items_in_order(report):
     return fallback
 
 
+def _homepage_compact_date_markup(date_range):
+    """Keep full report dates on desktop and use a compact, readable mobile form."""
+    text = str(date_range or '')
+    match = re.fullmatch(
+        r'(\d{4})-(\d{2})-(\d{2})\s+—\s+(\d{4})-(\d{2})-(\d{2})',
+        text,
+    )
+    if not match:
+        return escape(text)
+    short_text = f'{match.group(2)}.{match.group(3)} — {match.group(5)}.{match.group(6)}'
+    return (
+        f'<span class="compact-date-full">{escape(text)}</span>'
+        f'<span class="compact-date-short">{escape(short_text)}</span>'
+    )
+
+
+def _homepage_compact_update_markup(update_date, description):
+    """Use a shorter mobile update label without removing its date meaning."""
+    full_text = f'{update_date} · {description}'
+    match = re.search(r'(\d{4})-(\d{2})-(\d{2})', str(update_date or ''))
+    if not match:
+        return escape(full_text)
+    short_text = f'{match.group(2)}-{match.group(3)} 更新 · {description}'
+    return (
+        '<span class="compact-meta-full">'
+        f'{escape(full_text)}'
+        '</span>'
+        '<span class="compact-meta-short">'
+        f'{escape(short_text)}'
+        '</span>'
+    )
+
+
 def _homepage_compact_card(report, href, kicker, description):
     """Build a small homepage card without copying report body text."""
     date_range = str(report.get('date_range') or report.get('date') or '')
@@ -2906,7 +2939,7 @@ def _homepage_compact_card(report, href, kicker, description):
     return f'''
 <a class="compact-card" href="{escape(href, quote=True)}">
   <span class="compact-kicker">{escape(kicker)}</span>
-  <strong>{escape(date_range)}</strong>
+  <strong>{_homepage_compact_date_markup(date_range)}</strong>
   <span class="compact-meta">{escape(count_text)} · {escape(description)}</span>
 </a>'''
 
@@ -2968,13 +3001,13 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
 <a class="compact-card" href="intern.html">
   <span class="compact-kicker">🌱 实习机会</span>
   <strong>{total_intern} 个岗位</strong>
-  <span class="compact-meta">{escape(intern_update)} · 文博实习</span>
+  <span class="compact-meta">{_homepage_compact_update_markup(intern_update, '文博实习')}</span>
 </a>''')
     compact_cards.append(f'''
 <a class="compact-card" href="jobs.html">
   <span class="compact-kicker">💼 招聘信息</span>
   <strong>{total_jobs} 个岗位</strong>
-  <span class="compact-meta">{escape(jobs_update)} · 文博招聘</span>
+  <span class="compact-meta">{_homepage_compact_update_markup(jobs_update, '文博招聘')}</span>
 </a>''')
 
     index_css = """<style>
@@ -3014,6 +3047,8 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
   .compact-kicker { color:var(--accent); font-size:.82em; }
   .compact-card strong { font-size:1.05em; font-weight:650; }
   .compact-meta { color:var(--muted); font-size:.8em; overflow-wrap:anywhere; }
+  .compact-date-full, .compact-date-short { white-space:nowrap; }
+  .compact-date-short, .compact-meta-short { display:none; }
   .archive-summary { margin-top:28px; padding:16px 18px; border:1px solid var(--border); border-radius:10px; background:var(--card); }
   .archive-summary h2 { color:var(--accent); font-size:1.05em; margin-bottom:5px; }
   .archive-stats { color:var(--muted); font-size:.86em; }
@@ -3021,7 +3056,20 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
   footer { text-align:center; padding:32px 0 20px; color:var(--muted); font-size:.8em; border-top:1px solid var(--border); margin-top:24px; }
   footer a { color:var(--accent); }
   a:focus-visible, button:focus-visible, input:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
-  @media (max-width:520px) { body { padding:12px; } header { padding-top:24px; } header h1 { font-size:1.4em; } .quick-nav { justify-content:flex-start; } .compact-grid { grid-template-columns:1fr; } .hero { padding:16px; } }
+  @media (max-width:520px) {
+    body { padding:12px; }
+    header { padding-top:24px; }
+    header h1 { font-size:1.4em; }
+    .quick-nav { justify-content:flex-start; }
+    .compact-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .compact-card { gap:2px; padding:11px 12px; border-radius:9px; min-height:92px; line-height:1.38; }
+    .compact-kicker { font-size:.74em; line-height:1.35; }
+    .compact-card strong { font-size:.9em; line-height:1.35; }
+    .compact-meta { font-size:.72em; line-height:1.38; }
+    .compact-date-full, .compact-meta-full { display:none; }
+    .compact-date-short, .compact-meta-short { display:inline; }
+    .hero { padding:16px; }
+  }
 </style>"""
 
     return f'''<!DOCTYPE html>
