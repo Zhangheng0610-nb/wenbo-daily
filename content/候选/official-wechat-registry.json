@@ -1,4 +1,17 @@
 {
-  "schema": "official-wechat-registry-v1",
-  "accounts": []
+  "schema": "official-wechat-registry-v2",
+  "accounts": [
+    {
+      "biz": "MjM5NDIzMDUwMQ==",
+      "accountName": "山西博物院",
+      "institution": "山西博物院",
+      "institutionType": "省级博物馆",
+      "sourceTier": "A",
+      "verifiedEvidence": "https://shanximuseum.com.cn/sx/index/index.html",
+      "officialSite": "https://shanximuseum.com.cn/",
+      "originalOnly": true,
+      "verifiedAt": "2026-09-02",
+      "notes": "山西博物院官网首页提供微信入口并列出该账号发布的官方文章；官方文章页面可识别账号主体为山西博物院，并解析出本条稳定 __biz。仅当文章由本馆发布、属于本馆职责范围且 evidence source 标记 articleOriginal=true 时作为机构 A 级证据。"
+    }
+  ]
 }

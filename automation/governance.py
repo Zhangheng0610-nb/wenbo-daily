@@ -67,10 +67,11 @@ SOURCE_GROUPS = OrderedDict([
 # A WeChat article URL does not prove who operates the account.  Accounts are
 # therefore opt-in: add a stable __biz value only after recording the account
 # identity, institution type, official-site backlink, and original-publishing
-# evidence.  An empty registry is intentional; unknown accounts remain
-# blocked as final evidence until a human verifies them.  Keep the registry
-# outside Python so adding one account is an auditable data change.
+# evidence.  Only explicitly registered accounts can leave the unknown-account
+# state; all other accounts remain blocked as final evidence.  Keep the
+# registry outside Python so each account is an auditable data change.
 OFFICIAL_WECHAT_REGISTRY_PATH = ROOT / "content" / "候选" / "official-wechat-registry.json"
+WECHAT_SOURCE_TIERS = frozenset({"A", "B", "discovery_only"})
 
 
 def _load_official_wechat_accounts():
@@ -89,6 +90,56 @@ def _load_official_wechat_accounts():
 
 
 OFFICIAL_WECHAT_ACCOUNTS = _load_official_wechat_accounts()
+
+
+def _valid_http_url(value):
+    try:
+        parts = urlsplit(value or "")
+    except ValueError:
+        return False
+    return parts.scheme in {"http", "https"} and bool(parts.netloc)
+
+
+def validate_official_wechat_registry(path=None):
+    """Validate the opt-in WeChat account registry without trusting nicknames."""
+    path = path or OFFICIAL_WECHAT_REGISTRY_PATH
+    errors = []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        return [f"invalid official WeChat registry: {exc}"]
+    if not isinstance(payload, dict) or payload.get("schema") != "official-wechat-registry-v2":
+        errors.append("official WeChat registry schema must be official-wechat-registry-v2")
+    accounts = payload.get("accounts") if isinstance(payload, dict) else None
+    if not isinstance(accounts, list):
+        return errors + ["official WeChat registry accounts must be a list"]
+    seen = set()
+    required_text = (
+        "biz", "accountName", "institution", "institutionType",
+        "verifiedEvidence", "officialSite", "verifiedAt",
+    )
+    for index, account in enumerate(accounts, 1):
+        label = f"official WeChat account {index}"
+        if not isinstance(account, dict):
+            errors.append(f"{label}: must be an object")
+            continue
+        missing = [key for key in required_text if not isinstance(account.get(key), str) or not account[key].strip()]
+        if missing:
+            errors.append(f"{label}: missing fields: {', '.join(missing)}")
+        biz = account.get("biz")
+        if biz in seen:
+            errors.append(f"{label}: duplicate biz {biz}")
+        if biz:
+            seen.add(biz)
+        if account.get("sourceTier") not in WECHAT_SOURCE_TIERS:
+            errors.append(f"{label}: sourceTier must be A, B, or discovery_only")
+        if not _valid_http_url(account.get("verifiedEvidence")):
+            errors.append(f"{label}: verifiedEvidence must be an HTTP(S) URL")
+        if not _valid_http_url(account.get("officialSite")):
+            errors.append(f"{label}: officialSite must be an HTTP(S) URL")
+        if not isinstance(account.get("originalOnly"), bool):
+            errors.append(f"{label}: originalOnly must be boolean")
+    return errors
 
 
 # Explainable institutional suffixes for reputable non-Chinese university and
@@ -216,8 +267,34 @@ def official_wechat_account(url):
     if not account:
         return None
     required = ('accountName', 'institution', 'institutionType',
-                'verifiedEvidence', 'officialSite', 'originalOnly')
-    return account if all(account.get(key) for key in required) else None
+                'verifiedEvidence', 'officialSite', 'verifiedAt', 'sourceTier')
+    if not all(isinstance(account.get(key), str) and account[key].strip() for key in required):
+        return None
+    if account.get('sourceTier') not in WECHAT_SOURCE_TIERS:
+        return None
+    if not isinstance(account.get('originalOnly'), bool):
+        return None
+    return account
+
+
+def wechat_evidence_issues(source, selected=False):
+    """Return article-level governance issues for a WeChat evidence record."""
+    url = source.get('url', '') if isinstance(source, dict) else ''
+    if _host(url) != 'mp.weixin.qq.com':
+        return []
+    account = official_wechat_account(url)
+    if not account:
+        return ['wechat_account_not_registered_or_registry_invalid']
+    tier = account.get('sourceTier')
+    if tier == 'discovery_only':
+        return ['discovery_only_wechat_account_cannot_be_publishable_evidence']
+    if tier not in {'A', 'B'}:
+        return ['wechat_account_has_no_publishable_source_tier']
+    if account.get('originalOnly') is not True:
+        return ['wechat_account_is_not_approved_for_original_evidence']
+    if selected and source.get('articleOriginal') is not True:
+        return ['selected_wechat_evidence_requires_articleOriginal_true']
+    return []
 
 
 def source_info(url):
@@ -227,9 +304,19 @@ def source_info(url):
         return {"tier": "C", "label": "C级｜无效链接", "host": "", "blocked": True}
     if host == 'mp.weixin.qq.com':
         account = official_wechat_account(url)
-        if account:
-            return {"tier": "A", "label": "A级｜已核验机构公众号", "host": host,
+        if account and account.get('sourceTier') in {'A', 'B'} and account.get('originalOnly') is True:
+            tier = account['sourceTier']
+            label = "A级｜机构官方公众号" if tier == 'A' else "B级｜媒体官方公众号"
+            return {"tier": tier, "sourceTier": tier, "label": label, "host": host,
                     "blocked": False, "wechatAccount": account}
+        if account and account.get('sourceTier') == 'discovery_only':
+            return {"tier": "C", "sourceTier": "discovery_only",
+                    "label": "C级｜行业公众号，仅作发现线索", "host": host,
+                    "blocked": True, "wechatAccount": account}
+        if account:
+            return {"tier": "C", "sourceTier": account.get('sourceTier'),
+                    "label": "C级｜公众号原创关系未满足发布要求", "host": host,
+                    "blocked": True, "wechatAccount": account}
         return {"tier": "C", "label": "C级｜未核验公众号", "host": host, "blocked": True}
     if any(host_matches(host, blocked) for blocked in BLOCKED_HOSTS):
         return {"tier": "C", "label": "C级｜禁止作为最终来源", "host": host, "blocked": True}
@@ -323,10 +410,15 @@ def source_link_html(source):
     info = source_info(source.get("url", ""))
     tier_class = "source-" + info["tier"].lower()
     warning = " title=\"历史内容：该来源尚未纳入本站白名单\"" if info["tier"] == "C" else ""
+    account = info.get("wechatAccount")
+    if account and info["tier"] in {"A", "B"}:
+        display_name = f'{account["institution"]}官方公众号' if info["tier"] == "A" else f'{account["accountName"]}官方公众号'
+    else:
+        display_name = source.get("name", info["host"] or "原文")
     return (f'<span class="source-chip {tier_class}"{warning}>'
             f'<b>{info["tier"]}</b> '
             f'<a href="{source["url"]}" target="_blank" rel="noopener">'
-            f'{source.get("name", info["host"] or "原文")}</a></span>')
+            f'{display_name}</a></span>')
 
 
 def source_registry_rows():

@@ -11,7 +11,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER_DIR = ROOT / 'content' / '候选'
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from automation.governance import canonical_url, source_info
+from automation.governance import (
+    canonical_url,
+    source_info,
+    validate_official_wechat_registry,
+    wechat_evidence_issues,
+)
 from automation.daily_discovery import evidence_claim_risk
 REQUIRED = {
     'candidateId', 'title', 'publishedDate', 'discoveredAt',
@@ -325,6 +330,8 @@ def validate_discovery_audit(ledger_path, payload):
 
 def validate(path, report_path=None):
     errors = []
+    errors.extend(f'official WeChat registry: {error}'
+                  for error in validate_official_wechat_registry())
     try:
         payload = json.loads(path.read_text(encoding='utf-8'))
     except (OSError, json.JSONDecodeError) as exc:
@@ -406,6 +413,9 @@ def validate(path, report_path=None):
                 errors.append(f'{label}: invalid evidence source URL')
                 continue
             actual = source_info(source['url'])
+            for issue in wechat_evidence_issues(
+                    source, selected=candidate.get('decision') == 'selected'):
+                errors.append(f'{label}: {issue}: {source["url"]}')
             if actual['blocked']:
                 errors.append(f'{label}: evidence source is not currently publishable: {source["url"]}')
             elif source.get('tier') in {'A', 'B'} and source.get('tier') != actual['tier']:
