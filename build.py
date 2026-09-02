@@ -1507,6 +1507,22 @@ fetch('heatmap-data.json',{cache:'no-store'}).then(function(r){
 </html>'''
 
 
+DAILY_SECTION_LABELS = {
+    'domestic': '🇨🇳 国内要闻',
+    'international': '🌏 国际/区域交流',
+}
+
+
+def _daily_render_section(scope):
+    """Map raw domestic/regional/international scope to a display bucket."""
+    return 'domestic' if scope == 'domestic' else 'international'
+
+
+def _daily_section_label(scope):
+    """Return the single public label used for daily report sections."""
+    return DAILY_SECTION_LABELS[_daily_render_section(scope)]
+
+
 def _classify_daily_section(heading):
     """Classify a level-2 daily heading without depending on one exact label."""
     text = re.sub(r'^[^\u4e00-\u9fffA-Za-z0-9]+', '', heading or '').strip()
@@ -1532,7 +1548,8 @@ def parse_md(filepath):
         'notes': [],  # standalone blockquotes (e.g. 编辑说明) after items
         'date_modified': None,
         'domestic_count': 0, 'international_count': 0,
-        'toc_items': []
+        'toc_items': [],
+        'ordered_items': [],
     }
 
     lines = content.split('\n')
@@ -1547,7 +1564,9 @@ def parse_md(filepath):
 
     current_section = None
     current_item = None
-    item_idx = 0
+    body_items = []
+    body_index = 0
+    toc_items = []
 
     i = 1
     while i < len(lines):
@@ -1586,24 +1605,39 @@ def parse_md(filepath):
             i += 1
             continue
 
+        # An explicit numbered TOC is the editorial order.  Older reports do
+        # not have item-level TOCs, so those continue to use body order below.
+        toc_match = re.match(r'^\s*(?:[-*]\s*)?(\d+)\.\s+\[(.+?)\]\(#(item\d+)\)', line)
+        if toc_match and current_section == 'toc':
+            toc_number, toc_title, toc_id = toc_match.groups()
+            toc_items.append({
+                'id': toc_id,
+                'number': int(toc_number),
+                'title': toc_title.strip(),
+            })
+            i += 1
+            continue
+
         # News item header: ### N. title
         item_match = re.match(r'### (\d+)\.\s*(.+)', line)
         if item_match and current_section in ('domestic', 'international'):
-            num = int(item_match.group(1))
+            body_index += 1
             title = item_match.group(2).strip()
             title = re.sub(r'\s*\{#[^}]*\}\s*$', '', title)  # strip {#anchor} from title
-            item_idx += 1
             current_item = {
-                'id': f'item{item_idx}',
-                'number': item_idx,
+                # Keep the historical parsed identity for periodic reports;
+                # the ordered daily view below supplies display numbering.
+                'id': f'item{body_index}',
+                'number': body_index,
                 'title': title,
                 'sources': [],
                 'tags': [],
                 'body': '',
-                'commentary': ''
+                'commentary': '',
+                'section': current_section,
             }
             data[current_section].append(current_item)
-            data['toc_items'].append({'id': f'item{item_idx}', 'title': title})
+            body_items.append(current_item)
             i += 1
             continue
 
@@ -1672,6 +1706,34 @@ def parse_md(filepath):
     data['domestic_count'] = len(data['domestic'])
     data['international_count'] = len(data['international'])
 
+    items_by_id = {item['id']: item for item in body_items}
+    if toc_items:
+        unused_items = list(body_items)
+        ordered_items = []
+        for row in toc_items:
+            match = next((item for item in unused_items if item['title'] == row['title']), None)
+            if match is None:
+                match = items_by_id.get(row['id'])
+            if match is not None and all(existing is not match for existing in ordered_items):
+                ordered_items.append(match)
+                unused_items = [item for item in unused_items if item is not match]
+        ordered_ids = {item['id'] for item in ordered_items}
+        ordered_items.extend(item for item in body_items if item['id'] not in ordered_ids)
+    else:
+        ordered_items = body_items
+
+    display_items = []
+    for display_number, item in enumerate(ordered_items, start=1):
+        display_item = dict(item)
+        display_item['number'] = display_number
+        display_items.append(display_item)
+
+    data['ordered_items'] = display_items
+    data['toc_items'] = [
+        {'id': item['id'], 'title': item['title']}
+        for item in display_items
+    ]
+
     return data
 
 
@@ -1702,35 +1764,48 @@ def build_report_html(data, prev_report=None, next_report=None):
         toc_html += f'      <li><a href="#{item["id"]}">{item["title"]}</a></li>\n'
     toc_html += '    </ol>\n  </details>\n</div>'
 
-    def render_items(items, section_label):
-        html = f'<h2 class="section">{section_label}</h2>\n\n'
-        for item in items:
-            tags_html = ''
-            if item.get('tags'):
-                for tag in item['tags']:
-                    cls = f'tag tag-{tag}'
-                    tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
+    ordered_items = data.get('ordered_items') or data['domestic'] + data['international']
+    section_by_id = {
+        item.get('id'): section
+        for section in ('domestic', 'international')
+        for item in data.get(section, [])
+    }
 
-            html += f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
+    def render_item(item):
+        tags_html = ''
+        if item.get('tags'):
+            for tag in item['tags']:
+                cls = f'tag tag-{tag}'
+                tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
 
-            if item['sources']:
-                src_parts = [source_link_html(s) for s in item['sources']]
-                html += '<p class="source-row">📎 ' + ' '.join(src_parts) + '</p>\n'
+        html = f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
 
-            if item.get('image'):
-                html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n'
+        if item['sources']:
+            src_parts = [source_link_html(s) for s in item['sources']]
+            html += '<p class="source-row">📎 ' + ' '.join(src_parts) + '</p>\n'
 
-            if item['body']:
-                html += f'<p>{md_inline(item["body"])}</p>\n'
+        if item.get('image'):
+            html += f'<p><img src="{item["image"]}" class="news-img" loading="lazy" alt="配图" onerror="this.style.display=\'none\'"></p>\n'
 
-            if item['commentary']:
-                html += f'<blockquote><strong>点评：</strong> {md_inline(item["commentary"])}</blockquote>\n'
+        if item['body']:
+            html += f'<p>{md_inline(item["body"])}</p>\n'
 
-            html += '<hr>\n\n'
-        return html
+        if item['commentary']:
+            html += f'<blockquote><strong>点评：</strong> {md_inline(item["commentary"])}</blockquote>\n'
 
-    domestic_html = render_items(data['domestic'], '🇨🇳 国内要闻')
-    international_html = render_items(data['international'], '🌏 国际/区域交流')
+        return html + '<hr>\n\n'
+
+    report_items_html = ''
+    last_section = None
+    for item in ordered_items:
+        raw_section = item.get('section') or section_by_id.get(item.get('id'), 'domestic')
+        section = _daily_render_section(raw_section)
+        if section != last_section:
+            if last_section is not None:
+                report_items_html += '\n'
+            report_items_html += f'<h2 class="section">{_daily_section_label(section)}</h2>\n\n'
+            last_section = section
+        report_items_html += render_item(item)
 
     trends_html = '<h2 class="section">📊 今日趋势总结</h2>\n\n<table>\n'
     for i, row in enumerate(data['trends']):
@@ -1813,8 +1888,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 {toc_html}
 
-{domestic_html}
-{international_html}
+{report_items_html}
 {trends_html}{notes_html}
 
 {quality_html}
@@ -3884,7 +3958,7 @@ def main():
     search_data = []
     for r in daily_reports:
         items = []
-        for item in r['domestic'] + r['international']:
+        for item in r.get('ordered_items') or r['domestic'] + r['international']:
             items.append({
                 'id': item.get('id', ''),
                 'number': item.get('number', ''),

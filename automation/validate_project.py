@@ -89,7 +89,7 @@ def check_daily_structure(path):
     text = path.read_text(encoding='utf-8')
     markdown_count = len(re.findall(r'^###\s+\d+\.\s+.+$', text, re.M))
     data = parse_md(path)
-    items = data['domestic'] + data['international']
+    items = data.get('ordered_items') or data['domestic'] + data['international']
     if markdown_count != len(items):
         errors.append(f'Markdown news headers {markdown_count} != parsed items {len(items)}')
     ids = [item.get('id') for item in items]
@@ -109,6 +109,11 @@ def check_daily_structure(path):
         errors.append(f'HTML news cards {len(metrics["cards"])} != parsed items {len(items)}')
     if len(metrics['toc']) != len(items):
         errors.append(f'HTML TOC items {len(metrics["toc"])} != parsed items {len(items)}')
+    expected_ids = [item.get('id') for item in items]
+    if metrics['toc'] != expected_ids:
+        errors.append(f'HTML TOC order {metrics["toc"]} != parsed order {expected_ids}')
+    if metrics['cards'] != expected_ids:
+        errors.append(f'HTML body order {metrics["cards"]} != parsed order {expected_ids}')
     if len(metrics['cards']) != len(set(metrics['cards'])):
         errors.append('HTML news card IDs must be unique')
     if metrics['meta'] != (len(items), data['domestic_count'], data['international_count']):
@@ -125,7 +130,8 @@ def daily_structure_warnings(path):
     """Report suspicious cross-item source reuse without guessing semantics."""
     data = parse_md(path)
     by_url = {}
-    for item in data['domestic'] + data['international']:
+    items = data.get('ordered_items') or data['domestic'] + data['international']
+    for item in items:
         for source in item.get('sources') or []:
             normalized = canonical_url(source.get('url', ''))
             by_url.setdefault(normalized, []).append(item.get('title', ''))

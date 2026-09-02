@@ -478,7 +478,10 @@ def validate(path, report_path=None):
     if report_path and not errors:
         from build import parse_md
         report = parse_md(report_path)
-        report_items = {item['number']: item for item in report['domestic'] + report['international']}
+        report_items = {
+            item['number']: item
+            for item in (report.get('ordered_items') or report['domestic'] + report['international'])
+        }
         selected = [c for c in candidates if c.get('decision') == 'selected']
         numbers = [c.get('dailyItemNumber') for c in selected]
         if len(numbers) != len(set(numbers)):
