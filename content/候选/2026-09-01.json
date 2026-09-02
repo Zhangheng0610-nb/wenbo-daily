@@ -9,12 +9,28 @@
   "internationalDiscoveryNote": "已执行 UNESCO、世界遗产中心、ICOM、ICCROM、ICOMOS 及专业考古与博物馆来源扫描；查询均成功，但截止时刻没有完成 A/B 证据升级且具备明确新进展的国际事件，因此不据此断言近7日没有其他国际事件。",
   "replayCutoff": "2026-09-01T07:13:00+08:00",
   "candidatePoolDefinition": "账本记录 broad discovery 后经过时间、范围、重复、基础价值和证据门槛核验的代表性候选；原始搜索结果保留在 discovery audit。",
-  "editorialRevision": {
-    "revisedAt": "2026-09-01T18:27:42+08:00",
-    "revisionType": "same_day_editorial_review",
-    "basis": "controlled replay、evidence upgrade 和 unified editorial review",
+  "editorialInputPath": "content/复核/2026-09-01.json",
+  "revision": {
+    "revisedAt": "2026-09-03T02:24:19+08:00",
+    "revisionType": "historical_editorial_correction",
     "discoveryAuditUnchanged": true,
-    "note": "本期于2026-09-01完成一次编辑复核，根据补充核验结果调整部分条目。"
+    "editorialInputPath": "content/复核/2026-09-01.json",
+    "revisionReason": "原始 discovery 当日已发现该事件；旧版 editorial priority 未正确识别博物馆标本/展品人为受损及跨媒体公共关注，导致错误低估；经编辑复核确认属于应收录的文博公共治理事件。"
+  },
+  "editorialRevision": {
+    "revisedAt": "2026-09-03T02:24:19+08:00",
+    "revisionType": "historical_editorial_correction",
+    "basis": "原始 discovery 当日已发现该事件；旧版 editorial priority 低估了博物馆标本/展品人为受损及跨媒体公共关注。",
+    "discoveryAuditUnchanged": true,
+    "editorialInputPath": "content/复核/2026-09-01.json",
+    "note": "本期于2026-09-03完成一次历史编辑修正，补入原始发现中被低估的馆藏安全事件。",
+    "previousRevision": {
+      "revisedAt": "2026-09-01T18:27:42+08:00",
+      "revisionType": "same_day_editorial_review",
+      "basis": "controlled replay、evidence upgrade 和 unified editorial review",
+      "discoveryAuditUnchanged": true,
+      "note": "本期于2026-09-01完成一次编辑复核，根据补充核验结果调整部分条目。"
+    }
   },
   "candidates": [
     {
@@ -42,7 +58,7 @@
       "discoveredVia": "cctv.com supplementary search",
       "discoveryQuery": "贺兰山 四马拉车 岩画 2026",
       "newDevelopment": true,
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "贺兰山新发现“四马拉车”岩画",
       "evidenceResolution": "direct A/B source verified",
       "cutoffEligible": true,
@@ -73,7 +89,7 @@
       "discoveredVia": "google-news-rss",
       "discoveryQuery": "河北 数字化 智能化 文物保护 after:2026-08-25 before:2026-09-02",
       "newDevelopment": true,
-      "dailyItemNumber": 2,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "河北将数字化智能化深度融入文物保护全链条",
       "evidenceResolution": "direct A/B source verified",
       "cutoffEligible": true,
@@ -104,7 +120,7 @@
       "discoveredVia": "google-news-rss",
       "discoveryQuery": "湖北省博物馆 博士后 科研工作站 after:2026-08-25 before:2026-09-02",
       "newDevelopment": true,
-      "dailyItemNumber": 5,
+      "dailyItemNumber": 6,
       "dailyItemTitle": "湖北省博物馆获批设立国家博士后科研工作站",
       "evidenceResolution": "direct A/B source verified",
       "cutoffEligible": true,
@@ -244,7 +260,7 @@
       "editorialPriorityScore": 82,
       "editorialPriorityLabel": "high",
       "editorialReasons": ["substantive_archaeological_result", "historical_site_evidence", "regional_historical_significance"],
-      "dailyItemNumber": 3,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "宁古塔将军驻地旧城遗址考古发掘成果公布",
       "evidenceResolution": "direct A source verified during controlled replay",
       "cutoffEligible": true,
@@ -326,11 +342,127 @@
       "discoveredVia": "google-news-rss",
       "discoveryQuery": "广州 建城 学术研讨会 after:2026-08-25 before:2026-09-02",
       "newDevelopment": "needs_verification"
+    },
+    {
+      "candidateId": "daily-20260901-011",
+      "eventId": "event-20260901-national-animal-museum-specimen-damage",
+      "title": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+      "publishedDate": "2026-08-30",
+      "discoveredAt": "2026-09-01T07:19:42+08:00",
+      "discoverySource": "Google News RSS broad discovery",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5oNEEtTU9MZnVuaFhKZFN5TEU1am1mTW9lUk5HSkNETS1MYWl0R1Fzbmp6Ui1SX3MzY3EycU5Ob0trVXdqbE5YWlZvMWdSZw?oc=5",
+      "publisher": "川观新闻 / 澎湃新闻（发现线索）",
+      "institution": "国家动物博物馆",
+      "reportCount": 2,
+      "discoveryReports": [
+        {
+          "title": "“两孩子在博物馆不断用手抓、用脚踢标本……”，标本不会抗议，但法律的“牙齿”可以替它说话 - 川观新闻",
+          "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5oNEEtTU9MZnVuaFhKZFN5TEU1am1mTW9lUk5HSkNETS1MYWl0R1Fzbmp6Ui1SX3MzY3EycU5Ob0trVXdqbE5YWlZvMWdSZw?oc=5",
+          "publishedDate": "2026-08-30",
+          "sourceDomain": "川观新闻",
+          "discoveredAt": "2026-09-01T07:19:42+08:00"
+        },
+        {
+          "title": "家长拒不承认破坏标本，听说可能有防腐液残留却赶紧带孩子洗手：被“玩坏”的珍贵蛇标本，背后是一段以切指为代价的科研史 - thepaper.cn",
+          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1TaFFuSVdaV3puQ0lXS3A2STE0UXJ2SzlOV29YQi0xVzVWMURpUVpjTGNmbWJwVnNsVEM0ekxrclVzSV96Nkc2aGZQQ3hRZXVacDZ6SjNhNWphLXN5WEE?oc=5",
+          "publishedDate": "2026-08-30",
+          "sourceDomain": "thepaper.cn",
+          "discoveredAt": "2026-09-01T07:19:42+08:00"
+        }
+      ],
+      "evidenceSources": [
+        {
+          "name": "人民网：国家动物博物馆就破坏标本事件发布回应",
+          "url": "https://sc.people.com.cn/n2/2026/0831/c345167-41682318.html",
+          "tier": "A",
+          "role": "cross-check"
+        },
+        {
+          "name": "央视网：国家动物博物馆回应标本受损事件",
+          "url": "https://people.cctv.com/2026/09/01/ARTIWEQZUzIOJKM8JAROUVag260901.shtml",
+          "tier": "A",
+          "role": "cross-check"
+        },
+        {
+          "name": "央广网：国家动物博物馆回应游客破坏标本",
+          "url": "https://news.cnr.cn/native/gd/20260831/t20260831_527799708.shtml",
+          "tier": "A",
+          "role": "cross-check"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": ["博物馆", "藏品安全", "公共文化"],
+      "tags": ["北京", "国家动物博物馆", "标本保护", "参观秩序"],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "historical_editorial_correction_after_priority_review",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "原始 discovery 当日已发现该事件；本次历史编辑修正补入。仅采用人民网、央视网和央广网直接可读的 A 级报道，不写入未经确认的赔偿、处罚或法律定性。",
+      "discoveredVia": "google-news-rss (original production discovery)",
+      "discoveryQuery": "博物馆 管理 政策 文物局 after:2026-08-26 before:2026-09-02",
+      "newDevelopment": false,
+      "editorialPriorityScore": 87,
+      "editorialPriorityLabel": "high",
+      "editorialReasons": ["museum_collection_or_public_incident", "sustained_public_attention", "primary_freshness"],
+      "museumCollectionOrPublicIncident": true,
+      "independentCoverageCount": 5,
+      "publicSalience": {
+        "level": "sustained_public_attention",
+        "independentCoverageCount": 5,
+        "publisherDiversity": 5,
+        "sourceTypeDiversity": 3,
+        "coverageDates": ["2026-08-30", "2026-08-31", "2026-09-01"],
+        "sourceTypes": ["central_media", "local_mainstream", "professional_media"],
+        "reason": "independent coverage across central, local mainstream and professional media over multiple dates"
+      },
+      "evidenceTierAtDiscovery": "C",
+      "evidenceTierAfterUpgrade": "A",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolution": "three direct A sources verified during historical editorial correction",
+      "evidenceResolutionAttempts": [
+        {
+          "method": "existing_report",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiTkFVX3lxTEU5NEEtTU9MZnVuaFhKZFN5TEU1am1mTW9lUk5HSkNETS1MYWl0R1Fzbmp6Ui1SX3MzY3EycU5Ob0trVXdqbE5YWlZvMWdSZw?oc=5",
+          "resolvedUrl": "https://sc.people.com.cn/n2/2026/0831/c345167-41682318.html",
+          "domain": "sc.people.com.cn",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "evidenceTier": "A"
+        },
+        {
+          "method": "existing_report",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1TaFFuSVdaV3puQ0lXS3A2STE0UXJ2SzlOV29YQi0xVzVWMURpUVpjTGNmbWJwVnNsVEM0ekxrclVzSV96Nkc2aGZQQ3hRZXVacDZ6SjNhNWphLXN5WEE?oc=5",
+          "resolvedUrl": "https://people.cctv.com/2026/09/01/ARTIWEQZUzIOJKM8JAROUVag260901.shtml",
+          "domain": "people.cctv.com",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "evidenceTier": "A"
+        },
+        {
+          "method": "official_search",
+          "inputUrl": "site:news.cnr.cn 国家动物博物馆 标本",
+          "resolvedUrl": "https://news.cnr.cn/native/gd/20260831/t20260831_527799708.shtml",
+          "domain": "news.cnr.cn",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "evidenceTier": "A"
+        }
+      ],
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+      "cutoffEligible": true,
+      "cutoffBasis": "original discovery timestamp is before the 2026-09-01 correction review",
+      "revisionType": "historical_editorial_correction"
     }
   ],
   "summary": {
-    "discovered": 10,
-    "selected": 5,
+    "discovered": 11,
+    "selected": 6,
     "rejected": 4,
     "deferred": 0,
     "needsVerification": 1

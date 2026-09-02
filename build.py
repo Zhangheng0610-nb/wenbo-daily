@@ -1530,6 +1530,7 @@ def parse_md(filepath):
         'title': '', 'date': '', 'weekday': '',
         'domestic': [], 'international': [], 'trends': [],
         'notes': [],  # standalone blockquotes (e.g. 编辑说明) after items
+        'date_modified': None,
         'domestic_count': 0, 'international_count': 0,
         'toc_items': []
     }
@@ -1551,6 +1552,16 @@ def parse_md(filepath):
     i = 1
     while i < len(lines):
         line = lines[i]
+
+        # Optional machine-readable modification time for a historical
+        # editorial correction.  It is deliberately kept out of the visible
+        # report body while allowing structured metadata to retain the
+        # original publication time.
+        date_modified_match = re.match(r'<!--\s*dateModified:\s*(\S+)\s*-->', line.strip())
+        if date_modified_match:
+            data['date_modified'] = date_modified_match.group(1)
+            i += 1
+            continue
 
         # Section headers.  A new level-2 section always ends the previous
         # item; otherwise a renamed international section can swallow the
@@ -1671,6 +1682,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     """
     total = data['domestic_count'] + data['international_count']
     report_source_stats = source_stats([data])
+    date_modified = data.get('date_modified') or f"{data['date']}T07:13:00+08:00"
     is_legacy_report = bool(data.get('date')) and data['date'] < '2026-08-28'
     if report_source_stats['C']:
         quality_html = f'''<details class="quality-banner legacy">
@@ -1776,7 +1788,7 @@ def build_report_html(data, prev_report=None, next_report=None):
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | {data['date']}",
   "datePublished": "{data['date']}T07:13:00+08:00",
-  "dateModified": "{data['date']}T07:13:00+08:00",
+  "dateModified": "{date_modified}",
   "description": "{data['date']} 每日文博资讯，共 {total} 条",
   "url": "https://zhangheng666.top/reports/{data['date']}.html",
   "publisher": {{

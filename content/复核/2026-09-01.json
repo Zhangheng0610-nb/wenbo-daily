@@ -1,0 +1,149 @@
+{
+  "schema": "daily-editorial-replay-v1",
+  "schemaVersion": "1.0",
+  "date": "2026-09-01",
+  "runType": "replay",
+  "replayedAt": "2026-09-03T02:24:19+08:00",
+  "replayCutoff": "2026-09-01T07:13:00+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-01.json",
+  "baseDiscoveryAuditSha256": "F45E8FB5A65634C8D5AD1E218A5E5AC19135365EA069FF9B50440F98675ED3AA",
+  "revisionType": "historical_editorial_correction",
+  "reason": "原始 discovery 当日已发现该事件；旧版 editorial priority 未正确识别博物馆标本/展品人为受损及跨媒体公共关注，导致错误低估；经编辑复核确认属于应收录的文博公共治理事件。",
+  "runtimeEnrichment": false,
+  "discoveryAuditUnchanged": true,
+  "note": "Post-hoc historical editorial correction based on the immutable 2026-09-01 discovery snapshot; this artifact is not the original morning production run.",
+  "queryAudits": [
+    {
+      "queryFamily": "historical-editorial-correction-evidence",
+      "actualQuery": "原始 discovery reports + 已核验 A 级报道：国家动物博物馆 标本 受损",
+      "executedAt": "2026-09-03T02:24:19+08:00",
+      "success": true,
+      "returnedResultCount": 3,
+      "acceptedRawCount": 3,
+      "resultNote": "仅使用可直接访问的人民网、央视网、央广网原文；Google News RSS 仍只作为发现线索。"
+    }
+  ],
+  "sourceOfInput": {
+    "discoveryRecordIndexes": [22, 225],
+    "discoveryEvidenceStatus": "original snapshot contains two same-event C-level discovery reports",
+    "correctionEvidenceStatus": "three independent direct A-level media reports verified after the original run"
+  },
+  "resolverDiscoveredCandidates": [],
+  "evidenceQualification": {
+    "status": "completed",
+    "attemptedEvents": 1,
+    "qualifiedEvents": 1,
+    "failedEvents": 0,
+    "ambiguousEvents": 0,
+    "method": "reviewed the immutable discovery reports and reconciled the event against three direct A-level articles",
+    "qualifiedEventIds": ["event-20260901-national-animal-museum-specimen-damage"]
+  },
+  "finalEditorialPool": {
+    "status": "completed",
+    "rawQualifiedEvents": 1,
+    "canonicalUniqueEvents": 1,
+    "historicalDuplicates": 0,
+    "editoriallyReviewed": 1,
+    "events": [
+      {
+        "eventId": "event-20260901-national-animal-museum-specimen-damage",
+        "title": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+        "representativeTitle": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+        "publishedDate": "2026-08-30",
+        "scope": "domestic",
+        "freshnessTier": "primary_0_48h",
+        "reportCount": 2,
+        "sourceDomains": ["川观新闻", "thepaper.cn"],
+        "publisherDomains": ["sc.people.com.cn", "people.cctv.com", "news.cnr.cn"],
+        "discoveryReports": [
+          {
+            "title": "“两孩子在博物馆不断用手抓、用脚踢标本……”，标本不会抗议，但法律的“牙齿”可以替它说话 - 川观新闻",
+            "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5oNEEtTU9MZnVuaFhKZFN5TEU1am1mTW9lUk5HSkNETS1MYWl0R1Fzbmp6Ui1SX3MzY3EycU5Ob0trVXdqbE5YWlZvMWdSZw?oc=5",
+            "publishedDate": "2026-08-30",
+            "sourceDomain": "川观新闻",
+            "discoveredAt": "2026-09-01T07:19:42+08:00"
+          },
+          {
+            "title": "家长拒不承认破坏标本，听说可能有防腐液残留却赶紧带孩子洗手：被“玩坏”的珍贵蛇标本，背后是一段以切指为代价的科研史 - thepaper.cn",
+            "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1TaFFuSVdaV3puQ0lXS3A2STE0UXJ2SzlOV29YQi0xVzVWMURpUVpjTGNmbWJwVnNsVEM0ekxrclVzSV96Nkc2aGZQQ3hRZXVacDZ6SjNhNWphLXN5WEE?oc=5",
+            "publishedDate": "2026-08-30",
+            "sourceDomain": "thepaper.cn",
+            "discoveredAt": "2026-09-01T07:19:42+08:00"
+          }
+        ],
+        "newDevelopment": false,
+        "museumCollectionOrPublicIncident": true,
+        "independentCoverageCount": 5,
+        "publicSalience": {
+          "level": "sustained_public_attention",
+          "independentCoverageCount": 5,
+          "publisherDiversity": 5,
+          "sourceTypeDiversity": 3,
+          "coverageDates": ["2026-08-30", "2026-08-31", "2026-09-01"],
+          "sourceTypes": ["central_media", "local_mainstream", "professional_media"],
+          "reason": "independent coverage across central, local mainstream and professional media over multiple dates"
+        },
+        "editorialPriorityScore": 87,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": ["museum_collection_or_public_incident", "sustained_public_attention", "primary_freshness"],
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "completed",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceSources": [
+          {
+            "name": "人民网：国家动物博物馆就破坏标本事件发布回应",
+            "url": "https://sc.people.com.cn/n2/2026/0831/c345167-41682318.html",
+            "tier": "A",
+            "role": "cross-check"
+          },
+          {
+            "name": "央视网：国家动物博物馆回应标本受损事件",
+            "url": "https://people.cctv.com/2026/09/01/ARTIWEQZUzIOJKM8JAROUVag260901.shtml",
+            "tier": "A",
+            "role": "cross-check"
+          },
+          {
+            "name": "央广网：国家动物博物馆回应游客破坏标本",
+            "url": "https://news.cnr.cn/native/gd/20260831/t20260831_527799708.shtml",
+            "tier": "A",
+            "role": "cross-check"
+          }
+        ],
+        "evidenceResolution": "three direct A sources verified during historical editorial correction",
+        "evidenceResolutionAttempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5oNEEtTU9MZnVuaFhKZFN5TEU1am1mTW9lUk5HSkNETS1MYWl0R1Fzbmp6Ui1SX3MzY3EycU5Ob0trVXdqbE5YWlZvMWdSZw?oc=5",
+            "resolvedUrl": "https://sc.people.com.cn/n2/2026/0831/c345167-41682318.html",
+            "domain": "sc.people.com.cn",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "evidenceTier": "A"
+          },
+          {
+            "method": "existing_report",
+            "inputUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1TaFFuSVdaV3puQ0lXS3A2STE0UXJ2SzlOV29YQi0xVzVWMURpUVpjTGNmbWJwVnNsVEM0ekxrclVzSV96Nkc2aGZQQ3hRZXVacDZ6SjNhNWphLXN5WEE?oc=5",
+            "resolvedUrl": "https://people.cctv.com/2026/09/01/ARTIWEQZUzIOJKM8JAROUVag260901.shtml",
+            "domain": "people.cctv.com",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "evidenceTier": "A"
+          },
+          {
+            "method": "official_search",
+            "inputUrl": "site:news.cnr.cn 国家动物博物馆 标本",
+            "resolvedUrl": "https://news.cnr.cn/native/gd/20260831/t20260831_527799708.shtml",
+            "domain": "news.cnr.cn",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "evidenceTier": "A"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "原始 discovery 已捕获但旧模型低估；机构、展陈对象和人为损害共同构成馆藏安全与公共治理事件，且有跨媒体实质跟进。"
+      }
+    ]
+  }
+}
