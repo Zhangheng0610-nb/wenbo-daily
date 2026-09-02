@@ -316,9 +316,34 @@ function sourceList(sources) {
 function itemText(item) {
   return [item.title, item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
 }
-function matches(text, words) {
+function queryGroups(rawQuery) {
+  return String(rawQuery || '').trim().toLowerCase().split(/\s+/).filter(Boolean).map(function(chunk) {
+    const chars = Array.from(chunk);
+    const cjkOnly = chars.length > 0 && chars.every(function(ch) { return /[\u4e00-\u9fff]/.test(ch); });
+    const grams = cjkOnly && chars.length > 1 ? chars.slice(0, -1).map(function(_, index) {
+      return chars.slice(index, index + 2).join('');
+    }) : [];
+    return {raw: chunk, grams: grams};
+  });
+}
+function groupMatches(lower, group) {
+  if (lower.includes(group.raw)) return true;
+  if (!group.grams.length) return false;
+  const hits = group.grams.filter(function(gram) { return lower.includes(gram); }).length;
+  const required = group.grams.length <= 2 ? group.grams.length : Math.ceil(group.grams.length * 0.4);
+  return hits >= required;
+}
+function matches(text, groups) {
   const lower = String(text || '').toLowerCase();
-  return words.every(function(word) { return lower.includes(word); });
+  return groups.every(function(group) { return groupMatches(lower, group); });
+}
+function matchScore(text, groups) {
+  const lower = String(text || '').toLowerCase();
+  return groups.reduce(function(total, group) {
+    if (lower.includes(group.raw)) return total + 3;
+    if (!group.grams.length) return total;
+    return total + group.grams.filter(function(gram) { return lower.includes(gram); }).length;
+  }, 0);
 }
 function snippet(text, words) {
   const clean = cleanText(text);
@@ -356,7 +381,8 @@ function renderSearch(data, rawQuery) {
     results.innerHTML = '<div class="search-empty">搜索日报、周报、月报及招聘档案中的完整关键词。</div>';
     return;
   }
-  const words = query.split(/\s+/).filter(Boolean);
+  const groups = queryGroups(query);
+  const words = groups.reduce(function(all, group) { return all.concat([group.raw]).concat(group.grams); }, []);
   const hits = [];
   const seen = new Set();
   const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
@@ -365,20 +391,22 @@ function renderSearch(data, rawQuery) {
     if (items.length) {
       items.forEach(function(item) {
         if (!matches(itemText(item), words)) return;
-        const key = compact(item.title) || (record.path + (item.id || ''));
+        const key = record.path + '#' + (item.id || compact(item.title));
         if (seen.has(key)) return;
         seen.add(key);
-        hits.push({record: record, item: item});
+        const exactTitle = compact(item.title).includes(compact(query));
+        hits.push({record: record, item: item, score: (exactTitle ? 1000 : 0) + matchScore(itemText(item), groups)});
       });
-    } else if (matches([record.title, record.text].join(' '), words)) {
+    } else if (matches([record.title, record.text].join(' '), groups)) {
       const key = 'page:' + record.path;
       if (!seen.has(key)) {
         seen.add(key);
-        hits.push({record: record, item: null});
+        hits.push({record: record, item: null, score: matchScore([record.title, record.text].join(' '), groups)});
       }
     }
   });
-  summary.textContent = '找到 ' + hits.length + ' 条匹配新闻（已合并重复标题，优先显示最新记录）';
+  hits.sort(function(a, b) { return b.score - a.score || String(b.record.date || '').localeCompare(String(a.record.date || '')); });
+  summary.textContent = '找到 ' + hits.length + ' 条匹配新闻（按匹配度排序，保留不同报告记录）';
   results.innerHTML = hits.length ? hits.map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配新闻。可以换一个更具体或更常见的关键词。</div>';
 }
 

@@ -16,7 +16,7 @@
 
 ## 内容与信源
 
-搜索引擎、行业雷达和未核验公众号只用于发现候选，不是信源本身。日报候选写入 `content/候选/YYYY-MM-DD.json`；最终链接必须来自可核验的 A/B 级证据。`content/监测/` 仍只服务地图固定六源，不能塞入日报候选。
+搜索引擎、行业雷达和未核验公众号只用于发现候选，不是信源本身。日报候选写入 `content/候选/YYYY-MM-DD.json`；最终链接必须来自可核验的 A/B 级证据，或来自通过文章级核验的 `provisional_B`。`provisional_B` 只对当前文章生效，不会把未登记域名永久升级；高风险事实仍需 A 级或两个相互独立的 B 级来源（或 B + 官方确认）。`content/监测/` 仍只服务地图固定六源，不能塞入日报候选。
 
 日报链路明确分为两层：`DISCOVERY SOURCE` 用于扩大召回，不代表最终证据资格；`EVIDENCE SOURCE` 支持事实并展示给读者。每个候选都要在候选账本中记录发现渠道、证据来源、去重结果和最终决定。
 
@@ -126,15 +126,15 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 1. 先确认仓库根目录：它应同时包含 `build.py`、`content/`、`reports/` 和 `automation/`。
 2. 读取当天已有监测文件和日报、近 30 天去重索引及必要的上一期栏目。
 3. 先完成固定池巡检。正式每日任务运行 `python automation/backfill_monitoring.py --mode operational --end YYYY-MM-DD --days 1 --write`；历史回溯才使用默认的 `--mode archive-backfill`。再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
-4. 再做日报搜索：先按发现层广泛建立候选账本，再回溯 A/B 级证据，最后按专业价值精选。不得先选日报再反填监测库。
+4. 再做日报搜索：先按发现层广泛建立候选账本，再按事件重要性优先回溯 A/B 级证据；对未登记但可直接访问、身份和正文可核验的低风险文章，可记录为文章级 `provisional_B`，最后按专业价值精选。不得先选日报再反填监测库。
    现在必须执行独立的 broad discovery 审计：
 
    ```text
    python automation/daily_discovery.py --date YYYY-MM-DD --window-days 7 --write
    ```
 
-   该命令只写 `content/发现/YYYY-MM-DD.json`，不写入 `content/监测/`，也不改变地图数据。它主动扫描国家文物局文物新闻/政策入口、新华网、中国新闻网、UNESCO 和 Archaeology Magazine 等可重复入口，并默认真实执行 `daily_discovery.py` 中的国内/国际 query family（Bing News RSS + Google News RSS）；每条查询的 `actualQuery`、`executedAt`、成功/失败、返回数和窗口内接纳数都会写入同日 discovery audit。`--no-query-search` 仅供测试使用。发现来源只负责扩大召回，证据来源必须另行核验。
-   候选账本必须引用 `discoveryAuditPath`。从 2026-09-02 起，最终编辑唯一输入是该审计中的 `candidateEvaluation.finalEditorialPool`：先完成其中所有事件的最终编辑复核，再生成正式候选账本；不得另以旧候选账本或单独 evidence audit 作为平行选择集合。每条候选保留 `eventId`、`discoveredVia`、`discoveryQuery`、`duplicateStatus`、`duplicateOf`、`duplicateReason` 和 `newDevelopment`（未知时使用 `possible_duplicate` / `needs_verification`，不得静默删除），并写入 `finalEditorialDecision` / `finalEditorialReason`。候选评估先按独立的 `editorialPriorityScore`、`editorialPriorityLabel` 和 `editorialReasons` 排序，再做证据升级；正式候选账本沿用这些编辑优先级字段，来源 A/B/C 只说明证据可靠性，不代表新闻价值。发现审计中的 `highPriorityEvidenceQueue` 是下一步优先核验队列，`needs_verification` 表示证据尚未升级完成，不表示新闻价值低。不得因已经选够若干条就停止处理高优先级队列，也不得设置固定日报条数配额。
+   该命令只写 `content/发现/YYYY-MM-DD.json`，不写入 `content/监测/`，也不改变地图数据。它主动扫描国家文物局文物新闻/政策入口、新华网、中国新闻网、文化和旅游部直属中国国家博物馆栏目、登记的重点博物馆官网、UNESCO 和 Archaeology Magazine 等可重复入口，并默认真实执行 `daily_discovery.py` 中的国内/国际 query family（Bing News RSS + Google News RSS）；query family 包括政策治理、考古遗产、博物馆公共文化、数字遗产、文博专业人才、博物馆运营、革命/近现代遗产、地方文物治理和国际馆际借展等方向。每条查询的 `actualQuery`、`executedAt`、成功/失败、返回数和窗口内接纳数都会写入同日 discovery audit，并在 `queryFamilySummary` 中按 family 对账边际事件贡献、重复和噪声。`--no-query-search` 仅供测试使用。发现来源只负责扩大召回，证据来源必须另行核验。
+    候选账本必须引用 `discoveryAuditPath`。从 2026-09-02 起，最终编辑唯一输入是该审计中的 `candidateEvaluation.finalEditorialPool`：先完成其中所有事件的最终编辑复核，再生成正式候选账本；不得另以旧候选账本或单独 evidence audit 作为平行选择集合。每条候选保留 `eventId`、`discoveredVia`、`discoveryQuery`、`duplicateStatus`、`duplicateOf`、`duplicateReason` 和 `newDevelopment`（未知时使用 `possible_duplicate` / `needs_verification`，不得静默删除），并写入 `finalEditorialDecision` / `finalEditorialReason`。候选评估先按独立的 `editorialPriorityScore`、`editorialPriorityLabel` 和 `editorialReasons` 排序，再做证据升级；正式候选账本沿用这些编辑优先级字段，来源 A/B/C 只说明证据可靠性，不代表新闻价值。国家级人文与文博外交只有在高层级国家代表、明确博物馆/遗产对象和实质文化交流内容同时成立时，才增加 `high_level_cultural_diplomacy` 优先级信号；普通地方领导参观或无文博实质的礼宾活动不得因此升级。发现审计中的 `highPriorityEvidenceQueue` 是下一步优先核验队列，`needs_verification` 表示证据尚未升级完成，不表示新闻价值低。不得因已经选够若干条就停止处理高优先级队列，也不得设置固定日报条数配额。
 5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。去重顺序是：广泛发现 → 当天事件聚类 → 近 7—14 天历史事件核对 → evidence 核验 → editorial selection。当天同一事件只保留 canonical event；历史转载记录保留在 discovery audit 中并写明 `duplicateOf`；有明确新增事实的记录标记 `new_development`，不能因标题相似被误杀。
 6. 按日期判断是否执行招聘、周报、月报；不要把所有栏目都重复搜一遍。
 7. 正式每日任务先运行 `python digital_trend.py --incremental`，扫描国家文物局「文物新闻」近期分页，更新 `digital-data.json`，并写入 `content/数字趋势监测/YYYY-MM-DD.json`；确认扫描成功后再运行 `python build.py` 重建静态页面。普通 `python build.py` 只做页面构建（内部使用 `--build-only`），不联网采集、不更新数字趋势数据或覆盖记录。

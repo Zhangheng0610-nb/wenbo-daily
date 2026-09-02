@@ -136,16 +136,36 @@ def daily_structure_warnings(path):
     ]
 
 
+def _provisional_evidence_urls_for_report(path):
+    """Return article-level provisional evidence explicitly approved by its ledger."""
+    try:
+        report_date = date.fromisoformat(path.stem)
+    except ValueError:
+        return set()
+    ledger_path = CONTENT / '候选' / f'{report_date}.json'
+    try:
+        payload = json.loads(ledger_path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    urls = set()
+    for candidate in payload.get('candidates') or []:
+        for source in candidate.get('evidenceSources') or []:
+            if source.get('tier') == 'provisional_B' and source.get('articleVerified'):
+                urls.add(canonical_url(source.get('url', '')))
+    return {url for url in urls if url}
+
+
 def check_daily(path, strict=True):
     errors = []
     if not path.exists() or path.stat().st_size == 0:
         return [f'missing or empty: {path}']
     text = path.read_text(encoding='utf-8')
     urls = URL_RE.findall(text)
+    provisional_urls = _provisional_evidence_urls_for_report(path)
     seen = set()
     for url in urls:
         info = source_info(url)
-        if info['tier'] == 'C':
+        if info['tier'] == 'C' and canonical_url(url) not in provisional_urls:
             message = f"{'unapproved source' if not info['blocked'] else 'banned source'}: {url}"
             if strict:
                 errors.append(message)

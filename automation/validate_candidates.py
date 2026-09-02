@@ -11,6 +11,7 @@ LEDGER_DIR = ROOT / 'content' / '候选'
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from automation.governance import canonical_url, source_info
+from automation.daily_discovery import evidence_claim_risk
 REQUIRED = {
     'candidateId', 'title', 'publishedDate', 'discoveredAt',
     'discoverySource', 'discoverySourceType', 'discoveryUrl',
@@ -286,18 +287,34 @@ def validate(path, report_path=None):
                 errors.append(f'{label}: finalEditorialDecision required from 2026-09-02 onward')
             if not candidate.get('finalEditorialReason'):
                 errors.append(f'{label}: finalEditorialReason required from 2026-09-02 onward')
+        evidence_a = False
+        evidence_b_hosts = set()
         for source in evidence:
             if not isinstance(source, dict) or not valid_url(source.get('url')):
                 errors.append(f'{label}: invalid evidence source URL')
                 continue
             actual = source_info(source['url'])
-            if actual['blocked'] or actual['tier'] not in {'A', 'B'}:
+            if actual['blocked']:
                 errors.append(f'{label}: evidence source is not currently publishable: {source["url"]}')
-            elif source.get('tier') != actual['tier']:
+            elif source.get('tier') in {'A', 'B'} and source.get('tier') != actual['tier']:
                 errors.append(
                     f'{label}: evidence tier mismatch for {source["url"]}: '
                     f'ledger={source.get("tier")!r}, governance={actual["tier"]!r}'
                 )
+            elif source.get('tier') == 'provisional_B':
+                if actual['tier'] != 'C' or not source.get('articleVerified'):
+                    errors.append(f'{label}: provisional_B evidence must retain article-level verification: {source["url"]}')
+                if evidence_claim_risk(candidate) == 'high':
+                    errors.append(f'{label}: high-risk claim cannot rely on a single provisional_B source: {source["url"]}')
+            elif source.get('tier') not in {'A', 'B'}:
+                errors.append(f'{label}: evidence source has invalid publishable tier: {source["url"]}')
+            if actual['tier'] == 'A' and not actual['blocked']:
+                evidence_a = True
+            elif source.get('tier') == 'B' and actual['tier'] == 'B' and not actual['blocked']:
+                evidence_b_hosts.add(actual.get('host', ''))
+        if candidate.get('decision') == 'selected' and evidence_claim_risk(candidate) == 'high':
+            if not evidence_a and len({host for host in evidence_b_hosts if host}) < 2:
+                errors.append(f'{label}: high-risk selected claim needs A evidence or two independent B domains')
     summary = payload.get('summary') or {}
     expected = {
         'discovered': len(candidates),

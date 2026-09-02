@@ -10,10 +10,16 @@
   "replayCutoff": "2026-09-02T07:13:00+08:00",
   "candidatePoolDefinition": "唯一编辑输入为同日 broad discovery 审计的 finalEditorialPool；本账本逐条记录其全部 canonical event 的最终编辑复核、证据来源、去重状态和决定。",
   "editorialReview": {
-    "reviewedAt": "2026-09-02T08:02:00+08:00",
+    "reviewedAt": "2026-09-02T13:53:08+08:00",
     "reviewedEvents": 6,
-    "selectedEvents": 3,
-    "note": "已完成 finalEditorialPool 六个事件的逐条编辑复核；保留三条具有具体考古、展陈或行业机制增量的事件，其余按展讯汇编、一般性会议或同日重复处理。"
+    "selectedEvents": 2,
+    "note": "受控复核后完成 finalEditorialPool 六个事件的重新编辑判断；长春会议与 8 月 29 日正式日报重复，不再作为 9 月 2 日新事件发布。"
+  },
+  "revision": {
+    "revisedAt": "2026-09-02T13:53:08+08:00",
+    "revisionType": "same_day_editorial_correction",
+    "discoveryAuditUnchanged": true,
+    "revisionReason": "historical canonical dedup correction after controlled evidence replay"
   },
   "candidates": [
     {
@@ -90,18 +96,21 @@
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "selected",
-      "decisionReason": "selected_institutional_update_for_international_archaeology_management",
-      "selectedForDaily": true,
-      "dedupStatus": "unique_event",
+      "decision": "rejected",
+      "decisionReason": "historical_duplicate_published_2026_08_29_same_event",
+      "selectedForDaily": false,
+      "dedupStatus": "historical_duplicate",
+      "duplicateOf": "published-99de85396d89",
+      "duplicateOfTitle": "中外联合考古工作会议在长春召开",
+      "historicalDuplicateOfDate": "2026-08-29",
+      "historicalDuplicateOfReport": "content/日报/2026-08-29.md#item3",
+      "duplicateReason": "8月29日正式日报已发布同一长春会议事件；9月2日仅更换为国家文物局原始链接，不构成实质新进展。",
       "notes": "固定池官方原文同时说明联合考古成果汇报和制度化、规范化管理要求；保留为行业机制信息，不把会议口号扩写为已完成政策。",
       "discoveredVia": "ncha-wenwu-news",
       "discoveryQuery": "国家文物局 中外联合考古工作会议 长春 2026-08-27",
       "newDevelopment": false,
-      "finalEditorialDecision": "selected",
-      "finalEditorialReason": "会议提出赴外政策、经费、队伍管理和成果传播的具体机制安排，具有行业治理增量。",
-      "dailyItemNumber": 3,
-      "dailyItemTitle": "中外联合考古工作会议在长春召开"
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "该事件已于2026-08-29在正式日报发布；本次发现只是同一会议的另一来源，不重新占用日报席位。"
     },
     {
       "candidateId": "daily-20260902-004",
@@ -189,8 +198,8 @@
   ],
   "summary": {
     "discovered": 6,
-    "selected": 3,
-    "rejected": 3,
+    "selected": 2,
+    "rejected": 4,
     "deferred": 0,
     "needsVerification": 0
   }
