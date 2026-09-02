@@ -1,5 +1,6 @@
 """Validate the auditable daily editorial candidate ledger."""
 import argparse
+import hashlib
 import json
 import sys
 from datetime import date
@@ -26,6 +27,115 @@ DECISIONS = {'selected', 'rejected', 'deferred', 'needs_verification'}
 DUPLICATE_STATUSES = {'unique_event', 'same_day_duplicate', 'historical_duplicate', 'new_development', 'possible_duplicate', 'unique_opportunity', 'unresolved', 'not_selected'}
 DISCOVERY_AUDIT_REQUIRED_FROM = date(2026, 8, 31)
 FINAL_EDITORIAL_POOL_REQUIRED_FROM = date(2026, 9, 2)
+
+
+def _resolved_path(root, reference):
+    if not isinstance(reference, str) or not reference:
+        return None
+    path = (root / reference).resolve()
+    if root not in path.parents or not path.exists():
+        return None
+    return path
+
+
+def _sha256(path):
+    digest = hashlib.sha256()
+    with path.open('rb') as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _final_pool_ids(replay):
+    pool = replay.get('finalEditorialPool') if isinstance(replay, dict) else None
+    rows = pool.get('events') if isinstance(pool, dict) else None
+    if not isinstance(rows, list):
+        return None
+    return {row.get('eventId') for row in rows if isinstance(row, dict) and row.get('eventId')}
+
+
+def validate_editorial_input(ledger_path, payload, root=None):
+    """Validate the single editorial input selected for this ledger.
+
+    The immutable morning discovery audit remains independently validated by
+    ``validate_discovery_audit``.  A same-day revision may point the editor at
+    one explicit replay artifact, but it may not silently merge two pools.
+    """
+    root = root or ROOT
+    errors = []
+    discovery_ref = payload.get('discoveryAuditPath')
+    editorial_ref = payload.get('editorialInputPath') or discovery_ref
+    if not editorial_ref:
+        return errors, None
+    revision = payload.get('revision') or {}
+    if revision.get('revisionType') == 'same_day_editorial_revision' and not payload.get('editorialInputPath'):
+        errors.append('same_day_editorial_revision needs an explicit editorialInputPath')
+    if editorial_ref == discovery_ref:
+        return errors, None
+    if revision.get('revisionType') != 'same_day_editorial_revision':
+        errors.append('editorialInputPath may differ from discoveryAuditPath only for same_day_editorial_revision')
+        return errors, None
+    if revision.get('discoveryAuditUnchanged') is not True:
+        errors.append('same-day revision must declare discoveryAuditUnchanged=true')
+    if revision.get('editorialInputPath') not in (None, editorial_ref):
+        errors.append('revision editorialInputPath disagrees with ledger')
+    replay_path = _resolved_path(root, editorial_ref)
+    if replay_path is None:
+        errors.append(f'editorial input missing: {editorial_ref}')
+        return errors, None
+    try:
+        replay = json.loads(replay_path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f'invalid editorial replay: {exc}')
+        return errors, None
+    if replay.get('schema') != 'daily-editorial-replay-v1':
+        errors.append('editorial replay schema must be daily-editorial-replay-v1')
+    if replay.get('date') != payload.get('date'):
+        errors.append('editorial replay date does not match ledger')
+    if replay.get('baseDiscoveryAuditPath') != discovery_ref:
+        errors.append('editorial replay baseDiscoveryAuditPath does not match ledger discoveryAuditPath')
+    if replay.get('discoveryAuditUnchanged') is not True:
+        errors.append('editorial replay must declare discoveryAuditUnchanged=true')
+    base_path = _resolved_path(root, discovery_ref)
+    if base_path is None:
+        errors.append(f'editorial replay base discovery audit missing: {discovery_ref}')
+    else:
+        expected_hash = replay.get('baseDiscoveryAuditSha256')
+        if not isinstance(expected_hash, str) or expected_hash.lower() != _sha256(base_path):
+            errors.append('editorial replay baseDiscoveryAuditSha256 does not match immutable discovery audit')
+    query_audits = replay.get('queryAudits')
+    if not isinstance(query_audits, list) or not query_audits:
+        errors.append('editorial replay needs auditable queryAudits')
+    else:
+        for index, query in enumerate(query_audits, 1):
+            required = {'queryFamily', 'actualQuery', 'executedAt', 'success', 'returnedResultCount', 'acceptedRawCount'}
+            missing = sorted(required - set(query)) if isinstance(query, dict) else sorted(required)
+            if missing:
+                errors.append(f'editorial replay query audit {index}: missing fields: {", ".join(missing)}')
+    evidence = replay.get('evidenceQualification')
+    if not isinstance(evidence, dict) or evidence.get('status') != 'completed':
+        errors.append('editorial replay needs completed evidenceQualification provenance')
+    pool = replay.get('finalEditorialPool')
+    pool_ids = _final_pool_ids(replay)
+    if not isinstance(pool, dict) or pool_ids is None:
+        errors.append('editorial replay needs finalEditorialPool.events')
+    else:
+        events = pool.get('events')
+        if len(pool_ids) != len(events):
+            errors.append('editorial replay finalEditorialPool eventIds must be unique and non-empty')
+        if pool.get('canonicalUniqueEvents') != len(events):
+            errors.append('editorial replay canonicalUniqueEvents does not match events')
+        if pool.get('editoriallyReviewed') != len(events):
+            errors.append('editorial replay finalEditorialPool must record every reviewed event')
+        for index, event in enumerate(events, 1):
+            if not isinstance(event, dict) or not event.get('eventId'):
+                errors.append(f'editorial replay event {index}: eventId required')
+                continue
+            if event.get('evidenceTierAfterUpgrade') not in {'A', 'B', 'provisional_B'}:
+                errors.append(f'editorial replay event {index}: publishable evidence required')
+            if not isinstance(event.get('evidenceSources'), list) or not event.get('evidenceSources'):
+                errors.append(f'editorial replay event {index}: evidenceSources required')
+    return errors, pool_ids
 
 
 def valid_url(value):
@@ -233,6 +343,8 @@ def validate(path, report_path=None):
     if payload.get('internationalDiscoveryStatus') not in {'checked', 'partial', 'failed'}:
         errors.append('internationalDiscoveryStatus must be checked, partial, or failed')
     errors.extend(validate_discovery_audit(path, payload))
+    editorial_input_errors, editorial_pool_ids = validate_editorial_input(path, payload)
+    errors.extend(editorial_input_errors)
     ids = set()
     for index, candidate in enumerate(candidates, 1):
         label = f'candidate {index}'
@@ -327,19 +439,21 @@ def validate(path, report_path=None):
         if summary.get(key) != value:
             errors.append(f'summary {key}={summary.get(key)!r} != {value}')
     if ledger_date and ledger_date >= FINAL_EDITORIAL_POOL_REQUIRED_FROM and not errors:
-        ref = payload.get('discoveryAuditPath')
-        audit_path = (ROOT / ref).resolve() if ref else None
-        try:
-            audit_payload = json.loads(audit_path.read_text(encoding='utf-8'))
-            pool_events = ((audit_payload.get('candidateEvaluation') or {}).get('finalEditorialPool') or {}).get('events') or []
-            pool_ids = {row.get('eventId') for row in pool_events if isinstance(row, dict)}
-            for candidate in candidates:
-                if candidate.get('eventId') not in pool_ids:
-                    errors.append(f'{candidate.get("candidateId", "candidate")}: eventId is not in finalEditorialPool')
-        except (AttributeError, OSError, json.JSONDecodeError):
-            # The detailed missing/invalid-audit error is emitted by
-            # validate_discovery_audit; avoid masking it with a second error.
-            pass
+        pool_ids = editorial_pool_ids
+        if pool_ids is None:
+            ref = payload.get('discoveryAuditPath')
+            audit_path = _resolved_path(ROOT, ref)
+            try:
+                audit_payload = json.loads(audit_path.read_text(encoding='utf-8'))
+                pool_events = ((audit_payload.get('candidateEvaluation') or {}).get('finalEditorialPool') or {}).get('events') or []
+                pool_ids = {row.get('eventId') for row in pool_events if isinstance(row, dict)}
+            except (AttributeError, OSError, json.JSONDecodeError):
+                # The detailed missing/invalid-audit error is emitted by
+                # validate_discovery_audit; avoid masking it with a second error.
+                pool_ids = set()
+        for candidate in candidates:
+            if candidate.get('eventId') not in pool_ids:
+                errors.append(f'{candidate.get("candidateId", "candidate")}: eventId is not in editorialInput finalEditorialPool')
     if report_path and not errors:
         from build import parse_md
         report = parse_md(report_path)
