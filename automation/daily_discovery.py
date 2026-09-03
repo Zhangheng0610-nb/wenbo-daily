@@ -35,6 +35,7 @@ from automation.governance import canonical_url, host_matches, source_info
 
 TZ = timezone(timedelta(hours=8))
 DISCOVERY_DIR = ROOT / "content" / "发现"
+MONITORING_DIR = ROOT / "content" / "监测"
 # Search endpoints are public web services and may require the host's normal
 # HTTP route.  Fixed-source monitoring keeps its proxy-free opener separately;
 # broad discovery must not silently use that network policy.
@@ -249,7 +250,7 @@ HIGH_LEVEL_REPRESENTATIVE_TERMS = (
 FOREIGN_NATIONAL_REPRESENTATIVE_TERMS = ("总统", "总理", "首相", "国王", "王后", "国家元首", "第一夫人")
 DIPLOMATIC_CONTEXT_TERMS = (
     "国事访问", "正式访问", "外事访问", "访问期间", "双边", "两国", "人文交流", "文化交流",
-    "文物合作", "联合展览", "联合办展", "联展",
+    "国际交流", "文物合作", "联合展览", "联合办展", "联展",
 )
 CULTURAL_DIPLOMACY_OBJECT_TERMS = ("国家历史博物馆", "国家博物馆", "国家级博物馆", "国家博物院", "世界遗产", "国家级文化机构")
 CULTURAL_DIPLOMACY_SUBSTANCE_TERMS = (
@@ -806,7 +807,14 @@ def event_id_for(group: list[dict]) -> str:
 def compact_discovery_report(row: dict) -> dict:
     compacted = {
         key: row.get(key)
-        for key in ("title", "url", "publishedDate", "discoveredVia", "discoverySourceType", "discoveryQuery", "queryFamily", "sourceDomain", "sourcePublisherUrl", "duplicateStatus", "duplicateOrigin")
+        for key in (
+            "title", "url", "publishedDate", "discoveredVia", "discoverySourceType",
+            "discoverySource", "discoveryQuery", "queryFamily", "sourceDomain",
+            "sourcePublisherUrl", "duplicateStatus", "duplicateOrigin", "notes",
+            "monitoringRecordId", "monitoringPath", "originalSourceUrl",
+            "monitoringScope", "monitoringLocationTier", "monitoringPrimaryProvince",
+            "dailyScopeHint",
+        )
         if row.get(key) is not None
     }
     domains = publisher_domains(row)
@@ -815,6 +823,96 @@ def compact_discovery_report(row: dict) -> dict:
     if is_search_wrapper_url(str(row.get("url") or "")):
         compacted["transportUrl"] = row.get("url")
     return compacted
+
+
+def _radar_daily_scope(item: dict) -> tuple[str, str]:
+    """Infer the editorial scope of a radar item without copying map geography."""
+    title = str(item.get("title") or "")
+    themes = " ".join(str(value) for value in (item.get("themes") or []))
+    tags = " ".join(str(value) for value in (item.get("tags") or []))
+    text = " ".join((title, themes, tags))
+    has_museum_object = any(term in text for term in ("博物馆", "博物院", "文化遗产", "文物", "展览"))
+    has_cross_border = any(term in text for term in ("国际交流", "文化交流", "文明交流", "联合展览", "联合办展", "跨国"))
+    has_high_level = any(term in text for term in HIGH_LEVEL_REPRESENTATIVE_TERMS)
+    if has_cross_border and has_museum_object and has_high_level:
+        return "international", "title_and_monitoring_semantics"
+    return "domestic", "title_and_monitoring_semantics"
+
+
+def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_path: Path | None = None) -> tuple[list[dict], dict]:
+    """Turn only same-day fixed-panel items into one-way daily radar reports."""
+    path = monitoring_path or (MONITORING_DIR / f"{required_date.isoformat()}.json")
+    items = payload.get("items") if isinstance(payload, dict) else []
+    seeds = []
+    seen_ids = set()
+    if not isinstance(items, list):
+        items = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        if item.get("origin") != "fixed-panel-monitoring" or item.get("date") != required_date.isoformat():
+            continue
+        record_id = str(item.get("recordId") or "").strip()
+        if not record_id or record_id in seen_ids:
+            continue
+        sources = item.get("sources") or []
+        source = next((row for row in sources if isinstance(row, dict) and row.get("url")), {})
+        original_url = source.get("url", "")
+        if not original_url:
+            continue
+        daily_scope, scope_method = _radar_daily_scope(item)
+        themes = [str(value) for value in (item.get("themes") or []) if value]
+        tags = [str(value) for value in (item.get("tags") or []) if value]
+        seeds.append({
+            "title": item.get("title", ""),
+            "publishedDate": required_date.isoformat(),
+            "url": original_url,
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": f'{source.get("name") or "固定六源"}固定源监测',
+            "sourceDomain": (urlsplit(original_url).hostname or "").lower(),
+            "sourcePublisherUrl": original_url,
+            "scope": daily_scope,
+            "dailyScopeHint": daily_scope,
+            "dailyScopeHintMethod": scope_method,
+            "monitoringRecordId": record_id,
+            "monitoringPath": path.relative_to(ROOT).as_posix() if path.is_absolute() else str(path).replace("\\", "/"),
+            "originalSourceUrl": original_url,
+            "monitoringScope": item.get("scope"),
+            "monitoringLocationTier": item.get("locationTier"),
+            "monitoringPrimaryProvince": item.get("primaryProvince"),
+            "notes": "固定源语义标签：" + "、".join(dict.fromkeys(themes + tags)),
+        })
+        seen_ids.add(record_id)
+    audit = {
+        "status": "scan_success_with_update" if seeds else "scan_success_no_update",
+        "runType": payload.get("runType") if isinstance(payload, dict) else None,
+        "monitoringPath": path.relative_to(ROOT).as_posix() if path.is_absolute() else str(path).replace("\\", "/"),
+        "targetDate": required_date.isoformat(),
+        "seedCount": len(seeds),
+        "seedRecordIds": [row["monitoringRecordId"] for row in seeds],
+        "seeds": [
+            {key: row.get(key) for key in ("monitoringRecordId", "title", "originalSourceUrl", "dailyScopeHint")}
+            for row in seeds
+        ],
+    }
+    return seeds, audit
+
+
+def load_fixed_panel_radar(required_date: date) -> tuple[list[dict], dict]:
+    """Load same-day monitoring only; missing monitoring is not treated as no-update."""
+    path = MONITORING_DIR / f"{required_date.isoformat()}.json"
+    if not path.exists():
+        return [], {
+            "status": "not_available",
+            "monitoringPath": path.relative_to(ROOT).as_posix(),
+            "targetDate": required_date.isoformat(),
+            "seedCount": 0,
+            "seedRecordIds": [],
+            "seeds": [],
+        }
+    payload = load_json(path, {})
+    return fixed_panel_radar_records(required_date, payload, path)
 
 
 def aggregate_event_candidates(records: list[dict]) -> list[dict]:
@@ -862,11 +960,18 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
         title = clean_discovery_title(representative.get("title", ""))
         dates = [row.get("publishedDate") for row in group if row.get("publishedDate")]
         scopes = [row.get("scope", "domestic") for row in group]
+        scope_hints = [row.get("dailyScopeHint") for row in group if row.get("dailyScopeHint")]
         source_domains = sorted({row.get("sourceDomain") for row in group if row.get("sourceDomain")})
         query_families = sorted({row.get("queryFamily") for row in group if row.get("queryFamily")})
         publisher_domain_set = set()
         for row in group:
             publisher_domain_set.update(publisher_domains(row))
+        context_parts = []
+        for row in group:
+            for key in ("summary", "body", "notes"):
+                value = str(row.get(key) or "").strip()
+                if value and value not in context_parts:
+                    context_parts.append(value)
         event_id = event_id_for(group)
         if event_id in used_event_ids:
             # Identity terms can legitimately collide for separate reports
@@ -886,7 +991,11 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
             "representativeTitle": title,
             "url": representative.get("url", ""),
             "publishedDate": max(dates) if dates else representative.get("publishedDate", ""),
-            "scope": "international" if scopes.count("international") > len(scopes) / 2 else "domestic",
+            # A radar report may carry an explicitly recomputed editorial
+            # scope hint.  It is not the monitoring map scope and takes
+            # precedence only for that event; ordinary reports retain the
+            # existing majority rule.
+            "scope": "international" if "international" in scope_hints or scopes.count("international") > len(scopes) / 2 else "domestic",
             "newDevelopment": any(row.get("newDevelopment") is True for row in group),
             "discoveryReports": [compact_discovery_report(row) for row in group],
             "reportCount": len(group),
@@ -894,6 +1003,8 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
             "publisherDomains": sorted(publisher_domain_set),
             "queryFamilies": query_families,
         }
+        if context_parts:
+            event["notes"] = " ".join(context_parts)
         events.append(event)
         for row in group:
             row["eventId"] = event["eventId"]
@@ -1751,8 +1862,8 @@ def is_relevant_record(record: dict) -> bool:
 
 
 def is_high_value_record(record: dict) -> bool:
-    title = (record.get("title", "") or "").lower()
-    return any(term.lower() in title for term in HIGH_VALUE_TERMS)
+    text = _editorial_context(record)
+    return any(term.lower() in text for term in HIGH_VALUE_TERMS) or high_level_cultural_diplomacy_signal(record)
 
 
 def evidence_claim_risk(record: dict) -> str:
@@ -1803,6 +1914,11 @@ def classify_evidence_failure(record: dict, checked_sources: list[dict], *,
 
 def _editorial_context(record: dict) -> str:
     parts = [str(record.get(key) or "") for key in ("title", "summary", "body", "notes", "institution", "publisher", "entity", "eventType", "location")]
+    for domain in record.get("sourceDomains", []) if isinstance(record.get("sourceDomains"), list) else [record.get("sourceDomain", "")]:
+        if domain:
+            parts.append(str(domain))
+    if record.get("sourcePublisherUrl"):
+        parts.append(str(record["sourcePublisherUrl"]))
     for report in record.get("discoveryReports", []) if isinstance(record.get("discoveryReports"), list) else []:
         if isinstance(report, dict):
             parts.extend(str(report.get(key) or "") for key in ("title", "publisher", "sourceDomain", "publisherDomain"))
@@ -1810,6 +1926,28 @@ def _editorial_context(record: dict) -> str:
         if isinstance(source, dict):
             parts.extend(str(source.get(key) or "") for key in ("name", "publisher", "publisherDomain"))
     return " ".join(part for part in parts if part).lower()
+
+
+def high_level_cultural_diplomacy_signal(record: dict) -> bool:
+    """Share the existing diplomacy rule with the routine-activity gate."""
+    text = _editorial_context(record)
+
+    def hit(terms):
+        return any(term.lower() in text for term in terms)
+
+    high_level_rep = hit(HIGH_LEVEL_REPRESENTATIVE_TERMS)
+    foreign_national_rep = hit(FOREIGN_NATIONAL_REPRESENTATIVE_TERMS)
+    national_cultural_object = hit(CULTURAL_DIPLOMACY_OBJECT_TERMS)
+    museum_object = hit(("博物馆", "博物院", "纪念馆", "世界遗产", "文化遗产"))
+    cultural_substance = hit(CULTURAL_DIPLOMACY_SUBSTANCE_TERMS)
+    diplomatic_context = hit(DIPLOMATIC_CONTEXT_TERMS) or bool(re.search(r"(?:embassy|使馆|大使馆|外交|mfa|gov\.cn)", text))
+    return (
+        foreign_national_rep
+        and high_level_rep
+        and diplomatic_context
+        and (national_cultural_object or museum_object)
+        and (cultural_substance or (national_cultural_object and hit(("参观", "访问"))))
+    )
 
 
 def museum_collection_or_public_incident(record: dict) -> bool:
@@ -1939,19 +2077,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     cooperation = hit(COOPERATION_TERMS)
     routine = hit(ROUTINE_PRIORITY_TERMS)
     official_diplomatic_source = bool(re.search(r"(?:embassy|使馆|大使馆|外交|mfa|gov\.cn)", text))
-    high_level_rep = hit(HIGH_LEVEL_REPRESENTATIVE_TERMS)
-    foreign_national_rep = hit(FOREIGN_NATIONAL_REPRESENTATIVE_TERMS)
-    national_cultural_object = hit(CULTURAL_DIPLOMACY_OBJECT_TERMS)
-    museum_object = hit(("博物馆", "博物院", "纪念馆", "世界遗产", "文化遗产"))
-    cultural_substance = hit(CULTURAL_DIPLOMACY_SUBSTANCE_TERMS)
-    diplomatic_context = hit(DIPLOMATIC_CONTEXT_TERMS) or official_diplomatic_source
-    high_level_cultural_diplomacy = (
-        foreign_national_rep
-        and high_level_rep
-        and diplomatic_context
-        and (national_cultural_object or museum_object)
-        and (cultural_substance or (national_cultural_object and hit(("参观", "访问"))))
-    )
+    high_level_cultural_diplomacy = high_level_cultural_diplomacy_signal(record)
     salience = public_salience(record)
 
     if national_policy:
@@ -2089,6 +2215,13 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         record["filterReasons"] = reasons
         record["candidateDisposition"] = disposition
         record["evidenceTierAtDiscovery"] = evidence.get("tier", "C")
+        if disposition == "evidence_qualified":
+            # Direct A/B evidence is already publishable at discovery time.
+            # Keep the same evidence-state contract used by the upgrade
+            # executor so a direct fixed-panel radar hit can enter the same
+            # final editorial pool without a second, artificial upgrade.
+            record["evidenceSources"] = initial_evidence
+            record["evidenceTierAfterUpgrade"] = evidence.get("tier", "C")
         record["claimRisk"] = evidence_claim_risk(record)
         record["editorialPriorityScore"] = priority["score"]
         record["editorialPriorityLabel"] = priority["label"]
@@ -2298,15 +2431,65 @@ def build_query_family_summary(report_records: list[dict], query_audits: list[di
     return result
 
 
-def build_audit(required_date: date, raw_records: list[dict], scan_statuses: list[dict], query_results: list[dict], query_audits: list[dict] | None = None, perform_evidence_upgrade: bool = False) -> dict:
+def summarize_fixed_panel_radar(radar_audit: dict | None, event_candidates: list[dict], evaluated_events: list[dict]) -> dict:
+    """Reconcile same-day fixed-panel radar seeds at event level."""
+    base = dict(radar_audit or {})
+    base.pop("_records", None)
+    seed_rows = base.get("seeds") if isinstance(base.get("seeds"), list) else []
+    event_by_id = {row.get("eventId"): row for row in evaluated_events if row.get("eventId")}
+    seed_events = []
+    for seed in seed_rows:
+        record_id = seed.get("monitoringRecordId") if isinstance(seed, dict) else None
+        matches = [
+            event for event in event_candidates
+            if any(report.get("monitoringRecordId") == record_id for report in event.get("discoveryReports", []))
+        ]
+        if not matches:
+            continue
+        event = matches[0]
+        event_id = event.get("eventId")
+        event_reports = event.get("discoveryReports", [])
+        already = any(report.get("discoverySourceType") != "fixed_panel_radar" for report in event_reports)
+        seed_events.append({
+            "monitoringRecordId": record_id,
+            "eventId": event_id,
+            "title": event.get("representativeTitle") or event.get("title", ""),
+            "alreadyDiscovered": already,
+            "candidateDisposition": event_by_id.get(event_id, {}).get("candidateDisposition"),
+        })
+    base.update({
+        "seedCount": len(seed_rows),
+        "matchedEventCount": len(seed_events),
+        "fixedRadarSeeds": len(seed_rows),
+        "fixedRadarAlreadyDiscovered": sum(row["alreadyDiscovered"] for row in seed_events),
+        "fixedRadarNewToDaily": sum(not row["alreadyDiscovered"] for row in seed_events),
+        "fixedRadarEvidenceQualified": sum(row.get("candidateDisposition") == "evidence_qualified" for row in seed_events),
+        "fixedRadarSelected": 0,
+        "eventMatches": seed_events,
+    })
+    return base
+
+
+def build_audit(required_date: date, raw_records: list[dict], scan_statuses: list[dict], query_results: list[dict], query_audits: list[dict] | None = None, perform_evidence_upgrade: bool = False, radar_audit: dict | None = None) -> dict:
     start = required_date - timedelta(days=6)
     history = load_history(required_date)
     combined = []
+    radar_records = [
+        row for row in (radar_audit or {}).get("_records", [])
+        if isinstance(row, dict)
+    ]
     seen_urls = set()
-    for record in raw_records + query_results:
+    for record in raw_records + query_results + radar_records:
         url = canonical_url(record.get("url") or record.get("discoveryUrl") or "")
         if url and url in seen_urls:
-            continue
+            # A monitoring item may already be present in the morning query
+            # snapshot. Preserve the radar report as provenance even when
+            # its canonical URL is identical; event aggregation will merge
+            # the reports into one event candidate.
+            if record.get("discoverySourceType") != "fixed_panel_radar":
+                continue
+            record = dict(record)
+            record["duplicateOrigin"] = "same_url_fixed_panel_radar"
         if url:
             seen_urls.add(url)
         record = dict(record)
@@ -2428,6 +2611,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         event_candidates,
         evaluated_events,
     )
+    fixed_panel_radar = summarize_fixed_panel_radar(radar_audit, event_candidates, evaluated_events)
     return {
         "schema": "daily-discovery-v1",
         "date": required_date.isoformat(),
@@ -2482,6 +2666,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
                 {k: row.get(k) for k in ("eventId", "representativeTitle", "publishedDate", "reportCount", "candidateDisposition", "editorialPriorityScore", "editorialPriorityLabel")}
                 for row in evaluation.get("resolverDiscoveredEvents", [])
             ],
+            "fixedPanelRadar": fixed_panel_radar,
         },
         "summary": {
             "sourceScansAttempted": len(scan_statuses),
@@ -2505,11 +2690,13 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             "eventDuplicateReports": sum(max(0, row.get("reportCount", 0) - 1) for row in event_candidates),
             "domestic": stats(domestic),
             "international": stats(international),
+            "fixedPanelRadar": fixed_panel_radar,
         },
+        "fixedPanelRadar": fixed_panel_radar,
     }
 
 
-def run(required_date: date, *, window_days: int = 7, query_results: list[dict] | None = None, query_audits: list[dict] | None = None, execute_query_search: bool = True, perform_evidence_upgrade: bool = True, write: bool = False, output_path: Path | None = None) -> dict:
+def run(required_date: date, *, window_days: int = 7, query_results: list[dict] | None = None, query_audits: list[dict] | None = None, execute_query_search: bool = True, perform_evidence_upgrade: bool = True, include_fixed_panel_radar: bool = True, write: bool = False, output_path: Path | None = None) -> dict:
     start = required_date - timedelta(days=window_days - 1)
     statuses, raw = [], []
     for spec in SOURCE_SCANS:
@@ -2520,7 +2707,19 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         searched, audits = execute_queries(required_date, start, required_date)
         query_results = (query_results or []) + searched
         query_audits = audits
-    audit = build_audit(required_date, raw, statuses, query_results or [], query_audits or [], perform_evidence_upgrade=perform_evidence_upgrade)
+    radar_records, radar_audit = load_fixed_panel_radar(required_date) if include_fixed_panel_radar else (
+        [], {"status": "not_run", "targetDate": required_date.isoformat(), "seedCount": 0, "seedRecordIds": [], "seeds": []}
+    )
+    radar_audit["_records"] = radar_records
+    audit = build_audit(
+        required_date,
+        raw,
+        statuses,
+        query_results or [],
+        query_audits or [],
+        perform_evidence_upgrade=perform_evidence_upgrade,
+        radar_audit=radar_audit,
+    )
     if write:
         DISCOVERY_DIR.mkdir(parents=True, exist_ok=True)
         (DISCOVERY_DIR / "README.md").write_text(

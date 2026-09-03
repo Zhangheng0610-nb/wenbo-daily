@@ -16,6 +16,8 @@ from automation.daily_discovery import (
     evidence_upgrade_queries,
     event_match_details,
     editorial_priority,
+    evaluate_candidate_pool,
+    fixed_panel_radar_records,
     has_specific_event_anchor,
     is_relevant_record,
     load_history,
@@ -27,6 +29,7 @@ from automation.daily_discovery import (
     resolve_evidence_attempt,
     run_evidence_upgrade,
     run,
+    build_audit,
     unwrap_redirect_url,
 )
 
@@ -192,6 +195,166 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(result["highLevelCulturalDiplomacy"])
         self.assertEqual(result["label"], "high")
         self.assertIn("high_level_cultural_diplomacy", result["reasons"])
+
+    def test_fixed_panel_radar_accepts_only_same_day_monitoring_items(self):
+        from datetime import date
+        records, audit = fixed_panel_radar_records(date(2026, 9, 3), {
+            "runType": "live",
+            "items": [
+                {
+                    "date": "2026-09-03",
+                    "origin": "fixed-panel-monitoring",
+                    "recordId": "monitor-today",
+                    "title": "国家级博物馆与外国总统参观展览并开展国际交流",
+                    "scope": "unassigned",
+                    "themes": ["博物馆", "国际交流"],
+                    "sources": [{"name": "新华网文博", "url": "https://www.news.cn/politics/20260903/story.html"}],
+                },
+                {
+                    "date": "2026-09-02",
+                    "origin": "fixed-panel-monitoring",
+                    "recordId": "monitor-yesterday",
+                    "title": "昨天的博物馆消息",
+                    "sources": [{"name": "新华网文博", "url": "https://www.news.cn/politics/20260902/story.html"}],
+                },
+                {
+                    "date": "2026-09-03",
+                    "origin": "query-search",
+                    "recordId": "not-monitoring",
+                    "title": "不属于固定监测的线索",
+                    "sources": [{"name": "搜索", "url": "https://example.test/story"}],
+                },
+            ],
+        })
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["monitoringRecordId"], "monitor-today")
+        self.assertEqual(records[0]["discoverySourceType"], "fixed_panel_radar")
+        self.assertEqual(records[0]["discoverySource"], "新华网文博固定源监测")
+        self.assertEqual(audit["seedCount"], 1)
+
+    def test_fixed_panel_radar_merges_with_query_report_and_recomputes_scope(self):
+        from datetime import date
+        radar, _ = fixed_panel_radar_records(date(2026, 9, 3), {
+            "items": [{
+                "date": "2026-09-03",
+                "origin": "fixed-panel-monitoring",
+                "recordId": "monitor-egypt",
+                "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+                "scope": "unassigned",
+                "themes": ["博物馆", "文化遗产", "国际交流"],
+                "tags": ["博物馆", "国际交流"],
+                "sources": [{"name": "新华网文博", "url": "https://www.news.cn/politics/leaders/20260903/story.html"}],
+            }],
+        })
+        query = {
+            "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+            "url": "https://news.google.com/rss/articles/example",
+            "publishedDate": "2026-09-03",
+            "scope": "domestic",
+            "discoverySourceType": "query_search",
+            "sourceDomain": "chinanews.com.cn",
+        }
+        events = aggregate_event_candidates([query, radar[0]])
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["reportCount"], 2)
+        self.assertEqual(events[0]["scope"], "international")
+        self.assertEqual(sum("fixed_panel_radar" == row.get("discoverySourceType") for row in events[0]["discoveryReports"]), 1)
+
+    def test_fixed_panel_radar_preserves_provenance_when_url_already_seen(self):
+        from datetime import date
+        url = "https://www.news.cn/politics/leaders/20260903/story.html"
+        records, radar_audit = fixed_panel_radar_records(date(2026, 9, 3), {
+            "runType": "live",
+            "items": [{
+                "date": "2026-09-03",
+                "origin": "fixed-panel-monitoring",
+                "recordId": "monitor-same-url",
+                "title": "某国家博物馆发布国际交流展览成果",
+                "themes": ["博物馆", "国际交流"],
+                "sources": [{"name": "固定源", "url": url}],
+            }],
+        })
+        radar_audit["_records"] = records
+        audit = build_audit(
+            date(2026, 9, 3),
+            [{"title": "某国家博物馆发布国际交流展览成果", "url": url, "publishedDate": "2026-09-03"}],
+            [], [], [], False, radar_audit,
+        )
+        events = audit["candidateEvaluation"]["eventCandidates"]
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["reportCount"], 2)
+        self.assertEqual(sum(row.get("discoverySourceType") == "fixed_panel_radar" for row in events[0]["discoveryReports"]), 1)
+
+    @patch("automation.daily_discovery.load_history")
+    def test_fixed_panel_radar_does_not_bypass_historical_dedup(self, load_history):
+        from datetime import date
+        load_history.return_value = [{
+            "title": "某国家博物馆发布国际交流展览成果",
+            "url": "https://archive.example/published",
+            "publishedDate": "2026-09-02",
+        }]
+        records, radar_audit = fixed_panel_radar_records(date(2026, 9, 3), {
+            "runType": "live",
+            "items": [{
+                "date": "2026-09-03",
+                "origin": "fixed-panel-monitoring",
+                "recordId": "monitor-historical",
+                "title": "某国家博物馆发布国际交流展览成果",
+                "themes": ["博物馆", "国际交流"],
+                "sources": [{"name": "固定源", "url": "https://fixed.example/story"}],
+            }],
+        })
+        radar_audit["_records"] = records
+        audit = build_audit(date(2026, 9, 3), [], [], [], [], False, radar_audit)
+        self.assertEqual(len(audit["records"]), 1)
+        self.assertEqual(audit["records"][0]["duplicateStatus"], "historical_duplicate")
+        self.assertEqual(audit["candidateEvaluation"]["eventCandidates"], [])
+        self.assertEqual(audit["candidateEvaluation"]["summary"]["candidateEvaluationPool"], 0)
+
+    def test_fixed_panel_radar_does_not_bypass_evidence_gate(self):
+        from datetime import date
+        records, _ = fixed_panel_radar_records(date(2026, 9, 3), {
+            "items": [{
+                "date": "2026-09-03",
+                "origin": "fixed-panel-monitoring",
+                "recordId": "monitor-unknown",
+                "title": "某博物馆发布重要文物保护进展",
+                "scope": "province",
+                "themes": ["博物馆", "文物保护"],
+                "sources": [{"name": "固定源", "url": "https://unknown.example/story"}],
+            }],
+        })
+        events = aggregate_event_candidates(records)
+        evaluation = evaluate_candidate_pool(date(2026, 9, 3), events)
+        self.assertEqual(evaluation["records"][0]["candidateDisposition"], "needs_verification")
+        self.assertNotEqual(evaluation["records"][0]["candidateDisposition"], "selected")
+
+    def test_fixed_panel_radar_diplomacy_enters_review_with_direct_a_evidence(self):
+        from datetime import date
+        records, radar_audit = fixed_panel_radar_records(date(2026, 9, 3), {
+            "runType": "live",
+            "items": [{
+                "date": "2026-09-03",
+                "origin": "fixed-panel-monitoring",
+                "recordId": "monitor-egypt-a",
+                "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+                "scope": "unassigned",
+                "themes": ["博物馆", "文化遗产", "国际交流"],
+                "tags": ["博物馆", "国际交流"],
+                "sources": [{"name": "新华网文博", "url": "https://www.news.cn/politics/leaders/20260903/800e09d7185c45e4800776e340ee9d38/c.html"}],
+            }],
+        })
+        radar_audit["_records"] = records
+        audit = build_audit(date(2026, 9, 3), [], [], [], [], False, radar_audit)
+        events = audit["candidateEvaluation"]["finalEditorialPool"]["events"]
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0]["scope"], "international")
+        self.assertEqual(events[0]["candidateDisposition"], "evidence_qualified")
+        self.assertEqual(events[0]["evidenceTierAfterUpgrade"], "A")
+        self.assertTrue(events[0]["evidenceSources"])
+        self.assertIn("high_level_cultural_diplomacy", events[0]["editorialReasons"])
+        self.assertEqual(audit["fixedPanelRadar"]["fixedRadarNewToDaily"], 1)
+        self.assertEqual(audit["fixedPanelRadar"]["fixedRadarEvidenceQualified"], 1)
 
     def test_local_leader_museum_visit_is_not_cultural_diplomacy(self):
         result = editorial_priority({"title": "某市市长参观地方博物馆", "publishedDate": "2026-09-01"})

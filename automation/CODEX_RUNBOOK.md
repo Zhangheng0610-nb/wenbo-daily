@@ -127,6 +127,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 2. 读取当天已有监测文件和日报、近 30 天去重索引及必要的上一期栏目。
 3. 先完成固定池巡检。正式每日任务运行 `python automation/backfill_monitoring.py --mode operational --end YYYY-MM-DD --days 1 --write`；历史回溯才使用默认的 `--mode archive-backfill`。再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
 4. 再做日报搜索：先按发现层广泛建立候选账本，再按事件重要性优先回溯 A/B 级证据；对未登记但可直接访问、身份和正文可核验的低风险文章，可记录为文章级 `provisional_B`，最后按专业价值精选。不得先选日报再反填监测库。
+   日报发现运行会额外读取当天 `content/监测/YYYY-MM-DD.json` 中 `origin=fixed-panel-monitoring` 且日期相同的记录，作为 `fixed_panel_radar` 单向雷达线索；这些记录仍须经过日报事件聚合、历史去重、编辑优先级和 A/B 证据门槛，不能直接进入日报，也不会反写监测库。
    现在必须执行独立的 broad discovery 审计：
 
    ```text
