@@ -109,6 +109,11 @@ WENBO_TERMS = (
     "展出", "开馆", "廊桥", "传统村落", "历史文化", "文化遗址", "文化遗产",
 )
 
+NCHA_NEWS_PATH_RE = re.compile(
+    r"/art/(20\d{2})/(\d{1,2})/(\d{1,2})/art_722_[^/?#]+",
+    re.I,
+)
+
 
 def fetch(url: str) -> str:
     """Fetch public HTML, favouring HTTP where older government sites require it."""
@@ -177,6 +182,25 @@ def date_from_url(url: str) -> date | None:
         except ValueError:
             continue
     return None
+
+
+def ncha_news_date(url: str) -> date | None:
+    """Parse the fixed 文物新闻 column's article path without title/date text."""
+    target = unquote(html.unescape(url)).strip()
+    match = NCHA_NEWS_PATH_RE.search(urlsplit(target).path)
+    if not match:
+        return None
+    try:
+        return date(*(int(value) for value in match.groups()))
+    except ValueError:
+        return None
+
+
+def ncha_news_url(url: str) -> bool:
+    """Keep the fixed panel on column 722 article pages only."""
+    target = unquote(html.unescape(url)).strip()
+    host = (urlsplit(target).hostname or "").lower()
+    return host in {"ncha.gov.cn", "www.ncha.gov.cn"} and bool(NCHA_NEWS_PATH_RE.search(urlsplit(target).path))
 
 
 def xinhua_url(url: str) -> str:
@@ -335,12 +359,18 @@ def crawl_ncha(start: date, end: date) -> tuple[list[dict], bool, str]:
     found: dict[str, dict] = {}
     oldest: date | None = None
     for page_no in range(1, 20):
-        page = html.unescape(fetch(base + "?" + params + str(page_no)))
+        # The proxy response is occasionally served from a stale edge cache
+        # during the morning update.  Refresh only this fixed column request;
+        # it does not widen the source boundary or reuse broad discovery data.
+        request_url = base + "?" + params + str(page_no)
+        if page_no == 1:
+            request_url += "&_scan=" + datetime.now(TZ).strftime("%Y%m%d%H%M%S%f")
+        page = html.unescape(fetch(request_url))
         page_rows = 0
         for text, url in links(page, base):
-            if "/art/" not in url or "art_722_" not in url:
+            if not ncha_news_url(url):
                 continue
-            published = date_from_url(url)
+            published = ncha_news_date(url)
             if not published:
                 continue
             page_rows += 1
@@ -689,6 +719,12 @@ def as_record(
     }
     if run_type:
         record["runType"] = run_type
+    if row.get("_duplicateProvenance"):
+        record["duplicateProvenance"] = {
+            "rule": "same_source_same_day_normalized_title",
+            "canonicalUrl": row["url"],
+            "duplicateUrls": [entry["url"] for entry in row["_duplicateProvenance"]],
+        }
     return record
 
 
@@ -782,6 +818,53 @@ def allowed_backfill_row(row: dict) -> bool:
     return bool(reason) and reason != "routine-program-communication"
 
 
+def normalized_event_title(value: str) -> str:
+    """Normalize only enough for the conservative same-source event key."""
+    return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", plain(value).lower())
+
+
+def monitoring_event_key(row: dict) -> tuple[str, str, str] | None:
+    source_id = str(row.get("sourceId", "") or "")
+    day = str(row.get("date", "") or "")
+    title = normalized_event_title(str(row.get("title", "") or ""))
+    if not source_id or not day or not title:
+        return None
+    return source_id, day, title
+
+
+def monitoring_record_event_key(item: dict) -> tuple[str, str, str] | None:
+    sources = item.get("sources") or []
+    source_id = sources[0].get("sourceId", "") if sources else ""
+    return monitoring_event_key({
+        "sourceId": source_id,
+        "date": item.get("date", ""),
+        "title": item.get("title", ""),
+    })
+
+
+def deduplicate_monitoring_rows(rows: list[dict]) -> tuple[list[dict], int]:
+    """Deduplicate same-source same-day exact normalized-title events only.
+
+    The source id is part of the key on purpose: cross-source reports remain
+    separate here and are reconciled later by the heatmap event layer.
+    """
+    unique: list[dict] = []
+    by_key: dict[tuple[str, str, str], dict] = {}
+    duplicates = 0
+    for row in rows:
+        key = monitoring_event_key(row)
+        if key is None or key not in by_key:
+            unique.append(row)
+            if key is not None:
+                by_key[key] = row
+            continue
+        canonical = by_key[key]
+        provenance = canonical.setdefault("_duplicateProvenance", [])
+        provenance.append({"url": row.get("url", ""), "title": row.get("title", "")})
+        duplicates += 1
+    return unique, duplicates
+
+
 def _outcome_details(value) -> dict:
     """Normalize legacy tuple outcomes and the operational audit shape."""
     if isinstance(value, dict):
@@ -811,7 +894,12 @@ def merge_write(
     by_day: dict[str, list[dict]] = defaultdict(list)
     raw_rows = list(rows)
     rows = [row for row in raw_rows if allowed_backfill_row(row)]
+    rows, _ = deduplicate_monitoring_rows(rows)
     row_urls = {row["url"].rstrip("/") for row in rows}
+    incoming_keys = {
+        key for row in rows
+        if (key := monitoring_event_key(row)) is not None
+    }
     run_type = "replay" if mode == "operational" and replay else "live" if mode == "operational" else None
     for index, row in enumerate(sorted(rows, key=lambda value: (value["date"], value["sourceId"], value["url"])), 1):
         by_day[row["date"]].append(as_record(
@@ -838,10 +926,12 @@ def merge_write(
             payload.setdefault("mode", "archive-backfill")
         prior_items = list(payload.get("items", []))
         existing = {}
+        existing_event_keys = set()
         for item in payload.get("items", []):
             if not item.get("sources"):
                 continue
             item_url = item["sources"][0].get("url", "")
+            item_key = monitoring_record_event_key(item)
             # A generated backfill observation must never duplicate the legacy
             # migration corpus.  Keep a human-authored operational item intact.
             if item.get("origin") == "archive-backfill" and item_url.rstrip("/") in baseline_urls:
@@ -852,13 +942,20 @@ def merge_write(
             if (
                 item.get("origin") == "archive-backfill"
                 or (mode == "operational" and item.get("origin") == "fixed-panel-monitoring")
-            ) and item_url.rstrip("/") in row_urls:
+            ) and (
+                item_url.rstrip("/") in row_urls
+                or item_key in incoming_keys
+            ):
+                continue
+            if item.get("origin") == "fixed-panel-monitoring" and item_key in existing_event_keys:
                 continue
             if item.get("origin") == "archive-backfill" and not allowed_backfill_row({
                 "sourceId": source.get("sourceId", ""), "title": item.get("title", "")
             }):
                 continue
             existing[item_url] = item
+            if item_key is not None:
+                existing_event_keys.add(item_key)
         for item in by_day.get(day.isoformat(), []):
             item_url = item["sources"][0]["url"]
             if item_url.rstrip("/") not in baseline_urls:
@@ -1023,7 +1120,9 @@ def main() -> int:
             status = "checked" if complete else "partial"
         raw_count = len(rows)
         rows = list({row["url"].rstrip("/"): row for row in rows}.values())
-        duplicate_count = raw_count - len(rows)
+        url_duplicate_count = raw_count - len(rows)
+        rows, event_duplicate_count = deduplicate_monitoring_rows(rows)
+        duplicate_count = url_duplicate_count + event_duplicate_count
         eligible_count = sum(1 for row in rows if allowed_backfill_row(row))
         all_rows.extend(rows)
         outcomes[source_id] = {

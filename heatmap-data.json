@@ -5526,7 +5526,7 @@
         "mode": "operational",
         "runType": "live",
         "status": "no_update",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "checkedAt": "2026-09-03T13:58:54+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5543,7 +5543,7 @@
         "mode": "operational",
         "runType": "live",
         "status": "no_update",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "checkedAt": "2026-09-03T13:58:54+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5560,7 +5560,7 @@
         "mode": "operational",
         "runType": "live",
         "status": "no_update",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "checkedAt": "2026-09-03T13:58:54+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5577,7 +5577,7 @@
         "mode": "operational",
         "runType": "live",
         "status": "no_update",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "checkedAt": "2026-09-03T13:58:54+08:00",
         "candidateCount": 0,
         "note": "",
         "rawCount": 0,
@@ -5593,15 +5593,15 @@
         "sourceId": "ncha",
         "mode": "operational",
         "runType": "live",
-        "status": "no_update",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
-        "candidateCount": 0,
+        "status": "success",
+        "checkedAt": "2026-09-03T13:58:54+08:00",
+        "candidateCount": 1,
         "note": "",
-        "rawCount": 0,
-        "eligibleCount": 0,
-        "acceptedThisRun": 0,
+        "rawCount": 1,
+        "eligibleCount": 1,
+        "acceptedThisRun": 1,
         "retainedExisting": 0,
-        "finalItemCount": 0,
+        "finalItemCount": 1,
         "duplicatesSkipped": 0,
         "scanStatus": "checked",
         "date": "2026-09-03"
@@ -5611,15 +5611,15 @@
         "mode": "operational",
         "runType": "live",
         "status": "success",
-        "checkedAt": "2026-09-03T07:14:03+08:00",
-        "candidateCount": 2,
+        "checkedAt": "2026-09-03T13:58:54+08:00",
+        "candidateCount": 3,
         "note": "",
-        "rawCount": 24,
-        "eligibleCount": 2,
-        "acceptedThisRun": 2,
+        "rawCount": 128,
+        "eligibleCount": 3,
+        "acceptedThisRun": 3,
         "retainedExisting": 0,
-        "finalItemCount": 2,
-        "duplicatesSkipped": 0,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 26,
         "scanStatus": "checked",
         "date": "2026-09-03"
       }
@@ -5638,41 +5638,41 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 502,
-    "includedProvincialRecords": 113,
-    "provincialEvents": 94,
+    "totalMonitoredRecords": 504,
+    "includedProvincialRecords": 116,
+    "provincialEvents": 96,
     "nationalEvents": 34,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 412,
-    "fixedPanelMonitoringRecords": 21,
-    "operationalRecords": 21,
+    "fixedPanelMonitoringRecords": 23,
+    "operationalRecords": 23,
     "operationalRecordTypes": {
-      "live": 2,
+      "live": 4,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 21
+      "fixed-panel-monitoring": 23
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 433,
+    "analysisRecords": 435,
     "analysisProvenanceRecords": {
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 21
+      "fixed-panel-monitoring": 23
     },
     "excludedNonPanel": 0,
-    "unassigned": 266,
+    "unassigned": 265,
     "panelSourceCount": 6,
     "coverageDays": 97,
     "completeCoverageDays": 8,
     "successfulSourceChecks": 315,
     "coverageStatuses": {
-      "success": 144,
-      "no_update": 171,
+      "success": 145,
+      "no_update": 170,
       "partial": 267,
       "failed": 0
     },
@@ -5709,15 +5709,155 @@
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 73,
+      "ncha": 74,
       "cultural-relics-news": 103,
       "archaeology": 201,
       "museum-association": 29,
-      "xinhua-wenbo": 13,
+      "xinhua-wenbo": 14,
       "cctv-wenbo": 14
     }
   },
   "events": [
+    {
+      "title": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+      "firstDate": "2026-09-03",
+      "lastDate": "2026-09-03",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "文化遗产",
+        "内蒙古"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-03",
+          "title": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+          "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+              "host": "nmg.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-9a29ee74d1",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+          "host": "nmg.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "陈刚在南宁调研文化和文物保护工作",
+      "firstDate": "2026-09-03",
+      "lastDate": "2026-09-03",
+      "primaryProvince": "广西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "国际交流"
+      ],
+      "tags": [
+        "文物保护",
+        "广西",
+        "文化遗产",
+        "国际交流"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-03",
+          "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+              "host": "www.ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-03",
+          "title": "陈刚在南宁调研文化和文物保护工作",
+          "url": "http://www.gx.xinhuanet.com/20260903/7bd0c8bdd23946cbb85b29afc609a43c/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.gx.xinhuanet.com/20260903/7bd0c8bdd23946cbb85b29afc609a43c/c.html",
+              "host": "www.gx.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-ff60214a8d",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "关注",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+          "host": "www.ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        },
+        {
+          "name": "新华网文博",
+          "url": "http://www.gx.xinhuanet.com/20260903/7bd0c8bdd23946cbb85b29afc609a43c/c.html",
+          "host": "www.gx.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "云南海晏村：古村留古韵 文旅促振兴",
       "firstDate": "2026-08-31",
