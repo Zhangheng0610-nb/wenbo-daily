@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-02",
-  "asOf": "2026-09-02",
+  "generated": "2026-09-03",
+  "asOf": "2026-09-03",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -5520,6 +5520,108 @@
         "duplicatesSkipped": 0,
         "scanStatus": "checked",
         "date": "2026-09-02"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-03T07:14:03+08:00",
+        "candidateCount": 2,
+        "note": "",
+        "rawCount": 24,
+        "eligibleCount": 2,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-03"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -5536,41 +5638,41 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 500,
+    "totalMonitoredRecords": 502,
     "includedProvincialRecords": 113,
     "provincialEvents": 94,
     "nationalEvents": 34,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 412,
-    "fixedPanelMonitoringRecords": 19,
-    "operationalRecords": 19,
+    "fixedPanelMonitoringRecords": 21,
+    "operationalRecords": 21,
     "operationalRecordTypes": {
-      "live": 0,
+      "live": 2,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 19
+      "fixed-panel-monitoring": 21
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 431,
+    "analysisRecords": 433,
     "analysisProvenanceRecords": {
       "archive-backfill": 412,
-      "fixed-panel-monitoring": 19
+      "fixed-panel-monitoring": 21
     },
     "excludedNonPanel": 0,
-    "unassigned": 264,
+    "unassigned": 266,
     "panelSourceCount": 6,
-    "coverageDays": 96,
-    "completeCoverageDays": 7,
-    "successfulSourceChecks": 309,
+    "coverageDays": 97,
+    "completeCoverageDays": 8,
+    "successfulSourceChecks": 315,
     "coverageStatuses": {
-      "success": 143,
-      "no_update": 166,
+      "success": 144,
+      "no_update": 171,
       "partial": 267,
       "failed": 0
     },
@@ -5581,15 +5683,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 36,
-        "good": 36,
-        "days": 6
+        "checks": 42,
+        "good": 42,
+        "days": 7
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 36,
+    "operationalCoverageChecks": 42,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 6,
+    "operationalCoverageDays": 7,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -5597,13 +5699,13 @@
         "days": 4
       },
       "live": {
-        "checks": 12,
-        "good": 12,
-        "days": 2
+        "checks": 18,
+        "good": 18,
+        "days": 3
       }
     },
-    "liveOperationalCoverageChecks": 12,
-    "liveOperationalCoverageDays": 2,
+    "liveOperationalCoverageChecks": 18,
+    "liveOperationalCoverageDays": 3,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
@@ -5611,7 +5713,7 @@
       "cultural-relics-news": 103,
       "archaeology": 201,
       "museum-association": 29,
-      "xinhua-wenbo": 11,
+      "xinhua-wenbo": 13,
       "cctv-wenbo": 14
     }
   },

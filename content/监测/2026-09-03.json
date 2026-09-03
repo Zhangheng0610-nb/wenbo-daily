@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "date": "2026-09-03",
+  "mode": "operational",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "archaeology",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "museum-association",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "success",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 2,
+      "note": "",
+      "rawCount": 24,
+      "eligibleCount": 2,
+      "acceptedThisRun": 2,
+      "retainedExisting": 0,
+      "finalItemCount": 2,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-03T07:14:03+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "operational-20260903-xinhua-wenbo-0001-498daacchtml",
+      "date": "2026-09-03",
+      "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/photo/20260903/0c663f22432240c5ad20c0c8f498daac/c.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live"
+    },
+    {
+      "recordId": "operational-20260903-xinhua-wenbo-0002-0ee9d38chtml",
+      "date": "2026-09-03",
+      "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/leaders/20260903/800e09d7185c45e4800776e340ee9d38/c.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆",
+        "文化遗产",
+        "国际交流"
+      ],
+      "tags": [
+        "博物馆",
+        "文化遗产",
+        "国际交流"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live"
+    }
+  ],
+  "runType": "live",
+  "scanAudit": {
+    "scanner": "automation/backfill_monitoring.py",
+    "mode": "operational",
+    "runType": "live",
+    "completed": true,
+    "checkedAt": "2026-09-03T07:14:03+08:00",
+    "replay": false,
+    "sources": {
+      "ncha": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "cultural-relics-news": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "archaeology": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "museum-association": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "xinhua-wenbo": {
+        "rawCount": 24,
+        "eligibleCount": 2,
+        "acceptedCount": 2,
+        "rawDiscovered": 24,
+        "scopeQualified": 2,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "cctv-wenbo": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      }
+    }
+  }
+}

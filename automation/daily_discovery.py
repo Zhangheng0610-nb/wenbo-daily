@@ -16,6 +16,7 @@ import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta, timezone
+from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit
@@ -131,6 +132,10 @@ QUERY_BACKENDS = (
     {"id": "bing-news-rss", "name": "Bing News RSS", "base": "https://www.bing.com/news/search", "locale": "zh"},
     {"id": "google-news-rss", "name": "Google News RSS", "base": "https://news.google.com/rss/search", "locale": "en"},
 )
+
+# Keep the full daily search within the native automation run window while
+# retaining a per-request timeout and one audit row per configured query.
+DISCOVERY_SEARCH_WORKERS = 32
 
 GENERIC_TITLE_WORDS = {
     "文物", "博物馆", "考古", "文化", "遗址", "发布", "举行", "召开", "相关", "我国", "中国", "国际",
@@ -390,7 +395,7 @@ def execute_queries(required_date: date, start: date, end: date) -> tuple[list[d
         for base_query in family["queries"]
     ]
     results = [None] * len(tasks)
-    with ThreadPoolExecutor(max_workers=min(8, len(tasks))) as pool:
+    with ThreadPoolExecutor(max_workers=min(DISCOVERY_SEARCH_WORKERS, len(tasks))) as pool:
         futures = {
             pool.submit(_execute_one_query, family, backend, base_query, start, end): index
             for index, (family, backend, base_query) in enumerate(tasks)
@@ -405,15 +410,18 @@ def execute_queries(required_date: date, start: date, end: date) -> tuple[list[d
     return records, audits
 
 
+@lru_cache(maxsize=16384)
 def compact(text: str) -> str:
     return re.sub(r"[^0-9a-z\u4e00-\u9fff]+", "", (text or "").lower())
 
 
+@lru_cache(maxsize=16384)
 def meaningful_terms(text: str) -> set[str]:
     terms = set(re.findall(r"[\u4e00-\u9fff]{2,}|[a-z0-9]+", (text or "").lower()))
     return {term for term in terms if term not in GENERIC_TITLE_WORDS and len(term) >= 2}
 
 
+@lru_cache(maxsize=16384)
 def clean_discovery_title(title: str) -> str:
     """Remove transport/source suffixes before comparing syndicated reports."""
     value = unescape(title or "").replace("\u00a0", " ").strip()
@@ -446,6 +454,7 @@ def _match_fragment_is_weak(fragment: str) -> bool:
     return len(value) <= 8 and all(char in generic_chars for char in value)
 
 
+@lru_cache(maxsize=16384)
 def event_match_terms(text: str) -> set[str]:
     """Create bounded Chinese/Latin anchors for article-level event matching."""
     value = clean_discovery_title(text)
@@ -465,6 +474,7 @@ def event_match_terms(text: str) -> set[str]:
     return terms
 
 
+@lru_cache(maxsize=16384)
 def event_actions(text: str) -> set[str]:
     value = clean_discovery_title(text)
     return {
@@ -542,6 +552,7 @@ def event_match_details(event: dict, result: dict, body: str = "") -> dict:
     }
 
 
+@lru_cache(maxsize=16384)
 def normalized_event_title(title: str) -> str:
     """Normalize a headline for cross-source historical identity checks."""
     value = clean_discovery_title(title)
@@ -549,11 +560,13 @@ def normalized_event_title(title: str) -> str:
     return compact(value)
 
 
+@lru_cache(maxsize=16384)
 def event_kind(title: str) -> set[str]:
     text = clean_discovery_title(title)
     return {kind for kind, terms in EVENT_KIND_TERMS.items() if any(term in text for term in terms)}
 
 
+@lru_cache(maxsize=16384)
 def event_action(text: str) -> str:
     """Return a coarse event action so one entity's different events stay separate."""
     value = text or ""
@@ -563,6 +576,7 @@ def event_action(text: str) -> str:
     return ""
 
 
+@lru_cache(maxsize=16384)
 def event_named_entity(text: str) -> str:
     """Extract a named institution/project/instrument, not a generic topic word."""
     value = clean_discovery_title(text)
@@ -726,6 +740,54 @@ def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | No
     return ("same_day_duplicate" if distance == 0 else "historical_duplicate", "shared named event anchor and event type")
 
 
+def _dedup_relation_keys(record: dict) -> set[tuple[str, str]]:
+    """Build conservative inverted-index keys for duplicate comparison.
+
+    Every relation accepted by ``duplicate_relation`` or
+    ``event_report_relation`` has at least one of these anchors in common:
+    URL, normalized title, canonical identity, event-match terms, or
+    meaningful title terms.  The index only narrows comparisons; the
+    existing relation functions remain authoritative, so matching semantics
+    do not change.
+    """
+    keys: set[tuple[str, str]] = set()
+    url = canonical_url(record.get("url") or record.get("evidenceUrl") or "")
+    if url:
+        keys.add(("url", url))
+    title = normalized_event_title(record.get("representativeTitle") or record.get("title", ""))
+    if title:
+        keys.add(("title", title))
+    identity = canonical_event_identity(record)
+    if identity:
+        keys.add(("identity", identity))
+    title_text = clean_discovery_title(record.get("representativeTitle") or record.get("title", ""))
+    for term in event_match_terms(title_text):
+        keys.add(("event-term", term))
+    for term in meaningful_terms(title_text):
+        keys.add(("meaningful-term", term))
+    return keys
+
+
+def _indexed_relation_candidates(record: dict, rows_by_key: dict[tuple[str, str], dict[int, dict]]) -> list[dict]:
+    """Return possible predecessors in their original comparison order."""
+    candidates: dict[int, dict] = {}
+    for key in _dedup_relation_keys(record):
+        candidates.update(rows_by_key.get(key, {}))
+    return [candidates[index] for index in sorted(candidates)]
+
+
+def _index_relation_row(record: dict, order: int, rows_by_key: dict[tuple[str, str], dict[int, dict]]) -> None:
+    for key in _dedup_relation_keys(record):
+        rows_by_key.setdefault(key, {})[order] = record
+
+
+def _indexed_group_candidates(record: dict, groups: list[list[dict]], group_index: dict[tuple[str, str], dict[int, None]]) -> list[list[dict]]:
+    group_orders: dict[int, None] = {}
+    for key in _dedup_relation_keys(record):
+        group_orders.update(group_index.get(key, {}))
+    return [groups[order] for order in sorted(group_orders)]
+
+
 def event_id_for(group: list[dict]) -> str:
     identities = {canonical_event_identity(row) for row in group if canonical_event_identity(row)}
     if len(identities) == 1:
@@ -758,16 +820,20 @@ def compact_discovery_report(row: dict) -> dict:
 def aggregate_event_candidates(records: list[dict]) -> list[dict]:
     """Collapse current-window reports into event candidates before scoring."""
     groups: list[list[dict]] = []
+    group_index: dict[tuple[str, str], dict[int, None]] = {}
     for row in records:
         if row.get("duplicateStatus") == "historical_duplicate":
             continue
-        for group in groups:
+        possible_groups = _indexed_group_candidates(row, groups, group_index)
+        for group in possible_groups:
             relation = event_report_relation(row, group[0])
             if relation:
                 group.append(row)
                 break
         else:
             groups.append([row])
+            for key in _dedup_relation_keys(row):
+                group_index.setdefault(key, {})[len(groups) - 1] = None
     # A report may have been marked historical because it matched an older
     # daily item, while another report for the same event is also present in
     # this replay window. Keep that report only when it matches a current
@@ -775,7 +841,7 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
     for row in records:
         if row.get("duplicateStatus") != "historical_duplicate":
             continue
-        for group in groups:
+        for group in _indexed_group_candidates(row, groups, group_index):
             if event_report_relation(row, group[0]):
                 group.append(row)
                 break
@@ -1255,7 +1321,7 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                 # after:/before: for older indexed source pages.
                 query_jobs.append((event["eventId"], family, backend, base_query, not base_query.startswith("site:")))
     query_results = {event_id: [] for event_id in {event["eventId"] for event in queued}}
-    with ThreadPoolExecutor(max_workers=min(8, len(query_jobs) or 1)) as pool:
+    with ThreadPoolExecutor(max_workers=min(DISCOVERY_SEARCH_WORKERS, len(query_jobs) or 1)) as pool:
         futures = {
             pool.submit(_execute_one_query, family, backend, base_query, required_date - timedelta(days=6), required_date, date_filter=date_filter): event_id
             for event_id, family, backend, base_query, date_filter in query_jobs
@@ -2248,9 +2314,13 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         combined.append(record)
     same_day = historical = developments = 0
     annotated = []
-    for record in combined:
+    relation_index: dict[tuple[str, str], dict[int, dict]] = {}
+    history_order = len(combined)
+    for history_index, previous in enumerate(history):
+        _index_relation_row(previous, history_order + history_index, relation_index)
+    for record_index, record in enumerate(combined):
         relation = None
-        for previous in annotated + history:
+        for previous in _indexed_relation_candidates(record, relation_index):
             relation = duplicate_relation(record, previous)
             if relation:
                 break
@@ -2275,6 +2345,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             record.setdefault("duplicateStatus", "unique_event")
             record.setdefault("newDevelopment", False)
         annotated.append(record)
+        _index_relation_row(record, record_index, relation_index)
     raw_priority_counts = {"high": 0, "medium": 0, "low": 0}
     for row in annotated:
         raw_priority_counts[editorial_priority(row, required_date)["label"]] += 1
