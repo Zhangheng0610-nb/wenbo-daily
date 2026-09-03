@@ -1,0 +1,3386 @@
+{
+  "schema": "daily-discovery-v1",
+  "date": "2026-09-04",
+  "windowStart": "2026-08-29",
+  "windowEnd": "2026-09-04",
+  "cutoffTimezone": "Asia/Shanghai",
+  "sourceScans": [
+    {
+      "sourceId": "ncha-wenwu-news",
+      "name": "国家文物局文物新闻栏目",
+      "scope": "domestic",
+      "url": "http://www.ncha.gov.cn/module/jslib/jquery/jpage/dataproxy.jsp?appid=1&webid=1&path=/&columnid=722&unitid=8000&webname=%E5%9B%BD%E5%AE%B6%E6%96%87%E7%89%A9%E5%B1%80&permissiontype=0&page=1",
+      "status": "checked",
+      "linksSeen": 300,
+      "datedLinks": 300,
+      "outsideWindow": 294,
+      "undatedLinks": 0,
+      "rawResults": 300,
+      "windowResults": 6,
+      "note": ""
+    },
+    {
+      "sourceId": "ncha-policy-news",
+      "name": "国家文物局政策/工作动态栏目",
+      "scope": "domestic",
+      "url": "http://www.ncha.gov.cn/module/jslib/jquery/jpage/dataproxy.jsp?appid=1&webid=1&path=/&columnid=1879&unitid=8000&webname=%E5%9B%BD%E5%AE%B6%E6%96%87%E7%89%A9%E5%B1%80&permissiontype=0&page=1",
+      "status": "checked",
+      "linksSeen": 300,
+      "datedLinks": 300,
+      "outsideWindow": 297,
+      "undatedLinks": 0,
+      "rawResults": 300,
+      "windowResults": 3,
+      "note": ""
+    },
+    {
+      "sourceId": "xinhua-cultural",
+      "name": "新华网文化/文博栏目",
+      "scope": "domestic",
+      "url": "https://www.news.cn/ci/wb.html",
+      "status": "checked",
+      "linksSeen": 29,
+      "datedLinks": 16,
+      "outsideWindow": 10,
+      "undatedLinks": 13,
+      "rawResults": 16,
+      "windowResults": 6,
+      "note": ""
+    },
+    {
+      "sourceId": "chinanews-cultural",
+      "name": "中国新闻网文化栏目",
+      "scope": "domestic",
+      "url": "https://www.chinanews.com.cn/cul/",
+      "status": "checked",
+      "linksSeen": 0,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 0,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "mct-national-museum",
+      "name": "文化和旅游部直属中国国家博物馆栏目",
+      "scope": "domestic",
+      "url": "https://www.mct.gov.cn/whzx/zsdw/zggjbwg/",
+      "status": "checked",
+      "linksSeen": 119,
+      "datedLinks": 20,
+      "outsideWindow": 20,
+      "undatedLinks": 99,
+      "rawResults": 20,
+      "windowResults": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "shanxi-museum",
+      "name": "山西博物院官网新闻/公告入口",
+      "scope": "domestic",
+      "url": "https://shanximuseum.com.cn/sx/index/index.html",
+      "status": "checked",
+      "linksSeen": 111,
+      "datedLinks": 3,
+      "outsideWindow": 2,
+      "undatedLinks": 108,
+      "rawResults": 3,
+      "windowResults": 1,
+      "note": ""
+    },
+    {
+      "sourceId": "unesco-news",
+      "name": "UNESCO新闻",
+      "scope": "international",
+      "url": "https://www.unesco.org/en/newsroom/news",
+      "status": "checked",
+      "linksSeen": 224,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 224,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": ""
+    },
+    {
+      "sourceId": "archaeology-magazine",
+      "name": "Archaeology Magazine新闻",
+      "scope": "international",
+      "url": "https://archaeology.org/news/",
+      "status": "checked",
+      "linksSeen": 0,
+      "datedLinks": 0,
+      "outsideWindow": 0,
+      "undatedLinks": 0,
+      "rawResults": 0,
+      "windowResults": 0,
+      "note": ""
+    }
+  ],
+  "queryFamilies": [
+    {
+      "id": "policy-governance",
+      "scope": "domestic",
+      "queries": [
+        "文物 政策 管理办法 通知 施行",
+        "博物馆 管理 政策 文物局",
+        "site:gov.cn 文物 博物馆 政策",
+        "文博 考古 专家 政府特殊津贴",
+        "博物馆 入馆 预约 证件 规则",
+        "博物馆 陈列展览 内容审核 通知"
+      ]
+    },
+    {
+      "id": "archaeology-heritage",
+      "scope": "domestic",
+      "queries": [
+        "考古 新发现 遗址 保护 研究成果",
+        "文物保护 工程 遗产 条例",
+        "site:chinanews.com.cn 考古 遗址 文明",
+        "site:henandaily.cn 考古 文物",
+        "古建筑 修缮 保护工程 文物",
+        "革命文物 烈士墓葬 考古发现",
+        "革命文物 烈士墓 文物保护"
+      ]
+    },
+    {
+      "id": "museum-public-culture",
+      "scope": "domestic",
+      "queries": [
+        "博物馆 开馆 展览 重要馆藏 官方",
+        "博物馆 安全 声明 重大事件",
+        "site:thepaper.cn 博物馆 文物 安全",
+        "site:gov.cn 博物馆 开馆 展览",
+        "博物馆 展览 闭幕 参观人次",
+        "博物馆 国际合作 文物展 数字展示",
+        "site:chinanews.com.cn 博物馆 展览",
+        "博物馆 馆际借展 国际借展 文物",
+        "博物馆 藏品 出境 借展 联展"
+      ]
+    },
+    {
+      "id": "digital-heritage",
+      "scope": "domestic",
+      "queries": [
+        "数字文博 AI 三维 虚拟现实 博物馆",
+        "文物 数字化 数据平台 保护"
+      ]
+    },
+    {
+      "id": "heritage-professionals",
+      "scope": "domestic",
+      "queries": [
+        "文博 特殊津贴",
+        "文博 人才 入选",
+        "考古 专家 名单",
+        "文物专家 公示",
+        "博物馆 人才 任命",
+        "专家 政府 特殊津贴"
+      ]
+    },
+    {
+      "id": "museum-operations",
+      "scope": "domestic",
+      "queries": [
+        "博物馆 入馆",
+        "博物馆 证件 二维码",
+        "博物馆 预约 规则",
+        "博物馆 开放 调整",
+        "博物馆 证件 入馆"
+      ]
+    },
+    {
+      "id": "modern-heritage",
+      "scope": "domestic",
+      "queries": [
+        "烈士墓葬 发现",
+        "革命文物 保护 修缮",
+        "革命遗址 调查",
+        "近现代遗产 保护"
+      ]
+    },
+    {
+      "id": "international-loans",
+      "scope": "international",
+      "queries": [
+        "museum loan exhibition",
+        "museum collection loan",
+        "touring exhibition museum",
+        "museum objects on loan",
+        "major museum loan exhibition",
+        "site:theartnewspaper.com museum loan",
+        "site:smithsonianmag.com museum exhibition"
+      ]
+    },
+    {
+      "id": "local-heritage-governance",
+      "scope": "domestic",
+      "queries": [
+        "文物局 陈列展览 审核",
+        "博物馆 内容审核",
+        "文物局 藏品管理",
+        "地方 博物馆 监管 通知",
+        "site:thepaper.cn 博物馆 陈列展览 审核"
+      ]
+    },
+    {
+      "id": "international-heritage",
+      "scope": "international",
+      "queries": [
+        "museum archaeology cultural heritage",
+        "archaeological discovery heritage site",
+        "heritage protection museum theft",
+        "repatriation museum policy",
+        "digital heritage museum technology",
+        "museum loan exhibition Islamic art",
+        "natural history museum fossil palaeontology exhibition",
+        "museum dinosaur fossil exhibition",
+        "site:polizei.gv.at museum theft",
+        "site:aa.com.tr archaeology heritage",
+        "site:reuters.com museum archaeology heritage",
+        "site:apnews.com museum archaeology heritage"
+      ]
+    }
+  ],
+  "queryAuditStatus": "checked",
+  "queryResults": [],
+  "queryAudits": [
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物 政策 管理办法 通知 施行 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 管理 政策 文物局 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:gov.cn 文物 博物馆 政策 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文博 考古 专家 政府特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 入馆 预约 证件 规则 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 陈列展览 内容审核 通知 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物 政策 管理办法 通知 施行 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 管理 政策 文物局 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:gov.cn 文物 博物馆 政策 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文博 考古 专家 政府特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 入馆 预约 证件 规则 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "policy-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 陈列展览 内容审核 通知 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "考古 新发现 遗址 保护 研究成果 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物保护 工程 遗产 条例 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:chinanews.com.cn 考古 遗址 文明 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:henandaily.cn 考古 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "古建筑 修缮 保护工程 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "革命文物 烈士墓葬 考古发现 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "革命文物 烈士墓 文物保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "考古 新发现 遗址 保护 研究成果 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物保护 工程 遗产 条例 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:chinanews.com.cn 考古 遗址 文明 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:henandaily.cn 考古 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "古建筑 修缮 保护工程 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "革命文物 烈士墓葬 考古发现 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "archaeology-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "革命文物 烈士墓 文物保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 开馆 展览 重要馆藏 官方 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 安全 声明 重大事件 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:thepaper.cn 博物馆 文物 安全 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:gov.cn 博物馆 开馆 展览 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 展览 闭幕 参观人次 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 国际合作 文物展 数字展示 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:21+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:chinanews.com.cn 博物馆 展览 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 馆际借展 国际借展 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 藏品 出境 借展 联展 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 开馆 展览 重要馆藏 官方 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 安全 声明 重大事件 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:thepaper.cn 博物馆 文物 安全 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:gov.cn 博物馆 开馆 展览 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 展览 闭幕 参观人次 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 国际合作 文物展 数字展示 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:chinanews.com.cn 博物馆 展览 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 馆际借展 国际借展 文物 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-public-culture",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 藏品 出境 借展 联展 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "digital-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "数字文博 AI 三维 虚拟现实 博物馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "digital-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物 数字化 数据平台 保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "digital-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "数字文博 AI 三维 虚拟现实 博物馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "digital-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物 数字化 数据平台 保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文博 特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文博 人才 入选 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "考古 专家 名单 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物专家 公示 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 人才 任命 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "专家 政府 特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文博 特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文博 人才 入选 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:22+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "考古 专家 名单 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物专家 公示 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 人才 任命 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "heritage-professionals",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "专家 政府 特殊津贴 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 入馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 证件 二维码 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:23+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 预约 规则 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:24+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 开放 调整 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:24+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 证件 入馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:24+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 入馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:24+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 证件 二维码 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:16:25+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 预约 规则 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 开放 调整 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "museum-operations",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 证件 入馆 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "烈士墓葬 发现 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "革命文物 保护 修缮 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "革命遗址 调查 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "近现代遗产 保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "烈士墓葬 发现 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "革命文物 保护 修缮 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "革命遗址 调查 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "modern-heritage",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "近现代遗产 保护 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum loan exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum collection loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:09+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "touring exhibition museum after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum objects on loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "major museum loan exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:theartnewspaper.com museum loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:smithsonianmag.com museum exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum loan exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum collection loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "touring exhibition museum after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum objects on loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "major museum loan exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:theartnewspaper.com museum loan after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-loans",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:smithsonianmag.com museum exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物局 陈列展览 审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "博物馆 内容审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "文物局 藏品管理 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "地方 博物馆 监管 通知 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:thepaper.cn 博物馆 陈列展览 审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物局 陈列展览 审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "博物馆 内容审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "文物局 藏品管理 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "地方 博物馆 监管 通知 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "local-heritage-governance",
+      "scope": "domestic",
+      "backend": "google-news-rss",
+      "actualQuery": "site:thepaper.cn 博物馆 陈列展览 审核 after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum archaeology cultural heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "archaeological discovery heritage site after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "heritage protection museum theft after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "repatriation museum policy after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:10+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "digital heritage museum technology after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum loan exhibition Islamic art after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "natural history museum fossil palaeontology exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "museum dinosaur fossil exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:polizei.gv.at museum theft after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:aa.com.tr archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:reuters.com museum archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "bing-news-rss",
+      "actualQuery": "site:apnews.com museum archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "ParseError: syntax error: line 1, column 0",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum archaeology cultural heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "archaeological discovery heritage site after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "heritage protection museum theft after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "repatriation museum policy after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "digital heritage museum technology after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum loan exhibition Islamic art after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "natural history museum fossil palaeontology exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "museum dinosaur fossil exhibition after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:11+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:polizei.gv.at museum theft after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:12+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:aa.com.tr archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:12+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:reuters.com museum archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:12+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    },
+    {
+      "queryFamily": "international-heritage",
+      "scope": "international",
+      "backend": "google-news-rss",
+      "actualQuery": "site:apnews.com museum archaeology heritage after:2026-08-29 before:2026-09-05",
+      "executedAt": "2026-09-04T07:17:12+08:00",
+      "success": false,
+      "failure": "URLError: <urlopen error timed out>",
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "undatedResultCount": 0,
+      "dateFilterApplied": true
+    }
+  ],
+  "queryFamilySummary": {
+    "policy-governance": {
+      "queriesAttempted": 12,
+      "queriesSucceeded": 0,
+      "queriesFailed": 12,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "archaeology-heritage": {
+      "queriesAttempted": 14,
+      "queriesSucceeded": 0,
+      "queriesFailed": 14,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "museum-public-culture": {
+      "queriesAttempted": 18,
+      "queriesSucceeded": 0,
+      "queriesFailed": 18,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "digital-heritage": {
+      "queriesAttempted": 4,
+      "queriesSucceeded": 0,
+      "queriesFailed": 4,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "heritage-professionals": {
+      "queriesAttempted": 12,
+      "queriesSucceeded": 0,
+      "queriesFailed": 12,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "museum-operations": {
+      "queriesAttempted": 10,
+      "queriesSucceeded": 0,
+      "queriesFailed": 10,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "modern-heritage": {
+      "queriesAttempted": 8,
+      "queriesSucceeded": 0,
+      "queriesFailed": 8,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "international-loans": {
+      "queriesAttempted": 14,
+      "queriesSucceeded": 0,
+      "queriesFailed": 14,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "local-heritage-governance": {
+      "queriesAttempted": 10,
+      "queriesSucceeded": 0,
+      "queriesFailed": 10,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    },
+    "international-heritage": {
+      "queriesAttempted": 24,
+      "queriesSucceeded": 0,
+      "queriesFailed": 24,
+      "returnedResults": 0,
+      "acceptedRawRecords": 0,
+      "rawRecords": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 0,
+      "uniqueEventsTouched": 0,
+      "firstDiscoveryEventCount": 0,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 0
+    }
+  },
+  "records": [
+    {
+      "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+      "publishedDate": "2026-09-03",
+      "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-eaee9c72a7b2",
+      "eventCandidateDisposition": "evidence_qualified",
+      "eventEditorialPriorityScore": 28,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "看展览 | 博物馆展讯速览",
+      "publishedDate": "2026-09-01",
+      "url": "http://www.ncha.gov.cn/art/2026/9/1/art_722_204626.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-b9f4bd112b49",
+      "eventCandidateDisposition": "deferred",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+      "publishedDate": "2026-09-02",
+      "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-99acc4dd0f5d",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 28,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "《金石探文明》今晚播出 解码两千多年前的石刻史诗",
+      "publishedDate": "2026-08-30",
+      "url": "http://www.ncha.gov.cn/art/2026/8/30/art_722_204570.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-84907bba2270",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "一周文物动态摘编（8.22-8.28）",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204565.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-9ecf52dca9c1",
+      "eventCandidateDisposition": "deferred",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+      "discoveredVia": "ncha-wenwu-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "same normalized title within event window",
+      "duplicateOf": "published-d3acacf17180",
+      "duplicateOfTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "newDevelopment": false,
+      "eventId": "event-8a6da5892d19",
+      "eventCandidateDisposition": "evidence_qualified",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "《求是》杂志发表习近平总书记重要文章《坚持落实管党治党政治责任》",
+      "publishedDate": "2026-08-31",
+      "url": "http://www.ncha.gov.cn/art/2026/8/31/art_1879_204591.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-825c8a7d87ba",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "习近平：坚持落实管党治党政治责任",
+      "publishedDate": "2026-08-31",
+      "url": "http://www.ncha.gov.cn/art/2026/8/31/art_1879_204590.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-0a43635776da",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "publishedDate": "2026-08-29",
+      "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+      "discoveredVia": "ncha-policy-news",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "ncha.gov.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "same_day_duplicate",
+      "duplicateReason": "same normalized title within event window",
+      "duplicateOf": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "duplicateOfTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "newDevelopment": false,
+      "eventId": "event-8a6da5892d19",
+      "eventCandidateDisposition": "evidence_qualified",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "中埃联合考古队新发现一批重要遗迹和文物",
+      "publishedDate": "2026-09-02",
+      "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "new_development",
+      "duplicateReason": "specific event match with a current development marker",
+      "duplicateOf": "published-e223cb06ff72",
+      "duplicateOfTitle": "🔥 中埃联合考古新突破：阿齐兹遗址发现神庙遗迹",
+      "newDevelopment": true,
+      "eventId": "event-8551a8589879",
+      "eventCandidateDisposition": "evidence_qualified",
+      "eventEditorialPriorityScore": 94,
+      "eventEditorialPriorityLabel": "high"
+    },
+    {
+      "title": "首图推出“重走营造学社之路——中国古建筑系列讲座”",
+      "publishedDate": "2026-08-30",
+      "url": "https://www.news.cn/ci/20260830/28d9f2c0a5644edd9db36a007a3bc2c3/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-eabe4a408740",
+      "eventCandidateDisposition": "deferred",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "“歌声中的共同记忆——裕固族口头传统资源建设成果展演活动”在国图举办",
+      "publishedDate": "2026-08-30",
+      "url": "https://www.news.cn/ci/20260830/1518e10868c14cedaa930955de276700/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-4ce7199e09b7",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "“血脉觉醒”，传统文化成了“顶流”",
+      "publishedDate": "2026-09-03",
+      "url": "https://www.news.cn/ci/20260903/c8bc133415b84c9b9c6f925a0c339801/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-0ee77212ffe1",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 28,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "文旅消费新体验 圆明园里开了间中医数智小屋",
+      "publishedDate": "2026-08-31",
+      "url": "https://www.news.cn/ci/20260831/45721dacdbba4ccb93fa0bccb34f4166/c.html",
+      "discoveredVia": "xinhua-cultural",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "news.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-ecad7f11e8f7",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "山西博物院关于停止使用二维码核验入馆参观的公告 2026.09.01",
+      "publishedDate": "2026-09-01",
+      "url": "https://mp.weixin.qq.com/s/6GnIAh0QaxOKl4Ed86tuoQ",
+      "discoveredVia": "shanxi-museum",
+      "discoverySourceType": "source_scan",
+      "scope": "domestic",
+      "sourceDomain": "shanximuseum.com.cn",
+      "discoveredAt": "2026-09-04T07:18:01+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-a3317cbf74ca",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 0,
+      "eventEditorialPriorityLabel": "low"
+    }
+  ],
+  "candidateEvaluation": {
+    "summary": {
+      "rawRecords": 15,
+      "eventCandidateCount": 14,
+      "deduplicatedReports": 15,
+      "candidateEvaluationPool": 3,
+      "evidenceQualified": 3,
+      "needsVerification": 0,
+      "highPriorityCandidates": 1,
+      "highPriorityEvidenceQueue": 0,
+      "highPriorityNeedsVerification": 0,
+      "highPriorityEvidenceQueueEvents": 0,
+      "mediumPriorityEvidenceQueueEvents": 0,
+      "evidenceUpgradeAttempted": 0,
+      "evidenceUpgradeQualified": 0,
+      "evidenceUpgradeFailed": 0,
+      "evidenceUpgradeAmbiguous": 0,
+      "rejected": 8,
+      "deferred": 3,
+      "provisionalWouldBeSelected": 1,
+      "editorialPriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 13
+      },
+      "eventCandidatePriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 13
+      },
+      "rawRecordPriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 14
+      },
+      "dispositionCounts": {
+        "rejected": 8,
+        "evidence_qualified": 3,
+        "deferred": 3
+      }
+    },
+    "finalEditorialPool": {
+      "status": "pending_editorial_review",
+      "rawQualifiedEvents": 3,
+      "canonicalUniqueEvents": 3,
+      "historicalDuplicates": 1,
+      "historicalDuplicateDefinition": "unique published-event targets excluded before evidence qualification",
+      "editoriallyReviewed": 0,
+      "events": [
+        {
+          "eventId": "event-8551a8589879",
+          "title": "中埃联合考古队新发现一批重要遗迹和文物",
+          "representativeTitle": "中埃联合考古队新发现一批重要遗迹和文物",
+          "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+          "publishedDate": "2026-09-02",
+          "scope": "domestic",
+          "candidateDisposition": "evidence_qualified",
+          "reportCount": 1,
+          "sourceDomains": [
+            "news.cn"
+          ],
+          "publisherDomains": [
+            "news.cn"
+          ],
+          "freshnessTier": "primary_0_48h",
+          "newDevelopment": true,
+          "claimRisk": "ordinary",
+          "editorialPriorityScore": 94,
+          "editorialPriorityLabel": "high",
+          "editorialReasons": [
+            "substantive_archaeological_discovery_or_new_knowledge",
+            "meaningful_institutional_or_international_cooperation",
+            "new_development",
+            "primary_freshness"
+          ],
+          "museumCollectionOrPublicIncident": false,
+          "publicSalience": {
+            "level": "normal",
+            "independentCoverageCount": 1,
+            "publisherDiversity": 1,
+            "sourceTypeDiversity": 1,
+            "coverageDates": [
+              "2026-09-02"
+            ],
+            "sourceTypes": [
+              "central_media"
+            ],
+            "reason": "limited_or_unconfirmed_independent_coverage"
+          },
+          "independentCoverageCount": 1,
+          "evidenceTierAtDiscovery": "A",
+          "evidenceTierAfterUpgrade": "A",
+          "evidenceUpgradeStatus": "not_needed",
+          "evidenceUpgradeAttempted": null,
+          "evidenceUpgradeResult": null,
+          "evidenceSources": [
+            {
+              "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+              "tier": "A"
+            }
+          ],
+          "evidenceResolutionAttempts": null,
+          "discoveryReports": [
+            {
+              "title": "中埃联合考古队新发现一批重要遗迹和文物",
+              "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+              "publishedDate": "2026-09-02",
+              "discoveredVia": "xinhua-cultural",
+              "discoverySourceType": "source_scan",
+              "sourceDomain": "news.cn",
+              "duplicateStatus": "new_development",
+              "publisherDomain": "news.cn"
+            }
+          ]
+        },
+        {
+          "eventId": "event-eaee9c72a7b2",
+          "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+          "representativeTitle": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+          "publishedDate": "2026-09-03",
+          "scope": "domestic",
+          "candidateDisposition": "evidence_qualified",
+          "reportCount": 1,
+          "sourceDomains": [
+            "ncha.gov.cn"
+          ],
+          "publisherDomains": [
+            "ncha.gov.cn"
+          ],
+          "freshnessTier": "primary_0_48h",
+          "newDevelopment": false,
+          "claimRisk": "ordinary",
+          "editorialPriorityScore": 28,
+          "editorialPriorityLabel": "low",
+          "editorialReasons": [
+            "primary_freshness"
+          ],
+          "museumCollectionOrPublicIncident": false,
+          "publicSalience": {
+            "level": "normal",
+            "independentCoverageCount": 1,
+            "publisherDiversity": 1,
+            "sourceTypeDiversity": 1,
+            "coverageDates": [
+              "2026-09-03"
+            ],
+            "sourceTypes": [
+              "official_institution"
+            ],
+            "reason": "limited_or_unconfirmed_independent_coverage"
+          },
+          "independentCoverageCount": 1,
+          "evidenceTierAtDiscovery": "A",
+          "evidenceTierAfterUpgrade": "A",
+          "evidenceUpgradeStatus": "not_needed",
+          "evidenceUpgradeAttempted": null,
+          "evidenceUpgradeResult": null,
+          "evidenceSources": [
+            {
+              "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+              "tier": "A"
+            }
+          ],
+          "evidenceResolutionAttempts": null,
+          "discoveryReports": [
+            {
+              "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+              "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+              "publishedDate": "2026-09-03",
+              "discoveredVia": "ncha-wenwu-news",
+              "discoverySourceType": "source_scan",
+              "sourceDomain": "ncha.gov.cn",
+              "duplicateStatus": "unique_event",
+              "publisherDomain": "ncha.gov.cn"
+            }
+          ]
+        },
+        {
+          "eventId": "event-8a6da5892d19",
+          "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+          "representativeTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+          "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+          "publishedDate": "2026-08-29",
+          "scope": "domestic",
+          "candidateDisposition": "evidence_qualified",
+          "reportCount": 2,
+          "sourceDomains": [
+            "ncha.gov.cn"
+          ],
+          "publisherDomains": [
+            "ncha.gov.cn"
+          ],
+          "freshnessTier": "backfill_3_7d",
+          "newDevelopment": false,
+          "claimRisk": "ordinary",
+          "editorialPriorityScore": 22,
+          "editorialPriorityLabel": "low",
+          "editorialReasons": [
+            "backfill_freshness"
+          ],
+          "museumCollectionOrPublicIncident": false,
+          "publicSalience": {
+            "level": "normal",
+            "independentCoverageCount": 1,
+            "publisherDiversity": 1,
+            "sourceTypeDiversity": 1,
+            "coverageDates": [
+              "2026-08-29"
+            ],
+            "sourceTypes": [
+              "official_institution"
+            ],
+            "reason": "limited_or_unconfirmed_independent_coverage"
+          },
+          "independentCoverageCount": 1,
+          "evidenceTierAtDiscovery": "A",
+          "evidenceTierAfterUpgrade": "A",
+          "evidenceUpgradeStatus": "not_needed",
+          "evidenceUpgradeAttempted": null,
+          "evidenceUpgradeResult": null,
+          "evidenceSources": [
+            {
+              "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+              "tier": "A"
+            }
+          ],
+          "evidenceResolutionAttempts": null,
+          "discoveryReports": [
+            {
+              "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+              "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+              "publishedDate": "2026-08-29",
+              "discoveredVia": "ncha-policy-news",
+              "discoverySourceType": "source_scan",
+              "sourceDomain": "ncha.gov.cn",
+              "duplicateStatus": "same_day_duplicate",
+              "publisherDomain": "ncha.gov.cn"
+            },
+            {
+              "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+              "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+              "publishedDate": "2026-08-29",
+              "discoveredVia": "ncha-wenwu-news",
+              "discoverySourceType": "source_scan",
+              "sourceDomain": "ncha.gov.cn",
+              "duplicateStatus": "historical_duplicate",
+              "publisherDomain": "ncha.gov.cn"
+            }
+          ]
+        }
+      ]
+    },
+    "eventCandidates": [
+      {
+        "eventId": "event-eaee9c72a7b2",
+        "representativeTitle": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+            "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-b9f4bd112b49",
+        "representativeTitle": "看展览 | 博物馆展讯速览",
+        "publishedDate": "2026-09-01",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "看展览 | 博物馆展讯速览",
+            "url": "http://www.ncha.gov.cn/art/2026/9/1/art_722_204626.html",
+            "publishedDate": "2026-09-01",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-99acc4dd0f5d",
+        "representativeTitle": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+        "publishedDate": "2026-09-02",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+            "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+            "publishedDate": "2026-09-02",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-84907bba2270",
+        "representativeTitle": "《金石探文明》今晚播出 解码两千多年前的石刻史诗",
+        "publishedDate": "2026-08-30",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "《金石探文明》今晚播出 解码两千多年前的石刻史诗",
+            "url": "http://www.ncha.gov.cn/art/2026/8/30/art_722_204570.html",
+            "publishedDate": "2026-08-30",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-9ecf52dca9c1",
+        "representativeTitle": "一周文物动态摘编（8.22-8.28）",
+        "publishedDate": "2026-08-29",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "一周文物动态摘编（8.22-8.28）",
+            "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204565.html",
+            "publishedDate": "2026-08-29",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-825c8a7d87ba",
+        "representativeTitle": "《求是》杂志发表习近平总书记重要文章《坚持落实管党治党政治责任》",
+        "publishedDate": "2026-08-31",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "《求是》杂志发表习近平总书记重要文章《坚持落实管党治党政治责任》",
+            "url": "http://www.ncha.gov.cn/art/2026/8/31/art_1879_204591.html",
+            "publishedDate": "2026-08-31",
+            "discoveredVia": "ncha-policy-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-0a43635776da",
+        "representativeTitle": "习近平：坚持落实管党治党政治责任",
+        "publishedDate": "2026-08-31",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "习近平：坚持落实管党治党政治责任",
+            "url": "http://www.ncha.gov.cn/art/2026/8/31/art_1879_204590.html",
+            "publishedDate": "2026-08-31",
+            "discoveredVia": "ncha-policy-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-8a6da5892d19",
+        "representativeTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+        "publishedDate": "2026-08-29",
+        "scope": "domestic",
+        "reportCount": 2,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+            "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+            "publishedDate": "2026-08-29",
+            "discoveredVia": "ncha-policy-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "same_day_duplicate",
+            "publisherDomain": "ncha.gov.cn"
+          },
+          {
+            "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+            "url": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+            "publishedDate": "2026-08-29",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "historical_duplicate",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-8551a8589879",
+        "representativeTitle": "中埃联合考古队新发现一批重要遗迹和文物",
+        "publishedDate": "2026-09-02",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "中埃联合考古队新发现一批重要遗迹和文物",
+            "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+            "publishedDate": "2026-09-02",
+            "discoveredVia": "xinhua-cultural",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "news.cn",
+            "duplicateStatus": "new_development",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-eabe4a408740",
+        "representativeTitle": "首图推出“重走营造学社之路——中国古建筑系列讲座”",
+        "publishedDate": "2026-08-30",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "首图推出“重走营造学社之路——中国古建筑系列讲座”",
+            "url": "https://www.news.cn/ci/20260830/28d9f2c0a5644edd9db36a007a3bc2c3/c.html",
+            "publishedDate": "2026-08-30",
+            "discoveredVia": "xinhua-cultural",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "news.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-4ce7199e09b7",
+        "representativeTitle": "“歌声中的共同记忆——裕固族口头传统资源建设成果展演活动”在国图举办",
+        "publishedDate": "2026-08-30",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "“歌声中的共同记忆——裕固族口头传统资源建设成果展演活动”在国图举办",
+            "url": "https://www.news.cn/ci/20260830/1518e10868c14cedaa930955de276700/c.html",
+            "publishedDate": "2026-08-30",
+            "discoveredVia": "xinhua-cultural",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "news.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-0ee77212ffe1",
+        "representativeTitle": "“血脉觉醒”，传统文化成了“顶流”",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "“血脉觉醒”，传统文化成了“顶流”",
+            "url": "https://www.news.cn/ci/20260903/c8bc133415b84c9b9c6f925a0c339801/c.html",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "xinhua-cultural",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "news.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-ecad7f11e8f7",
+        "representativeTitle": "文旅消费新体验 圆明园里开了间中医数智小屋",
+        "publishedDate": "2026-08-31",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "文旅消费新体验 圆明园里开了间中医数智小屋",
+            "url": "https://www.news.cn/ci/20260831/45721dacdbba4ccb93fa0bccb34f4166/c.html",
+            "publishedDate": "2026-08-31",
+            "discoveredVia": "xinhua-cultural",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "news.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-a3317cbf74ca",
+        "representativeTitle": "山西博物院关于停止使用二维码核验入馆参观的公告 2026.09.01",
+        "publishedDate": "2026-09-01",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "shanximuseum.com.cn"
+        ],
+        "publisherDomains": [
+          "shanximuseum.com.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "山西博物院关于停止使用二维码核验入馆参观的公告 2026.09.01",
+            "url": "https://mp.weixin.qq.com/s/6GnIAh0QaxOKl4Ed86tuoQ",
+            "publishedDate": "2026-09-01",
+            "discoveredVia": "shanxi-museum",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "shanximuseum.com.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "shanximuseum.com.cn"
+          }
+        ]
+      }
+    ],
+    "pool": [
+      {
+        "eventId": "event-8551a8589879",
+        "title": "中埃联合考古队新发现一批重要遗迹和文物",
+        "representativeTitle": "中埃联合考古队新发现一批重要遗迹和文物",
+        "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+        "publishedDate": "2026-09-02",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "evidence_qualified",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "filterReasons": [],
+        "editorialPriorityScore": 94,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "meaningful_institutional_or_international_cooperation",
+          "new_development",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-02"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 1,
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-eaee9c72a7b2",
+        "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+        "representativeTitle": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+        "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "evidence_qualified",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "filterReasons": [],
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 2,
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-8a6da5892d19",
+        "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+        "representativeTitle": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+        "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+        "publishedDate": "2026-08-29",
+        "scope": "domestic",
+        "reportCount": 2,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "candidateDisposition": "evidence_qualified",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "filterReasons": [],
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-08-29"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 12,
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      }
+    ],
+    "highPriorityEvidenceQueue": [],
+    "mediumPriorityEvidenceQueue": [],
+    "provisionalWouldBeSelected": [
+      {
+        "title": "中埃联合考古队新发现一批重要遗迹和文物",
+        "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+        "publishedDate": "2026-09-02",
+        "scope": "domestic",
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "evidence_qualified"
+      }
+    ],
+    "resolverDiscoveredCandidates": [],
+    "resolverDiscoveredEvents": [],
+    "fixedPanelRadar": {
+      "status": "scan_success_no_update",
+      "runType": "live",
+      "monitoringPath": "content/监测/2026-09-04.json",
+      "targetDate": "2026-09-04",
+      "seedCount": 0,
+      "seedRecordIds": [],
+      "seeds": [],
+      "matchedEventCount": 0,
+      "fixedRadarSeeds": 0,
+      "fixedRadarAlreadyDiscovered": 0,
+      "fixedRadarNewToDaily": 0,
+      "fixedRadarEvidenceQualified": 0,
+      "fixedRadarSelected": 0,
+      "eventMatches": []
+    }
+  },
+  "summary": {
+    "sourceScansAttempted": 8,
+    "sourceScansSucceeded": 8,
+    "queriesExecuted": 0,
+    "queriesAttempted": 126,
+    "queriesSucceeded": 0,
+    "queriesFailed": 126,
+    "rawResults": 15,
+    "sameDayDuplicateRecords": 1,
+    "historicalDuplicateRecords": 1,
+    "historicalDuplicateCanonicalTargets": 1,
+    "newDevelopmentRecords": 1,
+    "deduplicatedResults": 13,
+    "candidateEvaluation": {
+      "rawRecords": 15,
+      "eventCandidateCount": 14,
+      "deduplicatedReports": 15,
+      "candidateEvaluationPool": 3,
+      "evidenceQualified": 3,
+      "needsVerification": 0,
+      "highPriorityCandidates": 1,
+      "highPriorityEvidenceQueue": 0,
+      "highPriorityNeedsVerification": 0,
+      "highPriorityEvidenceQueueEvents": 0,
+      "mediumPriorityEvidenceQueueEvents": 0,
+      "evidenceUpgradeAttempted": 0,
+      "evidenceUpgradeQualified": 0,
+      "evidenceUpgradeFailed": 0,
+      "evidenceUpgradeAmbiguous": 0,
+      "rejected": 8,
+      "deferred": 3,
+      "provisionalWouldBeSelected": 1,
+      "editorialPriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 13
+      },
+      "eventCandidatePriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 13
+      },
+      "rawRecordPriorityCounts": {
+        "high": 1,
+        "medium": 0,
+        "low": 14
+      },
+      "dispositionCounts": {
+        "rejected": 8,
+        "evidence_qualified": 3,
+        "deferred": 3
+      }
+    },
+    "resolverDiscoveredCandidates": 0,
+    "resolverDiscoveredEvents": 0,
+    "queryFamilySummary": {
+      "policy-governance": {
+        "queriesAttempted": 12,
+        "queriesSucceeded": 0,
+        "queriesFailed": 12,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "archaeology-heritage": {
+        "queriesAttempted": 14,
+        "queriesSucceeded": 0,
+        "queriesFailed": 14,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "museum-public-culture": {
+        "queriesAttempted": 18,
+        "queriesSucceeded": 0,
+        "queriesFailed": 18,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "digital-heritage": {
+        "queriesAttempted": 4,
+        "queriesSucceeded": 0,
+        "queriesFailed": 4,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "heritage-professionals": {
+        "queriesAttempted": 12,
+        "queriesSucceeded": 0,
+        "queriesFailed": 12,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "museum-operations": {
+        "queriesAttempted": 10,
+        "queriesSucceeded": 0,
+        "queriesFailed": 10,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "modern-heritage": {
+        "queriesAttempted": 8,
+        "queriesSucceeded": 0,
+        "queriesFailed": 8,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-loans": {
+        "queriesAttempted": 14,
+        "queriesSucceeded": 0,
+        "queriesFailed": 14,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "local-heritage-governance": {
+        "queriesAttempted": 10,
+        "queriesSucceeded": 0,
+        "queriesFailed": 10,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-heritage": {
+        "queriesAttempted": 24,
+        "queriesSucceeded": 0,
+        "queriesFailed": 24,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      }
+    },
+    "deduplicatedReports": 15,
+    "uniqueEvents": 14,
+    "eventDuplicateReports": 1,
+    "domestic": {
+      "rawResults": 15,
+      "sameDayDuplicateRecords": 1,
+      "historicalDuplicateRecords": 1,
+      "historicalDuplicateCanonicalTargets": 1,
+      "newDevelopmentRecords": 1,
+      "deduplicatedResults": 13
+    },
+    "international": {
+      "rawResults": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "historicalDuplicateCanonicalTargets": 0,
+      "newDevelopmentRecords": 0,
+      "deduplicatedResults": 0
+    },
+    "fixedPanelRadar": {
+      "status": "scan_success_no_update",
+      "runType": "live",
+      "monitoringPath": "content/监测/2026-09-04.json",
+      "targetDate": "2026-09-04",
+      "seedCount": 0,
+      "seedRecordIds": [],
+      "seeds": [],
+      "matchedEventCount": 0,
+      "fixedRadarSeeds": 0,
+      "fixedRadarAlreadyDiscovered": 0,
+      "fixedRadarNewToDaily": 0,
+      "fixedRadarEvidenceQualified": 0,
+      "fixedRadarSelected": 0,
+      "eventMatches": []
+    }
+  },
+  "fixedPanelRadar": {
+    "status": "scan_success_no_update",
+    "runType": "live",
+    "monitoringPath": "content/监测/2026-09-04.json",
+    "targetDate": "2026-09-04",
+    "seedCount": 0,
+    "seedRecordIds": [],
+    "seeds": [],
+    "matchedEventCount": 0,
+    "fixedRadarSeeds": 0,
+    "fixedRadarAlreadyDiscovered": 0,
+    "fixedRadarNewToDaily": 0,
+    "fixedRadarEvidenceQualified": 0,
+    "fixedRadarSelected": 0,
+    "eventMatches": []
+  }
+}

@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-03",
-  "asOf": "2026-09-03",
+  "generated": "2026-09-04",
+  "asOf": "2026-09-04",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -5622,6 +5622,108 @@
         "duplicatesSkipped": 26,
         "scanStatus": "checked",
         "date": "2026-09-03"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-04"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-04"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-04"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-04"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-04"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-04T07:15:40+08:00",
+        "candidateCount": 0,
+        "note": "新华网栏目扫描完成，但域内补充检索有 7 个查询失败。",
+        "rawCount": 8,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-04"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -5667,13 +5769,13 @@
     "excludedNonPanel": 0,
     "unassigned": 265,
     "panelSourceCount": 6,
-    "coverageDays": 97,
+    "coverageDays": 98,
     "completeCoverageDays": 8,
-    "successfulSourceChecks": 315,
+    "successfulSourceChecks": 320,
     "coverageStatuses": {
       "success": 145,
-      "no_update": 170,
-      "partial": 267,
+      "no_update": 175,
+      "partial": 268,
       "failed": 0
     },
     "coverageByMode": {
@@ -5683,15 +5785,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 42,
-        "good": 42,
-        "days": 7
+        "checks": 48,
+        "good": 47,
+        "days": 8
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 42,
+    "operationalCoverageChecks": 48,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 7,
+    "operationalCoverageDays": 8,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -5699,13 +5801,13 @@
         "days": 4
       },
       "live": {
-        "checks": 18,
-        "good": 18,
-        "days": 3
+        "checks": 24,
+        "good": 23,
+        "days": 4
       }
     },
-    "liveOperationalCoverageChecks": 18,
-    "liveOperationalCoverageDays": 3,
+    "liveOperationalCoverageChecks": 24,
+    "liveOperationalCoverageDays": 4,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {

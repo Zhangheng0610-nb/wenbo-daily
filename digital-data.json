@@ -1,9 +1,9 @@
 {
- "generated": "2026-09-03",
+ "generated": "2026-09-04",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-09-03"
+  "end": "2026-09-04"
  },
  "stats": {
   "total": 273,
@@ -53,10 +53,10 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-03T13:17:06+08:00",
+  "last_incremental_scan_at": "2026-09-04T07:23:25+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-08-28",
-   "end": "2026-09-03"
+   "start": "2026-08-29",
+   "end": "2026-09-04"
   }
  },
  "topic_info": [
