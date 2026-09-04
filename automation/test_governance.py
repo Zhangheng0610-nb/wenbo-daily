@@ -8,6 +8,7 @@ from pathlib import Path
 from automation.governance import (
     OFFICIAL_WECHAT_ACCOUNTS,
     OFFICIAL_WECHAT_REGISTRY_PATH,
+    canonical_publisher_domain,
     official_wechat_account,
     publisher_domain_from_name,
     source_info,
@@ -42,6 +43,8 @@ class WeChatGovernanceTests(unittest.TestCase):
         )
         self.assertEqual(source_info("https://www.washingtonpost.com")['tier'], "B")
         self.assertEqual(source_info("https://abcnews.go.com")['tier'], "B")
+        self.assertEqual(canonical_publisher_domain("https://abcnews.com/story"), "abcnews.go.com")
+        self.assertEqual(source_info("https://abcnews.com/story")['host'], "abcnews.go.com")
 
     def test_unknown_publisher_alias_is_not_trusted(self):
         self.assertEqual(publisher_domain_from_name("Museum News Aggregator"), "")

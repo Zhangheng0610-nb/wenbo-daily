@@ -26,6 +26,8 @@ from automation.daily_discovery import (
     metadata_urls,
     parse_date,
     publisher_search_results,
+    publisher_search_anchor,
+    publisher_search_queries,
     public_salience,
     alternate_evidence_match_hint,
     resolve_evidence_attempt,
@@ -43,6 +45,7 @@ from automation.daily_discovery import (
     query_audit_status,
     _execute_one_query,
     unwrap_redirect_url,
+    resolution_failure_type,
 )
 
 
@@ -1265,6 +1268,97 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(rows[0]["url"], "https://www.washingtonpost.com/politics/smithsonian-support/")
         self.assertEqual(rows[0]["sourceRelationship"], "publisher_recovery")
         self.assertIn("site:washingtonpost.com", audit["actualQuery"])
+
+    def test_publisher_recovery_puts_specific_entity_before_high_frequency_actor(self):
+        event = {"representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian"}
+        self.assertEqual(publisher_search_anchor(event).split()[0], "smithsonian")
+        variants = publisher_search_queries(event, "washingtonpost.com")
+        self.assertLessEqual(len(variants), 3)
+        self.assertTrue(all("smithsonian" in query.split() for query in variants))
+        self.assertTrue(variants[0].startswith("site:washingtonpost.com smithsonian"))
+        self.assertTrue(variants[-1].startswith("smithsonian"))
+
+    @patch("automation.daily_discovery._execute_bing_web_publisher_query")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_publisher_search_screens_unrelated_results_then_tries_next_variant(self, execute_query, web_query):
+        unrelated = {
+            "title": "Trump urges Congress to pass tax incentives to restore Hollywood's luster",
+            "url": "https://www.washingtonpost.com/politics/hollywood/",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "The Washington Post",
+        }
+        relevant = {
+            "title": "Smithsonian faces federal funding cuts amid administration dispute",
+            "url": "https://www.washingtonpost.com/politics/smithsonian-funding/",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "The Washington Post",
+        }
+        web_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "web"})
+        # The second RSS variant contains a plausible result.  The unrelated
+        # first result must not terminate recovery.
+        execute_query.side_effect = [([unrelated], {"success": True, "returnedResultCount": 1, "actualQuery": "variant-a"}), ([relevant], {"success": True, "returnedResultCount": 1, "actualQuery": "variant-b"})]
+        rows, audit = publisher_search_results(
+            {"representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian", "scope": "international"},
+            {"sourceDomain": "The Washington Post"},
+            __import__("datetime").date(2026, 9, 1), __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["url"], relevant["url"])
+        self.assertGreaterEqual(audit["irrelevantPublisherResultsRejected"], 1)
+        self.assertTrue(audit["publisherSearchTransportSuccess"])
+        self.assertTrue(audit["publisherEventCandidateFound"])
+
+    @patch("automation.daily_discovery._execute_bing_web_publisher_query")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_bing_web_publisher_fallback_can_find_same_event(self, execute_query, web_query):
+        execute_query.return_value = ([{
+            "title": "Trump urges Congress to pass tax incentives for Hollywood",
+            "url": "https://www.washingtonpost.com/politics/hollywood/",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "The Washington Post",
+        }], {"success": True, "returnedResultCount": 1, "actualQuery": "rss"})
+        web_query.return_value = ([{
+            "title": "Smithsonian faces federal funding cuts amid administration dispute",
+            "url": "https://www.washingtonpost.com/politics/smithsonian-funding/",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "washingtonpost.com",
+        }], {"success": True, "returnedResultCount": 1, "actualQuery": "web"})
+        rows, audit = publisher_search_results(
+            {"representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian", "scope": "international"},
+            {"sourceDomain": "The Washington Post"},
+            __import__("datetime").date(2026, 9, 1), __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["sourceDomain"], "washingtonpost.com")
+        self.assertTrue(audit["publisherEventCandidateFound"])
+        self.assertEqual(audit["searchOutcome"], "direct_candidate_found")
+
+    def test_resolution_failures_are_not_semantic_mismatches(self):
+        self.assertEqual(resolution_failure_type("TimeoutError: timed out"), "network_timeout")
+        self.assertEqual(resolution_failure_type("HTTP Error 401: Unauthorized"), "http_401")
+        self.assertEqual(resolution_failure_type("HTTP Error 403: Forbidden"), "http_403")
+        self.assertEqual(resolution_failure_type(None), None)
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    def test_fetched_body_mismatch_gets_semantic_failure_classification(self, resolve_url):
+        resolve_url.return_value = (
+            "https://www.washingtonpost.com/politics/unrelated/",
+            "<html><head><title>Unrelated politics story</title></head><body>" + "ordinary unrelated text " * 30 + "</body></html>",
+            None,
+        )
+        outcome, source = resolve_evidence_attempt(
+            {"representativeTitle": "Smithsonian federal support dispute", "scope": "international"},
+            {"title": "Unrelated politics story", "url": "https://www.washingtonpost.com/politics/unrelated/", "sourceDomain": "washingtonpost.com"},
+            "domain_search",
+        )
+        self.assertIsNone(source)
+        self.assertEqual(outcome["checked"]["failureClassification"], "article_body_fetched_semantic_mismatch")
+
+    def test_bing_web_public_redirect_is_unwrapped_before_screening(self):
+        url = "https://www.bing.com/ck/a?u=a1aHR0cHM6Ly93d3cud2FzaGluZ3RvbnBvc3QuY29tL2FydGljbGU="
+        resolved, changed = unwrap_redirect_url(url)
+        self.assertTrue(changed)
+        self.assertEqual(resolved, "https://www.washingtonpost.com/article")
 
     @patch("automation.daily_discovery.resolve_evidence_url")
     def test_trusted_alternate_direct_article_is_article_verified(self, resolve_url):

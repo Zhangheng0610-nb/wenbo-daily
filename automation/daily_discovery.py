@@ -8,6 +8,7 @@ deliberately does not decide what should be published.
 from __future__ import annotations
 
 import argparse
+import base64
 import email.utils
 import hashlib
 from html import unescape
@@ -32,6 +33,7 @@ else:
 
 from automation.backfill_monitoring import fetch, links
 from automation.governance import (
+    canonical_publisher_domain,
     canonical_url,
     host_matches,
     publisher_domain_from_name,
@@ -463,7 +465,7 @@ class _BingHtmlResultParser(HTMLParser):
             self.current["snippet"].append(data)
 
 
-def parse_bing_html(html_text: str, *, family: dict, backend: dict, query: str, start: date, end: date) -> tuple[list[dict], int, int]:
+def parse_bing_html(html_text: str, *, family: dict, backend: dict, query: str, start: date, end: date, allow_undated: bool = False) -> tuple[list[dict], int, int]:
     parser = _BingHtmlResultParser()
     parser.feed(html_text or "")
     records = []
@@ -472,13 +474,14 @@ def parse_bing_html(html_text: str, *, family: dict, backend: dict, query: str, 
         published = parse_date(item["url"]) or parse_date(item["title"]) or parse_date(item["snippet"])
         if not published:
             undated += 1
-            continue
-        if not (start <= published <= end):
+            if not allow_undated:
+                continue
+        if published and not (start <= published <= end):
             continue
         domain = (urlsplit(item["url"]).hostname or "").lower()
         records.append({
             "title": item["title"],
-            "publishedDate": published.isoformat(),
+            "publishedDate": published.isoformat() if published else "",
             "url": item["url"],
             "discoveredVia": "bing-news-html-fallback",
             "discoverySourceType": "query_search",
@@ -722,10 +725,10 @@ def publisher_domains(record: dict) -> list[str]:
     """Return publisher hosts separately from RSS/search transport hosts."""
     domains = set()
     publisher_url = str(record.get("sourcePublisherUrl") or "")
-    host = (urlsplit(publisher_url).hostname or "").lower()
+    host = canonical_publisher_domain(urlsplit(publisher_url).hostname or "")
     if host and not is_search_wrapper_url(publisher_url):
         domains.add(host)
-    source_domain = str(record.get("sourceDomain") or "").lower().strip()
+    source_domain = canonical_publisher_domain(record.get("sourceDomain") or "")
     if re.fullmatch(r"(?:[a-z0-9-]+\.)+[a-z]{2,}", source_domain) and source_domain not in {"news.google.com", "bing.com"}:
         domains.add(source_domain)
     for value in (
@@ -1505,14 +1508,24 @@ def publisher_search_anchor(event: dict) -> str:
     cjk = sorted((term for term in terms if re.search(r"[\u4e00-\u9fff]", term)), key=lambda term: (-len(term), term))
     if cjk:
         return " ".join(cjk[:2])
-    latin = sorted((term for term in terms if re.fullmatch(r"[a-z][a-z0-9'-]{3,}", term)), key=lambda term: (-len(term), term))
+    latin_in_title = [
+        token.casefold() for token in re.findall(r"\b[a-z][a-z0-9'-]{3,}\b", title, flags=re.I)
+        if token.casefold() in terms
+    ]
+    latin = list(dict.fromkeys(latin_in_title))
     proper = [
         token.casefold() for token in re.findall(r"\b[A-Z][a-z0-9'-]{3,}\b", title)
         if token.casefold() in latin
     ]
+    # A headline often starts with a prominent political actor and ends with
+    # the institution actually being searched.  Prefer the later proper-noun
+    # anchors while retaining a generic fallback for headlines without a
+    # recognizable institution.  This is deliberately lexical and applies to
+    # every trusted publisher, not to one person or one museum.
+    entity_proper = proper[1:] if len(proper) > 1 else proper
     signal = [term for term in latin if term in PUBLISHER_SEARCH_SIGNAL_TERMS]
     selected = []
-    for term in proper + signal + latin:
+    for term in entity_proper + signal + latin:
         if term not in selected:
             selected.append(term)
         if len(selected) >= 4:
@@ -1520,42 +1533,195 @@ def publisher_search_anchor(event: dict) -> str:
     return " ".join(selected) or title
 
 
+def publisher_search_queries(event: dict, host: str) -> list[str]:
+    """Build at most three bounded, entity-first publisher lookup queries."""
+    anchor = publisher_search_anchor(event)
+    tokens = [token for token in anchor.split() if token]
+    if not tokens:
+        return []
+    entity = tokens[0]
+    supporting = tokens[1:]
+    variants = []
+    if supporting:
+        variants.extend(f"site:{host} {entity} {token}" for token in supporting[:2])
+    if len(supporting) >= 2:
+        # Bing News sometimes ignores ``site:`` and returns a popular article
+        # from the same host.  A bounded publisher-name fallback lets its own
+        # source metadata identify the publisher while the URL host check and
+        # event screen remain mandatory.
+        publisher_hint = host.split(".")[0]
+        variants.append(f"{entity} {' '.join(supporting[:2])} {publisher_hint}")
+    if not variants:
+        variants.append(f"site:{host} {entity}")
+    return list(dict.fromkeys(variants))[:3]
+
+
+def _publisher_event_screen(event: dict, result: dict) -> dict:
+    """Screen a publisher result before article retrieval.
+
+    Search transport success is not evidence and same-domain relevance is not
+    enough.  Require the event's concrete anchors/action relationship before
+    allowing a direct URL to reach ``resolve_evidence_attempt``.
+    """
+    details = event_match_details(event, result, result.get("snippet", ""))
+    if details.get("matched"):
+        return details
+    if alternate_evidence_match_hint(event, result):
+        details = dict(details)
+        details["retrievalHint"] = True
+        details["matched"] = True
+        details.setdefault("reasons", []).append("bounded_retrieval_hint")
+        return details
+    details = dict(details)
+    details["matched"] = False
+    return details
+
+
+def _execute_bing_web_publisher_query(family: dict, backend: dict, query: str, start: date, end: date) -> tuple[list[dict], dict]:
+    """Run the existing Bing Web HTML path for a publisher recovery query."""
+    actual = actual_query(query, start, end)
+    audit = {
+        "queryFamily": family["id"],
+        "scope": family["scope"],
+        "backend": "publisher-search-bing-web",
+        "actualQuery": actual,
+        "executedAt": now_cn(),
+        "success": False,
+        "failure": None,
+        "returnedResultCount": 0,
+        "acceptedRawCount": 0,
+        "dateFilterApplied": True,
+        "provider": "bing-web-html",
+    }
+    try:
+        request = Request(web_search_url(backend, actual), headers={
+            "User-Agent": SEARCH_USER_AGENT,
+            "Accept": "text/html,application/xhtml+xml,*/*",
+        })
+        with SEARCH_OPENER.open(request, timeout=8) as response:
+            payload = response.read()
+        audit["httpStatus"] = getattr(response, "status", None)
+        audit["contentType"] = response.headers.get("Content-Type")
+        audit["responseBytes"] = len(payload)
+        audit["finalUrl"] = response.geturl()
+        found, returned, undated = parse_bing_html(
+            payload.decode("utf-8", errors="replace"), family=family, backend=backend,
+            query=actual, start=start, end=end, allow_undated=True,
+        )
+        audit["success"] = True
+        audit["returnedResultCount"] = returned
+        audit["acceptedRawCount"] = len(found)
+        audit["undatedResultCount"] = undated
+        return found, audit
+    except Exception as exc:
+        audit["failure"] = f"{type(exc).__name__}: {exc}"
+        message = str(exc).lower()
+        audit["failureType"] = "network_timeout" if "timed out" in message or "timeout" in message else "request_or_parse_error"
+        return [], audit
+
+
 def generic_publisher_search_results(event: dict, report: dict, start: date, end: date) -> tuple[list[dict], dict | None]:
-    """Use one bounded Bing web/RSS lookup to turn a known publisher hint into direct URLs."""
+    """Use bounded publisher lookups and reject same-domain unrelated stories."""
     domains = publisher_domains(report)
     if not domains:
         return [], None
     host = domains[0]
     if not any(host_matches(host, domain) for domain in WIRE_PUBLISHER_DOMAINS):
         return [], None
-    query = f"site:{host} {publisher_search_anchor(event)}"
     bing = next((backend for backend in QUERY_BACKENDS if backend["id"] == "bing-news-rss"), None)
     if not bing:
         return [], None
     family = {"id": "evidence-upgrade", "scope": event.get("scope", "domestic")}
-    found, audit = _execute_one_query(family, bing, query, start, end)
-    audit = dict(audit or {})
-    audit["backend"] = "publisher-search-bing"
-    audit["publisherDomain"] = host
+    variants = publisher_search_queries(event, host)
+    audits = []
     direct = []
-    for result in found:
-        transport = result.get("url", "")
-        resolved, changed = unwrap_redirect_url(transport)
-        resolved_host = (urlsplit(resolved).hostname or "").lower()
-        if not resolved_host or not host_matches(resolved_host, host):
-            continue
-        row = dict(result)
-        row["url"] = resolved
-        row["sourceDomain"] = host
-        row["sourcePublisherUrl"] = f"https://{host}"
-        row["sourceRelationship"] = "publisher_recovery"
-        if changed:
-            row["transportUrl"] = transport
-        row["discoveredVia"] = "publisher-domain-search"
-        row["discoverySourceType"] = "evidence_upgrade"
-        direct.append(row)
-    audit["acceptedRawCount"] = len(direct)
-    audit["resolvedDirectCount"] = len(direct)
+    direct_seen = set()
+    raw_results = 0
+    rejected = 0
+    screening = []
+
+    def consider(found: list[dict], query_audit: dict) -> None:
+        nonlocal rejected
+        for result in found:
+            transport = result.get("url", "")
+            resolved, changed = unwrap_redirect_url(transport)
+            resolved_host = canonical_publisher_domain(urlsplit(resolved).hostname or "")
+            if not resolved_host or not host_matches(resolved_host, host):
+                continue
+            row = dict(result)
+            row["url"] = resolved
+            row["sourceDomain"] = host
+            row["sourcePublisherUrl"] = f"https://{host}"
+            row["sourceRelationship"] = "publisher_recovery"
+            if changed:
+                row["transportUrl"] = transport
+            row["discoveredVia"] = "publisher-domain-search"
+            row["discoverySourceType"] = "evidence_upgrade"
+            match = _publisher_event_screen(event, row)
+            screening.append({
+                "query": query_audit.get("actualQuery", ""),
+                "title": row.get("title", ""),
+                "url": row.get("url", ""),
+                "matched": bool(match.get("matched")),
+                "score": match.get("score", 0),
+                "reasons": match.get("reasons", []),
+            })
+            if not match.get("matched"):
+                rejected += 1
+                continue
+            key = canonical_url(row.get("url", ""))
+            if key and key not in direct_seen:
+                direct_seen.add(key)
+                direct.append(row)
+
+    for variant in variants:
+        found, audit_row = _execute_one_query(family, bing, variant, start, end)
+        audit_row = dict(audit_row or {})
+        audit_row["backend"] = "publisher-search-bing-rss"
+        audit_row["publisherDomain"] = host
+        audit_row["transportSuccess"] = bool(audit_row.get("success"))
+        audits.append(audit_row)
+        raw_results += int(audit_row.get("returnedResultCount") or len(found))
+        consider(found, audit_row)
+        if direct:
+            break
+        # A successful News RSS response can still contain popular unrelated
+        # stories.  Use the existing ordinary Bing HTML search once for this
+        # same bounded variant before trying the next variant.
+        web_found, web_audit = _execute_bing_web_publisher_query(family, bing, variant, start, end)
+        web_audit["publisherDomain"] = host
+        web_audit["transportSuccess"] = bool(web_audit.get("success"))
+        audits.append(web_audit)
+        raw_results += int(web_audit.get("returnedResultCount") or len(web_found))
+        consider(web_found, web_audit)
+        if direct:
+            break
+    transport_success = any(row.get("transportSuccess") for row in audits)
+    audit = {
+        "queryFamily": "evidence-upgrade",
+        "scope": event.get("scope", "domestic"),
+        "backend": "publisher-search-bing",
+        "publisherDomain": host,
+        "actualQuery": audits[0].get("actualQuery", "") if audits else "",
+        "executedAt": now_cn(),
+        "success": transport_success,
+        "publisherSearchTransportSuccess": transport_success,
+        "publisherEventCandidateFound": bool(direct),
+        "publisherSearchResultsReturned": raw_results,
+        "irrelevantPublisherResultsRejected": rejected,
+        "directCandidateUrls": [row.get("url", "") for row in direct],
+        "resolvedDirectCount": len(direct),
+        "acceptedRawCount": len(direct),
+        "queryVariants": audits,
+        "resultScreening": screening,
+        "searchOutcome": (
+            "direct_candidate_found" if direct else
+            "results_but_event_mismatch" if raw_results else
+            "no_search_results"
+        ),
+    }
+    if not transport_success:
+        audit["failure"] = "publisher search transport failed"
     return direct, audit
 
 
@@ -1719,6 +1885,24 @@ def is_search_wrapper_url(url: str) -> bool:
     return host in {"news.google.com", "www.google.com", "bing.com", "www.bing.com"}
 
 
+def resolution_failure_type(error: str | None) -> str | None:
+    """Keep transport/access failures distinct from a fetched mismatch."""
+    if not error:
+        return None
+    message = str(error).lower()
+    if "timed out" in message or "timeout" in message:
+        return "network_timeout"
+    if "401" in message or "unauthorized" in message:
+        return "http_401"
+    if "403" in message or "forbidden" in message:
+        return "http_403"
+    if any(term in message for term in ("captcha", "challenge", "robot check", "verify you are human")):
+        return "challenge_page"
+    if "empty" in message or "no body" in message:
+        return "empty_body"
+    return "access_denied" if "denied" in message or "blocked" in message else "resolver_failed"
+
+
 def article_level_provisional_b(event: dict, result: dict, resolved_url: str, body: str) -> tuple[bool, dict]:
     """Verify an unregistered direct article without promoting its whole domain."""
     info = source_info(resolved_url)
@@ -1759,6 +1943,20 @@ def unwrap_redirect_url(url: str) -> tuple[str, bool]:
         embedded = parse_qs(parts.query).get("url", [""])[0]
         if embedded:
             return unquote(embedded), True
+    # Ordinary Bing Web HTML result cards use a public ``/ck/a`` redirect
+    # whose ``u=a1...`` value is URL-safe base64.  This is a transport wrapper,
+    # not evidence; decode only a well-formed absolute HTTP(S) target.
+    if host.endswith("bing.com") and parts.path.lower().startswith("/ck/a"):
+        embedded = parse_qs(parts.query).get("u", [""])[0]
+        if embedded.startswith("a1"):
+            try:
+                encoded = embedded[2:]
+                encoded += "=" * (-len(encoded) % 4)
+                decoded = base64.urlsafe_b64decode(encoded).decode("utf-8", errors="strict")
+            except (ValueError, UnicodeDecodeError, base64.binascii.Error):
+                decoded = ""
+            if urlsplit(decoded).scheme in {"http", "https"}:
+                return decoded, True
     # Some providers use a generic redirect endpoint with a url/u/target
     # parameter. Only accept an absolute HTTP(S) target; arbitrary query text
     # must never become an evidence URL.
@@ -1905,6 +2103,12 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         "error": ("search_wrapper" if wrapper_page and not resolve_error else resolve_error),
         "method": method,
     }
+    if resolve_error:
+        checked["failureClassification"] = resolution_failure_type(resolve_error)
+    elif wrapper_page:
+        checked["failureClassification"] = "search_wrapper"
+    elif not matched:
+        checked["failureClassification"] = "article_body_fetched_semantic_mismatch"
     checked["articleVerified"] = bool(matched and evidence_tier in {"A", "B", "provisional_B"})
     checked["articleVerification"] = verification
     checked["eventMatch"] = match_details
@@ -2143,6 +2347,7 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                         "retrieved": False,
                         "matched": False,
                         "error": "title_not_matched_to_event",
+                        "failureClassification": "publisher_search_event_mismatch",
                         "eventMatch": match_details,
                         "method": method,
                     })
@@ -2196,6 +2401,14 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                     "resolver_failed": "source_page_retrieval_failed",
                     "blocked_or_low_quality_source": "only_blocked_or_low_quality_sources_found",
                     "event_match_failed": "retrieved_article_did_not_match_event",
+                    "article_body_fetched_semantic_mismatch": "retrieved_article_did_not_match_event",
+                    "publisher_search_event_mismatch": "publisher_results_did_not_match_event",
+                    "network_timeout": "source_page_network_timeout",
+                    "http_401": "source_page_returned_http_401",
+                    "http_403": "source_page_returned_http_403",
+                    "access_denied": "source_page_access_denied",
+                    "challenge_page": "source_page_challenge_or_captcha",
+                    "empty_body": "source_page_empty_body",
                     "no_reliable_evidence": "no_publishable_matching_A_or_B_source",
                 }.get(event["evidenceFailureType"], "search_or_retrieval_incomplete")
             event["evidenceUpgradeStatus"] = event["evidenceUpgradeResult"]
@@ -2614,17 +2827,25 @@ def classify_evidence_failure(record: dict, checked_sources: list[dict], *,
     """
     if publishable and evidence_claim_risk(record) == "high":
         return "high_risk_requires_independent_confirmation"
+    transport_failures = {
+        "network_timeout", "http_401", "http_403", "access_denied",
+        "challenge_page", "empty_body",
+    }
+    for source in checked_sources:
+        failure = source.get("failureClassification")
+        if failure in transport_failures:
+            return failure
     if had_query_failure:
         return "query_failed"
-    if had_resolution_failure:
-        return "resolver_failed"
     for source in checked_sources:
         if source.get("error") in {"blocked_source", "search_wrapper", "source_unverified"}:
             return "blocked_or_low_quality_source"
-        if source.get("error") == "title_not_matched_to_event":
-            continue
-        if source.get("retrieved") and source.get("matched") is False:
-            return "event_match_failed"
+        if source.get("failureClassification") == "article_body_fetched_semantic_mismatch":
+            return "article_body_fetched_semantic_mismatch"
+        if source.get("failureClassification") == "publisher_search_event_mismatch":
+            return "publisher_search_event_mismatch"
+    if had_resolution_failure:
+        return "resolver_failed"
     return "no_reliable_evidence"
 
 

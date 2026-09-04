@@ -80,6 +80,14 @@ PUBLISHER_NAME_DOMAIN_ALIASES = (
     (("the hill",), "thehill.com"),
 )
 
+# A publisher can expose more than one public hostname.  Keep the identity
+# used by recovery/governance stable so the display hostname and the article
+# hostname do not create two source identities.
+PUBLISHER_HOST_ALIASES = {
+    "abcnews.com": "abcnews.go.com",
+    "www.abcnews.com": "abcnews.go.com",
+}
+
 
 def publisher_domain_from_name(value):
     """Map a trusted publisher display name to its canonical domain."""
@@ -95,6 +103,17 @@ def publisher_domain_from_name(value):
         ):
             return domain
     return ""
+
+
+def canonical_publisher_domain(value):
+    """Return the canonical publisher host for a URL or bare hostname."""
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    host = _host(raw) if "://" in raw else raw.casefold().rstrip(".")
+    if host.startswith("www."):
+        host = host[4:]
+    return PUBLISHER_HOST_ALIASES.get(host, host)
 
 
 # A WeChat article URL does not prove who operates the account.  Accounts are
@@ -332,7 +351,7 @@ def wechat_evidence_issues(source, selected=False):
 
 def source_info(url):
     """Return a stable, display-ready source classification."""
-    host = _host(url)
+    host = canonical_publisher_domain(_host(url))
     if not host:
         return {"tier": "C", "label": "C级｜无效链接", "host": "", "blocked": True}
     if host == 'mp.weixin.qq.com':
