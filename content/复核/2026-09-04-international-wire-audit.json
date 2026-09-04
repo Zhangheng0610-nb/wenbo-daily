@@ -4,7 +4,7 @@
   "runType": "replay",
   "replayType": "international-wire-runtime-audit",
   "codeVersion": "0e4f4654ab8788e1dbb2272689350cd4d8c9c720 + trusted alternate publisher recovery",
-  "replayedAt": "2026-09-04T20:44:18+08:00",
+  "replayedAt": "2026-09-04T21:02:44+08:00",
   "window": {
     "start": "2026-08-06",
     "end": "2026-09-04",
@@ -2601,6 +2601,120 @@
         "searchOutcome": "results_but_event_mismatch"
       },
       "directCandidates": []
+    },
+    "hostFamilyAudit": {
+      "Reuters": {
+        "canonicalIdentity": "reuters.com",
+        "recoveryHosts": [
+          "reuters.com"
+        ],
+        "hostsTested": [
+          "reuters.com"
+        ],
+        "directArticleCandidates": [],
+        "publisherSearch": {
+          "attempted": true,
+          "transportSuccess": true,
+          "resultsReturned": 43,
+          "eventCandidates": false,
+          "failureCategories": [
+            "results_but_event_mismatch"
+          ]
+        },
+        "fetch": {
+          "attempts": 0,
+          "transportSuccesses": 0,
+          "bodyExtracted": 0,
+          "semanticMatches": 0,
+          "evidenceQualified": 0
+        }
+      },
+      "The Washington Post": {
+        "canonicalIdentity": "washingtonpost.com",
+        "recoveryHosts": [
+          "washingtonpost.com"
+        ],
+        "hostsTested": [
+          "washingtonpost.com"
+        ],
+        "directArticleCandidates": [],
+        "publisherSearch": {
+          "attempted": true,
+          "transportSuccess": true,
+          "resultsReturned": 54,
+          "eventCandidates": false,
+          "failureCategories": [
+            "results_but_event_mismatch"
+          ]
+        },
+        "fetch": {
+          "attempts": 0,
+          "transportSuccesses": 0,
+          "bodyExtracted": 0,
+          "semanticMatches": 0,
+          "evidenceQualified": 0
+        }
+      },
+      "ABC News": {
+        "canonicalIdentity": "abcnews.go.com",
+        "recoveryHosts": [
+          "abcnews.go.com",
+          "abcnews.com",
+          "ingest.abcnews.com",
+          "www-cdn.abcnews.com"
+        ],
+        "hostsTested": [
+          "abcnews.com",
+          "abcnews.go.com",
+          "ingest.abcnews.com",
+          "www-cdn.abcnews.com"
+        ],
+        "directArticleCandidates": [
+          {
+            "url": "https://ingest.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+            "rawHost": "ingest.abcnews.com",
+            "resolvedUrl": "https://ingest.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+            "fetchStatus": "ok",
+            "bodyLength": 7003,
+            "sourceTier": "B",
+            "publisherCanonicalDomain": "abcnews.go.com",
+            "semanticMatch": true,
+            "articleVerified": true,
+            "failureClassification": null,
+            "discoveryMethod": "live_host_identity_diagnostic",
+            "productionSearchSeed": false
+          },
+          {
+            "url": "https://www-cdn.abcnews.com/amp/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+            "rawHost": "www-cdn.abcnews.com",
+            "resolvedUrl": "https://www-cdn.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+            "fetchStatus": "ok",
+            "bodyLength": 6989,
+            "sourceTier": "B",
+            "publisherCanonicalDomain": "abcnews.go.com",
+            "semanticMatch": true,
+            "articleVerified": true,
+            "failureClassification": null,
+            "discoveryMethod": "live_host_identity_diagnostic",
+            "productionSearchSeed": false
+          }
+        ],
+        "publisherSearch": {
+          "attempted": true,
+          "transportSuccess": true,
+          "resultsReturned": 30,
+          "eventCandidates": false,
+          "outcome": "results_but_event_mismatch",
+          "note": "Bing results were audited separately from the live direct-host identity diagnostic; no production URL was injected."
+        },
+        "fetch": {
+          "attempts": 2,
+          "transportSuccesses": 2,
+          "bodyExtracted": 2,
+          "semanticMatches": 2,
+          "evidenceQualified": 2
+        }
+      }
     }
   },
   "integrationReplay": {
@@ -4558,5 +4672,216 @@
     ],
     "publisherSearchesSucceeded": 10,
     "publisherSearchResultsChecked": 485
+  },
+  "publisherHostFamilies": {
+    "reuters.com": {
+      "canonicalIdentity": "reuters.com",
+      "recoveryHosts": [
+        "reuters.com"
+      ],
+      "hostsTested": [
+        "reuters.com"
+      ],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 43,
+        "eventCandidates": false,
+        "failureCategories": [
+          "results_but_event_mismatch"
+        ]
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    },
+    "abcnews.go.com": {
+      "canonicalIdentity": "abcnews.go.com",
+      "recoveryHosts": [
+        "abcnews.go.com",
+        "abcnews.com",
+        "ingest.abcnews.com",
+        "www-cdn.abcnews.com"
+      ],
+      "hostsTested": [
+        "abcnews.com",
+        "abcnews.go.com",
+        "ingest.abcnews.com",
+        "www-cdn.abcnews.com"
+      ],
+      "directArticleCandidates": [
+        {
+          "url": "https://ingest.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "rawHost": "ingest.abcnews.com",
+          "resolvedUrl": "https://ingest.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "fetchStatus": "ok",
+          "bodyLength": 7003,
+          "sourceTier": "B",
+          "publisherCanonicalDomain": "abcnews.go.com",
+          "semanticMatch": true,
+          "articleVerified": true,
+          "failureClassification": null,
+          "discoveryMethod": "live_host_identity_diagnostic",
+          "productionSearchSeed": false
+        },
+        {
+          "url": "https://www-cdn.abcnews.com/amp/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "rawHost": "www-cdn.abcnews.com",
+          "resolvedUrl": "https://www-cdn.abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "fetchStatus": "ok",
+          "bodyLength": 6989,
+          "sourceTier": "B",
+          "publisherCanonicalDomain": "abcnews.go.com",
+          "semanticMatch": true,
+          "articleVerified": true,
+          "failureClassification": null,
+          "discoveryMethod": "live_host_identity_diagnostic",
+          "productionSearchSeed": false
+        }
+      ],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 30,
+        "eventCandidates": false,
+        "outcome": "results_but_event_mismatch",
+        "note": "Bing results were audited separately from the live direct-host identity diagnostic; no production URL was injected."
+      },
+      "fetch": {
+        "attempts": 2,
+        "transportSuccesses": 2,
+        "bodyExtracted": 2,
+        "semanticMatches": 2,
+        "evidenceQualified": 2
+      }
+    },
+    "washingtonpost.com": {
+      "canonicalIdentity": "washingtonpost.com",
+      "recoveryHosts": [
+        "washingtonpost.com"
+      ],
+      "hostsTested": [
+        "washingtonpost.com"
+      ],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 54,
+        "eventCandidates": false,
+        "failureCategories": [
+          "results_but_event_mismatch"
+        ]
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    },
+    "npr.org": {
+      "canonicalIdentity": "npr.org",
+      "recoveryHosts": [
+        "npr.org"
+      ],
+      "hostsTested": [
+        "npr.org"
+      ],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 54,
+        "eventCandidates": false,
+        "failureCategories": [
+          "results_but_event_mismatch"
+        ]
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    },
+    "thehill.com": {
+      "canonicalIdentity": "thehill.com",
+      "recoveryHosts": [
+        "thehill.com"
+      ],
+      "hostsTested": [
+        "thehill.com"
+      ],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 55,
+        "eventCandidates": false,
+        "failureCategories": [
+          "results_but_event_mismatch"
+        ]
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    },
+    "cnn.com": {
+      "canonicalIdentity": "cnn.com",
+      "recoveryHosts": [
+        "cnn.com"
+      ],
+      "hostsTested": [
+        "cnn.com"
+      ],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": true,
+        "transportSuccess": true,
+        "resultsReturned": 56,
+        "eventCandidates": false,
+        "failureCategories": [
+          "results_but_event_mismatch"
+        ]
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    },
+    "apnews.com": {
+      "canonicalIdentity": "apnews.com",
+      "recoveryHosts": [
+        "apnews.com"
+      ],
+      "hostsTested": [],
+      "directArticleCandidates": [],
+      "publisherSearch": {
+        "attempted": false,
+        "note": "No AP wrapper was included in the ten sampled alternate recoveries."
+      },
+      "fetch": {
+        "attempts": 0,
+        "transportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0
+      }
+    }
   }
 }

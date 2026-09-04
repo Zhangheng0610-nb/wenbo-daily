@@ -28,6 +28,7 @@ from automation.daily_discovery import (
     publisher_search_results,
     publisher_search_anchor,
     publisher_search_queries,
+    publisher_recovery_hosts_for_record,
     public_salience,
     alternate_evidence_match_hint,
     resolve_evidence_attempt,
@@ -1277,6 +1278,82 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(all("smithsonian" in query.split() for query in variants))
         self.assertTrue(variants[0].startswith("site:washingtonpost.com smithsonian"))
         self.assertTrue(variants[-1].startswith("smithsonian"))
+
+    def test_abc_recovery_uses_explicit_host_family(self):
+        hosts = publisher_recovery_hosts_for_record({
+            "sourceDomain": "ABC News - Breaking News, Latest News and Videos",
+        })
+        self.assertEqual(hosts, [
+            "abcnews.com",
+            "abcnews.go.com",
+            "ingest.abcnews.com",
+            "www-cdn.abcnews.com",
+        ])
+
+    @patch("automation.daily_discovery._execute_bing_web_publisher_query")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_abc_recovery_falls_back_to_registered_article_host(self, execute_query, web_query):
+        event = {
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "scope": "international",
+        }
+        relevant = {
+            "title": "Trump admin threatens to cut federal support for Smithsonian",
+            "url": "https://ingest.abcnews.com/Politics/smithsonian-support/story?id=136182940",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "ABC News",
+        }
+
+        def rss(*args):
+            query = args[2]
+            found = [relevant] if "site:ingest.abcnews.com" in query else []
+            return found, {"success": True, "returnedResultCount": len(found), "actualQuery": query}
+
+        def web(*args):
+            query = args[2]
+            found = [relevant] if "site:ingest.abcnews.com" in query else []
+            return found, {"success": True, "returnedResultCount": len(found), "actualQuery": query}
+
+        execute_query.side_effect = rss
+        web_query.side_effect = web
+        rows, audit = publisher_search_results(
+            event,
+            {"sourceDomain": "ABC News - Breaking News, Latest News and Videos"},
+            __import__("datetime").date(2026, 9, 1),
+            __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["url"], relevant["url"])
+        self.assertEqual(rows[0]["sourceDomain"], "abcnews.go.com")
+        self.assertIn("ingest.abcnews.com", audit["publisherRecoveryHosts"])
+        self.assertIn("ingest.abcnews.com", audit["hostsTested"])
+        self.assertEqual(audit["searchOutcome"], "direct_candidate_found")
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    def test_abc_ingest_article_is_verified_b_without_url_rewrite(self, resolve_url):
+        url = "https://ingest.abcnews.com/Politics/smithsonian-support/story?id=136182940"
+        resolve_url.return_value = (
+            url,
+            "<html><head><title>Trump admin threatens to cut federal support for Smithsonian</title></head>"
+            "<body>The Smithsonian Institution faces a threat to federal agency support. "
+            "The letter concerns loaning artifacts for exhibits, procurement processes and discretionary grants.</body></html>",
+            None,
+        )
+        event = {
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "scope": "international",
+        }
+        outcome, source = resolve_evidence_attempt(event, {
+            "title": "Trump admin threatens to cut federal support for Smithsonian",
+            "url": url,
+            "sourceDomain": "abcnews.go.com",
+            "sourceRelationship": "publisher_recovery",
+        }, "domain_search")
+        self.assertIsNotNone(source)
+        self.assertEqual(source["tier"], "B")
+        self.assertEqual(source["url"], url)
+        self.assertEqual(source["publisherDomain"], "abcnews.go.com")
+        self.assertTrue(outcome["checked"]["articleVerified"])
 
     @patch("automation.daily_discovery._execute_bing_web_publisher_query")
     @patch("automation.daily_discovery._execute_one_query")

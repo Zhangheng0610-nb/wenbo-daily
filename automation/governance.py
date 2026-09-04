@@ -86,6 +86,20 @@ PUBLISHER_NAME_DOMAIN_ALIASES = (
 PUBLISHER_HOST_ALIASES = {
     "abcnews.com": "abcnews.go.com",
     "www.abcnews.com": "abcnews.go.com",
+    "ingest.abcnews.com": "abcnews.go.com",
+    "www-cdn.abcnews.com": "abcnews.go.com",
+}
+
+# Recovery hosts are explicit publisher-governance metadata.  They are used
+# to look up a trusted publisher's article without treating arbitrary
+# subdomains as trusted, and do not rewrite the URL retained as evidence.
+PUBLISHER_RECOVERY_HOST_FAMILIES = {
+    "abcnews.go.com": (
+        "abcnews.go.com",
+        "abcnews.com",
+        "ingest.abcnews.com",
+        "www-cdn.abcnews.com",
+    ),
 }
 
 
@@ -114,6 +128,14 @@ def canonical_publisher_domain(value):
     if host.startswith("www."):
         host = host[4:]
     return PUBLISHER_HOST_ALIASES.get(host, host)
+
+
+def publisher_recovery_hosts(value):
+    """Return explicitly verified hosts for one publisher identity."""
+    canonical = publisher_domain_from_name(value) or canonical_publisher_domain(value)
+    if not canonical:
+        return []
+    return list(PUBLISHER_RECOVERY_HOST_FAMILIES.get(canonical, (canonical,)))
 
 
 # A WeChat article URL does not prove who operates the account.  Accounts are

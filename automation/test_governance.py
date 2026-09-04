@@ -11,6 +11,7 @@ from automation.governance import (
     canonical_publisher_domain,
     official_wechat_account,
     publisher_domain_from_name,
+    publisher_recovery_hosts,
     source_info,
     source_link_html,
     validate_official_wechat_registry,
@@ -45,6 +46,21 @@ class WeChatGovernanceTests(unittest.TestCase):
         self.assertEqual(source_info("https://abcnews.go.com")['tier'], "B")
         self.assertEqual(canonical_publisher_domain("https://abcnews.com/story"), "abcnews.go.com")
         self.assertEqual(source_info("https://abcnews.com/story")['host'], "abcnews.go.com")
+
+    def test_abc_news_verified_host_family_keeps_canonical_identity(self):
+        expected_hosts = [
+            "abcnews.go.com",
+            "abcnews.com",
+            "ingest.abcnews.com",
+            "www-cdn.abcnews.com",
+        ]
+        self.assertEqual(publisher_recovery_hosts("ABC News"), expected_hosts)
+        for host in expected_hosts:
+            info = source_info(f"https://{host}/article")
+            self.assertEqual(info["tier"], "B")
+            self.assertEqual(info["host"], "abcnews.go.com")
+        self.assertEqual(
+            source_info("https://abcnews.example.com/article")["tier"], "C")
 
     def test_unknown_publisher_alias_is_not_trusted(self):
         self.assertEqual(publisher_domain_from_name("Museum News Aggregator"), "")

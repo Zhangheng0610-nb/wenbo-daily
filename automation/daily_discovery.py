@@ -37,6 +37,7 @@ from automation.governance import (
     canonical_url,
     host_matches,
     publisher_domain_from_name,
+    publisher_recovery_hosts,
     source_info,
 )
 
@@ -740,6 +741,27 @@ def publisher_domains(record: dict) -> list[str]:
         if mapped:
             domains.add(mapped)
     return sorted(domains)
+
+
+def publisher_recovery_hosts_for_record(record: dict) -> list[str]:
+    """Return explicit recovery hosts for a trusted publisher record."""
+    values = (
+        record.get("sourcePublisherUrl"),
+        record.get("sourceDomain"),
+        record.get("publisher"),
+        record.get("publisherName"),
+        record.get("publisherDomain"),
+    )
+    hosts = set()
+    for value in values:
+        mapped = publisher_domain_from_name(value)
+        identity = mapped or canonical_publisher_domain(value)
+        if identity:
+            hosts.update(publisher_recovery_hosts(identity))
+    if not hosts:
+        for identity in publisher_domains(record):
+            hosts.update(publisher_recovery_hosts(identity))
+    return sorted(hosts)
 
 
 def event_match_details(event: dict, result: dict, body: str = "") -> dict:
@@ -1625,14 +1647,19 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
     domains = publisher_domains(report)
     if not domains:
         return [], None
-    host = domains[0]
-    if not any(host_matches(host, domain) for domain in WIRE_PUBLISHER_DOMAINS):
+    publisher_identity = domains[0]
+    if not any(host_matches(publisher_identity, domain) for domain in WIRE_PUBLISHER_DOMAINS):
         return [], None
     bing = next((backend for backend in QUERY_BACKENDS if backend["id"] == "bing-news-rss"), None)
     if not bing:
         return [], None
     family = {"id": "evidence-upgrade", "scope": event.get("scope", "domestic")}
-    variants = publisher_search_queries(event, host)
+    recovery_hosts = [
+        host for host in publisher_recovery_hosts_for_record(report)
+        if any(host_matches(canonical_publisher_domain(host), domain) for domain in WIRE_PUBLISHER_DOMAINS)
+    ]
+    if not recovery_hosts:
+        recovery_hosts = [publisher_identity]
     audits = []
     direct = []
     direct_seen = set()
@@ -1640,18 +1667,18 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
     rejected = 0
     screening = []
 
-    def consider(found: list[dict], query_audit: dict) -> None:
+    def consider(found: list[dict], query_audit: dict, searched_host: str) -> None:
         nonlocal rejected
         for result in found:
             transport = result.get("url", "")
             resolved, changed = unwrap_redirect_url(transport)
             resolved_host = canonical_publisher_domain(urlsplit(resolved).hostname or "")
-            if not resolved_host or not host_matches(resolved_host, host):
+            if not resolved_host or not host_matches(resolved_host, publisher_identity):
                 continue
             row = dict(result)
             row["url"] = resolved
-            row["sourceDomain"] = host
-            row["sourcePublisherUrl"] = f"https://{host}"
+            row["sourceDomain"] = publisher_identity
+            row["sourcePublisherUrl"] = f"https://{publisher_identity}"
             row["sourceRelationship"] = "publisher_recovery"
             if changed:
                 row["transportUrl"] = transport
@@ -1665,6 +1692,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
                 "matched": bool(match.get("matched")),
                 "score": match.get("score", 0),
                 "reasons": match.get("reasons", []),
+                "searchedHost": searched_host,
             })
             if not match.get("matched"):
                 rejected += 1
@@ -1674,26 +1702,32 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
                 direct_seen.add(key)
                 direct.append(row)
 
-    for variant in variants:
-        found, audit_row = _execute_one_query(family, bing, variant, start, end)
-        audit_row = dict(audit_row or {})
-        audit_row["backend"] = "publisher-search-bing-rss"
-        audit_row["publisherDomain"] = host
-        audit_row["transportSuccess"] = bool(audit_row.get("success"))
-        audits.append(audit_row)
-        raw_results += int(audit_row.get("returnedResultCount") or len(found))
-        consider(found, audit_row)
-        if direct:
-            break
-        # A successful News RSS response can still contain popular unrelated
-        # stories.  Use the existing ordinary Bing HTML search once for this
-        # same bounded variant before trying the next variant.
-        web_found, web_audit = _execute_bing_web_publisher_query(family, bing, variant, start, end)
-        web_audit["publisherDomain"] = host
-        web_audit["transportSuccess"] = bool(web_audit.get("success"))
-        audits.append(web_audit)
-        raw_results += int(web_audit.get("returnedResultCount") or len(web_found))
-        consider(web_found, web_audit)
+    for searched_host in recovery_hosts:
+        for variant in publisher_search_queries(event, searched_host):
+            found, audit_row = _execute_one_query(family, bing, variant, start, end)
+            audit_row = dict(audit_row or {})
+            audit_row["backend"] = "publisher-search-bing-rss"
+            audit_row["publisherDomain"] = publisher_identity
+            audit_row["searchedHost"] = searched_host
+            audit_row["transportSuccess"] = bool(audit_row.get("success"))
+            audits.append(audit_row)
+            raw_results += int(audit_row.get("returnedResultCount") or len(found))
+            consider(found, audit_row, searched_host)
+            if direct:
+                break
+            # A successful News RSS response can still contain popular
+            # unrelated stories.  Use the existing ordinary Bing HTML search
+            # once for this bounded variant before trying the next variant.
+            web_found, web_audit = _execute_bing_web_publisher_query(
+                family, bing, variant, start, end)
+            web_audit["publisherDomain"] = publisher_identity
+            web_audit["searchedHost"] = searched_host
+            web_audit["transportSuccess"] = bool(web_audit.get("success"))
+            audits.append(web_audit)
+            raw_results += int(web_audit.get("returnedResultCount") or len(web_found))
+            consider(web_found, web_audit, searched_host)
+            if direct:
+                break
         if direct:
             break
     transport_success = any(row.get("transportSuccess") for row in audits)
@@ -1701,7 +1735,10 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
         "queryFamily": "evidence-upgrade",
         "scope": event.get("scope", "domestic"),
         "backend": "publisher-search-bing",
-        "publisherDomain": host,
+        "publisherDomain": publisher_identity,
+        "publisherCanonicalDomain": publisher_identity,
+        "publisherRecoveryHosts": recovery_hosts,
+        "hostsTested": sorted({row.get("searchedHost") for row in audits if row.get("searchedHost")}),
         "actualQuery": audits[0].get("actualQuery", "") if audits else "",
         "executedAt": now_cn(),
         "success": transport_success,
@@ -2123,7 +2160,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "role": "evidence-upgrade",
             "articleVerified": True,
             "publisher": verification.get("publisher") or result.get("sourceDomain") or (urlsplit(resolved_url).hostname or "").lower(),
-            "publisherDomain": (urlsplit(resolved_url).hostname or "").lower(),
+            "publisherDomain": canonical_publisher_domain(urlsplit(resolved_url).hostname or ""),
             "sourceRelationship": source_relationship,
             "publishedDate": result.get("publishedDate") or "",
         }
