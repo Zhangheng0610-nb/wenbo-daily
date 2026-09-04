@@ -10494,7 +10494,7 @@
       {
         "id": "item4",
         "number": 4,
-        "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+        "title": "特朗普政府威胁切断联邦机构对史密森学会的支持",
         "body": "ABC News 9月3日报道，特朗普政府威胁切断联邦机构对史密森学会的支持，涉及文物借展、采购和自由裁量拨款等合作安排。相关行动指向史密森学会及其博物馆体系的治理与机构自主性。",
         "commentary": "这件事的文博含义不在于一场政治争执本身，而在于联邦机构怎样支撑国家级博物馆的日常运转：文物借展、采购和拨款一旦被收紧，影响的就不只是经费，也包括博物馆之间共享藏品和开展公共文化服务的方式。",
         "tags": [
@@ -10508,7 +10508,8 @@
             "name": "ABC News：Trump admin threatens to cut federal support for Smithsonian",
             "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940"
           }
-        ]
+        ],
+        "originalTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian"
       },
       {
         "id": "item5",

@@ -8,6 +8,7 @@ from build import (
     _daily_render_section,
     _daily_section_label,
     build_report_html,
+    build_homepage,
     parse_md,
 )
 
@@ -79,6 +80,74 @@ class DailyReportRenderingTests(unittest.TestCase):
             html = build_report_html(data)
             self.assertEqual(re.findall(r'<h3 id="(item\d+)">', html), expected_ids, name)
             self.assertEqual(re.findall(r'href="#(item\d+)"', html), expected_ids, name)
+
+    def test_international_display_title_is_separate_from_original_title(self):
+        markdown = """# 🏛️ 每日文博资讯 | 2026年09月04日（周五）
+
+---
+## 📑 目录
+1. [特朗普政府威胁切断联邦机构对史密森学会的支持](#item1)
+
+---
+## 🌏 国际/区域交流
+
+<!-- originalTitle: Trump administration threatens to cut federal agencies' support for Smithsonian -->
+### 1. 特朗普政府威胁切断联邦机构对史密森学会的支持
+📎 [ABC News: Trump admin threatens support for Smithsonian](https://abcnews.com/article)
+
+ABC News报道史密森学会相关公共文化政策变化。
+
+> **点评：** 联邦支持安排会影响国家级博物馆的借展、采购与公共服务。
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / '2026-09-04.md'
+            path.write_text(markdown, encoding='utf-8')
+            data = parse_md(path)
+
+        item = data['ordered_items'][0]
+        self.assertEqual(item['displayTitle'], '特朗普政府威胁切断联邦机构对史密森学会的支持')
+        self.assertEqual(item['title'], item['displayTitle'])
+        self.assertEqual(item['originalTitle'], "Trump administration threatens to cut federal agencies' support for Smithsonian")
+        html = build_report_html(data)
+        self.assertIn('###', markdown)  # the source remains Markdown, not a renderer translation
+        self.assertIn('1. 特朗普政府威胁切断联邦机构对史密森学会的支持', html)
+        self.assertNotIn('<h3 id="item1">1. Trump administration', html)
+        self.assertIn('ABC News: Trump admin threatens support for Smithsonian', html)
+
+    def test_chinese_canonical_title_is_not_relocalized(self):
+        markdown = """# 🏛️ 每日文博资讯 | 2026年09月04日（周五）
+
+---
+## 🌏 国际/区域交流
+
+### 1. 中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆
+中文来源：内容。
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / '2026-09-04.md'
+            path.write_text(markdown, encoding='utf-8')
+            item = parse_md(path)['ordered_items'][0]
+        self.assertEqual(item['displayTitle'], item['originalTitle'])
+        self.assertEqual(item['displayTitle'], '中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆')
+
+    def test_homepage_consumes_the_same_display_title(self):
+        item = {
+            'id': 'item1', 'number': 1,
+            'title': '特朗普政府威胁切断联邦机构对史密森学会的支持',
+            'displayTitle': '特朗普政府威胁切断联邦机构对史密森学会的支持',
+            'originalTitle': "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            'section': 'international', 'sources': [], 'tags': [], 'body': '正文', 'commentary': ''
+        }
+        report = {
+            'date': '2026-09-04', 'weekday': '周五', 'title': '每日文博资讯 | 2026-09-04',
+            'domestic': [], 'international': [item], 'ordered_items': [item],
+            'toc_items': [{'id': 'item1', 'title': item['displayTitle']}],
+            'trends': [], 'notes': [], 'date_modified': None,
+            'domestic_count': 0, 'international_count': 1,
+        }
+        html = build_homepage([report], [], [], None, None)
+        self.assertIn('特朗普政府威胁切断联邦机构对史密森学会的支持', html)
+        self.assertNotIn('Trump administration threatens to cut federal agencies', html)
 
 
 if __name__ == '__main__':

@@ -1513,6 +1513,16 @@ DAILY_SECTION_LABELS = {
 }
 
 
+def _daily_display_title(item):
+    """Return the public-language title without changing event identity."""
+    return str(item.get('displayTitle') or item.get('title') or '')
+
+
+def _daily_original_title(item):
+    """Return the source/canonical title used for provenance and identity."""
+    return str(item.get('originalTitle') or item.get('title') or '')
+
+
 def _daily_render_section(scope):
     """Map raw domestic/regional/international scope to a display bucket."""
     return 'domestic' if scope == 'domestic' else 'international'
@@ -1567,6 +1577,8 @@ def parse_md(filepath):
     body_items = []
     body_index = 0
     toc_items = []
+    pending_original_title = None
+    pending_display_title = None
 
     i = 1
     while i < len(lines):
@@ -1579,6 +1591,19 @@ def parse_md(filepath):
         date_modified_match = re.match(r'<!--\s*dateModified:\s*(\S+)\s*-->', line.strip())
         if date_modified_match:
             data['date_modified'] = date_modified_match.group(1)
+            i += 1
+            continue
+
+        title_metadata_match = re.match(
+            r'<!--\s*(originalTitle|displayTitle):\s*(.*?)\s*-->$',
+            line.strip(),
+        )
+        if title_metadata_match:
+            key, value = title_metadata_match.groups()
+            if key == 'originalTitle':
+                pending_original_title = value.strip()
+            else:
+                pending_display_title = value.strip()
             i += 1
             continue
 
@@ -1624,18 +1649,23 @@ def parse_md(filepath):
             body_index += 1
             title = item_match.group(2).strip()
             title = re.sub(r'\s*\{#[^}]*\}\s*$', '', title)  # strip {#anchor} from title
+            display_title = pending_display_title or title
             current_item = {
                 # Keep the historical parsed identity for periodic reports;
                 # the ordered daily view below supplies display numbering.
                 'id': f'item{body_index}',
                 'number': body_index,
-                'title': title,
+                'title': display_title,
+                'displayTitle': display_title,
+                'originalTitle': pending_original_title or title,
                 'sources': [],
                 'tags': [],
                 'body': '',
                 'commentary': '',
                 'section': current_section,
             }
+            pending_original_title = None
+            pending_display_title = None
             data[current_section].append(current_item)
             body_items.append(current_item)
             i += 1
@@ -1730,7 +1760,7 @@ def parse_md(filepath):
 
     data['ordered_items'] = display_items
     data['toc_items'] = [
-        {'id': item['id'], 'title': item['title']}
+        {'id': item['id'], 'title': _daily_display_title(item)}
         for item in display_items
     ]
 
@@ -1778,7 +1808,7 @@ def build_report_html(data, prev_report=None, next_report=None):
                 cls = f'tag tag-{tag}'
                 tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
 
-        html = f'<h3 id="{item["id"]}">{item["number"]}. {item["title"]}{tags_html}</h3>\n'
+        html = f'<h3 id="{item["id"]}">{item["number"]}. {_daily_display_title(item)}{tags_html}</h3>\n'
 
         if item['sources']:
             src_parts = [source_link_html(s) for s in item['sources']]
@@ -2697,7 +2727,7 @@ def related_digest_sources(title, daily_reports, context=''):
         # aggregate weekly headings that carry local paragraph context.
         for report in daily_reports:
             for item in report.get('domestic', []) + report.get('international', []):
-                candidate = _compact_title(item.get('title', ''))
+                candidate = _compact_title(_daily_original_title(item))
                 if not candidate:
                     continue
                 shared = target in candidate or candidate in target
@@ -2709,7 +2739,7 @@ def related_digest_sources(title, daily_reports, context=''):
     matches = []
     for report in daily_reports:
         for item in report.get('domestic', []) + report.get('international', []):
-            candidate = _compact_title(item.get('title', ''))
+            candidate = _compact_title(_daily_original_title(item))
             if not candidate:
                 continue
             shared = target in candidate or candidate in target
@@ -3488,7 +3518,7 @@ function sourceList(sources) {
   }).filter(Boolean).join(' · ');
 }
 function itemText(item) {
-  return [item.title, item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
+  return [item.title, (item.originalTitle || ''), item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
 }
 function queryGroups(rawQuery) {
   return String(rawQuery || '').trim().toLowerCase().split(/\\s+/).filter(Boolean).map(function(chunk) {
@@ -3568,7 +3598,7 @@ function renderSearch(data, rawQuery) {
         const key = record.path + '#' + (item.id || compact(item.title));
         if (seen.has(key)) return;
         seen.add(key);
-        const exactTitle = compact(item.title).includes(compact(query));
+        const exactTitle = compact([item.title, (item.originalTitle || '')].join(' ')).includes(compact(query));
         hits.push({record: record, item: item, score: (exactTitle ? 1000 : 0) + matchScore(itemText(item), groups)});
       });
     } else if (matches([record.title, record.text].join(' '), groups)) {
@@ -3874,7 +3904,7 @@ def build_dedup_index(daily_reports, days=30):
     sorted_r = sorted(daily_reports, key=lambda r: r['date'], reverse=True)[:days]
     out = []
     for r in sorted_r:
-        items = [{'id': it['id'], 'title': it['title']} for it in r['domestic'] + r['international']]
+        items = [{'id': it['id'], 'title': _daily_original_title(it)} for it in r['domestic'] + r['international']]
         out.append({'date': r['date'], 'items': items})
     path = os.path.join(SITE_DIR, 'dedup-index.json')
     with open(path, 'w', encoding='utf-8') as f:
@@ -3959,15 +3989,19 @@ def main():
     for r in daily_reports:
         items = []
         for item in r.get('ordered_items') or r['domestic'] + r['international']:
-            items.append({
+            search_item = {
                 'id': item.get('id', ''),
                 'number': item.get('number', ''),
-                'title': item['title'],
+                'title': _daily_display_title(item),
                 'body': item['body'][:200] if item['body'] else '',
                 'commentary': item['commentary'],
                 'tags': item.get('tags', []),
                 'sources': [{'name': s.get('name', ''), 'url': s.get('url', '')} for s in item.get('sources', [])],
-            })
+            }
+            original_title = _daily_original_title(item)
+            if original_title != search_item['title']:
+                search_item['originalTitle'] = original_title
+            items.append(search_item)
         search_data.append({
             'type': 'daily',
             'path': f"reports/{r['date']}.html",

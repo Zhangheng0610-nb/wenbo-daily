@@ -314,7 +314,7 @@ function sourceList(sources) {
   }).filter(Boolean).join(' · ');
 }
 function itemText(item) {
-  return [item.title, item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
+  return [item.title, (item.originalTitle || ''), item.body, item.commentary, (item.progress || ''), (item.tags || []).join(' '), (item.sources || []).map(function(s) { return typeof s === 'string' ? s : s.name; }).join(' ')].join(' ');
 }
 function queryGroups(rawQuery) {
   return String(rawQuery || '').trim().toLowerCase().split(/\s+/).filter(Boolean).map(function(chunk) {
@@ -394,7 +394,7 @@ function renderSearch(data, rawQuery) {
         const key = record.path + '#' + (item.id || compact(item.title));
         if (seen.has(key)) return;
         seen.add(key);
-        const exactTitle = compact(item.title).includes(compact(query));
+        const exactTitle = compact([item.title, (item.originalTitle || '')].join(' ')).includes(compact(query));
         hits.push({record: record, item: item, score: (exactTitle ? 1000 : 0) + matchScore(itemText(item), groups)});
       });
     } else if (matches([record.title, record.text].join(' '), groups)) {
