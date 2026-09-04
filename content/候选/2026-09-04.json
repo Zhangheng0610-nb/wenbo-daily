@@ -11,11 +11,11 @@
   "replayCutoff": "2026-09-04T07:13:00+08:00",
   "candidatePoolDefinition": "本次正式编辑重审的唯一输入为 content/复核/2026-09-04-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 与治理回放仅用于追溯，不与复核池拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-04T15:57:59+08:00",
+    "reviewedAt": "2026-09-04T16:55:43+08:00",
     "reviewedEvents": 8,
-    "selectedEvents": 5,
+    "selectedEvents": 6,
     "historicalExcludedEvents": 4,
-    "note": "基于最新八个 evidence-qualified event 完成统一编辑重审；高优先级古埃及展、标本法律责任解读与三条既有实质博物馆事件入选，低优先级事项不作填充。"
+    "note": "基于最新八个 evidence-qualified event 完成统一编辑重审；scope 与 editorial priority 已按事件语义重算，新增全国文物地震安全治理事件，低优先级事项不作填充。"
   },
   "candidates": [
     {
@@ -99,7 +99,7 @@
       "evidenceUpgradeStatus": "completed",
       "evidenceUpgradeAttempted": true,
       "evidenceUpgradeResult": "qualified",
-      "dailyItemNumber": 2,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读"
     },
     {
@@ -190,7 +190,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 3,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展"
     },
     {
@@ -283,7 +283,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展"
     },
     {
@@ -310,9 +310,9 @@
         "建筑",
         "国际文化设施"
       ],
-      "domestic": true,
-      "international": false,
-      "scope": "domestic",
+      "domestic": false,
+      "international": true,
+      "scope": "international",
       "decision": "selected",
       "decisionReason": "selected_fresh_A_evidence_and_major_new_museum_project",
       "selectedForDaily": true,
@@ -386,7 +386,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 5,
+      "dailyItemNumber": 6,
       "dailyItemTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆"
     },
     {
@@ -401,7 +401,7 @@
       "publisher": "ncha.gov.cn",
       "evidenceSources": [
         {
-          "name": "中国新闻网：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
           "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
           "tier": "A",
           "role": "evidence-upgrade"
@@ -412,27 +412,37 @@
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "rejected",
-      "decisionReason": "low_editorial_priority_after_full_network_recovery",
-      "selectedForDaily": false,
+      "decision": "selected",
+      "decisionReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
+      "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "Reviewed after full-network recovery; no filler selection.",
       "discoveredVia": "full-network-recovery",
       "discoveryQuery": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "low_editorial_priority_after_full_network_recovery",
-      "editorialPriorityScore": 28,
-      "editorialPriorityLabel": "low",
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
+      "editorialPriorityScore": 70,
+      "editorialPriorityLabel": "high",
       "editorialReasons": [
+        "national_heritage_safety_or_governance",
         "primary_freshness"
       ],
+      "heritageGovernance": {
+        "matched": true,
+        "national": true,
+        "hasSubject": true,
+        "hasAction": true,
+        "hasNationalScope": true
+      },
       "reportCount": 1,
       "freshnessTier": "primary_0_48h",
-      "evidenceUpgradeStatus": "not_needed",
-      "evidenceUpgradeAttempted": null,
-      "evidenceUpgradeResult": null,
-      "evidenceResolutionAttempts": null
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [],
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
     },
     {
       "candidateId": "recovery-20260904-005",
@@ -700,17 +710,17 @@
   ],
   "summary": {
     "discovered": 12,
-    "selected": 5,
-    "rejected": 7,
+    "selected": 6,
+    "rejected": 6,
     "deferred": 0,
     "needsVerification": 0
   },
   "revision": {
-    "revisedAt": "2026-09-04T15:57:59+08:00",
+    "revisedAt": "2026-09-04T16:55:43+08:00",
     "revisionType": "same_day_editorial_revision",
     "discoveryAuditUnchanged": true,
     "editorialInputPath": "content/复核/2026-09-04-editorial-replay.json",
     "runtimeEnrichment": true,
-    "revisionReason": "formal_editorial_replay_with_alternate_evidence_resolution_audit"
+    "revisionReason": "formal_editorial_replay_with_scope_and_priority_recalculation"
   }
 }

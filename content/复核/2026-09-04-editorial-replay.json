@@ -4,7 +4,7 @@
   "date": "2026-09-04",
   "runType": "replay",
   "replayType": "formal-editorial-replay",
-  "replayedAt": "2026-09-04T15:57:59+08:00",
+  "replayedAt": "2026-09-04T16:55:43+08:00",
   "replayCutoff": "2026-09-04T07:13:00+08:00",
   "baseDiscoveryAuditPath": "content/发现/2026-09-04.json",
   "baseDiscoveryAuditSha256": "8f0a2e05112e498c65019709438d8bbc4bdc9d75cc6bcdd252da37c51b432f5f",
@@ -13,6 +13,31 @@
   "reason": "基于已保存的完整网络治理回放，对最新八个 evidence-qualified event 进行统一正式编辑重审；原始 discovery audit 保持不变。",
   "runtimeEnrichment": true,
   "discoveryAuditUnchanged": true,
+  "scopeFinalization": {
+    "status": "completed",
+    "corrections": [
+      {
+        "eventId": "event-0621fc6c86ce",
+        "previousScope": "domestic",
+        "finalScope": "international",
+        "reason": "foreign_museum_event_location_in_los_angeles"
+      }
+    ]
+  },
+  "priorityRecalculation": {
+    "status": "completed",
+    "changedEvents": [
+      {
+        "eventId": "event-af2353ba1bef",
+        "previousScore": 28,
+        "previousLabel": "low",
+        "previousReasons": ["primary_freshness"],
+        "finalScore": 70,
+        "finalLabel": "high",
+        "finalReasons": ["national_heritage_safety_or_governance", "primary_freshness"]
+      }
+    ]
+  },
   "queryAudits": [
     {
       "queryFamily": "governance-recall-input",
@@ -111,7 +136,7 @@
         "eventId": "event-0621fc6c86ce",
         "representativeTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
         "publishedDate": "2026-09-03",
-        "scope": "domestic",
+        "scope": "international",
         "reportCount": 1,
         "editorialPriorityScore": 56,
         "editorialPriorityLabel": "medium",
@@ -129,13 +154,20 @@
         "publishedDate": "2026-09-04",
         "scope": "domestic",
         "reportCount": 1,
-        "editorialPriorityScore": 28,
-        "editorialPriorityLabel": "low",
+        "editorialPriorityScore": 70,
+        "editorialPriorityLabel": "high",
         "candidateDisposition": "evidence_qualified",
         "evidenceTierAtDiscovery": "A",
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["primary_freshness"],
+        "editorialReasons": ["national_heritage_safety_or_governance", "primary_freshness"],
+        "heritageGovernance": {
+          "matched": true,
+          "national": true,
+          "hasSubject": true,
+          "hasAction": true,
+          "hasNationalScope": true
+        },
         "evidenceSources": [{"name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会", "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html", "tier": "A", "role": "discovery-evidence", "articleVerified": true}]
       },
       {
@@ -171,21 +203,21 @@
     ]
   },
   "editorialReview": {
-    "reviewedAt": "2026-09-04T15:57:59+08:00",
+    "reviewedAt": "2026-09-04T16:55:43+08:00",
     "reviewedEvents": 8,
-    "selectedEvents": 5,
+    "selectedEvents": 6,
     "decisions": [
       {"eventId": "event-12aaa43d2f5a", "decision": "selected", "reason": "最高优先级；展览运营数据与展后技术合作均有明确信息增量。"},
+      {"eventId": "event-af2353ba1bef", "decision": "selected", "reason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。"},
       {"eventId": "event-5432c779ed5b", "decision": "selected", "reason": "标本受损事件的法律责任解读提供了馆藏保护与公众管理的具体行业信息。"},
       {"eventId": "event-4ca89b8f0532", "decision": "selected", "reason": "两家专题博物馆联合策展，展览内容与纪念节点均具明确信息增量。"},
       {"eventId": "event-49ae576b8781", "decision": "selected", "reason": "侨批文物与电影道具结合并开启全国巡展，具有具体传播与展示实践。"},
       {"eventId": "event-0621fc6c86ce", "decision": "selected", "reason": "大型新博物馆项目兼具中国建筑师主持设计、馆藏规模与城市公共空间信息。"},
-      {"eventId": "event-af2353ba1bef", "decision": "rejected", "reason": "low_editorial_priority_after_full_network_recovery"},
       {"eventId": "event-eaee9c72a7b2", "decision": "rejected", "reason": "low_editorial_priority_after_full_network_recovery"},
       {"eventId": "event-f35206d16b83", "decision": "rejected", "reason": "low_editorial_priority_after_full_network_recovery"}
     ],
     "historicalDuplicatesExcluded": 133,
     "note": "所有八个 evidence-qualified event 统一完成编辑复核；旧 selected 不享有 incumbent 优先权。"
   },
-  "note": "Formal editorial replay uses the saved governance recall pool; it is not a replacement for the original morning discovery audit."
+  "note": "Formal editorial replay uses the saved governance recall pool; scope and priority were recalculated from event semantics; it is not a replacement for the original morning discovery audit."
 }

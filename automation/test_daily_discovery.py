@@ -19,6 +19,7 @@ from automation.daily_discovery import (
     evaluate_candidate_pool,
     fixed_panel_radar_records,
     has_specific_event_anchor,
+    is_high_value_record,
     is_relevant_record,
     load_history,
     museum_collection_or_public_incident,
@@ -302,6 +303,22 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(infer_editorial_scope(domestic_joint_meeting, ["domestic"], []), "domestic")
         self.assertEqual(infer_editorial_scope(foreign_report_of_china, ["international"], []), "domestic")
 
+    def test_foreign_museum_location_overrides_chinese_participant_and_publisher(self):
+        event = [{
+            "title": "中国建筑师主持设计的卢卡斯叙事艺术博物馆将在美国洛杉矶开馆",
+            "sourceDomain": "chinanews.com.cn",
+            "scope": "domestic",
+        }]
+        self.assertEqual(infer_editorial_scope(event, ["domestic"], []), "international")
+
+    def test_foreign_media_does_not_override_china_event_scope(self):
+        event = [{
+            "title": "Reuters reports China museum collection policy update in Beijing",
+            "sourceDomain": "reuters.com",
+            "scope": "international",
+        }]
+        self.assertEqual(infer_editorial_scope(event, ["international"], []), "domestic")
+
     def test_different_sites_are_not_duplicates(self):
         a = {"title": "甲遗址发现古墓", "url": "https://a.test/1", "publishedDate": "2026-08-31", "entity": "甲遗址", "eventType": "archaeology"}
         b = {"title": "乙遗址发现古墓", "url": "https://b.test/2", "publishedDate": "2026-08-31", "entity": "乙遗址", "eventType": "archaeology"}
@@ -330,6 +347,42 @@ class DailyDiscoveryTests(unittest.TestCase):
     def test_archaeological_research_result_gets_substantive_signal(self):
         result = editorial_priority({"title": "某遗址研究揭示古人类迁徙新认识"})
         self.assertIn("substantive_archaeological_discovery_or_new_knowledge", result["reasons"])
+
+    def test_national_heritage_safety_coordination_gets_governance_priority(self):
+        result = editorial_priority({
+            "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+            "sourceDomain": "ncha.gov.cn",
+            "publishedDate": "2026-09-04",
+        }, __import__("datetime").date(2026, 9, 4))
+        self.assertTrue(result["heritageGovernance"]["matched"])
+        self.assertTrue(result["heritageGovernance"]["national"])
+        self.assertEqual(result["score"], 70)
+        self.assertEqual(result["label"], "high")
+        self.assertIn("national_heritage_safety_or_governance", result["reasons"])
+
+    def test_substantive_heritage_governance_enters_high_value_path(self):
+        self.assertTrue(is_high_value_record({
+            "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+        }))
+
+    def test_generic_heritage_meeting_does_not_get_governance_priority(self):
+        result = editorial_priority({"title": "国家文物局召开年度工作交流会"})
+        self.assertFalse(result["heritageGovernance"]["matched"])
+        self.assertLess(result["score"], 45)
+
+    def test_legal_commentary_without_concrete_incident_stays_low(self):
+        result = editorial_priority({"title": "博物馆参观法律责任律师解读"})
+        self.assertFalse(result["museumCollectionOrPublicIncident"])
+        self.assertLess(result["score"], 45)
+
+    def test_specimen_incident_score_is_from_concrete_incident_not_lawyer_word(self):
+        result = editorial_priority({
+            "title": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+            "publishedDate": "2026-08-31",
+        }, __import__("datetime").date(2026, 9, 4))
+        self.assertEqual(result["score"], 65)
+        self.assertIn("museum_collection_or_public_incident", result["reasons"])
+        self.assertNotIn("substantive_heritage_governance", result["reasons"])
 
     def test_high_level_cultural_diplomacy_is_high_priority(self):
         result = editorial_priority({

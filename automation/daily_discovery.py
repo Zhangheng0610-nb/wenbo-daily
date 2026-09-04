@@ -233,6 +233,16 @@ NATIONAL_POLICY_TERMS = ("国家文物局", "文化和旅游部", "全国范围"
 ARCHAEOLOGY_DISCOVERY_TERMS = ("考古发现", "考古发掘", "发掘成果", "成果公布", "研究揭示", "研究成果", "新发现", "新认识", "出土", "墓地发现", "遗址发现")
 MAJOR_DISCOVERY_TERMS = ("重大考古", "重大新发现", "填补", "重要发现", "重大发现")
 SECURITY_PRIORITY_TERMS = ("盗窃", "失窃", "抢劫", "文物安全事件", "追回", "落网", "藏品受损")
+HERITAGE_GOVERNANCE_SUBJECT_TERMS = (
+    "文物安全", "地震安全", "防震", "防灾", "防洪", "消防", "风险管理", "风险治理",
+    "博物馆治理", "博物馆监管", "藏品管理", "陈列展览内容审核", "内容审核", "行业规范",
+    "文物保护监管", "安全保障",
+)
+HERITAGE_GOVERNANCE_ACTION_TERMS = (
+    "联合", "协同", "部门", "机制", "部署", "监管", "审核", "核查", "整改", "整治",
+    "治理", "标准", "规范", "指引", "工作交流", "交流会", "工作会", "专项",
+)
+NATIONAL_GOVERNANCE_TERMS = ("全国", "国家级", "跨部门", "国家文物局", "文化和旅游部")
 MUSEUM_INSTITUTION_TERMS = (
     "博物馆", "博物院", "纪念馆", "美术馆", "自然博物馆", "动物博物馆", "科技馆", "收藏展示机构",
 )
@@ -266,7 +276,8 @@ DIPLOMATIC_CONTEXT_TERMS = (
 INTERNATIONAL_LOCATION_TERMS = (
     "埃及", "开罗", "吉尔吉斯", "美国", "英国", "法国", "德国", "意大利", "西班牙", "日本", "韩国",
     "俄罗斯", "乌兹别克", "哈萨克", "伊朗", "伊拉克", "土耳其", "印度", "澳大利亚", "加拿大", "墨西哥",
-    "越南", "柬埔寨", "老挝", "泰国", "尼泊尔", "斯里兰卡", "海外", "境外",
+    "越南", "柬埔寨", "老挝", "泰国", "尼泊尔", "斯里兰卡", "洛杉矶", "纽约", "华盛顿", "伦敦",
+    "巴黎", "罗马", "阿姆斯特丹", "维也纳", "悉尼", "旧金山", "海外", "境外",
 )
 CULTURAL_DIPLOMACY_OBJECT_TERMS = ("国家历史博物馆", "国家博物馆", "国家级博物馆", "国家博物院", "世界遗产", "国家级文化机构")
 CULTURAL_DIPLOMACY_SUBSTANCE_TERMS = (
@@ -1060,6 +1071,16 @@ def _radar_daily_scope(item: dict) -> tuple[str, str]:
     return "domestic", "title_and_monitoring_semantics"
 
 
+def _has_explicit_foreign_event_location(text: str) -> bool:
+    """Detect a foreign place as the event location, not just a mention."""
+    places = "|".join(re.escape(term) for term in INTERNATIONAL_LOCATION_TERMS)
+    return bool(re.search(
+        rf"(?:在|于|位于|将在|将于|赴|前往|举办于)\s*(?:{places})",
+        text,
+        re.IGNORECASE,
+    ))
+
+
 def infer_editorial_scope(group: list[dict], scopes: list[str], scope_hints: list[str]) -> str:
     """Resolve daily scope from event semantics, never from publisher nationality."""
     text = " ".join(
@@ -1071,7 +1092,8 @@ def infer_editorial_scope(group: list[dict], scopes: list[str], scope_hints: lis
     country_pair = bool(re.search(r"中(?!国)[\u4e00-\u9fff]{1,4}(?:联合|合作|交流|考古|展览|博物馆|文物|遗产)", text))
     cross_border = any(term in text for term in DIPLOMATIC_CONTEXT_TERMS + ("中外", "联合考古", "跨国")) or country_pair
     wenbo_subject = any(term in text for term in ("博物馆", "博物院", "考古", "文物", "遗产", "展览", "文化"))
-    if (foreign_location and cross_border) or (cross_border and wenbo_subject):
+    explicit_foreign_location = _has_explicit_foreign_event_location(text)
+    if (explicit_foreign_location and wenbo_subject) or (foreign_location and cross_border) or (cross_border and wenbo_subject):
         return "international"
     if "国际" in text and any(term in text for term in ("博物馆", "考古", "文物", "遗产", "展览", "文化")):
         return "international"
@@ -2065,7 +2087,7 @@ def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int
         "candidateDisposition",
         "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "newDevelopment", "claimRisk",
         "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons",
-        "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount",
+        "museumCollectionOrPublicIncident", "heritageGovernance", "publicSalience", "independentCoverageCount",
         "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceUpgradeStatus",
         "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceSources",
         "evidenceResolutionAttempts", "discoveryReports",
@@ -2183,6 +2205,7 @@ def is_high_value_record(record: dict) -> bool:
         any(term.lower() in text for term in HIGH_VALUE_TERMS)
         or high_level_cultural_diplomacy_signal(record)
         or international_museum_governance_relevance(record)
+        or heritage_governance_signal(record)["matched"]
     )
 
 
@@ -2278,6 +2301,22 @@ def museum_collection_or_public_incident(record: dict) -> bool:
         and any(term.lower() in text for term in COLLECTION_OBJECT_TERMS)
         and any(term.lower() in text for term in PUBLIC_INCIDENT_TERMS)
     )
+
+
+def heritage_governance_signal(record: dict) -> dict:
+    """Identify substantive heritage governance without rewarding meetings alone."""
+    text = _editorial_context(record)
+    has_subject = any(term.lower() in text for term in HERITAGE_GOVERNANCE_SUBJECT_TERMS)
+    has_action = any(term.lower() in text for term in HERITAGE_GOVERNANCE_ACTION_TERMS)
+    has_national_scope = any(term.lower() in text for term in NATIONAL_GOVERNANCE_TERMS)
+    substantive = has_subject and has_action
+    return {
+        "matched": substantive,
+        "national": substantive and has_national_scope,
+        "hasSubject": has_subject,
+        "hasAction": has_action,
+        "hasNationalScope": has_national_scope,
+    }
 
 
 def _coverage_domain_family(value: str) -> str:
@@ -2396,6 +2435,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     digital = hit(DIGITAL_PRIORITY_TERMS)
     cooperation = hit(COOPERATION_TERMS)
     museum_governance = international_museum_governance_relevance(record)
+    heritage_governance = heritage_governance_signal(record)
     routine = hit(ROUTINE_PRIORITY_TERMS)
     official_diplomatic_source = bool(re.search(r"(?:embassy|使馆|大使馆|外交|mfa|gov\.cn)", text))
     high_level_cultural_diplomacy = high_level_cultural_diplomacy_signal(record)
@@ -2441,12 +2481,20 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     if museum_governance:
         score += 42
         reasons.append("museum_or_cultural_institution_governance")
+    if heritage_governance["matched"]:
+        if heritage_governance["national"]:
+            score += 42
+            reasons.append("national_heritage_safety_or_governance")
+        else:
+            score += 30
+            reasons.append("substantive_heritage_governance")
     if high_level_cultural_diplomacy:
         score += 52
         reasons.append("high_level_cultural_diplomacy")
     salience_eligible = (
         museum_collection_incident or security or policy or archaeology_discovery or repatriation
         or heritage or (museum_project and hit(MUSEUM_SCALE_TERMS)) or digital or cooperation or museum_governance
+        or heritage_governance["matched"]
     )
     if salience_eligible and salience["level"] == "cross_media_attention":
         score += 10
@@ -2486,6 +2534,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
         "reasons": reasons,
         "highLevelCulturalDiplomacy": high_level_cultural_diplomacy,
         "museumCollectionOrPublicIncident": museum_collection_incident,
+        "heritageGovernance": heritage_governance,
         "publicSalience": salience,
         "independentCoverageCount": salience["independentCoverageCount"],
     }
@@ -2552,6 +2601,7 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         record["editorialReasons"] = priority["reasons"]
         record["highLevelCulturalDiplomacy"] = priority["highLevelCulturalDiplomacy"]
         record["museumCollectionOrPublicIncident"] = priority["museumCollectionOrPublicIncident"]
+        record["heritageGovernance"] = priority["heritageGovernance"]
         record["publicSalience"] = priority["publicSalience"]
         record["independentCoverageCount"] = priority["independentCoverageCount"]
         record["editorialPriorityRank"] = rank
