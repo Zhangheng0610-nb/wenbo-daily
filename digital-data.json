@@ -1,9 +1,9 @@
 {
- "generated": "2026-09-04",
+ "generated": "2026-09-05",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-09-04"
+  "end": "2026-09-05"
  },
  "stats": {
   "total": 273,
@@ -16,8 +16,8 @@
   },
   "digest_articles": 511,
   "unique_source_pages": 156,
-  "source_article_total": 13771,
-  "source_unique_pages": 4773,
+  "source_article_total": 13772,
+  "source_unique_pages": 4774,
   "overall_share": 3.27,
   "topic_unique_counts": {
    "数字保护与数字采集": 80,
@@ -53,10 +53,10 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-04T07:23:25+08:00",
+  "last_incremental_scan_at": "2026-09-05T07:25:10+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-08-29",
-   "end": "2026-09-04"
+   "start": "2026-08-30",
+   "end": "2026-09-05"
   }
  },
  "topic_info": [
@@ -11413,8 +11413,8 @@
    "content_item_count": 0,
    "source_page_count": 0,
    "unique_count": 0,
-   "source_count": 3,
-   "source_unique_count": 3,
+   "source_count": 4,
+   "source_unique_count": 4,
    "share": 0.0,
    "items": []
   }
@@ -20348,8 +20348,8 @@
    "content_item_count": 0,
    "source_page_count": 0,
    "unique_count": 0,
-   "source_count": 3,
-   "source_unique_count": 3,
+   "source_count": 4,
+   "source_unique_count": 4,
    "share": 0.0,
    "items": []
   }
@@ -43737,6 +43737,17 @@
    "source_unique_count": 1,
    "share": 0.0,
    "items": []
+  },
+  {
+   "key": "2026-09-04",
+   "count": 0,
+   "content_item_count": 0,
+   "source_page_count": 0,
+   "unique_count": 0,
+   "source_count": 1,
+   "source_unique_count": 1,
+   "share": 0.0,
+   "items": []
   }
  ],
  "by_year": [
@@ -43796,9 +43807,9 @@
    "content_item_count": 58,
    "source_page_count": 28,
    "unique_count": 28,
-   "source_count": 546,
-   "source_unique_count": 286,
-   "share": 9.79
+   "source_count": 547,
+   "source_unique_count": 287,
+   "share": 9.76
   }
  ],
  "content_items": [

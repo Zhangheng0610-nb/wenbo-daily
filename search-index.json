@@ -10532,6 +10532,75 @@
     ]
   },
   {
+    "type": "daily",
+    "path": "reports/2026-09-05.html",
+    "title": "🏛️ 每日文博资讯 | 2026年09月05日（周六）",
+    "date": "2026-09-05",
+    "weekday": "周六",
+    "domestic_count": 0,
+    "international_count": 3,
+    "items": [
+      {
+        "id": "item1",
+        "number": 1,
+        "title": "圣迭戈艺术机构因资金困境裁员，部分前员工质疑财务管理",
+        "body": "KPBS 9月3日报道，圣迭戈艺术博物馆和当代艺术机构近期均有裁员；当代艺术机构还暂时关闭巴尔博亚公园馆址，部分展览提前结束。机构董事会表示已启动财务与治理复核，前员工则对管理提出质疑。",
+        "commentary": "报道把资金收缩对机构的影响落到具体运营：当代艺术机构裁员42%、暂时关闭巴尔博亚公园馆址并提前结束展览，圣迭戈艺术博物馆也裁员。董事会已启动财务与治理复核；在结论公布前，前员工的“财务管理失当”只能作为已归属的质疑呈现。",
+        "tags": [
+          "博物馆",
+          "运营治理",
+          "国际",
+          "美国"
+        ],
+        "sources": [
+          {
+            "name": "KPBS Public Media：San Diego arts organizations cut staff due to funding struggles",
+            "url": "https://www.kpbs.org/news/arts-culture/2026/09/03/san-diego-arts-organizations-cut-staff-due-to-funding-struggles-some-former-employees-claim-financial-mismanagement"
+          }
+        ]
+      },
+      {
+        "id": "item2",
+        "number": 2,
+        "title": "美国博物馆联盟提出博物馆 AI 治理三原则",
+        "body": "美国博物馆联盟8月31日发布文章，提出博物馆使用人工智能时应遵循“避免伤害、维护信任、创造价值”三原则，并讨论隐私安全、知识产权、专业责任、透明披露、人员培训和机构使命等问题。",
+        "commentary": "AAM提出“避免伤害、维护信任、创造价值”三原则，并把博物馆使用AI的风险拆成隐私/IP、专业责任、透明披露和培训等环节。对藏品阐释、捐赠研究和人事决策等高后果场景，文章主张AI可以辅助专业判断，却不能替代专业责任；这使AI治理从工具采购转向机构问责。",
+        "tags": [
+          "博物馆",
+          "数字文博",
+          "行业治理",
+          "国际",
+          "美国"
+        ],
+        "sources": [
+          {
+            "name": "American Alliance of Museums：The Three Laws of AI Governance",
+            "url": "https://www.aam-us.org/2026/08/31/the-three-laws-of-ai-governance/"
+          }
+        ]
+      },
+      {
+        "id": "item3",
+        "number": 3,
+        "title": "LED 多光谱成像系统帮助考古发掘前评估遗址",
+        "body": "Archaeology Magazine 9月3日报道，奥胡斯大学团队开发了使用16种波段 LED 的多光谱成像系统，并在丹麦博恩霍尔姆岛的 Sorte Muld 铁器时代遗址进行测试。系统显出肉眼难见的土层变化，小骨片在紫外光下出现荧光，相关线索仍需通过发掘验证。",
+        "commentary": "这项技术的增量不在于给遗址拍更亮的照片，而在发掘前增加一层可重复的材料识别：16种波段的LED多光谱系统在丹麦Sorte Muld遗址显出肉眼难见的土层变化，并让小骨片在紫外光下出现荧光。研究团队仍需用发掘验证线索，但它把“先观察、后扰动”推进到现场评估环节。",
+        "tags": [
+          "考古",
+          "科技保护",
+          "国际",
+          "丹麦"
+        ],
+        "sources": [
+          {
+            "name": "Archaeology Magazine：LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
+            "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "type": "weekly",
     "path": "reports/weekly-2026-08-09.html",
     "title": "📰 文博资讯周报 | 2026年8月3日 — 8月9日",

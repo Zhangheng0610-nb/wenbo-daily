@@ -323,7 +323,11 @@ def validate_discovery_audit(ledger_path, payload):
                                 f'candidate evaluation pool {index} evidence attempt {attempt_index}: '
                                 f'missing fields: {", ".join(missing_attempt_fields)}'
                             )
-                        if attempt.get('method') not in {'existing_report', 'redirect_unwrap', 'domain_search', 'official_search', 'broad_search'}:
+                        if attempt.get('method') not in {
+                            'existing_report', 'redirect_unwrap', 'native_index',
+                            'domain_search', 'official_search', 'broad_search',
+                            'alternate_source',
+                        }:
                             errors.append(f'candidate evaluation pool {index} evidence attempt {attempt_index}: invalid method')
                         if not isinstance(attempt.get('articleMatched'), bool):
                             errors.append(f'candidate evaluation pool {index} evidence attempt {attempt_index}: articleMatched must be boolean')

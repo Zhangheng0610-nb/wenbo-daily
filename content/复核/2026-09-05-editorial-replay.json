@@ -1,0 +1,120 @@
+{
+  "schema": "daily-editorial-replay-v1",
+  "schemaVersion": 1,
+  "date": "2026-09-05",
+  "runType": "replay",
+  "replayType": "formal-editorial-replay",
+  "replayedAt": "2026-09-05T07:22:05+08:00",
+  "replayCutoff": "2026-09-05T07:13:00+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-05.json",
+  "baseDiscoveryAuditSha256": "5f159cbd55451bffcd002c7a2379207ab79c082249bb62fd9f84b7da9f06fb17",
+  "reason": "对完整 broad discovery 的全部 4 个 evidence-qualified 事件逐条完成正式编辑复核；原始 discovery audit 保持不变。",
+  "runtimeEnrichment": true,
+  "discoveryAuditUnchanged": true,
+  "queryAudits": [
+    {
+      "queryFamily": "full-broad-discovery",
+      "actualQuery": "python automation/daily_discovery.py --date 2026-09-05 --window-days 7 --write",
+      "executedAt": "2026-09-05T07:16:27+08:00",
+      "success": true,
+      "returnedResultCount": 1165,
+      "acceptedRawCount": 1165,
+      "sourceAudit": "content/发现/2026-09-05.json"
+    }
+  ],
+  "evidenceQualification": {
+    "status": "completed",
+    "sourceAudit": "content/发现/2026-09-05.json",
+    "qualified": 4,
+    "needsVerification": 0,
+    "note": "四个事件逐条回读其已记录的 A/B 或文章级 provisional_B 证据。"
+  },
+  "finalEditorialPool": {
+    "rawQualifiedEvents": 4,
+    "canonicalUniqueEvents": 4,
+    "historicalDuplicates": 0,
+    "editoriallyReviewed": 4,
+    "events": [
+      {
+        "eventId": "event-2d1f69a8c17e",
+        "representativeTitle": "圣迭戈艺术机构因资金困境裁员，部分前员工质疑财务管理",
+        "publishedDate": "2026-09-04",
+        "scope": "international",
+        "editorialPriorityScore": 70,
+        "editorialPriorityLabel": "high",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAfterUpgrade": "provisional_B",
+        "evidenceSources": [
+          {
+            "name": "KPBS Public Media：San Diego arts organizations cut staff due to funding struggles",
+            "url": "https://www.kpbs.org/news/arts-culture/2026/09/03/san-diego-arts-organizations-cut-staff-due-to-funding-struggles-some-former-employees-claim-financial-mismanagement",
+            "tier": "provisional_B",
+            "articleVerified": true,
+            "role": "evidence-upgrade"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "报道涉及博物馆与艺术机构的裁员、展览取消和治理复核，具有可核对的运营后果；标题保留前员工质疑的归属，不把指控写成定论。"
+      },
+      {
+        "eventId": "event-fa123656a2d4",
+        "representativeTitle": "美国博物馆联盟提出博物馆 AI 治理三原则",
+        "publishedDate": "2026-08-31",
+        "scope": "international",
+        "editorialPriorityScore": 64,
+        "editorialPriorityLabel": "medium",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAfterUpgrade": "provisional_B",
+        "evidenceSources": [
+          {
+            "name": "American Alliance of Museums：The Three Laws of AI Governance",
+            "url": "https://www.aam-us.org/2026/08/31/the-three-laws-of-ai-governance/",
+            "tier": "provisional_B",
+            "articleVerified": true,
+            "role": "evidence-upgrade"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "文章把 AI 使用落到隐私安全、专业责任、透明度、培训和价值评估，属于博物馆数字治理的具体框架，而非产品宣传。"
+      },
+      {
+        "eventId": "event-eaee9c72a7b2",
+        "representativeTitle": "广西在南宁调研文化和文物保护工作",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+            "tier": "A",
+            "role": "source-scan"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "国家文物局原文可核验，但当前记录主要是地方调研和工作强调，未见足以进入日报的具体制度、保护工程或阶段性成果增量。"
+      },
+      {
+        "eventId": "event-f35206d16b83",
+        "representativeTitle": "LED 多光谱成像系统帮助考古发掘前评估遗址",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAfterUpgrade": "B",
+        "evidenceSources": [
+          {
+            "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/",
+            "tier": "B",
+            "role": "source-scan"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "报道给出 16 波段 LED 系统、丹麦 Sorte Muld 铁器时代遗址测试和骨骼荧光线索，明确呈现非侵入性预勘对发掘决策的技术增量。"
+      }
+    ]
+  }
+}
