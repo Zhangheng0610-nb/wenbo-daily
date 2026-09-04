@@ -194,9 +194,9 @@ def validate_discovery_audit(ledger_path, payload):
     if not isinstance(audit.get('queryFamilies'), list) or not audit.get('queryFamilies'):
         errors.append('discovery audit needs queryFamilies')
     query_audits = audit.get('queryAudits')
-    if audit.get('queryAuditStatus') == 'checked':
+    if audit.get('queryAuditStatus') in {'checked', 'partial', 'failed'}:
         if not isinstance(query_audits, list) or not query_audits:
-            errors.append('checked discovery audit needs queryAudits')
+            errors.append('executed discovery audit needs queryAudits')
         else:
             for index, query in enumerate(query_audits, 1):
                 required_query_fields = {'queryFamily', 'actualQuery', 'executedAt', 'success', 'returnedResultCount', 'acceptedRawCount'}
@@ -473,7 +473,16 @@ def validate(path, report_path=None):
                 # validate_discovery_audit; avoid masking it with a second error.
                 pool_ids = set()
         for candidate in candidates:
-            if candidate.get('eventId') not in pool_ids:
+            # A historical duplicate is intentionally excluded from the
+            # publishable editorial pool, but remains auditable in the daily
+            # ledger so the correction/rejection is explicit.  This is not a
+            # bypass for selected or otherwise unresolved candidates.
+            historical_exclusion = (
+                candidate.get('decision') == 'rejected'
+                and candidate.get('dedupStatus') == 'historical_duplicate'
+                and bool(candidate.get('duplicateOf'))
+            )
+            if candidate.get('eventId') not in pool_ids and not historical_exclusion:
                 errors.append(f'{candidate.get("candidateId", "candidate")}: eventId is not in editorialInput finalEditorialPool')
     if report_path and not errors:
         from build import parse_md

@@ -252,6 +252,11 @@ DIPLOMATIC_CONTEXT_TERMS = (
     "国事访问", "正式访问", "外事访问", "访问期间", "双边", "两国", "人文交流", "文化交流",
     "国际交流", "文物合作", "联合展览", "联合办展", "联展",
 )
+INTERNATIONAL_LOCATION_TERMS = (
+    "埃及", "开罗", "吉尔吉斯", "美国", "英国", "法国", "德国", "意大利", "西班牙", "日本", "韩国",
+    "俄罗斯", "乌兹别克", "哈萨克", "伊朗", "伊拉克", "土耳其", "印度", "澳大利亚", "加拿大", "墨西哥",
+    "越南", "柬埔寨", "老挝", "泰国", "尼泊尔", "斯里兰卡", "海外", "境外",
+)
 CULTURAL_DIPLOMACY_OBJECT_TERMS = ("国家历史博物馆", "国家博物馆", "国家级博物馆", "国家博物院", "世界遗产", "国家级文化机构")
 CULTURAL_DIPLOMACY_SUBSTANCE_TERMS = (
     "展览", "文物", "传统文化", "文明", "文化遗产", "人文交流", "文化交流", "联合展", "联展", "文物合作", "保护", "传承",
@@ -312,6 +317,13 @@ def search_url(backend: dict, query: str, scope: str = "international") -> str:
     return backend["base"] + "?" + urlencode(params)
 
 
+def web_search_url(backend: dict, query: str) -> str:
+    """Return the bounded HTML fallback used when Bing's RSS view is unavailable."""
+    if backend["id"] == "bing-news-rss":
+        return "https://www.bing.com/search?" + urlencode({"q": query, "form": "QBLH"})
+    return search_url(backend, query)
+
+
 def parse_rss(xml_text: str, *, family: dict, backend: dict, query: str, start: date, end: date) -> tuple[list[dict], int, int]:
     root = ElementTree.fromstring(xml_text)
     records = []
@@ -351,6 +363,93 @@ def parse_rss(xml_text: str, *, family: dict, backend: dict, query: str, start: 
     return records, returned, undated
 
 
+class _BingHtmlResultParser(HTMLParser):
+    """Read only ordinary Bing result cards; never treats the page as evidence."""
+
+    def __init__(self):
+        super().__init__()
+        self.current = None
+        self.in_title = False
+        self.in_link = False
+        self.in_caption = False
+        self.results = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = {str(key).lower(): value for key, value in attrs}
+        classes = str(attrs.get("class") or "").split()
+        if tag.lower() == "li" and "b_algo" in classes:
+            self.current = {"title": [], "url": "", "snippet": []}
+        elif self.current is not None and tag.lower() == "h2":
+            self.in_title = True
+        elif self.current is not None and tag.lower() == "a" and self.in_title and not self.current["url"]:
+            self.current["url"] = str(attrs.get("href") or "").strip()
+            self.in_link = True
+        elif self.current is not None and tag.lower() == "p":
+            self.in_caption = True
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag == "h2":
+            self.in_title = False
+            self.in_link = False
+        elif tag == "p":
+            self.in_caption = False
+        elif tag == "li" and self.current is not None:
+            title = "".join(self.current["title"]).strip()
+            url = self.current["url"]
+            if title and url:
+                self.results.append({
+                    "title": unescape(title),
+                    "url": unescape(url),
+                    "snippet": unescape("".join(self.current["snippet"])).strip(),
+                })
+            self.current = None
+            self.in_title = self.in_link = self.in_caption = False
+
+    def handle_data(self, data):
+        if self.current is None:
+            return
+        if self.in_title:
+            self.current["title"].append(data)
+        elif self.in_caption:
+            self.current["snippet"].append(data)
+
+
+def parse_bing_html(html_text: str, *, family: dict, backend: dict, query: str, start: date, end: date) -> tuple[list[dict], int, int]:
+    parser = _BingHtmlResultParser()
+    parser.feed(html_text or "")
+    records = []
+    undated = 0
+    for item in parser.results:
+        published = parse_date(item["url"]) or parse_date(item["title"]) or parse_date(item["snippet"])
+        if not published:
+            undated += 1
+            continue
+        if not (start <= published <= end):
+            continue
+        domain = (urlsplit(item["url"]).hostname or "").lower()
+        records.append({
+            "title": item["title"],
+            "publishedDate": published.isoformat(),
+            "url": item["url"],
+            "discoveredVia": "bing-news-html-fallback",
+            "discoverySourceType": "query_search",
+            "discoveryQuery": query,
+            "queryFamily": family["id"],
+            "queryBackend": backend["id"],
+            "scope": family["scope"],
+            "sourceDomain": domain,
+            "snippet": item["snippet"],
+        })
+    return records, len(parser.results), undated
+
+
+def _response_is_xml(content_type: str, payload: bytes) -> bool:
+    value = (payload or b"").lstrip()[:512].lower()
+    content = (content_type or "").lower()
+    return "xml" in content or value.startswith(b"<?xml") or b"<rss" in value or b"<feed" in value
+
+
 def _execute_one_query(family: dict, backend: dict, base_query: str, start: date, end: date, *, date_filter: bool = True) -> tuple[list[dict], dict]:
     query = actual_query(base_query, start, end) if date_filter else base_query
     audit = {
@@ -365,6 +464,11 @@ def _execute_one_query(family: dict, backend: dict, base_query: str, start: date
         "acceptedRawCount": 0,
         "undatedResultCount": 0,
         "dateFilterApplied": date_filter,
+        "httpStatus": None,
+        "contentType": None,
+        "responseBytes": 0,
+        "finalUrl": None,
+        "parserFailureType": None,
     }
     try:
         request = Request(search_url(backend, query, family["scope"]), headers={
@@ -373,16 +477,87 @@ def _execute_one_query(family: dict, backend: dict, base_query: str, start: date
         })
         with SEARCH_OPENER.open(request, timeout=8) as response:
             payload = response.read()
-        found, returned, undated = parse_rss(
-            payload.decode("utf-8", errors="replace"), family=family, backend=backend,
-            query=query, start=start, end=end
-        )
+        audit["httpStatus"] = getattr(response, "status", None)
+        audit["contentType"] = response.headers.get("Content-Type")
+        audit["responseBytes"] = len(payload)
+        audit["finalUrl"] = response.geturl()
+        if _response_is_xml(audit["contentType"], payload):
+            found, returned, undated = parse_rss(
+                payload.decode("utf-8", errors="replace"), family=family, backend=backend,
+                query=query, start=start, end=end
+            )
+        elif backend["id"] == "bing-news-rss":
+            # Bing currently redirects its former RSS view to an HTML page in
+            # some regions. Use one bounded web-result fallback for recall;
+            # the returned links remain discovery clues and still require the
+            # normal evidence resolver before publication.
+            fallback_request = Request(web_search_url(backend, query), headers={
+                "User-Agent": SEARCH_USER_AGENT,
+                "Accept": "text/html,application/xhtml+xml,*/*",
+            })
+            with SEARCH_OPENER.open(fallback_request, timeout=8) as fallback_response:
+                fallback_payload = fallback_response.read()
+            audit["providerFallback"] = "bing-web-html"
+            audit["fallbackHttpStatus"] = getattr(fallback_response, "status", None)
+            audit["fallbackContentType"] = fallback_response.headers.get("Content-Type")
+            audit["fallbackResponseBytes"] = len(fallback_payload)
+            audit["fallbackFinalUrl"] = fallback_response.geturl()
+            audit["parserFailureType"] = "non_xml_response"
+            parser = _BingHtmlResultParser()
+            parser.feed(fallback_payload.decode("utf-8", errors="replace"))
+            if not parser.results:
+                raise ValueError("Bing HTML fallback contained no result cards")
+            found, returned, undated = parse_bing_html(
+                fallback_payload.decode("utf-8", errors="replace"), family=family, backend=backend,
+                query=query, start=start, end=end
+            )
+        else:
+            audit["parserFailureType"] = "non_xml_response"
+            raise ValueError("query provider returned non-XML content")
         audit["success"] = True
         audit["returnedResultCount"] = returned
         audit["acceptedRawCount"] = len(found)
         audit["undatedResultCount"] = undated
         return found, audit
     except Exception as exc:  # each query is independently auditable
+        # A transient Bing RSS failure should not prevent the same provider's
+        # bounded HTML result path from being attempted.  This is still only
+        # discovery: every returned link goes through the normal evidence
+        # resolver before it can be published.
+        if backend["id"] == "bing-news-rss" and "providerFallback" not in audit:
+            audit["primaryFailure"] = f"{type(exc).__name__}: {exc}"
+            try:
+                fallback_request = Request(web_search_url(backend, query), headers={
+                    "User-Agent": SEARCH_USER_AGENT,
+                    "Accept": "text/html,application/xhtml+xml,*/*",
+                })
+                with SEARCH_OPENER.open(fallback_request, timeout=8) as fallback_response:
+                    fallback_payload = fallback_response.read()
+                audit["providerFallback"] = "bing-web-html"
+                audit["fallbackHttpStatus"] = getattr(fallback_response, "status", None)
+                audit["fallbackContentType"] = fallback_response.headers.get("Content-Type")
+                audit["fallbackResponseBytes"] = len(fallback_payload)
+                audit["fallbackFinalUrl"] = fallback_response.geturl()
+                audit["parserFailureType"] = audit["parserFailureType"] or "primary_request_failed"
+                parser = _BingHtmlResultParser()
+                parser.feed(fallback_payload.decode("utf-8", errors="replace"))
+                if not parser.results:
+                    raise ValueError("Bing HTML fallback contained no result cards")
+                found, returned, undated = parse_bing_html(
+                    fallback_payload.decode("utf-8", errors="replace"), family=family, backend=backend,
+                    query=query, start=start, end=end
+                )
+                audit["success"] = True
+                audit["failure"] = None
+                audit["returnedResultCount"] = returned
+                audit["acceptedRawCount"] = len(found)
+                audit["undatedResultCount"] = undated
+                return found, audit
+            except Exception as fallback_exc:
+                audit["fallbackFailure"] = f"{type(fallback_exc).__name__}: {fallback_exc}"
+        if audit["parserFailureType"] is None:
+            message = str(exc).lower()
+            audit["parserFailureType"] = "network_timeout" if "timed out" in message or "timeout" in message else "request_or_parse_error"
         audit["failure"] = f"{type(exc).__name__}: {exc}"
         return [], audit
 
@@ -409,6 +584,17 @@ def execute_queries(required_date: date, start: date, end: date) -> tuple[list[d
         records.extend(found)
         audits.append(audit)
     return records, audits
+
+
+def query_audit_status(audits: list[dict] | None) -> str:
+    """Summarize provider health without treating failed queries as a clean run."""
+    audits = audits or []
+    if not audits:
+        return "not_replayed"
+    successes = sum(bool(row.get("success")) for row in audits)
+    if successes == len(audits):
+        return "checked"
+    return "partial" if successes else "failed"
 
 
 @lru_cache(maxsize=16384)
@@ -618,6 +804,30 @@ def has_specific_event_anchor(record: dict) -> bool:
     return any(not _match_fragment_is_weak(term) for term in event_match_terms(title))
 
 
+SUBSTANTIVE_DEVELOPMENT_TERMS = (
+    "正式施行", "正式公布", "正式开幕", "正式开放", "揭牌", "签约", "完成交接",
+    "追回", "落网", "发布结论", "启动发掘", "损害鉴定", "追责", "处罚", "赔偿",
+    "新数据库", "数据库上线", "第二阶段", "后续发掘", "阶段性成果",
+)
+
+
+def substantive_new_development(current: dict, previous: dict) -> bool:
+    """Require an explicit or materially changed action before breaking history."""
+    if current.get("substantiveNewDevelopment") is True:
+        return True
+    if current.get("newDevelopmentEvidence"):
+        return True
+    current_text = " ".join(str(current.get(key) or "") for key in ("title", "summary", "body", "notes"))
+    previous_text = " ".join(str(previous.get(key) or "") for key in ("title", "summary", "body", "notes"))
+    current_action = event_action(current_text)
+    previous_action = event_action(previous_text)
+    if current_action == previous_action or current_action not in {"policy", "opening", "digital_resource", "security", "cooperation"}:
+        return False
+    if not any(term in current_text for term in SUBSTANTIVE_DEVELOPMENT_TERMS):
+        return False
+    return True
+
+
 def event_match_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     """Bridge article-level semantic matching into current-window clustering."""
     if not (has_specific_event_anchor(current) and has_specific_event_anchor(previous)):
@@ -631,7 +841,7 @@ def event_match_relation(current: dict, previous: dict) -> tuple[str, str] | Non
         distance = 99
     if distance > 14:
         return None
-    if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
+    if substantive_new_development(current, previous):
         return ("new_development", "specific event match with a current development marker")
     return (
         "same_day_duplicate" if distance == 0 else "historical_duplicate",
@@ -682,7 +892,7 @@ def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | No
     current_identity = canonical_event_identity(current)
     previous_identity = canonical_event_identity(previous)
     if current_identity and current_identity == previous_identity:
-        if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
+        if substantive_new_development(current, previous):
             return ("new_development", "same canonical event identity with a substantive development marker")
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical event identity")
     matched_relation = event_match_relation(current, previous)
@@ -736,7 +946,7 @@ def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | No
         distance = 99
     if distance > 2 and len(shared) < 2:
         return None
-    if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
+    if substantive_new_development(current, previous):
         return ("new_development", "shared named event anchor with a current development marker")
     return ("same_day_duplicate" if distance == 0 else "historical_duplicate", "shared named event anchor and event type")
 
@@ -837,6 +1047,31 @@ def _radar_daily_scope(item: dict) -> tuple[str, str]:
     if has_cross_border and has_museum_object and has_high_level:
         return "international", "title_and_monitoring_semantics"
     return "domestic", "title_and_monitoring_semantics"
+
+
+def infer_editorial_scope(group: list[dict], scopes: list[str], scope_hints: list[str]) -> str:
+    """Resolve daily scope from event semantics, never from publisher nationality."""
+    text = " ".join(
+        str(row.get(key) or "")
+        for row in group
+        for key in ("title", "summary", "body", "notes", "entity", "institution", "location")
+    )
+    foreign_location = any(term in text for term in INTERNATIONAL_LOCATION_TERMS)
+    country_pair = bool(re.search(r"中(?!国)[\u4e00-\u9fff]{1,4}(?:联合|合作|交流|考古|展览|博物馆|文物|遗产)", text))
+    cross_border = any(term in text for term in DIPLOMATIC_CONTEXT_TERMS + ("中外", "联合考古", "跨国")) or country_pair
+    wenbo_subject = any(term in text for term in ("博物馆", "博物院", "考古", "文物", "遗产", "展览", "文化"))
+    if (foreign_location and cross_border) or (cross_border and wenbo_subject):
+        return "international"
+    if "国际" in text and any(term in text for term in ("博物馆", "考古", "文物", "遗产", "展览", "文化")):
+        return "international"
+    # Keep an explicitly international query family useful for genuinely
+    # foreign-language/foreign-location events, while a China-only event
+    # remains domestic even when a foreign publisher reported it.
+    if scopes.count("international") > len(scopes) / 2 and not re.search(r"(?:中国|china|chinese)", text, re.I):
+        return "international"
+    if "international" in scope_hints and foreign_location:
+        return "international"
+    return "domestic"
 
 
 def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_path: Path | None = None) -> tuple[list[dict], dict]:
@@ -946,6 +1181,11 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
     events = []
     used_event_ids = set()
     for group in groups:
+        # A group made entirely of already-published/same-day duplicate
+        # reports has no new editorial event.  Do not let a second URL keep a
+        # historical item alive merely because it was found by another scan.
+        if group and all(row.get("duplicateStatus") in {"same_day_duplicate", "historical_duplicate"} for row in group):
+            continue
         # Prefer a directly classified A/B URL as representative; otherwise use
         # the most informative title while preserving all discovery reports.
         ranked = sorted(
@@ -995,7 +1235,7 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
             # scope hint.  It is not the monitoring map scope and takes
             # precedence only for that event; ordinary reports retain the
             # existing majority rule.
-            "scope": "international" if "international" in scope_hints or scopes.count("international") > len(scopes) / 2 else "domestic",
+            "scope": infer_editorial_scope(group, scopes, scope_hints),
             "newDevelopment": any(row.get("newDevelopment") is True for row in group),
             "discoveryReports": [compact_discovery_report(row) for row in group],
             "reportCount": len(group),
@@ -1728,7 +1968,7 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     current_identity = canonical_event_identity(current)
     previous_identity = canonical_event_identity(previous)
     if current_identity and current_identity == previous_identity:
-        if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
+        if substantive_new_development(current, previous):
             return ("new_development", "same event identity but current record contains a substantive development marker")
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same event identity")
     matched_relation = event_match_relation(current, previous)
@@ -1757,7 +1997,7 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     if len(named_shared) >= 2 and (
         len(shared) / max(1, min(len(left), len(right))) >= 0.4 or close_in_time
     ):
-        if any(word in (current.get("title", "") + current.get("notes", "")) for word in DEVELOPMENT_WORDS):
+        if substantive_new_development(current, previous):
             return ("new_development", "high-overlap event identity with a substantive development marker")
         return ("historical_duplicate", "high-overlap event identity")
     return None
@@ -2414,6 +2654,7 @@ def build_query_family_summary(report_records: list[dict], query_audits: list[di
         family_events = [event_by_id[event_id] for event_id in event_ids if event_id in event_by_id]
         dispositions = [event.get("candidateDisposition") for event in family_events]
         result[family_id] = {
+            "status": query_audit_status(audits),
             "queriesAttempted": len(audits),
             "queriesSucceeded": sum(bool(audit.get("success")) for audit in audits),
             "queriesFailed": sum(not bool(audit.get("success")) for audit in audits),
@@ -2620,7 +2861,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         "cutoffTimezone": "Asia/Shanghai",
         "sourceScans": scan_statuses,
         "queryFamilies": [dict(f, queries=list(f["queries"])) for f in QUERY_FAMILIES],
-        "queryAuditStatus": "checked" if query_audits else "not_replayed",
+        "queryAuditStatus": query_audit_status(query_audits),
         "queryResults": query_results,
         "queryAudits": query_audits or [],
         "queryFamilySummary": query_family_summary,
@@ -2675,6 +2916,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             "queriesAttempted": len(query_audits or []),
             "queriesSucceeded": sum(bool(a.get("success")) for a in (query_audits or [])),
             "queriesFailed": sum(not bool(a.get("success")) for a in (query_audits or [])),
+            "queryLayerStatus": query_audit_status(query_audits),
             "rawResults": len(report_records),
             "sameDayDuplicateRecords": same_day,
             "historicalDuplicateRecords": historical,

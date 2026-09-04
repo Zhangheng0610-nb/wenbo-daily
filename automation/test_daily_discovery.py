@@ -30,6 +30,10 @@ from automation.daily_discovery import (
     run_evidence_upgrade,
     run,
     build_audit,
+    infer_editorial_scope,
+    parse_bing_html,
+    query_audit_status,
+    _execute_one_query,
     unwrap_redirect_url,
 )
 
@@ -156,6 +160,146 @@ class DailyDiscoveryTests(unittest.TestCase):
         old = {"title": "某展览即将开展", "url": "https://a.test/1", "publishedDate": "2026-08-30", "entity": "某展览", "eventType": "exhibition"}
         new = {"title": "某展览正式开幕", "url": "https://b.test/2", "publishedDate": "2026-08-31", "entity": "某展览", "eventType": "exhibition"}
         self.assertEqual(duplicate_relation(new, old)[0], "new_development")
+
+    def test_historical_archaeology_repeat_does_not_use_generic_new_discovery_marker(self):
+        old = {
+            "title": "中埃联合考古队在塞赫迈特神庙遗址发现重要遗迹",
+            "url": "https://a.test/old",
+            "publishedDate": "2026-09-02",
+        }
+        repeat = {
+            "title": "中埃联合考古队新发现一批重要遗迹和文物",
+            "url": "https://b.test/repeat",
+            "publishedDate": "2026-09-04",
+        }
+        self.assertEqual(duplicate_relation(repeat, old)[0], "historical_duplicate")
+
+    def test_substantive_follow_up_requires_explicit_evidence(self):
+        old = {
+            "title": "某遗址公布考古成果",
+            "url": "https://a.test/old",
+            "publishedDate": "2026-09-02",
+            "entity": "某遗址",
+            "eventType": "archaeology",
+        }
+        follow_up = {
+            "title": "某遗址公布后续考古成果",
+            "url": "https://b.test/new",
+            "publishedDate": "2026-09-04",
+            "entity": "某遗址",
+            "eventType": "archaeology",
+            "substantiveNewDevelopment": True,
+            "newDevelopmentEvidence": "官方公布第二阶段发掘结果",
+        }
+        self.assertEqual(duplicate_relation(follow_up, old)[0], "new_development")
+
+    def test_query_provider_failure_status_is_not_clean(self):
+        self.assertEqual(query_audit_status([{"success": False}]), "failed")
+        self.assertEqual(query_audit_status([{"success": True}, {"success": False}]), "partial")
+        self.assertEqual(query_audit_status([{"success": False} for _ in range(126)]), "failed")
+
+    def test_historical_event_stays_duplicate_across_consecutive_runs(self):
+        canonical = {
+            "eventId": "event-stable",
+            "title": "中埃联合考古队在塞赫迈特神庙遗址发现重要遗迹",
+            "url": "https://a.test/2026-09-02",
+            "publishedDate": "2026-09-02",
+        }
+        repeat_1 = {
+            "eventId": "event-stable",
+            "title": "中埃联合考古队新发现一批重要遗迹和文物",
+            "url": "https://b.test/2026-09-03",
+            "publishedDate": "2026-09-03",
+        }
+        repeat_2 = dict(repeat_1, url="https://c.test/2026-09-04", publishedDate="2026-09-04")
+        self.assertEqual(duplicate_relation(repeat_1, canonical)[0], "historical_duplicate")
+        self.assertEqual(duplicate_relation(repeat_2, canonical)[0], "historical_duplicate")
+
+    def test_non_xml_provider_response_keeps_diagnostic_metadata(self):
+        class FakeResponse:
+            status = 200
+            headers = {"Content-Type": "text/html; charset=utf-8"}
+
+            def __init__(self, payload, url):
+                self.payload = payload
+                self.url = url
+
+            def read(self):
+                return self.payload
+
+            def geturl(self):
+                return self.url
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_):
+                return False
+
+        family = {"id": "policy-governance", "scope": "domestic"}
+        backend = {"id": "bing-news-rss", "name": "Bing News RSS", "base": "https://www.bing.com/news/search"}
+        with patch(
+            "automation.daily_discovery.SEARCH_OPENER.open",
+            side_effect=[
+                FakeResponse(b"<!doctype html><title>challenge</title>", "https://cn.bing.com/"),
+                FakeResponse(b"<!doctype html><title>no result cards</title>", "https://cn.bing.com/search"),
+            ],
+        ):
+            rows, audit = _execute_one_query(
+                family,
+                backend,
+                "文物 政策",
+                __import__("datetime").date(2026, 9, 1),
+                __import__("datetime").date(2026, 9, 4),
+            )
+        self.assertEqual(rows, [])
+        self.assertFalse(audit["success"])
+        self.assertEqual(audit["httpStatus"], 200)
+        self.assertEqual(audit["contentType"], "text/html; charset=utf-8")
+        self.assertGreater(audit["responseBytes"], 0)
+        self.assertEqual(audit["parserFailureType"], "non_xml_response")
+        self.assertEqual(audit["providerFallback"], "bing-web-html")
+        self.assertGreater(audit["fallbackResponseBytes"], 0)
+
+    def test_bing_html_fallback_parses_dated_discovery_links(self):
+        html = (
+            '<ol id="b_results"><li class="b_algo"><h2><a href="https://example.com/2026/09/03/story">'
+            '某博物馆发布考古成果</a></h2><div class="b_caption"><p>某地报道</p></div></li></ol>'
+        )
+        rows, returned, undated = parse_bing_html(
+            html,
+            family={"id": "archaeology-heritage", "scope": "domestic"},
+            backend={"id": "bing-news-rss", "name": "Bing News RSS"},
+            query="考古",
+            start=__import__("datetime").date(2026, 9, 1),
+            end=__import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(returned, 1)
+        self.assertEqual(undated, 0)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["discoveredVia"], "bing-news-html-fallback")
+
+    def test_event_scope_uses_event_semantics_not_publisher_nationality(self):
+        cross_border = [{
+            "title": "新华社：中埃联合考古队参观埃及国家博物馆并公布考古成果",
+            "scope": "domestic",
+        }]
+        foreign_report_of_china = [{
+            "title": "China museum publishes a domestic collection report",
+            "scope": "international",
+        }]
+        cross_border_without_explicit_location = [{
+            "title": "中埃联合考古队公布神庙遗址阶段性成果",
+            "scope": "domestic",
+        }]
+        domestic_joint_meeting = [{
+            "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+            "scope": "domestic",
+        }]
+        self.assertEqual(infer_editorial_scope(cross_border, ["domestic"], []), "international")
+        self.assertEqual(infer_editorial_scope(cross_border_without_explicit_location, ["domestic"], []), "international")
+        self.assertEqual(infer_editorial_scope(domestic_joint_meeting, ["domestic"], []), "domestic")
+        self.assertEqual(infer_editorial_scope(foreign_report_of_china, ["international"], []), "domestic")
 
     def test_different_sites_are_not_duplicates(self):
         a = {"title": "甲遗址发现古墓", "url": "https://a.test/1", "publishedDate": "2026-08-31", "entity": "甲遗址", "eventType": "archaeology"}
