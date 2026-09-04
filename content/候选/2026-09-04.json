@@ -3,21 +3,105 @@
   "date": "2026-09-04",
   "scope": "daily-editorial",
   "discoveryAuditPath": "content/发现/2026-09-04.json",
-  "editorialInputPath": "content/复核/2026-09-04.json",
+  "editorialInputPath": "content/复核/2026-09-04-editorial-replay.json",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
   "internationalDiscoveryStatus": "checked",
   "internationalDiscoveryNote": "代理恢复后完整执行国内与国际 query families；126/126 查询成功，未将 provider 恢复误写为早晨 production 状态。",
   "replayCutoff": "2026-09-04T07:13:00+08:00",
-  "candidatePoolDefinition": "本次 recovery 的唯一正式编辑输入为 content/复核/2026-09-04.json 的 finalEditorialPool；原始 discovery audit 仅用于追溯，不与复核池拼接。",
+  "candidatePoolDefinition": "本次正式编辑重审的唯一输入为 content/复核/2026-09-04-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 与治理回放仅用于追溯，不与复核池拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-04T14:55:49+08:00",
-    "reviewedEvents": 6,
-    "selectedEvents": 3,
+    "reviewedAt": "2026-09-04T15:57:59+08:00",
+    "reviewedEvents": 8,
+    "selectedEvents": 5,
     "historicalExcludedEvents": 4,
-    "note": "完成全网络 recovery 后，对历史去重后的六个可发布事件逐条编辑判断；三条中等优先级、A级直接证据的实质博物馆事件入选，低优先级事项不作填充。"
+    "note": "基于最新八个 evidence-qualified event 完成统一编辑重审；高优先级古埃及展、标本法律责任解读与三条既有实质博物馆事件入选，低优先级事项不作填充。"
   },
   "candidates": [
+    {
+      "candidateId": "replay-20260904-001",
+      "eventId": "event-12aaa43d2f5a",
+      "title": "香港“古埃及文明大展”落幕",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T15:23:02+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "governance_recall",
+      "discoveryUrl": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
+      "publisher": "中国新闻网",
+      "evidenceSources": [{
+        "name": "中国新闻网：香港“古埃及文明大展”落幕 接待访客逾67万人次",
+        "url": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
+        "tier": "A",
+        "role": "evidence-upgrade"
+      }],
+      "evidenceTier": "A",
+      "topic": ["博物馆", "展览", "国际交流"],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_high_priority_A_evidence_and_substantive_exhibition_outcome",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "来自已保存治理回放的 finalEditorialPool；统一编辑重审后入选。",
+      "discoveredVia": "governance-recall",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "最高优先级；展览运营数据与展后技术合作均有明确信息增量。",
+      "editorialPriorityScore": 92,
+      "editorialPriorityLabel": "high",
+      "editorialReasons": ["significant_museum_or_exhibition_project", "substantive_audience_or_operation_data", "sustained_public_attention", "primary_freshness"],
+      "reportCount": 8,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "dailyItemNumber": 1,
+      "dailyItemTitle": "香港“古埃及文明大展”落幕"
+    },
+    {
+      "candidateId": "replay-20260904-002",
+      "eventId": "event-5432c779ed5b",
+      "title": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T15:23:02+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "governance_recall",
+      "discoveryUrl": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+      "publisher": "中国新闻网",
+      "evidenceSources": [{
+        "name": "中国新闻网：玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+        "url": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+        "tier": "A",
+        "role": "evidence-upgrade"
+      }],
+      "evidenceTier": "A",
+      "topic": ["博物馆", "馆藏安全", "公共文化"],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_medium_A_evidence_and_substantive_collection_protection_analysis",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "来自已保存治理回放的 finalEditorialPool；统一编辑重审后入选。",
+      "discoveredVia": "governance-recall",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "标本受损事件的法律责任解读提供了馆藏保护与公众管理的具体行业信息。",
+      "editorialPriorityScore": 65,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": ["museum_collection_or_public_incident", "backfill_freshness"],
+      "reportCount": 2,
+      "freshnessTier": "backfill_3_7d",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读"
+    },
     {
       "candidateId": "recovery-20260904-001",
       "eventId": "event-4ca89b8f0532",
@@ -106,7 +190,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 1,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展"
     },
     {
@@ -199,7 +283,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 2,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展"
     },
     {
@@ -302,7 +386,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 3,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆"
     },
     {
@@ -615,18 +699,18 @@
     }
   ],
   "summary": {
-    "discovered": 10,
-    "selected": 3,
+    "discovered": 12,
+    "selected": 5,
     "rejected": 7,
     "deferred": 0,
     "needsVerification": 0
   },
   "revision": {
-    "revisedAt": "2026-09-04T14:55:49+08:00",
+    "revisedAt": "2026-09-04T15:57:59+08:00",
     "revisionType": "same_day_editorial_revision",
     "discoveryAuditUnchanged": true,
-    "editorialInputPath": "content/复核/2026-09-04.json",
+    "editorialInputPath": "content/复核/2026-09-04-editorial-replay.json",
     "runtimeEnrichment": true,
-    "revisionReason": "query_provider_recovery_and_historical_dedup_correction"
+    "revisionReason": "formal_editorial_replay_with_alternate_evidence_resolution_audit"
   }
 }

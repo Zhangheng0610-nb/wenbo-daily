@@ -1582,6 +1582,25 @@ def evidence_matches_event(event: dict, result: dict, body: str) -> bool:
     return bool(event_match_details(event, result, body).get("matched"))
 
 
+def alternate_evidence_match_hint(event: dict, result: dict) -> bool:
+    """Allow a concrete title variant to reach article retrieval.
+
+    Search results often use a materially different headline from the
+    discovery clue.  This is deliberately only a retrieval hint: the fetched
+    article still has to pass ``event_match_details`` with its body before it
+    can become evidence.
+    """
+    details = event_match_details(event, result, "")
+    if details.get("matched") or details.get("actionConflict"):
+        return False
+    event_title = clean_discovery_title(event.get("representativeTitle") or event.get("title", ""))
+    result_title = clean_discovery_title(result.get("title", ""))
+    shared = event_match_terms(event_title) & event_match_terms(result_title)
+    # Two concrete anchors are enough to justify one bounded fetch, while
+    # avoiding unrelated stories that merely share a topic word or institution.
+    return len(shared) >= 2
+
+
 def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[dict, dict | None]:
     """Resolve one report and return an auditable attempt plus publishable source."""
     input_url = result.get("url", "")
@@ -1846,6 +1865,15 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                 # retrieval cost, not an evidence qualification decision.
                 match_details = event_match_details(event, result, "")
                 if not match_details.get("matched"):
+                    if alternate_evidence_match_hint(event, result):
+                        outcome, source = resolve_evidence_attempt(event, result, "alternate_source")
+                        resolution_attempts.extend(outcome["attempts"])
+                        checked_sources.append(outcome["checked"])
+                        collect_unmatched_direct_result(result, audit, outcome)
+                        had_resolution_failure = had_resolution_failure or bool(outcome["checked"].get("error"))
+                        if source:
+                            publishable.append(source)
+                            continue
                     collect_resolver_candidate(result, audit)
                     result_domain = (urlsplit(result.get("url", "")).hostname or "").lower()
                     resolution_attempts.append({

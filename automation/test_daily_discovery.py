@@ -26,6 +26,7 @@ from automation.daily_discovery import (
     parse_date,
     publisher_search_results,
     public_salience,
+    alternate_evidence_match_hint,
     resolve_evidence_attempt,
     run_evidence_upgrade,
     run,
@@ -671,6 +672,68 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(event["evidenceUpgradeAttempted"])
         self.assertEqual(event["evidenceUpgradeResult"], "qualified")
         self.assertEqual(event["evidenceTierAfterUpgrade"], "A")
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_alternate_high_trust_article_can_resolve_title_variant(self, execute_query, resolve_url):
+        event = {
+            "eventId": "event-smithsonian",
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "publishedDate": "2026-09-03",
+            "scope": "international",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "high",
+            "editorialPriorityScore": 86,
+            "discoveryReports": [{
+                "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+                "url": "https://www.reuters.com/world/us/smithsonian-support",
+                "sourceDomain": "reuters.com",
+            }],
+        }
+        alternate = {
+            "title": "Smithsonian faces federal funding cuts amid Trump administration dispute",
+            "url": "https://apnews.com/article/smithsonian-support",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "apnews.com",
+        }
+        execute_query.return_value = ([alternate], {
+            "actualQuery": "Smithsonian federal support official source",
+            "executedAt": "2026-09-04T07:00:00+08:00",
+            "success": True,
+            "returnedResultCount": 1,
+            "acceptedRawCount": 1,
+        })
+
+        def resolve(url):
+            if "reuters.com" in url:
+                return url, "", "URLError: primary source unavailable"
+            return (
+                url,
+                "<html><head><title>Smithsonian faces federal funding cuts amid Trump administration dispute</title></head>"
+                "<body>The Trump administration is threatening to cut federal agencies support for the Smithsonian Institution. "
+                "The museum says federal support is at stake.</body></html>",
+                None,
+            )
+
+        resolve_url.side_effect = resolve
+        result = run_evidence_upgrade(__import__("datetime").date(2026, 9, 4), [event])
+
+        self.assertEqual(result["qualified"], 1)
+        self.assertEqual(event["evidenceTierAfterUpgrade"], "B")
+        self.assertTrue(any(
+            attempt["method"] == "alternate_source"
+            for attempt in event["evidenceResolutionAttempts"]
+        ))
+        self.assertEqual(event["evidenceSources"][0]["url"], alternate["url"])
+
+    def test_alternate_match_hint_requires_concrete_shared_anchors(self):
+        event = {"representativeTitle": "Trump administration threatens federal support for Smithsonian"}
+        self.assertTrue(alternate_evidence_match_hint(event, {
+            "title": "Smithsonian faces federal funding cuts amid Trump administration dispute",
+        }))
+        self.assertFalse(alternate_evidence_match_hint(event, {
+            "title": "Smithsonian opens a new exhibition in Washington",
+        }))
 
     @patch("automation.daily_discovery._execute_one_query")
     def test_evidence_upgrade_queue_has_no_fixed_top_n_and_skips_low_priority(self, execute_query):
