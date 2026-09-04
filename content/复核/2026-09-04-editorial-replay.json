@@ -4,7 +4,7 @@
   "date": "2026-09-04",
   "runType": "replay",
   "replayType": "formal-editorial-replay",
-  "replayedAt": "2026-09-04T16:55:43+08:00",
+  "replayedAt": "2026-09-04T17:27:11+08:00",
   "replayCutoff": "2026-09-04T07:13:00+08:00",
   "baseDiscoveryAuditPath": "content/发现/2026-09-04.json",
   "baseDiscoveryAuditSha256": "8f0a2e05112e498c65019709438d8bbc4bdc9d75cc6bcdd252da37c51b432f5f",
@@ -31,10 +31,15 @@
         "eventId": "event-af2353ba1bef",
         "previousScore": 28,
         "previousLabel": "low",
-        "previousReasons": ["primary_freshness"],
+        "previousReasons": [
+          "primary_freshness"
+        ],
         "finalScore": 70,
         "finalLabel": "high",
-        "finalReasons": ["national_heritage_safety_or_governance", "primary_freshness"]
+        "finalReasons": [
+          "national_heritage_safety_or_governance",
+          "primary_freshness"
+        ]
       }
     ]
   },
@@ -63,43 +68,11 @@
     }
   },
   "finalEditorialPool": {
-    "rawQualifiedEvents": 8,
-    "canonicalUniqueEvents": 8,
+    "rawQualifiedEvents": 6,
+    "canonicalUniqueEvents": 6,
     "historicalDuplicates": 133,
-    "editoriallyReviewed": 8,
+    "editoriallyReviewed": 6,
     "events": [
-      {
-        "eventId": "event-12aaa43d2f5a",
-        "representativeTitle": "香港故宫文化博物馆\"古埃及文明大展\"今日圆满结束博物馆战略合作伙伴中国银行（香港）全力支持香港近年规模最大、展品等级最高的古埃及文明展览于九个半月展期招待逾67万访客",
-        "publishedDate": "2026-09-03",
-        "scope": "domestic",
-        "reportCount": 8,
-        "editorialPriorityScore": 92,
-        "editorialPriorityLabel": "high",
-        "candidateDisposition": "evidence_qualified",
-        "evidenceTierAtDiscovery": "C",
-        "evidenceTierAfterUpgrade": "A",
-        "evidenceUpgradeAttempted": true,
-        "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["significant_museum_or_exhibition_project", "substantive_audience_or_operation_data", "sustained_public_attention", "primary_freshness"],
-        "evidenceSources": [{"name": "中国新闻网：香港“古埃及文明大展”落幕 接待访客逾67万人次", "url": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}]
-      },
-      {
-        "eventId": "event-5432c779ed5b",
-        "representativeTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
-        "publishedDate": "2026-08-31",
-        "scope": "domestic",
-        "reportCount": 2,
-        "editorialPriorityScore": 65,
-        "editorialPriorityLabel": "medium",
-        "candidateDisposition": "evidence_qualified",
-        "evidenceTierAtDiscovery": "C",
-        "evidenceTierAfterUpgrade": "A",
-        "evidenceUpgradeAttempted": true,
-        "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["museum_collection_or_public_incident", "backfill_freshness"],
-        "evidenceSources": [{"name": "中国新闻网：玩闹致博物馆标本受损是否应承担法律责任？律师解读", "url": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}]
-      },
       {
         "eventId": "event-49ae576b8781",
         "representativeTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展",
@@ -113,8 +86,19 @@
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeAttempted": true,
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["significant_museum_or_exhibition_project", "primary_freshness"],
-        "evidenceSources": [{"name": "中国新闻网：《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展", "url": "http://www.chinanews.com.cn/hr/2026/09-04/10690244.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}]
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ],
+        "evidenceSources": [
+          {
+            "name": "中国新闻网：《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展",
+            "url": "http://www.chinanews.com.cn/hr/2026/09-04/10690244.shtml",
+            "tier": "A",
+            "role": "evidence-upgrade",
+            "articleVerified": true
+          }
+        ]
       },
       {
         "eventId": "event-4ca89b8f0532",
@@ -129,8 +113,19 @@
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeAttempted": true,
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["significant_museum_or_exhibition_project", "primary_freshness"],
-        "evidenceSources": [{"name": "中国新闻网：海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展", "url": "http://www.chinanews.com.cn/hr/2026/09-03/10689658.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}]
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ],
+        "evidenceSources": [
+          {
+            "name": "中国新闻网：海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展",
+            "url": "http://www.chinanews.com.cn/hr/2026/09-03/10689658.shtml",
+            "tier": "A",
+            "role": "evidence-upgrade",
+            "articleVerified": true
+          }
+        ]
       },
       {
         "eventId": "event-0621fc6c86ce",
@@ -145,8 +140,19 @@
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeAttempted": true,
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["significant_museum_or_exhibition_project", "primary_freshness"],
-        "evidenceSources": [{"name": "中国新闻网：中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆", "url": "http://www.chinanews.com.cn/cul/2026/09-03/10689949.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}]
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ],
+        "evidenceSources": [
+          {
+            "name": "中国新闻网：中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
+            "url": "http://www.chinanews.com.cn/cul/2026/09-03/10689949.shtml",
+            "tier": "A",
+            "role": "evidence-upgrade",
+            "articleVerified": true
+          }
+        ]
       },
       {
         "eventId": "event-af2353ba1bef",
@@ -160,7 +166,10 @@
         "evidenceTierAtDiscovery": "A",
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["national_heritage_safety_or_governance", "primary_freshness"],
+        "editorialReasons": [
+          "national_heritage_safety_or_governance",
+          "primary_freshness"
+        ],
         "heritageGovernance": {
           "matched": true,
           "national": true,
@@ -168,7 +177,15 @@
           "hasAction": true,
           "hasNationalScope": true
         },
-        "evidenceSources": [{"name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会", "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html", "tier": "A", "role": "discovery-evidence", "articleVerified": true}]
+        "evidenceSources": [
+          {
+            "name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+            "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+            "tier": "A",
+            "role": "discovery-evidence",
+            "articleVerified": true
+          }
+        ]
       },
       {
         "eventId": "event-eaee9c72a7b2",
@@ -182,8 +199,18 @@
         "evidenceTierAtDiscovery": "A",
         "evidenceTierAfterUpgrade": "A",
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["primary_freshness"],
-        "evidenceSources": [{"name": "国家文物局：广西文化和文物保护工作调研", "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html", "tier": "A", "role": "discovery-evidence", "articleVerified": true}]
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "evidenceSources": [
+          {
+            "name": "国家文物局：广西文化和文物保护工作调研",
+            "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+            "tier": "A",
+            "role": "discovery-evidence",
+            "articleVerified": true
+          }
+        ]
       },
       {
         "eventId": "event-f35206d16b83",
@@ -197,27 +224,70 @@
         "evidenceTierAtDiscovery": "B",
         "evidenceTierAfterUpgrade": "B",
         "evidenceUpgradeResult": "qualified",
-        "editorialReasons": ["primary_freshness"],
-        "evidenceSources": [{"name": "Archaeology Magazine：LED Light System Could Help Archaeologists Evaluate Sites Before Excavation", "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/", "tier": "B", "role": "discovery-evidence", "articleVerified": true}]
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "evidenceSources": [
+          {
+            "name": "Archaeology Magazine：LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
+            "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/",
+            "tier": "B",
+            "role": "discovery-evidence",
+            "articleVerified": true
+          }
+        ]
       }
     ]
   },
   "editorialReview": {
-    "reviewedAt": "2026-09-04T16:55:43+08:00",
-    "reviewedEvents": 8,
-    "selectedEvents": 6,
+    "reviewedAt": "2026-09-04T17:27:11+08:00",
+    "reviewedEvents": 6,
+    "selectedEvents": 4,
     "decisions": [
-      {"eventId": "event-12aaa43d2f5a", "decision": "selected", "reason": "最高优先级；展览运营数据与展后技术合作均有明确信息增量。"},
-      {"eventId": "event-af2353ba1bef", "decision": "selected", "reason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。"},
-      {"eventId": "event-5432c779ed5b", "decision": "selected", "reason": "标本受损事件的法律责任解读提供了馆藏保护与公众管理的具体行业信息。"},
-      {"eventId": "event-4ca89b8f0532", "decision": "selected", "reason": "两家专题博物馆联合策展，展览内容与纪念节点均具明确信息增量。"},
-      {"eventId": "event-49ae576b8781", "decision": "selected", "reason": "侨批文物与电影道具结合并开启全国巡展，具有具体传播与展示实践。"},
-      {"eventId": "event-0621fc6c86ce", "decision": "selected", "reason": "大型新博物馆项目兼具中国建筑师主持设计、馆藏规模与城市公共空间信息。"},
-      {"eventId": "event-eaee9c72a7b2", "decision": "rejected", "reason": "low_editorial_priority_after_full_network_recovery"},
-      {"eventId": "event-f35206d16b83", "decision": "rejected", "reason": "low_editorial_priority_after_full_network_recovery"}
+      {
+        "eventId": "event-af2353ba1bef",
+        "decision": "selected",
+        "reason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。"
+      },
+      {
+        "eventId": "event-4ca89b8f0532",
+        "decision": "selected",
+        "reason": "两家专题博物馆联合策展，展览内容与纪念节点均具明确信息增量。"
+      },
+      {
+        "eventId": "event-49ae576b8781",
+        "decision": "selected",
+        "reason": "侨批文物与电影道具结合并开启全国巡展，具有具体传播与展示实践。"
+      },
+      {
+        "eventId": "event-0621fc6c86ce",
+        "decision": "selected",
+        "reason": "大型新博物馆项目兼具中国建筑师主持设计、馆藏规模与城市公共空间信息。"
+      },
+      {
+        "eventId": "event-eaee9c72a7b2",
+        "decision": "rejected",
+        "reason": "low_editorial_priority_after_full_network_recovery"
+      },
+      {
+        "eventId": "event-f35206d16b83",
+        "decision": "rejected",
+        "reason": "low_editorial_priority_after_full_network_recovery"
+      }
     ],
     "historicalDuplicatesExcluded": 133,
-    "note": "所有八个 evidence-qualified event 统一完成编辑复核；旧 selected 不享有 incumbent 优先权。"
+    "note": "证据合格事件先经过最终历史闸门；香港展为历史重复，律师文章为既有标本事件的衍生解读，剩余六个事件统一完成编辑复核。"
   },
-  "note": "Formal editorial replay uses the saved governance recall pool; scope and priority were recalculated from event semantics; it is not a replacement for the original morning discovery audit."
+  "note": "Formal editorial replay uses the saved governance recall pool; the final historical guard runs after evidence upgrade; the original discovery audit remains unchanged.",
+  "finalHistoricalGuard": {
+    "status": "completed",
+    "checkedEvents": 8,
+    "retainedEvents": 6,
+    "historicalDuplicates": 1,
+    "derivativeCommentary": 1,
+    "excludedEventIds": [
+      "event-12aaa43d2f5a",
+      "event-5432c779ed5b"
+    ]
+  }
 }

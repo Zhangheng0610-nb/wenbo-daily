@@ -19,7 +19,7 @@ from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit
+from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, build_opener
 from xml.etree import ElementTree
 
@@ -832,6 +832,117 @@ SUBSTANTIVE_DEVELOPMENT_TERMS = (
     "新数据库", "数据库上线", "第二阶段", "后续发掘", "阶段性成果",
 )
 
+DERIVATIVE_COMMENTARY_TERMS = (
+    "律师解读", "专家解读", "专家点评", "学者回应", "怎么看", "是否担责",
+    "法律责任", "业内人士表示", "引发热议",
+)
+COLLECTION_OBJECT_TERMS = ("藏品", "馆藏", "展品", "标本", "化石", "遗骸", "文物", "艺术品")
+COLLECTION_INCIDENT_TERMS = (
+    "受损", "损坏", "破坏", "毁损", "打砸", "踢打", "抓取", "拿起", "攀爬",
+    "涂写", "泼洒", "擅自触摸", "人为破坏", "盗窃", "失窃",
+)
+PUBLIC_INCIDENT_BEHAVIOR_TERMS = ("游客", "儿童", "孩子", "玩闹", "抓", "踢", "触碰", "拿起", "攀爬", "破坏")
+
+
+def record_title(record: dict) -> str:
+    """Use the event title retained by either report or editorial-pool schemas."""
+    return str(record.get("title") or record.get("representativeTitle") or "")
+
+
+def canonical_article_url(url: str) -> str:
+    """Normalize an article URL for identity checks without changing display URLs."""
+    normalized = canonical_url(url or "")
+    if not normalized or not normalized.lower().startswith(("http://", "https://")):
+        return ""
+    try:
+        parts = urlsplit(normalized)
+        host = (parts.hostname or "").lower().rstrip(".")
+        if host.startswith("www."):
+            host = host[4:]
+        if not host:
+            return ""
+        if parts.port:
+            host = f"{host}:{parts.port}"
+        path = unquote(parts.path or "/").rstrip("/") or "/"
+        # Scheme and fragment are transport details for article identity;
+        # canonical_url has already removed known tracking parameters.
+        return urlunsplit(("", host, path, parts.query, ""))
+    except (TypeError, ValueError):
+        return ""
+
+
+def canonical_article_identity(url: str) -> str:
+    """Return a conservative host/path or host/article-id identity."""
+    normalized = canonical_article_url(url)
+    if not normalized:
+        return ""
+    parts = urlsplit(normalized)
+    host = parts.netloc.lower()
+    path = unquote(parts.path or "/").rstrip("/") or "/"
+    for segment in reversed([part for part in path.split("/") if part]):
+        stem = re.sub(r"\.[a-z0-9]{1,10}$", "", segment, flags=re.I)
+        # Numeric article IDs are a cross-publisher convention, but only a
+        # standalone long numeric path segment is strong enough to use.
+        if re.fullmatch(r"\d{5,}", stem):
+            return f"article-id|{host}|{stem}"
+    return f"article-path|{host}|{path}"
+
+
+def record_source_urls(record: dict) -> list[str]:
+    """Collect direct and evidence URLs used by final historical matching."""
+    values = []
+    for key in ("url", "evidenceUrl", "discoveryUrl"):
+        if record.get(key):
+            values.append(str(record[key]))
+    for key in ("evidenceSources", "sources", "discoveryReports"):
+        rows = record.get(key)
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if isinstance(row, dict):
+                for url_key in ("url", "evidenceUrl", "discoveryUrl"):
+                    if row.get(url_key):
+                        values.append(str(row[url_key]))
+    return list(dict.fromkeys(values))
+
+
+def _contains_any(text: str, terms: tuple[str, ...]) -> set[str]:
+    return {term for term in terms if term in text}
+
+
+def derivative_commentary_relation(current: dict, previous: dict) -> tuple[str, str] | None:
+    """Classify analysis of a published incident when no new action occurred."""
+    current_text = " ".join(str(current.get(key) or "") for key in ("title", "representativeTitle", "summary", "body", "notes"))
+    previous_text = " ".join(str(previous.get(key) or "") for key in ("title", "representativeTitle", "summary", "body", "notes"))
+    if not _contains_any(current_text, DERIVATIVE_COMMENTARY_TERMS):
+        return None
+    if substantive_new_development(current, previous):
+        return None
+    current_kinds = event_kind(record_title(current) + " " + current_text)
+    previous_kinds = event_kind(record_title(previous) + " " + previous_text)
+    if not {"museum", "security"}.issubset(current_kinds & previous_kinds):
+        return None
+    current_objects = _contains_any(current_text, COLLECTION_OBJECT_TERMS)
+    previous_objects = _contains_any(previous_text, COLLECTION_OBJECT_TERMS)
+    current_incidents = _contains_any(current_text, COLLECTION_INCIDENT_TERMS)
+    previous_incidents = _contains_any(previous_text, COLLECTION_INCIDENT_TERMS)
+    current_behaviors = bool(_contains_any(current_text, PUBLIC_INCIDENT_BEHAVIOR_TERMS))
+    previous_behaviors = bool(_contains_any(previous_text, PUBLIC_INCIDENT_BEHAVIOR_TERMS))
+    if not (current_objects & previous_objects and current_incidents & previous_incidents):
+        return None
+    if not (current_behaviors and previous_behaviors):
+        return None
+    try:
+        distance = abs(date.fromisoformat(current.get("publishedDate", "")) - date.fromisoformat(previous.get("publishedDate", ""))).days
+    except (TypeError, ValueError):
+        distance = 99
+    if distance > 14:
+        return None
+    return (
+        "derivative_commentary",
+        "published collection/public incident with commentary but no substantive new action",
+    )
+
 
 def substantive_new_development(current: dict, previous: dict) -> bool:
     """Require an explicit or materially changed action before breaking history."""
@@ -884,7 +995,7 @@ def canonical_event_identity(record: dict) -> str:
     explicit = record.get("canonicalEventId")
     if explicit:
         return str(explicit)
-    title = str(record.get("title") or "")
+    title = record_title(record)
     context = " ".join(
         str(record.get(key) or "")
         for key in ("summary", "body", "notes", "institution", "publisher", "entity", "eventType", "location")
@@ -2012,8 +2123,8 @@ def event_key(record: dict) -> str:
 def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     current_url = canonical_url(current.get("url") or current.get("evidenceUrl") or "")
     previous_url = canonical_url(previous.get("url") or previous.get("evidenceUrl") or "")
-    current_title = normalized_event_title(current.get("title", ""))
-    previous_title = normalized_event_title(previous.get("title", ""))
+    current_title = normalized_event_title(record_title(current))
+    previous_title = normalized_event_title(record_title(previous))
     if current_title and current_title == previous_title and has_specific_event_anchor(current) and has_specific_event_anchor(previous):
         try:
             distance = abs(date.fromisoformat(current.get("publishedDate", "")) - date.fromisoformat(previous.get("publishedDate", ""))).days
@@ -2043,8 +2154,8 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
         previous_key = previous_identity or event_key(previous)
     else:
         current_key = previous_key = ""
-    left = meaningful_terms(current.get("title", ""))
-    right = meaningful_terms(previous.get("title", ""))
+    left = meaningful_terms(record_title(current))
+    right = meaningful_terms(record_title(previous))
     shared = left & right
     # Similar subject matter is not enough.  Require a substantial overlap
     # plus a shared named anchor, so two different archaeological sites are
@@ -2064,7 +2175,127 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     return None
 
 
-def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int = 0) -> dict:
+def historical_published_event_relation(current: dict, previous: dict) -> tuple[str, str] | None:
+    """Match a publishable event against one formally published daily item."""
+    if substantive_new_development(current, previous):
+        return None
+    current_urls = [url for url in record_source_urls(current) if not is_search_wrapper_url(url)]
+    previous_urls = [url for url in record_source_urls(previous) if not is_search_wrapper_url(url)]
+    current_canonical = {canonical_article_url(url) for url in current_urls} - {""}
+    previous_canonical = {canonical_article_url(url) for url in previous_urls} - {""}
+    if current_canonical & previous_canonical:
+        return ("historical_duplicate", "same canonical evidence article")
+    current_articles = {canonical_article_identity(url) for url in current_urls} - {""}
+    previous_articles = {canonical_article_identity(url) for url in previous_urls} - {""}
+    if current_articles & previous_articles:
+        return ("historical_duplicate", "same publisher article identity")
+    current_row = dict(current)
+    previous_row = dict(previous)
+    current_row["title"] = record_title(current)
+    previous_row["title"] = record_title(previous)
+    commentary = derivative_commentary_relation(current_row, previous_row)
+    if commentary:
+        return commentary
+    relation = duplicate_relation(current_row, previous_row)
+    if relation and relation[0] in {"same_day_duplicate", "historical_duplicate"}:
+        return ("historical_duplicate", relation[1])
+    return None
+
+
+def final_historical_guard(required_date: date, records: list[dict]) -> dict:
+    """Apply published-history and derivative-commentary checks after evidence."""
+    history = list(reversed(load_history(required_date)))
+    retained = []
+    excluded = []
+    for original in records:
+        row = dict(original)
+        relation = None
+        previous = None
+        for candidate in history:
+            relation = historical_published_event_relation(row, candidate)
+            if relation:
+                previous = candidate
+                break
+        if not relation:
+            retained.append(row)
+            continue
+        status, reason = relation
+        row["duplicateStatus"] = status
+        row["duplicateReason"] = reason
+        row["duplicateOf"] = previous.get("historicalItemId") or previous.get("historicalCanonicalEventId") or previous.get("title")
+        row["duplicateOfTitle"] = previous.get("title", "")
+        row["newDevelopment"] = False
+        row["candidateDisposition"] = "rejected"
+        row["evidenceUpgradeStatus"] = row.get("evidenceUpgradeStatus") or "completed"
+        row["filterReasons"] = list(row.get("filterReasons") or [])
+        row["filterReasons"].append(status)
+        if status == "derivative_commentary":
+            row["classification"] = "derivative_commentary"
+            row["derivedFrom"] = row["duplicateOf"]
+        excluded.append(row)
+    return {
+        "records": retained + excluded,
+        "retained": retained,
+        "excluded": excluded,
+        "audit": {
+            "status": "completed",
+            "checkedEvents": len(records),
+            "retainedEvents": len(retained),
+            "historicalDuplicates": sum(row.get("duplicateStatus") == "historical_duplicate" for row in excluded),
+            "derivativeCommentary": sum(row.get("duplicateStatus") == "derivative_commentary" for row in excluded),
+            "excludedEventIds": [row.get("eventId") for row in excluded if row.get("eventId")],
+        },
+    }
+
+
+def refresh_evaluation_views(evaluation: dict) -> None:
+    """Rebuild queue/summary views after a final disposition change."""
+    records = evaluation.get("records", [])
+    pool = [row for row in records if row.get("candidateDisposition") in {"evidence_qualified", "needs_verification"}]
+    high_queue = [
+        row for row in pool
+        if row.get("candidateDisposition") == "needs_verification"
+        and row.get("editorialPriorityLabel") == "high"
+    ]
+    medium_queue = [
+        row for row in pool
+        if row.get("candidateDisposition") == "needs_verification"
+        and row.get("editorialPriorityLabel") == "medium"
+        and row.get("editorialPriorityScore", 0) >= 55
+    ]
+    high_queue.sort(key=lambda row: row.get("editorialPriorityScore", 0), reverse=True)
+    medium_queue.sort(key=lambda row: row.get("editorialPriorityScore", 0), reverse=True)
+    provisional = [
+        row for row in pool
+        if row.get("candidateDisposition") == "evidence_qualified"
+        and row.get("freshnessTier") == "primary_0_48h"
+        and row.get("editorialPriorityLabel") == "high"
+    ]
+    evaluation["pool"] = pool
+    evaluation["highPriorityEvidenceQueue"] = high_queue
+    evaluation["mediumPriorityEvidenceQueue"] = medium_queue
+    evaluation["provisionalWouldBeSelected"] = provisional
+    summary = evaluation.setdefault("summary", {})
+    summary.update({
+        "candidateEvaluationPool": len(pool),
+        "evidenceQualified": sum(row.get("candidateDisposition") == "evidence_qualified" for row in pool),
+        "needsVerification": sum(row.get("candidateDisposition") == "needs_verification" for row in pool),
+        "highPriorityCandidates": sum(row.get("editorialPriorityLabel") == "high" for row in pool),
+        "highPriorityEvidenceQueue": len(high_queue),
+        "highPriorityNeedsVerification": len(high_queue),
+        "highPriorityEvidenceQueueEvents": len(high_queue),
+        "mediumPriorityEvidenceQueueEvents": len(medium_queue),
+        "provisionalWouldBeSelected": len(provisional),
+        "rejected": sum(row.get("candidateDisposition") == "rejected" for row in records),
+        "deferred": sum(row.get("candidateDisposition") == "deferred" for row in records),
+        "dispositionCounts": {
+            disposition: sum(row.get("candidateDisposition") == disposition for row in records)
+            for disposition in {row.get("candidateDisposition") for row in records}
+        },
+    })
+
+
+def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int = 0, final_guard: dict | None = None) -> dict:
     """Expose one event-level, publishable input for the final editor.
 
     This is intentionally not the editorial selector.  Codex still decides
@@ -2092,7 +2323,7 @@ def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int
         "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceSources",
         "evidenceResolutionAttempts", "discoveryReports",
     )
-    return {
+    result = {
         "status": "pending_editorial_review",
         "rawQualifiedEvents": len(qualified),
         "canonicalUniqueEvents": len(event_ids),
@@ -2103,6 +2334,9 @@ def build_final_editorial_pool(evaluation: dict, historical_duplicate_count: int
         "editoriallyReviewed": 0,
         "events": [{key: row.get(key) for key in fields} for row in canonical_events.values()],
     }
+    if final_guard:
+        result["finalHistoricalGuard"] = final_guard
+    return result
 
 
 def reflow_resolver_discovered_candidates(required_date: date, records: list[dict], known_events: list[dict]) -> dict:
@@ -2728,7 +2962,7 @@ def load_history(required_date: date) -> list[dict]:
                 parsed = parse_md(path)
             except Exception:
                 continue
-            for item in parsed.get("domestic", []) + parsed.get("international", []):
+            for item_index, item in enumerate(parsed.get("ordered_items") or parsed.get("domestic", []) + parsed.get("international", []), 1):
                 row = {
                     "title": item.get("title", ""),
                     "body": item.get("body", ""),
@@ -2736,6 +2970,7 @@ def load_history(required_date: date) -> list[dict]:
                     "publishedDate": parsed.get("date", ""),
                     "url": (item.get("sources") or [{}])[0].get("url", ""),
                     "historicalSource": "published_daily_markdown",
+                    "historicalItemId": f"{day.isoformat()}#item{item_index}",
                 }
                 identity = canonical_event_identity(row)
                 if identity:
@@ -2956,6 +3191,11 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         evaluation["resolverDiscoveredCandidates"] = resolver_reflow["records"]
         evaluation["resolverDiscoveredEvents"] = resolver_reflow["events"]
         evaluation["resolverReflow"] = resolver_reflow["evaluation"]
+    final_guard_result = final_historical_guard(required_date, evaluation["records"])
+    evaluation["records"] = final_guard_result["records"]
+    evaluation["finalHistoricalGuard"] = final_guard_result["audit"]
+    refresh_evaluation_views(evaluation)
+    evaluated_events = evaluation["records"]
     event_by_id = {row.get("eventId"): row for row in evaluated_events}
     for report in report_records:
         event = event_by_id.get(report.get("eventId"))
@@ -2979,6 +3219,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
     final_editorial_pool = build_final_editorial_pool(
         evaluation,
         historical_duplicate_count=len({r.get("duplicateOf") for r in historical_rows if r.get("duplicateOf")}),
+        final_guard=final_guard_result["audit"],
     )
     query_family_summary = build_query_family_summary(
         report_records,
@@ -3003,6 +3244,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         "candidateEvaluation": {
             "summary": evaluation["summary"],
             "finalEditorialPool": final_editorial_pool,
+            "finalHistoricalGuard": final_guard_result["audit"],
             "eventCandidates": [
                 {
                     "eventId": row.get("eventId"),

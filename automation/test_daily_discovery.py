@@ -32,6 +32,11 @@ from automation.daily_discovery import (
     run_evidence_upgrade,
     run,
     build_audit,
+    canonical_article_identity,
+    canonical_article_url,
+    derivative_commentary_relation,
+    final_historical_guard,
+    historical_published_event_relation,
     infer_editorial_scope,
     parse_bing_html,
     query_audit_status,
@@ -87,6 +92,59 @@ class DailyDiscoveryTests(unittest.TestCase):
             "publishedDate": "2026-09-01",
         }
         self.assertEqual(duplicate_relation(new, old)[0], "historical_duplicate")
+
+    def test_article_identity_normalizes_transport_and_www_variants(self):
+        secure = "https://www.example.test/2026/08/31/123456789.shtml?utm_source=x#top"
+        plain = "http://example.test/2026/08/31/123456789.shtml"
+        self.assertEqual(canonical_article_url(secure), canonical_article_url(plain))
+        self.assertEqual(canonical_article_identity(secure), canonical_article_identity(plain))
+
+    @patch("automation.daily_discovery.load_history")
+    def test_final_historical_guard_uses_evidence_url_after_upgrade(self, load_history_mock):
+        load_history_mock.return_value = [{
+            "title": "香港“古埃及文明大展”落幕",
+            "publishedDate": "2026-09-01",
+            "url": "https://www.chinanews.com.cn/dwq/2026-08-31/10687546.shtml",
+            "historicalItemId": "2026-09-01#item1",
+        }]
+        row = {
+            "eventId": "event-new-id",
+            "representativeTitle": "香港故宫文化博物馆古埃及文明大展今日圆满结束",
+            "publishedDate": "2026-09-03",
+            "candidateDisposition": "evidence_qualified",
+            "evidenceSources": [{"url": "http://chinanews.com.cn/dwq/2026-08-31/10687546.shtml", "tier": "A"}],
+        }
+        result = final_historical_guard(__import__("datetime").date(2026, 9, 4), [row])
+        self.assertEqual(result["retained"], [])
+        self.assertEqual(result["excluded"][0]["duplicateStatus"], "historical_duplicate")
+        self.assertEqual(result["excluded"][0]["duplicateOf"], "2026-09-01#item1")
+
+    def test_derivative_commentary_is_not_a_new_collection_event(self):
+        previous = {
+            "title": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+            "body": "游客抓、踢、拿起标本，造成标本受损。",
+            "publishedDate": "2026-09-01",
+        }
+        current = {
+            "representativeTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+            "publishedDate": "2026-09-04",
+        }
+        relation = derivative_commentary_relation(current, previous)
+        self.assertIsNotNone(relation)
+        self.assertEqual(relation[0], "derivative_commentary")
+
+    def test_substantive_collection_follow_up_is_not_derivative_commentary(self):
+        previous = {
+            "title": "国家动物博物馆珍稀蛇类标本遭游客不当触碰受损",
+            "body": "游客抓、踢、拿起标本，造成标本受损。",
+            "publishedDate": "2026-09-01",
+        }
+        current = {
+            "representativeTitle": "国家动物博物馆公布标本损害鉴定与追责结果",
+            "publishedDate": "2026-09-04",
+            "substantiveNewDevelopment": True,
+        }
+        self.assertIsNone(derivative_commentary_relation(current, previous))
 
     def test_exact_historical_title_matches_across_source_and_report_date(self):
         old = {

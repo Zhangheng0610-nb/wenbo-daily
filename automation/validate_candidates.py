@@ -17,7 +17,11 @@ from automation.governance import (
     validate_official_wechat_registry,
     wechat_evidence_issues,
 )
-from automation.daily_discovery import evidence_claim_risk
+from automation.daily_discovery import (
+    evidence_claim_risk,
+    historical_published_event_relation,
+    load_history,
+)
 REQUIRED = {
     'candidateId', 'title', 'publishedDate', 'discoveredAt',
     'discoverySource', 'discoverySourceType', 'discoveryUrl',
@@ -29,7 +33,7 @@ DECISIONS = {'selected', 'rejected', 'deferred', 'needs_verification'}
 # Keep the two earlier ledger vocabularies readable; new discovery audits use
 # the explicit event-level values below.  Historical ledgers are not silently
 # rewritten just to satisfy the newer validator.
-DUPLICATE_STATUSES = {'unique_event', 'same_day_duplicate', 'historical_duplicate', 'new_development', 'possible_duplicate', 'unique_opportunity', 'unresolved', 'not_selected'}
+DUPLICATE_STATUSES = {'unique_event', 'same_day_duplicate', 'historical_duplicate', 'derivative_commentary', 'new_development', 'possible_duplicate', 'unique_opportunity', 'unresolved', 'not_selected'}
 DISCOVERY_AUDIT_REQUIRED_FROM = date(2026, 8, 31)
 FINAL_EDITORIAL_POOL_REQUIRED_FROM = date(2026, 9, 2)
 
@@ -220,7 +224,7 @@ def validate_discovery_audit(ledger_path, payload):
             status = record.get('duplicateStatus', 'unique_event')
             if status not in DUPLICATE_STATUSES:
                 errors.append(f'discovery record {index}: invalid duplicateStatus')
-            if status in {'same_day_duplicate', 'historical_duplicate', 'possible_duplicate'} and not record.get('duplicateOf'):
+            if status in {'same_day_duplicate', 'historical_duplicate', 'derivative_commentary', 'possible_duplicate'} and not record.get('duplicateOf'):
                 errors.append(f'discovery record {index}: duplicateOf required for {status}')
     summary = audit.get('summary') or {}
     if isinstance(records, list) and summary.get('rawResults') != len(records):
@@ -377,12 +381,16 @@ def validate(path, report_path=None):
             errors.append(f'{label}: invalid decision')
         if candidate.get('dedupStatus', 'unique_event') not in DUPLICATE_STATUSES:
             errors.append(f'{label}: invalid dedupStatus')
-        if candidate.get('dedupStatus') in {'same_day_duplicate', 'historical_duplicate', 'possible_duplicate'} and not candidate.get('duplicateOf'):
+        if candidate.get('dedupStatus') in {'same_day_duplicate', 'historical_duplicate', 'derivative_commentary', 'possible_duplicate'} and not candidate.get('duplicateOf'):
             errors.append(f'{label}: duplicateOf required for {candidate.get("dedupStatus")}')
         if not isinstance(candidate.get('selectedForDaily'), bool):
             errors.append(f'{label}: selectedForDaily must be boolean')
         elif candidate['selectedForDaily'] != (candidate.get('decision') == 'selected'):
             errors.append(f'{label}: selectedForDaily disagrees with decision')
+        if candidate.get('decision') == 'selected' and candidate.get('dedupStatus') in {
+            'same_day_duplicate', 'historical_duplicate', 'derivative_commentary'
+        }:
+            errors.append(f'{label}: selected candidate cannot have {candidate.get("dedupStatus")}')
         scope = candidate.get('scope')
         if scope not in {'domestic', 'regional', 'international'}:
             errors.append(f'{label}: scope must be domestic, regional, or international')
@@ -448,6 +456,22 @@ def validate(path, report_path=None):
         if candidate.get('decision') == 'selected' and evidence_claim_risk(candidate) == 'high':
             if not evidence_a and len({host for host in evidence_b_hosts if host}) < 2:
                 errors.append(f'{label}: high-risk selected claim needs A evidence or two independent B domains')
+        if candidate.get('decision') == 'selected' and ledger_date:
+            current = dict(candidate)
+            current['title'] = candidate.get('title', '')
+            current['url'] = candidate.get('discoveryUrl', '')
+            try:
+                historical_rows = load_history(ledger_date)
+            except Exception:
+                historical_rows = []
+            for previous in reversed(historical_rows):
+                relation = historical_published_event_relation(current, previous)
+                if relation and relation[0] in {'historical_duplicate', 'derivative_commentary'}:
+                    errors.append(
+                        f'{label}: selected candidate matches published history '
+                        f'{previous.get("historicalItemId") or previous.get("title", "")}'
+                    )
+                    break
     summary = payload.get('summary') or {}
     expected = {
         'discovered': len(candidates),
@@ -479,7 +503,7 @@ def validate(path, report_path=None):
             # bypass for selected or otherwise unresolved candidates.
             historical_exclusion = (
                 candidate.get('decision') == 'rejected'
-                and candidate.get('dedupStatus') == 'historical_duplicate'
+                and candidate.get('dedupStatus') in {'historical_duplicate', 'derivative_commentary'}
                 and bool(candidate.get('duplicateOf'))
             )
             if candidate.get('eventId') not in pool_ids and not historical_exclusion:

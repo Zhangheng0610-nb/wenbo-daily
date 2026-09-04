@@ -11,96 +11,67 @@
   "replayCutoff": "2026-09-04T07:13:00+08:00",
   "candidatePoolDefinition": "本次正式编辑重审的唯一输入为 content/复核/2026-09-04-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 与治理回放仅用于追溯，不与复核池拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-04T16:55:43+08:00",
-    "reviewedEvents": 8,
-    "selectedEvents": 6,
+    "reviewedAt": "2026-09-04T17:27:11+08:00",
+    "reviewedEvents": 6,
+    "selectedEvents": 4,
     "historicalExcludedEvents": 4,
-    "note": "基于最新八个 evidence-qualified event 完成统一编辑重审；scope 与 editorial priority 已按事件语义重算，新增全国文物地震安全治理事件，低优先级事项不作填充。"
+    "note": "证据合格事件先经过最终历史闸门；香港展为历史重复，律师文章为既有标本事件的衍生解读，剩余六个事件统一完成编辑复核。"
   },
   "candidates": [
     {
-      "candidateId": "replay-20260904-001",
-      "eventId": "event-12aaa43d2f5a",
-      "title": "香港“古埃及文明大展”落幕",
-      "publishedDate": "2026-08-31",
-      "discoveredAt": "2026-09-04T15:23:02+08:00",
-      "discoverySource": "chinanews.com.cn",
-      "discoverySourceType": "governance_recall",
-      "discoveryUrl": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
-      "publisher": "中国新闻网",
-      "evidenceSources": [{
-        "name": "中国新闻网：香港“古埃及文明大展”落幕 接待访客逾67万人次",
-        "url": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
-        "tier": "A",
-        "role": "evidence-upgrade"
-      }],
+      "candidateId": "recovery-20260904-004",
+      "eventId": "event-af2353ba1bef",
+      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "publishedDate": "2026-09-04",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "ncha.gov.cn",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+      "publisher": "ncha.gov.cn",
+      "evidenceSources": [
+        {
+          "name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "tier": "A",
+          "role": "evidence-upgrade"
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["博物馆", "展览", "国际交流"],
+      "topic": [],
       "domestic": true,
       "international": false,
       "scope": "domestic",
       "decision": "selected",
-      "decisionReason": "selected_high_priority_A_evidence_and_substantive_exhibition_outcome",
+      "decisionReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
       "selectedForDaily": true,
       "dedupStatus": "unique_event",
-      "notes": "来自已保存治理回放的 finalEditorialPool；统一编辑重审后入选。",
-      "discoveredVia": "governance-recall",
+      "notes": "Reviewed after full-network recovery; no filler selection.",
+      "discoveredVia": "full-network-recovery",
       "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "selected",
-      "finalEditorialReason": "最高优先级；展览运营数据与展后技术合作均有明确信息增量。",
-      "editorialPriorityScore": 92,
+      "finalEditorialReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
+      "editorialPriorityScore": 70,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["significant_museum_or_exhibition_project", "substantive_audience_or_operation_data", "sustained_public_attention", "primary_freshness"],
-      "reportCount": 8,
+      "editorialReasons": [
+        "national_heritage_safety_or_governance",
+        "primary_freshness"
+      ],
+      "heritageGovernance": {
+        "matched": true,
+        "national": true,
+        "hasSubject": true,
+        "hasAction": true,
+        "hasNationalScope": true
+      },
+      "reportCount": 1,
       "freshnessTier": "primary_0_48h",
       "evidenceUpgradeStatus": "completed",
       "evidenceUpgradeAttempted": true,
       "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [],
       "dailyItemNumber": 1,
-      "dailyItemTitle": "香港“古埃及文明大展”落幕"
-    },
-    {
-      "candidateId": "replay-20260904-002",
-      "eventId": "event-5432c779ed5b",
-      "title": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
-      "publishedDate": "2026-08-31",
-      "discoveredAt": "2026-09-04T15:23:02+08:00",
-      "discoverySource": "chinanews.com.cn",
-      "discoverySourceType": "governance_recall",
-      "discoveryUrl": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
-      "publisher": "中国新闻网",
-      "evidenceSources": [{
-        "name": "中国新闻网：玩闹致博物馆标本受损是否应承担法律责任？律师解读",
-        "url": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
-        "tier": "A",
-        "role": "evidence-upgrade"
-      }],
-      "evidenceTier": "A",
-      "topic": ["博物馆", "馆藏安全", "公共文化"],
-      "domestic": true,
-      "international": false,
-      "scope": "domestic",
-      "decision": "selected",
-      "decisionReason": "selected_medium_A_evidence_and_substantive_collection_protection_analysis",
-      "selectedForDaily": true,
-      "dedupStatus": "unique_event",
-      "notes": "来自已保存治理回放的 finalEditorialPool；统一编辑重审后入选。",
-      "discoveredVia": "governance-recall",
-      "discoveryQuery": null,
-      "newDevelopment": false,
-      "finalEditorialDecision": "selected",
-      "finalEditorialReason": "标本受损事件的法律责任解读提供了馆藏保护与公众管理的具体行业信息。",
-      "editorialPriorityScore": 65,
-      "editorialPriorityLabel": "medium",
-      "editorialReasons": ["museum_collection_or_public_incident", "backfill_freshness"],
-      "reportCount": 2,
-      "freshnessTier": "backfill_3_7d",
-      "evidenceUpgradeStatus": "completed",
-      "evidenceUpgradeAttempted": true,
-      "evidenceUpgradeResult": "qualified",
-      "dailyItemNumber": 3,
-      "dailyItemTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读"
+      "dailyItemTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
     },
     {
       "candidateId": "recovery-20260904-001",
@@ -190,7 +161,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 2,
       "dailyItemTitle": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展"
     },
     {
@@ -283,7 +254,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 5,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展"
     },
     {
@@ -386,63 +357,118 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 6,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆"
     },
     {
-      "candidateId": "recovery-20260904-004",
-      "eventId": "event-af2353ba1bef",
-      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
-      "publishedDate": "2026-09-04",
-      "discoveredAt": "2026-09-04T14:55:49+08:00",
-      "discoverySource": "ncha.gov.cn",
-      "discoverySourceType": "query_search",
-      "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
-      "publisher": "ncha.gov.cn",
+      "candidateId": "replay-20260904-001",
+      "eventId": "event-12aaa43d2f5a",
+      "title": "香港“古埃及文明大展”落幕",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T15:23:02+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "governance_recall",
+      "discoveryUrl": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
+      "publisher": "中国新闻网",
       "evidenceSources": [
         {
-          "name": "国家文物局：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
-          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "name": "中国新闻网：香港“古埃及文明大展”落幕 接待访客逾67万人次",
+          "url": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
           "tier": "A",
           "role": "evidence-upgrade"
         }
       ],
       "evidenceTier": "A",
-      "topic": [],
+      "topic": [
+        "博物馆",
+        "展览",
+        "国际交流"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "selected",
-      "decisionReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
-      "selectedForDaily": true,
-      "dedupStatus": "unique_event",
-      "notes": "Reviewed after full-network recovery; no filler selection.",
-      "discoveredVia": "full-network-recovery",
+      "decision": "rejected",
+      "decisionReason": "historical_duplicate_same_event_no_substantive_new_development",
+      "selectedForDaily": false,
+      "dedupStatus": "historical_duplicate",
+      "notes": "最终历史闸门排除；保留证据与来源以供审计，不进入本次 finalEditorialPool。",
+      "discoveredVia": "governance-recall",
       "discoveryQuery": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "selected",
-      "finalEditorialReason": "全国文物地震安全与两部门协同具有明确的行业风险治理增量，不是普通会议报道。",
-      "editorialPriorityScore": 70,
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。",
+      "editorialPriorityScore": 92,
       "editorialPriorityLabel": "high",
       "editorialReasons": [
-        "national_heritage_safety_or_governance",
+        "significant_museum_or_exhibition_project",
+        "substantive_audience_or_operation_data",
+        "sustained_public_attention",
         "primary_freshness"
       ],
-      "heritageGovernance": {
-        "matched": true,
-        "national": true,
-        "hasSubject": true,
-        "hasAction": true,
-        "hasNationalScope": true
-      },
-      "reportCount": 1,
+      "reportCount": 8,
       "freshnessTier": "primary_0_48h",
       "evidenceUpgradeStatus": "completed",
       "evidenceUpgradeAttempted": true,
       "evidenceUpgradeResult": "qualified",
-      "evidenceResolutionAttempts": [],
-      "dailyItemNumber": 2,
-      "dailyItemTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
+      "dailyItemNumber": null,
+      "dailyItemTitle": null,
+      "duplicateOf": "2026-09-01#item1",
+      "duplicateReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。"
+    },
+    {
+      "candidateId": "replay-20260904-002",
+      "eventId": "event-5432c779ed5b",
+      "title": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T15:23:02+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "governance_recall",
+      "discoveryUrl": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+      "publisher": "中国新闻网",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+          "url": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "博物馆",
+        "馆藏安全",
+        "公共文化"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "rejected",
+      "decisionReason": "derivative_commentary_without_substantive_new_development",
+      "selectedForDaily": false,
+      "dedupStatus": "derivative_commentary",
+      "notes": "最终历史闸门排除；保留证据与来源以供审计，不进入本次 finalEditorialPool。",
+      "discoveredVia": "governance-recall",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "已发布标本受损事件的法律解读；未发现判决、处罚、追责或制度调整等实质新动作。",
+      "editorialPriorityScore": 65,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "museum_collection_or_public_incident",
+        "backfill_freshness"
+      ],
+      "reportCount": 2,
+      "freshnessTier": "backfill_3_7d",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "dailyItemNumber": null,
+      "dailyItemTitle": null,
+      "duplicateOf": "2026-09-01#item2",
+      "duplicateReason": "已发布标本受损事件的法律解读；未发现判决、处罚、追责或制度调整等实质新动作。",
+      "classification": "derivative_commentary",
+      "derivedFrom": "2026-09-01#item2"
     },
     {
       "candidateId": "recovery-20260904-005",
@@ -710,17 +736,17 @@
   ],
   "summary": {
     "discovered": 12,
-    "selected": 6,
-    "rejected": 6,
+    "selected": 4,
+    "rejected": 8,
     "deferred": 0,
     "needsVerification": 0
   },
   "revision": {
-    "revisedAt": "2026-09-04T16:55:43+08:00",
+    "revisedAt": "2026-09-04T17:27:11+08:00",
     "revisionType": "same_day_editorial_revision",
     "discoveryAuditUnchanged": true,
     "editorialInputPath": "content/复核/2026-09-04-editorial-replay.json",
     "runtimeEnrichment": true,
-    "revisionReason": "formal_editorial_replay_with_scope_and_priority_recalculation"
+    "revisionReason": "final_historical_guard_and_derivative_commentary_exclusion"
   }
 }
