@@ -3,8 +3,8 @@
   "date": "2026-09-04",
   "runType": "replay",
   "replayType": "international-wire-runtime-audit",
-  "codeVersion": "0e4f4654ab8788e1dbb2272689350cd4d8c9c720 + trusted alternate publisher recovery",
-  "replayedAt": "2026-09-04T21:02:44+08:00",
+  "codeVersion": "f1265c0bfb5e381f9ff4663cb62db4a94d63c852 + trusted wrapper headline navigation",
+  "replayedAt": "2026-09-04T21:18:55+08:00",
   "window": {
     "start": "2026-08-06",
     "end": "2026-09-04",
@@ -2706,6 +2706,41 @@
           "eventCandidates": false,
           "outcome": "results_but_event_mismatch",
           "note": "Bing results were audited separately from the live direct-host identity diagnostic; no production URL was injected."
+        },
+        "trustedHeadlineRecovery": {
+          "wrappersEligible": 1,
+          "originalWrapperTitle": "Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism' - ABC News - Breaking News, Latest News and Videos",
+          "normalizedHeadlines": [
+            "Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'"
+          ],
+          "headlineQueriesAttempted": 8,
+          "headlineNavigationQueries": [
+            "site:abcnews.com \"Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'\"",
+            "site:abcnews.com \"Trump admin threatens cut federal support\"",
+            "site:abcnews.go.com \"Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'\"",
+            "site:abcnews.go.com \"Trump admin threatens cut federal support\"",
+            "site:ingest.abcnews.com \"Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'\"",
+            "site:ingest.abcnews.com \"Trump admin threatens cut federal support\"",
+            "site:www-cdn.abcnews.com \"Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'\"",
+            "site:www-cdn.abcnews.com \"Trump admin threatens cut federal support\""
+          ],
+          "recoveryHostsTested": [
+            "abcnews.com",
+            "abcnews.go.com",
+            "ingest.abcnews.com",
+            "www-cdn.abcnews.com"
+          ],
+          "searchResultsReturned": 80,
+          "headlineCandidateMatches": 0,
+          "directUrlsFound": [],
+          "directFetchAttempts": 0,
+          "directFetchSuccess": 0,
+          "directFetchTransportSuccesses": 0,
+          "bodyExtracted": 0,
+          "semanticMatches": 0,
+          "evidenceQualified": 0,
+          "outcome": "headline_navigation_event_mismatch",
+          "note": "Live bounded headline navigation used the trusted ABC wrapper headline; search returned no same-event direct ABC article. Separately verified direct ABC host diagnostics remain provenance-only and were not injected into production search results."
         },
         "fetch": {
           "attempts": 2,

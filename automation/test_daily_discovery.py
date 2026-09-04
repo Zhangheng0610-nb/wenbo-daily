@@ -28,6 +28,8 @@ from automation.daily_discovery import (
     publisher_search_results,
     publisher_search_anchor,
     publisher_search_queries,
+    normalize_trusted_publisher_headline,
+    trusted_headline_navigation_queries,
     publisher_recovery_hosts_for_record,
     public_salience,
     alternate_evidence_match_hint,
@@ -1278,6 +1280,128 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(all("smithsonian" in query.split() for query in variants))
         self.assertTrue(variants[0].startswith("site:washingtonpost.com smithsonian"))
         self.assertTrue(variants[-1].startswith("smithsonian"))
+
+    def test_trusted_wrapper_headline_removes_only_identified_publisher_suffix(self):
+        headline = "Trump admin threatens support for Smithsonian - ABC News - Breaking News, Latest News and Videos"
+        self.assertEqual(
+            normalize_trusted_publisher_headline(headline, "ABC News - Breaking News, Latest News and Videos"),
+            "Trump admin threatens support for Smithsonian",
+        )
+        internal_hyphen = "Museum-led project opens a new gallery"
+        self.assertEqual(
+            normalize_trusted_publisher_headline(internal_hyphen, "ABC News"),
+            internal_hyphen,
+        )
+
+    def test_trusted_headline_navigation_is_bounded_and_headline_derived(self):
+        queries = trusted_headline_navigation_queries(
+            "Administration threatens support for National Heritage Museum",
+            "abcnews.com",
+        )
+        self.assertGreaterEqual(len(queries), 1)
+        self.assertLessEqual(len(queries), 2)
+        self.assertTrue(all(query.startswith('site:abcnews.com "') for query in queries))
+        self.assertTrue(any("National Heritage Museum" in query for query in queries))
+        self.assertNotIn("Smithsonian", " ".join(queries))
+
+    @patch("automation.daily_discovery._execute_bing_web_publisher_query")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_trusted_wrapper_headline_finds_registered_host_article_before_event_queries(self, execute_query, web_query):
+        relevant = {
+            "title": "Trump admin threatens to cut federal support for Smithsonian - ABC News",
+            "url": "https://ingest.abcnews.com/Politics/smithsonian-support/story?id=136182940",
+            "publishedDate": "2026-09-04",
+            "sourceDomain": "ABC News",
+        }
+        calls = []
+
+        def rss(*args):
+            query = args[2]
+            calls.append(query)
+            if "site:ingest.abcnews.com" in query and '"Trump admin threatens to cut federal support for Smithsonian"' in query:
+                return [relevant], {"success": True, "returnedResultCount": 1, "actualQuery": query}
+            return [], {"success": True, "returnedResultCount": 0, "actualQuery": query}
+
+        execute_query.side_effect = rss
+        web_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "web"})
+        rows, audit = publisher_search_results(
+            {
+                "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+                "scope": "international",
+            },
+            {
+                "title": "Trump admin threatens to cut federal support for Smithsonian - ABC News - Breaking News, Latest News and Videos",
+                "url": "https://news.google.com/rss/articles/example",
+                "sourceDomain": "ABC News - Breaking News, Latest News and Videos",
+            },
+            __import__("datetime").date(2026, 9, 1),
+            __import__("datetime").date(2026, 9, 4),
+        )
+        headline_audit = audit["trustedHeadlineRecovery"]
+        self.assertEqual(headline_audit["wrappersEligible"], 1)
+        self.assertGreaterEqual(headline_audit["headlineQueriesAttempted"], 1)
+        self.assertIn("ingest.abcnews.com", headline_audit["recoveryHostsTested"])
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["recoveryStage"], "headline_navigation")
+        self.assertEqual(rows[0]["url"], relevant["url"])
+        self.assertTrue(any('"Trump admin threatens to cut federal support for Smithsonian"' in query for query in calls))
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    @patch("automation.daily_discovery.publisher_search_results")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_headline_recovery_audit_records_direct_fetch_and_semantic_metrics(self, execute_query, publisher_search, resolve_url):
+        execute_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "query"})
+        direct = {
+            "title": "Trump admin threatens to cut federal support for Smithsonian",
+            "url": "https://abcnews.com/Politics/smithsonian-support/story?id=136182940",
+            "sourceDomain": "abcnews.go.com",
+            "recoveryStage": "headline_navigation",
+        }
+        search_audit = {
+            "success": True,
+            "trustedHeadlineRecovery": {
+                "wrappersEligible": 1,
+                "headlineQueriesAttempted": 1,
+                "searchResultsReturned": 1,
+                "headlineCandidateMatches": 1,
+                "directUrlsFound": [direct["url"]],
+                "directFetchAttempts": 0,
+                "directFetchSuccess": 0,
+                "directFetchTransportSuccesses": 0,
+                "bodyExtracted": 0,
+                "semanticMatches": 0,
+                "evidenceQualified": 0,
+            },
+        }
+        publisher_search.return_value = ([direct], search_audit)
+        resolve_url.return_value = (
+            direct["url"],
+            "<html><head><title>Trump admin threatens to cut federal support for Smithsonian</title></head>"
+            "<body>The Smithsonian Institution faces a threat to federal agency support. "
+            "The letter concerns artifact loans, procurement and discretionary grants.</body></html>",
+            None,
+        )
+        event = {
+            "eventId": "event-headline-audit",
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "scope": "international",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "high",
+            "editorialPriorityScore": 86,
+            "discoveryReports": [{
+                "title": "Trump admin threatens to cut federal support for Smithsonian - ABC News",
+                "url": "https://news.google.com/rss/articles/example",
+                "sourceDomain": "ABC News",
+            }],
+        }
+        result = run_evidence_upgrade(__import__("datetime").date(2026, 9, 4), [event])
+        self.assertEqual(result["qualified"], 1)
+        metrics = event["evidenceUpgradeQueries"][0]["trustedHeadlineRecovery"]
+        self.assertEqual(metrics["directFetchAttempts"], 1)
+        self.assertEqual(metrics["directFetchSuccess"], 1)
+        self.assertEqual(metrics["bodyExtracted"], 1)
+        self.assertEqual(metrics["semanticMatches"], 1)
+        self.assertEqual(metrics["evidenceQualified"], 1)
 
     def test_abc_recovery_uses_explicit_host_family(self):
         hosts = publisher_recovery_hosts_for_record({

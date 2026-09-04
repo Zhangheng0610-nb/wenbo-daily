@@ -1578,6 +1578,51 @@ def publisher_search_queries(event: dict, host: str) -> list[str]:
     return list(dict.fromkeys(variants))[:3]
 
 
+def normalize_trusted_publisher_headline(title: str, publisher: str = "") -> str:
+    """Remove only an identified publisher suffix from a wrapper headline.
+
+    A final hyphen is not, by itself, a safe delimiter: hyphens are common in
+    real headlines.  The suffix is removed only when it starts with the
+    trusted publisher display name (including a longer display-name suffix).
+    """
+    value = unescape(str(title or "")).replace("\u00a0", " ").strip()
+    display = " ".join(str(publisher or "").split()).strip()
+    labels = []
+    if display:
+        labels.append(display)
+        labels.extend(part.strip() for part in re.split(r"\s+[-|｜]\s+", display) if part.strip())
+    for label in sorted(set(labels), key=len, reverse=True):
+        suffix = re.compile(
+            rf"\s*(?:-|—|–|_|[|｜])\s*{re.escape(label)}(?:\s*(?:-|—|–|_|[|｜]).*)?$",
+            re.I,
+        )
+        value = suffix.sub("", value).strip()
+    return value
+
+
+def trusted_headline_navigation_queries(headline: str, host: str) -> list[str]:
+    """Build at most two bounded publisher lookups from a trusted headline."""
+    normalized = normalize_trusted_publisher_headline(headline)
+    if not normalized or not host:
+        return []
+    # Keep the full headline as the strongest navigation clue.  The shorter
+    # phrase is only a bounded fallback for engines that ignore long quoted
+    # strings; it is derived from the headline and is never a discovery query.
+    queries = [f'site:{host} "{normalized}"']
+    tokens = re.findall(r"[A-Za-z0-9]+|[\u4e00-\u9fff]{2,}", normalized)
+    stop = {
+        "the", "a", "an", "and", "or", "to", "of", "for", "in", "on", "as", "at",
+        "with", "from", "by", "is", "are", "was", "were", "this", "that", "how",
+    }
+    meaningful = [token for token in tokens if token.casefold() not in stop]
+    if len(meaningful) >= 3:
+        phrase = " ".join(meaningful[:6])
+        short = f'site:{host} "{phrase}"'
+        if short not in queries:
+            queries.append(short)
+    return queries[:2]
+
+
 def _publisher_event_screen(event: dict, result: dict) -> dict:
     """Screen a publisher result before article retrieval.
 
@@ -1666,8 +1711,35 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
     raw_results = 0
     rejected = 0
     screening = []
+    publisher_display = (
+        report.get("publisher")
+        or report.get("sourceDomain")
+        or report.get("publisherName")
+        or publisher_identity
+    )
+    original_wrapper_title = str(report.get("title") or report.get("headline") or "")
+    normalized_headline = normalize_trusted_publisher_headline(original_wrapper_title, publisher_display)
+    headline_recovery = {
+        "wrappersEligible": 0,
+        "originalWrapperTitle": original_wrapper_title,
+        "normalizedPublisherHeadline": normalized_headline,
+        "normalizedHeadlines": [normalized_headline] if normalized_headline else [],
+        "headlineQueriesAttempted": 0,
+        "headlineNavigationQueries": [],
+        "recoveryHostsTested": [],
+        "searchResultsReturned": 0,
+        "headlineCandidateMatches": 0,
+        "directUrlsFound": [],
+        "directFetchAttempts": 0,
+        "directFetchSuccess": 0,
+        "directFetchTransportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0,
+        "outcome": "not_eligible",
+    }
 
-    def consider(found: list[dict], query_audit: dict, searched_host: str) -> None:
+    def consider(found: list[dict], query_audit: dict, searched_host: str, recovery_stage: str = "event_derived") -> None:
         nonlocal rejected
         for result in found:
             transport = result.get("url", "")
@@ -1684,6 +1756,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
                 row["transportUrl"] = transport
             row["discoveredVia"] = "publisher-domain-search"
             row["discoverySourceType"] = "evidence_upgrade"
+            row["recoveryStage"] = recovery_stage
             match = _publisher_event_screen(event, row)
             screening.append({
                 "query": query_audit.get("actualQuery", ""),
@@ -1693,6 +1766,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
                 "score": match.get("score", 0),
                 "reasons": match.get("reasons", []),
                 "searchedHost": searched_host,
+                "recoveryStage": recovery_stage,
             })
             if not match.get("matched"):
                 rejected += 1
@@ -1701,35 +1775,102 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
             if key and key not in direct_seen:
                 direct_seen.add(key)
                 direct.append(row)
+                if recovery_stage == "headline_navigation":
+                    headline_recovery["headlineCandidateMatches"] += 1
+                    headline_recovery["directUrlsFound"].append(row.get("url", ""))
 
-    for searched_host in recovery_hosts:
-        for variant in publisher_search_queries(event, searched_host):
-            found, audit_row = _execute_one_query(family, bing, variant, start, end)
-            audit_row = dict(audit_row or {})
-            audit_row["backend"] = "publisher-search-bing-rss"
-            audit_row["publisherDomain"] = publisher_identity
-            audit_row["searchedHost"] = searched_host
-            audit_row["transportSuccess"] = bool(audit_row.get("success"))
-            audits.append(audit_row)
-            raw_results += int(audit_row.get("returnedResultCount") or len(found))
-            consider(found, audit_row, searched_host)
+    # A trusted wrapper already carries a publisher-verified navigational
+    # clue.  Use it before the broader event-derived variants, but only when
+    # the wrapper headline itself passes the existing retrieval screen.
+    wrapper_url = str(report.get("url") or "")
+    headline_screen = _publisher_event_screen(event, {
+        "title": normalized_headline,
+        "sourceDomain": publisher_identity,
+    }) if normalized_headline else {"matched": False}
+    headline_eligible = bool(
+        is_search_wrapper_url(wrapper_url)
+        and normalized_headline
+        and headline_screen.get("matched")
+    )
+    if headline_eligible:
+        headline_recovery["wrappersEligible"] = 1
+        headline_recovery["recoveryHostsTested"] = list(recovery_hosts)
+        for searched_host in recovery_hosts:
+            for variant in trusted_headline_navigation_queries(normalized_headline, searched_host):
+                headline_recovery["headlineQueriesAttempted"] += 1
+                headline_recovery["headlineNavigationQueries"].append(variant)
+                found, audit_row = _execute_one_query(family, bing, variant, start, end)
+                audit_row = dict(audit_row or {})
+                audit_row["backend"] = "publisher-search-bing-rss"
+                audit_row["publisherDomain"] = publisher_identity
+                audit_row["searchedHost"] = searched_host
+                audit_row["recoveryStage"] = "headline_navigation"
+                audit_row["transportSuccess"] = bool(audit_row.get("success"))
+                audits.append(audit_row)
+                result_count = int(audit_row.get("returnedResultCount") or len(found))
+                raw_results += result_count
+                headline_recovery["searchResultsReturned"] += result_count
+                consider(found, audit_row, searched_host, "headline_navigation")
+                if direct:
+                    headline_recovery["outcome"] = "headline_navigation_success"
+                    break
+                # Keep the existing public Bing Web fallback as part of the
+                # same bounded headline-navigation attempt.
+                web_found, web_audit = _execute_bing_web_publisher_query(
+                    family, bing, variant, start, end)
+                web_audit["publisherDomain"] = publisher_identity
+                web_audit["searchedHost"] = searched_host
+                web_audit["recoveryStage"] = "headline_navigation"
+                web_audit["transportSuccess"] = bool(web_audit.get("success"))
+                audits.append(web_audit)
+                web_result_count = int(web_audit.get("returnedResultCount") or len(web_found))
+                raw_results += web_result_count
+                headline_recovery["searchResultsReturned"] += web_result_count
+                consider(web_found, web_audit, searched_host, "headline_navigation")
+                if direct:
+                    headline_recovery["outcome"] = "headline_navigation_success"
+                    break
             if direct:
                 break
-            # A successful News RSS response can still contain popular
-            # unrelated stories.  Use the existing ordinary Bing HTML search
-            # once for this bounded variant before trying the next variant.
-            web_found, web_audit = _execute_bing_web_publisher_query(
-                family, bing, variant, start, end)
-            web_audit["publisherDomain"] = publisher_identity
-            web_audit["searchedHost"] = searched_host
-            web_audit["transportSuccess"] = bool(web_audit.get("success"))
-            audits.append(web_audit)
-            raw_results += int(web_audit.get("returnedResultCount") or len(web_found))
-            consider(web_found, web_audit, searched_host)
+        if not direct:
+            headline_recovery["outcome"] = (
+                "headline_navigation_event_mismatch"
+                if headline_recovery["searchResultsReturned"]
+                else "headline_navigation_no_result"
+            )
+
+    if not direct:
+        for searched_host in recovery_hosts:
+            for variant in publisher_search_queries(event, searched_host):
+                found, audit_row = _execute_one_query(family, bing, variant, start, end)
+                audit_row = dict(audit_row or {})
+                audit_row["backend"] = "publisher-search-bing-rss"
+                audit_row["publisherDomain"] = publisher_identity
+                audit_row["searchedHost"] = searched_host
+                audit_row["recoveryStage"] = "event_derived"
+                audit_row["transportSuccess"] = bool(audit_row.get("success"))
+                audits.append(audit_row)
+                raw_results += int(audit_row.get("returnedResultCount") or len(found))
+                consider(found, audit_row, searched_host, "event_derived")
+                if direct:
+                    break
+                # A successful News RSS response can still contain popular
+                # unrelated stories.  Use the existing ordinary Bing HTML
+                # search once for this bounded variant before trying the next
+                # variant.
+                web_found, web_audit = _execute_bing_web_publisher_query(
+                    family, bing, variant, start, end)
+                web_audit["publisherDomain"] = publisher_identity
+                web_audit["searchedHost"] = searched_host
+                web_audit["recoveryStage"] = "event_derived"
+                web_audit["transportSuccess"] = bool(web_audit.get("success"))
+                audits.append(web_audit)
+                raw_results += int(web_audit.get("returnedResultCount") or len(web_found))
+                consider(web_found, web_audit, searched_host, "event_derived")
+                if direct:
+                    break
             if direct:
                 break
-        if direct:
-            break
     transport_success = any(row.get("transportSuccess") for row in audits)
     audit = {
         "queryFamily": "evidence-upgrade",
@@ -1751,6 +1892,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
         "acceptedRawCount": len(direct),
         "queryVariants": audits,
         "resultScreening": screening,
+        "trustedHeadlineRecovery": headline_recovery,
         "searchOutcome": (
             "direct_candidate_found" if direct else
             "results_but_event_mismatch" if raw_results else
@@ -2136,6 +2278,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         "title": result.get("title", ""),
         "tier": actual.get("tier", "C"),
         "retrieved": not bool(resolve_error) and not wrapper_page,
+        "bodyCharacters": len(visible_article_text(body)) if not resolve_error else 0,
         "matched": matched,
         "error": ("search_wrapper" if wrapper_page and not resolve_error else resolve_error),
         "method": method,
@@ -2245,6 +2388,30 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
             checked = outcome.get("checked", {})
             if checked.get("retrieved") and not checked.get("matched") and checked.get("error") != "search_wrapper":
                 collect_resolver_candidate(result, audit)
+
+        def update_headline_recovery_metrics(
+            publisher_audit: dict | None, result: dict, outcome: dict, source: dict | None
+        ) -> None:
+            """Attach direct-fetch facts to the trusted-headline audit row."""
+            if result.get("recoveryStage") != "headline_navigation" or not publisher_audit:
+                return
+            metrics = publisher_audit.get("trustedHeadlineRecovery")
+            if not isinstance(metrics, dict):
+                return
+            checked = outcome.get("checked", {})
+            metrics["directFetchAttempts"] = int(metrics.get("directFetchAttempts") or 0) + 1
+            if checked.get("retrieved"):
+                metrics["directFetchTransportSuccesses"] = int(
+                    metrics.get("directFetchTransportSuccesses") or 0
+                ) + 1
+                metrics["directFetchSuccess"] = int(metrics.get("directFetchSuccess") or 0) + 1
+            if checked.get("bodyCharacters", 0) > 0:
+                metrics["bodyExtracted"] = int(metrics.get("bodyExtracted") or 0) + 1
+            if checked.get("matched"):
+                metrics["semanticMatches"] = int(metrics.get("semanticMatches") or 0) + 1
+            if source:
+                metrics["evidenceQualified"] = int(metrics.get("evidenceQualified") or 0) + 1
+
         # Existing reports are the cheapest and most reliable path to a
         # publisher page.  A report may still contain a Google/Bing wrapper;
         # the resolver audit records that separately instead of discarding it.
@@ -2298,6 +2465,7 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                 outcome, source = resolve_evidence_attempt(event, result, "domain_search")
                 resolution_attempts.extend(outcome["attempts"])
                 checked_sources.append(outcome["checked"])
+                update_headline_recovery_metrics(publisher_audit, result, outcome, source)
                 collect_unmatched_direct_result(result, publisher_audit or {"actualQuery": "publisher domain search"}, outcome)
                 had_resolution_failure = had_resolution_failure or bool(outcome["checked"].get("error"))
                 if source:
@@ -2340,6 +2508,7 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                         outcome, source = resolve_evidence_attempt(event, direct_result, "domain_search")
                         resolution_attempts.extend(outcome["attempts"])
                         checked_sources.append(outcome["checked"])
+                        update_headline_recovery_metrics(publisher_audit, direct_result, outcome, source)
                         collect_unmatched_direct_result(direct_result, publisher_audit or {"actualQuery": "publisher domain search"}, outcome)
                         had_resolution_failure = had_resolution_failure or bool(outcome["checked"].get("error"))
                         if source:
