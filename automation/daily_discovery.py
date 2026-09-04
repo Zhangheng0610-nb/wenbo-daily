@@ -22,6 +22,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import parse_qs, quote, unquote, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, build_opener
+from urllib.robotparser import RobotFileParser
 from xml.etree import ElementTree
 
 if __package__ in (None, ""):
@@ -156,6 +157,27 @@ WIRE_PUBLISHER_DOMAINS = (
     "reuters.com", "apnews.com", "washingtonpost.com", "abcnews.go.com",
     "cnn.com", "npr.org", "thehill.com",
 )
+# Explicitly verified machine-readable publisher navigation.  These are
+# discovery endpoints only; an entry must still be fetched and pass the
+# ordinary article-level evidence checks before publication.
+PUBLISHER_NATIVE_INDEXES = {
+    "abcnews.go.com": (
+        {
+            "type": "sitemap",
+            "url": "https://abcnews.go.com/xmap",
+            "parser": "xml_sitemap",
+            "allowedForAutomatedNavigation": True,
+            "maxItems": 64,
+        },
+        {
+            "type": "sitemap",
+            "url": "https://abcnews.go.com/xmlLatestStories",
+            "parser": "news_sitemap",
+            "allowedForAutomatedNavigation": True,
+            "maxItems": 1000,
+        },
+    ),
+}
 PUBLISHER_SEARCH_SIGNAL_TERMS = frozenset({
     "support", "funding", "grant", "grants", "agency", "agencies", "ties",
     "cooperation", "loan", "loans", "lending", "policy", "governance",
@@ -1687,6 +1709,285 @@ def _execute_bing_web_publisher_query(family: dict, backend: dict, query: str, s
         return [], audit
 
 
+def native_index_endpoints_for_publisher(publisher_identity: str) -> list[dict]:
+    """Return only explicitly verified public navigation endpoints."""
+    canonical = canonical_publisher_domain(publisher_identity)
+    return [dict(endpoint) for endpoint in PUBLISHER_NATIVE_INDEXES.get(canonical, ())]
+
+
+@lru_cache(maxsize=64)
+def _native_index_robots_policy(host: str) -> dict:
+    """Fetch one publisher robots file and evaluate this bot's access."""
+    host = (host or "").lower().rstrip(".")
+    robots_url = f"https://{host}/robots.txt"
+    policy = {
+        "robotsChecked": False,
+        "robotsUrl": robots_url,
+        "robotsHttpStatus": None,
+        "robotsContentType": None,
+        "robotsResponseBytes": 0,
+        "robotsAllowed": False,
+        "robotsError": None,
+    }
+    try:
+        request = Request(robots_url, headers={
+            "User-Agent": SEARCH_USER_AGENT,
+            "Accept": "text/plain,text/*;q=0.9,*/*;q=0.1",
+        })
+        with SEARCH_OPENER.open(request, timeout=8) as response:
+            payload = response.read()
+        policy["robotsChecked"] = True
+        policy["robotsHttpStatus"] = getattr(response, "status", None)
+        policy["robotsContentType"] = response.headers.get("Content-Type")
+        policy["robotsResponseBytes"] = len(payload)
+        parser = RobotFileParser()
+        parser.set_url(robots_url)
+        parser.parse(payload.decode("utf-8", errors="replace").splitlines())
+        policy["robotsParserSitemaps"] = list(parser.site_maps() or [])
+        policy["robotsAllowed"] = True
+        policy["_parser"] = parser
+    except Exception as exc:
+        policy["robotsError"] = f"{type(exc).__name__}: {exc}"
+    return policy
+
+
+def _native_index_allowed(endpoint_url: str) -> dict:
+    """Evaluate a native endpoint without using disallowed site search."""
+    host = (urlsplit(endpoint_url).hostname or "").lower()
+    policy = _native_index_robots_policy(host)
+    result = {key: value for key, value in policy.items() if key != "_parser"}
+    parser = policy.get("_parser")
+    if parser is not None:
+        result["robotsAllowed"] = bool(parser.can_fetch(SEARCH_USER_AGENT, endpoint_url))
+    return result
+
+
+def _xml_local_name(tag: str) -> str:
+    return str(tag or "").rsplit("}", 1)[-1].lower()
+
+
+def _xml_text(node, names: tuple[str, ...], *, descendant: bool = False) -> str:
+    nodes = node.iter() if descendant else list(node)
+    for child in nodes:
+        if child is node:
+            continue
+        if _xml_local_name(child.tag) in names:
+            value = "".join(child.itertext()).strip()
+            if value:
+                return value
+    return ""
+
+
+def parse_native_index_entries(xml_text: str, *, endpoint: dict, start: date, end: date) -> tuple[list[dict], int, int]:
+    """Parse sitemap/news-sitemap/RSS entries as navigation records only."""
+    root = ElementTree.fromstring(xml_text)
+    nodes = []
+    for node in root.iter():
+        local = _xml_local_name(node.tag)
+        if local in {"url", "item", "entry"} and _xml_text(node, ("loc", "link"), descendant=False):
+            nodes.append(node)
+    entries = []
+    undated = 0
+    for node in nodes:
+        url = _xml_text(node, ("loc",), descendant=False)
+        if not url:
+            link_nodes = [child for child in node if _xml_local_name(child.tag) == "link"]
+            for link in link_nodes:
+                url = str(link.attrib.get("href") or "").strip() or "".join(link.itertext()).strip()
+                if url:
+                    break
+        title = _xml_text(node, ("title",), descendant=True)
+        published_value = _xml_text(
+            node,
+            ("publication_date", "pubdate", "published", "updated", "date", "lastmod"),
+            descendant=False,
+        )
+        published = parse_feed_date(published_value) or parse_date(published_value) if published_value else None
+        if not published:
+            undated += 1
+            continue
+        if not (start <= published <= end):
+            continue
+        entries.append({
+            "title": unescape(title),
+            "publishedDate": published.isoformat(),
+            "url": url,
+            "nativeIndexType": endpoint.get("type", "native"),
+            "nativeIndexUrl": endpoint.get("url", ""),
+        })
+    return entries, len(nodes), undated
+
+
+def _native_headline_specific_terms(headline: str) -> set[str]:
+    """Extract non-generic proper/named anchors for native-index screening."""
+    value = clean_discovery_title(headline)
+    proper = [token.casefold() for token in re.findall(r"\b[A-Z][A-Za-z0-9'-]{3,}\b", value)]
+    stop = {
+        "administration", "federal", "government", "support", "agency", "agencies",
+        "president", "presidential", "official", "officials", "national", "state",
+    }
+    filtered = [token for token in proper if token not in stop]
+    # A leading person/actor is often the highest-frequency term in a news
+    # headline.  Prefer the later named institution/object when the headline
+    # exposes more than one proper-noun anchor, without naming any person or
+    # publisher in the rule.
+    terms = set(filtered[1:] if len(filtered) > 1 else filtered)
+    named = event_named_entity(value)
+    if named:
+        terms.add(named.casefold())
+    return terms
+
+
+def native_index_event_match(event: dict, trusted_headline: str, candidate: dict) -> dict:
+    """Require headline/entity continuity before accepting an index entry."""
+    expected = clean_discovery_title(trusted_headline)
+    actual = clean_discovery_title(candidate.get("title", ""))
+    expected_terms = event_match_terms(expected)
+    actual_terms = event_match_terms(actual)
+    shared = expected_terms & actual_terms
+    ratio = len(shared) / max(1, min(len(expected_terms), len(actual_terms)))
+    specific_terms = _native_headline_specific_terms(expected)
+    candidate_text = actual.casefold()
+    specific_present = bool(specific_terms and any(term in candidate_text for term in specific_terms))
+    exact = bool(normalized_event_title(expected) and normalized_event_title(expected) == normalized_event_title(actual))
+    event_details = _publisher_event_screen(event, candidate)
+    matched = bool(
+        exact
+        or (specific_present and len(shared) >= 2 and ratio >= 0.45)
+        or (specific_present and event_details.get("matched") and event_details.get("actionOverlap"))
+    )
+    return {
+        "matched": matched,
+        "exactHeadline": exact,
+        "sharedTerms": sorted(shared),
+        "specificTerms": sorted(specific_terms),
+        "specificAnchorPresent": specific_present,
+        "headlineRatio": round(ratio, 3),
+        "eventMatch": event_details,
+    }
+
+
+def native_publisher_index_results(
+    event: dict,
+    report: dict,
+    publisher_identity: str,
+    normalized_headline: str,
+    start: date,
+    end: date,
+) -> tuple[list[dict], dict]:
+    """Find direct publisher URLs through a verified native index only."""
+    family = {"id": "evidence-upgrade", "scope": event.get("scope", "domestic")}
+    audit = {
+        "publisher": report.get("publisher") or report.get("sourceDomain") or publisher_identity,
+        "publisherCanonicalDomain": publisher_identity,
+        "robotsChecked": False,
+        "endpoints": [],
+        "entriesParsed": 0,
+        "entriesInWindow": 0,
+        "matchingCandidates": 0,
+        "directUrls": [],
+        "directFetchAttempts": 0,
+        "directFetchTransportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0,
+        "outcome": "not_configured",
+    }
+    endpoints = native_index_endpoints_for_publisher(publisher_identity)
+    rows = []
+    seen_urls = set()
+    for endpoint in endpoints:
+        endpoint_audit = {
+            "type": endpoint.get("type"),
+            "url": endpoint.get("url"),
+            "parser": endpoint.get("parser"),
+            "allowedForAutomatedNavigation": bool(endpoint.get("allowedForAutomatedNavigation")),
+            "robotsAllowed": False,
+            "httpStatus": None,
+            "contentType": None,
+            "responseBytes": 0,
+            "entriesParsed": 0,
+            "entriesInWindow": 0,
+            "matchingCandidates": 0,
+            "directUrls": [],
+            "fetchResult": "not_attempted",
+        }
+        if not endpoint_audit["allowedForAutomatedNavigation"]:
+            endpoint_audit["fetchResult"] = "metadata_disallowed"
+            audit["endpoints"].append(endpoint_audit)
+            continue
+        robots = _native_index_allowed(endpoint["url"])
+        audit["robotsChecked"] = audit["robotsChecked"] or bool(robots.get("robotsChecked"))
+        endpoint_audit.update({
+            "robotsChecked": robots.get("robotsChecked", False),
+            "robotsAllowed": robots.get("robotsAllowed", False),
+            "robotsUrl": robots.get("robotsUrl"),
+            "robotsHttpStatus": robots.get("robotsHttpStatus"),
+            "robotsContentType": robots.get("robotsContentType"),
+            "robotsResponseBytes": robots.get("robotsResponseBytes", 0),
+        })
+        if not robots.get("robotsAllowed"):
+            endpoint_audit["fetchResult"] = "robots_disallowed_or_unavailable"
+            audit["endpoints"].append(endpoint_audit)
+            continue
+        try:
+            request = Request(endpoint["url"], headers={
+                "User-Agent": SEARCH_USER_AGENT,
+                "Accept": "application/xml,text/xml,application/rss+xml,text/html,*/*",
+            })
+            with SEARCH_OPENER.open(request, timeout=8) as response:
+                payload = response.read()
+            endpoint_audit["httpStatus"] = getattr(response, "status", None)
+            endpoint_audit["contentType"] = response.headers.get("Content-Type")
+            endpoint_audit["responseBytes"] = len(payload)
+            entries, parsed_count, undated = parse_native_index_entries(
+                payload.decode("utf-8", errors="replace"), endpoint=endpoint, start=start, end=end
+            )
+            endpoint_audit["entriesParsed"] = parsed_count
+            endpoint_audit["entriesInWindow"] = len(entries)
+            endpoint_audit["undatedEntries"] = undated
+            endpoint_audit["fetchResult"] = "parsed"
+            audit["entriesParsed"] += parsed_count
+            audit["entriesInWindow"] += len(entries)
+            for entry in entries:
+                entry_host = canonical_publisher_domain(urlsplit(entry.get("url", "")).hostname or "")
+                if not entry_host or not host_matches(entry_host, publisher_identity):
+                    continue
+                native_match = native_index_event_match(event, normalized_headline, entry)
+                if not native_match.get("matched"):
+                    continue
+                endpoint_audit["matchingCandidates"] += 1
+                audit["matchingCandidates"] += 1
+                direct_url = canonical_url(entry["url"])
+                if not direct_url or direct_url in seen_urls:
+                    continue
+                seen_urls.add(direct_url)
+                row = dict(entry)
+                row.update({
+                    "sourceDomain": publisher_identity,
+                    "sourcePublisherUrl": f"https://{publisher_identity}",
+                    "sourceRelationship": "publisher_native_index",
+                    "discoveredVia": "publisher-native-index",
+                    "discoverySourceType": "evidence_upgrade",
+                    "recoveryStage": "native_index",
+                })
+                rows.append(row)
+                endpoint_audit["directUrls"].append(direct_url)
+                audit["directUrls"].append(direct_url)
+        except Exception as exc:
+            endpoint_audit["fetchResult"] = "fetch_failed"
+            endpoint_audit["failure"] = f"{type(exc).__name__}: {exc}"
+        audit["endpoints"].append(endpoint_audit)
+        if rows:
+            break
+    audit["outcome"] = (
+        "direct_candidate_found" if rows else
+        "no_matching_native_entry" if endpoints else
+        "not_configured"
+    )
+    return rows, audit
+
+
 def generic_publisher_search_results(event: dict, report: dict, start: date, end: date) -> tuple[list[dict], dict | None]:
     """Use bounded publisher lookups and reject same-domain unrelated stories."""
     domains = publisher_domains(report)
@@ -1738,6 +2039,22 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
         "evidenceQualified": 0,
         "outcome": "not_eligible",
     }
+    native_recovery = {
+        "publisher": publisher_display,
+        "publisherCanonicalDomain": publisher_identity,
+        "robotsChecked": False,
+        "endpoints": [],
+        "entriesParsed": 0,
+        "entriesInWindow": 0,
+        "matchingCandidates": 0,
+        "directUrls": [],
+        "directFetchAttempts": 0,
+        "directFetchTransportSuccesses": 0,
+        "bodyExtracted": 0,
+        "semanticMatches": 0,
+        "evidenceQualified": 0,
+        "outcome": "not_attempted",
+    }
 
     def consider(found: list[dict], query_audit: dict, searched_host: str, recovery_stage: str = "event_derived") -> None:
         nonlocal rejected
@@ -1751,10 +2068,14 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
             row["url"] = resolved
             row["sourceDomain"] = publisher_identity
             row["sourcePublisherUrl"] = f"https://{publisher_identity}"
-            row["sourceRelationship"] = "publisher_recovery"
+            row["sourceRelationship"] = (
+                "publisher_native_index" if recovery_stage == "native_index" else "publisher_recovery"
+            )
             if changed:
                 row["transportUrl"] = transport
-            row["discoveredVia"] = "publisher-domain-search"
+            row["discoveredVia"] = (
+                "publisher-native-index" if recovery_stage == "native_index" else "publisher-domain-search"
+            )
             row["discoverySourceType"] = "evidence_upgrade"
             row["recoveryStage"] = recovery_stage
             match = _publisher_event_screen(event, row)
@@ -1871,6 +2192,24 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
                     break
             if direct:
                 break
+    # Only a trusted wrapper with a screened headline may reach the explicit
+    # native index registry.  This keeps publisher sitemaps/feed entries a
+    # bounded navigation aid rather than a new broad discovery source.
+    if not direct and headline_eligible:
+        native_rows, native_recovery = native_publisher_index_results(
+            event, report, publisher_identity, normalized_headline, start, end
+        )
+        native_query_audit = {
+            "actualQuery": native_recovery.get("endpoints", [{}])[0].get("url", "")
+            if native_recovery.get("endpoints") else "publisher-native-index",
+            "success": bool(native_rows),
+            "backend": "publisher-native-index",
+            "publisherDomain": publisher_identity,
+            "recoveryStage": "native_index",
+        }
+        consider(native_rows, native_query_audit, publisher_identity, "native_index")
+        if direct:
+            native_recovery["outcome"] = "direct_candidate_found"
     transport_success = any(row.get("transportSuccess") for row in audits)
     audit = {
         "queryFamily": "evidence-upgrade",
@@ -1893,6 +2232,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
         "queryVariants": audits,
         "resultScreening": screening,
         "trustedHeadlineRecovery": headline_recovery,
+        "publisherNativeRecovery": native_recovery,
         "searchOutcome": (
             "direct_candidate_found" if direct else
             "results_but_event_mismatch" if raw_results else
@@ -2392,10 +2732,16 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
         def update_headline_recovery_metrics(
             publisher_audit: dict | None, result: dict, outcome: dict, source: dict | None
         ) -> None:
-            """Attach direct-fetch facts to the trusted-headline audit row."""
-            if result.get("recoveryStage") != "headline_navigation" or not publisher_audit:
+            """Attach direct-fetch facts to headline/native navigation audits."""
+            if not publisher_audit:
                 return
-            metrics = publisher_audit.get("trustedHeadlineRecovery")
+            stage = result.get("recoveryStage")
+            if stage == "headline_navigation":
+                metrics = publisher_audit.get("trustedHeadlineRecovery")
+            elif stage == "native_index":
+                metrics = publisher_audit.get("publisherNativeRecovery")
+            else:
+                return
             if not isinstance(metrics, dict):
                 return
             checked = outcome.get("checked", {})
@@ -2462,7 +2808,8 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                 if not result_url or result_url in seen_result_urls:
                     continue
                 seen_result_urls.add(result_url)
-                outcome, source = resolve_evidence_attempt(event, result, "domain_search")
+                resolve_method = "native_index" if result.get("recoveryStage") == "native_index" else "domain_search"
+                outcome, source = resolve_evidence_attempt(event, result, resolve_method)
                 resolution_attempts.extend(outcome["attempts"])
                 checked_sources.append(outcome["checked"])
                 update_headline_recovery_metrics(publisher_audit, result, outcome, source)
@@ -2505,7 +2852,8 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
                         if not direct_url or direct_url in seen_result_urls:
                             continue
                         seen_result_urls.add(direct_url)
-                        outcome, source = resolve_evidence_attempt(event, direct_result, "domain_search")
+                        resolve_method = "native_index" if direct_result.get("recoveryStage") == "native_index" else "domain_search"
+                        outcome, source = resolve_evidence_attempt(event, direct_result, resolve_method)
                         resolution_attempts.extend(outcome["attempts"])
                         checked_sources.append(outcome["checked"])
                         update_headline_recovery_metrics(publisher_audit, direct_result, outcome, source)

@@ -11,11 +11,11 @@
   "replayCutoff": "2026-09-04T07:13:00+08:00",
   "candidatePoolDefinition": "本次正式编辑重审的唯一输入为 content/复核/2026-09-04-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 与治理回放仅用于追溯，不与复核池拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-04T17:27:11+08:00",
-    "reviewedEvents": 6,
-    "selectedEvents": 4,
+    "reviewedAt": "2026-09-04T22:05:00+08:00",
+    "reviewedEvents": 7,
+    "selectedEvents": 5,
     "historicalExcludedEvents": 4,
-    "note": "证据合格事件先经过最终历史闸门；香港展为历史重复，律师文章为既有标本事件的衍生解读，剩余六个事件统一完成编辑复核。"
+    "note": "证据合格事件先经过最终历史闸门；香港展为历史重复，律师文章为既有标本事件的衍生解读，剩余七个事件统一完成编辑复核。"
   },
   "candidates": [
     {
@@ -357,7 +357,7 @@
           "evidenceTier": "C"
         }
       ],
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆"
     },
     {
@@ -732,11 +732,83 @@
       "editorialReasons": [
         "historical_duplicate"
       ]
+    },
+    {
+      "candidateId": "recovery-20260904-011",
+      "eventId": "event-b5913a7a5f0b",
+      "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+      "publishedDate": "2026-09-03",
+      "discoveredAt": "2026-09-04T22:05:00+08:00",
+      "discoverySource": "ABC News",
+      "discoverySourceType": "trusted_publisher_native_index",
+      "discoveryUrl": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+      "publisher": "ABC News",
+      "evidenceSources": [
+        {
+          "name": "ABC News: Trump admin threatens to cut federal support for Smithsonian",
+          "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "tier": "B",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "publisherDomain": "abcnews.go.com",
+          "sourceRelationship": "publisher_native_index"
+        }
+      ],
+      "evidenceTier": "B",
+      "topic": [
+        "国际文博治理",
+        "博物馆治理"
+      ],
+      "domestic": false,
+      "international": true,
+      "scope": "international",
+      "decision": "selected",
+      "decisionReason": "high_priority_international_museum_governance_with_verified_B_evidence",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "Post-hoc native-index recovery supplied a direct ABC article; this candidate was then reviewed with the existing final editorial pool.",
+      "discoveredVia": "publisher-native-index",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "86分高优先级国际博物馆治理事件，涉及联邦机构与国家级博物馆支持关系，且已有正文匹配的B级直达证据。",
+      "editorialPriorityScore": 86,
+      "editorialPriorityLabel": "high",
+      "editorialReasons": [
+        "international_museum_governance",
+        "high_level_public_cultural_impact"
+      ],
+      "reportCount": 2,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [
+        {
+          "method": "native_index",
+          "inputUrl": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "resolvedUrl": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "domain": "abcnews.com",
+          "publisherDomain": "abcnews.go.com",
+          "sourceRelationship": "publisher_native_index",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "matchScore": 84,
+          "matchReasons": [
+            "shared_named_title_anchor",
+            "shared_named_body_anchor"
+          ],
+          "evidenceTier": "B",
+          "bodyCharacters": 6992
+        }
+      ],
+      "dailyItemNumber": 4,
+      "dailyItemTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian"
     }
   ],
   "summary": {
-    "discovered": 12,
-    "selected": 4,
+    "discovered": 13,
+    "selected": 5,
     "rejected": 8,
     "deferred": 0,
     "needsVerification": 0

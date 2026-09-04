@@ -30,6 +30,10 @@ from automation.daily_discovery import (
     publisher_search_queries,
     normalize_trusted_publisher_headline,
     trusted_headline_navigation_queries,
+    native_index_endpoints_for_publisher,
+    native_index_event_match,
+    native_publisher_index_results,
+    parse_native_index_entries,
     publisher_recovery_hosts_for_record,
     public_salience,
     alternate_evidence_match_hint,
@@ -1303,6 +1307,168 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(all(query.startswith('site:abcnews.com "') for query in queries))
         self.assertTrue(any("National Heritage Museum" in query for query in queries))
         self.assertNotIn("Smithsonian", " ".join(queries))
+
+    def test_native_index_metadata_is_explicit_and_robots_checked_before_navigation(self):
+        endpoints = native_index_endpoints_for_publisher("abcnews.go.com")
+        self.assertTrue(endpoints)
+        self.assertTrue(all(item["allowedForAutomatedNavigation"] for item in endpoints))
+        self.assertTrue(all(item["type"] == "sitemap" for item in endpoints))
+        self.assertTrue(all(item["url"].startswith("https://abcnews.go.com/") for item in endpoints))
+
+    @patch("automation.daily_discovery._native_index_allowed")
+    @patch("automation.daily_discovery.SEARCH_OPENER.open")
+    def test_native_latest_index_finds_same_headline_and_rejects_unrelated(self, open_url, robots_allowed):
+        class FakeResponse:
+            status = 200
+            headers = {"Content-Type": "application/xml"}
+
+            def __init__(self, payload):
+                self.payload = payload.encode("utf-8")
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return False
+
+            def read(self, *_args):
+                return self.payload
+
+            def geturl(self):
+                return "https://abcnews.go.com/xmlLatestStories"
+
+        robots_allowed.return_value = {"robotsChecked": True, "robotsAllowed": True}
+        unrelated = "https://abcnews.com/Politics/unrelated/story?id=1"
+        target = "https://abcnews.com/Politics/target/story?id=2"
+        xmap = """<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://abcnews.com/Politics/</loc><lastmod>2026-09-03T00:00:00Z</lastmod></url></urlset>"""
+        latest = f"""<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        <url><loc>{unrelated}</loc><lastmod>2026-09-03T00:00:00Z</lastmod><news:news><news:publication_date>2026-09-03T00:00:00Z</news:publication_date><news:title>Trump plan changes a federal panel</news:title></news:news></url>
+        <url><loc>{target}</loc><lastmod>2026-09-03T00:00:00Z</lastmod><news:news><news:publication_date>2026-09-03T00:00:00Z</news:publication_date><news:title>Trump admin threatens to cut federal support for Smithsonian</news:title></news:news></url>
+        </urlset>"""
+        open_url.side_effect = [FakeResponse(xmap), FakeResponse(latest)]
+        event = {"representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian", "scope": "international"}
+        report = {"title": "Trump admin threatens to cut federal support for Smithsonian - ABC News", "publisher": "ABC News", "url": "https://news.google.com/rss/articles/example"}
+        rows, audit = native_publisher_index_results(
+            event, report, "abcnews.go.com",
+            "Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of 'ideological activism'",
+            __import__("datetime").date(2026, 9, 1), __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual([row["url"] for row in rows], [target])
+        self.assertEqual(audit["outcome"], "direct_candidate_found")
+        self.assertEqual(audit["endpoints"][0]["matchingCandidates"], 0)
+        self.assertEqual(audit["endpoints"][1]["matchingCandidates"], 1)
+        self.assertEqual(audit["endpoints"][1]["directUrls"], [target])
+
+    def test_native_index_headline_match_does_not_use_one_shared_generic_word(self):
+        event = {"representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian"}
+        self.assertTrue(native_index_event_match(
+            event,
+            "Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of ideological activism",
+            {"title": "Trump admin threatens to cut federal support for Smithsonian"},
+        )["matched"])
+        self.assertFalse(native_index_event_match(
+            event,
+            "Trump admin threatens to cut federal support for Smithsonian as it accuses leadership of ideological activism",
+            {"title": "Trump plan for fence near White House gets review by federal panel"},
+        )["matched"])
+
+    def test_native_rss_entry_is_navigation_only_until_direct_article_fetch(self):
+        xml = """<rss version="2.0"><channel><item><title>Same event article</title><link>https://abcnews.com/Politics/same-event</link><pubDate>Thu, 03 Sep 2026 12:00:00 GMT</pubDate></item></channel></rss>"""
+        entries, parsed, _ = parse_native_index_entries(
+            xml,
+            endpoint={"type": "rss", "url": "https://abcnews.go.com/xmldata/rss"},
+            start=__import__("datetime").date(2026, 9, 1),
+            end=__import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(parsed, 1)
+        self.assertEqual(entries[0]["url"], "https://abcnews.com/Politics/same-event")
+        self.assertNotIn("tier", entries[0])
+
+    @patch("automation.daily_discovery.SEARCH_OPENER.open")
+    @patch("automation.daily_discovery._native_index_allowed")
+    def test_native_index_does_not_fetch_robots_disallowed_endpoint(self, robots_allowed, open_url):
+        robots_allowed.return_value = {"robotsChecked": True, "robotsAllowed": False}
+        event = {"representativeTitle": "A named museum exhibition opens", "scope": "international"}
+        report = {"publisher": "ABC News", "url": "https://news.google.com/rss/articles/example"}
+        rows, audit = native_publisher_index_results(
+            event, report, "abcnews.go.com", "A named museum exhibition opens",
+            __import__("datetime").date(2026, 9, 1), __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(rows, [])
+        self.assertTrue(all(item["fetchResult"] == "robots_disallowed_or_unavailable" for item in audit["endpoints"]))
+        open_url.assert_not_called()
+
+    @patch("automation.daily_discovery.native_publisher_index_results")
+    @patch("automation.daily_discovery._execute_bing_web_publisher_query")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_generic_publisher_search_tries_native_index_after_search_miss(self, execute_query, web_query, native_index):
+        execute_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "publisher query"})
+        web_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "publisher web query"})
+        direct = {
+            "title": "Trump admin threatens to cut federal support for Smithsonian",
+            "url": "https://abcnews.com/Politics/smithsonian-support/story?id=2",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "abcnews.go.com",
+            "recoveryStage": "native_index",
+        }
+        native_index.return_value = ([direct], {"outcome": "direct_candidate_found", "endpoints": [{"url": "https://abcnews.go.com/xmlLatestStories"}]})
+        rows, audit = publisher_search_results(
+            {"representativeTitle": "Trump administration threatens federal agencies' support for Smithsonian", "scope": "international"},
+            {"title": "Trump admin threatens to cut federal support for Smithsonian - ABC News", "publisher": "ABC News", "url": "https://news.google.com/rss/articles/example"},
+            __import__("datetime").date(2026, 9, 1), __import__("datetime").date(2026, 9, 4),
+        )
+        native_index.assert_called_once()
+        self.assertEqual(rows[0]["recoveryStage"], "native_index")
+        self.assertEqual(rows[0]["sourceRelationship"], "publisher_native_index")
+        self.assertEqual(audit["searchOutcome"], "direct_candidate_found")
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    @patch("automation.daily_discovery.publisher_search_results")
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_native_recovery_audit_records_article_fetch_and_evidence(self, execute_query, publisher_search, resolve_url):
+        execute_query.return_value = ([], {"success": True, "returnedResultCount": 0, "actualQuery": "query"})
+        direct = {
+            "title": "Trump admin threatens to cut federal support for Smithsonian",
+            "url": "https://abcnews.com/Politics/smithsonian-support/story?id=2",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "abcnews.go.com",
+            "sourceRelationship": "publisher_native_index",
+            "recoveryStage": "native_index",
+        }
+        publisher_search.return_value = ([direct], {
+            "success": True,
+            "publisherNativeRecovery": {
+                "directFetchAttempts": 0,
+                "directFetchTransportSuccesses": 0,
+                "bodyExtracted": 0,
+                "semanticMatches": 0,
+                "evidenceQualified": 0,
+            },
+        })
+        resolve_url.return_value = (
+            direct["url"],
+            "<html><head><title>Trump admin threatens to cut federal support for Smithsonian</title></head>"
+            "<body>The Smithsonian Institution faces a threat to federal agency support. "
+            "The letter concerns artifact loans, procurement and discretionary grants.</body></html>",
+            None,
+        )
+        event = {
+            "eventId": "event-native-audit",
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "summary": "Smithsonian Institution federal agency support artifact loans procurement discretionary grants",
+            "scope": "international",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "high",
+            "editorialPriorityScore": 86,
+            "discoveryReports": [{"title": "Trusted ABC headline", "url": "https://news.google.com/rss/articles/example", "sourceDomain": "ABC News"}],
+        }
+        result = run_evidence_upgrade(__import__("datetime").date(2026, 9, 4), [event])
+        self.assertEqual(result["qualified"], 1)
+        metrics = event["evidenceUpgradeQueries"][0]["publisherNativeRecovery"]
+        self.assertEqual(metrics["directFetchTransportSuccesses"], 1)
+        self.assertEqual(metrics["bodyExtracted"], 1)
+        self.assertEqual(metrics["semanticMatches"], 1)
+        self.assertEqual(metrics["evidenceQualified"], 1)
 
     @patch("automation.daily_discovery._execute_bing_web_publisher_query")
     @patch("automation.daily_discovery._execute_one_query")

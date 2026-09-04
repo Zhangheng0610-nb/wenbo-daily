@@ -3,8 +3,8 @@
   "date": "2026-09-04",
   "runType": "replay",
   "replayType": "international-wire-runtime-audit",
-  "codeVersion": "f1265c0bfb5e381f9ff4663cb62db4a94d63c852 + trusted wrapper headline navigation",
-  "replayedAt": "2026-09-04T21:18:55+08:00",
+  "codeVersion": "335387067994bf294607b6d9578374c1a19aa595 + trusted publisher native index recovery",
+  "replayedAt": "2026-09-04T22:05:00+08:00",
   "window": {
     "start": "2026-08-06",
     "end": "2026-09-04",
@@ -1575,9 +1575,21 @@
       }
     ],
     "evidenceUpgradeAttempted": true,
-    "evidenceUpgradeResult": "ambiguous",
-    "evidenceTierAfterUpgrade": "C",
-    "evidenceSources": [],
+    "evidenceUpgradeResult": "qualified",
+    "evidenceTierAfterUpgrade": "B",
+    "evidenceSources": [
+      {
+        "name": "Trump admin threatens to cut federal support for Smithsonian",
+        "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+        "tier": "B",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "ABC News",
+        "publisherDomain": "abcnews.go.com",
+        "sourceRelationship": "publisher_native_index",
+        "publishedDate": "2026-09-03"
+      }
+    ],
     "evidenceResolutionAttempts": [
       {
         "method": "alternate_source",
@@ -2399,7 +2411,7 @@
         "evidenceTier": "C"
       }
     ],
-    "failureType": "http_401",
+    "failureType": null,
     "before": {
       "evidenceUpgradeAttempted": true,
       "evidenceUpgradeResult": "ambiguous",
@@ -2409,13 +2421,33 @@
     },
     "after": {
       "evidenceUpgradeAttempted": true,
-      "evidenceUpgradeResult": "ambiguous",
-      "evidenceTierAfterUpgrade": "C",
-      "evidenceSources": [],
-      "failureType": "http_401",
-      "evidenceFailureReason": "source_page_returned_http_401"
+      "evidenceUpgradeResult": "qualified",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceSources": [
+        {
+          "name": "Trump admin threatens to cut federal support for Smithsonian",
+          "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+          "tier": "B",
+          "articleVerified": true,
+          "publisherDomain": "abcnews.go.com",
+          "sourceRelationship": "publisher_native_index"
+        }
+      ],
+      "failureType": null,
+      "evidenceFailureReason": null
     },
-    "evidenceFailureReason": "source_page_returned_http_401",
+    "evidenceFailureReason": null,
+    "finalHistoricalGuard": {
+      "status": "completed",
+      "historicalDuplicate": false,
+      "duplicateOf": null,
+      "newDevelopment": false
+    },
+    "editorialReview": {
+      "decision": "selected",
+      "reason": "high-priority museum governance event with direct B-level body verification; not a historical duplicate",
+      "reviewedAgainst": "existing 2026-09-04 final editorial pool"
+    },
     "attemptCount": 64,
     "publisherDomainRecoveryProof": {
       "publisher": "The Washington Post",
@@ -2741,6 +2773,81 @@
           "evidenceQualified": 0,
           "outcome": "headline_navigation_event_mismatch",
           "note": "Live bounded headline navigation used the trusted ABC wrapper headline; search returned no same-event direct ABC article. Separately verified direct ABC host diagnostics remain provenance-only and were not injected into production search results."
+        },
+        "publisherNativeRecovery": {
+          "publisher": "ABC News - Breaking News, Latest News and Videos",
+          "publisherCanonicalDomain": "abcnews.go.com",
+          "robotsChecked": true,
+          "endpoints": [
+            {
+              "type": "sitemap",
+              "url": "https://abcnews.go.com/xmap",
+              "parser": "xml_sitemap",
+              "allowedForAutomatedNavigation": true,
+              "robotsAllowed": true,
+              "robotsUrl": "https://abcnews.go.com/robots.txt",
+              "robotsHttpStatus": 200,
+              "robotsContentType": "text/plain",
+              "robotsResponseBytes": 1754,
+              "httpStatus": 200,
+              "contentType": "application/xml",
+              "responseBytes": 4004,
+              "entriesParsed": 21,
+              "entriesInWindow": 21,
+              "matchingCandidates": 0,
+              "directUrls": [],
+              "fetchResult": "parsed"
+            },
+            {
+              "type": "sitemap",
+              "url": "https://abcnews.go.com/xmlLatestStories",
+              "parser": "news_sitemap",
+              "allowedForAutomatedNavigation": true,
+              "robotsAllowed": true,
+              "robotsUrl": "https://abcnews.go.com/robots.txt",
+              "robotsHttpStatus": 200,
+              "robotsContentType": "text/plain",
+              "robotsResponseBytes": 1754,
+              "httpStatus": 200,
+              "contentType": "application/xml",
+              "responseBytes": 894480,
+              "entriesParsed": 1000,
+              "entriesInWindow": 773,
+              "matchingCandidates": 1,
+              "directUrls": [
+                "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940"
+              ],
+              "fetchResult": "parsed"
+            }
+          ],
+          "entriesParsed": 1021,
+          "entriesInWindow": 794,
+          "matchingCandidates": 1,
+          "directUrls": [
+            "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940"
+          ],
+          "directFetchAttempts": 1,
+          "directFetchTransportSuccesses": 1,
+          "bodyExtracted": 1,
+          "semanticMatches": 1,
+          "evidenceQualified": 1,
+          "directFetchSuccess": 1,
+          "directArticle": {
+            "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940",
+            "httpStatus": 200,
+            "bodyCharacters": 6992,
+            "semanticMatch": true,
+            "matchScore": 84,
+            "matchReasons": [
+              "shared_named_title_anchor",
+              "shared_named_body_anchor"
+            ],
+            "evidenceTier": "B",
+            "publisherCanonicalDomain": "abcnews.go.com",
+            "sourceRelationship": "publisher_native_index"
+          },
+          "outcome": "direct_candidate_found",
+          "note": "Robots-declared ABC sitemap navigation was used after bounded search recovery found no direct article. The latest-stories sitemap contained the same-event direct article; only the fetched article body was used for B-level evidence."
         },
         "fetch": {
           "attempts": 2,

@@ -10434,7 +10434,7 @@
     "date": "2026-09-04",
     "weekday": "周五",
     "domestic_count": 3,
-    "international_count": 1,
+    "international_count": 2,
     "items": [
       {
         "id": "item1",
@@ -10494,6 +10494,25 @@
       {
         "id": "item4",
         "number": 4,
+        "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+        "body": "ABC News 9月3日报道，特朗普政府威胁切断联邦机构对史密森学会的支持，涉及文物借展、采购和自由裁量拨款等合作安排。相关行动指向史密森学会及其博物馆体系的治理与机构自主性。",
+        "commentary": "这件事的文博含义不在于一场政治争执本身，而在于联邦机构怎样支撑国家级博物馆的日常运转：文物借展、采购和拨款一旦被收紧，影响的就不只是经费，也包括博物馆之间共享藏品和开展公共文化服务的方式。",
+        "tags": [
+          "国际文博治理",
+          "博物馆",
+          "文化政策",
+          "美国"
+        ],
+        "sources": [
+          {
+            "name": "ABC News：Trump admin threatens to cut federal support for Smithsonian",
+            "url": "https://abcnews.com/Politics/trump-admin-threatens-cut-federal-support-smithsonian-accuses/story?id=136182940"
+          }
+        ]
+      },
+      {
+        "id": "item5",
+        "number": 5,
         "title": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
         "body": "中国新闻网9月3日报道，由马岩松主持设计的卢卡斯叙事艺术博物馆将于9月22日在美国洛杉矶开馆。博物馆由乔治·卢卡斯与梅洛迪·霍布森创立，建筑面积约2.8万平方米，藏品超过4万件，内容涉及艺术、电影与想象力。",
         "commentary": "这座博物馆把电影收藏、建筑设计和城市公共空间放在了一起：藏品超过4万件，建筑却没有沿用封闭的传统盒子，而是通过悬浮体量、屋顶花园和公共空间与洛杉矶的公园环境相连。它值得关注的地方，正在于博物馆如何同时成为收藏场所和城市文化地标。",
