@@ -126,6 +126,7 @@ QUERY_FAMILIES = (
     {"id": "modern-heritage", "scope": "domestic", "queries": ("烈士墓葬 发现", "革命文物 保护 修缮", "革命遗址 调查", "近现代遗产 保护")},
     {"id": "international-loans", "scope": "international", "queries": ("museum loan exhibition", "museum collection loan", "touring exhibition museum", "museum objects on loan", "major museum loan exhibition", "site:theartnewspaper.com museum loan", "site:smithsonianmag.com museum exhibition")},
     {"id": "local-heritage-governance", "scope": "domestic", "queries": ("文物局 陈列展览 审核", "博物馆 内容审核", "文物局 藏品管理", "地方 博物馆 监管 通知", "site:thepaper.cn 博物馆 陈列展览 审核")},
+    {"id": "international-museum-governance", "scope": "international", "queries": ("museum government support", "museum federal funding", "museum governance policy", "public museum administration", "cultural institution government intervention", "museum collection lending policy")},
     {"id": "international-heritage", "scope": "international", "queries": ("museum archaeology cultural heritage", "archaeological discovery heritage site", "heritage protection museum theft", "repatriation museum policy", "digital heritage museum technology", "museum loan exhibition Islamic art", "natural history museum fossil palaeontology exhibition", "museum dinosaur fossil exhibition", "site:polizei.gv.at museum theft", "site:aa.com.tr archaeology heritage", "site:reuters.com museum archaeology heritage", "site:apnews.com museum archaeology heritage")},
 )
 
@@ -211,6 +212,7 @@ QUERY_FAMILY_RELEVANCE_TERMS = {
     "museum-operations": ("入馆", "博物馆", "博物院", "预约", "二维码", "证件", "开放", "闭馆", "参观"),
     "modern-heritage": ("革命文物", "革命遗址", "烈士墓", "抗战遗址", "近现代遗产", "红色文物", "红色遗产"),
     "international-loans": ("loan", "lending", "on loan", "touring exhibition", "museum", "louvre", "smithsonian", "collection"),
+    "international-museum-governance": ("museum", "museums", "gallery", "cultural institution", "governance", "funding", "grants", "administration", "lending"),
     "local-heritage-governance": ("文物局", "博物馆", "文物", "考古", "遗产", "展览审核", "内容审核", "藏品管理"),
 }
 
@@ -218,6 +220,15 @@ QUERY_FAMILY_RELEVANCE_TERMS = {
 # rules only prioritize the order in which a human/Codex editor should try to
 # upgrade evidence; they do not publish a record or replace the evidence gate.
 POLICY_PRIORITY_TERMS = ("办法", "条例", "规章", "规划", "规范", "正式施行", "部令", "制度")
+INTERNATIONAL_MUSEUM_GOVERNANCE_TERMS = (
+    "governance", "funding", "government support", "federal support", "federal funding", "grants",
+    "administration", "government intervention", "institutional independence", "museum policy",
+    "collection lending", "lending policy", "cut support", "stop working with",
+)
+INTERNATIONAL_MUSEUM_ANCHOR_TERMS = (
+    "museum", "museums", "gallery", "galleries", "cultural institution", "heritage institution",
+    "public museum", "collection", "archive",
+)
 NATIONAL_POLICY_TERMS = ("国家文物局", "文化和旅游部", "全国范围", "全国博物馆", "国家级")
 ARCHAEOLOGY_DISCOVERY_TERMS = ("考古发现", "考古发掘", "发掘成果", "成果公布", "研究揭示", "研究成果", "新发现", "新认识", "出土", "墓地发现", "遗址发现")
 MAJOR_DISCOVERY_TERMS = ("重大考古", "重大新发现", "填补", "重要发现", "重大发现")
@@ -2098,12 +2109,53 @@ def is_relevant_record(record: dict) -> bool:
         for family_id in family_ids
         for term in QUERY_FAMILY_RELEVANCE_TERMS.get(family_id, ())
     )
-    return any(term.lower() in text for term in family_terms)
+    if "international-museum-governance" in family_ids:
+        return international_museum_governance_relevance(record)
+    if any(term.lower() in text for term in family_terms):
+        return True
+    return False
+
+
+_GOVERNANCE_COMMON_CAPITALIZED_WORDS = {
+    "The", "White", "House", "Trump", "Biden", "Federal", "Agencies", "Government",
+    "Administration", "Support", "Reuters", "News", "United", "States", "America",
+}
+
+
+def international_museum_governance_relevance(record: dict) -> bool:
+    """Keep governance discovery narrow without requiring a museum word in the headline.
+
+    International institutions are often referred to by a proper name alone
+    (for example, an institution's short name).  When a result came from this
+    narrowly scoped museum-governance family, a governance action plus either
+    an explicit institution anchor or a non-generic capitalized organization
+    token is sufficient for discovery relevance.  It is not evidence.
+    """
+    text = _editorial_context(record)
+    if not any(term in text for term in INTERNATIONAL_MUSEUM_GOVERNANCE_TERMS):
+        return False
+    if any(term in text for term in INTERNATIONAL_MUSEUM_ANCHOR_TERMS):
+        return True
+    titles = [record.get("title", ""), record.get("representativeTitle", "")]
+    titles.extend(
+        report.get("title", "")
+        for report in record.get("discoveryReports", [])
+        if isinstance(report, dict)
+    )
+    for title in titles:
+        tokens = re.findall(r"\b[A-Z][A-Za-z0-9’'-]{3,}\b", str(title or ""))
+        if any(token not in _GOVERNANCE_COMMON_CAPITALIZED_WORDS for token in tokens[1:]):
+            return True
+    return False
 
 
 def is_high_value_record(record: dict) -> bool:
     text = _editorial_context(record)
-    return any(term.lower() in text for term in HIGH_VALUE_TERMS) or high_level_cultural_diplomacy_signal(record)
+    return (
+        any(term.lower() in text for term in HIGH_VALUE_TERMS)
+        or high_level_cultural_diplomacy_signal(record)
+        or international_museum_governance_relevance(record)
+    )
 
 
 def evidence_claim_risk(record: dict) -> str:
@@ -2315,6 +2367,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     museum_project = hit(MUSEUM_PROJECT_TERMS)
     digital = hit(DIGITAL_PRIORITY_TERMS)
     cooperation = hit(COOPERATION_TERMS)
+    museum_governance = international_museum_governance_relevance(record)
     routine = hit(ROUTINE_PRIORITY_TERMS)
     official_diplomatic_source = bool(re.search(r"(?:embassy|使馆|大使馆|外交|mfa|gov\.cn)", text))
     high_level_cultural_diplomacy = high_level_cultural_diplomacy_signal(record)
@@ -2357,12 +2410,15 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     if cooperation:
         score += 20
         reasons.append("meaningful_institutional_or_international_cooperation")
+    if museum_governance:
+        score += 42
+        reasons.append("museum_or_cultural_institution_governance")
     if high_level_cultural_diplomacy:
         score += 52
         reasons.append("high_level_cultural_diplomacy")
     salience_eligible = (
         museum_collection_incident or security or policy or archaeology_discovery or repatriation
-        or heritage or (museum_project and hit(MUSEUM_SCALE_TERMS)) or digital or cooperation
+        or heritage or (museum_project and hit(MUSEUM_SCALE_TERMS)) or digital or cooperation or museum_governance
     )
     if salience_eligible and salience["level"] == "cross_media_attention":
         score += 10

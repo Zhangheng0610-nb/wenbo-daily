@@ -672,6 +672,55 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(event["evidenceUpgradeResult"], "qualified")
         self.assertEqual(event["evidenceTierAfterUpgrade"], "A")
 
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_evidence_upgrade_queue_has_no_fixed_top_n_and_skips_low_priority(self, execute_query):
+        execute_query.return_value = ([], {
+            "actualQuery": "event evidence official source",
+            "executedAt": "2026-09-04T07:00:00+08:00",
+            "success": True,
+            "returnedResultCount": 0,
+            "acceptedRawCount": 0,
+        })
+        events = [
+            {
+                "eventId": f"event-high-{index}",
+                "representativeTitle": f"重要文博政策事项{index}",
+                "publishedDate": "2026-09-04",
+                "scope": "international" if index == 1 else "domestic",
+                "candidateDisposition": "needs_verification",
+                "editorialPriorityLabel": "high",
+                "editorialPriorityScore": 90 - index,
+            }
+            for index in range(3)
+        ]
+        events.append({
+            "eventId": "event-medium",
+            "representativeTitle": "重要博物馆项目",
+            "publishedDate": "2026-09-04",
+            "scope": "domestic",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "medium",
+            "editorialPriorityScore": 60,
+        })
+        events.append({
+            "eventId": "event-low",
+            "representativeTitle": "普通活动通知",
+            "publishedDate": "2026-09-04",
+            "scope": "domestic",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "low",
+            "editorialPriorityScore": 30,
+        })
+
+        result = run_evidence_upgrade(__import__("datetime").date(2026, 9, 4), events)
+
+        self.assertEqual(result["attempted"], 4)
+        self.assertEqual(
+            {event["eventId"] for event in events if event.get("evidenceUpgradeAttempted")},
+            {"event-high-0", "event-high-1", "event-high-2", "event-medium"},
+        )
+        self.assertFalse(events[-1].get("evidenceUpgradeAttempted", False))
+
     def test_syndicated_english_titles_are_event_duplicates(self):
         a = {"title": "Egyptian queen's 673-diamond necklace stolen from Vienna museum", "url": "https://a.test/1", "publishedDate": "2026-08-30"}
         b = {"title": "Thieves plunder 673 diamond necklace from Vienna Museum", "url": "https://b.test/2", "publishedDate": "2026-08-31"}
@@ -908,6 +957,8 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertTrue(any("烈士墓葬" in query for query in queries))
         self.assertTrue(any("natural history museum" in query for query in queries))
         self.assertTrue(any("fossil" in query and "exhibition" in query for query in queries))
+        self.assertTrue(any("museum" in query and "government support" in query for query in queries))
+        self.assertTrue(any("museum" in query and "federal funding" in query for query in queries))
 
     def test_recall_expansion_families_are_executable_and_auditable(self):
         family_ids = {family["id"] for family in QUERY_FAMILIES}
@@ -916,6 +967,7 @@ class DailyDiscoveryTests(unittest.TestCase):
             "museum-operations",
             "modern-heritage",
             "international-loans",
+            "international-museum-governance",
             "local-heritage-governance",
         } <= family_ids)
         self.assertIn("mct-national-museum", {spec["sourceId"] for spec in SOURCE_SCANS})
@@ -941,6 +993,27 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(summary["modern-heritage"]["queriesAttempted"], 1)
         self.assertEqual(summary["modern-heritage"]["firstDiscoveryEventCount"], 1)
         self.assertEqual(summary["modern-heritage"]["evidenceUpgradeCandidates"], 1)
+
+    def test_international_museum_governance_relevance_is_generic(self):
+        target = {
+            "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "queryFamily": "international-museum-governance",
+            "scope": "international",
+            "sourceDomain": "reuters.com",
+            "publishedDate": "2026-09-04",
+        }
+        self.assertTrue(is_relevant_record(target))
+        priority = editorial_priority(target, __import__("datetime").date(2026, 9, 4))
+        self.assertGreaterEqual(priority["score"], 70)
+        self.assertIn("museum_or_cultural_institution_governance", priority["reasons"])
+
+        generic_politics = {
+            "title": "Federal agencies receive new grants",
+            "queryFamily": "international-museum-governance",
+            "scope": "international",
+            "sourceDomain": "example.gov",
+        }
+        self.assertFalse(is_relevant_record(generic_politics))
 
     def test_family_scope_prevents_industry_talent_result_from_early_drop(self):
         reports = [{

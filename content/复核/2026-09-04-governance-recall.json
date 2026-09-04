@@ -1,0 +1,927 @@
+{
+  "schema": "daily-editorial-replay-v1",
+  "schemaVersion": 1,
+  "date": "2026-09-04",
+  "runType": "replay",
+  "replayType": "governance-recall-audit",
+  "replayedAt": "2026-09-04T15:23:02+08:00",
+  "replayCutoff": "2026-09-04T07:13:00+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-04.json",
+  "baseDiscoveryAuditSha256": "8f0a2e05112e498c65019709438d8bbc4bdc9d75cc6bcdd252da37c51b432f5f",
+  "reason": "Post-hoc controlled replay to audit and repair the narrow international museum governance discovery gap; this is not a production report revision.",
+  "runtimeEnrichment": true,
+  "discoveryAuditUnchanged": true,
+  "queryLayer": {
+    "status": "checked",
+    "sourceScansAttempted": 8,
+    "sourceScansSucceeded": 8,
+    "queriesAttempted": 138,
+    "queriesSucceeded": 138,
+    "queriesFailed": 0,
+    "providers": {
+      "bing-news-rss": {
+        "attempted": 69,
+        "succeeded": 69,
+        "failed": 0,
+        "returnedResults": 85,
+        "acceptedRawRecords": 6
+      },
+      "google-news-rss": {
+        "attempted": 69,
+        "succeeded": 69,
+        "failed": 0,
+        "returnedResults": 1120,
+        "acceptedRawRecords": 1112
+      }
+    },
+    "newQueryFamily": "international-museum-governance",
+    "newFamilyQueries": [
+      "museum government support",
+      "museum federal funding",
+      "museum governance policy",
+      "public museum administration",
+      "cultural institution government intervention",
+      "museum collection lending policy"
+    ]
+  },
+  "queryFamilySummary": {
+    "policy-governance": {
+      "status": "checked",
+      "queriesAttempted": 12,
+      "queriesSucceeded": 12,
+      "queriesFailed": 0,
+      "returnedResults": 120,
+      "acceptedRawRecords": 102,
+      "rawRecords": 98,
+      "sameDayDuplicateRecords": 9,
+      "historicalDuplicateRecords": 24,
+      "irrelevantNoiseRecords": 39,
+      "uniqueEventsTouched": 66,
+      "firstDiscoveryEventCount": 66,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 13
+    },
+    "archaeology-heritage": {
+      "status": "checked",
+      "queriesAttempted": 14,
+      "queriesSucceeded": 14,
+      "queriesFailed": 0,
+      "returnedResults": 142,
+      "acceptedRawRecords": 132,
+      "rawRecords": 128,
+      "sameDayDuplicateRecords": 7,
+      "historicalDuplicateRecords": 11,
+      "irrelevantNoiseRecords": 94,
+      "uniqueEventsTouched": 111,
+      "firstDiscoveryEventCount": 110,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 21
+    },
+    "museum-public-culture": {
+      "status": "checked",
+      "queriesAttempted": 18,
+      "queriesSucceeded": 18,
+      "queriesFailed": 0,
+      "returnedResults": 247,
+      "acceptedRawRecords": 235,
+      "rawRecords": 197,
+      "sameDayDuplicateRecords": 14,
+      "historicalDuplicateRecords": 43,
+      "irrelevantNoiseRecords": 131,
+      "uniqueEventsTouched": 146,
+      "firstDiscoveryEventCount": 140,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 23
+    },
+    "digital-heritage": {
+      "status": "checked",
+      "queriesAttempted": 4,
+      "queriesSucceeded": 4,
+      "queriesFailed": 0,
+      "returnedResults": 6,
+      "acceptedRawRecords": 6,
+      "rawRecords": 6,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 4,
+      "uniqueEventsTouched": 6,
+      "firstDiscoveryEventCount": 6,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 1
+    },
+    "heritage-professionals": {
+      "status": "checked",
+      "queriesAttempted": 12,
+      "queriesSucceeded": 12,
+      "queriesFailed": 0,
+      "returnedResults": 24,
+      "acceptedRawRecords": 24,
+      "rawRecords": 24,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 4,
+      "irrelevantNoiseRecords": 16,
+      "uniqueEventsTouched": 20,
+      "firstDiscoveryEventCount": 20,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 2
+    },
+    "museum-operations": {
+      "status": "checked",
+      "queriesAttempted": 10,
+      "queriesSucceeded": 10,
+      "queriesFailed": 0,
+      "returnedResults": 77,
+      "acceptedRawRecords": 77,
+      "rawRecords": 58,
+      "sameDayDuplicateRecords": 4,
+      "historicalDuplicateRecords": 10,
+      "irrelevantNoiseRecords": 21,
+      "uniqueEventsTouched": 47,
+      "firstDiscoveryEventCount": 44,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 13
+    },
+    "modern-heritage": {
+      "status": "checked",
+      "queriesAttempted": 8,
+      "queriesSucceeded": 8,
+      "queriesFailed": 0,
+      "returnedResults": 18,
+      "acceptedRawRecords": 18,
+      "rawRecords": 17,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "irrelevantNoiseRecords": 13,
+      "uniqueEventsTouched": 17,
+      "firstDiscoveryEventCount": 16,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 3
+    },
+    "international-loans": {
+      "status": "checked",
+      "queriesAttempted": 14,
+      "queriesSucceeded": 14,
+      "queriesFailed": 0,
+      "returnedResults": 234,
+      "acceptedRawRecords": 211,
+      "rawRecords": 154,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 70,
+      "irrelevantNoiseRecords": 71,
+      "uniqueEventsTouched": 84,
+      "firstDiscoveryEventCount": 84,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 22
+    },
+    "local-heritage-governance": {
+      "status": "checked",
+      "queriesAttempted": 10,
+      "queriesSucceeded": 10,
+      "queriesFailed": 0,
+      "returnedResults": 22,
+      "acceptedRawRecords": 22,
+      "rawRecords": 9,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 4,
+      "irrelevantNoiseRecords": 3,
+      "uniqueEventsTouched": 5,
+      "firstDiscoveryEventCount": 5,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 1
+    },
+    "international-museum-governance": {
+      "status": "checked",
+      "queriesAttempted": 12,
+      "queriesSucceeded": 12,
+      "queriesFailed": 0,
+      "returnedResults": 138,
+      "acceptedRawRecords": 138,
+      "rawRecords": 106,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 44,
+      "irrelevantNoiseRecords": 41,
+      "uniqueEventsTouched": 62,
+      "firstDiscoveryEventCount": 62,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 29
+    },
+    "international-heritage": {
+      "status": "checked",
+      "queriesAttempted": 24,
+      "queriesSucceeded": 24,
+      "queriesFailed": 0,
+      "returnedResults": 177,
+      "acceptedRawRecords": 153,
+      "rawRecords": 133,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 62,
+      "irrelevantNoiseRecords": 77,
+      "uniqueEventsTouched": 71,
+      "firstDiscoveryEventCount": 71,
+      "historicalDuplicateEvents": 0,
+      "evidenceUpgradeCandidates": 12
+    }
+  },
+  "candidateEvaluation": {
+    "summary": {
+      "rawRecords": 958,
+      "eventCandidateCount": 647,
+      "deduplicatedReports": 691,
+      "candidateEvaluationPool": 136,
+      "evidenceQualified": 8,
+      "needsVerification": 128,
+      "highPriorityCandidates": 6,
+      "highPriorityEvidenceQueue": 5,
+      "highPriorityNeedsVerification": 5,
+      "highPriorityEvidenceQueueEvents": 5,
+      "mediumPriorityEvidenceQueueEvents": 9,
+      "evidenceUpgradeAttempted": 19,
+      "evidenceUpgradeQualified": 5,
+      "evidenceUpgradeFailed": 0,
+      "evidenceUpgradeAmbiguous": 14,
+      "rejected": 414,
+      "deferred": 97,
+      "provisionalWouldBeSelected": 1,
+      "editorialPriorityCounts": {
+        "high": 7,
+        "medium": 20,
+        "low": 620
+      },
+      "eventCandidatePriorityCounts": {
+        "high": 7,
+        "medium": 20,
+        "low": 620
+      },
+      "rawRecordPriorityCounts": {
+        "high": 44,
+        "medium": 41,
+        "low": 873
+      },
+      "dispositionCounts": {
+        "rejected": 414,
+        "evidence_qualified": 8,
+        "needs_verification": 128,
+        "deferred": 97
+      }
+    },
+    "targetEvent": {
+      "event": {
+        "eventId": "event-b5913a7a5f0b",
+        "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "reportCount": 2,
+        "queryFamilies": [
+          "international-museum-governance"
+        ],
+        "sourceDomains": [
+          "reuters.com",
+          "whbl.com"
+        ],
+        "publisherDomains": [
+          "reuters.com",
+          "whbl.com",
+          "www.reuters.com"
+        ],
+        "discoveryReports": [
+          {
+            "title": "Trump administration threatens to cut federal agencies' support for Smithsonian - reuters.com",
+            "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "google-news-rss",
+            "discoverySourceType": "query_search",
+            "discoveryQuery": "museum government support after:2026-08-29 before:2026-09-05",
+            "queryFamily": "international-museum-governance",
+            "sourceDomain": "reuters.com",
+            "sourcePublisherUrl": "https://www.reuters.com",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": [
+              "reuters.com",
+              "www.reuters.com"
+            ],
+            "transportUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5"
+          },
+          {
+            "title": "Trump administration threatens to cut federal agencies’ support for Smithsonian - whbl.com",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNelhlelVHQ2hNVXZpbS1BTV9Ec25SSV9LQ0p5U1YxN1hPVko5N1lFVGN5LUF0d0xpS0RGTkphQk1ZVmlGd0dOWFhzOWdzVk15V3FvaDdGcDJUeEFIbzE5czl4aV9XWTFKVFVyQkI4cjBSbDJhekZSeHlibVYyMVkyaW1pYmlDWVhzMGhvQkxhdlFoYjRkM2o2WXN5WXh0Q0tDMm9YY1hpczhJNG8?oc=5",
+            "publishedDate": "2026-09-02",
+            "discoveredVia": "google-news-rss",
+            "discoverySourceType": "query_search",
+            "discoveryQuery": "museum government support after:2026-08-29 before:2026-09-05",
+            "queryFamily": "international-museum-governance",
+            "sourceDomain": "whbl.com",
+            "sourcePublisherUrl": "https://whbl.com",
+            "duplicateStatus": "historical_duplicate",
+            "publisherDomain": "whbl.com",
+            "transportUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNelhlelVHQ2hNVXZpbS1BTV9Ec25SSV9LQ0p5U1YxN1hPVko5N1lFVGN5LUF0d0xpS0RGTkphQk1ZVmlGd0dOWFhzOWdzVk15V3FvaDdGcDJUeEFIbzE5czl4aV9XWTFKVFVyQkI4cjBSbDJhekZSeHlibVYyMVkyaW1pYmlDWVhzMGhvQkxhdlFoYjRkM2o2WXN5WXh0Q0tDMm9YY1hpczhJNG8?oc=5"
+          }
+        ]
+      },
+      "evaluation": {
+        "eventId": "event-b5913a7a5f0b",
+        "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "reportCount": 2,
+        "editorialPriorityScore": 86,
+        "editorialPriorityLabel": "high",
+        "candidateDisposition": "needs_verification",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "C",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "ambiguous",
+        "evidenceFailureType": "resolver_failed",
+        "evidenceFailureReason": "source_page_retrieval_failed",
+        "editorialReasons": [
+          "museum_or_cultural_institution_governance",
+          "sustained_public_attention",
+          "primary_freshness"
+        ]
+      },
+      "discoveryReports": [
+        {
+          "title": "Trump administration threatens to cut federal agencies' support for Smithsonian - reuters.com",
+          "publishedDate": "2026-09-03",
+          "sourceDomain": "reuters.com",
+          "queryFamily": "international-museum-governance",
+          "discoveryQuery": "museum government support after:2026-08-29 before:2026-09-05",
+          "discoveredVia": "google-news-rss"
+        },
+        {
+          "title": "Trump administration threatens to cut federal agencies’ support for Smithsonian - whbl.com",
+          "publishedDate": "2026-09-02",
+          "sourceDomain": "whbl.com",
+          "queryFamily": "international-museum-governance",
+          "discoveryQuery": "museum government support after:2026-08-29 before:2026-09-05",
+          "discoveredVia": "google-news-rss"
+        }
+      ],
+      "resolutionAttempts": [
+        {
+          "method": "existing_report",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "existing_report",
+          "domain": "news.google.com",
+          "publisherDomain": "whbl.com",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "abcnews.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.nbcnews.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "thehill.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.straitstimes.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "sg.news.yahoo.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "informat.ro",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.devdiscourse.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "uk.news.yahoo.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.devdiscourse.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "news.meaww.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "thechenabtimes.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "news.ssbcrack.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "theatlantic.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 55,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.wusa9.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "95wxtk.iheart.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "www.yahoo.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "domain": "news.google.com",
+          "publisherDomain": "news.ssbcrack.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 60,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "redirect_unwrap",
+          "domain": "www.reuters.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "resolved",
+          "articleMatched": false,
+          "matchScore": null,
+          "evidenceTier": "B"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.reuters.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "failed",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "B"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "reuters.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 45,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "news.google.com",
+          "publisherDomain": "whbl.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "redirect_unwrap",
+          "domain": "www.reuters.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "resolved",
+          "articleMatched": false,
+          "matchScore": null,
+          "evidenceTier": "B"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.reuters.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "failed",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "B"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "domain": "www.bing.com",
+          "publisherDomain": "www.bing.com",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 0,
+          "evidenceTier": "C"
+        }
+      ]
+    }
+  },
+  "finalEditorialPool": {
+    "rawQualifiedEvents": 8,
+    "canonicalUniqueEvents": 8,
+    "historicalDuplicates": 133,
+    "editoriallyReviewed": 0,
+    "events": [
+      {
+        "eventId": "event-12aaa43d2f5a",
+        "representativeTitle": "香港故宫文化博物馆\"古埃及文明大展\"今日圆满结束博物馆战略合作伙伴中国银行（香港）全力支持香港近年规模最大、展品等级最高的古埃及文明展览于九个半月展期招待逾67万访客",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 8,
+        "editorialPriorityScore": 92,
+        "editorialPriorityLabel": "high",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "substantive_audience_or_operation_data",
+          "sustained_public_attention",
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-5432c779ed5b",
+        "representativeTitle": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+        "publishedDate": "2026-08-31",
+        "scope": "domestic",
+        "reportCount": 2,
+        "editorialPriorityScore": 65,
+        "editorialPriorityLabel": "medium",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "museum_collection_or_public_incident",
+          "backfill_freshness"
+        ]
+      },
+      {
+        "eventId": "event-49ae576b8781",
+        "representativeTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展",
+        "publishedDate": "2026-09-04",
+        "scope": "domestic",
+        "reportCount": 1,
+        "editorialPriorityScore": 56,
+        "editorialPriorityLabel": "medium",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-4ca89b8f0532",
+        "representativeTitle": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "editorialPriorityScore": 56,
+        "editorialPriorityLabel": "medium",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-0621fc6c86ce",
+        "representativeTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "editorialPriorityScore": 56,
+        "editorialPriorityLabel": "medium",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "significant_museum_or_exhibition_project",
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-af2353ba1bef",
+        "representativeTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+        "publishedDate": "2026-09-04",
+        "scope": "domestic",
+        "reportCount": 1,
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-eaee9c72a7b2",
+        "representativeTitle": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "reportCount": 1,
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "primary_freshness"
+        ]
+      },
+      {
+        "eventId": "event-f35206d16b83",
+        "representativeTitle": "LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "reportCount": 1,
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "candidateDisposition": "evidence_qualified",
+        "evidenceTierAtDiscovery": "B",
+        "evidenceTierAfterUpgrade": "B",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureType": null,
+        "evidenceFailureReason": null,
+        "editorialReasons": [
+          "primary_freshness"
+        ]
+      }
+    ]
+  },
+  "note": "The official 2026-09-04 discovery snapshot, candidate ledger, daily report, heatmap, and digital-trend artifacts were not rewritten by this audit. The target was naturally discovered by the new generic family; existing evidence resolution still could not retrieve a publishable direct Reuters article, so no report revision was made."
+}
