@@ -1189,6 +1189,74 @@ class DailyDiscoveryTests(unittest.TestCase):
         }
         self.assertFalse(is_relevant_record(generic_politics))
 
+    def test_international_wire_family_uses_narrow_single_topic_queries(self):
+        family = next(item for item in QUERY_FAMILIES if item["id"] == "international-wire")
+        self.assertEqual(len(family["queries"]), 4)
+        self.assertIn("site:reuters.com museum", family["queries"])
+        self.assertIn("site:reuters.com archaeology", family["queries"])
+        self.assertIn("site:apnews.com museum", family["queries"])
+        self.assertIn("site:apnews.com archaeology", family["queries"])
+        self.assertNotIn("Smithsonian", " ".join(family["queries"]))
+
+    def test_international_wire_relevance_keeps_heritage_name_noise_out(self):
+        self.assertTrue(is_relevant_record({
+            "title": "Archaeologists unveil new remains at an ancient site",
+            "queryFamily": "international-wire",
+        }))
+        self.assertTrue(is_relevant_record({
+            "title": "A galaxy of storytelling comes to life at a new museum",
+            "queryFamily": "international-wire",
+        }))
+        self.assertFalse(is_relevant_record({
+            "title": "RBC Heritage added to PGA Tour's Championship Series",
+            "queryFamily": "international-wire",
+        }))
+
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_generic_wire_publisher_search_unwraps_direct_article_url(self, execute_query):
+        execute_query.return_value = ([{
+            "title": "Museum governance support changes",
+            "url": "https://www.bing.com/news/apiclick.aspx?url=https%3A%2F%2Fwww.reuters.com%2Fworld%2Fmuseum-support-2026-09-03%2F",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "Reuters",
+        }], {
+            "success": True,
+            "actualQuery": "site:reuters.com museum support",
+            "returnedResultCount": 1,
+            "acceptedRawCount": 1,
+        })
+        rows, audit = publisher_search_results(
+            {"representativeTitle": "Museum governance support changes", "scope": "international"},
+            {"sourcePublisherUrl": "https://www.reuters.com", "sourceDomain": "Reuters"},
+            __import__("datetime").date(2026, 9, 1),
+            __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["url"], "https://www.reuters.com/world/museum-support-2026-09-03/")
+        self.assertEqual(rows[0]["transportUrl"].split("?", 1)[0], "https://www.bing.com/news/apiclick.aspx")
+        self.assertEqual(audit["backend"], "publisher-search-bing")
+        self.assertEqual(audit["resolvedDirectCount"], 1)
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    def test_google_news_wrapper_never_becomes_final_evidence(self, resolve_url):
+        resolve_url.return_value = (
+            "https://news.google.com/rss/articles/example",
+            "<html><body>Google News shell</body></html>",
+            None,
+        )
+        outcome, source = resolve_evidence_attempt(
+            {"representativeTitle": "Museum governance support changes", "scope": "international"},
+            {
+                "title": "Museum governance support changes - Reuters",
+                "url": "https://news.google.com/rss/articles/example",
+                "sourcePublisherUrl": "https://www.reuters.com",
+            },
+            "existing_report",
+        )
+        self.assertIsNone(source)
+        self.assertEqual(outcome["checked"]["error"], "search_wrapper")
+        self.assertFalse(outcome["checked"]["articleVerified"])
+
     def test_family_scope_prevents_industry_talent_result_from_early_drop(self):
         reports = [{
             "title": "中宣部公示2026享受政府特殊津贴推荐人选（40人）",

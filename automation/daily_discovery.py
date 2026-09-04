@@ -127,13 +127,24 @@ QUERY_FAMILIES = (
     {"id": "international-loans", "scope": "international", "queries": ("museum loan exhibition", "museum collection loan", "touring exhibition museum", "museum objects on loan", "major museum loan exhibition", "site:theartnewspaper.com museum loan", "site:smithsonianmag.com museum exhibition")},
     {"id": "local-heritage-governance", "scope": "domestic", "queries": ("文物局 陈列展览 审核", "博物馆 内容审核", "文物局 藏品管理", "地方 博物馆 监管 通知", "site:thepaper.cn 博物馆 陈列展览 审核")},
     {"id": "international-museum-governance", "scope": "international", "queries": ("museum government support", "museum federal funding", "museum governance policy", "public museum administration", "cultural institution government intervention", "museum collection lending policy")},
-    {"id": "international-heritage", "scope": "international", "queries": ("museum archaeology cultural heritage", "archaeological discovery heritage site", "heritage protection museum theft", "repatriation museum policy", "digital heritage museum technology", "museum loan exhibition Islamic art", "natural history museum fossil palaeontology exhibition", "museum dinosaur fossil exhibition", "site:polizei.gv.at museum theft", "site:aa.com.tr archaeology heritage", "site:reuters.com museum archaeology heritage", "site:apnews.com museum archaeology heritage")},
+    {"id": "international-heritage", "scope": "international", "queries": ("museum archaeology cultural heritage", "archaeological discovery heritage site", "heritage protection museum theft", "repatriation museum policy", "digital heritage museum technology", "museum loan exhibition Islamic art", "natural history museum fossil palaeontology exhibition", "museum dinosaur fossil exhibition", "site:polizei.gv.at museum theft", "site:aa.com.tr archaeology heritage")},
+    # Wire-service search is deliberately narrow and domain-constrained. The
+    # older three-topic Reuters/AP clauses behaved like strict AND queries and
+    # missed otherwise relevant museum or archaeology stories. These four
+    # queries remain discovery-only; publication still requires the normal
+    # evidence resolver and editorial review.
+    {"id": "international-wire", "scope": "international", "queries": ("site:reuters.com museum", "site:reuters.com archaeology", "site:apnews.com museum", "site:apnews.com archaeology")},
 )
 
 QUERY_BACKENDS = (
     {"id": "bing-news-rss", "name": "Bing News RSS", "base": "https://www.bing.com/news/search", "locale": "zh"},
     {"id": "google-news-rss", "name": "Google News RSS", "base": "https://news.google.com/rss/search", "locale": "en"},
 )
+
+# The generic publisher-domain fallback is intentionally bounded to the
+# international wire publishers audited in this pass. Other A/B sources keep
+# their existing event-specific and alternate-source paths.
+WIRE_PUBLISHER_DOMAINS = ("reuters.com", "apnews.com")
 
 # Keep the full daily search within the native automation run window while
 # retaining a per-request timeout and one audit row per configured query.
@@ -213,6 +224,7 @@ QUERY_FAMILY_RELEVANCE_TERMS = {
     "modern-heritage": ("革命文物", "革命遗址", "烈士墓", "抗战遗址", "近现代遗产", "红色文物", "红色遗产"),
     "international-loans": ("loan", "lending", "on loan", "touring exhibition", "museum", "louvre", "smithsonian", "collection"),
     "international-museum-governance": ("museum", "museums", "gallery", "cultural institution", "governance", "funding", "grants", "administration", "lending"),
+    "international-wire": ("museum", "museums", "archaeology", "archaeological", "heritage site", "cultural heritage", "exhibition", "collection", "artifact", "artefact", "fossil", "palaeontology", "conservation", "excavation", "repatriation", "restitution", "theft", "stolen", "funding", "governance", "institutional independence"),
     "local-heritage-governance": ("文物局", "博物馆", "文物", "考古", "遗产", "展览审核", "内容审核", "藏品管理"),
 }
 
@@ -1456,11 +1468,68 @@ def publisher_search_endpoint(report: dict) -> tuple[str, str] | None:
     return None
 
 
+def publisher_search_anchor(event: dict) -> str:
+    """Build a small publisher-search anchor from the event, not a headline rule."""
+    title = clean_discovery_title(event.get("representativeTitle") or event.get("title", ""))
+    terms = [
+        term for term in meaningful_terms(title)
+        if term not in EVIDENCE_CONTEXT_TERMS
+        and term not in GENERIC_EVENT_WORDS
+        and len(term) >= 3
+    ]
+    named = event_named_entity(title)
+    if named:
+        return named
+    cjk = sorted((term for term in terms if re.search(r"[\u4e00-\u9fff]", term)), key=lambda term: (-len(term), term))
+    if cjk:
+        return " ".join(cjk[:2])
+    latin = sorted((term for term in terms if re.fullmatch(r"[a-z][a-z0-9'-]{3,}", term)), key=lambda term: (-len(term), term))
+    return " ".join(latin[:4]) or title
+
+
+def generic_publisher_search_results(event: dict, report: dict, start: date, end: date) -> tuple[list[dict], dict | None]:
+    """Use one bounded Bing web/RSS lookup to turn a known publisher hint into direct URLs."""
+    domains = publisher_domains(report)
+    if not domains:
+        return [], None
+    host = domains[0]
+    if not any(host_matches(host, domain) for domain in WIRE_PUBLISHER_DOMAINS):
+        return [], None
+    query = f"site:{host} {publisher_search_anchor(event)}"
+    bing = next((backend for backend in QUERY_BACKENDS if backend["id"] == "bing-news-rss"), None)
+    if not bing:
+        return [], None
+    family = {"id": "evidence-upgrade", "scope": event.get("scope", "domestic")}
+    found, audit = _execute_one_query(family, bing, query, start, end)
+    audit = dict(audit or {})
+    audit["backend"] = "publisher-search-bing"
+    audit["publisherDomain"] = host
+    direct = []
+    for result in found:
+        transport = result.get("url", "")
+        resolved, changed = unwrap_redirect_url(transport)
+        resolved_host = (urlsplit(resolved).hostname or "").lower()
+        if not resolved_host or not host_matches(resolved_host, host):
+            continue
+        row = dict(result)
+        row["url"] = resolved
+        row["sourceDomain"] = host
+        row["sourcePublisherUrl"] = f"https://{host}"
+        if changed:
+            row["transportUrl"] = transport
+        row["discoveredVia"] = "publisher-domain-search"
+        row["discoverySourceType"] = "evidence_upgrade"
+        direct.append(row)
+    audit["acceptedRawCount"] = len(direct)
+    audit["resolvedDirectCount"] = len(direct)
+    return direct, audit
+
+
 def publisher_search_results(event: dict, report: dict, start: date, end: date) -> tuple[list[dict], dict | None]:
     """Query a known publisher search page and return direct article URLs."""
     endpoint = publisher_search_endpoint(report)
     if not endpoint:
-        return [], None
+        return generic_publisher_search_results(event, report, start, end)
     search_url_base, host = endpoint
     title = clean_discovery_title(event.get("representativeTitle") or event.get("title", ""))
     query_terms = [
@@ -2381,13 +2450,39 @@ def freshness_tier(required_date: date, published_value: str) -> str:
     return "outside_window"
 
 
+INTERNATIONAL_WIRE_INSTITUTION_TERMS = (
+    "museum", "museums", "gallery", "galleries", "cultural institution", "heritage institution",
+)
+
+
+def international_wire_relevance(record: dict) -> bool:
+    """Keep domain-constrained wire discovery focused on substantive wenbo events."""
+    text = " ".join(
+        str(record.get(key) or "")
+        for key in ("title", "summary", "body", "notes", "institution", "publisher", "entity", "location")
+    ).lower()
+    has_institution = any(term in text for term in INTERNATIONAL_WIRE_INSTITUTION_TERMS)
+    has_archaeology = any(term in text for term in ("archaeology", "archaeological", "archaeologist", "archaeologists", "excavation", "unearthed"))
+    has_heritage = any(term in text for term in ("heritage site", "cultural heritage", "heritage protection"))
+    # An archaeology result need not say “museum”, while a governance/funding
+    # result must identify a cultural institution. This prevents generic uses
+    # such as a sports event named “Heritage” from entering the wenbo pool.
+    return has_institution or has_archaeology or has_heritage
+
+
 def is_relevant_record(record: dict) -> bool:
     text = " ".join(str(record.get(key) or "") for key in ("title", "summary", "body", "notes")).lower()
-    if any(term.lower() in text for term in RELEVANCE_TERMS):
-        return True
     family_ids = list(record.get("queryFamilies") or [])
     if record.get("queryFamily"):
         family_ids.append(record.get("queryFamily"))
+    if "international-wire" in family_ids:
+        if international_wire_relevance(record):
+            return True
+        family_ids = [family_id for family_id in family_ids if family_id != "international-wire"]
+        if not family_ids:
+            return False
+    if any(term.lower() in text for term in RELEVANCE_TERMS):
+        return True
     family_terms = tuple(
         term
         for family_id in family_ids
