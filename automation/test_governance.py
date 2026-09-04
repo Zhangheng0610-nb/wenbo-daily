@@ -9,6 +9,7 @@ from automation.governance import (
     OFFICIAL_WECHAT_ACCOUNTS,
     OFFICIAL_WECHAT_REGISTRY_PATH,
     official_wechat_account,
+    publisher_domain_from_name,
     source_info,
     source_link_html,
     validate_official_wechat_registry,
@@ -33,6 +34,18 @@ def account(biz, name, institution, tier, institution_type="机构"):
 
 
 class WeChatGovernanceTests(unittest.TestCase):
+    def test_trusted_alternate_publisher_aliases_retain_b_tier(self):
+        self.assertEqual(publisher_domain_from_name("The Washington Post"), "washingtonpost.com")
+        self.assertEqual(
+            publisher_domain_from_name("ABC News - Breaking News, Latest News and Videos"),
+            "abcnews.go.com",
+        )
+        self.assertEqual(source_info("https://www.washingtonpost.com")['tier'], "B")
+        self.assertEqual(source_info("https://abcnews.go.com")['tier'], "B")
+
+    def test_unknown_publisher_alias_is_not_trusted(self):
+        self.assertEqual(publisher_domain_from_name("Museum News Aggregator"), "")
+
     def test_registry_schema_is_valid(self):
         self.assertEqual(validate_official_wechat_registry(OFFICIAL_WECHAT_REGISTRY_PATH), [])
 

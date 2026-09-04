@@ -3,8 +3,8 @@
   "date": "2026-09-04",
   "runType": "replay",
   "replayType": "international-wire-runtime-audit",
-  "codeVersion": "18e323e3f4b15769dd2399866ae1eb9d803a325f + audited working-tree wire enhancement",
-  "replayedAt": "2026-09-04T18:45:38+08:00",
+  "codeVersion": "0e4f4654ab8788e1dbb2272689350cd4d8c9c720 + trusted alternate publisher recovery",
+  "replayedAt": "2026-09-04T19:13:56+08:00",
   "window": {
     "start": "2026-08-06",
     "end": "2026-09-04",
@@ -1585,6 +1585,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "reuters.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1597,6 +1598,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNelhlelVHQ2hNVXZpbS1BTV9Ec25SSV9LQ0p5U1YxN1hPVko5N1lFVGN5LUF0d0xpS0RGTkphQk1ZVmlGd0dOWFhzOWdzVk15V3FvaDdGcDJUeEFIbzE5czl4aV9XWTFKVFVyQkI4cjBSbDJhekZSeHlibVYyMVkyaW1pYmlDWVhzMGhvQkxhdlFoYjRkM2o2WXN5WXh0Q0tDMm9YY1hpczhJNG8?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "whbl.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1609,6 +1611,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQNlNlZ25SVHU0cFlwT2syOFp3Z2c1dFNGRkp5RDNCenhMSDZncEdRNjJacnh4cjZSX3RTRE9GS0hoMmhmNFV3VWVmUnBwcDBrZUNQMUQxSGdQWldVaVpyRFNiX3hXanR3c1pEZGxTQWZQN0VzUUJOeVhGNzEyN3Y3UFV6WGpEZ2JKS3V4a2VlX09hbHllbHNaaWVxVVh6UUUzZ2hIc0t2SWlteHJXbnfSAbMBQVVfeXFMUFdMTmNDaE1FbWJDTWhSdkt6YlVxMDh6a3lnMG1CamN0Nk9xZy03OW5ITjFtUm1ndTZFa3lDY1FHQ0NWa1R5Z1NfWHVHQlFfWV93cmVCd0N6VE0tbjNwN2tGYlpRaGo1b3U5M1NnRUpGUTFKVFY2TjlTdmtJdUJNLWZzTFF6aWV6bjZJbGRQMUVjWmxINWRCWHNJZTFaTW95ZzdqV3BzUlFlUm1EYXF4N0RPSFU?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "abcnews.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1634,7 +1637,8 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQbnJZRzE2OEhZNHJtTXhOZ3RLQlpKT0d5blFkU21QWlVFQnFkRGFwUTY2N0Uxd1VfbGJUUGF3blUtTGpsZkF4YnQ5SXBrTWcwNWYxb3EtMGY0LTZBSXpYd0VNMExXUlJEY2hSM0lreEExTXZrS0ZFM2xFY0dUY3pydWlOaU9WZ1h0RENkYWp2WXZCajMxQzBaMVZDSTdiM0F4Nk1MUkRicnNRM1R6MHNhT3c5OWtWQQ?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQbnJZRzE2OEhZNHJtTXhOZ3RLQlpKT0d5blFkU21QWlVFQnFkRGFwUTY2N0Uxd1VfbGJUUGF3blUtTGpsZkF4YnQ5SXBrTWcwNWYxb3EtMGY0LTZBSXpYd0VNMExXUlJEY2hSM0lreEExTXZrS0ZFM2xFY0dUY3pydWlOaU9WZ1h0RENkYWp2WXZCajMxQzBaMVZDSTdiM0F4Nk1MUkRicnNRM1R6MHNhT3c5OWtWQQ?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
-        "publisherDomain": "www.nbcnews.com",
+        "publisherDomain": "nbcnews.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1646,7 +1650,7 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQbnJZRzE2OEhZNHJtTXhOZ3RLQlpKT0d5blFkU21QWlVFQnFkRGFwUTY2N0Uxd1VfbGJUUGF3blUtTGpsZkF4YnQ5SXBrTWcwNWYxb3EtMGY0LTZBSXpYd0VNMExXUlJEY2hSM0lreEExTXZrS0ZFM2xFY0dUY3pydWlOaU9WZ1h0RENkYWp2WXZCajMxQzBaMVZDSTdiM0F4Nk1MUkRicnNRM1R6MHNhT3c5OWtWQQ?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQbnJZRzE2OEhZNHJtTXhOZ3RLQlpKT0d5blFkU21QWlVFQnFkRGFwUTY2N0Uxd1VfbGJUUGF3blUtTGpsZkF4YnQ5SXBrTWcwNWYxb3EtMGY0LTZBSXpYd0VNMExXUlJEY2hSM0lreEExTXZrS0ZFM2xFY0dUY3pydWlOaU9WZ1h0RENkYWp2WXZCajMxQzBaMVZDSTdiM0F4Nk1MUkRicnNRM1R6MHNhT3c5OWtWQQ?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.nbcnews.com",
+        "publisherDomain": "nbcnews.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 60,
@@ -1656,30 +1660,17 @@
         "evidenceTier": "C"
       },
       {
-        "method": "alternate_source",
-        "inputUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWlE4anFFUEpYdElNclJwVjk1ZGEybjFINndpNUcyUFdRcjZpMEdKSVFDMzk0ajcyTFVfcEpFSnFsU2hqRmVxb2tNOGpYSkNhblBCSjRWVDZwRkNLaUYxTi1HM0RwQTdlSVNNbVZUMGMyLWhHT2oxb1NlODJoNFVNZ3c2MWpXWWh3RzFCdUxzSXBzQ3Jtbi1qb3dvZ21oSVZlQmY0ckZ2c0gzZ2g4X2xOT1c0TlRhSkFreVZZ0gHAAUFVX3lxTE1XdXJZV29uMDF4ZVg4X0YzX1hlTUpoSHdhTWFQZlhWenlyLS1ZVkN4UVlqdVBaTW9tWm9iX05WdnVMYUpFVEZYNHpDdDZrLUVPRFJfRnNQbUc4Yk01RThadlk3bnJtQk1rVnlBR0JIb3hyRkxkNlh6R05jUjVYZWM3b2JaZGNmb1p1QkpZRWI2U1A2eE1JQXE2SUJuZFBwTEJPX3dMYnlxQ0ZfTTV3UW9yZ2lfakZZXzRxYkJyeGREOQ?oc=5",
-        "resolvedUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWlE4anFFUEpYdElNclJwVjk1ZGEybjFINndpNUcyUFdRcjZpMEdKSVFDMzk0ajcyTFVfcEpFSnFsU2hqRmVxb2tNOGpYSkNhblBCSjRWVDZwRkNLaUYxTi1HM0RwQTdlSVNNbVZUMGMyLWhHT2oxb1NlODJoNFVNZ3c2MWpXWWh3RzFCdUxzSXBzQ3Jtbi1qb3dvZ21oSVZlQmY0ckZ2c0gzZ2g4X2xOT1c0TlRhSkFreVZZ0gHAAUFVX3lxTE1XdXJZV29uMDF4ZVg4X0YzX1hlTUpoSHdhTWFQZlhWenlyLS1ZVkN4UVlqdVBaTW9tWm9iX05WdnVMYUpFVEZYNHpDdDZrLUVPRFJfRnNQbUc4Yk01RThadlk3bnJtQk1rVnlBR0JIb3hyRkxkNlh6R05jUjVYZWM3b2JaZGNmb1p1QkpZRWI2U1A2eE1JQXE2SUJuZFBwTEJPX3dMYnlxQ0ZfTTV3UW9yZ2lfakZZXzRxYkJyeGREOQ?oc=5&hl=en-US&gl=US&ceid=US:en",
-        "domain": "news.google.com",
+        "method": "domain_search",
+        "inputUrl": "https://thehill.com/media/6059334-carlson-says-trump-should-be-removed/",
+        "resolvedUrl": "https://thehill.com/media/6059334-carlson-says-trump-should-be-removed/",
+        "domain": "thehill.com",
         "publisherDomain": "thehill.com",
-        "fetchStatus": "wrapper",
+        "sourceRelationship": "publisher_recovery",
+        "fetchStatus": "failed",
         "articleMatched": false,
         "matchScore": 0,
         "matchReasons": [],
-        "evidenceTier": "C"
-      },
-      {
-        "method": "official_search",
-        "inputUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWlE4anFFUEpYdElNclJwVjk1ZGEybjFINndpNUcyUFdRcjZpMEdKSVFDMzk0ajcyTFVfcEpFSnFsU2hqRmVxb2tNOGpYSkNhblBCSjRWVDZwRkNLaUYxTi1HM0RwQTdlSVNNbVZUMGMyLWhHT2oxb1NlODJoNFVNZ3c2MWpXWWh3RzFCdUxzSXBzQ3Jtbi1qb3dvZ21oSVZlQmY0ckZ2c0gzZ2g4X2xOT1c0TlRhSkFreVZZ0gHAAUFVX3lxTE1XdXJZV29uMDF4ZVg4X0YzX1hlTUpoSHdhTWFQZlhWenlyLS1ZVkN4UVlqdVBaTW9tWm9iX05WdnVMYUpFVEZYNHpDdDZrLUVPRFJfRnNQbUc4Yk01RThadlk3bnJtQk1rVnlBR0JIb3hyRkxkNlh6R05jUjVYZWM3b2JaZGNmb1p1QkpZRWI2U1A2eE1JQXE2SUJuZFBwTEJPX3dMYnlxQ0ZfTTV3UW9yZ2lfakZZXzRxYkJyeGREOQ?oc=5",
-        "resolvedUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWlE4anFFUEpYdElNclJwVjk1ZGEybjFINndpNUcyUFdRcjZpMEdKSVFDMzk0ajcyTFVfcEpFSnFsU2hqRmVxb2tNOGpYSkNhblBCSjRWVDZwRkNLaUYxTi1HM0RwQTdlSVNNbVZUMGMyLWhHT2oxb1NlODJoNFVNZ3c2MWpXWWh3RzFCdUxzSXBzQ3Jtbi1qb3dvZ21oSVZlQmY0ckZ2c0gzZ2g4X2xOT1c0TlRhSkFreVZZ0gHAAUFVX3lxTE1XdXJZV29uMDF4ZVg4X0YzX1hlTUpoSHdhTWFQZlhWenlyLS1ZVkN4UVlqdVBaTW9tWm9iX05WdnVMYUpFVEZYNHpDdDZrLUVPRFJfRnNQbUc4Yk01RThadlk3bnJtQk1rVnlBR0JIb3hyRkxkNlh6R05jUjVYZWM3b2JaZGNmb1p1QkpZRWI2U1A2eE1JQXE2SUJuZFBwTEJPX3dMYnlxQ0ZfTTV3UW9yZ2lfakZZXzRxYkJyeGREOQ?oc=5",
-        "domain": "news.google.com",
-        "publisherDomain": "thehill.com",
-        "fetchStatus": "screened_out",
-        "articleMatched": false,
-        "matchScore": 60,
-        "matchReasons": [
-          "shared_named_title_anchor"
-        ],
-        "evidenceTier": "C"
+        "evidenceTier": "B"
       },
       {
         "method": "alternate_source",
@@ -1687,6 +1678,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNWDNqa2ZMSndfdnJoNTRjdXh3LVVUSmtZN0t0d2F4SVpvZnFOZzFDcHoxV0tJLUdzQkd1VGpGd28zZjh0aDBVamFkMkJOaFk4VTJmVVhDQ0JTYk5iMThSLW1GaEdMYXM2a3pvc05IZV9TQWJZS3FydFFjengwa09adTMwU2YyLXlCMkcxYXpidTd2Ykk5OHR4ZVRMNVBmaVRESzVPcmNraElOS0hMdDhzQjVMNDR3cHVnUFBUY0Y1Y1pHTGdBTlE?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "www.straitstimes.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1713,6 +1705,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMif0FVX3lxTE45NFVTSGpoZl81VUFvcFE2eWZUVEFTZ1UxTmo3dDIzWjdRQ1YtLTUwcThUUWZ0dHRnQmkwVk1scnhBTEJvVWlCRk1WT254cVFXMm52M0RhS0duaS1aZkxkYVJqM2JsdlBFWU9mTEU3ZnVTcFdleTBaZzNXZE9IMUU?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "sg.news.yahoo.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1739,6 +1732,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPR2ZvcUNfUzJ1cEFEb1hUaXd0RzZ1UEFtUnRCS2VMbFVhQXJrQW9ncmZnZ215Rm1xMjBkeTItaW9kakxMYWtHZnY4LTFjd1hHdGs5WmZqbkFobXMtVjdhaklwaFlPdGo2UVNYTG5Bcml1UVJkNVNIZUxGazNHM25Yc0RKVmFVQXBqdi11cFZyTmtJYUlrYVFTTjU0dmRzZldPYi02blFEQzRMcGNja0E?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "informat.ro",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1773,22 +1767,10 @@
       },
       {
         "method": "official_search",
-        "inputUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OZ2FEZ3RnN0ZCT0dBOVQzUVQxTEJRSS1reEFTbFBQOHFrWGJSLS1ONHpocWplOEtNQk1NMVRrZ1JTZEpIMUliSVFuc0xyRjdMSUJFcVVINXg2cEZOLWtPbFRpTjJrZms?oc=5",
-        "resolvedUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE9OZ2FEZ3RnN0ZCT0dBOVQzUVQxTEJRSS1reEFTbFBQOHFrWGJSLS1ONHpocWplOEtNQk1NMVRrZ1JTZEpIMUliSVFuc0xyRjdMSUJFcVVINXg2cEZOLWtPbFRpTjJrZms?oc=5",
-        "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
-        "fetchStatus": "screened_out",
-        "articleMatched": false,
-        "matchScore": 0,
-        "matchReasons": [],
-        "evidenceTier": "C"
-      },
-      {
-        "method": "official_search",
         "inputUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE92R1VYZ1JIOEp1U2Z5NlkxNTdmeXVjamxJR3JnRU9JcWVvRldGVzRqVUhFd2ppSnJqOWpZQ0ptSlRqMzduLS15WURiZUh6M2J6VU9WM3piSExKVlJmeHc2eFVTTlVXR1k?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE92R1VYZ1JIOEp1U2Z5NlkxNTdmeXVjamxJR3JnRU9JcWVvRldGVzRqVUhFd2ppSnJqOWpZQ0ptSlRqMzduLS15WURiZUh6M2J6VU9WM3piSExKVlJmeHc2eFVTTlVXR1k?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -1801,6 +1783,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1saTg1YnhaVjE2S2ZqajlUajF6ZDJiMUVoZ3l0a0ZUYS1MZEcwRVVFLTVjZDVrWFh2Tm82MVhFZjlzbExUTEEzNWNkR2xtdnlQT0xlWmRndHpQei1Ja0czQjA0QzZxd2l6aFBReVREY2V6dVEzUXBrZUc0Sk9ydw?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "uk.news.yahoo.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1838,7 +1821,19 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1jN2R3MzRaVUxicDgwZU1nTlMxcWhWTkpITHhUaUFhUnBLWmE4NTM3RVA2eV90OU1qdGVtTk03QWRSMnFTQUlkaGxvQU44N1RMbC1Nd1ktVHlNYXNPdk4taW54cGNVZw?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE1jN2R3MzRaVUxicDgwZU1nTlMxcWhWTkpITHhUaUFhUnBLWmE4NTM3RVA2eV90OU1qdGVtTk03QWRSMnFTQUlkaGxvQU44N1RMbC1Nd1ktVHlNYXNPdk4taW54cGNVZw?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
+        "fetchStatus": "screened_out",
+        "articleMatched": false,
+        "matchScore": 0,
+        "matchReasons": [],
+        "evidenceTier": "C"
+      },
+      {
+        "method": "official_search",
+        "inputUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1aMzBTTzQ1NVhKSW95Qm1pRjhGMDZzYzNlcXZZUnJwV2QtX3luaGVLU1BHYmZGb3lGZzJVV2pORXhRYXZwVmZ2NUN2NTk4UWhTRWpMV3B0Mnh2dVp2c3luZU1kaGM0WHVRQ0FKOUJJLUJYWUlzZjFmYzBwSlg?oc=5",
+        "resolvedUrl": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1aMzBTTzQ1NVhKSW95Qm1pRjhGMDZzYzNlcXZZUnJwV2QtX3luaGVLU1BHYmZGb3lGZzJVV2pORXhRYXZwVmZ2NUN2NTk4UWhTRWpMV3B0Mnh2dVp2c3luZU1kaGM0WHVRQ0FKOUJJLUJYWUlzZjFmYzBwSlg?oc=5",
+        "domain": "news.google.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -1851,6 +1846,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE54ajZzb2tFUWJyZFluTFpkdWlVejFfODZ1bWZQQ1Z0SlQ3MXBxRnVZRnFQejJmeFNhd2tFR1o1Si1JV2dEVThaR1VOUXBobEZpbTVaeTJUdmE5eFNqZkE?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "news.meaww.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1877,6 +1873,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYUtHOWRiVVF1Z1lvUFliZFRzOW82cm4yMmtrYkl3WXJHaTF5SGpXbjlhYTBZRlVkczBnTmpoZFFldGdIOGF1cG05TXFTNUFnN3d1Mktuc28ycWFtOFoxQ2JxRFpzamNTUXFHczI1TzFCYjJVOHBHb0xrOEtnMjRkX3RHQ2hndXlYQS14VUw4M2k0MlNTeTF3endnYy1Jb1BhNTlfN0FLd3pkQ0pZamtuVjhZM2pVeTlURTR1eks4bHjSAcgBQVVfeXFMTm96c1pkMEZWMzU0WVg1YXU3a0NlODBULVBwM3BiRWFIemNCc1ZEMjZxc0tJdGhERUlPdzZrOXJmRnlQcy1OLUJPREtWUXNuWGdZQzBqblY2UXE5d0kyU0t5bXVDNDZzRjRuWnZpU1VPQ0gwTWY1Q2FMUEd6cnZiZXkyUGU2MGFlX3pIaVNRV0VOWGVDeGhuNWFlQkQ1Z0h5TF9OTlBndVhmNzVOeXgxUHBKX1hpVkg1S3d3Y09ybW96OXJPRVVXNG4?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "thechenabtimes.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1903,6 +1900,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPMzVBVTRIRmxuZkxXZTN0clkzQ2tlZHBKM0RZM2wwV1JlTms1WWRDaFRpcUZfU0lOVWY3RV94aVd2SUY0cE5QTkVCWnYwc3plZ0FsLU1zV2JUdVFsVHNJYU5ySFA4WkJpRU9NYUhNZGZIWUNqVlktWHA3aGJ4bHo0Tm4tb1FQZFdENjNvMXFLb2gyQ3drX0drVWNZTGtldkVKZkRtM25rZjM2ay0wR2c?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "news.ssbcrack.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1943,6 +1941,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxOWjdpenllQTRWQXpBTHRpMmpMbTZDNmdaenNSQ1FDTldiVlA3Nmk5WER5YW1fYm1CcTVOMTk4b0daQ21rNmZpOGY3S1BxRkYtRmNUT2FNMTNZM0hNYzhuYi1YVVpsUTN0ZFNWTTRYdE5LX2hyM19Ma0NkVWpQaEdSQXAwTnVyM2xzaWIyd24zMTN1ZjdxNEpwQ2tWbmd3b1Y4VFIwUFBoN1h3Tll4eGtBNkg5amNsMnVEN0ZVLThUaGZqX0hGWHh1dzRidDZKdC1LODZ1VEU3WlJCVTR5Q3ZKalJfb01JNEJqTEptWEk4dXNfSjhZX19YM1hzdnZLNmc?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "www.wusa9.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1969,6 +1968,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOamdEOWkya19TY0x6cVdYMkpLRFVab1lCWVM1bUxMbFRjRFY1VWVSX2F2NVNrUFJOeDB3dHVFbk5iWDVseDAtbHF2VnRGaVA4QUM3WDM4bmlPNWdjQUFjOE5ZSnVSMThEazZQeWxJZmxXQms5aFJZQ0hieEIxYnRTcll6TmdhUWRnQXltQ2RuZE1HSGQyZzlWZGZUWEFOdUt2ZDJUcjB3?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "95wxtk.iheart.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -1995,6 +1995,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOTFdqSDlXTEV2b3E0Qk9fZkx4aHhhdnFYZzlsYVZIdHVxaFMyV0xQaXJ5SXFjNUpIeVBZNGw1OFBvZzlfOWt0U3ZqNDlKOW9UWFdsNEdremQxU0VpRTVTUUJiRVlCTVppZDJQdENwTGZfd1VWSlFyV3A2b1JCU1ZWdFh2MTdlWmxyVGVrQ0V2aUpRNGhoWThNOWVleWxHSmtrZEtwUmZn?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "www.yahoo.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -2021,6 +2022,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOMHhCaHB0NS14Z3MwaXkzenR1Wnhya3k3RnU5V01nTm9JM0RoYjF4cUhwclcwQ0tySDJxamZmQmwzbUZtalNDeXFudGo5V2dETG0zamhUNWFwcGF5MklkSzQwSk9LS0Z1ekxlNFVOd2lNY2VHaVBlMHpJVmhIRXpSM1I1VEZ5UTh1SGZYVExFdXFhQ1I5SkVR?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "www.yahoo.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -2047,6 +2049,7 @@
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOTTZ1bnRiUlJPU3otOTE4SGxoSTBCczJOLUZEM0ZHNE56dFhnYmpGTFpzTFdiWmUyLTVzQUZTZFdmT3dDTk1XQ2JZeDJ0dVlkcDdIcnlLTFpiZnNTUlYzdkE4R2pyWWJtRlVhVVJ6VzFXenczOUpHQm02WldHdDhGZENGWU1LaEtPTHBRb253ekFhWmFEc3hoXzhQeENfWUdjRk4ycDBvUDJISzgyWE42M2FibFpoN1pycHJUeTVmb09fZW54b0ljWA?oc=5&hl=en-US&gl=US&ceid=US:en",
         "domain": "news.google.com",
         "publisherDomain": "news.ssbcrack.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "wrapper",
         "articleMatched": false,
         "matchScore": 0,
@@ -2069,20 +2072,22 @@
       },
       {
         "method": "redirect_unwrap",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
         "resolvedUrl": "https://www.reuters.com/legal/government/trump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03/",
         "domain": "www.reuters.com",
         "publisherDomain": "www.bing.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "resolved",
         "articleMatched": false,
         "evidenceTier": "B"
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
         "resolvedUrl": "https://www.reuters.com/legal/government/trump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03/",
         "domain": "www.reuters.com",
         "publisherDomain": "www.bing.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "failed",
         "articleMatched": false,
         "matchScore": 0,
@@ -2091,8 +2096,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2103,8 +2108,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2115,8 +2120,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2127,8 +2132,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2139,8 +2144,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2151,8 +2156,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2163,8 +2168,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2175,8 +2180,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13ba6f5494580b993602a629792&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa82296f6460d909757905550661f&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2190,7 +2195,7 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxONjZ6c3JQMXpkT1NnTEtndXdZenRjNG9QSzNIVXlxVEQ4aE5kY2xNZkR5djBfdS1JWmNWUUdYWlJIOUVWYVdsNlJQeVZ3eE5BZmdjQUVzRVFPcF91N19GSlV5RWlVRmE4azVNRGsyUmh0TVFIWVk1d0dGTkp2c2wzR0RsSFpQMnhqRV85cG1sQmdTbEJIS0JhckxhUm10OWxXY05FV2FEWQ?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxONjZ6c3JQMXpkT1NnTEtndXdZenRjNG9QSzNIVXlxVEQ4aE5kY2xNZkR5djBfdS1JWmNWUUdYWlJIOUVWYVdsNlJQeVZ3eE5BZmdjQUVzRVFPcF91N19GSlV5RWlVRmE4azVNRGsyUmh0TVFIWVk1d0dGTkp2c2wzR0RsSFpQMnhqRV85cG1sQmdTbEJIS0JhckxhUm10OWxXY05FV2FEWQ?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -2202,7 +2207,7 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPTC1pRDNFMFBQb0lzSE1QVlhTaW8zODc5RkQwZ0lzdVJlTVh2ek1DblFuakt6Y1RZRHNpMnd3TDRuNXI1TnZkei1Da1lxU3pHazI3WVlieEpMWklvMHNzWURaTjZNbnJqNUxnTVB3VVRRT1d5MkZPTTFVRTFfWDBXdlIxSXVYalh4dDNJSUZ5NEVnUm1vNTFISzhUTDdqOVFoZnI1Nk0yRmpFVmRudUQ4RzNyVWd3VUIyaU1Gb2NMY01LYUMtY19VbzZ3?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPTC1pRDNFMFBQb0lzSE1QVlhTaW8zODc5RkQwZ0lzdVJlTVh2ek1DblFuakt6Y1RZRHNpMnd3TDRuNXI1TnZkei1Da1lxU3pHazI3WVlieEpMWklvMHNzWURaTjZNbnJqNUxnTVB3VVRRT1d5MkZPTTFVRTFfWDBXdlIxSXVYalh4dDNJSUZ5NEVnUm1vNTFISzhUTDdqOVFoZnI1Nk0yRmpFVmRudUQ4RzNyVWd3VUIyaU1Gb2NMY01LYUMtY19VbzZ3?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -2214,7 +2219,7 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNnkwWFlwbHdGeDR0UEFwd3d3V1RDU1ZzaWtfbWhhRWVoVXQ2MUNUMlY3RS04c2s5eDQ4bUxJMEFKcmNoaEZsV0hmWWRwWlpJaDBMREpyQ2Fnc3pKdlV5VFhiZ3JralEyc2cxenNURjFBS0xZX0pQamhpMHF1MzF5ZjVpR2ltMjVnd041SUxPaXlheXM?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNnkwWFlwbHdGeDR0UEFwd3d3V1RDU1ZzaWtfbWhhRWVoVXQ2MUNUMlY3RS04c2s5eDQ4bUxJMEFKcmNoaEZsV0hmWWRwWlpJaDBMREpyQ2Fnc3pKdlV5VFhiZ3JralEyc2cxenNURjFBS0xZX0pQamhpMHF1MzF5ZjVpR2ltMjVnd041SUxPaXlheXM?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -2226,7 +2231,7 @@
         "inputUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA4cWR5ZHA5dEdsNkg2a0FQYk5JaHI1bmYtRUNROFp5UnRUeG9jbVMyQUpPVHUya3JOby05US02YVRDQVhnWkRYM29Zb1VwaUwwQ1BneW5VaGtTQXZpZkF5b2ZtdW50Y0E?oc=5",
         "resolvedUrl": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFA4cWR5ZHA5dEdsNkg2a0FQYk5JaHI1bmYtRUNROFp5UnRUeG9jbVMyQUpPVHUya3JOby05US02YVRDQVhnWkRYM29Zb1VwaUwwQ1BneW5VaGtTQXZpZkF5b2ZtdW50Y0E?oc=5",
         "domain": "news.google.com",
-        "publisherDomain": "www.reuters.com",
+        "publisherDomain": "reuters.com",
         "fetchStatus": "screened_out",
         "articleMatched": false,
         "matchScore": 0,
@@ -2247,20 +2252,22 @@
       },
       {
         "method": "redirect_unwrap",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
         "resolvedUrl": "https://www.reuters.com/legal/government/trump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03/",
         "domain": "www.reuters.com",
         "publisherDomain": "www.bing.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "resolved",
         "articleMatched": false,
         "evidenceTier": "B"
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2flegal%2fgovernment%2ftrump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03%2f&c=10556201803724158452&mkt=en-us",
         "resolvedUrl": "https://www.reuters.com/legal/government/trump-administration-threatens-cut-federal-agencies-support-smithsonian-2026-09-03/",
         "domain": "www.reuters.com",
         "publisherDomain": "www.bing.com",
+        "sourceRelationship": "primary",
         "fetchStatus": "failed",
         "articleMatched": false,
         "matchScore": 0,
@@ -2269,8 +2276,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW947001092026RP1%2f&c=9205326976133194115&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2281,8 +2288,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW993603092026RP1%2f&c=9259921613443032706&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2293,8 +2300,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990503092026RP1%2f&c=9787783711672470122&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2305,8 +2312,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9L%2f&c=9803883474517512099&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2317,8 +2324,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW990603092026RP1%2f&c=9843624901573949460&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2329,8 +2336,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GVA0%2f&c=2754813029987115076&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2341,8 +2348,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRCV00GV9Y%2f&c=6217054260723421506&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2353,8 +2360,8 @@
       },
       {
         "method": "domain_search",
-        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
-        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa13b537a4827bd7b456c3aba798d&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
+        "inputUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
+        "resolvedUrl": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a9aa823235d47cbb46212270af2ae22&url=https%3a%2f%2fwww.reuters.com%2fvideo%2fwatch%2fidRW909531082026RP1%2f&c=18427530749818103765&mkt=en-us",
         "domain": "www.bing.com",
         "publisherDomain": "www.bing.com",
         "fetchStatus": "screened_out",
@@ -2364,7 +2371,23 @@
         "evidenceTier": "C"
       }
     ],
-    "failureType": "resolver_failed"
+    "failureType": "resolver_failed",
+    "before": {
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "ambiguous",
+      "evidenceTierAfterUpgrade": "C",
+      "evidenceSources": [],
+      "failureType": "resolver_failed"
+    },
+    "after": {
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "ambiguous",
+      "evidenceTierAfterUpgrade": "C",
+      "evidenceSources": [],
+      "failureType": "resolver_failed",
+      "evidenceFailureReason": "source_page_retrieval_failed"
+    },
+    "evidenceFailureReason": "source_page_retrieval_failed"
   },
   "integrationReplay": {
     "input": "new international-wire records from the same recent 7-day window only",
@@ -2389,5 +2412,331 @@
     "E": "article body fetched but semantic event match failed",
     "F": "article matched and passed the existing evidence policy"
   },
-  "notes": "Wire queries are discovery-only. Search wrappers and snippets are never final evidence; direct access failures are recorded without bypassing access controls. The integration replay is a post-hoc audit and does not rewrite the original production audit or formal daily report."
+  "notes": "Wire queries are discovery-only. Search wrappers and snippets are never final evidence; direct access failures are recorded without bypassing access controls. The integration replay is a post-hoc audit and does not rewrite the original production audit or formal daily report.",
+  "trustedAlternateRecovery": {
+    "auditedAt": "2026-09-04T19:13:56+08:00",
+    "scope": "existing Smithsonian trusted alternate wrapper samples",
+    "before": {
+      "wrapperSamplesConsidered": 10,
+      "publisherSearchesAttempted": 0,
+      "directUrlsFound": 0,
+      "directFetchSuccesses": 0,
+      "semanticMatches": 0,
+      "evidenceQualified": 0,
+      "successRate": 0.0,
+      "note": "Previous resolver had no generic publisher-domain recovery for alternate display names."
+    },
+    "wrappersConsidered": 10,
+    "publishersMapped": 6,
+    "publisherDomains": [
+      "abcnews.go.com",
+      "cnn.com",
+      "npr.org",
+      "reuters.com",
+      "thehill.com",
+      "washingtonpost.com"
+    ],
+    "publisherSearchesAttempted": 10,
+    "publisherSearchesSucceeded": 10,
+    "directUrlsFound": 7,
+    "directFetchSuccesses": 0,
+    "semanticMatches": 0,
+    "evidenceQualified": 0,
+    "successRate": 0.0,
+    "failureCategories": {
+      "semantic_match_failed": 5,
+      "no_direct_article": 5
+    },
+    "publisherTypes": [
+      {
+        "domain": "abcnews.go.com",
+        "sourceTier": "B"
+      },
+      {
+        "domain": "cnn.com",
+        "sourceTier": "B"
+      },
+      {
+        "domain": "npr.org",
+        "sourceTier": "B"
+      },
+      {
+        "domain": "reuters.com",
+        "sourceTier": "B"
+      },
+      {
+        "domain": "thehill.com",
+        "sourceTier": "B"
+      },
+      {
+        "domain": "washingtonpost.com",
+        "sourceTier": "B"
+      }
+    ],
+    "samples": [
+      {
+        "publisher": "Reuters",
+        "publisherDomain": "reuters.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5",
+        "publisherSearchQuery": "site:reuters.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [
+          {
+            "title": "American Airlines elevates premium seating for big spenders",
+            "url": "https://www.reuters.com/video/watch/idRW993603092026RP1/",
+            "fetchStatus": "HTTPError: HTTP Error 401: HTTP Forbidden",
+            "httpStatus": 401,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          }
+        ],
+        "directUrlsFound": 1,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "semantic_match_failed"
+        ]
+      },
+      {
+        "publisher": "ABC News - Breaking News, Latest News and Videos",
+        "publisherDomain": "abcnews.go.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQNlNlZ25SVHU0cFlwT2syOFp3Z2c1dFNGRkp5RDNCenhMSDZncEdRNjJacnh4cjZSX3RTRE9GS0hoMmhmNFV3VWVmUnBwcDBrZUNQMUQxSGdQWldVaVpyRFNiX3hXanR3c1pEZGxTQWZQN0VzUUJOeVhGNzEyN3Y3UFV6WGpEZ2JKS3V4a2VlX09hbHllbHNaaWVxVVh6UUUzZ2hIc0t2SWlteHJXbnfSAbMBQVVfeXFMUFdMTmNDaE1FbWJDTWhSdkt6YlVxMDh6a3lnMG1CamN0Nk9xZy03OW5ITjFtUm1ndTZFa3lDY1FHQ0NWa1R5Z1NfWHVHQlFfWV93cmVCd0N6VE0tbjNwN2tGYlpRaGo1b3U5M1NnRUpGUTFKVFY2TjlTdmtJdUJNLWZzTFF6aWV6bjZJbGRQMUVjWmxINWRCWHNJZTFaTW95ZzdqV3BzUlFlUm1EYXF4N0RPSFU?oc=5",
+        "publisherSearchQuery": "site:abcnews.go.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [],
+        "directUrlsFound": 0,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "no_direct_article"
+        ]
+      },
+      {
+        "publisher": "Reuters",
+        "publisherDomain": "reuters.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5",
+        "publisherSearchQuery": "site:reuters.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [
+          {
+            "title": "American Airlines elevates premium seating for big spenders",
+            "url": "https://www.reuters.com/video/watch/idRW993603092026RP1/",
+            "fetchStatus": "HTTPError: HTTP Error 401: HTTP Forbidden",
+            "httpStatus": 401,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          }
+        ],
+        "directUrlsFound": 1,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "semantic_match_failed"
+        ]
+      },
+      {
+        "publisher": "ABC News - Breaking News, Latest News and Videos",
+        "publisherDomain": "abcnews.go.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQNlNlZ25SVHU0cFlwT2syOFp3Z2c1dFNGRkp5RDNCenhMSDZncEdRNjJacnh4cjZSX3RTRE9GS0hoMmhmNFV3VWVmUnBwcDBrZUNQMUQxSGdQWldVaVpyRFNiX3hXanR3c1pEZGxTQWZQN0VzUUJOeVhGNzEyN3Y3UFV6WGpEZ2JKS3V4a2VlX09hbHllbHNaaWVxVVh6UUUzZ2hIc0t2SWlteHJXbnfSAbMBQVVfeXFMUFdMTmNDaE1FbWJDTWhSdkt6YlVxMDh6a3lnMG1CamN0Nk9xZy03OW5ITjFtUm1ndTZFa3lDY1FHQ0NWa1R5Z1NfWHVHQlFfWV93cmVCd0N6VE0tbjNwN2tGYlpRaGo1b3U5M1NnRUpGUTFKVFY2TjlTdmtJdUJNLWZzTFF6aWV6bjZJbGRQMUVjWmxINWRCWHNJZTFaTW95ZzdqV3BzUlFlUm1EYXF4N0RPSFU?oc=5",
+        "publisherSearchQuery": "site:abcnews.go.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [],
+        "directUrlsFound": 0,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "no_direct_article"
+        ]
+      },
+      {
+        "publisher": "The Washington Post",
+        "publisherDomain": "washingtonpost.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPb3h1VVBJZW5DdVp0MnFab0xBclJGOHc0alRWN0ZtMGljb0VkUDlyVlNXVzdrY2xET0g4WUJqNmp5VTVLNTBVd0VROVZEcHpKYTJ3bnZ1WVJvV0ZSWlVlNVE1eFo2UEdHOHhuN2lMbDJIQmxyZm9LbUU0SHFtQVF2RU9zLWRNMHM0UGxPb3JMbW9KT1VBS1VqSjBla3dmS2tISzJqMS1OcmJVY2ZOUllndVdhNlNxeElfd00yVFhRZm93MVk?oc=5",
+        "publisherSearchQuery": "site:washingtonpost.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [
+          {
+            "title": "Trump urges Congress to pass tax incentives to restore Hollywood’s luster",
+            "url": "https://www.washingtonpost.com/politics/2026/09/01/trump-urges-congress-pass-tax-incentives-film-production/",
+            "fetchStatus": "TimeoutError: The read operation timed out",
+            "httpStatus": null,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          },
+          {
+            "title": "Lake Ontario is now Lake America. Residents of Trump-voting Ontario have thoughts.",
+            "url": "https://www.washingtonpost.com/politics/2026/09/01/lake-ontario-is-now-lake-america-residents-trump-voting-ontario-have-thoughts/",
+            "fetchStatus": "TimeoutError: The read operation timed out",
+            "httpStatus": null,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          }
+        ],
+        "directUrlsFound": 2,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "semantic_match_failed"
+        ]
+      },
+      {
+        "publisher": "NPR",
+        "publisherDomain": "npr.org",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQWkxHVjllcGpRajRJWVBDLUNJaUtNaDI3QS1ZdFYyY0xhMTRnSmRCSDVLWm9tZkFCV0tES3Nwak1INndvdGFGcDBjYkRhZ20ybmFDdi14eVc4UUU4X0NzTVk5X1FfLXpVd3FhY2hyRGpRNEVsTnE3a2RLdWFuQWVVUkNqajNEWGVPVkxyLVN2eDRoN0syQ09BZjZOdw?oc=5",
+        "publisherSearchQuery": "site:npr.org trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [],
+        "directUrlsFound": 0,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "no_direct_article"
+        ]
+      },
+      {
+        "publisher": "The Washington Post",
+        "publisherDomain": "washingtonpost.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPb3h1VVBJZW5DdVp0MnFab0xBclJGOHc0alRWN0ZtMGljb0VkUDlyVlNXVzdrY2xET0g4WUJqNmp5VTVLNTBVd0VROVZEcHpKYTJ3bnZ1WVJvV0ZSWlVlNVE1eFo2UEdHOHhuN2lMbDJIQmxyZm9LbUU0SHFtQVF2RU9zLWRNMHM0UGxPb3JMbW9KT1VBS1VqSjBla3dmS2tISzJqMS1OcmJVY2ZOUllndVdhNlNxeElfd00yVFhRZm93MVk?oc=5",
+        "publisherSearchQuery": "site:washingtonpost.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [
+          {
+            "title": "Trump urges Congress to pass tax incentives to restore Hollywood’s luster",
+            "url": "https://www.washingtonpost.com/politics/2026/09/01/trump-urges-congress-pass-tax-incentives-film-production/",
+            "fetchStatus": "TimeoutError: The read operation timed out",
+            "httpStatus": null,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          },
+          {
+            "title": "Lake Ontario is now Lake America. Residents of Trump-voting Ontario have thoughts.",
+            "url": "https://www.washingtonpost.com/politics/2026/09/01/lake-ontario-is-now-lake-america-residents-trump-voting-ontario-have-thoughts/",
+            "fetchStatus": "TimeoutError: The read operation timed out",
+            "httpStatus": null,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          }
+        ],
+        "directUrlsFound": 2,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "semantic_match_failed"
+        ]
+      },
+      {
+        "publisher": "The Hill",
+        "publisherDomain": "thehill.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWlE4anFFUEpYdElNclJwVjk1ZGEybjFINndpNUcyUFdRcjZpMEdKSVFDMzk0ajcyTFVfcEpFSnFsU2hqRmVxb2tNOGpYSkNhblBCSjRWVDZwRkNLaUYxTi1HM0RwQTdlSVNNbVZUMGMyLWhHT2oxb1NlODJoNFVNZ3c2MWpXWWh3RzFCdUxzSXBzQ3Jtbi1qb3dvZ21oSVZlQmY0ckZ2c0gzZ2g4X2xOT1c0TlRhSkFreVZZ0gHAAUFVX3lxTE1XdXJZV29uMDF4ZVg4X0YzX1hlTUpoSHdhTWFQZlhWenlyLS1ZVkN4UVlqdVBaTW9tWm9iX05WdnVMYUpFVEZYNHpDdDZrLUVPRFJfRnNQbUc4Yk01RThadlk3bnJtQk1rVnlBR0JIb3hyRkxkNlh6R05jUjVYZWM3b2JaZGNmb1p1QkpZRWI2U1A2eE1JQXE2SUJuZFBwTEJPX3dMYnlxQ0ZfTTV3UW9yZ2lfakZZXzRxYkJyeGREOQ?oc=5",
+        "publisherSearchQuery": "site:thehill.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [],
+        "directUrlsFound": 0,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "no_direct_article"
+        ]
+      },
+      {
+        "publisher": "CNN",
+        "publisherDomain": "cnn.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNelhSZXpSUVpCV3dfSE1vcFdZRlpyazlJY3pvSU02bEJad0lySFhYWS1BdjVOVHg5TENuRF9xWnNUck9FaWRNQzlIZ0pnLVBsNXBxNWxqSjlmZUtvb00zeEloNGoxRkYzcmJzNkxycTlJUWxpRmRCOFZpMWk5emhEa290VVQ2Q1NJTkxYZWNRNmowRnYwVUhXaDBDMVNNRE0?oc=5",
+        "publisherSearchQuery": "site:cnn.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [],
+        "directUrlsFound": 0,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "no_direct_article"
+        ]
+      },
+      {
+        "publisher": "Reuters",
+        "publisherDomain": "reuters.com",
+        "sourceTier": "B",
+        "wrapperUrl": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWTFXUjNsUTU3amtBNEpSeGtYbGUwa2E2bFdpTjAzMGRRN3NJQk9RM3R4eUhiYUktZUR2YzVJSm12Wk9iMHM0cFpDU0gzQkl6RjdaZ1NXVGRzWm92OUZzcWVrcTFDamNiR00ydVVWcXFvZF82YXd4cmZYbUxWRjc4OFFQMFRZT1JUSHNoZTU4QXg5LThhaDFMYnZqSVd5NkNWS1EzSUtNeC1XemJqQjZPNTVvYkdqcm5xck1tYXN1ZGIxdw?oc=5",
+        "publisherSearchQuery": "site:reuters.com trump smithsonian threatens agencies after:2026-09-01 before:2026-09-05",
+        "publisherSearchSuccess": true,
+        "publisherSearchFailure": null,
+        "directUrls": [
+          {
+            "title": "American Airlines elevates premium seating for big spenders",
+            "url": "https://www.reuters.com/video/watch/idRW993603092026RP1/",
+            "fetchStatus": "HTTPError: HTTP Error 401: HTTP Forbidden",
+            "httpStatus": 401,
+            "bodyCharacters": 0,
+            "articleMatched": false,
+            "evidenceTier": "B",
+            "sourceRelationship": "publisher_recovery"
+          }
+        ],
+        "directUrlsFound": 1,
+        "directFetchSuccesses": 0,
+        "semanticMatches": 0,
+        "qualifiedSources": [],
+        "failureCategories": [
+          "semantic_match_failed"
+        ]
+      }
+    ],
+    "smithsonianResolution": {
+      "before": {
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "ambiguous",
+        "evidenceTierAfterUpgrade": "C",
+        "evidenceSources": [],
+        "failureType": "resolver_failed"
+      },
+      "after": {
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "ambiguous",
+        "evidenceTierAfterUpgrade": "C",
+        "evidenceSources": [],
+        "failureType": "resolver_failed",
+        "evidenceFailureReason": "source_page_retrieval_failed"
+      },
+      "attemptCount": 62
+    }
+  }
 }

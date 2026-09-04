@@ -31,7 +31,12 @@ else:
     ROOT = Path(__file__).resolve().parents[1]
 
 from automation.backfill_monitoring import fetch, links
-from automation.governance import canonical_url, host_matches, source_info
+from automation.governance import (
+    canonical_url,
+    host_matches,
+    publisher_domain_from_name,
+    source_info,
+)
 
 TZ = timezone(timedelta(hours=8))
 DISCOVERY_DIR = ROOT / "content" / "发现"
@@ -141,10 +146,19 @@ QUERY_BACKENDS = (
     {"id": "google-news-rss", "name": "Google News RSS", "base": "https://news.google.com/rss/search", "locale": "en"},
 )
 
-# The generic publisher-domain fallback is intentionally bounded to the
-# international wire publishers audited in this pass. Other A/B sources keep
-# their existing event-specific and alternate-source paths.
-WIRE_PUBLISHER_DOMAINS = ("reuters.com", "apnews.com")
+# The generic publisher-domain fallback is intentionally bounded to trusted
+# wire and mainstream publishers already classified by source policy. It is a
+# recovery path for a known publisher hint, not a new discovery family.
+WIRE_PUBLISHER_DOMAINS = (
+    "reuters.com", "apnews.com", "washingtonpost.com", "abcnews.go.com",
+    "cnn.com", "npr.org", "thehill.com",
+)
+PUBLISHER_SEARCH_SIGNAL_TERMS = frozenset({
+    "support", "funding", "grant", "grants", "agency", "agencies", "ties",
+    "cooperation", "loan", "loans", "lending", "policy", "governance",
+    "threat", "threatens", "threatened", "warning", "warns", "cut", "cuts",
+    "work", "working", "stolen", "theft", "discovery", "finds", "research",
+})
 
 # Keep the full daily search within the native automation run window while
 # retaining a per-request timeout and one audit row per configured query.
@@ -714,6 +728,14 @@ def publisher_domains(record: dict) -> list[str]:
     source_domain = str(record.get("sourceDomain") or "").lower().strip()
     if re.fullmatch(r"(?:[a-z0-9-]+\.)+[a-z]{2,}", source_domain) and source_domain not in {"news.google.com", "bing.com"}:
         domains.add(source_domain)
+    for value in (
+        record.get("sourceDomain"),
+        record.get("publisher"),
+        record.get("publisherName"),
+    ):
+        mapped = publisher_domain_from_name(value)
+        if mapped:
+            domains.add(mapped)
     return sorted(domains)
 
 
@@ -1484,7 +1506,18 @@ def publisher_search_anchor(event: dict) -> str:
     if cjk:
         return " ".join(cjk[:2])
     latin = sorted((term for term in terms if re.fullmatch(r"[a-z][a-z0-9'-]{3,}", term)), key=lambda term: (-len(term), term))
-    return " ".join(latin[:4]) or title
+    proper = [
+        token.casefold() for token in re.findall(r"\b[A-Z][a-z0-9'-]{3,}\b", title)
+        if token.casefold() in latin
+    ]
+    signal = [term for term in latin if term in PUBLISHER_SEARCH_SIGNAL_TERMS]
+    selected = []
+    for term in proper + signal + latin:
+        if term not in selected:
+            selected.append(term)
+        if len(selected) >= 4:
+            break
+    return " ".join(selected) or title
 
 
 def generic_publisher_search_results(event: dict, report: dict, start: date, end: date) -> tuple[list[dict], dict | None]:
@@ -1515,6 +1548,7 @@ def generic_publisher_search_results(event: dict, report: dict, start: date, end
         row["url"] = resolved
         row["sourceDomain"] = host
         row["sourcePublisherUrl"] = f"https://{host}"
+        row["sourceRelationship"] = "publisher_recovery"
         if changed:
             row["transportUrl"] = transport
         row["discoveredVia"] = "publisher-domain-search"
@@ -1595,6 +1629,7 @@ def publisher_search_results(event: dict, report: dict, start: date, end: date) 
                 "queryBackend": "publisher-search",
                 "scope": event.get("scope", "domestic"),
                 "sourceDomain": host,
+                "sourceRelationship": "publisher_recovery",
             })
         audit["success"] = True
         audit["returnedResultCount"] = len(docs)
@@ -1807,6 +1842,11 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
     """Resolve one report and return an auditable attempt plus publishable source."""
     input_url = result.get("url", "")
     publisher_domain = (publisher_domains(result) or [(urlsplit(input_url).hostname or "").lower()])[0]
+    source_relationship = result.get("sourceRelationship") or (
+        "publisher_recovery" if method == "domain_search" and result.get("discoveredVia") in {
+            "publisher-domain-search", "publisher-search"
+        } else "primary"
+    )
     unwrapped_url, unwrapped = unwrap_redirect_url(input_url)
     attempts = []
     if unwrapped:
@@ -1817,6 +1857,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "resolvedUrl": unwrapped_url,
             "domain": (urlsplit(unwrapped_url).hostname or "").lower(),
             "publisherDomain": publisher_domain,
+            "sourceRelationship": source_relationship,
             "fetchStatus": "resolved",
             "articleMatched": False,
             "evidenceTier": unwrapped_actual.get("tier", "C"),
@@ -1845,6 +1886,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         "resolvedUrl": resolved_url,
         "domain": (urlsplit(resolved_url).hostname or "").lower(),
         "publisherDomain": publisher_domain,
+        "sourceRelationship": source_relationship,
         "fetchStatus": "wrapper" if wrapper_page and not resolve_error else "ok" if not resolve_error else "failed",
             "articleMatched": matched,
             "matchScore": match_details.get("score", 0),
@@ -1855,6 +1897,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         "discoveryUrl": input_url,
         "url": resolved_url,
         "publisherDomain": publisher_domain,
+        "sourceRelationship": source_relationship,
         "title": result.get("title", ""),
         "tier": actual.get("tier", "C"),
         "retrieved": not bool(resolve_error) and not wrapper_page,
@@ -1877,6 +1920,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "articleVerified": True,
             "publisher": verification.get("publisher") or result.get("sourceDomain") or (urlsplit(resolved_url).hostname or "").lower(),
             "publisherDomain": (urlsplit(resolved_url).hostname or "").lower(),
+            "sourceRelationship": source_relationship,
             "publishedDate": result.get("publishedDate") or "",
         }
     return {"attempts": attempts, "checked": checked}, publishable

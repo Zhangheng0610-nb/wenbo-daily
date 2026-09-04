@@ -39,6 +39,7 @@ from automation.daily_discovery import (
     historical_published_event_relation,
     infer_editorial_scope,
     parse_bing_html,
+    publisher_domains,
     query_audit_status,
     _execute_one_query,
     unwrap_redirect_url,
@@ -1236,6 +1237,61 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(rows[0]["transportUrl"].split("?", 1)[0], "https://www.bing.com/news/apiclick.aspx")
         self.assertEqual(audit["backend"], "publisher-search-bing")
         self.assertEqual(audit["resolvedDirectCount"], 1)
+
+    @patch("automation.daily_discovery._execute_one_query")
+    def test_trusted_alternate_display_name_uses_bounded_publisher_recovery(self, execute_query):
+        execute_query.return_value = ([{
+            "title": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "url": "https://www.bing.com/news/apiclick.aspx?url=https%3A%2F%2Fwww.washingtonpost.com%2Fpolitics%2Fsmithsonian-support%2F",
+            "publishedDate": "2026-09-03",
+            "sourceDomain": "The Washington Post",
+        }], {
+            "actualQuery": "site:washingtonpost.com Smithsonian federal support",
+            "success": True,
+            "returnedResultCount": 1,
+            "acceptedRawCount": 1,
+        })
+        rows, audit = publisher_search_results(
+            {
+                "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+                "scope": "international",
+            },
+            {"sourceDomain": "The Washington Post"},
+            __import__("datetime").date(2026, 9, 1),
+            __import__("datetime").date(2026, 9, 4),
+        )
+        self.assertEqual(publisher_domains({"sourceDomain": "The Washington Post"}), ["washingtonpost.com"])
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["url"], "https://www.washingtonpost.com/politics/smithsonian-support/")
+        self.assertEqual(rows[0]["sourceRelationship"], "publisher_recovery")
+        self.assertIn("site:washingtonpost.com", audit["actualQuery"])
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    def test_trusted_alternate_direct_article_is_article_verified(self, resolve_url):
+        resolve_url.return_value = (
+            "https://www.washingtonpost.com/politics/smithsonian-support/",
+            "<html><head><title>Trump administration threatens to cut federal agencies' support for Smithsonian</title></head>"
+            "<body>The Trump administration is threatening to cut federal agencies' support for the Smithsonian Institution. "
+            "The dispute concerns federal support and museum agency cooperation.</body></html>",
+            None,
+        )
+        event = {
+            "representativeTitle": "Trump administration threatens to cut federal agencies' support for Smithsonian",
+            "scope": "international",
+        }
+        outcome, source = resolve_evidence_attempt(event, {
+            "title": "Smithsonian federal support dispute - The Washington Post",
+            "url": "https://www.washingtonpost.com/politics/smithsonian-support/",
+            "sourceDomain": "The Washington Post",
+            "sourceRelationship": "publisher_recovery",
+        }, "domain_search")
+        self.assertIsNotNone(source)
+        self.assertEqual(source["tier"], "B")
+        self.assertEqual(source["sourceRelationship"], "publisher_recovery")
+        self.assertTrue(outcome["checked"]["articleVerified"])
+
+    def test_unknown_publisher_display_name_is_not_promoted(self):
+        self.assertEqual(publisher_domains({"sourceDomain": "A Random News Desk"}), [])
 
     @patch("automation.daily_discovery.resolve_evidence_url")
     def test_google_news_wrapper_never_becomes_final_evidence(self, resolve_url):

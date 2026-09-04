@@ -53,6 +53,7 @@ SOURCE_GROUPS = OrderedDict([
             # supplementary evidence and should be cross-checked when material.
             "asahi.com", "bjd.com.cn", "nmgnews.com.cn",
             "henandaily.cn", "yzwb.net", "enorth.com.cn", "orf.at",
+            "washingtonpost.com", "abcnews.go.com", "npr.org", "thehill.com",
             "aa.com.tr",
         ),
     }),
@@ -62,6 +63,38 @@ SOURCE_GROUPS = OrderedDict([
         "domains": (),
     }),
 ])
+
+
+# Search providers often expose a publisher display name but no publisher
+# URL.  These aliases are source-governance metadata, not event rules: they
+# are resolved only to domains already classified as A/B by ``source_info``.
+# Keep the list small and explicit; an unknown display name must not become a
+# trusted hostname by string guessing.
+PUBLISHER_NAME_DOMAIN_ALIASES = (
+    (("reuters",), "reuters.com"),
+    (("associated press", "ap news", "ap"), "apnews.com"),
+    (("the washington post", "washington post"), "washingtonpost.com"),
+    (("abc news",), "abcnews.go.com"),
+    (("cnn",), "cnn.com"),
+    (("npr",), "npr.org"),
+    (("the hill",), "thehill.com"),
+)
+
+
+def publisher_domain_from_name(value):
+    """Map a trusted publisher display name to its canonical domain."""
+    normalized = " ".join(str(value or "").casefold().split())
+    if not normalized:
+        return ""
+    for aliases, domain in PUBLISHER_NAME_DOMAIN_ALIASES:
+        if any(
+            normalized == alias
+            or normalized.startswith(alias + " -")
+            or normalized.startswith(alias + " |")
+            for alias in aliases
+        ):
+            return domain
+    return ""
 
 
 # A WeChat article URL does not prove who operates the account.  Accounts are
