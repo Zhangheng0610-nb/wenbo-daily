@@ -6,41 +6,321 @@
   "editorialInputPath": "content/复核/2026-09-04.json",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
-  "internationalDiscoveryStatus": "partial",
-  "internationalDiscoveryNote": "恢复查询层完成 63/126 次；剩余失败已在 replay queryAudits 中逐条记录，未将 partial 当作完整发现。",
+  "internationalDiscoveryStatus": "checked",
+  "internationalDiscoveryNote": "代理恢复后完整执行国内与国际 query families；126/126 查询成功，未将 provider 恢复误写为早晨 production 状态。",
   "replayCutoff": "2026-09-04T07:13:00+08:00",
-  "candidatePoolDefinition": "本期唯一编辑输入为 content/复核/2026-09-04.json 的 completed finalEditorialPool；原始 discoveryAuditPath 仅用于追溯，不与复核池拼接。",
+  "candidatePoolDefinition": "本次 recovery 的唯一正式编辑输入为 content/复核/2026-09-04.json 的 finalEditorialPool；原始 discovery audit 仅用于追溯，不与复核池拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-04T14:20:20+08:00",
-    "reviewedEvents": 3,
-    "selectedEvents": 0,
-    "historicalExcludedEvents": 2,
-    "note": "已完成 recovery final pool 的逐条编辑判断；历史重复事件在历史去重阶段排除，不重新占用日报席位。"
-  },
-  "revision": {
-    "revisedAt": "2026-09-04T14:20:20+08:00",
-    "revisionType": "same_day_editorial_revision",
-    "discoveryAuditUnchanged": true,
-    "editorialInputPath": "content/复核/2026-09-04.json",
-    "runtimeEnrichment": true,
-    "revisionReason": "query_provider_recovery_and_historical_dedup_correction"
+    "reviewedAt": "2026-09-04T14:55:49+08:00",
+    "reviewedEvents": 6,
+    "selectedEvents": 3,
+    "historicalExcludedEvents": 4,
+    "note": "完成全网络 recovery 后，对历史去重后的六个可发布事件逐条编辑判断；三条中等优先级、A级直接证据的实质博物馆事件入选，低优先级事项不作填充。"
   },
   "candidates": [
     {
       "candidateId": "recovery-20260904-001",
+      "eventId": "event-4ca89b8f0532",
+      "title": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展",
+      "publishedDate": "2026-09-03",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE84NEpQTHJ6Y2ZLMENqVzZMRVkwbXVpMVRlZ1ZMWHZhNExObmp5Sk9vWHpuZ1pTR0gwQXBubkNrN3dha3lMd2hVaHBXajBQU1VWX1EwcGoyaWRQWGQ4QnBYU2JlZHA4MGZ2?oc=5",
+      "publisher": "chinanews.com.cn",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展",
+          "url": "http://www.chinanews.com.cn/hr/2026/09-03/10689658.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "博物馆",
+        "展览",
+        "近现代遗产"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_fresh_A_evidence_and_substantive_memorial_museum_exhibition",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "Full-network recovery under fixed code; editorial choice is independent of source tier.",
+      "discoveredVia": "full-network-recovery",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "selected_fresh_A_evidence_and_substantive_memorial_museum_exhibition",
+      "editorialPriorityScore": 56,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "significant_museum_or_exhibition_project",
+        "primary_freshness"
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [
+        {
+          "method": "existing_report",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE84NEpQTHJ6Y2ZLMENqVzZMRVkwbXVpMVRlZ1ZMWHZhNExObmp5Sk9vWHpuZ1pTR0gwQXBubkNrN3dha3lMd2hVaHBXajBQU1VWX1EwcGoyaWRQWGQ4QnBYU2JlZHA4MGZ2?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE84NEpQTHJ6Y2ZLMENqVzZMRVkwbXVpMVRlZ1ZMWHZhNExObmp5Sk9vWHpuZ1pTR0gwQXBubkNrN3dha3lMd2hVaHBXajBQU1VWX1EwcGoyaWRQWGQ4QnBYU2JlZHA4MGZ2?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "chinanews.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "inputUrl": "http://www.chinanews.com.cn/hr/2026/09-03/10689658.shtml",
+          "resolvedUrl": "http://www.chinanews.com.cn/hr/2026/09-03/10689658.shtml",
+          "domain": "www.chinanews.com.cn",
+          "publisherDomain": "www.chinanews.com.cn",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "matchScore": 100,
+          "matchReasons": [
+            "normalized_title_equal"
+          ],
+          "evidenceTier": "A"
+        },
+        {
+          "method": "broad_search",
+          "inputUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTzdVUXRJYXJRTmJib0VoemRtZDlyay1RRWdsbXB4cWpKUnNaTjJFTU5iZEJwbUtqVDlVVjFMNnJDdlpyNzVwdWRQNEhCckxycC1pa212SG9WdE9EX2tNd3NUOWRCX3hJVTNNWV9UWlBRRmpUUnM1TVdqNkgzbExBX25kYmIwMXM?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTzdVUXRJYXJRTmJib0VoemRtZDlyay1RRWdsbXB4cWpKUnNaTjJFTU5iZEJwbUtqVDlVVjFMNnJDdlpyNzVwdWRQNEhCckxycC1pa212SG9WdE9EX2tNd3NUOWRCX3hJVTNNWV9UWlBRRmpUUnM1TVdqNkgzbExBX25kYmIwMXM?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "finance.sina.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        }
+      ],
+      "dailyItemNumber": 1,
+      "dailyItemTitle": "海外华侨与抗日战争暨世界反法西斯战争纪念特展在沈阳开展"
+    },
+    {
+      "candidateId": "recovery-20260904-002",
+      "eventId": "event-49ae576b8781",
+      "title": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展",
+      "publishedDate": "2026-09-04",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9td1NqblJCTkxFQjBlSkxGdjAwbEdVV1QzMDktMDZPVk5zSVlQcFhaWG9ybmZLX0NPLXhpY1BRYzIyUE15dGxseVViRC03QW0tTXJyQU9nUXk3aWxtZXprc2tkWk9BS0lR?oc=5",
+      "publisher": "chinanews.com.cn",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展",
+          "url": "http://www.chinanews.com.cn/hr/2026/09-04/10690244.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "博物馆",
+        "展览",
+        "侨批文物"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_fresh_A_evidence_and_national_touring_exhibition",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "Full-network recovery under fixed code; editorial choice is independent of source tier.",
+      "discoveredVia": "full-network-recovery",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "selected_fresh_A_evidence_and_national_touring_exhibition",
+      "editorialPriorityScore": 56,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "significant_museum_or_exhibition_project",
+        "primary_freshness"
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [
+        {
+          "method": "existing_report",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9td1NqblJCTkxFQjBlSkxGdjAwbEdVV1QzMDktMDZPVk5zSVlQcFhaWG9ybmZLX0NPLXhpY1BRYzIyUE15dGxseVViRC03QW0tTXJyQU9nUXk3aWxtZXprc2tkWk9BS0lR?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9td1NqblJCTkxFQjBlSkxGdjAwbEdVV1QzMDktMDZPVk5zSVlQcFhaWG9ybmZLX0NPLXhpY1BRYzIyUE15dGxseVViRC03QW0tTXJyQU9nUXk3aWxtZXprc2tkWk9BS0lR?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "chinanews.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "inputUrl": "http://www.chinanews.com.cn/hr/2026/09-04/10690244.shtml",
+          "resolvedUrl": "http://www.chinanews.com.cn/hr/2026/09-04/10690244.shtml",
+          "domain": "www.chinanews.com.cn",
+          "publisherDomain": "www.chinanews.com.cn",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "matchScore": 100,
+          "matchReasons": [
+            "normalized_title_equal"
+          ],
+          "evidenceTier": "A"
+        },
+        {
+          "method": "broad_search",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1fS0pjWnkyd184TjdVejZ1VmFYYjJfb01oSkpyaE1fMldmMmtPOGIzMmFuSm5QWU5EeEQyRml3UUJOUzMyTkFTU2xQZWRSa1RPVUN2UGVydVh1dlJsdTVvdDNrWFI?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1fS0pjWnkyd184TjdVejZ1VmFYYjJfb01oSkpyaE1fMldmMmtPOGIzMmFuSm5QWU5EeEQyRml3UUJOUzMyTkFTU2xQZWRSa1RPVUN2UGVydVh1dlJsdTVvdDNrWFI?oc=5",
+          "domain": "news.google.com",
+          "publisherDomain": "www.bjnews.com.cn",
+          "fetchStatus": "screened_out",
+          "articleMatched": false,
+          "matchScore": 10,
+          "matchReasons": [
+            "compatible_event_kind"
+          ],
+          "evidenceTier": "C"
+        }
+      ],
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "《给阿嬷的情书》电影道具及侨批文物特展将开启全国巡展"
+    },
+    {
+      "candidateId": "recovery-20260904-003",
+      "eventId": "event-0621fc6c86ce",
+      "title": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
+      "publishedDate": "2026-09-03",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9hZWM3NjJNN3BxMG1Sd0pCOGpVSXlGdzBLblRienhyN3VDVUo3STRhOUtMR1pDRWV5UjBPY0d1MzVYRXgzWDdoSmtqd3Y3eHlaNC1YU2ZJVFprcUxfSGVwLVlfUGJ1bGMwNVE?oc=5",
+      "publisher": "chinanews.com.cn",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆",
+          "url": "http://www.chinanews.com.cn/cul/2026/09-03/10689949.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "博物馆",
+        "建筑",
+        "国际文化设施"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "selected_fresh_A_evidence_and_major_new_museum_project",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "Full-network recovery under fixed code; editorial choice is independent of source tier.",
+      "discoveredVia": "full-network-recovery",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "selected_fresh_A_evidence_and_major_new_museum_project",
+      "editorialPriorityScore": 56,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "significant_museum_or_exhibition_project",
+        "primary_freshness"
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "completed",
+      "evidenceUpgradeAttempted": true,
+      "evidenceUpgradeResult": "qualified",
+      "evidenceResolutionAttempts": [
+        {
+          "method": "existing_report",
+          "inputUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9hZWM3NjJNN3BxMG1Sd0pCOGpVSXlGdzBLblRienhyN3VDVUo3STRhOUtMR1pDRWV5UjBPY0d1MzVYRXgzWDdoSmtqd3Y3eHlaNC1YU2ZJVFprcUxfSGVwLVlfUGJ1bGMwNVE?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE9hZWM3NjJNN3BxMG1Sd0pCOGpVSXlGdzBLblRienhyN3VDVUo3STRhOUtMR1pDRWV5UjBPY0d1MzVYRXgzWDdoSmtqd3Y3eHlaNC1YU2ZJVFprcUxfSGVwLVlfUGJ1bGMwNVE?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "chinanews.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        },
+        {
+          "method": "domain_search",
+          "inputUrl": "http://www.chinanews.com.cn/cul/2026/09-03/10689949.shtml",
+          "resolvedUrl": "http://www.chinanews.com.cn/cul/2026/09-03/10689949.shtml",
+          "domain": "www.chinanews.com.cn",
+          "publisherDomain": "www.chinanews.com.cn",
+          "fetchStatus": "ok",
+          "articleMatched": true,
+          "matchScore": 100,
+          "matchReasons": [
+            "normalized_title_equal"
+          ],
+          "evidenceTier": "A"
+        },
+        {
+          "method": "official_search",
+          "inputUrl": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBwV1FFd2NzbXJ3ODNqYkRWZzVXUi1VSERmTGp6eDlKM0wxYkdfSkI1NkxZVmQwenNWdUF6ZURZR3RaWGdJZU8zZzllSjB1WTN0MGxDank1enZqUnFqWHMxeEx5QzhxWF8xRW5xbl9qQ0xXazZrRDUyZA?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBwV1FFd2NzbXJ3ODNqYkRWZzVXUi1VSERmTGp6eDlKM0wxYkdfSkI1NkxZVmQwenNWdUF6ZURZR3RaWGdJZU8zZzllSjB1WTN0MGxDank1enZqUnFqWHMxeEx5QzhxWF8xRW5xbl9qQ0xXazZrRDUyZA?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "finance.sina.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        },
+        {
+          "method": "official_search",
+          "inputUrl": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBFeE12WDZUcUJUU1V3Mm9jS1dsUDFsQzV1ekM3cWc1VXFodkpJTks1ajFLVDhPU3JtbHJ5RnZGbTRCSVNPbUhyS1B3Ylp4TFd1Z1ZWWTdZMTRCbVh3VWZRY0ROdGVpem84c3FtU29MRVdobkZxTllRYg?oc=5",
+          "resolvedUrl": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBFeE12WDZUcUJUU1V3Mm9jS1dsUDFsQzV1ekM3cWc1VXFodkpJTks1ajFLVDhPU3JtbHJ5RnZGbTRCSVNPbUhyS1B3Ylp4TFd1Z1ZWWTdZMTRCbVh3VWZRY0ROdGVpem84c3FtU29MRVdobkZxTllRYg?oc=5&hl=en-US&gl=US&ceid=US:en",
+          "domain": "news.google.com",
+          "publisherDomain": "finance.sina.com.cn",
+          "fetchStatus": "wrapper",
+          "articleMatched": false,
+          "matchScore": 0,
+          "matchReasons": [],
+          "evidenceTier": "C"
+        }
+      ],
+      "dailyItemNumber": 3,
+      "dailyItemTitle": "中国建筑师马岩松主持设计的卢卡斯叙事艺术博物馆将在洛杉矶开馆"
+    },
+    {
+      "candidateId": "recovery-20260904-004",
       "eventId": "event-af2353ba1bef",
       "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
       "publishedDate": "2026-09-04",
-      "discoveredAt": "2026-09-04T14:20:20+08:00",
-      "discoverySource": "ncha-wenwu-news",
-      "discoverySourceType": "source_scan",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "ncha.gov.cn",
+      "discoverySourceType": "query_search",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
       "publisher": "ncha.gov.cn",
       "evidenceSources": [
         {
+          "name": "中国新闻网：国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
           "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
           "tier": "A",
-          "name": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会（A级直接来源）"
+          "role": "evidence-upgrade"
         }
       ],
       "evidenceTier": "A",
@@ -49,36 +329,43 @@
       "international": false,
       "scope": "domestic",
       "decision": "rejected",
-      "decisionReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "decisionReason": "low_editorial_priority_after_full_network_recovery",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
-      "notes": "本次受控 recovery 重新检查；不把查询失败或低优先级结果当作安全的日报补充。",
-      "discoveredVia": "ncha-wenwu-news",
+      "notes": "Reviewed after full-network recovery; no filler selection.",
+      "discoveredVia": "full-network-recovery",
       "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "finalEditorialReason": "low_editorial_priority_after_full_network_recovery",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
       "editorialReasons": [
         "primary_freshness"
-      ]
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceResolutionAttempts": null
     },
     {
-      "candidateId": "recovery-20260904-002",
+      "candidateId": "recovery-20260904-005",
       "eventId": "event-eaee9c72a7b2",
       "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
       "publishedDate": "2026-09-03",
-      "discoveredAt": "2026-09-04T14:20:20+08:00",
-      "discoverySource": "ncha-wenwu-news",
-      "discoverySourceType": "source_scan",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "ncha.gov.cn",
+      "discoverySourceType": "query_search",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
       "publisher": "ncha.gov.cn",
       "evidenceSources": [
         {
+          "name": "中国新闻网：广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
           "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
           "tier": "A",
-          "name": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...（A级直接来源）"
+          "role": "evidence-upgrade"
         }
       ],
       "evidenceTier": "A",
@@ -87,36 +374,43 @@
       "international": false,
       "scope": "domestic",
       "decision": "rejected",
-      "decisionReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "decisionReason": "low_editorial_priority_after_full_network_recovery",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
-      "notes": "本次受控 recovery 重新检查；不把查询失败或低优先级结果当作安全的日报补充。",
-      "discoveredVia": "ncha-wenwu-news",
+      "notes": "Reviewed after full-network recovery; no filler selection.",
+      "discoveredVia": "full-network-recovery",
       "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "finalEditorialReason": "low_editorial_priority_after_full_network_recovery",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
       "editorialReasons": [
         "primary_freshness"
-      ]
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceResolutionAttempts": null
     },
     {
-      "candidateId": "recovery-20260904-003",
+      "candidateId": "recovery-20260904-006",
       "eventId": "event-f35206d16b83",
       "title": "LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
       "publishedDate": "2026-09-03",
-      "discoveredAt": "2026-09-04T14:20:20+08:00",
-      "discoverySource": "archaeology-magazine",
-      "discoverySourceType": "source_scan",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "archaeology.org",
+      "discoverySourceType": "query_search",
       "discoveryUrl": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/",
       "publisher": "archaeology.org",
       "evidenceSources": [
         {
+          "name": "中国新闻网：LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
           "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/",
           "tier": "B",
-          "name": "LED Light System Could Help Archaeologists Evaluate Sites Before Excavation（B级直接来源）"
+          "role": "evidence-upgrade"
         }
       ],
       "evidenceTier": "B",
@@ -125,29 +419,35 @@
       "international": true,
       "scope": "international",
       "decision": "rejected",
-      "decisionReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "decisionReason": "low_editorial_priority_after_full_network_recovery",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
-      "notes": "本次受控 recovery 重新检查；不把查询失败或低优先级结果当作安全的日报补充。",
-      "discoveredVia": "archaeology-magazine",
+      "notes": "Reviewed after full-network recovery; no filler selection.",
+      "discoveredVia": "full-network-recovery",
       "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "low_editorial_priority_after_query_recovery; no safe high_or_medium_priority fresh selection",
+      "finalEditorialReason": "low_editorial_priority_after_full_network_recovery",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
       "editorialReasons": [
         "primary_freshness"
-      ]
+      ],
+      "reportCount": 1,
+      "freshnessTier": "primary_0_48h",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceResolutionAttempts": null
     },
     {
-      "candidateId": "recovery-20260904-004",
+      "candidateId": "recovery-20260904-007",
       "eventId": "event-8551a8589879",
       "title": "中埃联合考古队新发现一批重要遗迹和文物",
       "publishedDate": "2026-09-02",
-      "discoveredAt": "2026-09-04T14:20:20+08:00",
-      "discoverySource": "新华网文博固定源扫描",
-      "discoverySourceType": "source_scan",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "新华网",
+      "discoverySourceType": "source_scan_and_query_search",
       "discoveryUrl": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
       "publisher": "新华网",
       "evidenceSources": [
@@ -155,54 +455,51 @@
           "name": "新华网：中埃联合考古队新发现一批重要遗迹和文物",
           "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
           "tier": "A",
-          "role": "source-scan"
+          "role": "historical-evidence"
         }
       ],
       "evidenceTier": "A",
       "topic": [
         "考古",
-        "国际交流",
-        "文化遗产"
+        "国际交流"
       ],
       "domestic": false,
       "international": true,
       "scope": "international",
       "decision": "rejected",
-      "decisionReason": "historical_duplicate_same_event_already_published; no substantive new development",
+      "decisionReason": "historical_duplicate_same_event_already_published_no_substantive_new_development",
       "selectedForDaily": false,
       "dedupStatus": "historical_duplicate",
-      "notes": "新华网直接报道上海博物馆与埃及最高文物委员会联合考古阶段性成果；未把搜索跳转页当作证据。",
-      "discoveredVia": "xinhua-cultural",
-      "discoveryQuery": "fixed source scan: xinhua-cultural",
+      "duplicateOf": "2026-09-02#item2",
+      "duplicateReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。",
+      "notes": "保留为审计记录，不进入本次 recovery finalEditorialPool。",
+      "discoveredVia": "historical-reconciliation",
+      "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "historical_duplicate_same_event_already_published; no substantive new development",
+      "finalEditorialReason": "历史 canonical event 已发布，来源更换或同事实报道不构成新进展。",
       "editorialPriorityScore": 94,
       "editorialPriorityLabel": "high",
       "editorialReasons": [
-        "substantive_archaeological_discovery_or_new_knowledge",
-        "meaningful_institutional_or_international_cooperation",
-        "new_development",
-        "primary_freshness"
-      ],
-      "duplicateOf": "2026-09-02#item2"
+        "historical_duplicate"
+      ]
     },
     {
-      "candidateId": "recovery-20260904-005",
+      "candidateId": "recovery-20260904-008",
       "eventId": "event-8a6da5892d19",
       "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
       "publishedDate": "2026-08-29",
-      "discoveredAt": "2026-09-04T14:20:20+08:00",
-      "discoverySource": "国家文物局政策与文物新闻固定源扫描",
-      "discoverySourceType": "source_scan",
-      "discoveryUrl": "http://www.ncha.gov.cn/art/2026/8/29/art_722_204552.html",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "国家文物局",
+      "discoverySourceType": "source_scan_and_query_search",
+      "discoveryUrl": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
       "publisher": "国家文物局",
       "evidenceSources": [
         {
-          "name": "国家文物局：召开树立和践行正确政绩观学习教育总结会",
+          "name": "国家文物局：国家文物局召开树立和践行正确政绩观学习教育总结会",
           "url": "http://www.ncha.gov.cn/art/2026/8/29/art_1879_204555.html",
           "tier": "A",
-          "role": "source-scan"
+          "role": "historical-evidence"
         }
       ],
       "evidenceTier": "A",
@@ -213,29 +510,123 @@
       "international": false,
       "scope": "domestic",
       "decision": "rejected",
-      "decisionReason": "historical_duplicate_same_event_already_published; no substantive new development",
+      "decisionReason": "historical_duplicate_same_event_already_published_no_substantive_new_development",
       "selectedForDaily": false,
       "dedupStatus": "historical_duplicate",
-      "notes": "固定源重复发现保留在 discovery audit 中，不重新进入日报。",
-      "discoveredVia": "ncha-policy-news",
-      "discoveryQuery": "fixed source scan: ncha-policy-news",
+      "duplicateOf": "2026-08-31#item1",
+      "duplicateReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。",
+      "notes": "保留为审计记录，不进入本次 recovery finalEditorialPool。",
+      "discoveredVia": "historical-reconciliation",
+      "discoveryQuery": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "historical_duplicate_same_event_already_published; no substantive new development",
+      "finalEditorialReason": "历史 canonical event 已发布，来源更换或同事实报道不构成新进展。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
       "editorialReasons": [
-        "backfill_freshness",
         "historical_duplicate"
+      ]
+    },
+    {
+      "candidateId": "recovery-20260904-009",
+      "eventId": "event-12aaa43d2f5a",
+      "title": "香港“古埃及文明大展”落幕",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "中国新闻网",
+      "discoverySourceType": "source_scan_and_query_search",
+      "discoveryUrl": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
+      "publisher": "中国新闻网",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：香港“古埃及文明大展”落幕",
+          "url": "http://www.chinanews.com.cn/dwq/2026/08-31/10687546.shtml",
+          "tier": "A",
+          "role": "historical-evidence"
+        }
       ],
-      "duplicateOf": "2026-08-31#item1"
+      "evidenceTier": "A",
+      "topic": [
+        "政策行业"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "rejected",
+      "decisionReason": "historical_duplicate_same_exhibition_already_published_no_substantive_new_development",
+      "selectedForDaily": false,
+      "dedupStatus": "historical_duplicate",
+      "duplicateOf": "2026-09-01#item1",
+      "duplicateReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。",
+      "notes": "保留为审计记录，不进入本次 recovery finalEditorialPool。",
+      "discoveredVia": "historical-reconciliation",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "历史 canonical event 已发布，来源更换或同事实报道不构成新进展。",
+      "editorialPriorityScore": 22,
+      "editorialPriorityLabel": "low",
+      "editorialReasons": [
+        "historical_duplicate"
+      ]
+    },
+    {
+      "candidateId": "recovery-20260904-010",
+      "eventId": "event-5432c779ed5b",
+      "title": "玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+      "publishedDate": "2026-08-31",
+      "discoveredAt": "2026-09-04T14:55:49+08:00",
+      "discoverySource": "中国新闻网",
+      "discoverySourceType": "source_scan_and_query_search",
+      "discoveryUrl": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+      "publisher": "中国新闻网",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：玩闹致博物馆标本受损是否应承担法律责任？律师解读",
+          "url": "http://www.chinanews.com.cn/cul/2026/08-31/10687526.shtml",
+          "tier": "A",
+          "role": "historical-evidence"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "政策行业"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "rejected",
+      "decisionReason": "historical_duplicate_same_incident_already_published_no_substantive_new_development",
+      "selectedForDaily": false,
+      "dedupStatus": "historical_duplicate",
+      "duplicateOf": "2026-09-01#item2",
+      "duplicateReason": "已发布的历史 canonical event；本次只增加来源或重复报道，未发现实质新进展。",
+      "notes": "保留为审计记录，不进入本次 recovery finalEditorialPool。",
+      "discoveredVia": "historical-reconciliation",
+      "discoveryQuery": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "历史 canonical event 已发布，来源更换或同事实报道不构成新进展。",
+      "editorialPriorityScore": 22,
+      "editorialPriorityLabel": "low",
+      "editorialReasons": [
+        "historical_duplicate"
+      ]
     }
   ],
   "summary": {
-    "discovered": 5,
-    "selected": 0,
-    "rejected": 5,
+    "discovered": 10,
+    "selected": 3,
+    "rejected": 7,
     "deferred": 0,
     "needsVerification": 0
+  },
+  "revision": {
+    "revisedAt": "2026-09-04T14:55:49+08:00",
+    "revisionType": "same_day_editorial_revision",
+    "discoveryAuditUnchanged": true,
+    "editorialInputPath": "content/复核/2026-09-04.json",
+    "runtimeEnrichment": true,
+    "revisionReason": "query_provider_recovery_and_historical_dedup_correction"
   }
 }
