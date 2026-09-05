@@ -253,11 +253,21 @@ RELEVANCE_TERMS = (
     "文物", "博物馆", "考古", "遗址", "文化遗产", "世界遗产", "国家历史文化名城", "历史文化名城", "石窟", "古建筑", "古墓", "古迹", "发掘", "出土",
     "展览", "大展", "特展", "临展", "联展", "展期", "藏品", "标本", "保护", "修复", "博物馆", "museum", "archaeology", "heritage", "conservation", "excavation",
 )
+DIGITAL_HERITAGE_RELEVANCE_TERMS = (
+    "文物数字化", "数字文博", "数字考古", "数字采集", "数字修复", "数字博物馆", "遗产数字化",
+    "文物数据库", "文物基因库", "三维扫描", "三维建模", "AI文物", "AI考古", "人工智能文物",
+    "基因库", "数字新生",
+)
+DIGITAL_HERITAGE_OBJECT_TERMS = (
+    "文物", "古陶瓷", "瓷片", "陶瓷", "博物馆", "博物院", "考古", "遗址", "遗产", "展品", "藏品", "标本", "化石",
+)
 QUERY_FAMILY_RELEVANCE_TERMS = {
     # Query-family terms are a discovery-scope signal only.  They prevent a
     # headline such as a national talent-list announcement from being
     # discarded before editorial review when the headline omits its wenbo
     # discipline; they do not promote the item or bypass evidence checks.
+    "archaeology-heritage": ("考古", "遗址", "出土", "发掘", "文物", "古陶瓷", "瓷片", "红山文化", "文化遗产", "古建筑", "文物保护"),
+    "digital-heritage": DIGITAL_HERITAGE_RELEVANCE_TERMS + ("文物", "古陶瓷", "瓷片", "博物馆", "考古"),
     "heritage-professionals": ("特殊津贴", "文博人才", "文物专家", "考古专家", "博物馆人才", "文博", "文物", "考古"),
     "museum-operations": ("入馆", "博物馆", "博物院", "预约", "二维码", "证件", "开放", "闭馆", "参观"),
     "modern-heritage": ("革命文物", "革命遗址", "烈士墓", "抗战遗址", "近现代遗产", "红色文物", "红色遗产"),
@@ -312,7 +322,10 @@ REPATRIATION_TERMS = ("文物返还", "文物追索", "归还", "交接完成")
 HERITAGE_RECOGNITION_TERMS = ("世界遗产", "国家历史文化名城", "历史文化名城")
 MUSEUM_PROJECT_TERMS = ("重要展览", "大型展览", "大展", "特展", "正式开幕", "正式开放", "闭幕", "开馆")
 MUSEUM_SCALE_TERMS = ("访客", "人次", "观众", "参观人数", "展期")
-DIGITAL_PRIORITY_TERMS = ("数字化", "人工智能", "三维扫描", "三维建模", "数字孪生", "数据库", "数据平台", "智慧博物馆", "虚拟现实", "增强现实")
+DIGITAL_PRIORITY_TERMS = (
+    "数字化", "人工智能", "三维扫描", "三维建模", "数字孪生", "数据库", "数据平台", "智慧博物馆", "虚拟现实", "增强现实",
+    "基因库", "数字新生", "数字考古", "文物数字化", "文物数据库", "数字修复", "遗产数字化",
+)
 COOPERATION_TERMS = ("联合考古", "国际合作", "合作签约", "签约", "合作备忘录", "国际交流")
 ROUTINE_PRIORITY_TERMS = ROUTINE_TERMS + ("培训", "开班", "常规会议", "一般会议", "普通活动", "探馆", "参观", "消费体验")
 HIGH_LEVEL_REPRESENTATIVE_TERMS = (
@@ -3292,6 +3305,11 @@ def is_relevant_record(record: dict) -> bool:
         family_ids = [family_id for family_id in family_ids if family_id != "international-wire"]
         if not family_ids:
             return False
+    if (
+        any(term.lower() in text for term in DIGITAL_HERITAGE_RELEVANCE_TERMS)
+        and any(term.lower() in text for term in DIGITAL_HERITAGE_OBJECT_TERMS)
+    ):
+        return True
     if any(term.lower() in text for term in RELEVANCE_TERMS):
         return True
     family_terms = tuple(

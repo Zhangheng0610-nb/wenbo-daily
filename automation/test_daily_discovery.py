@@ -396,6 +396,41 @@ class DailyDiscoveryTests(unittest.TestCase):
     def test_museum_exhibition_vocabulary_counts_as_relevant(self):
         self.assertTrue(is_relevant_record({"title": "某文明大展落幕 接待访客逾67万人次"}))
 
+    def test_chinanews_social_channel_digital_heritage_reaches_candidate_review(self):
+        report = {
+            "title": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+            "url": "https://www.chinanews.com.cn/sh/2026/09-04/10690243.shtml",
+            "publishedDate": "2026-09-04",
+            "queryFamily": "archaeology-heritage",
+            "sourceDomain": "chinanews.com.cn",
+            "scope": "domestic",
+        }
+        event = aggregate_event_candidates([report])[0]
+        self.assertTrue(is_relevant_record(event))
+        evaluation = evaluate_candidate_pool(__import__("datetime").date(2026, 9, 5), [event])
+        reviewed = evaluation["records"][0]
+        self.assertIn(reviewed["candidateDisposition"], {"needs_verification", "evidence_qualified"})
+        self.assertNotIn("not_wenbo_relevant", reviewed["filterReasons"])
+        self.assertIn("substantive_digital_or_technology_project", reviewed["editorialReasons"])
+
+    def test_chinanews_social_channel_without_heritage_semantics_stays_out(self):
+        self.assertFalse(is_relevant_record({
+            "title": "某地发布开学季消费提示",
+            "url": "https://www.chinanews.com.cn/sh/2026/09-04/00000000.shtml",
+            "queryFamily": "archaeology-heritage",
+            "sourceDomain": "chinanews.com.cn",
+        }))
+
+    def test_domestic_heritage_recall_vocabulary_covers_red_mountain_and_digital_objects(self):
+        self.assertTrue(is_relevant_record({
+            "title": "辽宁省汇聚慈善力量让红山文化“活起来”",
+            "queryFamily": "archaeology-heritage",
+        }))
+        self.assertTrue(is_relevant_record({
+            "title": "三维扫描与AI辅助文物数据库建设",
+            "queryFamily": "digital-heritage",
+        }))
+
     def test_editorial_priority_is_independent_of_source_tier(self):
         important = editorial_priority({"title": "某遗址发现重要考古新成果", "sourceDomain": "news.google.com"})
         routine = editorial_priority({"title": "某博物馆官网发布周末讲座安排", "sourceDomain": "museum.example"})

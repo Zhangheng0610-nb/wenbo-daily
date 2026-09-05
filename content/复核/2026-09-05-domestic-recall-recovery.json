@@ -1,0 +1,120 @@
+{
+  "schema": "daily-discovery-recall-recovery-v1",
+  "date": "2026-09-05",
+  "runType": "replay",
+  "replayType": "controlled-domestic-recall-recovery",
+  "replayedAt": "2026-09-05T12:37:11+08:00",
+  "replayCutoff": "2026-09-05T07:13:00+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-05.json",
+  "baseDiscoveryAuditSha256": "5f159cbd55451bffcd002c7a2379207ab79c082249bb62fd9f84b7da9f06fb17",
+  "discoveryAuditUnchanged": true,
+  "networkExecuted": false,
+  "reason": "修复标题级文博相关性漏判后，使用原始 2026-09-05 discovery snapshot 中保存的 queryResults/queryAudits 做确定性回放；不重跑实时发现，不改变原始 production audit。",
+  "input": {
+    "queryResultsReused": 1354,
+    "queryAuditsReused": 142,
+    "sourceScanRecordsReused": 28,
+    "newQueryFamilies": false,
+    "newProviderResults": false
+  },
+  "before": {
+    "rawRecords": 1165,
+    "eventCandidates": 709,
+    "candidateEvaluationPool": 123,
+    "evidenceQualified": 4,
+    "needsVerification": 119,
+    "rejected": 478,
+    "deferred": 108,
+    "finalEditorialPool": 4,
+    "domestic": {
+      "rawRecords": 532,
+      "eventCandidates": 404,
+      "candidateEvaluationPool": 53,
+      "evidenceQualified": 1,
+      "finalEditorialPool": 1
+    }
+  },
+  "after": {
+    "rawRecords": 1165,
+    "eventCandidates": 709,
+    "candidateEvaluationPool": 125,
+    "evidenceQualified": 4,
+    "needsVerification": 121,
+    "rejected": 476,
+    "deferred": 108,
+    "finalEditorialPool": 4,
+    "domestic": {
+      "rawRecords": 532,
+      "eventCandidates": 406,
+      "candidateEvaluationPool": 55,
+      "evidenceQualified": 1,
+      "finalEditorialPool": 1
+    }
+  },
+  "regressionTrace": [
+    {
+      "title": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+      "articleId": "10690243",
+      "url": "https://www.chinanews.com.cn/sh/2026/09-04/10690243.shtml",
+      "queryResult": "FOUND",
+      "acceptedDiscoveryRecord": "FOUND",
+      "eventCandidate": "FOUND:event-8a00bfd6d6d9",
+      "firstDisappearanceBeforeFix": "candidate_relevance_screen",
+      "before": {
+        "candidateDisposition": "rejected",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "reason": "not_wenbo_relevant"
+      },
+      "after": {
+        "candidateDisposition": "needs_verification",
+        "editorialPriorityScore": 52,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": ["substantive_digital_or_technology_project", "primary_freshness"],
+        "evidenceQualified": false,
+        "finalEditorialPool": false
+      }
+    },
+    {
+      "title": "乐享开学季 上海自然博物馆构筑趣味科普空间",
+      "queryResult": "FOUND",
+      "acceptedDiscoveryRecord": "FOUND",
+      "eventCandidate": "FOUND:event-b84864ef9374",
+      "after": {
+        "candidateDisposition": "needs_verification",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "evidenceQualified": false,
+        "finalEditorialPool": false
+      }
+    },
+    {
+      "title": "辽宁省汇聚慈善力量让红山文化“活起来”",
+      "queryResult": "FOUND",
+      "acceptedDiscoveryRecord": "FOUND",
+      "eventCandidate": "FOUND:event-9dd7ea3eaae1",
+      "firstDisappearanceBeforeFix": "candidate_relevance_screen",
+      "after": {
+        "candidateDisposition": "needs_verification",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "evidenceQualified": false,
+        "finalEditorialPool": false
+      }
+    }
+  ],
+  "editorialOutcome": {
+    "candidateLedgerChanged": false,
+    "dailyMarkdownChanged": false,
+    "selectedCount": 3,
+    "selectedCountChanged": false,
+    "domesticSelectedCount": 0,
+    "internationalSelectedCount": 3,
+    "domesticQuota": false
+  },
+  "ledPreviousRejectionGuard": {
+    "presentInCurrentMain": false,
+    "changedInThisRecovery": false,
+    "note": "event-f35206d16b83 的跨日 previous rejection guard 属于独立问题，本轮未修改。"
+  }
+}
