@@ -1,0 +1,80 @@
+{
+  "schema": "daily-editorial-replay-v1",
+  "schemaVersion": 1,
+  "date": "2026-09-06",
+  "runType": "replay",
+  "revisionType": "same_day_editorial_revision",
+  "replayedAt": "2026-09-06T07:20:27+08:00",
+  "replayCutoff": "2026-09-06T07:13:51+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-06.json",
+  "baseDiscoveryAuditSha256": "ca9148bb7aff8262afb5ef22d61c3332aa77d6e84c3e7671d436db9ca46594a9",
+  "reason": "Same-day editorial review of the sole evidence-qualified event from the immutable broad-discovery audit.",
+  "runtimeEnrichment": false,
+  "evidenceNetworkExecuted": false,
+  "discoveryAuditUnchanged": true,
+  "queryAudits": [
+    {
+      "queryFamily": "editorial-review",
+      "scope": "domestic",
+      "actualQuery": "content/发现/2026-09-06.json::candidateEvaluation.finalEditorialPool",
+      "executedAt": "2026-09-06T07:20:27+08:00",
+      "success": true,
+      "failure": null,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "sourceAudit": "content/发现/2026-09-06.json"
+    }
+  ],
+  "evidenceQualification": {
+    "status": "completed",
+    "sourceAudit": "content/发现/2026-09-06.json",
+    "qualified": 1,
+    "needsVerification": 0,
+    "note": "The saved discovery audit already contains an article-verified A-tier Xinhua evidence source; no second runtime upgrade was performed during editorial review."
+  },
+  "finalEditorialPool": {
+    "rawQualifiedEvents": 1,
+    "canonicalUniqueEvents": 1,
+    "historicalDuplicates": 205,
+    "editoriallyReviewed": 1,
+    "events": [
+      {
+        "eventId": "event-817d283a436e",
+        "representativeTitle": "《天津市长城保护条例》9月1日起实施 为40.28公里“世遗”全面护航",
+        "publishedDate": "2026-09-01",
+        "scope": "domestic",
+        "reportCount": 1,
+        "candidateDisposition": "evidence_qualified",
+        "newDevelopment": false,
+        "duplicateStatus": "unique_event",
+        "duplicateOf": null,
+        "duplicateReason": null,
+        "editorialPriorityScore": 64,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "policy_or_governance_update",
+          "backfill_freshness"
+        ],
+        "evidenceTierAtDiscovery": "C",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeAttempted": true,
+        "evidenceUpgradeResult": "qualified",
+        "evidenceSources": [
+          {
+            "name": "新华网：《天津市长城保护条例》9月1日起实施 为40.28公里“世遗”全面护航",
+            "url": "http://tj.xinhuanet.com/20260901/6684dfa2c31a4b6fa91625fc6b397bc0/c.html",
+            "tier": "A",
+            "role": "evidence-upgrade",
+            "articleVerified": true,
+            "publisher": "新华网",
+            "publisherDomain": "tj.xinhuanet.com",
+            "sourceRelationship": "primary",
+            "publishedDate": "2026-09-01"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "天津地方性法规已于9月1日施行，直接把长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；事件具体、证据为新华网A级，适合以地方保护治理案例入选，不扩写为全国性政策。"
+      }
+    ]
+  }
+}

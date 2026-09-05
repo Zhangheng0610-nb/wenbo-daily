@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "date": "2026-09-06",
+  "scope": "daily-editorial",
+  "discoveryAuditPath": "content/发现/2026-09-06.json",
+  "editorialInputPath": "content/复核/2026-09-06-editorial-replay.json",
+  "discoveryCompleted": true,
+  "internationalDiscoveryChecked": true,
+  "internationalDiscoveryStatus": "checked",
+  "internationalDiscoveryNote": "完整 broad discovery 142/142 查询成功；无其他达到A/B证据门槛的国际事件进入最终编辑池。",
+  "replayCutoff": "2026-09-06T07:13:51+08:00",
+  "revision": {
+    "revisionType": "same_day_editorial_revision",
+    "revisedAt": "2026-09-06T07:20:27+08:00",
+    "editorialInputPath": "content/复核/2026-09-06-editorial-replay.json",
+    "discoveryAuditUnchanged": true,
+    "revisionReason": "The sole evidence-qualified event was reviewed from the saved discovery audit; no editorial pools were merged.",
+    "runtimeEnrichment": false
+  },
+  "candidatePoolDefinition": "本次正式编辑唯一输入为 content/复核/2026-09-06-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 未修改。",
+  "editorialReview": {
+    "reviewedAt": "2026-09-06T07:20:27+08:00",
+    "reviewedEvents": 1,
+    "selectedEvents": 1,
+    "rejectedEvents": 0,
+    "note": "唯一 evidence-qualified 事件完成逐条编辑复核并入选；其余待核验事件不进入正式编辑输入。"
+  },
+  "candidates": [
+    {
+      "candidateId": "daily-20260906-001",
+      "eventId": "event-817d283a436e",
+      "title": "《天津市长城保护条例》9月1日起实施，为40.28公里天津段长城纳入法治化保护",
+      "publishedDate": "2026-09-01",
+      "discoveredAt": "2026-09-06T07:14:43+08:00",
+      "discoverySource": "新华网",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQRkd0NEVWLTIxVDQyN21mRW9ET192SjE5QTMxWndKaTVfVjBEUFJ6SldVam1hRkw4am5aeWlyV1ZPMUN4R3pQVGFhWFpFem5CSG9nMnRzSnExNklPeUxZYVB1eFI0NFVOYTIxRDVzZHo2Y1VrNVEzUHJwR0NQM3dtTkNB?oc=5",
+      "publisher": "tj.xinhuanet.com",
+      "evidenceSources": [
+        {
+          "name": "新华网：《天津市长城保护条例》9月1日起实施 为40.28公里“世遗”全面护航",
+          "url": "http://tj.xinhuanet.com/20260901/6684dfa2c31a4b6fa91625fc6b397bc0/c.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": ["文物保护", "政策实施", "国内", "天津"],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "天津地方性法规已于9月1日施行，将长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；以地方保护治理案例呈现，不扩写为全国性政策。",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "发现层来自 Google News RSS，最终发布链接回到新华网A级原文；标题和点评仅使用已核验的条例实施与保护机制事实。",
+      "discoveredVia": "google-news-rss",
+      "discoveryQuery": "文物保护 工程 遗产 条例 after:2026-08-31 before:2026-09-07",
+      "duplicateOf": null,
+      "duplicateReason": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "天津地方性法规已于9月1日施行，直接把长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；事件具体、证据为新华网A级，适合以地方保护治理案例入选。",
+      "editorialPriorityScore": 64,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": ["policy_or_governance_update", "backfill_freshness"],
+      "dailyItemNumber": 1,
+      "dailyItemTitle": "《天津市长城保护条例》9月1日起实施，为40.28公里天津段长城纳入法治化保护"
+    }
+  ],
+  "summary": {
+    "discovered": 1,
+    "selected": 1,
+    "rejected": 0,
+    "deferred": 0,
+    "needsVerification": 0
+  }
+}
