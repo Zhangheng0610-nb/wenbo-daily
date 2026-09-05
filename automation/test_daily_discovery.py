@@ -449,6 +449,9 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertFalse(is_relevant_record({
             "title": "陶瓷产业园采用三维扫描进行产品质量控制",
         }))
+        self.assertFalse(is_relevant_record({
+            "title": "日用陶瓷企业建设数字化三维模型生产系统",
+        }))
 
     def test_ancient_ceramics_fragments_with_3d_scanning_remain_relevant(self):
         self.assertTrue(is_relevant_record({
