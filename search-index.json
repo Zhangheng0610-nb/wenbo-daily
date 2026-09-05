@@ -10537,8 +10537,8 @@
     "title": "🏛️ 每日文博资讯 | 2026年09月05日（周六）",
     "date": "2026-09-05",
     "weekday": "周六",
-    "domestic_count": 0,
-    "international_count": 3,
+    "domestic_count": 1,
+    "international_count": 2,
     "items": [
       {
         "id": "item1",
@@ -10582,19 +10582,20 @@
       {
         "id": "item3",
         "number": 3,
-        "title": "LED 多光谱成像系统帮助考古发掘前评估遗址",
-        "body": "Archaeology Magazine 9月3日报道，奥胡斯大学团队开发了使用16种波段 LED 的多光谱成像系统，并在丹麦博恩霍尔姆岛的 Sorte Muld 铁器时代遗址进行测试。系统显出肉眼难见的土层变化，小骨片在紫外光下出现荧光，相关线索仍需通过发掘验证。",
-        "commentary": "这项技术的增量不在于给遗址拍更亮的照片，而在发掘前增加一层可重复的材料识别：16种波段的LED多光谱系统在丹麦Sorte Muld遗址显出肉眼难见的土层变化，并让小骨片在紫外光下出现荧光。研究团队仍需用发掘验证线索，但它把“先观察、后扰动”推进到现场评估环节。",
+        "title": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+        "body": "9月4日，中新社探访景德镇古陶瓷基因库：1.6万余片青花龙缸残片经三维扫描获得数字编号，断口、弧度和纹饰等信息被转成可计算数据，AI辅助识别断裂面和纹样、进行瓷片拼对；项目还与89家机构尝试共建世界瓷器互动地图。",
+        "commentary": "这不是把古瓷片简单“上网”。三维扫描把断口、弧度和纹饰变成可比对的数据，AI先帮研究者缩小拼对范围，数字编号则让碎片在修复、研究和跨机构协作中保持可追踪。与大英博物馆、大都会艺术博物馆等89家机构尝试共建互动地图，显示数字化正在从单馆存档走向共享研究基础。",
         "tags": [
-          "考古",
+          "文物数字化",
+          "数字考古",
           "科技保护",
-          "国际",
-          "丹麦"
+          "国内",
+          "江西"
         ],
         "sources": [
           {
-            "name": "Archaeology Magazine：LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
-            "url": "https://archaeology.org/news/2026/09/03/led-light-system-could-help-archaeologists-evaluate-sites-before-excavation/"
+            "name": "中国新闻网：景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+            "url": "http://www.chinanews.com.cn/sh/2026/09-04/10690243.shtml"
           }
         ]
       }

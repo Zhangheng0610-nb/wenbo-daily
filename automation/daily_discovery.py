@@ -150,6 +150,22 @@ QUERY_BACKENDS = (
     {"id": "google-news-rss", "name": "Google News RSS", "base": "https://news.google.com/rss/search", "locale": "en"},
 )
 
+# A medium-priority event normally enters the evidence queue at 55 points.
+# Keep that production gate intact, but allow a small, auditable rescue lane
+# for fresh, substantive events just below it.  This is deliberately bounded
+# so evidence work does not become a second broad-discovery pass.
+MEDIUM_EVIDENCE_QUEUE_THRESHOLD = 55
+NEAR_THRESHOLD_RESCUE_MIN_SCORE = 50
+NEAR_THRESHOLD_RESCUE_MAX_SCORE = MEDIUM_EVIDENCE_QUEUE_THRESHOLD - 1
+NEAR_THRESHOLD_RESCUE_MAX_ATTEMPTS = 3
+NEAR_THRESHOLD_RESCUE_EXCLUDED_REASONS = {
+    "primary_freshness",
+    "backfill_freshness",
+    "general_relevance_only",
+    "routine_or_peripheral_activity_penalty",
+}
+PREVIOUS_EDITORIAL_REJECTION_WINDOW_DAYS = 3
+
 # The generic publisher-domain fallback is intentionally bounded to trusted
 # wire and mainstream publishers already classified by source policy. It is a
 # recovery path for a known publisher hint, not a new discovery family.
@@ -2665,11 +2681,8 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
 
 def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
     """Actually search, retrieve and assess evidence for queued event candidates."""
-    queued = [
-        event for event in events
-        if event.get("candidateDisposition") == "needs_verification"
-        and (event.get("editorialPriorityLabel") == "high" or event.get("editorialPriorityScore", 0) >= 55)
-    ]
+    queue = select_evidence_upgrade_queue(events)
+    queued = queue["events"]
     attempted = qualified = failed = ambiguous = 0
     upgrade_rows = []
     resolver_discovered = []
@@ -2991,6 +3004,7 @@ def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
         "ambiguous": ambiguous,
         "events": upgrade_rows,
         "resolverDiscoveredCandidates": resolver_discovered,
+        "queue": queue,
     }
 
 
@@ -3154,7 +3168,10 @@ def refresh_evaluation_views(evaluation: dict) -> None:
         row for row in pool
         if row.get("candidateDisposition") == "needs_verification"
         and row.get("editorialPriorityLabel") == "medium"
-        and row.get("editorialPriorityScore", 0) >= 55
+        and (
+            row.get("editorialPriorityScore", 0) >= MEDIUM_EVIDENCE_QUEUE_THRESHOLD
+            or row.get("nearThresholdRescueEligible")
+        )
     ]
     high_queue.sort(key=lambda row: row.get("editorialPriorityScore", 0), reverse=True)
     medium_queue.sort(key=lambda row: row.get("editorialPriorityScore", 0), reverse=True)
@@ -3706,9 +3723,17 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     }
 
 
-def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priority_counts: dict | None = None, raw_record_count: int | None = None) -> dict:
+def evaluate_candidate_pool(
+    required_date: date,
+    records: list[dict],
+    raw_priority_counts: dict | None = None,
+    raw_record_count: int | None = None,
+    previous_rejections: list[dict] | None = None,
+) -> dict:
     """Rank news value first, then apply transparent evidence/editorial gates."""
     evaluated = []
+    rejection_guard_rows = []
+    rejection_rows = previous_rejections if previous_rejections is not None else load_recent_editorial_rejections(required_date)
     ranked = sorted(
         records,
         key=lambda row: (
@@ -3741,6 +3766,21 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         if disposition != "rejected" and tier == "backfill_3_7d" and not high_value:
             reasons.append("backfill_low_priority")
             disposition = "deferred"
+        previous_rejection = None
+        if disposition not in {"rejected", "deferred"}:
+            previous_rejection = find_previous_editorial_rejection(
+                required_date,
+                record,
+                previous_rejections=rejection_rows,
+            )
+            if previous_rejection:
+                reasons.append("previous_editorial_rejection")
+                disposition = "rejected"
+                rejection_guard_rows.append({
+                    "eventId": record.get("eventId"),
+                    "title": record.get("representativeTitle") or record.get("title", ""),
+                    **previous_rejection,
+                })
         direct_url = record.get("url", "")
         evidence = source_info(direct_url) if direct_url else {"tier": "C", "blocked": True}
         initial_evidence = [{"url": direct_url, "tier": evidence.get("tier", "C")}] if direct_url else []
@@ -3771,6 +3811,23 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         record["publicSalience"] = priority["publicSalience"]
         record["independentCoverageCount"] = priority["independentCoverageCount"]
         record["editorialPriorityRank"] = rank
+        record["previousEditorialRejection"] = bool(previous_rejection)
+        record["previousEditorialRejectionDate"] = previous_rejection.get("rejectionDate") if previous_rejection else None
+        record["previousEditorialRejectionOf"] = previous_rejection.get("rejectionEventId") if previous_rejection else None
+        record["previousEditorialRejectionReason"] = previous_rejection.get("rejectionReason") if previous_rejection else None
+        record["previousEditorialRejectionLedgerPath"] = previous_rejection.get("rejectionLedgerPath") if previous_rejection else None
+        if disposition == "needs_verification":
+            record["evidenceQueueClass"] = (
+                "near_threshold_rescue"
+                if near_threshold_rescue_eligible(record)
+                else "priority"
+                if record["editorialPriorityLabel"] == "high" or record["editorialPriorityScore"] >= MEDIUM_EVIDENCE_QUEUE_THRESHOLD
+                else "not_queued"
+            )
+            record["nearThresholdRescueEligible"] = near_threshold_rescue_eligible(record)
+        else:
+            record["evidenceQueueClass"] = "not_eligible"
+            record["nearThresholdRescueEligible"] = False
         record["evidenceUpgradeStatus"] = "queued" if disposition == "needs_verification" else "not_needed" if disposition == "evidence_qualified" else "not_eligible"
         evaluated.append(record)
     pool = [r for r in evaluated if r["candidateDisposition"] in {"evidence_qualified", "needs_verification"}]
@@ -3783,7 +3840,10 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
         r for r in pool
         if r["candidateDisposition"] == "needs_verification"
         and r["editorialPriorityLabel"] == "medium"
-        and r["editorialPriorityScore"] >= 55
+        and (
+            r["editorialPriorityScore"] >= MEDIUM_EVIDENCE_QUEUE_THRESHOLD
+            or r.get("nearThresholdRescueEligible")
+        )
     ]
     medium_priority_queue.sort(key=lambda row: row["editorialPriorityScore"], reverse=True)
     provisional = [
@@ -3813,6 +3873,7 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
             "highPriorityNeedsVerification": len(high_priority_queue),
             "highPriorityEvidenceQueueEvents": len(high_priority_queue),
             "mediumPriorityEvidenceQueueEvents": len(medium_priority_queue),
+            "previousEditorialRejectionCount": len(rejection_guard_rows),
             "evidenceUpgradeAttempted": 0,
             "evidenceUpgradeQualified": 0,
             "evidenceUpgradeFailed": 0,
@@ -3832,6 +3893,11 @@ def evaluate_candidate_pool(required_date: date, records: list[dict], raw_priori
             },
             "rawRecordPriorityCounts": raw_priority_counts or {},
             "dispositionCounts": counts(evaluated),
+        },
+        "previousEditorialRejectionGuard": {
+            "windowDays": PREVIOUS_EDITORIAL_REJECTION_WINDOW_DAYS,
+            "checkedRecentRejections": len(rejection_rows),
+            "blockedEvents": rejection_guard_rows,
         },
     }
 
@@ -3910,6 +3976,149 @@ def load_history(required_date: date) -> list[dict]:
                     row["historicalCanonicalEventId"] = "published-" + hashlib.sha1(identity.encode("utf-8")).hexdigest()[:12]
                 rows.append(row)
     return rows
+
+
+def load_recent_editorial_rejections(
+    required_date: date,
+    window_days: int = PREVIOUS_EDITORIAL_REJECTION_WINDOW_DAYS,
+) -> list[dict]:
+    """Load recent explicit editorial rejections without treating them as history.
+
+    Published history answers whether an event has already been reported.  A
+    rejection ledger answers a different question: whether the same event was
+    recently reviewed and deliberately declined.  Keeping this index separate
+    prevents a low-value repeat from re-entering the evidence queue while
+    preserving the possibility of a later substantive development.
+    """
+    if window_days < 1:
+        return []
+    ledger_dir = ROOT / "content" / "候选"
+    lower_bound = required_date - timedelta(days=window_days)
+    rows = []
+    for path in sorted(ledger_dir.glob("????-??-??.json")):
+        try:
+            ledger_day = date.fromisoformat(path.stem)
+        except ValueError:
+            continue
+        if not lower_bound <= ledger_day < required_date:
+            continue
+        payload = load_json(path, {})
+        if not isinstance(payload, dict):
+            continue
+        for candidate in payload.get("candidates", []):
+            if not isinstance(candidate, dict):
+                continue
+            decision = candidate.get("finalEditorialDecision") or candidate.get("decision")
+            if decision != "rejected":
+                continue
+            row = dict(candidate)
+            row["rejectionDate"] = ledger_day.isoformat()
+            row["rejectionLedgerPath"] = str(path.relative_to(ROOT)).replace("\\", "/")
+            row["rejectionReason"] = (
+                candidate.get("finalEditorialReason")
+                or candidate.get("decisionReason")
+                or "previous editorial rejection"
+            )
+            # Candidate ledgers use discoveryUrl while event rows use url.
+            row.setdefault("url", candidate.get("discoveryUrl", ""))
+            rows.append(row)
+    return rows
+
+
+def previous_editorial_rejection_relation(
+    current: dict,
+    previous: dict,
+) -> tuple[str, str] | None:
+    """Return a conservative match to a recent rejected editorial event."""
+    if substantive_new_development(current, previous):
+        return None
+    if current.get("eventId") and previous.get("eventId") and current["eventId"] == previous["eventId"]:
+        return ("previous_editorial_rejection", "same stable eventId was recently rejected")
+    relation = duplicate_relation(current, previous)
+    if relation and relation[0] in {"same_day_duplicate", "historical_duplicate"}:
+        return ("previous_editorial_rejection", "same canonical event was recently rejected")
+    return None
+
+
+def find_previous_editorial_rejection(
+    required_date: date,
+    current: dict,
+    previous_rejections: list[dict] | None = None,
+    window_days: int = PREVIOUS_EDITORIAL_REJECTION_WINDOW_DAYS,
+) -> dict | None:
+    """Find the most recent rejected counterpart, if no new development exists."""
+    rows = previous_rejections if previous_rejections is not None else load_recent_editorial_rejections(required_date, window_days)
+    matches = []
+    for previous in rows:
+        relation = previous_editorial_rejection_relation(current, previous)
+        if relation:
+            matches.append((previous.get("rejectionDate", ""), previous, relation))
+    if not matches:
+        return None
+    _, previous, relation = sorted(matches, key=lambda item: item[0], reverse=True)[0]
+    return {
+        "status": relation[0],
+        "reason": relation[1],
+        "rejectionDate": previous.get("rejectionDate"),
+        "rejectionLedgerPath": previous.get("rejectionLedgerPath"),
+        "rejectionEventId": previous.get("eventId"),
+        "rejectionTitle": record_title(previous),
+        "rejectionReason": previous.get("rejectionReason"),
+        "windowDays": window_days,
+    }
+
+
+def near_threshold_rescue_eligible(event: dict) -> bool:
+    """Identify a fresh, substantive medium event for the bounded rescue lane."""
+    score = event.get("editorialPriorityScore", 0)
+    if event.get("candidateDisposition") != "needs_verification":
+        return False
+    if event.get("editorialPriorityLabel") != "medium":
+        return False
+    if not isinstance(score, (int, float)) or not NEAR_THRESHOLD_RESCUE_MIN_SCORE <= score <= NEAR_THRESHOLD_RESCUE_MAX_SCORE:
+        return False
+    if event.get("freshnessTier") != "primary_0_48h":
+        return False
+    reasons = set(event.get("editorialReasons") or [])
+    return bool(reasons - NEAR_THRESHOLD_RESCUE_EXCLUDED_REASONS)
+
+
+def select_evidence_upgrade_queue(events: list[dict]) -> dict:
+    """Build the normal queue plus a small, explicit near-threshold rescue lane."""
+    normal = [
+        event for event in events
+        if event.get("candidateDisposition") == "needs_verification"
+        and (event.get("editorialPriorityLabel") == "high" or event.get("editorialPriorityScore", 0) >= MEDIUM_EVIDENCE_QUEUE_THRESHOLD)
+    ]
+    rescue_eligible = [event for event in events if near_threshold_rescue_eligible(event) and event not in normal]
+    rescue_eligible.sort(key=lambda row: (row.get("editorialPriorityScore", 0), row.get("publishedDate", ""), row.get("title", "")), reverse=True)
+    rescue = rescue_eligible[:NEAR_THRESHOLD_RESCUE_MAX_ATTEMPTS]
+    queued = []
+    seen = set()
+    for event in normal + rescue:
+        event_id = event.get("eventId")
+        if event_id in seen:
+            continue
+        seen.add(event_id)
+        event["evidenceQueueClass"] = "near_threshold_rescue" if event in rescue else "priority"
+        event["nearThresholdRescueEligible"] = event in rescue_eligible
+        event["nearThresholdRescueAttempted"] = event in rescue
+        queued.append(event)
+    for event in rescue_eligible:
+        if event not in rescue:
+            event["nearThresholdRescueEligible"] = True
+            event["nearThresholdRescueAttempted"] = False
+            event["nearThresholdRescueSkipped"] = "daily_rescue_cap"
+    return {
+        "events": queued,
+        "normalCount": len(normal),
+        "rescueEligibleCount": len(rescue_eligible),
+        "rescueAttemptedCount": len(rescue),
+        "rescueSkippedByCap": max(0, len(rescue_eligible) - len(rescue)),
+        "rescueCap": NEAR_THRESHOLD_RESCUE_MAX_ATTEMPTS,
+        "minScore": NEAR_THRESHOLD_RESCUE_MIN_SCORE,
+        "maxScore": NEAR_THRESHOLD_RESCUE_MAX_SCORE,
+    }
 
 
 def build_query_family_summary(report_records: list[dict], query_audits: list[dict], event_candidates: list[dict], evaluated_events: list[dict]) -> dict:
@@ -4083,9 +4292,18 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         evaluation["summary"]["evidenceUpgradeQualified"] = upgrade["qualified"]
         evaluation["summary"]["evidenceUpgradeFailed"] = upgrade["failed"]
         evaluation["summary"]["evidenceUpgradeAmbiguous"] = upgrade["ambiguous"]
+        evaluation["summary"]["evidenceUpgradeQueue"] = upgrade["queue"]
         evaluation["pool"] = [row for row in evaluation["records"] if row["candidateDisposition"] in {"evidence_qualified", "needs_verification"}]
         evaluation["highPriorityEvidenceQueue"] = [row for row in evaluation["pool"] if row["candidateDisposition"] == "needs_verification" and row["editorialPriorityLabel"] == "high"]
-        evaluation["mediumPriorityEvidenceQueue"] = [row for row in evaluation["pool"] if row["candidateDisposition"] == "needs_verification" and row["editorialPriorityLabel"] == "medium" and row["editorialPriorityScore"] >= 55]
+        evaluation["mediumPriorityEvidenceQueue"] = [
+            row for row in evaluation["pool"]
+            if row["candidateDisposition"] == "needs_verification"
+            and row["editorialPriorityLabel"] == "medium"
+            and (
+                row["editorialPriorityScore"] >= MEDIUM_EVIDENCE_QUEUE_THRESHOLD
+                or row.get("nearThresholdRescueEligible")
+            )
+        ]
         evaluation["highPriorityEvidenceQueue"].sort(key=lambda row: row["editorialPriorityScore"], reverse=True)
         evaluation["mediumPriorityEvidenceQueue"].sort(key=lambda row: row["editorialPriorityScore"], reverse=True)
         evaluation["summary"]["candidateEvaluationPool"] = len(evaluation["pool"])
@@ -4192,21 +4410,29 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
                 for row in event_candidates
             ],
             "pool": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount", "editorialPriorityRank", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount", "editorialPriorityRank", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
                 for row in evaluation["pool"]
             ],
             "highPriorityEvidenceQueue": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
                 for row in evaluation["highPriorityEvidenceQueue"]
             ],
             "mediumPriorityEvidenceQueue": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
                 for row in evaluation["mediumPriorityEvidenceQueue"]
             ],
             "provisionalWouldBeSelected": [
                 {k: row.get(k) for k in ("title", "url", "publishedDate", "scope", "freshnessTier", "candidateDisposition")}
                 for row in evaluation["provisionalWouldBeSelected"]
             ],
+            "previousEditorialRejectionGuard": evaluation.get("previousEditorialRejectionGuard", {}),
+            "evidenceThresholdPolicy": {
+                "normalMediumQueueThreshold": MEDIUM_EVIDENCE_QUEUE_THRESHOLD,
+                "nearThresholdRescueMinScore": NEAR_THRESHOLD_RESCUE_MIN_SCORE,
+                "nearThresholdRescueMaxScore": NEAR_THRESHOLD_RESCUE_MAX_SCORE,
+                "nearThresholdRescueCap": NEAR_THRESHOLD_RESCUE_MAX_ATTEMPTS,
+                "nearThresholdRescueRule": "fresh primary event with substantive editorial reason; no routine-only rescue",
+            },
             "resolverDiscoveredCandidates": [
                 {k: row.get(k) for k in ("title", "url", "publishedDate", "sourceDomain", "resolverParentEventId", "resolverDepth", "duplicateStatus", "duplicateOf")}
                 for row in evaluation.get("resolverDiscoveredCandidates", [])

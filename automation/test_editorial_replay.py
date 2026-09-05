@@ -3,7 +3,10 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from validate_candidates import validate_editorial_input, _sha256
+try:
+    from validate_candidates import validate_editorial_input, _sha256, _previous_rejection_exclusion_allowed
+except ModuleNotFoundError:
+    from automation.validate_candidates import validate_editorial_input, _sha256, _previous_rejection_exclusion_allowed
 
 
 def make_files(root, *, replay=None, audit=None):
@@ -97,6 +100,20 @@ class EditorialReplayContractTests(unittest.TestCase):
             errors, pool_ids = validate_editorial_input(root / 'content/候选/2026-09-02.json', payload, root)
             self.assertEqual(errors, [])
             self.assertNotIn('event-2', pool_ids)
+
+    def test_previous_rejection_exclusion_requires_explicit_audit_fields(self):
+        """The full ledger validator may allow only a rejected, auditable guard row outside the pool."""
+        allowed = {
+            'decision': 'rejected',
+            'decisionReason': 'previous_editorial_rejection',
+            'previousEditorialRejection': True,
+            'previousEditorialRejectionOf': 'event-old',
+            'previousEditorialRejectionDate': '2026-09-04',
+            'previousEditorialRejectionReason': 'low_editorial_priority_after_full_network_recovery',
+        }
+        self.assertTrue(_previous_rejection_exclusion_allowed(allowed))
+        self.assertFalse(_previous_rejection_exclusion_allowed(dict(allowed, previousEditorialRejectionReason=None)))
+        self.assertFalse(_previous_rejection_exclusion_allowed(dict(allowed, decision='selected')))
 
     def test_revision_requires_one_explicit_editorial_input(self):
         with tempfile.TemporaryDirectory() as temp:

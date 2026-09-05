@@ -3,24 +3,27 @@
   "date": "2026-09-05",
   "scope": "daily-editorial",
   "discoveryAuditPath": "content/发现/2026-09-05.json",
-  "editorialInputPath": "content/复核/2026-09-05-editorial-replay.json",
+  "editorialInputPath": "content/复核/2026-09-05-threshold-replay.json",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
   "internationalDiscoveryStatus": "checked",
-  "internationalDiscoveryNote": "完整 broad discovery 142/142 查询成功；四个 evidence-qualified 事件已逐条回读并完成编辑复核。",
+  "internationalDiscoveryNote": "完整 broad discovery 142/142 查询成功；受控回放对中优先级临界事件执行有界证据 rescue，并对近期明确拒绝事件执行重复入选防护。最终 3 个事件完成编辑复核。",
   "replayCutoff": "2026-09-05T07:13:00+08:00",
   "revision": {
     "revisionType": "same_day_editorial_revision",
-    "editorialInputPath": "content/复核/2026-09-05-editorial-replay.json",
-    "discoveryAuditUnchanged": true
+    "revisedAt": "2026-09-05T13:33:29+08:00",
+    "editorialInputPath": "content/复核/2026-09-05-threshold-replay.json",
+    "discoveryAuditUnchanged": true,
+    "revisionReason": "Bounded near-threshold evidence rescue and previous editorial rejection guard; original discovery audit remains unchanged.",
+    "runtimeEnrichment": false
   },
-  "candidatePoolDefinition": "本次正式编辑唯一输入为 content/复核/2026-09-05-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 未修改，未与其他候选池拼接。",
+  "candidatePoolDefinition": "本次正式编辑唯一输入为 content/复核/2026-09-05-threshold-replay.json 的 finalEditorialPool；原始 discovery audit 未修改，近期拒绝事件仅作为有审计字段的排除记录保留，未与其他 editorial pool 拼接。",
   "editorialReview": {
-    "reviewedAt": "2026-09-05T07:22:05+08:00",
-    "reviewedEvents": 4,
+    "reviewedAt": "2026-09-05T13:33:29+08:00",
+    "reviewedEvents": 5,
     "selectedEvents": 3,
-    "rejectedEvents": 1,
-    "note": "KPBS 艺术机构运营危机、AAM AI 治理框架和 LED 多光谱考古预勘入选；广西调研因缺少具体专业增量拒绝。"
+    "rejectedEvents": 2,
+    "note": "两条已通过证据的国际事件与景德镇古陶瓷基因库事件完成编辑复核；LED 事件和广西调研事件因近期已有明确拒绝且没有 substantive new development，被 previous_editorial_rejection guard 排除。"
   },
   "candidates": [
     {
@@ -43,7 +46,11 @@
         }
       ],
       "evidenceTier": "provisional_B",
-      "topic": ["博物馆", "运营治理", "国际"],
+      "topic": [
+        "博物馆",
+        "运营治理",
+        "国际"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
@@ -61,7 +68,10 @@
       "finalEditorialReason": "报道涉及博物馆与艺术机构裁员、展览取消和董事会财务治理复核，运营后果具体；前员工质疑保留为有明确归属的说法。",
       "editorialPriorityScore": 70,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["museum_or_cultural_institution_governance", "primary_freshness"],
+      "editorialReasons": [
+        "museum_or_cultural_institution_governance",
+        "primary_freshness"
+      ],
       "dailyItemNumber": 1,
       "dailyItemTitle": "圣迭戈艺术机构因资金困境裁员，部分前员工质疑财务管理"
     },
@@ -85,7 +95,12 @@
         }
       ],
       "evidenceTier": "provisional_B",
-      "topic": ["博物馆", "数字文博", "行业治理", "国际"],
+      "topic": [
+        "博物馆",
+        "数字文博",
+        "行业治理",
+        "国际"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
@@ -103,12 +118,69 @@
       "finalEditorialReason": "文章提出避免伤害、维护信任、创造价值三原则，并具体落到隐私、专业责任、透明披露、培训和价值评估。",
       "editorialPriorityScore": 64,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["museum_or_cultural_institution_governance", "backfill_freshness"],
+      "editorialReasons": [
+        "museum_or_cultural_institution_governance",
+        "backfill_freshness"
+      ],
       "dailyItemNumber": 2,
       "dailyItemTitle": "美国博物馆联盟提出博物馆 AI 治理三原则"
     },
     {
       "candidateId": "daily-20260905-003",
+      "eventId": "event-8a00bfd6d6d9",
+      "title": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+      "publishedDate": "2026-09-04",
+      "discoveredAt": "2026-09-05T07:16:47+08:00",
+      "discoverySource": "chinanews.com.cn",
+      "discoverySourceType": "query_search",
+      "discoveryUrl": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1RSmJDUEJMbklQVzhYc2JKdnd2NExXek82RWQzWWo4V29uYnY3M0FsclBtcGt2eGt4RUQ2dV9wUUpXczhNMGNSaWhCY0gyOGpWMFEtR2VFdG9qcUNzSWN0Q1NHbzI2bTBL?oc=5",
+      "publisher": "chinanews.com.cn",
+      "evidenceSources": [
+        {
+          "name": "中国新闻网：景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+          "url": "http://www.chinanews.com.cn/sh/2026/09-04/10690243.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "publisher": "www.chinanews.com.cn",
+          "publisherDomain": "chinanews.com.cn",
+          "sourceRelationship": "publisher_recovery",
+          "publishedDate": "2026-09-04"
+        }
+      ],
+      "evidenceTier": "A",
+      "topic": [
+        "文物数字化",
+        "数字考古",
+        "AI辅助研究",
+        "国际协作"
+      ],
+      "domestic": true,
+      "international": false,
+      "scope": "domestic",
+      "decision": "selected",
+      "decisionReason": "古陶瓷基因库把三维扫描、AI拼对和跨机构数据协作落实到1.6万余片残片，数字化的专业增量清楚且可核验。",
+      "selectedForDaily": true,
+      "dedupStatus": "unique_event",
+      "notes": "原始发现来自 2026-09-05 07:13 cutoff 内的 Google News discovery；后续通过中国新闻网直接原文完成 A 级证据核验。",
+      "discoveredVia": "google-news-rss",
+      "discoveryQuery": "site:chinanews.com.cn 考古 遗址 文明 after:2026-08-30 before:2026-09-06",
+      "duplicateOf": null,
+      "duplicateReason": null,
+      "newDevelopment": false,
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "古陶瓷基因库把三维扫描、AI拼对和跨机构数据协作落实到1.6万余片残片，数字化的专业增量清楚且可核验。",
+      "editorialPriorityScore": 52,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_digital_or_technology_project",
+        "primary_freshness"
+      ],
+      "dailyItemNumber": 3,
+      "dailyItemTitle": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”"
+    },
+    {
+      "candidateId": "daily-20260905-004",
       "eventId": "event-eaee9c72a7b2",
       "title": "广西在南宁调研文化和文物保护工作",
       "publishedDate": "2026-09-03",
@@ -125,12 +197,15 @@
         }
       ],
       "evidenceTier": "A",
-      "topic": ["文物保护", "地方治理"],
+      "topic": [
+        "文物保护",
+        "地方治理"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
       "decision": "rejected",
-      "decisionReason": "原文可核验，但当前记录主要是地方调研和工作强调，未见足以进入日报的具体制度、保护工程或阶段性成果增量。",
+      "decisionReason": "previous_editorial_rejection",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "notes": "保留在候选账本，未因已有其他入选条目而静默删除。",
@@ -140,13 +215,20 @@
       "duplicateReason": null,
       "newDevelopment": false,
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "原文可核验，但当前记录主要是地方调研和工作强调，未见足以进入日报的具体制度、保护工程或阶段性成果增量。",
+      "finalEditorialReason": "近3日内同一 canonical event 已完成编辑审阅并明确拒绝；本次没有新的 substantive new development。",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["primary_freshness"]
+      "editorialReasons": [
+        "primary_freshness"
+      ],
+      "previousEditorialRejection": true,
+      "previousEditorialRejectionDate": "2026-09-04",
+      "previousEditorialRejectionOf": "event-eaee9c72a7b2",
+      "previousEditorialRejectionReason": "low_editorial_priority_after_full_network_recovery",
+      "previousEditorialRejectionLedgerPath": "content/候选/2026-09-04.json"
     },
     {
-      "candidateId": "daily-20260905-004",
+      "candidateId": "daily-20260905-005",
       "eventId": "event-f35206d16b83",
       "title": "LED 多光谱成像系统帮助考古发掘前评估遗址",
       "publishedDate": "2026-09-03",
@@ -163,13 +245,17 @@
         }
       ],
       "evidenceTier": "B",
-      "topic": ["考古", "科技保护", "国际"],
+      "topic": [
+        "考古",
+        "科技保护",
+        "国际"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "selected",
-      "decisionReason": "报道给出 16 波段 LED 系统、丹麦 Sorte Muld 遗址测试、土层变化和骨骼荧光线索，呈现发掘前现场评估的具体技术增量。",
-      "selectedForDaily": true,
+      "decision": "rejected",
+      "decisionReason": "previous_editorial_rejection",
+      "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "notes": "Archaeology Magazine B 级来源；报道明确说明后续仍需通过发掘验证。",
       "discoveredVia": "archaeology-magazine",
@@ -177,19 +263,24 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "selected",
-      "finalEditorialReason": "报道给出 16 波段 LED 系统、丹麦 Sorte Muld 遗址测试、土层变化和骨骼荧光线索，呈现发掘前现场评估的具体技术增量。",
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "近3日内同一 canonical event 已完成编辑审阅并明确拒绝；本次没有新的 substantive new development。",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["primary_freshness"],
-      "dailyItemNumber": 3,
-      "dailyItemTitle": "LED 多光谱成像系统帮助考古发掘前评估遗址"
+      "editorialReasons": [
+        "primary_freshness"
+      ],
+      "previousEditorialRejection": true,
+      "previousEditorialRejectionDate": "2026-09-04",
+      "previousEditorialRejectionOf": "event-f35206d16b83",
+      "previousEditorialRejectionReason": "low_editorial_priority_after_full_network_recovery",
+      "previousEditorialRejectionLedgerPath": "content/候选/2026-09-04.json"
     }
   ],
   "summary": {
-    "discovered": 4,
+    "discovered": 5,
     "selected": 3,
-    "rejected": 1,
+    "rejected": 2,
     "deferred": 0,
     "needsVerification": 0
   }

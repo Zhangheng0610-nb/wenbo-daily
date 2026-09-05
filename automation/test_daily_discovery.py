@@ -53,6 +53,11 @@ from automation.daily_discovery import (
     _execute_one_query,
     unwrap_redirect_url,
     resolution_failure_type,
+    find_previous_editorial_rejection,
+    load_recent_editorial_rejections,
+    near_threshold_rescue_eligible,
+    select_evidence_upgrade_queue,
+    previous_editorial_rejection_relation,
 )
 
 
@@ -430,6 +435,105 @@ class DailyDiscoveryTests(unittest.TestCase):
             "title": "三维扫描与AI辅助文物数据库建设",
             "queryFamily": "digital-heritage",
         }))
+
+    def test_near_threshold_rescue_requires_fresh_substantive_medium_event(self):
+        eligible = {
+            "eventId": "event-digital",
+            "candidateDisposition": "needs_verification",
+            "editorialPriorityLabel": "medium",
+            "editorialPriorityScore": 52,
+            "freshnessTier": "primary_0_48h",
+            "editorialReasons": ["substantive_digital_or_technology_project", "primary_freshness"],
+        }
+        routine = dict(eligible, editorialReasons=["primary_freshness"])
+        stale = dict(eligible, freshnessTier="backfill_3_7d")
+        self.assertTrue(near_threshold_rescue_eligible(eligible))
+        self.assertFalse(near_threshold_rescue_eligible(routine))
+        self.assertFalse(near_threshold_rescue_eligible(stale))
+
+    def test_near_threshold_rescue_is_bounded_and_keeps_normal_queue(self):
+        def row(event_id, score):
+            return {
+                "eventId": event_id,
+                "candidateDisposition": "needs_verification",
+                "editorialPriorityLabel": "medium",
+                "editorialPriorityScore": score,
+                "freshnessTier": "primary_0_48h",
+                "editorialReasons": ["substantive_digital_or_technology_project", "primary_freshness"],
+            }
+        events = [row("normal", 55)] + [row(f"rescue-{n}", 54 - n) for n in range(4)]
+        selected = select_evidence_upgrade_queue(events)
+        self.assertEqual(selected["normalCount"], 1)
+        self.assertEqual(selected["rescueEligibleCount"], 4)
+        self.assertEqual(selected["rescueAttemptedCount"], 3)
+        self.assertEqual(selected["rescueSkippedByCap"], 1)
+        self.assertEqual({r["eventId"] for r in selected["events"]}, {"normal", "rescue-0", "rescue-1", "rescue-2"})
+        self.assertEqual(selected["events"][-1]["evidenceQueueClass"], "near_threshold_rescue")
+
+    def test_previous_editorial_rejection_blocks_same_event_without_new_development(self):
+        previous = {
+            "eventId": "event-rejected",
+            "title": "LED Light System Could Help Archaeologists Evaluate Sites Before Excavation",
+            "publishedDate": "2026-09-03",
+            "rejectionDate": "2026-09-04",
+            "rejectionReason": "low_editorial_priority_after_full_network_recovery",
+        }
+        current = dict(previous, publishedDate="2026-09-03")
+        relation = previous_editorial_rejection_relation(current, previous)
+        self.assertEqual(relation[0], "previous_editorial_rejection")
+        self.assertEqual(find_previous_editorial_rejection(__import__("datetime").date(2026, 9, 5), current, [previous])["rejectionDate"], "2026-09-04")
+
+    def test_previous_editorial_rejection_allows_substantive_new_development(self):
+        previous = {
+            "eventId": "event-rejected",
+            "title": "某项目公布初步研究结果",
+            "publishedDate": "2026-09-03",
+            "rejectionDate": "2026-09-04",
+        }
+        current = dict(previous, substantiveNewDevelopment=True, newDevelopmentEvidence="正式公布第二阶段结果")
+        self.assertIsNone(previous_editorial_rejection_relation(current, previous))
+
+    def test_previous_editorial_rejection_does_not_block_different_event_same_institution(self):
+        previous = {
+            "eventId": "event-opening",
+            "title": "某博物馆公布临时展览开幕安排",
+            "publishedDate": "2026-09-04",
+            "rejectionDate": "2026-09-04",
+            "rejectionReason": "routine_notice",
+        }
+        current = {
+            "eventId": "event-security",
+            "title": "某博物馆馆藏标本遭游客破坏并启动保护处置",
+            "publishedDate": "2026-09-05",
+            "scope": "domestic",
+        }
+        self.assertIsNone(previous_editorial_rejection_relation(current, previous))
+
+    def test_candidate_evaluation_records_previous_rejection_reason(self):
+        event = {
+            "eventId": "event-rejected",
+            "title": "某博物馆公布展陈研究结果",
+            "representativeTitle": "某博物馆公布展陈研究结果",
+            "url": "https://example.org/event",
+            "publishedDate": "2026-09-04",
+            "scope": "domestic",
+            "reportCount": 1,
+            "sourceDomains": ["example.org"],
+            "publisherDomains": ["example.org"],
+        }
+        previous = {
+            "eventId": "event-rejected",
+            "title": event["title"],
+            "publishedDate": "2026-09-04",
+            "rejectionDate": "2026-09-04",
+            "rejectionReason": "low_editorial_priority_after_review",
+        }
+        result = evaluate_candidate_pool(__import__("datetime").date(2026, 9, 5), [event], previous_rejections=[previous])
+        row = result["records"][0]
+        self.assertEqual(row["candidateDisposition"], "rejected")
+        self.assertIn("previous_editorial_rejection", row["filterReasons"])
+        self.assertEqual(result["summary"]["previousEditorialRejectionCount"], 1)
+        self.assertEqual(row["previousEditorialRejectionLedgerPath"], None)
 
     def test_editorial_priority_is_independent_of_source_tier(self):
         important = editorial_priority({"title": "某遗址发现重要考古新成果", "sourceDomain": "news.google.com"})

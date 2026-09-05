@@ -63,6 +63,19 @@ def _final_pool_ids(replay):
     return {row.get('eventId') for row in rows if isinstance(row, dict) and row.get('eventId')}
 
 
+def _previous_rejection_exclusion_allowed(candidate):
+    """Allow only an explicit rejected-event guard row outside the editorial pool."""
+    return (
+        isinstance(candidate, dict)
+        and candidate.get('decision') == 'rejected'
+        and candidate.get('decisionReason') == 'previous_editorial_rejection'
+        and candidate.get('previousEditorialRejection') is True
+        and bool(candidate.get('previousEditorialRejectionOf'))
+        and bool(candidate.get('previousEditorialRejectionDate'))
+        and bool(candidate.get('previousEditorialRejectionReason'))
+    )
+
+
 EDITORIAL_REPLAY_REVISION_TYPES = {
     'same_day_editorial_revision',
     'historical_editorial_correction',
@@ -510,7 +523,8 @@ def validate(path, report_path=None):
                 and candidate.get('dedupStatus') in {'historical_duplicate', 'derivative_commentary'}
                 and bool(candidate.get('duplicateOf'))
             )
-            if candidate.get('eventId') not in pool_ids and not historical_exclusion:
+            previous_rejection_exclusion = _previous_rejection_exclusion_allowed(candidate)
+            if candidate.get('eventId') not in pool_ids and not historical_exclusion and not previous_rejection_exclusion:
                 errors.append(f'{candidate.get("candidateId", "candidate")}: eventId is not in editorialInput finalEditorialPool')
     if report_path and not errors:
         from build import parse_md
