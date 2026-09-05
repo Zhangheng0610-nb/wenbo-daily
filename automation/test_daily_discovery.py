@@ -436,6 +436,35 @@ class DailyDiscoveryTests(unittest.TestCase):
             "queryFamily": "digital-heritage",
         }))
 
+    def test_modern_ceramics_manufacturing_with_3d_modeling_is_not_wenbo_relevant(self):
+        self.assertFalse(is_relevant_record({
+            "title": "某陶瓷企业利用三维建模升级智能生产线",
+        }))
+        self.assertFalse(is_relevant_record({
+            "title": "某陶瓷企业利用三维建模升级智能生产线",
+            "queryFamily": "digital-heritage",
+        }))
+
+    def test_modern_ceramics_quality_control_with_3d_scanning_is_not_wenbo_relevant(self):
+        self.assertFalse(is_relevant_record({
+            "title": "陶瓷产业园采用三维扫描进行产品质量控制",
+        }))
+
+    def test_ancient_ceramics_fragments_with_3d_scanning_remain_relevant(self):
+        self.assertTrue(is_relevant_record({
+            "title": "景德镇古陶瓷残片通过三维扫描建立文物基因库",
+        }))
+
+    def test_museum_ceramic_collection_digitization_remains_relevant(self):
+        self.assertTrue(is_relevant_record({
+            "title": "博物馆利用三维扫描开展陶瓷藏品数字化",
+        }))
+
+    def test_excavated_ceramic_shards_3d_modeling_remain_relevant(self):
+        self.assertTrue(is_relevant_record({
+            "title": "考古出土瓷片开展三维建模与数字拼接",
+        }))
+
     def test_near_threshold_rescue_requires_fresh_substantive_medium_event(self):
         eligible = {
             "eventId": "event-digital",

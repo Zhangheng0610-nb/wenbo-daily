@@ -277,6 +277,13 @@ DIGITAL_HERITAGE_RELEVANCE_TERMS = (
 DIGITAL_HERITAGE_OBJECT_TERMS = (
     "文物", "古陶瓷", "瓷片", "陶瓷", "博物馆", "博物院", "考古", "遗址", "遗产", "展品", "藏品", "标本", "化石",
 )
+# Bare "陶瓷" also appears in ordinary manufacturing and quality-control
+# stories.  Keep it available as a discovery vocabulary term, but require an
+# explicit heritage context before it can satisfy the digital-heritage object
+# side of the relevance conjunction.
+DIGITAL_HERITAGE_CONTEXT_TERMS = (
+    "文物", "古陶瓷", "瓷片", "考古", "遗址", "博物馆", "博物院", "遗产", "展品", "藏品", "出土", "文博",
+)
 QUERY_FAMILY_RELEVANCE_TERMS = {
     # Query-family terms are a discovery-scope signal only.  They prevent a
     # headline such as a national talent-list announcement from being
@@ -3322,10 +3329,16 @@ def is_relevant_record(record: dict) -> bool:
         family_ids = [family_id for family_id in family_ids if family_id != "international-wire"]
         if not family_ids:
             return False
-    if (
-        any(term.lower() in text for term in DIGITAL_HERITAGE_RELEVANCE_TERMS)
-        and any(term.lower() in text for term in DIGITAL_HERITAGE_OBJECT_TERMS)
-    ):
+    digital_signal = any(term.lower() in text for term in DIGITAL_HERITAGE_RELEVANCE_TERMS)
+    explicit_digital_object = any(
+        term.lower() in text for term in DIGITAL_HERITAGE_OBJECT_TERMS if term != "陶瓷"
+    )
+    ceramic_with_heritage_context = (
+        "陶瓷" in text
+        and any(term.lower() in text for term in DIGITAL_HERITAGE_CONTEXT_TERMS)
+    )
+    digital_heritage_context = explicit_digital_object or ceramic_with_heritage_context or "文博" in text
+    if digital_signal and digital_heritage_context:
         return True
     if any(term.lower() in text for term in RELEVANCE_TERMS):
         return True
@@ -3334,6 +3347,11 @@ def is_relevant_record(record: dict) -> bool:
         for family_id in family_ids
         for term in QUERY_FAMILY_RELEVANCE_TERMS.get(family_id, ())
     )
+    if "digital-heritage" in family_ids and not digital_heritage_context:
+        family_terms = tuple(
+            term for term in family_terms
+            if term.lower() not in {candidate.lower() for candidate in DIGITAL_HERITAGE_RELEVANCE_TERMS}
+        )
     if "international-museum-governance" in family_ids:
         return international_museum_governance_relevance(record)
     if any(term.lower() in text for term in family_terms):
