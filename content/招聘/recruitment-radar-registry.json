@@ -1,0 +1,64 @@
+{
+  "schema": "recruitment-radar-registry-v1",
+  "updatedAt": "2026-09-06",
+  "policy": "Radar sources are discovery-only. A listing is publishable only after a direct detail/application source is verified.",
+  "sources": [
+    {
+      "name": "高校人才网事业单位公告",
+      "type": "professional_recruitment_site",
+      "url": "https://www.gaoxiaojob.com/column/254.html",
+      "account": "",
+      "biz": "",
+      "scope": "全国事业单位及文博机构",
+      "discoveryOnly": true,
+      "active": true,
+      "lastVerified": "2026-09-06"
+    },
+    {
+      "name": "事业单位招聘考试网",
+      "type": "professional_recruitment_site",
+      "url": "https://www.shiyebian.com/",
+      "account": "",
+      "biz": "",
+      "scope": "全国事业单位 umbrella notices",
+      "discoveryOnly": true,
+      "active": true,
+      "lastVerified": "2026-09-06"
+    },
+    {
+      "name": "国家大学生就业服务平台",
+      "type": "school_employment_site",
+      "url": "https://www.ncss.cn/",
+      "account": "",
+      "biz": "",
+      "scope": "高校毕业生及实习岗位",
+      "discoveryOnly": true,
+      "active": true,
+      "lastVerified": "2026-09-06"
+    },
+    {
+      "name": "用户提供的文博招聘微信汇总",
+      "type": "industry_wechat",
+      "url": "https://mp.weixin.qq.com/s/pmPGBdH_6sgEi3F7Ad0GIw",
+      "account": "",
+      "biz": "",
+      "scope": "待核验文博招聘 benchmark",
+      "discoveryOnly": true,
+      "active": false,
+      "lastVerified": "2026-09-06",
+      "notes": "直链当前返回环境异常验证页，无法可靠取得文章、账号名或__biz；保留为 pending benchmark，不作永久活跃雷达或验证来源。"
+    },
+    {
+      "name": "文博人才（历史运行手册名称）",
+      "type": "industry_wechat",
+      "url": "",
+      "account": "文博人才",
+      "biz": "",
+      "scope": "全国文博招聘",
+      "discoveryOnly": true,
+      "active": false,
+      "lastVerified": null,
+      "notes": "旧规则只有昵称，没有可审计URL或__biz；在身份与入口核验前不自动抓取。"
+    }
+  ]
+}

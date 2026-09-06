@@ -420,7 +420,10 @@ RECRUITMENT_PLATFORM_DOMAINS = (
     "wondercv.com", "fenbi.com", "ncss.cn", "quanzhi.com", "jrzp.com",
 )
 RECRUITMENT_EMPLOYMENT_DOMAINS = (
-    "nbhr.org.cn", "career.zju.edu.cn", "culr.edu.cn",
+    "nbhr.org.cn", "career.zju.edu.cn", "culr.edu.cn", "tzrc.cn",
+)
+RECRUITMENT_OFFICIAL_INSTITUTION_DOMAINS = (
+    "wuhouci.net.cn",
 )
 
 
@@ -431,6 +434,8 @@ def recruitment_source_info(url):
         return {"label": "🔎 二手线索", "kind": "lead", "host": ""}
     if any(host_matches(host, domain) for domain in RECRUITMENT_EMPLOYMENT_DOMAINS):
         return {"label": "🎓 高校/就业平台", "kind": "employment", "host": host}
+    if any(host_matches(host, domain) for domain in RECRUITMENT_OFFICIAL_INSTITUTION_DOMAINS):
+        return {"label": "🏛️ 官方来源", "kind": "official", "host": host}
     if any(host_matches(host, domain) for domain in RECRUITMENT_PLATFORM_DOMAINS):
         return {"label": "💼 主流招聘平台", "kind": "platform", "host": host}
     info = source_info(url)
