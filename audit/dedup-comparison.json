@@ -1,0 +1,94 @@
+{
+  "scope": "11 human-labelled challenging live pairs; not population precision or recall",
+  "pairs": [
+    {
+      "left": "关于《深圳市非国有博物馆扶持资金管理办法》的政策解读 - sz.gov.cn",
+      "right": "《考古出土（出水）文物移交管理办法（试行）》解读 - 川观新闻",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "关于《深圳市非国有博物馆扶持资金管理办法》的政策解读 - sz.gov.cn",
+      "right": "《博物馆藏品管理办法》政策解读 - 河北省文化和旅游厅",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "Macron urges France, UK to forge closer bond as Bayeux Tapestry goes on display in Britain - France 24",
+      "right": "Vision for Tahoe snow sports and Winter Olympics museum moves closer to reality - Abridged – PBS KVIE",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "Macron urges France, UK to forge closer bond as Bayeux Tapestry goes on display in Britain - France 24",
+      "right": "Ho Chi Minh City brings culture closer to everyday life - Vietnam+ (VietnamPlus)",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "Macron urges France, UK to forge closer bond as Bayeux Tapestry goes on display in Britain - France 24",
+      "right": "He captivated millions on TV. Now Archbishop Fulton Sheen is one step closer to sainthood - AP News",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "全省博物馆陈列展览内容审核工作专题会议在沈召开 - 辽宁省文化和旅游厅",
+      "right": "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点 - thepaper.cn",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "别跑空！北京多家公园部分景点景区及博物馆恢复周一闭馆 - 京报网",
+      "right": "布达拉宫发布公告 - 京报网",
+      "expectedSameEvent": false,
+      "before": false,
+      "after": false
+    },
+    {
+      "left": "上海文化日历几乎全年无休 已形成多层次高品质展览生态 “来上海 看顶展” 成为日常2026-09-04 - 上海市人民政府",
+      "right": "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点 - thepaper.cn",
+      "expectedSameEvent": false,
+      "before": true,
+      "after": false
+    },
+    {
+      "left": "景德镇中国陶瓷博物馆暑期“圈粉”93.3万人次，人气再创新高 - China Daily",
+      "right": "景德镇中国陶瓷博物馆暑期“圈粉”93.3万人次，人气再创新高（图） - 大江网",
+      "expectedSameEvent": true,
+      "before": true,
+      "after": true
+    },
+    {
+      "left": "中埃联合考古队在塞赫迈特神庙遗址有新发现 - yidaiyilu.gov.cn",
+      "right": "中埃联合考古队在塞赫迈特神庙遗址有新发现_ 文博资讯 - 福建省文物局",
+      "expectedSameEvent": true,
+      "before": true,
+      "after": true
+    },
+    {
+      "left": "关于《深圳市非国有博物馆扶持资金管理办法》的政策解读 - sz.gov.cn",
+      "right": "深圳市文化广电旅游体育局关于印发《深圳市非国有博物馆扶持资金管理办法》的通知--2026年第26期（总第1425期） - sz.gov.cn",
+      "expectedSameEvent": true,
+      "before": true,
+      "after": true
+    }
+  ],
+  "before": {
+    "correct": 4,
+    "total": 11,
+    "falseMerges": 7,
+    "missedMatches": 0
+  },
+  "after": {
+    "correct": 11,
+    "total": 11,
+    "falseMerges": 0,
+    "missedMatches": 0
+  }
+}

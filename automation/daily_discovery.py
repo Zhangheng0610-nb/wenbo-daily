@@ -755,6 +755,12 @@ def clean_discovery_title(title: str) -> str:
     return re.sub(r"^[\s【\[]*(?:新华社|中新网|央视网|媒体报道)[：:）)、 ]*", "", value).strip()
 
 
+# Workflow phrases describe an action, not an institution or event identity.
+MATCH_GENERIC_PHRASES = tuple(MATCH_GENERIC_PHRASES) + (
+    '恢复周一闭馆', '陈列展览内容审核工作', '展览生态', '来上海看顶展',
+)
+
+
 def _match_fragment_is_weak(fragment: str) -> bool:
     """Reject topic-only fragments while retaining named entities and places."""
     value = compact(fragment)
@@ -790,12 +796,28 @@ def event_match_terms(text: str) -> set[str]:
     return terms
 
 
+def action_pattern_matches(pattern: str, text: str) -> bool:
+    if re.search(r"[a-zA-Z]", pattern):
+        return bool(re.search(r"(?<![a-z])" + re.escape(pattern) + r"(?![a-z])", text, re.I))
+    return pattern in text
+
+
+def named_policy_conflict(current: dict, previous: dict) -> bool:
+    def instruments(row):
+        title = row.get('representativeTitle') or row.get('title', '')
+        return {compact(re.sub(r'[（(]试行[）)]', '', name))
+                for name in re.findall(r'《([^》]+)》', title)
+                if re.search(r'办法|条例|规定|指南|规划|规程', name)}
+    left, right = instruments(current), instruments(previous)
+    return bool(left and right and not any(a in b or b in a for a in left for b in right))
+
+
 @lru_cache(maxsize=16384)
 def event_actions(text: str) -> set[str]:
     value = clean_discovery_title(text)
     return {
         action for action, patterns in EVENT_ACTION_PATTERNS
-        if any(pattern in value for pattern in patterns)
+        if any(action_pattern_matches(pattern, value) for pattern in patterns)
     }
 
 
@@ -868,6 +890,10 @@ def event_match_details(event: dict, result: dict, body: str = "") -> dict:
     """Explain whether an article is about the event, independent of its tier."""
     event_title = clean_discovery_title(event.get("representativeTitle") or event.get("title", ""))
     result_title = clean_discovery_title(result.get("title", ""))
+    if named_policy_conflict(event, result):
+        return {'matched': False, 'score': 0, 'reasons': ['different_named_policy'],
+                'eventAnchors': [], 'bodyAnchors': [], 'actionOverlap': [],
+                'actionConflict': True, 'eventKindOverlap': []}
     body_text = visible_article_text(body)[:12000]
     event_terms = event_match_terms(event_title)
     result_title_terms = event_match_terms(result_title)
@@ -944,7 +970,7 @@ def event_action(text: str) -> str:
     """Return a coarse event action so one entity's different events stay separate."""
     value = text or ""
     for action, patterns in EVENT_ACTION_PATTERNS:
-        if any(pattern in value for pattern in patterns):
+        if any(action_pattern_matches(pattern, value) for pattern in patterns):
             return action
     return ""
 
@@ -973,6 +999,7 @@ def event_named_entity(text: str) -> str:
     value = clean_discovery_title(text)
     quoted = re.findall(r"《([^》]{2,48})》", value)
     for phrase in quoted:
+        phrase = re.sub(r'[（(]试行[）)]$', '', phrase)
         if any(phrase.endswith(suffix) for suffix in EVENT_ENTITY_SUFFIXES) or any(
             phrase.endswith(suffix) for suffix in ("办法", "条例", "规章", "规划", "规范")
         ):
@@ -1202,10 +1229,19 @@ def canonical_event_identity(record: dict) -> str:
 
 def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     """Find same-event reports without treating similar subjects as one event."""
+    # A source document may be a multi-item digest, not one event.
+    if named_policy_conflict(current, previous):
+        return None
+    left_segment = current.get("contentItemId") or current.get("content_item_id")
+    right_segment = previous.get("contentItemId") or previous.get("content_item_id")
+    if left_segment and right_segment and left_segment != right_segment:
+        return None
     current_url = canonical_url(current.get("url") or "")
     previous_url = canonical_url(previous.get("url") or "")
     if current_url and previous_url and current_url == previous_url:
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical discovery URL")
+    if named_policy_conflict(current, previous):
+        return None
     current_identity = canonical_event_identity(current)
     previous_identity = canonical_event_identity(previous)
     if current_identity and current_identity == previous_identity:
@@ -1524,7 +1560,9 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
         ranked = sorted(
             group,
             key=lambda row: (
+                1 if row.get("newDevelopment") is True else 0,
                 1 if source_info(row.get("url", "")).get("tier") in {"A", "B"} else 0,
+                row.get("publishedDate") or "",
                 len(clean_discovery_title(row.get("title", ""))),
             ),
             reverse=True,
@@ -1563,7 +1601,9 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
             "title": title,
             "representativeTitle": title,
             "url": representative.get("url", ""),
-            "publishedDate": max(dates) if dates else representative.get("publishedDate", ""),
+            "publishedDate": representative.get("publishedDate", ""),
+            "firstReportedDate": min(dates) if dates else "",
+            "latestReportedDate": max(dates) if dates else "",
             # A radar report may carry an explicitly recomputed editorial
             # scope hint.  It is not the monitoring map scope and takes
             # precedence only for that event; ordinary reports retain the

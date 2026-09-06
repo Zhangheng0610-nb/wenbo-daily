@@ -423,7 +423,8 @@ RECRUITMENT_EMPLOYMENT_DOMAINS = (
     "nbhr.org.cn", "career.zju.edu.cn", "culr.edu.cn", "tzrc.cn",
 )
 RECRUITMENT_OFFICIAL_INSTITUTION_DOMAINS = (
-    "wuhouci.net.cn",
+    # Official recruitment page and institutional footer verified 2026-09-06.
+    "pgm.org.cn", "wuhouci.net.cn",
 )
 
 

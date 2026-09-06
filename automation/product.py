@@ -2,13 +2,20 @@
 from pathlib import Path
 from html import escape
 from urllib.parse import urlsplit
+import hashlib
 import json
 import re
 import xml.etree.ElementTree as ET
 
 ORIGIN = 'https://zhangheng666.top'
-NAV = [('index.html', '资讯'), ('command-center/', '行业观察'), ('jobs.html', '招聘'),
-       ('intern.html', '实习'), ('archive.html', '档案'), ('search.html', '搜索')]
+NAV = [('index.html', '资讯'), ('command-center/', '行业观察'), ('jobs.html', '机会'), ('archive.html', '档案'), ('search.html', '搜索')]
+
+
+def job_id(item):
+    """Stable across reorder, status changes and editorial notes."""
+    identity = '|'.join(str(item.get(k, '')).strip() for k in
+                        ('institution', 'position', 'link_url', 'deadline'))
+    return 'job-' + hashlib.sha256(identity.encode()).hexdigest()[:14]
 
 
 def safe_url(value):
@@ -31,13 +38,15 @@ def decorate(html, path):
         return html
     prefix = '../' * (len(Path(path).parts) - 1)
     active = 'archive.html' if path.startswith('reports/') else path
+    if path == 'intern.html':
+        active = 'jobs.html'
     if path in ('heatmap.html', 'digital-trends.html'):
         active = 'command-center/'
     if path == 'command-center/index.html':
         active = 'command-center/'
     links = ''.join(f'<a href="{prefix}{url}"' + (' aria-current="page"' if active == url else '') + f'>{label}</a>' for url, label in NAV)
     nav = f'<div class="product-bar" data-product-shell><a class="skip-link" href="#product-main">跳到正文</a><a class="product-brand" href="{prefix}index.html">文博<span>DAILY</span></a><nav aria-label="全站导航">{links}</nav></div>'
-    head = f'<link rel="stylesheet" href="{prefix}assets/product.css"><script src="{prefix}assets/product.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="{prefix}feed.xml">'
+    head = f'<link rel="stylesheet" href="{prefix}assets/product.css"><script src="{prefix}assets/product.js" defer></script><script src="{prefix}assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="{prefix}feed.xml">'
     canonical = ORIGIN + ('/' if path == 'index.html' else '/' + path)
     if 'rel="canonical"' not in html:
         head += f'<link rel="canonical" href="{canonical}">'
@@ -58,6 +67,8 @@ def decorate(html, path):
 
 def finish_site(root, reports):
     root = Path(root)
+    from automation.reader_product import write_reader_product
+    write_reader_product(root, reports)
     latest = max((r['date'] for r in reports), default='')
     monitoring = root / 'content' / '监测' / (latest + '.json')
     payload = json.loads(monitoring.read_text()) if monitoring.exists() else {}
@@ -73,7 +84,7 @@ def finish_site(root, reports):
         relative = page.relative_to(root).as_posix()
         html = page.read_text()
         if relative == 'index.html':
-            evidence = f'<aside class="freshness" data-report-date="{latest}"><strong>最近发布：{latest}</strong><span data-freshness-message>固定信源完整巡检 {complete}/6 · ' + ('当日运行记录' if live else '暂无当日正式运行证据') + f'</span><a href="command-center/#product-main">查看数据范围</a><a href="feed.xml">RSS 订阅</a></aside>'
+            evidence = f'<aside class="freshness" data-report-date="{latest}"><strong>最近发布：{latest}</strong><span data-freshness-message>固定信源 {latest} 巡检 {complete}/6 · ' + ('仅代表该日，不代表长期覆盖' if live else '暂无当日正式运行证据') + f'</span><a href="command-center/#product-main">查看数据范围</a><a href="feed.xml">RSS 订阅</a></aside>'
             html = html.replace('<section class="hero"', evidence + '<section class="hero"', 1)
             html = html.replace('今日精选 ·', '最新精选 ·').replace('阅读今日日报', '阅读最新日报')
         page.write_text(decorate(html, relative))

@@ -2,7 +2,9 @@
 (() => {
   const freshness = document.querySelector('[data-report-date]');
   if (freshness) {
-    const today = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    const parts = new Intl.DateTimeFormat('en', {timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    const get = type => parts.find(p=>p.type===type).value;
+    const today = `${get('year')}-${get('month')}-${get('day')}`;
     if (freshness.dataset.reportDate < today) {
       freshness.classList.add('is-stale');
       freshness.querySelector('strong').textContent = `最新日报截至 ${freshness.dataset.reportDate}，尚非今日内容`;
@@ -15,7 +17,8 @@
   panel.setAttribute('role','search');
   panel.setAttribute('aria-label','筛选岗位');
   panel.innerHTML = '<label>岗位、机构、地点<input type="search" name="jobq" placeholder="例如：修复、宁波、数字化"></label><label>申请状态<select name="status"><option value="active">未截止及待核验</option><option value="open">可申请</option><option value="upcoming">尚未开始</option><option value="check">状态待核验</option><option value="closed">已截止</option><option value="all">全部档案</option></select></label><button type="reset">清除筛选</button><p class="job-filter-result" role="status" aria-live="polite"></p>';
-  document.querySelector('.job-section').before(panel);
+  const guidance=document.querySelector('.job-guidance');
+  (guidance || document.querySelector('.job-section')).before(panel);
   const input = panel.elements.jobq, select = panel.elements.status;
   const params = new URLSearchParams(location.search);
   input.value = params.get('jobq') || '';
@@ -39,7 +42,10 @@
       row.hidden=!(stateMatch&&tokens.every(t=>row.textContent.toLocaleLowerCase().includes(t)));
       if(!row.hidden)visible++;
     });
-    document.querySelectorAll('.job-section').forEach(section=>section.hidden=![...section.querySelectorAll('.job-item')].some(row=>!row.hidden));
+    document.querySelectorAll('.job-section').forEach(section=>{
+      const shown=[...section.querySelectorAll('.job-item')].filter(row=>!row.hidden).length;
+      section.hidden=!shown; section.querySelector('.count-badge').textContent=`${shown} 条`;
+    });
     for(const [id,value] of Object.entries({'job-open-count':counts.open,'job-open-stat':counts.open,'job-closed-count':counts.closed,'job-closed-stat':counts.closed,'job-urgent-stat':urgent})){
       const node=document.getElementById(id);if(node)node.textContent=value;
     }

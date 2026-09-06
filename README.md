@@ -44,3 +44,29 @@ python3 automation/validate_product.py
 - 部署前需要全部检查通过并完成浏览器验收；提交分支不会自动替代生产主分支。
 
 本轮发现、修改和未完成事项见 [优化审计](automation/PRODUCT_AUDIT.md)。
+
+### 本地开发与产品验收
+
+```bash
+npm ci
+python build.py
+npm run dev -- --port 4173
+```
+
+开发预览不会强制跳转线上域名。静态发布仍由 Python 构建，Vite 仅用于本地开发。
+
+- 首页的近期内容来自已发布日报与对应编辑事件账本，不会另行抓取或自动补写新闻。
+- 招聘与实习归入“机会”；搜索支持直达具体岗位，截止档案仍可检索。
+- 收藏仅存当前浏览器，无账号、无跨设备同步；历史核查提示位于对应条目前。
+- 持续优化记录见 `automation/PRODUCT_ROUND2.md`，其中列明实测与未完成事项。
+
+离线重现本轮去重挑战集和全量发现回放：
+
+```bash
+python automation/replay_dedup_audit.py audit/live-discovery-2026-09-06.json --output audit/dedup-replay-summary.json
+python -m unittest discover -s automation -p 'test_*.py'
+python automation/validate_project.py --all
+python automation/validate_product.py
+```
+
+需要新的实时质量审计时，运行 `python automation/measure_discovery.py YYYY-MM-DD`。该命令会联网但不改生产日报或监测账本；来源连接失败必须保留，不可用搜索引擎响应成功代替来源覆盖。
