@@ -11,19 +11,19 @@
   "replayCutoff": "2026-09-06T07:13:51+08:00",
   "revision": {
     "revisionType": "same_day_editorial_revision",
-    "revisedAt": "2026-09-06T07:20:27+08:00",
+    "revisedAt": "2026-09-06T15:06:59+08:00",
     "editorialInputPath": "content/复核/2026-09-06-editorial-replay.json",
     "discoveryAuditUnchanged": true,
-    "revisionReason": "The sole evidence-qualified event was reviewed from the saved discovery audit; no editorial pools were merged.",
+    "revisionReason": "基于不可变 discovery audit 的正式 controlled replay：修复 action-aware historical/event dedup 并复核 evidence direct-publisher resolution；未拼接平行 editorial pool，正式选稿结果不变。",
     "runtimeEnrichment": false
   },
   "candidatePoolDefinition": "本次正式编辑唯一输入为 content/复核/2026-09-06-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 未修改。",
   "editorialReview": {
-    "reviewedAt": "2026-09-06T07:20:27+08:00",
+    "reviewedAt": "2026-09-06T15:06:59+08:00",
     "reviewedEvents": 1,
     "selectedEvents": 1,
     "rejectedEvents": 0,
-    "note": "唯一 evidence-qualified 事件完成逐条编辑复核并入选；其余待核验事件不进入正式编辑输入。"
+    "note": "完成 action-aware dedup 与有界 evidence resolver controlled replay；无新的非历史 evidence-qualified 事件，既有已核验天津事件保留。"
   },
   "candidates": [
     {
@@ -46,7 +46,12 @@
         }
       ],
       "evidenceTier": "A",
-      "topic": ["文物保护", "政策实施", "国内", "天津"],
+      "topic": [
+        "文物保护",
+        "政策实施",
+        "国内",
+        "天津"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -64,7 +69,10 @@
       "finalEditorialReason": "天津地方性法规已于9月1日施行，直接把长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；事件具体、证据为新华网A级，适合以地方保护治理案例入选。",
       "editorialPriorityScore": 64,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["policy_or_governance_update", "backfill_freshness"],
+      "editorialReasons": [
+        "policy_or_governance_update",
+        "backfill_freshness"
+      ],
       "dailyItemNumber": 1,
       "dailyItemTitle": "《天津市长城保护条例》9月1日起实施，为40.28公里天津段长城纳入法治化保护"
     }

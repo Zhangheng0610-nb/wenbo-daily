@@ -3,39 +3,156 @@
   "schemaVersion": 1,
   "date": "2026-09-06",
   "runType": "replay",
-  "revisionType": "same_day_editorial_revision",
-  "replayedAt": "2026-09-06T07:20:27+08:00",
+  "replayType": "formal-editorial-replay",
+  "revisedAt": "2026-09-06T15:06:59+08:00",
+  "replayedAt": "2026-09-06T15:06:59+08:00",
   "replayCutoff": "2026-09-06T07:13:51+08:00",
   "baseDiscoveryAuditPath": "content/发现/2026-09-06.json",
   "baseDiscoveryAuditSha256": "ca9148bb7aff8262afb5ef22d61c3332aa77d6e84c3e7671d436db9ca46594a9",
-  "reason": "Same-day editorial review of the sole evidence-qualified event from the immutable broad-discovery audit.",
+  "reason": "在不可变 2026-09-06 discovery snapshot 上重做 action-aware event/historical dedup，并执行一次有界 evidence resolver replay；未将当前无法再次抓取的已核验证据误降级，也未拼接平行 editorial pool。",
   "runtimeEnrichment": false,
-  "evidenceNetworkExecuted": false,
+  "evidenceNetworkExecuted": true,
   "discoveryAuditUnchanged": true,
+  "inputMode": "immutable_discovery_snapshot_records",
   "queryAudits": [
     {
-      "queryFamily": "editorial-review",
-      "scope": "domestic",
-      "actualQuery": "content/发现/2026-09-06.json::candidateEvaluation.finalEditorialPool",
-      "executedAt": "2026-09-06T07:20:27+08:00",
+      "queryFamily": "immutable-discovery-snapshot",
+      "scope": "all",
+      "actualQuery": "content/发现/2026-09-06.json::records",
+      "executedAt": "2026-09-06T15:06:59+08:00",
       "success": true,
       "failure": null,
-      "returnedResultCount": 1,
-      "acceptedRawCount": 1,
-      "sourceAudit": "content/发现/2026-09-06.json"
+      "returnedResultCount": 1187,
+      "acceptedRawCount": 1187,
+      "sourceAudit": "content/发现/2026-09-06.json",
+      "inputSha256": "ca9148bb7aff8262afb5ef22d61c3332aa77d6e84c3e7671d436db9ca46594a9"
+    },
+    {
+      "queryFamily": "evidence-upgrade-replay",
+      "scope": "all",
+      "actualQuery": "bounded evidence resolution over replay candidate queue",
+      "executedAt": "2026-09-06T15:06:59+08:00",
+      "success": true,
+      "failure": null,
+      "returnedResultCount": 26,
+      "acceptedRawCount": 12,
+      "sourceAudit": "content/发现/2026-09-06.json",
+      "networkAttempts": 26,
+      "ambiguous": 14
     }
   ],
+  "replayFunnel": {
+    "sourceScansAttempted": 8,
+    "sourceScansSucceeded": 8,
+    "queriesAttempted": 142,
+    "queriesSucceeded": 142,
+    "queriesFailed": 0,
+    "queryLayerStatus": "checked",
+    "rawResults": 1187,
+    "sameDayDuplicateRecords": 42,
+    "historicalDuplicateRecords": 77,
+    "historicalDuplicateCanonicalTargets": 49,
+    "deduplicatedResults": 1068,
+    "resolverDiscoveredCandidates": 14,
+    "resolverDiscoveredEvents": 11,
+    "eventCandidateCount": 1060,
+    "candidateEvaluationPool": 152,
+    "evidenceQualified": 0,
+    "needsVerification": 152,
+    "rejected": 714,
+    "deferred": 194,
+    "evidenceUpgradeAttempted": 26,
+    "evidenceUpgradeQualified": 12,
+    "evidenceUpgradeFailed": 0,
+    "evidenceUpgradeAmbiguous": 14,
+    "highPriorityCandidates": 2,
+    "mediumPriorityEvidenceQueueEvents": 12,
+    "dispositionCounts": {
+      "deferred": 194,
+      "needs_verification": 152,
+      "rejected": 714
+    }
+  },
+  "dedupAudit": {
+    "rawRecords": 1187,
+    "eventCandidateCount": 1060,
+    "sameDayDuplicateRecords": 42,
+    "historicalDuplicateRecords": 77,
+    "historicalDuplicateCanonicalTargets": 49,
+    "actionAwareAcademyEvents": [
+      {
+        "eventId": "event-b1cccfb9f0ad",
+        "representativeTitle": "Academy of Natural Sciences and Drexel University reach tentative terms on the Academy’s future",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "reportCount": 1
+      },
+      {
+        "eventId": "event-e77274e260cc",
+        "representativeTitle": "Mayor Parker says she is working with Gov. Shapiro to 'preserve the essential mission' of Academy of Natural Sciences - PhillyVoice",
+        "publishedDate": "2026-09-03",
+        "scope": "international",
+        "reportCount": 1
+      },
+      {
+        "eventId": "event-a33c6599ea6d",
+        "representativeTitle": "Philly's Academy of Natural Sciences museum is closing. Here's what to see while you can - Billy Penn at WHYY",
+        "publishedDate": "2026-09-05",
+        "scope": "international",
+        "reportCount": 4
+      },
+      {
+        "eventId": "event-3bb9ed7e6df1",
+        "representativeTitle": "Supporters and fans rally to protest closing of Philadelphia’s Academy of Natural Science Museum - WHYY",
+        "publishedDate": "2026-09-05",
+        "scope": "international",
+        "reportCount": 1
+      },
+      {
+        "eventId": "event-ad72325fe83b",
+        "representativeTitle": "Preserving the Academy of Natural Sciences' Legacy and Collections for the Future - Drexel University",
+        "publishedDate": "2026-09-02",
+        "scope": "international",
+        "reportCount": 1
+      }
+    ],
+    "historicalGuard": {
+      "status": "completed",
+      "checkedEvents": 1060,
+      "retainedEvents": 1048,
+      "historicalDuplicates": 12,
+      "derivativeCommentary": 0,
+      "excludedEventIds": [
+        "event-23f3720caebb",
+        "event-3ac8dc9a9a4b",
+        "event-3ca87181015f",
+        "event-e3c3b68cf2d4",
+        "event-24f7f60e1e7e",
+        "event-84897a81bea6",
+        "event-1f501b018f02",
+        "event-d15ea4907aaf",
+        "event-313f10bb9ecf",
+        "event-317bdb3e9a50",
+        "event-b5913a7a5f0b",
+        "event-fa123656a2d4"
+      ]
+    }
+  },
   "evidenceQualification": {
     "status": "completed",
     "sourceAudit": "content/发现/2026-09-06.json",
-    "qualified": 1,
-    "needsVerification": 0,
-    "note": "The saved discovery audit already contains an article-verified A-tier Xinhua evidence source; no second runtime upgrade was performed during editorial review."
+    "attempted": 26,
+    "qualified": 12,
+    "failed": 0,
+    "ambiguous": 14,
+    "currentReplayFinalPoolQualified": 0,
+    "retainedPreviouslyQualified": 1,
+    "note": "当前 re-fetch 结果中未有新的非历史合格事件；正式编辑输入保留不可变 discovery audit 已记录并已核验的天津事件。search wrapper 本身未被当作证据。"
   },
   "finalEditorialPool": {
     "rawQualifiedEvents": 1,
     "canonicalUniqueEvents": 1,
-    "historicalDuplicates": 205,
+    "historicalDuplicates": 49,
     "editoriallyReviewed": 1,
     "events": [
       {
@@ -73,8 +190,41 @@
           }
         ],
         "finalEditorialDecision": "selected",
-        "finalEditorialReason": "天津地方性法规已于9月1日施行，直接把长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；事件具体、证据为新华网A级，适合以地方保护治理案例入选，不扩写为全国性政策。"
+        "finalEditorialReason": "天津地方性法规已于9月1日施行，直接把长城保护职责、经费、巡查监测和京津冀协同保护纳入制度框架；事件具体、证据为新华网A级，适合以地方保护治理案例入选，不扩写为全国性政策。",
+        "replayEvidenceDisposition": "retained_prior_qualification",
+        "currentReplayRequalification": "ambiguous_or_not_requalified"
       }
-    ]
-  }
+    ],
+    "finalHistoricalGuard": {
+      "status": "completed",
+      "checkedEvents": 1060,
+      "retainedEvents": 1048,
+      "historicalDuplicates": 12,
+      "derivativeCommentary": 0,
+      "excludedEventIds": [
+        "event-23f3720caebb",
+        "event-3ac8dc9a9a4b",
+        "event-3ca87181015f",
+        "event-e3c3b68cf2d4",
+        "event-24f7f60e1e7e",
+        "event-84897a81bea6",
+        "event-1f501b018f02",
+        "event-d15ea4907aaf",
+        "event-313f10bb9ecf",
+        "event-317bdb3e9a50",
+        "event-b5913a7a5f0b",
+        "event-fa123656a2d4"
+      ]
+    },
+    "retentionPolicy": "Previously article-verified evidence is retained when a later bounded re-fetch is ambiguous; no new event is added by that re-fetch."
+  },
+  "editorialReview": {
+    "status": "completed",
+    "reviewedAt": "2026-09-06T15:06:59+08:00",
+    "reviewedEvents": 1,
+    "selectedEvents": 1,
+    "rejectedEvents": 0,
+    "note": "action-aware replay 未产生新的可发布非历史事件；保留既有唯一已核验编辑输入，未改变正式日报内容。"
+  },
+  "revisionType": "same_day_editorial_revision"
 }

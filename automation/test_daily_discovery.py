@@ -291,6 +291,74 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(duplicate_relation(repeat_1, canonical)[0], "historical_duplicate")
         self.assertEqual(duplicate_relation(repeat_2, canonical)[0], "historical_duplicate")
 
+    def test_same_institution_different_action_events_stay_distinct(self):
+        governance = {
+            "title": "Academy of Natural Sciences and Drexel University reach tentative terms on the Academy's future",
+            "url": "https://inquirer.example/governance",
+            "publishedDate": "2026-09-03",
+        }
+        closure = {
+            "title": "Academy of Natural Sciences of Drexel University to close museum on Sept. 30",
+            "url": "https://nbc.example/closure",
+            "publishedDate": "2026-09-02",
+        }
+        protest = {
+            "title": "Supporters and fans rally to protest closing of Philadelphia's Academy of Natural Science Museum",
+            "url": "https://whyy.example/protest",
+            "publishedDate": "2026-09-05",
+        }
+        self.assertIsNone(duplicate_relation(closure, governance))
+        self.assertIsNone(duplicate_relation(protest, closure))
+        self.assertIsNone(duplicate_relation(protest, governance))
+        self.assertFalse(
+            event_match_details(
+                closure,
+                dict(governance, body="The Academy museum and Drexel discussed future governance arrangements."),
+                "The Academy museum and Drexel discussed future governance arrangements.",
+            )["matched"]
+        )
+
+    def test_same_closure_event_with_near_synonymous_headlines_still_deduplicates(self):
+        old = {
+            "title": "Academy of Natural Sciences of Drexel University to close museum on Sept. 30",
+            "url": "https://nbc.example/closure",
+            "publishedDate": "2026-09-02",
+        }
+        new = {
+            "title": "Philadelphia's Academy of Natural Sciences announces museum closure September 30",
+            "url": "https://whyy.example/closure",
+            "publishedDate": "2026-09-03",
+        }
+        self.assertEqual(duplicate_relation(new, old)[0], "historical_duplicate")
+
+    def test_unrelated_english_institutions_do_not_share_a_historical_event(self):
+        old = {
+            "title": "Heritage Resilience in Congo: UNESCO and the Government Take Action on Protection",
+            "url": "https://unesco.example/congo",
+            "publishedDate": "2026-09-04",
+        }
+        new = {
+            "title": "Advocates Demand the Parker Administration Take Action to Repair and Reactivate Atwater Kent Building",
+            "url": "https://hidden-city.example/atwater",
+            "publishedDate": "2026-09-05",
+        }
+        self.assertIsNone(duplicate_relation(new, old))
+
+    def test_same_action_without_shared_identity_does_not_match(self):
+        academy_closure = {
+            "title": "Academy of Natural Sciences of Drexel University to close museum on Sept. 30",
+            "url": "https://nbc.example/closure",
+            "publishedDate": "2026-09-02",
+        }
+        emerson_closure = {
+            "title": "Emerson Museum of Art announces galleries will close this fall",
+            "url": "https://emerson.example/closure",
+            "publishedDate": "2026-09-03",
+        }
+        details = event_match_details(academy_closure, emerson_closure)
+        self.assertFalse(details["matched"])
+        self.assertIsNone(duplicate_relation(academy_closure, emerson_closure))
+
     def test_non_xml_provider_response_keeps_diagnostic_metadata(self):
         class FakeResponse:
             status = 200
@@ -1921,6 +1989,29 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(source["tier"], "B")
         self.assertEqual(source["sourceRelationship"], "publisher_recovery")
         self.assertTrue(outcome["checked"]["articleVerified"])
+
+    @patch("automation.daily_discovery.resolve_evidence_url")
+    def test_persisted_direct_article_hint_is_used_before_wrapper(self, resolve_url):
+        direct = "https://www.washingtonpost.com/politics/smithsonian-support/"
+        resolve_url.return_value = (
+            direct,
+            "<html><head><title>Smithsonian federal support dispute</title></head>"
+            "<body>The Smithsonian Institution faces a federal support dispute involving museum agency cooperation.</body></html>",
+            None,
+        )
+        outcome, source = resolve_evidence_attempt(
+            {"representativeTitle": "Smithsonian federal support dispute", "scope": "international"},
+            {
+                "title": "Smithsonian federal support dispute - trusted publisher",
+                "url": "https://news.google.com/rss/articles/opaque",
+                "resolvedArticleUrl": direct,
+                "sourceDomain": "The Washington Post",
+            },
+            "existing_report",
+        )
+        self.assertIsNotNone(source)
+        self.assertEqual(resolve_url.call_args.args[0], direct)
+        self.assertEqual(outcome["attempts"][0]["method"], "direct_url_hint")
 
     def test_unknown_publisher_display_name_is_not_promoted(self):
         self.assertEqual(publisher_domains({"sourceDomain": "A Random News Desk"}), [])

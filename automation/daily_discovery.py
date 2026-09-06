@@ -236,14 +236,33 @@ EVENT_ENTITY_SUFFIXES = (
     "文物展", "墓地", "古墓", "岩画", "古城", "保护工程", "数据平台", "数据库", "资源库", "项目",
 )
 EVENT_ACTION_PATTERNS = (
+    # Keep explicit public-event actions ahead of contextual words such as
+    # “closing” in a protest headline.  The first matching action is the
+    # dominant action used by the conservative identity fallback below.
+    ("protest", ("protest", "rally", "demonstration", "demonstrators", "march", "抗议", "集会")),
+    ("reopening", ("reopen", "reopening", "re-open", "重新开放", "恢复开放")),
+    ("closure", ("closure", "closing", "close", "shut down", "shutdown", "closed", "闭馆", "关闭")),
+    ("governance", ("governance", "tentative terms", "governance arrangement", "management arrangement", "restructuring", "reach terms", "治理安排", "管理安排")),
+    ("funding", ("funding", "funds", "grant", "grants", "budget", "经费", "拨款")),
+    ("collection_transfer", ("collection relocation", "relocate collection", "collection transfer", "transfer collection", "藏品转移", "藏品迁移")),
+    ("damage_incident", ("damage", "damaged", "vandalism", "vandal", "incident", "受损", "损坏", "破坏")),
+    ("investigation", ("investigation", "investigate", "probe", "inquiry", "调查", "调查结果")),
     ("policy", ("管理办法", "实施办法", "保护条例", "条例", "规章", "规划", "规范", "制度", "部令", "内容审核", "内容审查", "核查")),
-    ("security", ("盗窃", "失窃", "抢劫", "被盗", "追回", "落网", "安全事件", "安全事故")),
+    ("security", ("盗窃", "失窃", "抢劫", "被盗", "追回", "落网", "安全事件", "安全事故", "stolen", "theft", "heist", "thieves", "plunder", "robbery")),
     ("archaeology", ("考古发掘", "发掘成果", "遗址调查", "考古发现", "新发现", "出土", "研究揭示", "成果公布")),
     ("opening", ("开馆", "开幕", "正式开放", "启用", "落成", "揭牌")),
     ("exhibition", ("展览", "大展", "特展", "展期", "落幕", "闭幕")),
     ("digital_resource", ("数据库", "数据平台", "资源库", "数字资源", "数字化项目")),
     ("cooperation", ("联合考古", "签约", "合作", "备忘录", "交接")),
 )
+EVENT_ACTION_CONFLICT_PAIRS = {
+    frozenset({"closure", "protest"}),
+    frozenset({"closure", "reopening"}),
+    frozenset({"closure", "governance"}),
+    frozenset({"protest", "governance"}),
+    frozenset({"protest", "funding"}),
+    frozenset({"damage_incident", "investigation"}),
+}
 MATCH_GENERIC_PHRASES = {
     "文物", "博物馆", "博物院", "考古", "遗址", "遗产", "文化", "保护", "研究", "成果", "发现",
     "考古发现", "新发现", "研究成果", "成果公布", "举办展览", "普通活动", "政策", "办法", "条例", "规划",
@@ -780,6 +799,29 @@ def event_actions(text: str) -> set[str]:
     }
 
 
+@lru_cache(maxsize=16384)
+def event_identity_anchor_terms(text: str) -> set[str]:
+    """Return event anchors after removing action-only/generic vocabulary.
+
+    An action such as ``close`` is useful evidence when paired with a concrete
+    institution or object, but it is not an event identity by itself. Keeping
+    it out of the strong-title bucket prevents unrelated institutions with the
+    same action from being merged by the article matcher.
+    """
+    action_terms = {
+        compact(pattern)
+        for _, patterns in EVENT_ACTION_PATTERNS
+        for pattern in patterns
+        if compact(pattern)
+    }
+    generic_terms = {compact(term) for term in GENERIC_EVENT_WORDS if compact(term)}
+    generic_terms.update(compact(term) for term in GENERIC_TITLE_WORDS if compact(term))
+    return {
+        term for term in event_match_terms(text)
+        if compact(term) not in action_terms and compact(term) not in generic_terms
+    }
+
+
 def publisher_domains(record: dict) -> list[str]:
     """Return publisher hosts separately from RSS/search transport hosts."""
     domains = set()
@@ -832,7 +874,10 @@ def event_match_details(event: dict, result: dict, body: str = "") -> dict:
     result_body_terms = event_match_terms(body_text)
     shared_title = event_terms & result_title_terms
     shared_body = event_terms & result_body_terms
-    strong_title = sorted(shared_title, key=lambda term: (-len(term), term))
+    strong_title = sorted(
+        event_identity_anchor_terms(event_title) & event_identity_anchor_terms(result_title),
+        key=lambda term: (-len(term), term),
+    )
     strong_body = sorted(shared_body, key=lambda term: (-len(term), term))
     event_text = " ".join((event_title, str(event.get("summary") or ""), str(event.get("body") or "")))
     result_text = " ".join((result_title, body_text))
@@ -863,8 +908,10 @@ def event_match_details(event: dict, result: dict, body: str = "") -> dict:
         elif kind_overlap:
             score += 10
             reasons.append("compatible_event_kind")
-    matched = (normalized_equal and not action_conflict) or bool(strong_title and action_overlap) or bool(
-        len(strong_title) >= 2 and strong_body
+    matched = (not action_conflict) and (
+        normalized_equal
+        or bool(strong_title and action_overlap)
+        or bool(len(strong_title) >= 2 and strong_body)
     )
     return {
         "matched": matched,
@@ -900,6 +947,24 @@ def event_action(text: str) -> str:
         if any(pattern in value for pattern in patterns):
             return action
     return ""
+
+
+def event_action_conflict(current: dict, previous: dict) -> bool:
+    """Return whether two records name incompatible actions for one subject."""
+    def action_text(record: dict) -> str:
+        return " ".join(
+            str(record.get(key) or "")
+            for key in ("title", "representativeTitle", "summary", "body", "notes")
+        )
+
+    current_action = event_action(action_text(current))
+    previous_action = event_action(action_text(previous))
+    return bool(
+        current_action
+        and previous_action
+        and current_action != previous_action
+        and frozenset({current_action, previous_action}) in EVENT_ACTION_CONFLICT_PAIRS
+    )
 
 
 @lru_cache(maxsize=16384)
@@ -1082,6 +1147,8 @@ def event_match_relation(current: dict, previous: dict) -> tuple[str, str] | Non
     """Bridge article-level semantic matching into current-window clustering."""
     if not (has_specific_event_anchor(current) and has_specific_event_anchor(previous)):
         return None
+    if event_action_conflict(current, previous):
+        return None
     details = event_match_details(current, previous, "")
     if not details.get("matched"):
         return None
@@ -1145,6 +1212,11 @@ def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | No
         if substantive_new_development(current, previous):
             return ("new_development", "same canonical event identity with a substantive development marker")
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical event identity")
+    # Do not let the broad token fallback undo an explicit action conflict.
+    # Shared institution/location words cannot merge closure, protest,
+    # governance, reopening, or other materially different developments.
+    if event_action_conflict(current, previous):
+        return None
     matched_relation = event_match_relation(current, previous)
     if matched_relation:
         return matched_relation
@@ -2594,6 +2666,17 @@ def alternate_evidence_match_hint(event: dict, result: dict) -> bool:
 def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[dict, dict | None]:
     """Resolve one report and return an auditable attempt plus publishable source."""
     input_url = result.get("url", "")
+    # Some provider adapters persist a direct publisher target while retaining
+    # the original RSS/search transport URL for provenance.  Prefer that
+    # navigation hint when it is an ordinary HTTP(S) article URL; it is still
+    # only a retrieval hint and must pass the same body-level verification
+    # below.  Never treat the hint or wrapper title as evidence by itself.
+    resolution_hint = ""
+    for key in ("resolvedArticleUrl", "directArticleUrl", "resolvedUrl", "directUrl"):
+        candidate = str(result.get(key) or "").strip()
+        if urlsplit(candidate).scheme in {"http", "https"} and not is_search_wrapper_url(candidate):
+            resolution_hint = candidate
+            break
     publisher_domain = (publisher_domains(result) or [(urlsplit(input_url).hostname or "").lower()])[0]
     source_relationship = result.get("sourceRelationship") or (
         "publisher_recovery" if method == "domain_search" and result.get("discoveredVia") in {
@@ -2601,7 +2684,21 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         } else "primary"
     )
     unwrapped_url, unwrapped = unwrap_redirect_url(input_url)
+    navigation_url = resolution_hint or unwrapped_url
     attempts = []
+    if resolution_hint:
+        hinted_actual = source_info(resolution_hint)
+        attempts.append({
+            "method": "direct_url_hint",
+            "inputUrl": input_url,
+            "resolvedUrl": resolution_hint,
+            "domain": (urlsplit(resolution_hint).hostname or "").lower(),
+            "publisherDomain": publisher_domain,
+            "sourceRelationship": source_relationship,
+            "fetchStatus": "hinted",
+            "articleMatched": False,
+            "evidenceTier": hinted_actual.get("tier", "C"),
+        })
     if unwrapped:
         unwrapped_actual = source_info(unwrapped_url)
         attempts.append({
@@ -2615,7 +2712,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "articleMatched": False,
             "evidenceTier": unwrapped_actual.get("tier", "C"),
         })
-    resolved_url, body, resolve_error = resolve_evidence_url(unwrapped_url)
+    resolved_url, body, resolve_error = resolve_evidence_url(navigation_url)
     actual = source_info(resolved_url)
     matched = False
     match_details = {}
@@ -3051,6 +3148,10 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
             return ("same_day_duplicate" if distance == 0 else "historical_duplicate", "same normalized title within event window")
     if current_url and previous_url and current_url == previous_url:
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical URL")
+    if event_action_conflict(current, previous):
+        # A shared institution or place cannot override an explicit action
+        # conflict such as closure versus protest or governance versus closure.
+        return None
     current_identity = canonical_event_identity(current)
     previous_identity = canonical_event_identity(previous)
     if current_identity and current_identity == previous_identity:
@@ -3083,6 +3184,13 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     if len(named_shared) >= 2 and (
         len(shared) / max(1, min(len(left), len(right))) >= 0.4 or close_in_time
     ):
+        # The high-overlap fallback is intentionally subordinate to the
+        # article-level matcher.  Shared English institution/topic tokens are
+        # not enough to establish a historical event when no compatible
+        # action, named event, or structured identity was found.
+        details = event_match_details(current, previous, "")
+        if not details.get("matched"):
+            return None
         if substantive_new_development(current, previous):
             return ("new_development", "high-overlap event identity with a substantive development marker")
         return ("historical_duplicate", "high-overlap event identity")
