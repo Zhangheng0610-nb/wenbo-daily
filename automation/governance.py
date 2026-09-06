@@ -494,10 +494,15 @@ def source_link_html(source):
         display_name = f'{account["institution"]}官方公众号' if info["tier"] == "A" else f'{account["accountName"]}官方公众号'
     else:
         display_name = source.get("name", info["host"] or "原文")
+    from html import escape
+    from automation.product import safe_url
+    url = safe_url(source.get('url', ''))
+    name = escape(str(display_name))
+    link = (f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">{name}</a>'
+            if url else f'<span>{name}（链接无效）</span>')
     return (f'<span class="source-chip {tier_class}"{warning}>'
-            f'<b>{info["tier"]}</b> '
-            f'<a href="{source["url"]}" target="_blank" rel="noopener">'
-            f'{display_name}</a></span>')
+            f'<b>{info["tier"]}</b> {link}</span>')
+
 
 
 def source_registry_rows():

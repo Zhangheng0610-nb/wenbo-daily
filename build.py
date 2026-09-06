@@ -1583,6 +1583,10 @@ def parse_md(filepath):
     i = 1
     while i < len(lines):
         line = lines[i]
+        # Legacy Markdown anchors duplicate the generated heading IDs.
+        if re.fullmatch(r'<a\s+id=["\']item\d+["\']\s*>\s*</a>', line.strip()):
+            i += 1
+            continue
 
         # Optional machine-readable modification time for a historical
         # editorial correction.  It is deliberately kept out of the visible
@@ -1774,7 +1778,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     """
     total = data['domestic_count'] + data['international_count']
     report_source_stats = source_stats([data])
-    date_modified = data.get('date_modified') or f"{data['date']}T07:13:00+08:00"
+    date_modified = data.get('date_modified') or data['date']
     is_legacy_report = bool(data.get('date')) and data['date'] < '2026-08-28'
     if report_source_stats['C']:
         quality_html = f'''<details class="quality-banner legacy">
@@ -1805,10 +1809,10 @@ def build_report_html(data, prev_report=None, next_report=None):
         tags_html = ''
         if item.get('tags'):
             for tag in item['tags']:
-                cls = f'tag tag-{tag}'
-                tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
+                cls = 'tag tag-' + escape(tag, quote=True)
+                tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{escape(tag)}</a>'
 
-        html = f'<h3 id="{item["id"]}">{item["number"]}. {_daily_display_title(item)}{tags_html}</h3>\n'
+        html = f'<h3 id="{item["id"]}">{item["number"]}. {escape(_daily_display_title(item))}{tags_html}</h3>\n'
 
         if item['sources']:
             src_parts = [source_link_html(s) for s in item['sources']]
@@ -1892,7 +1896,7 @@ def build_report_html(data, prev_report=None, next_report=None):
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | {data['date']}",
-  "datePublished": "{data['date']}T07:13:00+08:00",
+  "datePublished": "{data['date']}",
   "dateModified": "{date_modified}",
   "description": "{data['date']} 每日文博资讯，共 {total} 条",
   "url": "https://zhangheng666.top/reports/{data['date']}.html",
@@ -2189,6 +2193,7 @@ def md_inline(text):
     """Convert markdown inline formatting to HTML."""
     if not text:
         return text
+    text = escape(str(text))
     # **bold**
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     # *italic*
@@ -2202,8 +2207,9 @@ def md_inline(text):
 
 def extract_deadline_date(text):
     """Use the final date in a deadline range as the actual closing date."""
-    matches = re.findall(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or '')
-    return matches[-1] if matches else None
+    from automation.recruitment_dates import deadline_datetime
+    value = deadline_datetime(text)
+    return (str(value.year), str(value.month), str(value.day)) if value else None
 
 
 def extract_deadline_datetime(text):
@@ -2213,20 +2219,9 @@ def extract_deadline_datetime(text):
     “2026年6月18日发布” is deliberately not treated as a deadline because it
     describes the announcement date rather than an application closing time.
     """
-    matches = list(re.finditer(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or ''))
-    if not matches:
-        return None
-    match = matches[-1]
-    y, m, d = (int(value) for value in match.groups())
-    tail = (text or '')[match.end():match.end() + 80]
-    time_match = re.search(r'(\d{1,2}):([0-5]\d)', tail)
-    hour, minute, second = (int(time_match.group(1)), int(time_match.group(2)), 0) if time_match else (23, 59, 59)
-    if hour > 23:
-        return None
-    try:
-        return f'{y:04d}-{m:02d}-{d:02d}T{hour:02d}:{minute:02d}:{second:02d}+08:00'
-    except ValueError:
-        return None
+    from automation.recruitment_dates import deadline_datetime
+    value = deadline_datetime(text)
+    return value.isoformat() if value else None
 
 def parse_jobs(filepath):
     """Parse recruitment markdown file and return structured data.
@@ -2308,7 +2303,10 @@ def parse_jobs(filepath):
                 'days_left': None,
                 'deadline_at': None,
                 'note': '',
-                'status': 'check'
+                'status': 'check',
+                'links': [],
+                'application': '',
+                'details': []
             }
             if current_section is None:
                 # Default section
@@ -2328,17 +2326,24 @@ def parse_jobs(filepath):
                     current_item['education'] = field_value
                 elif '地点' in field_name:
                     current_item['location'] = field_value
-                elif '截止' in field_name:
+                elif '截止' in field_name or '报名时间' in field_name:
                     current_item['deadline'] = field_value
                 elif '待遇' in field_name:
                     current_item['note'] = field_value
+                elif '投递' in field_name:
+                    current_item['application'] = field_value
                 continue
 
             # Link line: - 🔗 [text](url)
             link_match = re.match(r'-\s*🔗\s*\[(.+?)\]\((.+?)\)', stripped)
             if link_match:
+                current_item['links'].extend({'name': name, 'url': url} for name, url in re.findall(r'\[([^]]+)\]\(([^)]+)\)', stripped))
                 current_item['link_text'] = link_match.group(1)
                 current_item['link_url'] = link_match.group(2)
+                continue
+
+            if stripped.startswith('- 💡'):
+                current_item['details'].append(stripped.removeprefix('- 💡').strip())
                 continue
 
             # Email line: - 📧 投递：email@addr  or  📧 email@addr
@@ -2349,38 +2354,27 @@ def parse_jobs(filepath):
                 current_item['link_text'] = email
                 continue
 
-    # Compute days_left and urgent flag for each item
+    from automation.recruitment_dates import application_status
+    now = datetime.now(CN_TZ)
     for section in data['sections']:
         for item in section['items']:
-            dl = item['deadline']
-            if dl and today:
-                dl_match = extract_deadline_date(dl)
-                if dl_match:
-                    try:
-                        from datetime import date
-                        dl_date = date(
-                            int(dl_match[0]), int(dl_match[1]), int(dl_match[2])
-                        )
-                        today_date = date.fromisoformat(today)
-                        item['days_left'] = (dl_date - today_date).days
-                        if item['days_left'] < 0:
-                            item['status'] = 'closed'
-                        else:
-                            item['status'] = 'open'
-                        if 0 <= item['days_left'] <= 3:
-                            item['urgent'] = True
-                        item['deadline_at'] = extract_deadline_datetime(dl)
-                    except (ValueError, KeyError):
-                        pass
+            status, start, end = application_status(item['deadline'], now)
+            item['status'] = status
+            item['deadline_at'] = end.isoformat() if end else None
+            item['opens_at'] = start.isoformat() if start else None
+            item['days_left'] = (end.astimezone(CN_TZ).date() - now.date()).days if end else None
+            item['urgent'] = bool(status == 'open' and end - now <= timedelta(days=3))
 
     # Sort items within each section by deadline (earliest first, no-deadline last)
     for section in data['sections']:
         def sort_key(item):
             if item['status'] == 'open':
                 return (0, item['days_left'] if item['days_left'] is not None else 9999)
+            if item['status'] == 'upcoming':
+                return (1, item['opens_at'])
             if item['status'] == 'check':
-                return (1, 9999)
-            return (2, item['days_left'] if item['days_left'] is not None else 9999)
+                return (2, 9999)
+            return (3, item['days_left'] if item['days_left'] is not None else 9999)
         section['items'].sort(key=sort_key)
 
     return data
@@ -2418,18 +2412,30 @@ def build_jobs_html(data, page_type='jobs'):
                 status_badge = '<span class="status-badge status-closed">已截止</span>'
             elif item.get('status') == 'open':
                 status_badge = '<span class="status-badge status-open">可申请</span>'
+            elif item.get('status') == 'upcoming':
+                status_badge = '<span class="status-badge status-check">尚未开始</span>'
             else:
-                status_badge = '<span class="status-badge status-check">待核截止</span>'
+                status_badge = '<span class="status-badge status-check">状态待核验</span>'
             if item.get('link_url', '').startswith(('http://', 'https://')):
                 link_info = recruitment_source_info(item['link_url'])
                 link_badge = f' <span class="source-note">{link_info["label"]}</span>'
             else:
                 link_badge = ''
 
+            # Escape untrusted content before HTML interpolation; links allow only safe schemes.
+            from automation.product import safe_url
+            item = dict(item)
+            extra = ''.join('<p>' + escape(value) + '</p>' for value in item.get('details', []))
+            if item.get('application'):
+                extra += '<p>投递方式：' + escape(item['application']) + '</p>'
+            more_links = ''.join('<a href="' + escape(safe_url(link['url']), quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(link['name']) + '</a> ' for link in item.get('links', [])[1:] if safe_url(link['url']))
+            for key in ('institution', 'position', 'education', 'location', 'deadline', 'note', 'link_text'):
+                item[key] = escape(str(item.get(key, '')))
+            item['link_url'] = escape(safe_url(item.get('link_url', '')), quote=True)
             deadline_attr = item.get('deadline_at') or ''
             static_status = item.get('status', 'check')
             items_html += f'''
-        <div class="job-item{row_class}" data-deadline-at="{deadline_attr}" data-static-status="{static_status}">
+        <div class="job-item{row_class}" data-deadline-at="{deadline_attr}" data-opens-at="{item.get('opens_at') or ''}" data-static-status="{static_status}">
           <div class="job-header">
             <span class="job-number">#{item['number']}</span>
             <span class="job-title">{item['institution']} — {item['position']}</span>
@@ -2442,8 +2448,10 @@ def build_jobs_html(data, page_type='jobs'):
             <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
             {('<span>💰 ' + item['note'] + '</span>') if item.get('note') else ''}
           </div>
+          <div class="job-details">{extra}</div>
           <div class="job-link">
             {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' + link_badge if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
+            {more_links}
           </div>
         </div>'''
 
@@ -2470,7 +2478,7 @@ def build_jobs_html(data, page_type='jobs'):
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng666.top/jobs.html">
+<meta property="og:url" content="https://zhangheng666.top/{page_url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
@@ -2576,42 +2584,7 @@ def build_jobs_html(data, page_type='jobs'):
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
-<script>
-(function() {{
-  var rows = Array.prototype.slice.call(document.querySelectorAll('.job-item'));
-  function beijingNow() {{
-    var parts = new Intl.DateTimeFormat('en-CA', {{ timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }}).formatToParts(new Date());
-    var out = {{}}; parts.forEach(function(p) {{ if (p.type !== 'literal') out[p.type] = p.value; }});
-    return new Date(out.year + '-' + out.month + '-' + out.day + 'T' + out.hour + ':' + out.minute + ':' + out.second + '+08:00');
-  }}
-  function refreshStatuses() {{
-    var now = beijingNow(), open = 0, closed = 0, urgent = 0;
-    rows.forEach(function(row) {{
-      var status = row.querySelector('.job-status'), deadline = row.getAttribute('data-deadline-at');
-      var isOpen = row.getAttribute('data-static-status') === 'open';
-      var isClosed = row.getAttribute('data-static-status') === 'closed';
-      if (deadline) {{
-        var end = new Date(deadline);
-        isClosed = now >= end;
-        isOpen = !isClosed;
-        if (isOpen && end - now <= 3 * 86400000) urgent += 1;
-      }}
-      if (status && (deadline || isOpen || isClosed)) {{
-        status.textContent = isClosed ? '已截止' : '可申请';
-        status.className = 'status-badge job-status ' + (isClosed ? 'status-closed' : 'status-open');
-      }}
-      row.classList.toggle('closed-row', isClosed);
-      if (isClosed) row.classList.remove('urgent-row');
-      if (isOpen) open += 1;
-      if (isClosed) closed += 1;
-    }});
-    var set = function(id, value) {{ var node = document.getElementById(id); if (node) node.textContent = value; }};
-    set('job-open-count', open); set('job-open-stat', open); set('job-closed-count', closed); set('job-closed-stat', closed); set('job-urgent-stat', urgent);
-  }}
-  refreshStatuses();
-  window.setInterval(refreshStatuses, 60000);
-}})();
-</script>
+
 
 </body>
 </html>'''
@@ -4175,20 +4148,14 @@ def main():
     # Ordinary builds are intentionally side-effect-free for data collection.
     # The formal daily job runs --incremental explicitly before this page-only
     # rebuild; --build-only remains available for manual page rebuilds.
-    try:
-        import digital_trend
-        digital_trend.main(['--build-only'])
-    except Exception as e:
-        print(f'Digital trends: SKIP ({e})')
+    import digital_trend
+    digital_trend.main(['--build-only'])
+    import build_command_center
+    build_command_center.main()
+    from automation.product import finish_site
+    finish_site(SITE_DIR, daily_reports)
 
-    # Build the independent dashboard after the data artifacts are ready.
-    try:
-        import build_command_center
-        build_command_center.main()
-    except Exception as e:
-        print(f'Command center: SKIP ({e})')
-
-    print('\nDone! Run push to deploy.')
+    print('\nBuild complete. Run validation before deployment.')
 
 
 if __name__ == '__main__':
