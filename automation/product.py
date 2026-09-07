@@ -70,6 +70,8 @@ def finish_site(root, reports):
     from automation.reader_product import write_reader_product
     write_reader_product(root, reports)
     latest = max((r['date'] for r in reports), default='')
+    from automation.ingestion_health import write_health
+    write_health(root, latest)
     monitoring = root / 'content' / '监测' / (latest + '.json')
     payload = json.loads(monitoring.read_text()) if monitoring.exists() else {}
     coverage = payload.get('coverage', [])
@@ -84,9 +86,11 @@ def finish_site(root, reports):
         relative = page.relative_to(root).as_posix()
         html = page.read_text()
         if relative == 'index.html':
-            evidence = f'<aside class="freshness" data-report-date="{latest}"><strong>最近发布：{latest}</strong><span data-freshness-message>固定信源 {latest} 巡检 {complete}/6 · ' + ('仅代表该日，不代表长期覆盖' if live else '暂无当日正式运行证据') + f'</span><a href="command-center/#product-main">查看数据范围</a><a href="feed.xml">RSS 订阅</a></aside>'
+            evidence = f'<aside class="freshness" data-report-date="{latest}"><strong>最近发布：{latest}</strong><span data-freshness-message>固定信源 {latest} 巡检 {complete}/6 · ' + ('仅代表该日，不代表长期覆盖' if live else '暂无当日正式运行证据') + f'</span><a href="data-health.html">查看采集与更新记录</a><a href="feed.xml">RSS 订阅</a></aside>'
             html = html.replace('<section class="hero"', evidence + '<section class="hero"', 1)
             html = html.replace('今日精选 ·', '最新精选 ·').replace('阅读今日日报', '阅读最新日报')
+        if relative == 'command-center/index.html':
+            html = html.replace('</header>', '</header><p style="padding:0 24px"><a href="../data-health.html">查看实际采集时间、每日入库量与发现入口状态 →</a></p>', 1)
         page.write_text(decorate(html, relative))
     rss = ET.Element('rss', version='2.0')
     channel = ET.SubElement(rss, 'channel')

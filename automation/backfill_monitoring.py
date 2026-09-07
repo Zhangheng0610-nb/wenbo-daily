@@ -20,6 +20,7 @@ import argparse
 import email.utils
 import html
 import json
+import os
 import re
 import ssl
 import sys
@@ -115,6 +116,14 @@ NCHA_NEWS_PATH_RE = re.compile(
 )
 
 
+def source_opener():
+    """Explicit deployment choice; never retry a denied request through another route."""
+    route = os.environ.get("WENBO_SOURCE_ROUTE", "direct")
+    if route not in {"direct", "system"}:
+        raise ValueError("WENBO_SOURCE_ROUTE must be direct or system")
+    return DIRECT_OPENER if route == "direct" else SEARCH_OPENER
+
+
 def fetch(url: str) -> str:
     """Fetch public HTML, favouring HTTP where older government sites require it."""
     urls = [url]
@@ -126,7 +135,7 @@ def fetch(url: str) -> str:
     for target in urls:
         request = Request(target, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"})
         try:
-            with DIRECT_OPENER.open(request, timeout=20) as response:
+            with source_opener().open(request, timeout=20) as response:
                 raw = response.read()
             break
         except (URLError, HTTPError) as exc:
@@ -287,11 +296,11 @@ def xinhua_domain_search(start: date, end: date) -> tuple[list[dict], list[dict]
 
 def enrich_xinhua_context(rows: list[dict]) -> None:
     """Fetch article text for generic scope/geography/impact inference."""
-    for row in rows:
+    def enrich(row):
         try:
             page = fetch(row["url"])
         except RuntimeError:
-            continue
+            return
         context = plain(page)
         # Xinhua article pages append “related stories” after the body.  Those
         # links can mention unrelated provinces and must not influence the
@@ -299,6 +308,11 @@ def enrich_xinhua_context(rows: list[dict]) -> None:
         for marker in ("【纠错】", "责任编辑", "阅读下一篇", "相关链接"):
             context = context.split(marker, 1)[0]
         row["_contextText"] = context
+
+    # A rolling overlap expands the queue; preserve recall with bounded
+    # concurrency rather than serially blocking the whole daily run.
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        list(pool.map(enrich, rows))
 
 
 def usable_article_context(row: dict) -> bool:
@@ -778,6 +792,8 @@ def normalize_archaeology_backfill() -> None:
             for source in item.get("sources", []):
                 counts[source.get("sourceId", "")] += 1
         for coverage in payload.get("coverage", []):
+            if coverage.get("mode") == "operational":
+                continue
             coverage["candidateCount"] = counts[coverage.get("sourceId", "")]
         payload["items"] = sorted(
             payload.get("items", []),
@@ -908,6 +924,11 @@ def merge_write(
             origin="fixed-panel-monitoring" if mode == "operational" else "archive-backfill",
             run_type=run_type,
         ))
+    observed_at = checked_at or datetime.now(TZ).isoformat(timespec="seconds")
+    for items in by_day.values():
+        for item in items:
+            item["observedAt"] = observed_at
+            item["observationDate"] = observed_at[:10]
     day = start
     while day <= end:
         path = MONITORING / f"{day.isoformat()}.json"
@@ -917,7 +938,7 @@ def merge_write(
             payload = empty_day(day)
         payload.setdefault("version", 1)
         payload["date"] = day.isoformat()
-        if mode == "operational":
+        if mode == "operational" and day == end:
             payload["mode"] = "operational"
             payload["runType"] = run_type
         else:
@@ -939,6 +960,13 @@ def merge_write(
             # A corrected parser may move an old generated observation to its
             # real publication date. Remove the stale copy here; the cleaned
             # row will be inserted into its new date below.
+            if mode == "operational" and day < end and item_url.rstrip("/") in row_urls:
+                # Already observed: retain first-observation provenance across
+                # overlapping runs instead of turning an old item into a new arrival.
+                existing[item_url] = item
+                if item_key is not None:
+                    existing_event_keys.add(item_key)
+                continue
             if (
                 item.get("origin") == "archive-backfill"
                 or (mode == "operational" and item.get("origin") == "fixed-panel-monitoring")
@@ -958,14 +986,34 @@ def merge_write(
                 existing_event_keys.add(item_key)
         for item in by_day.get(day.isoformat(), []):
             item_url = item["sources"][0]["url"]
+            first_observation = next((old for old in prior_items if
+                old.get("sources", [{}])[0].get("url", "").rstrip("/") == item_url.rstrip("/")), None)
+            if first_observation is not None:
+                for field in ("observedAt", "observationDate"):
+                    if field in first_observation:
+                        item[field] = first_observation[field]
+                    else:
+                        item.pop(field, None)
             if item_url.rstrip("/") not in baseline_urls:
                 # Refresh an earlier generated archive item so title/parser
                 # improvements are applied on the next maintenance run. Keep
                 # any human-authored operational observation untouched.
                 prior = existing.get(item_url)
-                if prior is None or prior.get("origin") == "archive-backfill":
+                if prior is None or (prior.get("origin") == "archive-backfill" and not (mode == "operational" and day < end)):
                     existing[item_url] = item
         payload["items"] = sorted(existing.values(), key=lambda value: (value["sources"][0]["sourceId"], value["title"]))
+        # Late arrivals retain their publication day. Today's inspection must
+        # not manufacture historical coverage or overwrite an earlier check.
+        if mode == "operational" and day < end:
+            if not path.exists():
+                for coverage in payload["coverage"]:
+                    coverage.update(checkedAt=None, checkedAtStatus="unknown",
+                                    checkedAtNote="仅有后续补收，没有原日检查时间。",
+                                    note="本次重叠窗口补收；没有该日实际巡检记录。")
+            if by_day.get(day.isoformat()):
+                path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            day += timedelta(days=1)
+            continue
         counts = defaultdict(int)
         for item in payload["items"]:
             for source in item.get("sources", []):
@@ -995,7 +1043,7 @@ def merge_write(
             # never downgrade a later same-day live inspection.  Otherwise a
             # 90-day maintenance run could make an already-audited day look
             # partial again in the public coverage meter.
-            if prior_checked > historical_checked_at and prior.get("status") in ("success", "no_update"):
+            if mode != "operational" and prior_checked > historical_checked_at and prior.get("status") in ("success", "no_update"):
                 status = prior["status"]
                 note = prior.get("note", "")
             row_coverage = {
@@ -1004,7 +1052,7 @@ def merge_write(
                 **({"runType": run_type} if mode == "operational" else {}),
                 "status": status,
                 "checkedAt": (
-                    checked_at if mode == "operational" and checked_at
+                    (outcome.get("checkedAt") or checked_at) if mode == "operational" and checked_at
                     else prior_checked if prior_checked > historical_checked_at else historical_checked_at
                 ),
                 "candidateCount": counts[source_id],
@@ -1080,6 +1128,8 @@ def merge_write(
                 "completed": True,
                 "checkedAt": checked_at,
                 "replay": bool(replay),
+                "publicationWindow": {"start": start.isoformat(), "end": end.isoformat()},
+                "lateArrivalCount": sum(len(v) for k, v in by_day.items() if k < end.isoformat()),
                 "sources": source_audit,
             }
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -1089,28 +1139,32 @@ def merge_write(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Scan the fixed-source map corpus or backfill its public archives.")
-    parser.add_argument("--end", type=date.fromisoformat, default=date.today(), help="inclusive end date (YYYY-MM-DD)")
+    parser.add_argument("--end", type=date.fromisoformat, default=datetime.now(TZ).date(), help="inclusive end date (YYYY-MM-DD)")
     parser.add_argument("--days", type=int, default=90, help="number of inclusive days to backfill")
     parser.add_argument(
         "--mode", choices=("archive-backfill", "operational"), default="archive-backfill",
         help="archive recovery (default) or the formal fixed-panel daily scan",
     )
+    parser.add_argument("--lookback-days", type=int, default=7, help="publication overlap for operational scans; observation remains today")
     parser.add_argument("--replay", action="store_true", help="mark an operational run as a controlled historical replay")
     parser.add_argument("--write", action="store_true", help="write merged daily monitoring files")
     args = parser.parse_args()
+    if not 1 <= args.lookback_days <= 30:
+        parser.error("--lookback-days must be between 1 and 30")
     if args.days < 1:
         parser.error("--days must be positive")
     if args.mode == "operational" and args.days != 1:
         parser.error("operational mode requires exactly one observation day")
     if args.mode != "operational" and args.replay:
         parser.error("--replay requires --mode operational")
-    if args.mode == "operational" and args.end != date.today() and not args.replay:
+    if args.mode == "operational" and args.end != datetime.now(TZ).date() and not args.replay:
         parser.error("historical operational dates require --replay")
-    start = args.end - timedelta(days=args.days - 1)
+    start = args.end - timedelta(days=(args.lookback_days if args.mode == "operational" else args.days) - 1)
     all_rows: list[dict] = []
     outcomes: dict[str, dict] = {}
     checked_at = datetime.now(TZ).isoformat(timespec="seconds") if args.mode == "operational" else None
     for source_id, crawler in CRAWLERS:
+        source_checked_at = datetime.now(TZ).isoformat(timespec="seconds")
         try:
             rows, complete, note = crawler(start, args.end)
         except Exception as exc:  # keep one source outage from discarding other evidence
@@ -1126,6 +1180,7 @@ def main() -> int:
         eligible_count = sum(1 for row in rows if allowed_backfill_row(row))
         all_rows.extend(rows)
         outcomes[source_id] = {
+            "checkedAt": source_checked_at,
             "complete": complete,
             "status": status,
             "note": note,

@@ -100,7 +100,36 @@
       "scanStatus": "checked"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "backfill-20260906-ncha-0007-22204716html",
+      "date": "2026-09-06",
+      "title": "一周文物动态摘编（8.29-9.4）",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

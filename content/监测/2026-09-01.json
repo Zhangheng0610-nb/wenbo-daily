@@ -100,7 +100,94 @@
       "scanStatus": "checked"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "backfill-20260901-cultural-relics-news-0001-2865id112735",
+      "date": "2026-09-01",
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112735"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:43.346168+08:00",
+      "observationDate": "2026-09-07"
+    },
+    {
+      "recordId": "backfill-20260901-cultural-relics-news-0002-2865id112738",
+      "date": "2026-09-01",
+      "title": "彭丽媛同吉尔吉斯斯坦总统扎帕罗夫夫人扎帕罗娃参观吉尔吉斯共和国国家历史博物馆",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112738"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:43.346168+08:00",
+      "observationDate": "2026-09-07"
+    },
+    {
+      "recordId": "backfill-20260901-ncha-0003-22204626html",
+      "date": "2026-09-01",
+      "title": "看展览 | 博物馆展讯速览",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/1/art_722_204626.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

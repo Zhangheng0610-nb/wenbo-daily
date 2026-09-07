@@ -5944,13 +5944,13 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 504,
+    "totalMonitoredRecords": 510,
     "includedProvincialRecords": 116,
     "provincialEvents": 96,
-    "nationalEvents": 34,
+    "nationalEvents": 36,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
-    "archiveBackfillRecords": 412,
+    "archiveBackfillRecords": 418,
     "fixedPanelMonitoringRecords": 23,
     "operationalRecords": 23,
     "operationalRecordTypes": {
@@ -5960,18 +5960,18 @@
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
-      "archive-backfill": 412,
+      "archive-backfill": 418,
       "fixed-panel-monitoring": 23
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 435,
+    "analysisRecords": 441,
     "analysisProvenanceRecords": {
-      "archive-backfill": 412,
+      "archive-backfill": 418,
       "fixed-panel-monitoring": 23
     },
     "excludedNonPanel": 0,
-    "unassigned": 265,
+    "unassigned": 268,
     "panelSourceCount": 6,
     "coverageDays": 100,
     "completeCoverageDays": 10,
@@ -6015,8 +6015,8 @@
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 74,
-      "cultural-relics-news": 103,
+      "ncha": 78,
+      "cultural-relics-news": 105,
       "archaeology": 201,
       "museum-association": 29,
       "xinhua-wenbo": 14,
@@ -11725,9 +11725,9 @@
   ],
   "nationalEvents": [
     {
-      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
-      "firstDate": "2026-08-29",
-      "lastDate": "2026-08-29",
+      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "firstDate": "2026-09-04",
+      "lastDate": "2026-09-04",
       "primaryProvince": "",
       "relatedProvinces": [],
       "locationTier": "national",
@@ -11741,6 +11741,128 @@
       "impact": 80.0,
       "scope": "national",
       "reports": [
+        {
+          "date": "2026-09-04",
+          "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-fd7f6fa41d",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+      "firstDate": "2026-09-02",
+      "lastDate": "2026-09-02",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-02",
+          "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-f6030d0efd",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+      "firstDate": "2026-08-29",
+      "lastDate": "2026-09-01",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-01",
+          "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112735",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112735",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
         {
           "date": "2026-08-29",
           "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
@@ -11760,10 +11882,10 @@
       ],
       "eventId": "evt-17004802bd",
       "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
+      "sourceCount": 2,
+      "reportCount": 2,
       "evidence": 100,
-      "breadth": 40,
+      "breadth": 65,
       "impactLabel": "重要",
       "primaryTheme": "政策行业",
       "sources": [
@@ -11774,6 +11896,14 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "ncha"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112735",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },

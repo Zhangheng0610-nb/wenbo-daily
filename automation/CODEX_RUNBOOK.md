@@ -139,7 +139,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 2. 读取当天已有监测文件和日报、近 30 天去重索引及必要的上一期栏目。
 3. 先完成固定池巡检。正式每日任务运行 `python automation/backfill_monitoring.py --mode operational --end YYYY-MM-DD --days 1 --write`；历史回溯才使用默认的 `--mode archive-backfill`。再逐一核对登记入口，入口列表不完整时，以 `site:登记域名 文物/博物馆/考古/文化遗产 + 日期` 定向检索补齐。核对原文发布日期和当天新增项，把全部合格候选写入 `content/监测/YYYY-MM-DD.json`。不要另写临时爬虫。
 4. 再做日报搜索：先按发现层广泛建立候选账本，再按事件重要性优先回溯 A/B 级证据；对未登记但可直接访问、身份和正文可核验的低风险文章，可记录为文章级 `provisional_B`，最后按专业价值精选。不得先选日报再反填监测库。
-   日报发现运行会额外读取当天 `content/监测/YYYY-MM-DD.json` 中 `origin=fixed-panel-monitoring` 且日期相同的记录，作为 `fixed_panel_radar` 单向雷达线索；这些记录仍须经过日报事件聚合、历史去重、编辑优先级和 A/B 证据门槛，不能直接进入日报，也不会反写监测库。
+   日报发现运行会额外读取当天 `content/监测/YYYY-MM-DD.json` 中 `origin=fixed-panel-monitoring` 且原文日期位于近 7 天窗口的记录，作为 `fixed_panel_radar` 单向雷达线索；这些记录仍须经过日报事件聚合、历史去重、编辑优先级和 A/B 证据门槛，不能直接进入日报，也不会反写监测库。
    现在必须执行独立的 broad discovery 审计：
 
    ```text
@@ -181,3 +181,15 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 报名时间和原文核验是两个状态：不能因日期未到、域名属于官方、搜索摘要有结果而写入核验通过。`content/招聘/evidence.json` 追加带时间戳的记录，保留失败尝试；只读到截止时间而未读到投递入口时不得声称两项都核验。通过记录需含 `fields: [deadline, application]`、原文 URL、字段签名、核查说明、带时区的 `checkedAt` 和 `reviewAfter`。本轮采用72小时复核期，属于编辑复核周期，不承诺公告期间不变化。
 
 字段签名由 `automation.opportunity_evidence.signature(item)` 生成，不手工伪造。证据只能覆盖实际读到的字段；岗位附件未读，学历、人数、薪资继续待核。访问超时写 `outcome: unavailable`，不改写为职位关闭。修改关键报名字段后，旧记录自动失效。此队列不新增外部调度器或付费服务。
+
+
+## 日报与固定源连续采集修复（2026-09-07）
+
+- 正式巡检仍只有一个观察日，命令保持 `--mode operational --days 1`；默认 `--lookback-days 7` 扫描最近七天原文。早上只扫描当天会永久遗漏昨天白天的发布，因此不能退回单日原文窗口。
+- 补收写到原文发布日期文件，条目另存 `observedAt` 和 `observationDate`；不修改过去的 coverage 或冒充过去已巡检。当天 scanAudit 记录 publicationWindow 和 lateArrivalCount。连续多日停跑超过七天，应另做 archive-backfill 恢复，并如实保留缺失运行日。
+- 日报固定源雷达读取近七天正式监测条目，保留原文日期，并继续执行历史事件去重及原文证据核验。固定六源地图边界不变。
+- `parse_failed` 不等于 no_update：入口可访问但没有任何可解析日期的链接，要查页面结构或补充有证据的来源检查。UNESCO 的英文长月份日期已支持。不能只看 HTTP 成功数。
+- 本地默认 `WENBO_SOURCE_ROUTE=direct`，保持原有国内源直连配置。需要平台正常网络出口的运行环境可显式设 `WENBO_SOURCE_ROUTE=system`。不得在访问被拒绝后自动切换出口，不能把网络失败解释成原站没更新。
+- 发布前查看 `data-health.html` / `ingestion-health.json`。搜索大量失败、有效解析入口下降、连续零入库时，应先诊断和补查；日报条数不设硬配额。7:13 是早间任务计划时间，页面只展示账本里的真实检查时间，不用构建时间冒充。
+
+执行日报前读取 `automation/DAILY_PRODUCT_STANDARD.md`。3–5 条是稳定供给目标，重要新闻密集时可达 10 条以上。首次精选少于 3 条必须继续诊断和补查，3–4 条再次检查遗漏；不能以现有条数默认完成，也不能用无新增的重复报道补足。中国内外都要有效发现。当前新增的是执行验收约定；自动恢复和点评质检仍需后续实现及连续运行验证。

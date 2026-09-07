@@ -1,22 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T13:12:15.860849+08:00",
+  "generatedAt": "2026-09-07T18:45:02.823420+08:00",
   "items": [
-    {
-      "id": "job-a09affce851611",
-      "kind": "jobs",
-      "institution": "甘肃省省直文博单位",
-      "position": "事业编制工作人员 22 名",
-      "deadline": "2026-09-07 18:00（网上报名）",
-      "deadlineAt": "2026-09-07T18:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-a09affce851611"
-    },
     {
       "id": "job-7991f577633daf",
       "kind": "jobs",
@@ -241,6 +226,21 @@
         "label": "报名信息尚无逐项核验记录"
       },
       "url": "jobs.html?status=all#job-eaf73a57cbf512"
+    },
+    {
+      "id": "job-a09affce851611",
+      "kind": "jobs",
+      "institution": "甘肃省省直文博单位",
+      "position": "事业编制工作人员 22 名",
+      "deadline": "2026-09-07 18:00（网上报名）",
+      "deadlineAt": "2026-09-07T18:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-a09affce851611"
     },
     {
       "id": "job-8f6f7c34f49284",
@@ -991,7 +991,6 @@
     }
   ],
   "reviewQueue": [
-    "job-a09affce851611",
     "job-549919fcb22ab1",
     "job-73cc210623397c",
     "job-8f6f7c34f49284",
@@ -1041,6 +1040,6 @@
   "counts": {
     "total": 62,
     "recentEvidence": 4,
-    "reviewNeeded": 46
+    "reviewNeeded": 45
   }
 }

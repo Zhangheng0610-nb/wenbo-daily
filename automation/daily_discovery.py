@@ -414,6 +414,15 @@ def parse_date(value: str) -> date | None:
             return date(*(int(part) for part in match.groups()))
         except ValueError:
             continue
+    # Official international indexes use visible dates such as "4 September
+    # 2026" even when their article URLs contain no date.
+    english = re.search(r"\b(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b", text, re.I)
+    if english:
+        months = {name.lower(): i for i, name in enumerate(("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), 1)}
+        try:
+            return date(int(english[3]), months[english[2].lower()], int(english[1]))
+        except ValueError:
+            pass
     return None
 
 
@@ -1516,7 +1525,17 @@ def load_fixed_panel_radar(required_date: date) -> tuple[list[dict], dict]:
             "seeds": [],
         }
     payload = load_json(path, {})
-    return fixed_panel_radar_records(required_date, payload, path)
+    records, audit = fixed_panel_radar_records(required_date, payload, path)
+    for offset in range(1, 7):
+        day = required_date - timedelta(days=offset)
+        earlier = MONITORING_DIR / f"{day.isoformat()}.json"
+        extra, _ = fixed_panel_radar_records(day, load_json(earlier, {}), earlier)
+        records.extend(extra)
+    audit.update(seedCount=len(records), seedRecordIds=[r["monitoringRecordId"] for r in records],
+                 publicationWindowStart=(required_date - timedelta(days=6)).isoformat(),
+                 seeds=[{k: r.get(k) for k in ("monitoringRecordId", "title", "originalSourceUrl", "publishedDate")} for r in records])
+    audit["status"] = "scan_success_with_update" if records else audit["status"]
+    return records, audit
 
 
 def aggregate_event_candidates(records: list[dict]) -> list[dict]:
@@ -4099,6 +4118,9 @@ def scan_page(spec: dict, start: date, end: date) -> tuple[dict, list[dict]]:
         }
         records.append(record)
     status["windowResults"] = len(records)
+    if not status["datedLinks"]:
+        status["status"] = "parse_failed"
+        status["note"] = "入口可访问，但未解析到带发布日期的新闻；不能据此判断没有更新，需补查栏目或文章详情。"
     return status, records
 
 
