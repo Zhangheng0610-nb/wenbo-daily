@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-07",
-  "asOf": "2026-09-07",
+  "generated": "2026-09-08",
+  "asOf": "2026-09-08",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6030,6 +6030,108 @@
         "duplicatesSkipped": 1,
         "scanStatus": "checked",
         "date": "2026-09-07"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-08T07:14:18+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 15,
+        "eligibleCount": 15,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-08"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-08T07:14:54+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-08"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-08T07:14:17+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-08"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-08T07:14:20+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-08"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-08T07:13:56+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 5,
+        "eligibleCount": 5,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-08"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-08T07:14:21+08:00",
+        "candidateCount": 0,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 245,
+        "eligibleCount": 4,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 38,
+        "scanStatus": "partial",
+        "date": "2026-09-08"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6046,42 +6148,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 510,
-    "includedProvincialRecords": 116,
-    "provincialEvents": 96,
-    "nationalEvents": 36,
+    "totalMonitoredRecords": 529,
+    "includedProvincialRecords": 119,
+    "provincialEvents": 99,
+    "nationalEvents": 37,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 23,
-    "operationalRecords": 23,
+    "fixedPanelMonitoringRecords": 42,
+    "operationalRecords": 42,
     "operationalRecordTypes": {
-      "live": 4,
+      "live": 23,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 23
+      "fixed-panel-monitoring": 42
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 441,
+    "analysisRecords": 460,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 23
+      "fixed-panel-monitoring": 42
     },
     "excludedNonPanel": 0,
-    "unassigned": 268,
+    "unassigned": 283,
     "panelSourceCount": 6,
-    "coverageDays": 101,
+    "coverageDays": 102,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 338,
+    "successfulSourceChecks": 341,
     "coverageStatuses": {
       "success": 145,
-      "no_update": 193,
-      "partial": 268,
+      "no_update": 196,
+      "partial": 271,
       "failed": 0
     },
     "coverageByMode": {
@@ -6091,15 +6193,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 66,
-        "good": 65,
-        "days": 11
+        "checks": 72,
+        "good": 68,
+        "days": 12
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 66,
+    "operationalCoverageChecks": 72,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 11,
+    "operationalCoverageDays": 12,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6107,21 +6209,21 @@
         "days": 4
       },
       "live": {
-        "checks": 42,
-        "good": 41,
-        "days": 7
+        "checks": 48,
+        "good": 44,
+        "days": 8
       }
     },
-    "liveOperationalCoverageChecks": 42,
-    "liveOperationalCoverageDays": 7,
+    "liveOperationalCoverageChecks": 48,
+    "liveOperationalCoverageDays": 8,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 78,
+      "ncha": 79,
       "cultural-relics-news": 105,
-      "archaeology": 201,
+      "archaeology": 216,
       "museum-association": 29,
-      "xinhua-wenbo": 14,
+      "xinhua-wenbo": 17,
       "cctv-wenbo": 14
     }
   },
@@ -6260,6 +6362,170 @@
           "name": "新华网文博",
           "url": "http://www.gx.xinhuanet.com/20260903/7bd0c8bdd23946cbb85b29afc609a43c/c.html",
           "host": "gx.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+      "firstDate": "2026-09-03",
+      "lastDate": "2026-09-03",
+      "primaryProvince": "甘肃",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "甘肃"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-03",
+          "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+          "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+              "host": "gs.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-df18741eb4",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+          "host": "gs.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+      "firstDate": "2026-09-03",
+      "lastDate": "2026-09-03",
+      "primaryProvince": "福建",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "福建"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-03",
+          "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国考古网",
+              "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+              "host": "kaogu.cssn.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "archaeology"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b3005f3d50",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+          "host": "kaogu.cssn.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "archaeology"
+        }
+      ]
+    },
+    {
+      "title": "中埃联合考古队新发现一批重要遗迹和文物",
+      "firstDate": "2026-09-02",
+      "lastDate": "2026-09-02",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "上海"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-02",
+          "title": "中埃联合考古队新发现一批重要遗迹和文物",
+          "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-f14d9dc8ad",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+          "host": "news.cn",
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
@@ -11876,6 +12142,61 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局发布考古出土（出水）文物移交管理办法",
+      "firstDate": "2026-09-04",
+      "lastDate": "2026-09-04",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-04",
+          "title": "国家文物局发布考古出土（出水）文物移交管理办法",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066076.shtml",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国考古网",
+              "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066076.shtml",
+              "host": "kaogu.cssn.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "archaeology"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-77a567840a",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066076.shtml",
+          "host": "kaogu.cssn.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "archaeology"
         }
       ]
     },

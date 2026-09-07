@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-08T00:46:39.869459+08:00",
+  "generatedAt": "2026-09-08T07:47:32.620281+08:00",
   "items": [
     {
       "id": "job-7991f577633daf",
@@ -638,9 +638,9 @@
       "institution": "📍 Brighton & Hove Museums（英国）",
       "position": "Curator 策展人 2 名",
       "deadline": "2026-09-13 17:00（英国时间）",
-      "deadlineAt": null,
+      "deadlineAt": "2026-09-13T17:00:00+01:00",
       "opensAt": null,
-      "timeStatus": "check",
+      "timeStatus": "open",
       "evidence": {
         "state": "missing",
         "label": "报名信息尚无逐项核验记录"
@@ -997,6 +997,7 @@
     "job-801e32262a0e35",
     "job-36f3c5a500ce0d",
     "job-097a4eb13bf520",
+    "job-0e5f1058a5cc6f",
     "job-56be98e36251a7",
     "job-228c2b07aacd46",
     "job-040981bcb60298",
@@ -1019,7 +1020,6 @@
     "job-8cdff02483b43c",
     "job-985e628e8bc99c",
     "job-0c4e1b024b290c",
-    "job-0e5f1058a5cc6f",
     "job-9dfd285c267181",
     "job-b9e6a4da997acc",
     "job-a826137822ef35",

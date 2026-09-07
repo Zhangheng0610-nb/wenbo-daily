@@ -102,6 +102,183 @@
   ],
   "items": [
     {
+      "recordId": "operational-20260903-archaeology-0003-6065843shtml",
+      "date": "2026-09-03",
+      "title": "2016—2026年中国纺织考古学科发展综述——以冷门绝学建设推动中国特色纺织文化遗产的系统性保护",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文化遗产"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260903-archaeology-0008-6065840shtml",
+      "date": "2026-09-03",
+      "title": "一间书屋打开的“思想之窗”",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065840.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260903-archaeology-0006-6065831shtml",
+      "date": "2026-09-03",
+      "title": "社科要闻 | 加强中华民族共同体意识研究 为推动民族团结进步事业提供学理支撑",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065831.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260903-archaeology-0004-6065848shtml",
+      "date": "2026-09-03",
+      "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "福建",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "福建"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260903-archaeology-0007-6065836shtml",
+      "date": "2026-09-03",
+      "title": "第八届中国边疆考古学术研讨会召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260903-archaeology-0005-6065833shtml",
+      "date": "2026-09-03",
+      "title": "贺兰山新发现“四马拉车”岩画",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260903_6065833.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
       "recordId": "operational-20260903-ncha-0001-22204652html",
       "date": "2026-09-03",
       "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
@@ -198,6 +375,38 @@
       "selectedForDaily": false,
       "origin": "fixed-panel-monitoring",
       "runType": "live"
+    },
+    {
+      "recordId": "operational-20260903-xinhua-wenbo-0010-d807d46chtml",
+      "date": "2026-09-03",
+      "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "甘肃",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "甘肃"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
     },
     {
       "recordId": "operational-20260903-xinhua-wenbo-0003-609a43cchtml",
