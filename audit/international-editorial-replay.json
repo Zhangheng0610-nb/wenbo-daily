@@ -1,0 +1,281 @@
+{
+  "input": "audit/unesco-parser-live-2026-09-07.json",
+  "runType": "offline_replay",
+  "records": [
+    {
+      "title": "News Joint recommendations advance rights-based digital platforms and media governance in the Western Balkans 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "editorialPriorityScore": 64,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "museum_or_cultural_institution_governance",
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 58,
+      "candidateDisposition": "evidence_qualified",
+      "filterReasons": [],
+      "editorialReasons": [
+        "heritage_recognition_or_world_heritage_update",
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 58,
+      "candidateDisposition": "evidence_qualified",
+      "filterReasons": [],
+      "editorialReasons": [
+        "heritage_emergency_response",
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "Story When a conversation becomes a calling 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "Story Read, write and lead: Meet the Quechua women of Cusco who are rewriting their stories 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "Story Hellmuth Sievers: a life dedicated to understanding the ocean and tsunamis 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Young Leaders Call for a New Culture of Peace 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News University of Oxford and UNESCO launch free online course on Freedom of Expression for Judicial Actors 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News UNESCO strengthens citizenship among Indigenous and vulnerable populations living around natural World Heritage sites in Cameroon. 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "deferred",
+      "filterReasons": [
+        "backfill_low_priority"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News UNESCO and countries in Latin America and the Caribbean prepare to present the results of ERCE 2025, the region’s leading assessment of student learning 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News UNESCO and SEDECO strengthen Oaxaca's biocultural heritage and economic development 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "deferred",
+      "filterReasons": [
+        "backfill_low_priority"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Ocean Decade endorsement accelerates partnerships and data sharing for coastal resilience 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Culture for Sustainable Development: New UN Decade, a renewed global ambition 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Consultancy for Development and Dissemination of Advocacy, Knowledge Sharing and Visibility Materials 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Communities living around Manovo Gounda St Floris National Park in the Central African Republic strengthen their capacities in sustainable entrepreneurship 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Cameroon: Towards a Renewed Legal Framework for the Film Sector 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "Story From recovery to resilience: Helping schools in Viet Nam prepare for future disasters 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News UNESCO brings together experts to analyze what explains changes in learning outcomes in Latin America and the Caribbean 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "Story UNESCO supports the Hyrcanian Forest Wildfire Recovery and Preparedness Initiative 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Young people from China explore AI through media and information literacy at UNESCO Headquarters 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News New UNESCO research reveals opportunities and challenges facing South Africa’s digital content creators 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Bringing Khanbogd – Shar Tsav Geopark to the international stage 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "title": "News Beyond 2030: Shaping the future of education for sustainable development 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "editorialPriorityScore": 22,
+      "candidateDisposition": "rejected",
+      "filterReasons": [
+        "not_wenbo_relevant"
+      ],
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
+    }
+  ]
+}

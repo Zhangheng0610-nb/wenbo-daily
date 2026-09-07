@@ -324,7 +324,26 @@ def check_monitoring(required_date=None):
                         observed[source_id] += 1
             for row in coverage:
                 source_id = row.get('sourceId')
-                if source_id in observed and row.get('candidateCount') != observed[source_id]:
+                expected_count = observed.get(source_id, 0)
+                # Coverage is a snapshot at checkedAt. Explicitly later arrivals
+                # belong in today's corpus without rewriting that past snapshot.
+                if row.get('mode') == 'operational' and row.get('checkedAt'):
+                    try:
+                        checked = datetime.fromisoformat(row['checkedAt'])
+                    except (TypeError, ValueError):
+                        continue
+                    for record in records:
+                        if source_id not in {s.get('sourceId') for s in record.get('sources', [])}:
+                            continue
+                        observed_at = record.get('observedAt')
+                        if observed_at:
+                            try:
+                                arrived = datetime.fromisoformat(observed_at)
+                                if arrived > checked:
+                                    expected_count -= 1
+                            except (ValueError, TypeError):
+                                errors.append(f'{path.relative_to(ROOT)}: invalid observedAt')
+                if source_id in observed and row.get('candidateCount') != expected_count:
                     errors.append(f'{path.relative_to(ROOT)}: candidateCount mismatch for {source_id}')
             if mode == 'operational' and date.fromisoformat(file_date) >= FIXED_PANEL_OPERATIONAL_START:
                 scan_audit = payload.get('scanAudit')
@@ -364,7 +383,7 @@ def check_monitoring(required_date=None):
                 errors.append(f'{label}: baseline origin must be legacy-daily-selection')
             elif path != baseline_path and payload.get('mode') in MONITOR_MODES:
                 expected_origin = 'archive-backfill' if payload['mode'] == 'archive-backfill' else 'fixed-panel-monitoring'
-                if origin != expected_origin:
+                if origin != expected_origin and not is_late_observation(record, file_date):
                     errors.append(f'{label}: origin does not match mode {payload["mode"]}')
             errors.extend(check_monitor_record(record, label))
             record_id = record.get('recordId')
@@ -378,6 +397,19 @@ def check_monitoring(required_date=None):
                     errors.append(f'{label}: duplicate monitored URL {url}')
                 seen_urls.add(url)
     return sorted(set(errors))
+
+
+def is_late_observation(record, publication_day):
+    """A mixed-provenance item needs explicit later collection evidence."""
+    if record.get('origin') not in {'archive-backfill', 'fixed-panel-monitoring'}:
+        return False
+    try:
+        observed = datetime.fromisoformat(record.get('observedAt', ''))
+        return (observed.tzinfo is not None and
+                observed.astimezone(CN_TZ).date().isoformat() == record.get('observationDate') and
+                observed.astimezone(CN_TZ).date() > date.fromisoformat(publication_day))
+    except (TypeError, ValueError):
+        return False
 
 
 def check_heatmap():

@@ -1,0 +1,1772 @@
+{
+  "mode": "offline replay of saved real HTML; real semantic matcher, mocked transport; no publication",
+  "targetDate": "2026-09-07",
+  "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+  "documentSHA256": "d8d20ce884790e665adcc701179ba23ba14669f366071f91ec8eb366d55d82a5",
+  "summary": {
+    "sourceScansAttempted": 0,
+    "sourceScansSucceeded": 0,
+    "queriesExecuted": 0,
+    "queriesAttempted": 0,
+    "queriesSucceeded": 0,
+    "queriesFailed": 0,
+    "queryLayerStatus": "not_replayed",
+    "rawResults": 16,
+    "sameDayDuplicateRecords": 0,
+    "historicalDuplicateRecords": 5,
+    "historicalDuplicateCanonicalTargets": 5,
+    "newDevelopmentRecords": 0,
+    "deduplicatedResults": 11,
+    "candidateEvaluation": {
+      "rawRecords": 16,
+      "eventCandidateCount": 11,
+      "deduplicatedReports": 11,
+      "candidateEvaluationPool": 10,
+      "evidenceQualified": 0,
+      "needsVerification": 10,
+      "highPriorityCandidates": 3,
+      "highPriorityEvidenceQueue": 3,
+      "highPriorityNeedsVerification": 3,
+      "highPriorityEvidenceQueueEvents": 3,
+      "mediumPriorityEvidenceQueueEvents": 2,
+      "previousEditorialRejectionCount": 0,
+      "evidenceUpgradeAttempted": 0,
+      "evidenceUpgradeQualified": 0,
+      "evidenceUpgradeFailed": 0,
+      "evidenceUpgradeAmbiguous": 0,
+      "rejected": 1,
+      "deferred": 0,
+      "provisionalWouldBeSelected": 0,
+      "editorialPriorityCounts": {
+        "high": 3,
+        "medium": 2,
+        "low": 6
+      },
+      "eventCandidatePriorityCounts": {
+        "high": 3,
+        "medium": 2,
+        "low": 6
+      },
+      "rawRecordPriorityCounts": {
+        "high": 6,
+        "medium": 3,
+        "low": 7
+      },
+      "dispositionCounts": {
+        "needs_verification": 10,
+        "rejected": 1
+      }
+    },
+    "resolverDiscoveredCandidates": 0,
+    "resolverDiscoveredEvents": 0,
+    "queryFamilySummary": {
+      "policy-governance": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "archaeology-heritage": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "museum-public-culture": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "digital-heritage": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "heritage-professionals": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "museum-operations": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "modern-heritage": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-loans": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "local-heritage-governance": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-museum-governance": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-heritage": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      },
+      "international-wire": {
+        "status": "not_replayed",
+        "queriesAttempted": 0,
+        "queriesSucceeded": 0,
+        "queriesFailed": 0,
+        "returnedResults": 0,
+        "acceptedRawRecords": 0,
+        "rawRecords": 0,
+        "sameDayDuplicateRecords": 0,
+        "historicalDuplicateRecords": 0,
+        "irrelevantNoiseRecords": 0,
+        "uniqueEventsTouched": 0,
+        "firstDiscoveryEventCount": 0,
+        "historicalDuplicateEvents": 0,
+        "evidenceUpgradeCandidates": 0
+      }
+    },
+    "deduplicatedReports": 11,
+    "uniqueEvents": 11,
+    "eventDuplicateReports": 0,
+    "domestic": {
+      "rawResults": 16,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 5,
+      "historicalDuplicateCanonicalTargets": 5,
+      "newDevelopmentRecords": 0,
+      "deduplicatedResults": 11
+    },
+    "international": {
+      "rawResults": 0,
+      "sameDayDuplicateRecords": 0,
+      "historicalDuplicateRecords": 0,
+      "historicalDuplicateCanonicalTargets": 0,
+      "newDevelopmentRecords": 0,
+      "deduplicatedResults": 0
+    },
+    "fixedPanelRadar": {
+      "seedCount": 0,
+      "matchedEventCount": 0,
+      "fixedRadarSeeds": 0,
+      "fixedRadarAlreadyDiscovered": 0,
+      "fixedRadarNewToDaily": 0,
+      "fixedRadarEvidenceQualified": 0,
+      "fixedRadarSelected": 0,
+      "eventMatches": []
+    }
+  },
+  "items": [
+    {
+      "title": "国家文物局印发《考古出土（出水）文物移交管理办法（试行）》",
+      "contentItemId": "digest-6b6011597a26c6f20a98",
+      "sourceRegionLabel": "",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "same event identity",
+      "duplicateOfTitle": "考古文物移交有时间表了！国家文物局发布试行办法",
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 184,
+      "bodySHA256": "0f55736b0bcc6e6f5e6d780d58f9b646fa84072472ea8a71880acf142b614860",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "全国文物地震安全工作交流会召开",
+      "contentItemId": "digest-126af1baf3a119c7da88",
+      "sourceRegionLabel": "",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "specific event match across title/action variants",
+      "duplicateOfTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 191,
+      "bodySHA256": "c69898d3c1dc23cf1da3ad4b794263f0d85fd2e6f3f3c82f777555b8a81f2d22",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "第八届中国边疆考古学术研讨会举办",
+      "contentItemId": "digest-31151e9c1d2ea6890d05",
+      "sourceRegionLabel": "内蒙古",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 171,
+      "bodySHA256": "5730e7b7f1ae7f3f693e215077f42fddbd777abc32c0199dfdb1012668a7df3b",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "中埃联合考古队在塞赫迈特神庙遗址取得重要发现",
+      "contentItemId": "digest-39a7263331f84967caa8",
+      "sourceRegionLabel": "上海",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "specific event match across title/action variants",
+      "duplicateOfTitle": "中埃联合考古队在塞赫迈特神庙遗址发现重要遗迹",
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 199,
+      "bodySHA256": "0ea611837bafdbb10b87395f22b69c472fa170796220e016288dcf233cfa9169",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "上海加强博物馆陈列展览内容审核",
+      "contentItemId": "digest-117a5607844a1024a22b",
+      "sourceRegionLabel": "上海",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "specific event match across title/action variants",
+      "duplicateOfTitle": "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点",
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 194,
+      "bodySHA256": "77ee6628b313c4ebf8cb5bdb6aa1ee2f084fd1578448a355cc0a6ef38a641967",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "南京总统府历史文化街区保护规划公布",
+      "contentItemId": "digest-f4e8f5567ba77a07a371",
+      "sourceRegionLabel": "江苏",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 214,
+      "bodySHA256": "8067ac6b9071c241f9fd8ff4b603cd3266035504c02ffeb64be297ad1217c23c",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "长三角十地法院跨区域共护良渚文化遗址",
+      "contentItemId": "digest-3cfc14b8337a958d327b",
+      "sourceRegionLabel": "浙江",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 208,
+      "bodySHA256": "fba93153b6087bc932e52ecd5bebd6b27bc7b62876e50ea33336780dec2ebafc",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "绍兴南山遗址发掘成果公布",
+      "contentItemId": "digest-030c3cde69a3d0eb16d6",
+      "sourceRegionLabel": "浙江",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 209,
+      "bodySHA256": "1f7076facd2c84b687388af26b46e24fe9a215a7acbc85296559900c9ee9932b",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "中国近代工业化遗产联合申遗工作推进会召开",
+      "contentItemId": "digest-8b1458cf9aad0a6beb4e",
+      "sourceRegionLabel": "福建",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 196,
+      "bodySHA256": "3cd2be40d910b1cf3469ad3972979ff73484f8bf7a79b95c5958fd553b2dd7cb",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "仰韶时代与中华文明形成学术研讨会召开",
+      "contentItemId": "digest-1fb45b73717d45e30097",
+      "sourceRegionLabel": "河南",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 198,
+      "bodySHA256": "87c16a2429e1e7634528d1c8d53562b360e589479cfac159af7a8121abd93453",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "河南支援和田文物考古工作站揭牌",
+      "contentItemId": "digest-109cb457a327aaca774b",
+      "sourceRegionLabel": "河南",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "specific event match across title/action variants",
+      "duplicateOfTitle": "河南省支援和田文物考古工作站正式揭牌",
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 182,
+      "bodySHA256": "094a650a003cf191a4090302bbb8f94ac9b3680a2d200116f947d7492e668002",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+      "contentItemId": "digest-77c8c8ee554d98ab2669",
+      "sourceRegionLabel": "广东",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 164,
+      "bodySHA256": "9cf90a7f5c715312d918111a985b5829394f6b616e0db9187761b7b9bc9705f6",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "大足石刻与宋史研究学术研讨会举办",
+      "contentItemId": "digest-4a376004f0105e1d2382",
+      "sourceRegionLabel": "重庆",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 153,
+      "bodySHA256": "1cd0d2b9fc17313b32c7634bb1ea9b83f3cd9ae69d44fd0b93e529f40e1ab529",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "“老挝国立大学·云南考古交流活动”举办",
+      "contentItemId": "digest-1d8dcaab4dd15740d484",
+      "sourceRegionLabel": "云南",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 200,
+      "bodySHA256": "f894fb158ad96768c04de2cd889e637415660b54736ac8430926d18be24b54a9",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+      "contentItemId": "digest-8255029b081364c5695f",
+      "sourceRegionLabel": "陕西",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 188,
+      "bodySHA256": "cfbe717475b35eca4196434f7be86a6342806b603f0438321c69043017ad3fde",
+      "isolatedEvidenceMatched": true
+    },
+    {
+      "title": "创新技术为千年木构古建提供无损加固",
+      "contentItemId": "digest-7a62bb450eec28768ace",
+      "sourceRegionLabel": "陕西",
+      "duplicateStatus": "unique_event",
+      "duplicateReason": null,
+      "duplicateOfTitle": null,
+      "eventDate": null,
+      "publicationDateBasis": "digest_publication",
+      "bodyCharacters": 185,
+      "bodySHA256": "0eea9e656f868d18f35d9c53387a13ab00e192483a3e766f4541264faf015098",
+      "isolatedEvidenceMatched": true
+    }
+  ],
+  "candidateEvaluation": {
+    "summary": {
+      "rawRecords": 16,
+      "eventCandidateCount": 11,
+      "deduplicatedReports": 11,
+      "candidateEvaluationPool": 10,
+      "evidenceQualified": 0,
+      "needsVerification": 10,
+      "highPriorityCandidates": 3,
+      "highPriorityEvidenceQueue": 3,
+      "highPriorityNeedsVerification": 3,
+      "highPriorityEvidenceQueueEvents": 3,
+      "mediumPriorityEvidenceQueueEvents": 2,
+      "previousEditorialRejectionCount": 0,
+      "evidenceUpgradeAttempted": 0,
+      "evidenceUpgradeQualified": 0,
+      "evidenceUpgradeFailed": 0,
+      "evidenceUpgradeAmbiguous": 0,
+      "rejected": 1,
+      "deferred": 0,
+      "provisionalWouldBeSelected": 0,
+      "editorialPriorityCounts": {
+        "high": 3,
+        "medium": 2,
+        "low": 6
+      },
+      "eventCandidatePriorityCounts": {
+        "high": 3,
+        "medium": 2,
+        "low": 6
+      },
+      "rawRecordPriorityCounts": {
+        "high": 6,
+        "medium": 3,
+        "low": 7
+      },
+      "dispositionCounts": {
+        "needs_verification": 10,
+        "rejected": 1
+      }
+    },
+    "finalEditorialPool": {
+      "status": "pending_editorial_review",
+      "rawQualifiedEvents": 0,
+      "canonicalUniqueEvents": 0,
+      "historicalDuplicates": 5,
+      "historicalDuplicateDefinition": "unique published-event targets excluded before evidence qualification",
+      "editoriallyReviewed": 0,
+      "events": [],
+      "finalHistoricalGuard": {
+        "status": "completed",
+        "checkedEvents": 11,
+        "retainedEvents": 11,
+        "historicalDuplicates": 0,
+        "derivativeCommentary": 0,
+        "excludedEventIds": []
+      }
+    },
+    "finalHistoricalGuard": {
+      "status": "completed",
+      "checkedEvents": 11,
+      "retainedEvents": 11,
+      "historicalDuplicates": 0,
+      "derivativeCommentary": 0,
+      "excludedEventIds": []
+    },
+    "eventCandidates": [
+      {
+        "eventId": "event-3ceda40c3344",
+        "representativeTitle": "第八届中国边疆考古学术研讨会举办",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "第八届中国边疆考古学术研讨会举办",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-31151e9c1d2ea6890d05",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "内蒙古",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-6a733df1f07b",
+        "representativeTitle": "南京总统府历史文化街区保护规划公布",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "南京总统府历史文化街区保护规划公布",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-f4e8f5567ba77a07a371",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "江苏",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-ad1f7cb14c26",
+        "representativeTitle": "长三角十地法院跨区域共护良渚文化遗址",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "长三角十地法院跨区域共护良渚文化遗址",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-3cfc14b8337a958d327b",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "浙江",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-7be9f219acc7",
+        "representativeTitle": "绍兴南山遗址发掘成果公布",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "绍兴南山遗址发掘成果公布",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-030c3cde69a3d0eb16d6",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "浙江",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-85e0ff46074d",
+        "representativeTitle": "中国近代工业化遗产联合申遗工作推进会召开",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "中国近代工业化遗产联合申遗工作推进会召开",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-8b1458cf9aad0a6beb4e",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "福建",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-f2f34620dd94",
+        "representativeTitle": "仰韶时代与中华文明形成学术研讨会召开",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "仰韶时代与中华文明形成学术研讨会召开",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-1fb45b73717d45e30097",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "河南",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-0b196742e887",
+        "representativeTitle": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-77c8c8ee554d98ab2669",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "广东",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-759a10977f7c",
+        "representativeTitle": "大足石刻与宋史研究学术研讨会举办",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "大足石刻与宋史研究学术研讨会举办",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-4a376004f0105e1d2382",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "重庆",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-23dfe872d3b6",
+        "representativeTitle": "“老挝国立大学·云南考古交流活动”举办",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "“老挝国立大学·云南考古交流活动”举办",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-1d8dcaab4dd15740d484",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "云南",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-8d752ba87957",
+        "representativeTitle": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "publishedDate": "2026-09-06",
+        "scope": "international",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-8255029b081364c5695f",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "陕西",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-27486a3c57e0",
+        "representativeTitle": "创新技术为千年木构古建提供无损加固",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "queryFamilies": [],
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "discoveryReports": [
+          {
+            "title": "创新技术为千年木构古建提供无损加固",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "contentItemId": "digest-7a62bb450eec28768ace",
+            "isDigestItem": true,
+            "sourceDocumentTitle": "一周文物动态摘编",
+            "publicationDateBasis": "digest_publication",
+            "eventDateStatus": "requires_editorial_verification",
+            "sourceRegionLabel": "陕西",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ]
+      }
+    ],
+    "pool": [
+      {
+        "eventId": "event-6a733df1f07b",
+        "title": "南京总统府历史文化街区保护规划公布",
+        "representativeTitle": "南京总统府历史文化街区保护规划公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 100,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "policy_or_governance_update",
+          "high_level_cultural_diplomacy",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": true,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 1,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-8d752ba87957",
+        "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "representativeTitle": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "international",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 96,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "major_archaeological_or_heritage_discovery_signal",
+          "meaningful_institutional_or_international_cooperation",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 2,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-0b196742e887",
+        "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "representativeTitle": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "high",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 70,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "policy_or_governance_update",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 3,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-7be9f219acc7",
+        "title": "绍兴南山遗址发掘成果公布",
+        "representativeTitle": "绍兴南山遗址发掘成果公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 62,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 4,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-f2f34620dd94",
+        "title": "仰韶时代与中华文明形成学术研讨会召开",
+        "representativeTitle": "仰韶时代与中华文明形成学术研讨会召开",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 62,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 5,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-ad1f7cb14c26",
+        "title": "长三角十地法院跨区域共护良渚文化遗址",
+        "representativeTitle": "长三角十地法院跨区域共护良渚文化遗址",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 6,
+        "evidenceQueueClass": "not_queued",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-3ceda40c3344",
+        "title": "第八届中国边疆考古学术研讨会举办",
+        "representativeTitle": "第八届中国边疆考古学术研讨会举办",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 7,
+        "evidenceQueueClass": "not_queued",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-27486a3c57e0",
+        "title": "创新技术为千年木构古建提供无损加固",
+        "representativeTitle": "创新技术为千年木构古建提供无损加固",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 9,
+        "evidenceQueueClass": "not_queued",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-85e0ff46074d",
+        "title": "中国近代工业化遗产联合申遗工作推进会召开",
+        "representativeTitle": "中国近代工业化遗产联合申遗工作推进会召开",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 10,
+        "evidenceQueueClass": "not_queued",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-23dfe872d3b6",
+        "title": "“老挝国立大学·云南考古交流活动”举办",
+        "representativeTitle": "“老挝国立大学·云南考古交流活动”举办",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "candidateDisposition": "needs_verification",
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "editorialPriorityScore": 0,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness",
+          "routine_or_peripheral_activity_penalty"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "editorialPriorityRank": 11,
+        "evidenceQueueClass": "not_queued",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeStatus": "queued",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      }
+    ],
+    "highPriorityEvidenceQueue": [
+      {
+        "eventId": "event-6a733df1f07b",
+        "title": "南京总统府历史文化街区保护规划公布",
+        "representativeTitle": "南京总统府历史文化街区保护规划公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "editorialPriorityScore": 100,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "policy_or_governance_update",
+          "high_level_cultural_diplomacy",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": true,
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-8d752ba87957",
+        "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "representativeTitle": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "international",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "editorialPriorityScore": 96,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "major_archaeological_or_heritage_discovery_signal",
+          "meaningful_institutional_or_international_cooperation",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-0b196742e887",
+        "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "representativeTitle": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "editorialPriorityScore": 70,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "policy_or_governance_update",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "claimRisk": "high",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      }
+    ],
+    "mediumPriorityEvidenceQueue": [
+      {
+        "eventId": "event-7be9f219acc7",
+        "title": "绍兴南山遗址发掘成果公布",
+        "representativeTitle": "绍兴南山遗址发掘成果公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "editorialPriorityScore": 62,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      },
+      {
+        "eventId": "event-f2f34620dd94",
+        "title": "仰韶时代与中华文明形成学术研讨会召开",
+        "representativeTitle": "仰韶时代与中华文明形成学术研讨会召开",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "reportCount": 1,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "editorialPriorityScore": 62,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "claimRisk": "ordinary",
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": null,
+        "evidenceQueueClass": "priority",
+        "nearThresholdRescueEligible": false,
+        "nearThresholdRescueAttempted": null,
+        "previousEditorialRejection": false,
+        "previousEditorialRejectionDate": null,
+        "previousEditorialRejectionOf": null,
+        "previousEditorialRejectionReason": null,
+        "previousEditorialRejectionLedgerPath": null,
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceFailureReason": null,
+        "evidenceFailureType": null,
+        "evidenceSources": null,
+        "evidenceUpgradeQueries": null,
+        "evidenceUpgradeSourcesChecked": null,
+        "evidenceResolutionAttempts": null
+      }
+    ],
+    "provisionalWouldBeSelected": [],
+    "previousEditorialRejectionGuard": {
+      "windowDays": 3,
+      "checkedRecentRejections": 10,
+      "blockedEvents": []
+    },
+    "evidenceThresholdPolicy": {
+      "normalMediumQueueThreshold": 55,
+      "nearThresholdRescueMinScore": 50,
+      "nearThresholdRescueMaxScore": 54,
+      "nearThresholdRescueCap": 3,
+      "nearThresholdRescueRule": "fresh primary event with substantive editorial reason; no routine-only rescue"
+    },
+    "resolverDiscoveredCandidates": [],
+    "resolverDiscoveredEvents": [],
+    "fixedPanelRadar": {
+      "seedCount": 0,
+      "matchedEventCount": 0,
+      "fixedRadarSeeds": 0,
+      "fixedRadarAlreadyDiscovered": 0,
+      "fixedRadarNewToDaily": 0,
+      "fixedRadarEvidenceQualified": 0,
+      "fixedRadarSelected": 0,
+      "eventMatches": []
+    }
+  }
+}

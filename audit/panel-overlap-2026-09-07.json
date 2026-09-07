@@ -1,0 +1,141 @@
+{
+  "runType": "live_quality_audit",
+  "notProductionRun": true,
+  "publicationWindow": [
+    "2026-09-01",
+    "2026-09-07"
+  ],
+  "requestedSources": [
+    "ncha",
+    "cultural-relics-news",
+    "archaeology"
+  ],
+  "sources": [
+    {
+      "sourceId": "cultural-relics-news",
+      "checkedAt": "2026-09-07T13:36:43.346168+08:00",
+      "complete": true,
+      "note": "中国文物报逐日期数字报档案已回溯。",
+      "rawRows": 8,
+      "eligibleRows": 2,
+      "sameDayOnlyRows": 0,
+      "recoveredEarlierRows": 2,
+      "rows": [
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "习近平同吉尔吉斯斯坦总统扎帕罗夫会谈",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112733"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "《求是》杂志发表习近平总书记重要文章 坚持落实管党治党政治责任",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112734"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "国家文物局召开树立和践行正确政绩观学习教育总结会",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112735"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "“典则：唐宋书画展”亮相故宫文华殿",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112736"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "《平“语”近人——习近平喜欢的典故》（多语种版）在上合组织国家媒体播出",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112737"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "彭丽媛同吉尔吉斯斯坦总统扎帕罗夫夫人扎帕罗娃参观吉尔吉斯共和国国家历史博物馆",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112738"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "中吉共续文化丝路情缘",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112739"
+        },
+        {
+          "sourceId": "cultural-relics-news",
+          "date": "2026-09-01",
+          "title": "《金石探文明》播出 解码先秦石刻史诗",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-01/paperId/22865/id/112740"
+        }
+      ]
+    },
+    {
+      "sourceId": "ncha",
+      "checkedAt": "2026-09-07T13:36:45.217447+08:00",
+      "complete": true,
+      "note": "国家文物局“文物新闻”分页档案已回溯。",
+      "rawRows": 6,
+      "eligibleRows": 6,
+      "sameDayOnlyRows": 1,
+      "recoveredEarlierRows": 5,
+      "rows": [
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-07",
+          "title": "文博日历丨白露登高 不必远行 案头有山便是秋天",
+          "url": "http://www.ncha.gov.cn/art/2026/9/7/art_722_204719.html",
+          "sourceSection": "文物新闻"
+        },
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-06",
+          "title": "一周文物动态摘编（8.29-9.4）",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "sourceSection": "文物新闻"
+        },
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-04",
+          "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "sourceSection": "文物新闻"
+        },
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-03",
+          "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+          "sourceSection": "文物新闻"
+        },
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-01",
+          "title": "看展览 | 博物馆展讯速览",
+          "url": "http://www.ncha.gov.cn/art/2026/9/1/art_722_204626.html",
+          "sourceSection": "文物新闻"
+        },
+        {
+          "sourceId": "ncha",
+          "date": "2026-09-02",
+          "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+          "sourceSection": "文物新闻"
+        }
+      ]
+    },
+    {
+      "sourceId": "archaeology",
+      "checkedAt": "2026-09-07T13:39:00.165866+08:00",
+      "complete": false,
+      "note": "timed out",
+      "rawRows": 0,
+      "eligibleRows": 0,
+      "sameDayOnlyRows": 0,
+      "recoveredEarlierRows": 0,
+      "rows": []
+    }
+  ],
+  "completed": true
+}

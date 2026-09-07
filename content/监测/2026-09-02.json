@@ -100,7 +100,36 @@
       "scanStatus": "checked"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "backfill-20260902-ncha-0004-22204633html",
+      "date": "2026-09-02",
+      "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

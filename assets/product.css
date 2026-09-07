@@ -1,0 +1,76 @@
+/* Shared design tokens. Local data visualizations retain their own chart palette. */
+body.product-page{--bg:#f4f6f8;--card:#fff;--text:#182d39;--muted:#526672;--accent:#155d76;--tag-bg:#e6f0f3;--border:#d2dce2;font-size:16px;line-height:1.75;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.product-page *{box-sizing:border-box}
+.product-page a{color:var(--accent)}
+.product-page a:focus-visible,.product-page button:focus-visible,.product-page input:focus-visible,.product-page select:focus-visible,.product-page summary:focus-visible{outline:3px solid #b16b0b;outline-offset:4px}
+.product-page :target{scroll-margin-top:24px}
+.product-bar{display:flex;align-items:center;gap:24px;justify-content:space-between;border-bottom:2px solid var(--text);padding:16px 0;margin-bottom:24px;text-align:left}
+.product-bar .product-brand{font-weight:800;font-size:22px;white-space:nowrap;text-decoration:none;letter-spacing:.08em;color:var(--text)}
+.product-brand span{display:block;font-size:12px;letter-spacing:.19em;line-height:1.1;color:var(--accent)}
+.product-bar nav{display:flex;flex-wrap:wrap;gap:4px}
+.product-bar nav a{font-size:14px;text-decoration:none;padding:9px 12px;min-height:44px;border-radius:4px;color:var(--muted)}
+.product-bar nav a[aria-current]{background:var(--text);color:var(--card);font-weight:650}
+.product-bar .skip-link{position:absolute;left:-10000px}
+.product-bar .skip-link:focus{left:12px;top:12px;padding:12px;background:var(--card);z-index:100}
+.product-page header{padding-top:14px;padding-bottom:18px;text-align:left}
+.product-page header h1{font-size:clamp(1.55rem,4vw,2.2rem);line-height:1.35;letter-spacing:-.025em;color:var(--text)}
+.product-page .hero{border-radius:6px;border-top:4px solid var(--accent);box-shadow:none;padding:24px}
+.product-page .hero-list{line-height:1.8}
+.product-page .hero-list li{margin:12px 0}
+.product-page .hero-list a{font-size:1.1rem;color:var(--text)}
+.product-page .compact-card,.product-page .archive-summary,.product-page .job-item,.product-page .search-result{border-radius:6px;box-shadow:none}
+.product-page .compact-meta,.product-page .job-meta,.product-page .meta,.product-page .search-meta,.product-page .search-snippet{font-size:14px;line-height:1.7}
+.product-page .job-meta{display:grid;gap:6px}
+.product-page .job-details{font-size:14px;color:var(--muted);margin-top:10px}
+.product-page .job-details p{margin:4px 0}
+.product-page .job-link{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:12px}
+.product-page .job-link a{overflow-wrap:anywhere;font-size:14px}
+.product-page .job-summary{font-size:14px}
+.product-page .job-title{font-size:17px}
+.product-page .status-badge,.product-page .closing-badge{font-size:13px}
+.product-page .job-item[hidden],.product-page .job-section[hidden]{display:none}
+.freshness{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap;padding:12px 0;margin-bottom:12px;font-size:14px;color:var(--muted)}
+.freshness strong{color:var(--text)}
+.freshness.is-stale{border-left:3px solid #b16b0b;padding-left:12px}
+.job-filters{background:var(--card);border:1px solid var(--border);padding:16px;margin:20px 0;border-radius:6px;display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.job-filters label{font-size:14px;display:flex;flex-direction:column;gap:5px;flex:1 1 160px}
+.job-filters input,.job-filters select,.job-filters button{font:inherit;color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:4px;padding:10px;min-height:44px;max-width:100%}
+.job-filters button{cursor:pointer;flex:0 0 auto}
+.job-filter-result{flex-basis:100%;font-size:14px;margin:0;color:var(--muted)}
+.product-page .quick-nav{display:none}
+@media(min-width:900px){body.product-page:has(.hero),body.product-page:has(.job-section){max-width:1000px;margin:auto;padding:20px 28px}.product-page .compact-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:600px){.product-bar{align-items:start;gap:10px;flex-direction:column;margin-bottom:16px}.product-bar .product-brand{font-size:20px}.product-brand span{display:inline;margin-left:10px}.product-bar nav{width:100%;justify-content:space-between}.product-bar nav a{padding:8px;font-size:14px}.product-page .compact-meta{font-size:13px}.product-page .hero{padding:18px}.product-page .compact-kicker{font-size:14px}.job-filters{padding:12px}.product-page .job-item{padding:14px}.product-page .job-title{overflow-wrap:anywhere}}
+@media(prefers-color-scheme:dark){body.product-page{--bg:#101d26;--card:#192a35;--text:#edf3f6;--muted:#adc0ca;--accent:#83c9e0;--tag-bg:#233e4c;--border:#3d5260}}
+@media(prefers-reduced-motion:reduce){.product-page *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{.product-bar,.job-filters,.freshness{display:none}.product-page{background:white!important;color:black!important}.job-item{break-inside:avoid}}
+
+/* Application tools precede editorial guidance, including on a 320px viewport. */
+.opportunity-tabs{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin-top:12px}
+.opportunity-tabs a{display:inline-block;min-height:44px;padding:8px 0}
+.job-guidance{font-size:14px;color:var(--muted);margin:12px 0}
+.job-guidance summary{cursor:pointer;min-height:44px;padding:10px 0}
+.product-page:has(.job-section) header{padding-bottom:0}
+@media(max-width:600px){
+ .product-bar nav{flex-wrap:nowrap;gap:0}
+ .product-bar nav a{padding:8px 6px;font-size:13px;white-space:nowrap}
+ .product-page header{padding-top:0}
+ .product-page header h1{margin:0 0 8px}
+ .product-page:has(.job-section) .job-filters{margin:12px 0;gap:8px}
+ .job-filter-result{font-size:13px}
+}
+
+.evidence-audit{border-left:3px solid #b16b0b;background:var(--card);padding:12px 16px;margin:16px 0;font-size:14px;overflow-wrap:anywhere}.evidence-audit p{margin:6px 0}
+
+.reader-feed{margin:28px 0}.reader-heading{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}.reader-meta{font-size:13px;color:var(--muted)}.reader-entry{padding:18px 0;border-bottom:1px solid var(--border)}.reader-entry h3{font-size:18px;line-height:1.55;margin:8px 0}.reader-entry h3 a{text-decoration:none;color:var(--text)}.reader-entry p{margin:6px 0;font-size:14px}.reader-entry[hidden]{display:none}.reader-filter{display:flex;align-items:center;gap:12px;margin:12px 0}.reader-filter select,.save-entry,#reading-list button{font:inherit;color:var(--accent);background:var(--card);border:1px solid var(--border);border-radius:4px;min-height:44px;padding:8px 12px;cursor:pointer}.save-entry{font-size:14px}.save-entry[aria-pressed=true]{background:var(--tag-bg)}#reading-list article{display:flex;justify-content:space-between;align-items:center;gap:16px}body.product-page:has(#reading-list){max-width:900px;margin:auto;padding:24px}#save-message{font-size:14px;color:var(--accent)}
+.event-history{font-size:13px;margin:10px 0;color:var(--muted)}.event-history summary{cursor:pointer;padding:8px 0;min-height:44px}.event-history a{overflow-wrap:anywhere}
+@media(max-width:600px){body.product-page{padding:12px}.product-bar{padding:10px 0;margin-bottom:12px}.product-page:has(.job-section) header{margin-bottom:8px}.product-page:has(.job-section) .job-section{margin-top:12px}}
+
+/* The chart overview uses a dark data palette regardless of reader theme. */
+body.product-page:has(#industry-module){--bg:#081221;--card:#102238;--text:#edf7ff;--muted:#aec2d2;--accent:#8eddf1;--border:#34506a;--tag-bg:#17394e;background:var(--bg);color:var(--text)}
+.product-page:has(#industry-module) h1{text-shadow:none;letter-spacing:0}
+.product-page:has(#industry-module) .panel{box-shadow:none;border-radius:6px}
+@media(max-width:600px){.product-page:has(#industry-module) .eyebrow{font-size:10px}.product-page:has(#industry-module) #fullscreen{display:none}.product-page:has(#industry-module) .top-actions{gap:6px}.product-page:has(#industry-module) .top-actions a{padding:6px;font-size:12px;min-height:44px}}
+
+.search-type{display:flex;align-items:center;gap:8px;font-size:14px}.search-type select,#search-more{font:inherit;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:10px;min-height:44px}#search-more{margin:18px 0;cursor:pointer}@media(max-width:600px){.search-wrap{flex-wrap:wrap}.search-wrap input{flex-basis:100%}.search-type{flex:1}.search-type select{max-width:100%}}
+
+.opportunity-evidence{margin:12px 0;padding:10px 12px;border-left:3px solid var(--border);font-size:13px;color:var(--muted)}.opportunity-evidence p{margin:4px 0}.job-item[data-evidence-state="recent"] .opportunity-evidence{border-color:var(--accent)}

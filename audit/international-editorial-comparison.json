@@ -1,0 +1,32 @@
+{
+  "input": "audit/unesco-parser-live-2026-09-07.json",
+  "reports": 24,
+  "events": 23,
+  "changedEvents": [
+    {
+      "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+      "before": {
+        "editorialPriorityScore": 22,
+        "candidateDisposition": "deferred"
+      },
+      "after": {
+        "editorialPriorityScore": 58,
+        "candidateDisposition": "evidence_qualified"
+      }
+    },
+    {
+      "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+      "before": {
+        "editorialPriorityScore": 22,
+        "candidateDisposition": "deferred"
+      },
+      "after": {
+        "editorialPriorityScore": 58,
+        "candidateDisposition": "evidence_qualified"
+      }
+    }
+  ],
+  "beforeRule": "international professional signals disabled",
+  "afterRule": "object plus professional action",
+  "notOverallRecallEstimate": true
+}

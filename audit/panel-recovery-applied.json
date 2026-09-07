@@ -1,0 +1,46 @@
+{
+  "sourceAudit": "audit/panel-overlap-2026-09-07.json",
+  "sourcesUsed": [
+    "ncha",
+    "cultural-relics-news"
+  ],
+  "mode": "archive-backfill",
+  "comparison": [
+    {
+      "date": "2026-09-01",
+      "before": 0,
+      "after": 3,
+      "originalCoveragePreserved": true
+    },
+    {
+      "date": "2026-09-02",
+      "before": 0,
+      "after": 1,
+      "originalCoveragePreserved": true
+    },
+    {
+      "date": "2026-09-03",
+      "before": 4,
+      "after": 4,
+      "originalCoveragePreserved": true
+    },
+    {
+      "date": "2026-09-04",
+      "before": 0,
+      "after": 1,
+      "originalCoveragePreserved": true
+    },
+    {
+      "date": "2026-09-05",
+      "before": 0,
+      "after": 0,
+      "originalCoveragePreserved": true
+    },
+    {
+      "date": "2026-09-06",
+      "before": 0,
+      "after": 1,
+      "originalCoveragePreserved": true
+    }
+  ]
+}

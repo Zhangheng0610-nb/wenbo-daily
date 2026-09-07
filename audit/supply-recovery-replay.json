@@ -1,0 +1,471 @@
+{
+  "runType": "offline_replay",
+  "evidenceUpgradeExecuted": false,
+  "note": "Discovery source qualification is not a substitute for article body verification.",
+  "beforeRecovery": {
+    "rawRecords": 865,
+    "uniqueEvents": 658,
+    "qualifiedCandidates": 3,
+    "events": [
+      {
+        "eventId": "event-c24c9a216937",
+        "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+        "representativeTitle": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+        "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+        "publishedDate": "2026-09-04",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "unesco.org"
+        ],
+        "publisherDomains": [
+          "unesco.org"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 58,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "heritage_recognition_or_world_heritage_update",
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+            "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "unesco-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "unesco.org",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "unesco.org"
+          }
+        ]
+      },
+      {
+        "eventId": "event-2b083ded7c0e",
+        "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+        "representativeTitle": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+        "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+        "publishedDate": "2026-09-04",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "unesco.org"
+        ],
+        "publisherDomains": [
+          "unesco.org"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 58,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "heritage_emergency_response",
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+            "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "unesco-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "unesco.org",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "unesco.org"
+          }
+        ]
+      },
+      {
+        "eventId": "event-9ecf52dca9c1",
+        "title": "一周文物动态摘编（8.29-9.4）",
+        "representativeTitle": "一周文物动态摘编（8.29-9.4）",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 2,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "一周文物动态摘编（8.29-9.4）",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          },
+          {
+            "title": "一周文物动态摘编（8.29-9.4） - ncha.gov.cn",
+            "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA5eGdTay00Zk41UTBDNC01X2IxSWRfbFJDNEJ0aG13N203UFFYbW5IMnhjOU0wUVI1WDhRd1hQUHd1VjF3SkxPcjBuamdEWUdXeURObHl5Z3pwclFpY0Y1VmF3b09idw?oc=5",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "google-news-rss",
+            "discoverySourceType": "query_search",
+            "discoveryQuery": "site:gov.cn 博物馆 开馆 展览 after:2026-09-01 before:2026-09-08",
+            "queryFamily": "museum-public-culture",
+            "sourceDomain": "ncha.gov.cn",
+            "sourcePublisherUrl": "http://www.ncha.gov.cn",
+            "duplicateStatus": "same_day_duplicate",
+            "publisherDomain": "ncha.gov.cn",
+            "transportUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA5eGdTay00Zk41UTBDNC01X2IxSWRfbFJDNEJ0aG13N203UFFYbW5IMnhjOU0wUVI1WDhRd1hQUHd1VjF3SkxPcjBuamdEWUdXeURObHl5Z3pwclFpY0Y1VmF3b09idw?oc=5"
+          }
+        ]
+      }
+    ]
+  },
+  "afterRecovery": {
+    "rawRecords": 998,
+    "uniqueEvents": 760,
+    "qualifiedCandidates": 3,
+    "events": [
+      {
+        "eventId": "event-c24c9a216937",
+        "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+        "representativeTitle": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+        "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+        "publishedDate": "2026-09-04",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "unesco.org"
+        ],
+        "publisherDomains": [
+          "unesco.org"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 58,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "heritage_recognition_or_world_heritage_update",
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+            "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "unesco-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "unesco.org",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "unesco.org"
+          }
+        ]
+      },
+      {
+        "eventId": "event-2b083ded7c0e",
+        "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+        "representativeTitle": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+        "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+        "publishedDate": "2026-09-04",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "unesco.org"
+        ],
+        "publisherDomains": [
+          "unesco.org"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 58,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "heritage_emergency_response",
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+            "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "unesco-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "unesco.org",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "unesco.org"
+          }
+        ]
+      },
+      {
+        "eventId": "event-9ecf52dca9c1",
+        "title": "一周文物动态摘编（8.29-9.4）",
+        "representativeTitle": "一周文物动态摘编（8.29-9.4）",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 2,
+        "sourceDomains": [
+          "ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "一周文物动态摘编（8.29-9.4）",
+            "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          },
+          {
+            "title": "一周文物动态摘编（8.29-9.4） - ncha.gov.cn",
+            "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA5eGdTay00Zk41UTBDNC01X2IxSWRfbFJDNEJ0aG13N203UFFYbW5IMnhjOU0wUVI1WDhRd1hQUHd1VjF3SkxPcjBuamdEWUdXeURObHl5Z3pwclFpY0Y1VmF3b09idw?oc=5",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "google-news-rss",
+            "discoverySourceType": "query_search",
+            "discoveryQuery": "site:gov.cn 博物馆 开馆 展览 after:2026-09-01 before:2026-09-08",
+            "queryFamily": "museum-public-culture",
+            "sourceDomain": "ncha.gov.cn",
+            "sourcePublisherUrl": "http://www.ncha.gov.cn",
+            "duplicateStatus": "same_day_duplicate",
+            "publisherDomain": "ncha.gov.cn",
+            "transportUrl": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFA5eGdTay00Zk41UTBDNC01X2IxSWRfbFJDNEJ0aG13N203UFFYbW5IMnhjOU0wUVI1WDhRd1hQUHd1VjF3SkxPcjBuamdEWUdXeURObHl5Z3pwclFpY0Y1VmF3b09idw?oc=5"
+          }
+        ]
+      }
+    ]
+  }
+}

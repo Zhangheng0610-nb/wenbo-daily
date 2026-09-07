@@ -16,6 +16,7 @@ from automation.governance import (
     source_registry_rows, source_stats, recruitment_source_info,
 )
 from automation.theme_rules import classify_themes
+from automation.evidence_audit import audit_for, audit_html, LABELS as AUDIT_LABELS
 
 CN_TZ = timezone(timedelta(hours=8))
 
@@ -1092,7 +1093,7 @@ def build_heatmap_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博行业关注地图 | 每日文博资讯</title>
 <meta name="description" content="基于权威公开报道、独立事件与可解释指标生成的中国文博行业关注地图。">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">
@@ -1285,8 +1286,8 @@ def build_heatmap_html():
     <h2>本页数据说明</h2>
     <p id="coverage-status">正在核对本页资料是否足够用于地区比较…</p>
     <div class="coverage-grid">
-      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>本窗口检查完成度</span></div>
-      <div class="coverage-cell"><strong id="c-days">—</strong><span>全部来源已检查</span></div>
+      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>本窗口正式运行覆盖</span></div>
+      <div class="coverage-cell"><strong id="c-days">—</strong><span>正式完整检查日</span></div>
       <div class="coverage-cell"><strong id="c-sources">—</strong><span>追踪的权威来源</span></div>
       <div class="coverage-cell"><strong id="c-window">—</strong><span>查看范围</span></div>
     </div>
@@ -1439,7 +1440,7 @@ function renderScope(events,id,countId) {
   list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
 }
 function coverageForWindow(days, previous) {
-  var coverage=window.WenboAnalysis.coverageForWindow(RAW.coverage, RAW.asOf, days, previous);
+  var coverage=window.WenboAnalysis.coverageForWindow(RAW.coverage, RAW.asOf, days, previous, 'operational', 'live');
   coverage.sourceGood={};
   coverage.rows.forEach(function(row){coverage.sourceGood[row.id]=row.good;});
   coverage.ready=coverage.state==='ready';
@@ -1447,10 +1448,10 @@ function coverageForWindow(days, previous) {
 }
 function renderCoverage() {
   CUR_COVERAGE=coverageForWindow(CUR_WINDOW.days,false);PREVIOUS_COVERAGE=coverageForWindow(CUR_WINDOW.days,true);var c=CUR_COVERAGE,quality=document.getElementById('quality');quality.setAttribute('data-state',c.state);
-  document.getElementById('c-coverage').textContent=Math.round(c.rate*100)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
+  document.getElementById('c-coverage').textContent=(c.rate*100).toFixed(1)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
   var status=document.getElementById('coverage-status');
   if(c.ready)status.innerHTML='<strong>资料已足够：</strong>当前范围内，可以比较这些权威来源对不同地区的相对关注；但它不等同于各地真实文博活动总量。';
-  else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前已完成 '+c.successful+'/'+c.planned+' 次来源检查。地图可供浏览，但暂不适合拿来比较不同地区。';
+  else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前正式运行已完成 '+c.successful+'/'+c.planned+' 次有效来源检查；历史回放与回溯不计入此覆盖率。地图可供浏览，但暂不适合拿来比较不同地区。';
   else status.innerHTML='<strong>资料刚开始积累：</strong>从下一次自动更新起，网站会每天检查固定的权威来源。当前展示的是从旧日报整理出的历史资料，只供了解，不用于比较不同地区。';
   var mobileGuide=document.getElementById('mobile-guide-status');
   if(c.ready)mobileGuide.textContent='资料较充分，可用地图比较近期报道关注。';
@@ -1462,7 +1463,9 @@ function renderCoverage() {
 }
 function renderQuality() {
   var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
-  document.getElementById('quality-text').innerHTML='本页目前收录 <strong>'+s.totalMonitoredRecords+'</strong> 条来自固定权威来源的历史资料，其中 <strong>'+s.includedProvincialRecords+'</strong> 条涉及具体地区，合并为 <strong>'+s.provincialEvents+'</strong> 件事项；另有 <strong>'+s.nationalEvents+'</strong> 条全国性动态。这些历史资料来自旧日报整理，无法确认当时是否每天都查全了，所以暂不用于地区比较。新的每日检查目前已积累 <strong>'+s.operationalRecords+'</strong> 条资料。';
+  var types=s.operationalRecordTypes||{};
+  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。样本积累量不等于每天巡检完成度；上方覆盖率仅计算正式实时巡检。';
+
 }
 function updateMeta() {
   var label=CUR_THEME?' · '+CUR_THEME:'',quality=CUR_COVERAGE&&CUR_COVERAGE.ready?'资料充足':'资料积累中';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · '+quality+' · 本页最高关注度显示为 100';
@@ -1583,6 +1586,10 @@ def parse_md(filepath):
     i = 1
     while i < len(lines):
         line = lines[i]
+        # Legacy Markdown anchors duplicate the generated heading IDs.
+        if re.fullmatch(r'<a\s+id=["\']item\d+["\']\s*>\s*</a>', line.strip()):
+            i += 1
+            continue
 
         # Optional machine-readable modification time for a historical
         # editorial correction.  It is deliberately kept out of the visible
@@ -1774,7 +1781,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     """
     total = data['domestic_count'] + data['international_count']
     report_source_stats = source_stats([data])
-    date_modified = data.get('date_modified') or f"{data['date']}T07:13:00+08:00"
+    date_modified = data.get('date_modified') or data['date']
     is_legacy_report = bool(data.get('date')) and data['date'] < '2026-08-28'
     if report_source_stats['C']:
         quality_html = f'''<details class="quality-banner legacy">
@@ -1785,7 +1792,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     else:
         quality_html = f'''<details class="quality-banner">
   <summary><strong>🧭 来源与核验</strong><span class="source-summary">本期 {report_source_stats['total']} 个来源均通过 A/B 门槛</span></summary>
-  <p>本期来源全部通过本站 A/B 级发布门槛。</p>
+  <p>A/B 标签仅说明来源类别；具体事实和引用对应关系以条目旁的原文复核记录为准。</p>
   <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
 </details>'''
 
@@ -1805,11 +1812,12 @@ def build_report_html(data, prev_report=None, next_report=None):
         tags_html = ''
         if item.get('tags'):
             for tag in item['tags']:
-                cls = f'tag tag-{tag}'
-                tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{tag}</a>'
+                cls = 'tag tag-' + escape(tag, quote=True)
+                tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{escape(tag)}</a>'
 
-        html = f'<h3 id="{item["id"]}">{item["number"]}. {_daily_display_title(item)}{tags_html}</h3>\n'
+        html = f'<h3 id="{item["id"]}">{item["number"]}. {escape(_daily_display_title(item))}{tags_html}</h3>\n'
 
+        html += audit_html(audit_for(data['date'], item))
         if item['sources']:
             src_parts = [source_link_html(s) for s in item['sources']]
             html += '<p class="source-row">📎 ' + ' '.join(src_parts) + '</p>\n'
@@ -1873,7 +1881,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | {data['date']}</title>
 <meta name="description" content="{data['date']} 每日文博资讯，共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）。{data['toc_items'][0]['title'][:60] if data['toc_items'] else ''}">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,每日文博资讯,{data['date']}">
@@ -1892,7 +1900,7 @@ def build_report_html(data, prev_report=None, next_report=None):
   "@context": "https://schema.org",
   "@type": "NewsArticle",
   "headline": "每日文博资讯 | {data['date']}",
-  "datePublished": "{data['date']}T07:13:00+08:00",
+  "datePublished": "{data['date']}",
   "dateModified": "{date_modified}",
   "description": "{data['date']} 每日文博资讯，共 {total} 条",
   "url": "https://zhangheng666.top/reports/{data['date']}.html",
@@ -2189,6 +2197,7 @@ def md_inline(text):
     """Convert markdown inline formatting to HTML."""
     if not text:
         return text
+    text = escape(str(text))
     # **bold**
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     # *italic*
@@ -2202,8 +2211,9 @@ def md_inline(text):
 
 def extract_deadline_date(text):
     """Use the final date in a deadline range as the actual closing date."""
-    matches = re.findall(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or '')
-    return matches[-1] if matches else None
+    from automation.recruitment_dates import deadline_datetime
+    value = deadline_datetime(text)
+    return (str(value.year), str(value.month), str(value.day)) if value else None
 
 
 def extract_deadline_datetime(text):
@@ -2213,20 +2223,9 @@ def extract_deadline_datetime(text):
     “2026年6月18日发布” is deliberately not treated as a deadline because it
     describes the announcement date rather than an application closing time.
     """
-    matches = list(re.finditer(r'(\d{4})-(\d{1,2})-(\d{1,2})', text or ''))
-    if not matches:
-        return None
-    match = matches[-1]
-    y, m, d = (int(value) for value in match.groups())
-    tail = (text or '')[match.end():match.end() + 80]
-    time_match = re.search(r'(\d{1,2}):([0-5]\d)', tail)
-    hour, minute, second = (int(time_match.group(1)), int(time_match.group(2)), 0) if time_match else (23, 59, 59)
-    if hour > 23:
-        return None
-    try:
-        return f'{y:04d}-{m:02d}-{d:02d}T{hour:02d}:{minute:02d}:{second:02d}+08:00'
-    except ValueError:
-        return None
+    from automation.recruitment_dates import deadline_datetime
+    value = deadline_datetime(text)
+    return value.isoformat() if value else None
 
 def parse_jobs(filepath):
     """Parse recruitment markdown file and return structured data.
@@ -2308,7 +2307,10 @@ def parse_jobs(filepath):
                 'days_left': None,
                 'deadline_at': None,
                 'note': '',
-                'status': 'check'
+                'status': 'check',
+                'links': [],
+                'application': '',
+                'details': []
             }
             if current_section is None:
                 # Default section
@@ -2328,17 +2330,24 @@ def parse_jobs(filepath):
                     current_item['education'] = field_value
                 elif '地点' in field_name:
                     current_item['location'] = field_value
-                elif '截止' in field_name:
+                elif '截止' in field_name or '报名时间' in field_name:
                     current_item['deadline'] = field_value
                 elif '待遇' in field_name:
                     current_item['note'] = field_value
+                elif '投递' in field_name:
+                    current_item['application'] = field_value
                 continue
 
             # Link line: - 🔗 [text](url)
             link_match = re.match(r'-\s*🔗\s*\[(.+?)\]\((.+?)\)', stripped)
             if link_match:
+                current_item['links'].extend({'name': name, 'url': url} for name, url in re.findall(r'\[([^]]+)\]\(([^)]+)\)', stripped))
                 current_item['link_text'] = link_match.group(1)
                 current_item['link_url'] = link_match.group(2)
+                continue
+
+            if stripped.startswith('- 💡'):
+                current_item['details'].append(stripped.removeprefix('- 💡').strip())
                 continue
 
             # Email line: - 📧 投递：email@addr  or  📧 email@addr
@@ -2349,38 +2358,27 @@ def parse_jobs(filepath):
                 current_item['link_text'] = email
                 continue
 
-    # Compute days_left and urgent flag for each item
+    from automation.recruitment_dates import application_status
+    now = datetime.now(CN_TZ)
     for section in data['sections']:
         for item in section['items']:
-            dl = item['deadline']
-            if dl and today:
-                dl_match = extract_deadline_date(dl)
-                if dl_match:
-                    try:
-                        from datetime import date
-                        dl_date = date(
-                            int(dl_match[0]), int(dl_match[1]), int(dl_match[2])
-                        )
-                        today_date = date.fromisoformat(today)
-                        item['days_left'] = (dl_date - today_date).days
-                        if item['days_left'] < 0:
-                            item['status'] = 'closed'
-                        else:
-                            item['status'] = 'open'
-                        if 0 <= item['days_left'] <= 3:
-                            item['urgent'] = True
-                        item['deadline_at'] = extract_deadline_datetime(dl)
-                    except (ValueError, KeyError):
-                        pass
+            status, start, end = application_status(item['deadline'], now)
+            item['status'] = status
+            item['deadline_at'] = end.isoformat() if end else None
+            item['opens_at'] = start.isoformat() if start else None
+            item['days_left'] = (end.astimezone(CN_TZ).date() - now.date()).days if end else None
+            item['urgent'] = bool(status == 'open' and end - now <= timedelta(days=3))
 
     # Sort items within each section by deadline (earliest first, no-deadline last)
     for section in data['sections']:
         def sort_key(item):
             if item['status'] == 'open':
                 return (0, item['days_left'] if item['days_left'] is not None else 9999)
+            if item['status'] == 'upcoming':
+                return (1, item['opens_at'])
             if item['status'] == 'check':
-                return (1, 9999)
-            return (2, item['days_left'] if item['days_left'] is not None else 9999)
+                return (2, 9999)
+            return (3, item['days_left'] if item['days_left'] is not None else 9999)
         section['items'].sort(key=sort_key)
 
     return data
@@ -2394,7 +2392,7 @@ def build_jobs_html(data, page_type='jobs'):
     check_count = sum(1 for s in data['sections'] for it in s['items'] if it.get('status') == 'check')
     active_count = sum(1 for s in data['sections'] for it in s['items'] if it.get('status') == 'open')
     is_intern = (page_type == 'intern')
-    page_title = '🌱 文博实习招聘' if is_intern else '💼 文博招聘信息'
+    page_title = '实习与志愿服务' if is_intern else '文博招聘'
     page_url = 'intern.html' if is_intern else 'jobs.html'
 
     # Build sections
@@ -2417,19 +2415,36 @@ def build_jobs_html(data, page_type='jobs'):
             if item.get('status') == 'closed':
                 status_badge = '<span class="status-badge status-closed">已截止</span>'
             elif item.get('status') == 'open':
-                status_badge = '<span class="status-badge status-open">可申请</span>'
+                status_badge = '<span class="status-badge status-open">报名期内</span>'
+            elif item.get('status') == 'upcoming':
+                status_badge = '<span class="status-badge status-check">尚未开始</span>'
             else:
-                status_badge = '<span class="status-badge status-check">待核截止</span>'
+                status_badge = '<span class="status-badge status-check">状态待核验</span>'
             if item.get('link_url', '').startswith(('http://', 'https://')):
                 link_info = recruitment_source_info(item['link_url'])
                 link_badge = f' <span class="source-note">{link_info["label"]}</span>'
             else:
                 link_badge = ''
 
+            # Escape untrusted content before HTML interpolation; links allow only safe schemes.
+            from automation.product import safe_url, job_id
+            stable_id = job_id(item)
+            raw_item = item
+            item = dict(item)
+            extra = ''.join('<p>' + escape(value) + '</p>' for value in item.get('details', []))
+            if item.get('application'):
+                extra += '<p>投递方式：' + escape(item['application']) + '</p>'
+            more_links = ''.join('<a href="' + escape(safe_url(link['url']), quote=True) + '" target="_blank" rel="noopener noreferrer">' + escape(link['name']) + '</a> ' for link in item.get('links', [])[1:] if safe_url(link['url']))
+            for key in ('institution', 'position', 'education', 'location', 'deadline', 'note', 'link_text'):
+                item[key] = escape(str(item.get(key, '')))
+            item['link_url'] = escape(safe_url(item.get('link_url', '')), quote=True)
             deadline_attr = item.get('deadline_at') or ''
             static_status = item.get('status', 'check')
+            from automation.opportunity_evidence import evidence_for, evidence_html
+            evidence = evidence_for(raw_item, datetime.now(CN_TZ))
+            evidence_markup = evidence_html(evidence)
             items_html += f'''
-        <div class="job-item{row_class}" data-deadline-at="{deadline_attr}" data-static-status="{static_status}">
+        <div id="{stable_id}" class="job-item{row_class}" data-evidence-state="{evidence['state']}" data-checked-at="{evidence.get('checkedAt', '')}" data-review-after="{evidence.get('reviewAfter', '')}" data-deadline-at="{deadline_attr}" data-opens-at="{item.get('opens_at') or ''}" data-static-status="{static_status}">
           <div class="job-header">
             <span class="job-number">#{item['number']}</span>
             <span class="job-title">{item['institution']} — {item['position']}</span>
@@ -2442,8 +2457,11 @@ def build_jobs_html(data, page_type='jobs'):
             <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
             {('<span>💰 ' + item['note'] + '</span>') if item.get('note') else ''}
           </div>
+          {evidence_markup}
+          <div class="job-details">{extra}</div>
           <div class="job-link">
             {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' + link_badge if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
+            {more_links}
           </div>
         </div>'''
 
@@ -2456,21 +2474,21 @@ def build_jobs_html(data, page_type='jobs'):
     # Summary
     summary_html = ''
     if data['summary']:
-        summary_html = f'<p class="job-summary">{md_inline(data["summary"])}</p>'
+        summary_html = f'<details class="job-guidance"><summary>收录范围与申请说明</summary><p class="job-summary">{md_inline(data["summary"])}</p></details>'
 
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{page_title} | {data['update_date']}</title>
 <meta property="og:title" content="{page_title} | {data['update_date']}">
 <meta property="og:description" content="{'文博实习岗位，面向在读学生，共 ' + str(total) + ' 个岗位' if is_intern else '省级以上博物馆、考古院所、高校文博专业招聘信息，共 ' + str(total) + ' 个岗位。即将截止 ' + str(urgent_count) + ' 个。'}">
 <meta property="og:image" content="https://zhangheng666.top/cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://zhangheng666.top/jobs.html">
+<meta property="og:url" content="https://zhangheng666.top/{page_url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="每日文博资讯">
 <meta name="twitter:card" content="summary_large_image">
@@ -2552,22 +2570,13 @@ def build_jobs_html(data, page_type='jobs'):
 
 <header>
   <h1>{page_title}</h1>
-  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 个{'实习岗位' if is_intern else '岗位'} ｜ 可申请 <span id="job-open-count">{active_count}</span> ｜ 已截止 <span id="job-closed-count">{closed_count}</span></p>
-  <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 条{'实习与服务机会' if is_intern else '招聘记录'} ｜ 报名期内 <span id="job-open-count">{active_count}</span> ｜ 已截止 <span id="job-closed-count">{closed_count}</span></p>
+  <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
 </header>
 
-{summary_html}
-
-<div class="stats-bar">
-  <div class="stat-item">📋 总岗位数：<strong>{total}</strong></div>
-  <div class="stat-item">🟢 可申请：<strong id="job-open-stat">{active_count}</strong></div>
-  <div class="stat-item">⏰ 3天内截止：<strong id="job-urgent-stat">{urgent_count}</strong></div>
-  <div class="stat-item">🔴 已截止：<strong id="job-closed-stat">{closed_count}</strong></div>
-  <div class="stat-item">🧭 待核截止：<strong>{check_count}</strong></div>
-  <div class="stat-item">🔄 每两天更新一次</div>
-</div>
-
 {sections_html}
+
+{summary_html}
 
 <hr>
 <p style="font-size:.82em; color: var(--muted);">⚠️ 状态按北京时间动态更新，精确到公告给出的截止时刻；申请前仍请核对原文和投递入口。本页保留已截止条目作为档案，“待核截止”表示公告未给出标准日期或需人工确认。来源标签采用“官方来源 / 高校·就业平台 / 主流招聘平台 / 二手线索”，不与日报 A/B/C 新闻等级混用。</p>
@@ -2576,42 +2585,7 @@ def build_jobs_html(data, page_type='jobs'):
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
 </footer>
 
-<script>
-(function() {{
-  var rows = Array.prototype.slice.call(document.querySelectorAll('.job-item'));
-  function beijingNow() {{
-    var parts = new Intl.DateTimeFormat('en-CA', {{ timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }}).formatToParts(new Date());
-    var out = {{}}; parts.forEach(function(p) {{ if (p.type !== 'literal') out[p.type] = p.value; }});
-    return new Date(out.year + '-' + out.month + '-' + out.day + 'T' + out.hour + ':' + out.minute + ':' + out.second + '+08:00');
-  }}
-  function refreshStatuses() {{
-    var now = beijingNow(), open = 0, closed = 0, urgent = 0;
-    rows.forEach(function(row) {{
-      var status = row.querySelector('.job-status'), deadline = row.getAttribute('data-deadline-at');
-      var isOpen = row.getAttribute('data-static-status') === 'open';
-      var isClosed = row.getAttribute('data-static-status') === 'closed';
-      if (deadline) {{
-        var end = new Date(deadline);
-        isClosed = now >= end;
-        isOpen = !isClosed;
-        if (isOpen && end - now <= 3 * 86400000) urgent += 1;
-      }}
-      if (status && (deadline || isOpen || isClosed)) {{
-        status.textContent = isClosed ? '已截止' : '可申请';
-        status.className = 'status-badge job-status ' + (isClosed ? 'status-closed' : 'status-open');
-      }}
-      row.classList.toggle('closed-row', isClosed);
-      if (isClosed) row.classList.remove('urgent-row');
-      if (isOpen) open += 1;
-      if (isClosed) closed += 1;
-    }});
-    var set = function(id, value) {{ var node = document.getElementById(id); if (node) node.textContent = value; }};
-    set('job-open-count', open); set('job-open-stat', open); set('job-closed-count', closed); set('job-closed-stat', closed); set('job-urgent-stat', urgent);
-  }}
-  refreshStatuses();
-  window.setInterval(refreshStatuses, 60000);
-}})();
-</script>
+
 
 </body>
 </html>'''
@@ -2951,7 +2925,7 @@ def build_digest_html(data, daily_reports=None):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>{og_label} | {data['date_range']}</title>
 <meta property="og:title" content="{og_label} | {data['date_range']}">
 <meta property="og:description" content="{data['date_range']} {og_label}{'，' + count_text if count_text else ''}">
@@ -3085,8 +3059,8 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
 
     has_jobs = bool(recruitment_data and recruitment_data.get('sections'))
     has_intern = bool(intern_data and intern_data.get('sections'))
-    total_jobs = sum(len(section['items']) for section in recruitment_data['sections']) if has_jobs else 0
-    total_intern = sum(len(section['items']) for section in intern_data['sections']) if has_intern else 0
+    total_jobs = sum(item.get('status') == 'open' for section in recruitment_data['sections'] for item in section['items']) if has_jobs else 0
+    total_intern = sum(item.get('status') == 'open' for section in intern_data['sections'] for item in section['items']) if has_intern else 0
     jobs_update = str((recruitment_data or {}).get('update_date') or '暂无更新')
     intern_update = str((intern_data or {}).get('update_date') or '暂无更新')
 
@@ -3114,15 +3088,15 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
   <span class="compact-meta">月报每月更新</span>
 </div>''')
     compact_cards.append(f'''
-<a class="compact-card" href="intern.html">
+<a class="compact-card" href="intern.html?status=open">
   <span class="compact-kicker">🌱 实习机会</span>
-  <strong>{total_intern} 个岗位</strong>
+  <strong>{total_intern} 条报名期内</strong>
   <span class="compact-meta">{_homepage_compact_update_markup(intern_update, '文博实习')}</span>
 </a>''')
     compact_cards.append(f'''
-<a class="compact-card" href="jobs.html">
+<a class="compact-card" href="jobs.html?status=open">
   <span class="compact-kicker">💼 招聘信息</span>
-  <strong>{total_jobs} 个岗位</strong>
+  <strong>{total_jobs} 条报名期内</strong>
   <span class="compact-meta">{_homepage_compact_update_markup(jobs_update, '文博招聘')}</span>
 </a>''')
 
@@ -3193,7 +3167,7 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>每日文博资讯 | 文博·考古·博物馆行业日报</title>
 <meta name="description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送。AI 自动采集编撰，每天早 7:13（北京时间）更新，已有 {len(daily_reports)} 天日报">
 <meta name="keywords" content="文博,考古,博物馆,文化遗产,文物,文博资讯,文博日报,每日文博">
@@ -3445,7 +3419,7 @@ def build_search_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>搜索文博新闻 | 每日文博资讯</title>
 <meta name="description" content="搜索每日文博资讯中的考古、博物馆、文物保护、文化遗产和行业新闻。">
 <meta property="og:title" content="搜索文博新闻 | 每日文博资讯">
@@ -3458,17 +3432,19 @@ __SEARCH_CSS__
 <body>
 <header class="search-head">
   <p><a class="back" href="index.html">← 返回首页</a></p>
-  <h1>🔎 搜索文博新闻</h1>
-  <p class="meta">从日报、周报、月报及招聘档案中集中检索</p>
+  <h1>搜索资讯与机会</h1>
+  <p class="meta">检索完整关键词；空格分隔的多个关键词须同时出现。包含日报、周报、月报与岗位。</p>
 </header>
 
 <main>
   <form class="search-wrap" action="search.html" method="get" role="search">
     <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词" required>
+    <label class="search-type">范围<select name="type" id="search-type"><option value="all">全部内容</option><option value="daily">日报</option><option value="opportunities">招聘与实习</option><option value="weekly">周报</option><option value="monthly">月报</option></select></label>
     <button class="search-submit" type="submit">搜索</button>
   </form>
   <p id="summary" class="search-summary">请输入关键词开始搜索。</p>
   <section id="results" aria-live="polite"><div class="search-empty">正在加载搜索索引…</div></section>
+  <button id="search-more" type="button" hidden>显示更多结果</button>
 </main>
 
 <footer>
@@ -3501,20 +3477,17 @@ function cleanText(value) {
     .trim();
 }
 function highlight(value, words) {
-  let out = escapeHtml(value);
-  words.slice().sort((a, b) => b.length - a.length).forEach(function(word) {
-    if (!word) return;
-    const safe = escapeHtml(word);
-    out = out.replace(new RegExp('(' + escapeRegExp(safe) + ')', 'gi'), '<mark>$1</mark>');
-  });
-  return out;
+  const terms=[...new Set(words)].filter(Boolean).sort((a,b)=>b.length-a.length);
+  if(!terms.length)return escapeHtml(value);
+  const pattern=new RegExp('(' + terms.map(escapeRegExp).join('|') + ')','gi');
+  return String(value||'').split(pattern).map((part,index)=>index%2?'<mark>'+escapeHtml(part)+'</mark>':escapeHtml(part)).join('');
 }
 function compact(value) { return String(value || '').toLowerCase().replace(/[^0-9a-z\\u4e00-\\u9fff]+/g, ''); }
 function sourceList(sources) {
   return (Array.isArray(sources) ? sources : []).map(function(source) {
     const item = typeof source === 'string' ? {name: source, url: ''} : source;
     const name = escapeHtml(item.name || '');
-    return item.url ? '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
+    return ['http:', 'https:'].some(scheme => String(item.url || '').startsWith(scheme + '//')) ? '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + name + '</a>' : name;
   }).filter(Boolean).join(' · ');
 }
 function itemText(item) {
@@ -3531,11 +3504,7 @@ function queryGroups(rawQuery) {
   });
 }
 function groupMatches(lower, group) {
-  if (lower.includes(group.raw)) return true;
-  if (!group.grams.length) return false;
-  const hits = group.grams.filter(function(gram) { return lower.includes(gram); }).length;
-  const required = group.grams.length <= 2 ? group.grams.length : Math.ceil(group.grams.length * 0.4);
-  return hits >= required;
+  return lower.includes(group.raw);
 }
 function matches(text, groups) {
   const lower = String(text || '').toLowerCase();
@@ -3570,10 +3539,11 @@ function renderHit(hit, words) {
     '<summary>' + highlight(title, words) + '</summary>' +
     '<div class="search-detail">' +
       '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
+      (item && item.auditLabel ? '<p class="evidence-audit">' + escapeHtml(item.auditLabel + '：' + item.auditNote) + '</p>' : '') +
       (body ? '<p class="search-snippet">' + snippet(body, words) + '</p>' : '') +
       (tags ? '<div>' + tags + '</div>' : '') +
       (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
-      '<p class="search-open"><a href="' + escapeHtml(href) + '">打开所在报告 →</a></p>' +
+      '<p class="search-open"><a href="' + escapeHtml(href) + '">查看完整条目 →</a></p>' +
     '</div>' +
     '</details>';
 }
@@ -3586,11 +3556,14 @@ function renderSearch(data, rawQuery) {
     return;
   }
   const groups = queryGroups(query);
-  const words = groups.reduce(function(all, group) { return all.concat([group.raw]).concat(group.grams); }, []);
+  const words = groups.map(function(group) { return group.raw; });
   const hits = [];
   const seen = new Set();
   const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
+  const kind = new URLSearchParams(location.search).get('type') || 'all';
+  document.getElementById('search-type').value = kind;
   records.forEach(function(record) {
+    if(kind !== 'all' && (kind === 'opportunities' ? !['jobs','intern'].includes(record.type) : record.type !== kind)) return;
     const items = Array.isArray(record.items) ? record.items : [];
     if (items.length) {
       items.forEach(function(item) {
@@ -3610,8 +3583,16 @@ function renderSearch(data, rawQuery) {
     }
   });
   hits.sort(function(a, b) { return b.score - a.score || String(b.record.date || '').localeCompare(String(a.record.date || '')); });
-  summary.textContent = '找到 ' + hits.length + ' 条匹配新闻（按匹配度排序，保留不同报告记录）';
-  results.innerHTML = hits.length ? hits.map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配新闻。可以换一个更具体或更常见的关键词。</div>';
+  summary.textContent = '找到 ' + hits.length + ' 条匹配条目（按匹配度排序，保留不同报告记录）';
+  let visible = 30;
+  const more = document.getElementById('search-more');
+  function draw() {
+    results.innerHTML = hits.length ? hits.slice(0, visible).map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配条目。可以换一个更具体或更常见的关键词。</div>';
+    more.hidden = visible >= hits.length;
+    more.textContent = '显示更多结果（已显示 ' + Math.min(visible,hits.length) + ' / ' + hits.length + '）';
+  }
+  more.onclick = function(){ visible += 30; draw(); };
+  draw();
 }
 
 const params = new URLSearchParams(location.search);
@@ -3739,7 +3720,7 @@ def build_about_html():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>关于本站 | 每日文博资讯</title>
 <meta name="description" content="每日文博资讯 — 网站介绍、内容来源、编撰流程与免责声明">
 <link rel="canonical" href="https://zhangheng666.top/about.html">
@@ -3756,7 +3737,7 @@ def build_about_html():
 <header>
   <h1>🏛️ 关于本站</h1>
   <p class="meta">每日文博资讯 · 网站说明</p>
-  <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
+  <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
 </header>
 
 <h2 class="section">📖 这是什么</h2>
@@ -3848,7 +3829,7 @@ def build_sources_html(daily_reports, heat_data=None):
 <header>
   <h1>🧭 信源与方法</h1>
   <p class="meta">把“可信”变成可检查的发布规则</p>
-  <p style="margin-top:4px;font-size:.85em"><a href="index.html">← 返回首页</a></p>
+  <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
 </header>
 
 <div class="quality-banner{audit_class}"><strong>档案审计：</strong>已检查 {len(daily_reports)} 份日报、{stats['total']} 个来源链接；A级 {stats['A']} 个，B级 {stats['B']} 个，待复核 {stats['C']} 个。{audit_text}</div>
@@ -3993,11 +3974,15 @@ def main():
                 'id': item.get('id', ''),
                 'number': item.get('number', ''),
                 'title': _daily_display_title(item),
-                'body': item['body'][:200] if item['body'] else '',
+                'body': item['body'] or '',
                 'commentary': item['commentary'],
                 'tags': item.get('tags', []),
                 'sources': [{'name': s.get('name', ''), 'url': s.get('url', '')} for s in item.get('sources', [])],
             }
+            audit = audit_for(r['date'], item)
+            if audit:
+                search_item['auditLabel'] = AUDIT_LABELS[audit['status']]
+                search_item['auditNote'] = audit['note']
             original_title = _daily_original_title(item)
             if original_title != search_item['title']:
                 search_item['originalTitle'] = original_title
@@ -4103,23 +4088,24 @@ def main():
     def append_job_search_record(data, kind, path):
         if not data:
             return
-        parts = [data.get('summary', '')]
+        from automation.product import job_id
+        items = []
         for section in data.get('sections', []):
-            parts.append(section.get('category', ''))
             for item in section.get('items', []):
-                parts.extend([item.get('institution', ''), item.get('position', ''),
-                              item.get('education', ''), item.get('location', ''),
-                              item.get('deadline', ''), item.get('note', ''),
-                              item.get('link_text', '')])
-        search_data.append({
-            'type': kind,
-            'path': path,
-            'title': '文博实习招聘' if kind == 'intern' else '文博招聘信息',
-            'date': data.get('update_date', ''),
-            'text': ' '.join(parts),
-            'items': [],
-        })
+                parts = [str(item.get(key, '')) for key in
+                         ('education', 'location', 'deadline', 'note', 'application')]
+                parts.extend(item.get('details', []))
+                items.append({'id': job_id(item),
+                              'title': item['institution'] + ' — ' + item['position'],
+                              'body': ' · '.join(filter(None, parts)),
+                              'tags': [section['category']],
+                              'sources': item.get('links', [])})
+        search_data.append({'type': kind, 'path': path + '?status=all',
+                            'title': '实习与志愿服务' if kind == 'intern' else '文博招聘',
+                            'date': data.get('update_date', ''), 'text': '', 'items': items})
 
+    from automation.opportunity_evidence import write_projection
+    write_projection(SITE_DIR, [('jobs', recruitment_data), ('intern', intern_data)], datetime.now(CN_TZ))
     append_job_search_record(recruitment_data, 'jobs', 'jobs.html')
     append_job_search_record(intern_data, 'intern', 'intern.html')
     idx_path = os.path.join(SITE_DIR, 'search-index.json')
@@ -4175,20 +4161,14 @@ def main():
     # Ordinary builds are intentionally side-effect-free for data collection.
     # The formal daily job runs --incremental explicitly before this page-only
     # rebuild; --build-only remains available for manual page rebuilds.
-    try:
-        import digital_trend
-        digital_trend.main(['--build-only'])
-    except Exception as e:
-        print(f'Digital trends: SKIP ({e})')
+    import digital_trend
+    digital_trend.main(['--build-only'])
+    import build_command_center
+    build_command_center.main()
+    from automation.product import finish_site
+    finish_site(SITE_DIR, daily_reports)
 
-    # Build the independent dashboard after the data artifacts are ready.
-    try:
-        import build_command_center
-        build_command_center.main()
-    except Exception as e:
-        print(f'Command center: SKIP ({e})')
-
-    print('\nDone! Run push to deploy.')
+    print('\nBuild complete. Run validation before deployment.')
 
 
 if __name__ == '__main__':

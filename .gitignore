@@ -12,3 +12,5 @@ ssh-*.py
 *.log
 __pycache__/
 dedup-index.json
+
+node_modules/

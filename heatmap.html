@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>if(location.protocol==='http:' && !/^(localhost|127[.]0[.]0[.]1)$/.test(location.hostname))location.replace('https://'+location.host+location.pathname+location.search)</script>
+<script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>文博行业关注地图 | 每日文博资讯</title>
 <meta name="description" content="基于权威公开报道、独立事件与可解释指标生成的中国文博行业关注地图。">
 <link rel="canonical" href="https://zhangheng666.top/heatmap.html">
@@ -131,8 +131,9 @@
     th:nth-child(5),td:nth-child(5) { display:none; }
   }
 </style>
+<link rel="stylesheet" href="assets/product.css"><script src="assets/product.js" defer></script><script src="assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="feed.xml">
 </head>
-<body>
+<body class="product-page"><div class="product-bar" data-product-shell><a class="skip-link" href="#product-main">跳到正文</a><a class="product-brand" href="index.html">文博<span>DAILY</span></a><nav aria-label="全站导航"><a href="index.html">资讯</a><a href="command-center/" aria-current="page">行业观察</a><a href="jobs.html">机会</a><a href="archive.html">档案</a><a href="search.html">搜索</a></nav></div><main id="product-main" tabindex="-1">
 <div class="wrap">
   <header>
     <a class="back" href="./">← 返回首页</a>
@@ -196,8 +197,8 @@
     <h2>本页数据说明</h2>
     <p id="coverage-status">正在核对本页资料是否足够用于地区比较…</p>
     <div class="coverage-grid">
-      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>本窗口检查完成度</span></div>
-      <div class="coverage-cell"><strong id="c-days">—</strong><span>全部来源已检查</span></div>
+      <div class="coverage-cell"><strong id="c-coverage">—</strong><span>本窗口正式运行覆盖</span></div>
+      <div class="coverage-cell"><strong id="c-days">—</strong><span>正式完整检查日</span></div>
       <div class="coverage-cell"><strong id="c-sources">—</strong><span>追踪的权威来源</span></div>
       <div class="coverage-cell"><strong id="c-window">—</strong><span>查看范围</span></div>
     </div>
@@ -206,7 +207,7 @@
     <div class="formula"><strong>关注度如何计算：</strong>事情的重要程度占 35%，来源可靠程度占 30%，是否有不同来源印证占 20%，发布时间新近程度占 15%。同一件事的后续报道会合并计算；只收录本页列出的固定权威来源。</div>
     <div class="formula"><strong>重要性分档：</strong>重大＝国家级政策、世界遗产、重大考古、一级文物或文物安全；重要＝一般考古、文物返还追索或重要保护工程；关注＝数字化、科技保护、重要展览或开馆；一般＝讲座、报名、征集和常规活动。分档由标题与标签规则触发，可在<a href="sources.html">信源与方法</a>复核。</div>
   </section>
-  <footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
+  </main><footer><a href="index.html">每日文博资讯</a> ｜ <a href="sources.html">信源与方法</a> ｜ 数据与算法均可追溯至原始报道</footer>
 </div>
 <script src="lib/wenbo-analysis.js"></script>
 <script src="lib/echarts.min.js"></script>
@@ -350,7 +351,7 @@ function renderScope(events,id,countId) {
   list.forEach(function(event){var div=document.createElement('div');div.className='scope-item';var a=document.createElement('a');a.href=event.reports[0].url;a.textContent=event.title;var span=document.createElement('span');span.textContent=event.lastDate+' · '+event.sourceTier+'级证据 · '+event.primaryTheme;div.appendChild(a);div.appendChild(span);box.appendChild(div);});
 }
 function coverageForWindow(days, previous) {
-  var coverage=window.WenboAnalysis.coverageForWindow(RAW.coverage, RAW.asOf, days, previous);
+  var coverage=window.WenboAnalysis.coverageForWindow(RAW.coverage, RAW.asOf, days, previous, 'operational', 'live');
   coverage.sourceGood={};
   coverage.rows.forEach(function(row){coverage.sourceGood[row.id]=row.good;});
   coverage.ready=coverage.state==='ready';
@@ -358,10 +359,10 @@ function coverageForWindow(days, previous) {
 }
 function renderCoverage() {
   CUR_COVERAGE=coverageForWindow(CUR_WINDOW.days,false);PREVIOUS_COVERAGE=coverageForWindow(CUR_WINDOW.days,true);var c=CUR_COVERAGE,quality=document.getElementById('quality');quality.setAttribute('data-state',c.state);
-  document.getElementById('c-coverage').textContent=Math.round(c.rate*100)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
+  document.getElementById('c-coverage').textContent=(c.rate*100).toFixed(1)+'%';document.getElementById('c-days').textContent=c.completeDays+'/'+CUR_WINDOW.days;document.getElementById('c-sources').textContent=c.panel.length;document.getElementById('c-window').textContent=CUR_WINDOW.label;
   var status=document.getElementById('coverage-status');
   if(c.ready)status.innerHTML='<strong>资料已足够：</strong>当前范围内，可以比较这些权威来源对不同地区的相对关注；但它不等同于各地真实文博活动总量。';
-  else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前已完成 '+c.successful+'/'+c.planned+' 次来源检查。地图可供浏览，但暂不适合拿来比较不同地区。';
+  else if(c.successful)status.innerHTML='<strong>资料仍在积累：</strong>当前正式运行已完成 '+c.successful+'/'+c.planned+' 次有效来源检查；历史回放与回溯不计入此覆盖率。地图可供浏览，但暂不适合拿来比较不同地区。';
   else status.innerHTML='<strong>资料刚开始积累：</strong>从下一次自动更新起，网站会每天检查固定的权威来源。当前展示的是从旧日报整理出的历史资料，只供了解，不用于比较不同地区。';
   var mobileGuide=document.getElementById('mobile-guide-status');
   if(c.ready)mobileGuide.textContent='资料较充分，可用地图比较近期报道关注。';
@@ -373,7 +374,9 @@ function renderCoverage() {
 }
 function renderQuality() {
   var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
-  document.getElementById('quality-text').innerHTML='本页目前收录 <strong>'+s.totalMonitoredRecords+'</strong> 条来自固定权威来源的历史资料，其中 <strong>'+s.includedProvincialRecords+'</strong> 条涉及具体地区，合并为 <strong>'+s.provincialEvents+'</strong> 件事项；另有 <strong>'+s.nationalEvents+'</strong> 条全国性动态。这些历史资料来自旧日报整理，无法确认当时是否每天都查全了，所以暂不用于地区比较。新的每日检查目前已积累 <strong>'+s.operationalRecords+'</strong> 条资料。';
+  var types=s.operationalRecordTypes||{};
+  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。样本积累量不等于每天巡检完成度；上方覆盖率仅计算正式实时巡检。';
+
 }
 function updateMeta() {
   var label=CUR_THEME?' · '+CUR_THEME:'',quality=CUR_COVERAGE&&CUR_COVERAGE.ready?'资料充足':'资料积累中';document.getElementById('meta').textContent=CUR_WINDOW.label+label+' · 数据截至 '+AS_OF_STR+' · '+quality+' · 本页最高关注度显示为 100';

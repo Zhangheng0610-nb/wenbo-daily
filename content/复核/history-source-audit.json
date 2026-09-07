@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "scope": "首轮六组共享来源告警及核查中发现的关联时效性问题；非全库逐句核验",
+  "items": [
+    {
+      "reportDate": "2026-07-27",
+      "itemId": "item7",
+      "title": "🔥 日本飞鸟·藤原古都列入世遗——19处遗址见证律令制国家诞生",
+      "status": "unresolved",
+      "note": "本轮未能读取这条共同引用的 AP 原文，无法判断分段对应关系；未将访问失败视为报道失实。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://uat.apnews.com/article/unesco-mount-olympus-japan-ancient-capitals-1d3fabaa482d9384b1cb0b5c917ce5d5",
+          "title": "原引用 AP 链接（本轮不可访问）",
+          "publishedDate": null
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-07-27",
+      "itemId": "item8",
+      "title": "希腊奥林匹斯山列入世遗——12年申遗路，首个神话主题混合遗产",
+      "status": "unresolved",
+      "note": "本轮未能读取这条共同引用的 AP 原文，无法判断分段对应关系；未将访问失败视为报道失实。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://uat.apnews.com/article/unesco-mount-olympus-japan-ancient-capitals-1d3fabaa482d9384b1cb0b5c917ce5d5",
+          "title": "原引用 AP 链接（本轮不可访问）",
+          "publishedDate": null
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-07-29",
+      "itemId": "item3",
+      "title": "🔥 世遗大会釜山闭幕——《釜山宣言》新增\"合作\"为第六战略目标，全球名录达1273处",
+      "status": "partial",
+      "note": "此原文支持新增遗产数量，但未发现《釜山宣言》及“合作成为第六战略目标”的依据；这些表述仍待补充一手出处。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://en.gmw.cn/2026-07/29/content_38914278.htm",
+          "title": "25 new properties added to UNESCO World Heritage List",
+          "publishedDate": "2026-07-29"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-07-29",
+      "itemId": "item10",
+      "title": "世遗版图历史性扩展——南苏丹等三国首次拥有世界遗产",
+      "status": "supported",
+      "note": "共享原文确实介绍了三个国家首次拥有世界遗产；本次仅核对该核心事实，不代表全部点评逐句通过。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://en.gmw.cn/2026-07/29/content_38914278.htm",
+          "title": "25 new properties added to UNESCO World Heritage List",
+          "publishedDate": "2026-07-29"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-01",
+      "itemId": "item1",
+      "title": "🔥🔥 三星堆祭祀坑40周年新解：意外失火说颠覆\"仪式焚烧\"假说——象牙保护以\"骨胶原\"注入取得突破",
+      "status": "source_mismatch",
+      "note": "极目新闻链接实际报道北京科技考古研讨会，不能作为三星堆意外失火或骨胶原保护结论的依据；其他引用仍需单独复核。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://www.ctdsb.net/c1673_202608/2818562.html",
+          "title": "科技考古与文化遗产保护国际学术研讨会在京举行",
+          "publishedDate": "2026-08-01"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-01",
+      "itemId": "item3",
+      "title": "🔥 科技考古与文化遗产保护国际学术研讨会在京举行——早期国家形成、数字遗产、考古伦理三大议题",
+      "status": "supported",
+      "note": "原文支持会议在北京举行及六个分议题等核心事实；未对全部延伸点评作真实性背书。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://www.ctdsb.net/c1673_202608/2818562.html",
+          "title": "科技考古与文化遗产保护国际学术研讨会在京举行",
+          "publishedDate": "2026-08-01"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-08",
+      "itemId": "item4",
+      "title": "花山岩画申遗成功十周年——AI智能监测+全域数字化总库，中外专家崇左共商岩画保护\"中国方案\"",
+      "status": "source_mismatch",
+      "note": "此光明日报链接报道北京中轴线，并非花山岩画，不能支撑本条 AI 监测等具体表述；广西来源仍需单独核对。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://news.gmw.cn/2026-08/05/content_38927248.htm",
+          "title": "北京中轴线遗产保护为世界提供中国经验",
+          "publishedDate": "2026-08-05"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-08",
+      "itemId": "item5",
+      "title": "北京中轴线申遗成功两周年——累计实施百余项文保工程，\"最小干预\"为世界遗产城市保护提供中国经验",
+      "status": "supported",
+      "note": "原文支持百余项保护工程、最小干预及钟鼓楼和万宁桥案例，来源日期为8月5日。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://news.gmw.cn/2026-08/05/content_38927248.htm",
+          "title": "北京中轴线遗产保护为世界提供中国经验",
+          "publishedDate": "2026-08-05"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-17",
+      "itemId": "item3",
+      "title": "🔥 山西吕梁明代古城墙\"拆旧建新\"引发调查：条石城砖被当废弃物倾倒",
+      "status": "partial",
+      "note": "该财新链接是一页多条新闻的汇编，目录包含对应事件，因此共享 URL 不能直接判为错引；本轮仅核对到目录，正文细节仍待核。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html",
+          "title": "财新闻｜王祖贤首次回应“AI形象授权”（多条新闻汇编）",
+          "publishedDate": "2026-08-16"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-17",
+      "itemId": "item6",
+      "title": "南京大屠杀遇难同胞纪念馆新征集史料150余件（套）",
+      "status": "partial",
+      "note": "该财新链接是一页多条新闻的汇编，目录包含对应事件，因此共享 URL 不能直接判为错引；本轮仅核对到目录，正文细节仍待核。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html",
+          "title": "财新闻｜王祖贤首次回应“AI形象授权”（多条新闻汇编）",
+          "publishedDate": "2026-08-16"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-17",
+      "itemId": "item7",
+      "title": "乌克兰敖德萨世界遗产\"历史中心\"6座文化遗产建筑在袭击中受损",
+      "status": "partial",
+      "note": "该财新链接是一页多条新闻的汇编，目录包含对应事件，因此共享 URL 不能直接判为错引；本轮仅核对到目录，正文细节仍待核。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://mini.caixin.com/2026-08-16/102474598.html",
+          "title": "财新闻｜王祖贤首次回应“AI形象授权”（多条新闻汇编）",
+          "publishedDate": "2026-08-16"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-18",
+      "itemId": "item3",
+      "title": "🔥 国家文物局解读《国有文物资源数据管理办法》：文物数据资产化管理提速",
+      "status": "older_source",
+      "note": "原稿仅链接国家文物局首页。已找到注明来源为国家文物局的官方转载，日期为7月6日；没有证据表明8月18日有新的政策进展，不宜作为当日新发布信息。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://wwj.baoji.gov.cn/zzzb/zcjd/202607/t20260706_1282793.html",
+          "title": "《国有文物资源数据管理办法》解读",
+          "publishedDate": "2026-07-06"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-18",
+      "itemId": "item4",
+      "title": "国家文物局发布《地下文物埋藏区划定指南》解读：考古前置再添技术底座",
+      "status": "older_source",
+      "note": "原稿仅链接国家文物局首页。官方转载日期为2月28日；没有证据表明8月18日有新的发布或实施进展。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://wwj.baoji.gov.cn/zzzb/zcjd/202602/t20260228_1249562.html",
+          "title": "《地下文物埋藏区划定指南》解读",
+          "publishedDate": "2026-02-28"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-08",
+      "itemId": "item2",
+      "title": "🔥🔥 文物领域首个数据管理专项文件印发——\"国有文物资源数据属于国家所有\"，三类服务场景构建数据开放新范式",
+      "status": "older_source",
+      "note": "复核发现该文件解读已于7月6日公开，8月8日不应仅凭转载视为首次印发；政策实际施行时间应另列。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://wwj.baoji.gov.cn/zzzb/zcjd/202607/t20260706_1282793.html",
+          "title": "《国有文物资源数据管理办法》解读",
+          "publishedDate": "2026-07-06"
+        }
+      ]
+    },
+    {
+      "reportDate": "2026-08-17",
+      "itemId": "item4",
+      "title": "国家文物局发布《文物建筑预防性保护技术导则》——不可移动文物首个预防性保护规范",
+      "status": "older_source",
+      "note": "官方答记者问早于本期日报，已于2025年10月21日公开；不能将旧政策介绍作为8月17日首次发布的新规。",
+      "checkedAt": "2026-09-06",
+      "evidence": [
+        {
+          "url": "https://wwj.baoji.gov.cn/zzzb/zcjd/202510/t20251021_1220278.html",
+          "title": "《全国重点文物保护单位文物建筑预防性保护技术导则（试行）》答记者问",
+          "publishedDate": "2025-10-21"
+        }
+      ]
+    }
+  ]
+}
