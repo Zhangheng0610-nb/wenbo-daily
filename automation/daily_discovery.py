@@ -11,7 +11,7 @@ import argparse
 import base64
 import email.utils
 import hashlib
-from html import unescape
+from html import unescape, escape
 import json
 import re
 import sys
@@ -847,10 +847,24 @@ def event_identity_anchor_terms(text: str) -> set[str]:
     }
     generic_terms = {compact(term) for term in GENERIC_EVENT_WORDS if compact(term)}
     generic_terms.update(compact(term) for term in GENERIC_TITLE_WORDS if compact(term))
-    return {
-        term for term in event_match_terms(text)
+    # Remove entire generic phrases before generating n-grams: filtering only
+    # exact tokens leaves fragments such as “联合考” or “强博物馆陈”.
+    value = text
+    for phrase in sorted(("国家文物局", "文物局", "联合考古", "神庙遗址",
+                          "加强博物馆陈列展览内容审核工作", "加强博物馆陈列展览内容审核"), key=len, reverse=True):
+        value = value.replace(phrase, " ")
+    anchors = {
+        term for term in event_match_terms(value)
         if compact(term) not in action_terms and compact(term) not in generic_terms
     }
+    # Preserve named bilateral teams when a headline omits the site name.
+    anchors.update(re.findall(r"中[埃吉法英意德美俄肯乌巴秘]联合考古", text))
+    # Local implementation of the same workflow is a different event in each
+    # jurisdiction; the workflow alone must never bridge Beijing and Shanghai.
+    if "陈列展览内容审核" in text:
+        from automation.digest_content import REGIONS
+        anchors.update(region + "|陈列展览内容审核" for region in REGIONS if region in text)
+    return anchors
 
 
 def publisher_domains(record: dict) -> list[str]:
@@ -946,6 +960,11 @@ def event_match_details(event: dict, result: dict, body: str = "") -> dict:
     matched = (not action_conflict) and (
         normalized_equal
         or bool(strong_title and action_overlap)
+        or bool(kind_overlap and strong_title and any(
+            len(name) >= 10 and name in other
+            for name, other in ((re.sub(r"(?:召开|举办)$", "", normalized_event_title(event_title)), normalized_event_title(result_title)),
+                                (re.sub(r"(?:召开|举办)$", "", normalized_event_title(result_title)), normalized_event_title(event_title)))
+        ))
         or bool(len(strong_title) >= 2 and strong_body)
     )
     return {
@@ -1243,11 +1262,11 @@ def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | No
         return None
     left_segment = current.get("contentItemId") or current.get("content_item_id")
     right_segment = previous.get("contentItemId") or previous.get("content_item_id")
-    if left_segment and right_segment and left_segment != right_segment:
-        return None
     current_url = canonical_url(current.get("url") or "")
     previous_url = canonical_url(previous.get("url") or "")
-    if current_url and previous_url and current_url == previous_url:
+    if current_url == previous_url and left_segment and right_segment and left_segment != right_segment:
+        return None
+    if current_url and previous_url and current_url == previous_url and left_segment == right_segment:
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical discovery URL")
     if named_policy_conflict(current, previous):
         return None
@@ -1390,7 +1409,8 @@ def compact_discovery_report(row: dict) -> dict:
             "sourcePublisherUrl", "duplicateStatus", "duplicateOrigin", "notes",
             "monitoringRecordId", "monitoringPath", "originalSourceUrl",
             "monitoringScope", "monitoringLocationTier", "monitoringPrimaryProvince",
-            "dailyScopeHint",
+            "dailyScopeHint", "contentItemId", "isDigestItem", "sourceDocumentTitle",
+            "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel",
         )
         if row.get(key) is not None
     }
@@ -1635,6 +1655,9 @@ def aggregate_event_candidates(records: list[dict]) -> list[dict]:
             "publisherDomains": sorted(publisher_domain_set),
             "queryFamilies": query_families,
         }
+        for key in ("contentItemId", "isDigestItem", "sourceDocumentTitle", "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel"):
+            if key in representative:
+                event[key] = representative[key]
         if context_parts:
             event["notes"] = " ".join(context_parts)
         events.append(event)
@@ -2772,6 +2795,15 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "evidenceTier": unwrapped_actual.get("tier", "C"),
         })
     resolved_url, body, resolve_error = resolve_evidence_url(navigation_url)
+    if result.get("isDigestItem") and not resolve_error:
+        from automation.digest_discovery import digest_records
+        parent = dict(result, title=result.get("sourceDocumentTitle", ""), url=input_url)
+        segments = digest_records(parent, body)
+        segment = next((r for r in segments if r["contentItemId"] == result.get("contentItemId")), None)
+        if segment:
+            body = '<article><h1>' + escape(segment['title']) + '</h1><p>' + escape(segment['summary']) + '</p></article>'
+        else:
+            resolve_error = "digest_segment_not_found"
     actual = source_info(resolved_url)
     matched = False
     match_details = {}
@@ -2838,6 +2870,7 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
             "publisherDomain": canonical_publisher_domain(urlsplit(resolved_url).hostname or ""),
             "sourceRelationship": source_relationship,
             "publishedDate": result.get("publishedDate") or "",
+            **({"contentItemId": result["contentItemId"], "publicationDateBasis": "digest_publication"} if result.get("isDigestItem") else {}),
         }
     return {"attempts": attempts, "checked": checked}, publishable
 
@@ -3193,6 +3226,10 @@ def event_key(record: dict) -> str:
 def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     current_url = canonical_url(current.get("url") or current.get("evidenceUrl") or "")
     previous_url = canonical_url(previous.get("url") or previous.get("evidenceUrl") or "")
+    left_segment = current.get("contentItemId") or current.get("content_item_id")
+    right_segment = previous.get("contentItemId") or previous.get("content_item_id")
+    if current_url and current_url == previous_url and left_segment and right_segment and left_segment != right_segment:
+        return None
     current_title = normalized_event_title(record_title(current))
     previous_title = normalized_event_title(record_title(previous))
     if current_title and current_title == previous_title and has_specific_event_anchor(current) and has_specific_event_anchor(previous):
@@ -3205,7 +3242,7 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
         # reviewed as a new event after a long interval.
         if distance <= 14:
             return ("same_day_duplicate" if distance == 0 else "historical_duplicate", "same normalized title within event window")
-    if current_url and previous_url and current_url == previous_url:
+    if current_url and previous_url and current_url == previous_url and left_segment == right_segment:
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical URL")
     if event_action_conflict(current, previous):
         # A shared institution or place cannot override an explicit action
@@ -3974,6 +4011,10 @@ def evaluate_candidate_pool(
         if disposition != "rejected" and tier == "backfill_3_7d" and not high_value:
             reasons.append("backfill_low_priority")
             disposition = "deferred"
+        from automation.digest_discovery import is_digest_container
+        if disposition != "rejected" and is_digest_container(record):
+            reasons.append("multi_event_document_requires_expansion")
+            disposition = "deferred"
         previous_rejection = None
         if disposition not in {"rejected", "deferred"}:
             previous_rejection = find_previous_editorial_rejection(
@@ -3992,7 +4033,7 @@ def evaluate_candidate_pool(
         direct_url = record.get("url", "")
         evidence = source_info(direct_url) if direct_url else {"tier": "C", "blocked": True}
         initial_evidence = [{"url": direct_url, "tier": evidence.get("tier", "C")}] if direct_url else []
-        if disposition == "candidate" and (evidence.get("blocked") or not evidence_sources_qualified(record, initial_evidence)):
+        if disposition == "candidate" and (record.get("isDigestItem") or evidence.get("blocked") or not evidence_sources_qualified(record, initial_evidence)):
             reasons.append("discovery_only_needs_evidence_upgrade")
             disposition = "needs_verification"
         if disposition == "candidate":
@@ -4444,7 +4485,8 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
     seen_urls = set()
     for record in raw_records + query_results + radar_records:
         url = canonical_url(record.get("url") or record.get("discoveryUrl") or "")
-        if url and url in seen_urls:
+        document_key = (url, record.get("contentItemId") or record.get("content_item_id") or "")
+        if url and document_key in seen_urls:
             # A monitoring item may already be present in the morning query
             # snapshot. Preserve the radar report as provenance even when
             # its canonical URL is identical; event aggregation will merge
@@ -4454,7 +4496,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
             record = dict(record)
             record["duplicateOrigin"] = "same_url_fixed_panel_radar"
         if url:
-            seen_urls.add(url)
+            seen_urls.add(document_key)
         record = dict(record)
         record.setdefault("discoveredAt", now_cn())
         combined.append(record)
@@ -4698,6 +4740,10 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
     radar_records, radar_audit = load_fixed_panel_radar(required_date) if include_fixed_panel_radar else (
         [], {"status": "not_run", "targetDate": required_date.isoformat(), "seedCount": 0, "seedRecordIds": [], "seeds": []}
     )
+    from automation.digest_discovery import expand_batches
+    (raw, query_results, radar_records), digest_audits = expand_batches(
+        [raw, query_results or [], radar_records], fetch
+    ) if execute_query_search else ([raw, query_results or [], radar_records], [])
     radar_audit["_records"] = radar_records
     supply_recovery = {"status": "not_run", "reason": "replay_or_discovery_only"}
     if execute_query_search and perform_evidence_upgrade:
@@ -4729,6 +4775,7 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
     supply_recovery["targetMet"] = supply_recovery["qualifiedAfter"] >= 5
     supply_recovery["qualifiedAfterDefinition"] = "final pool after historical dedup and evidence upgrade; not a causal estimate of supplementary search gains"
     audit["supplyRecovery"] = supply_recovery
+    audit["digestExpansion"] = digest_audits
     if supply_recovery.get("queriesAttempted"):
         from automation.supply_recovery import QUERIES as RECOVERY_QUERIES
         audit["queryFamilies"].extend({"id": "supply-recovery-" + scope, "scope": scope,
