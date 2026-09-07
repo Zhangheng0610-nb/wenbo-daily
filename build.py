@@ -2415,7 +2415,7 @@ def build_jobs_html(data, page_type='jobs'):
             if item.get('status') == 'closed':
                 status_badge = '<span class="status-badge status-closed">已截止</span>'
             elif item.get('status') == 'open':
-                status_badge = '<span class="status-badge status-open">可申请</span>'
+                status_badge = '<span class="status-badge status-open">报名期内</span>'
             elif item.get('status') == 'upcoming':
                 status_badge = '<span class="status-badge status-check">尚未开始</span>'
             else:
@@ -2429,6 +2429,7 @@ def build_jobs_html(data, page_type='jobs'):
             # Escape untrusted content before HTML interpolation; links allow only safe schemes.
             from automation.product import safe_url, job_id
             stable_id = job_id(item)
+            raw_item = item
             item = dict(item)
             extra = ''.join('<p>' + escape(value) + '</p>' for value in item.get('details', []))
             if item.get('application'):
@@ -2439,8 +2440,11 @@ def build_jobs_html(data, page_type='jobs'):
             item['link_url'] = escape(safe_url(item.get('link_url', '')), quote=True)
             deadline_attr = item.get('deadline_at') or ''
             static_status = item.get('status', 'check')
+            from automation.opportunity_evidence import evidence_for, evidence_html
+            evidence = evidence_for(raw_item, datetime.now(CN_TZ))
+            evidence_markup = evidence_html(evidence)
             items_html += f'''
-        <div id="{stable_id}" class="job-item{row_class}" data-deadline-at="{deadline_attr}" data-opens-at="{item.get('opens_at') or ''}" data-static-status="{static_status}">
+        <div id="{stable_id}" class="job-item{row_class}" data-evidence-state="{evidence['state']}" data-checked-at="{evidence.get('checkedAt', '')}" data-review-after="{evidence.get('reviewAfter', '')}" data-deadline-at="{deadline_attr}" data-opens-at="{item.get('opens_at') or ''}" data-static-status="{static_status}">
           <div class="job-header">
             <span class="job-number">#{item['number']}</span>
             <span class="job-title">{item['institution']} — {item['position']}</span>
@@ -2453,6 +2457,7 @@ def build_jobs_html(data, page_type='jobs'):
             <span class="job-deadline">📅 {item['deadline'] or '见公告'}</span>
             {('<span>💰 ' + item['note'] + '</span>') if item.get('note') else ''}
           </div>
+          {evidence_markup}
           <div class="job-details">{extra}</div>
           <div class="job-link">
             {'<a href="' + item['link_url'] + '" target="_blank" rel="noopener">🔗 ' + item['link_text'] + '</a>' + link_badge if item['link_url'] else '<span style="color:var(--muted);font-size:.85em">📧 ' + (item.get("link_text") or "见公告") + '</span>'}
@@ -2565,13 +2570,13 @@ def build_jobs_html(data, page_type='jobs'):
 
 <header>
   <h1>{page_title}</h1>
-  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 条{'实习与服务机会' if is_intern else '招聘记录'} ｜ 可申请 <span id="job-open-count">{active_count}</span> ｜ 已截止 <span id="job-closed-count">{closed_count}</span></p>
+  <p class="meta">{data['update_date']} 更新 ｜ 共 {total} 条{'实习与服务机会' if is_intern else '招聘记录'} ｜ 报名期内 <span id="job-open-count">{active_count}</span> ｜ 已截止 <span id="job-closed-count">{closed_count}</span></p>
   <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
 </header>
 
-{summary_html}
-
 {sections_html}
+
+{summary_html}
 
 <hr>
 <p style="font-size:.82em; color: var(--muted);">⚠️ 状态按北京时间动态更新，精确到公告给出的截止时刻；申请前仍请核对原文和投递入口。本页保留已截止条目作为档案，“待核截止”表示公告未给出标准日期或需人工确认。来源标签采用“官方来源 / 高校·就业平台 / 主流招聘平台 / 二手线索”，不与日报 A/B/C 新闻等级混用。</p>
@@ -3085,13 +3090,13 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
     compact_cards.append(f'''
 <a class="compact-card" href="intern.html?status=open">
   <span class="compact-kicker">🌱 实习机会</span>
-  <strong>{total_intern} 条可申请</strong>
+  <strong>{total_intern} 条报名期内</strong>
   <span class="compact-meta">{_homepage_compact_update_markup(intern_update, '文博实习')}</span>
 </a>''')
     compact_cards.append(f'''
 <a class="compact-card" href="jobs.html?status=open">
   <span class="compact-kicker">💼 招聘信息</span>
-  <strong>{total_jobs} 条可申请</strong>
+  <strong>{total_jobs} 条报名期内</strong>
   <span class="compact-meta">{_homepage_compact_update_markup(jobs_update, '文博招聘')}</span>
 </a>''')
 
@@ -4099,6 +4104,8 @@ def main():
                             'title': '实习与志愿服务' if kind == 'intern' else '文博招聘',
                             'date': data.get('update_date', ''), 'text': '', 'items': items})
 
+    from automation.opportunity_evidence import write_projection
+    write_projection(SITE_DIR, [('jobs', recruitment_data), ('intern', intern_data)], datetime.now(CN_TZ))
     append_job_search_record(recruitment_data, 'jobs', 'jobs.html')
     append_job_search_record(intern_data, 'intern', 'intern.html')
     idx_path = os.path.join(SITE_DIR, 'search-index.json')

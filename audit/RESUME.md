@@ -1,3 +1,7 @@
+# 最新继续点：机会证据链
+
+见 ../automation/PRODUCT_ROUND3.md。已增加字段级报名证据、到期机制、原文依据筛选和 opportunities.json 复核队列。下一轮先按队列补核临近截止岗位与附件，不重复实现已有机制。
+
 # 继续工作位置
 
 项目：wenbo-daily，分支 improve/product-reliability。不要重做第一轮审计。

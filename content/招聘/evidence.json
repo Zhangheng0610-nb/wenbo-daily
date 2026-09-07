@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "jobId": "job-7991f577633daf",
+      "signature": "9bdddb4bca6e44892eef58741d552f16d3506af991a9d94ef85a13bfa9770a6e",
+      "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+      "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+      "outcome": "supported",
+      "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+      "method": "public_web_extraction",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。"
+    },
+    {
+      "jobId": "job-29fcffae075624",
+      "signature": "b515294f12f6bbedaae24f9bef86d8371a6a96ae8468e1917a471cee4d85c21e",
+      "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+      "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+      "outcome": "supported",
+      "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+      "method": "public_web_extraction",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。"
+    },
+    {
+      "jobId": "job-0da777c31649df",
+      "signature": "f9172e48ecc2a2b5307c7e8df3c9fdb4a9a1ad4ee5c60910074c2694548a655f",
+      "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+      "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+      "outcome": "supported",
+      "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+      "method": "public_web_extraction",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。"
+    },
+    {
+      "jobId": "job-133ffdd922a5b9",
+      "signature": "e83b1970a387519820fc5c90e592908f38b241429415a0383c78befbf1cba50b",
+      "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+      "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+      "outcome": "unavailable",
+      "sourceUrl": "https://www.dpm.org.cn/classify_detail/379103.html",
+      "method": "public_web_extraction",
+      "fields": [],
+      "note": "本轮读取原文超时，不能据此确认或否定公告；保留原条目及报名时间。"
+    },
+    {
+      "jobId": "job-03d4917849af6a",
+      "signature": "b185aa63e0ffdc244b0ae782098dd28888b85c4981399a266c346df3b09e0258",
+      "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+      "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.pgm.org.cn/pgm/zxgg/202608/cd2fc6cea77b4581b1e06e26a76a282b.shtml",
+      "method": "public_web_extraction",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "官方公告支持9月15日截止、扫码报名和志愿服务性质；本记录不代表劳动岗位或录用资格。"
+    }
+  ]
+}

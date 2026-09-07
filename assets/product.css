@@ -72,3 +72,5 @@ body.product-page:has(#industry-module){--bg:#081221;--card:#102238;--text:#edf7
 @media(max-width:600px){.product-page:has(#industry-module) .eyebrow{font-size:10px}.product-page:has(#industry-module) #fullscreen{display:none}.product-page:has(#industry-module) .top-actions{gap:6px}.product-page:has(#industry-module) .top-actions a{padding:6px;font-size:12px;min-height:44px}}
 
 .search-type{display:flex;align-items:center;gap:8px;font-size:14px}.search-type select,#search-more{font:inherit;background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:10px;min-height:44px}#search-more{margin:18px 0;cursor:pointer}@media(max-width:600px){.search-wrap{flex-wrap:wrap}.search-wrap input{flex-basis:100%}.search-type{flex:1}.search-type select{max-width:100%}}
+
+.opportunity-evidence{margin:12px 0;padding:10px 12px;border-left:3px solid var(--border);font-size:13px;color:var(--muted)}.opportunity-evidence p{margin:4px 0}.job-item[data-evidence-state="recent"] .opportunity-evidence{border-color:var(--accent)}

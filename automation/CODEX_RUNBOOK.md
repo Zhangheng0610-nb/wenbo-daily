@@ -173,3 +173,11 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 ## 迁移原则
 
 本目录是可迁移仓库，不保存密钥。GitHub/Gitee 的登录凭据由新电脑上的 Git/SSH 配置提供；Codex 自动化只保存任务指令，不把 token 写进仓库。换电脑时克隆本仓库、在 Codex 中把自动化重新绑定到新电脑上的本地 checkout，并按 `PORTABILITY.md` 检查即可。
+
+### 机会栏目的逐项证据（2026-09-07）
+
+构建会生成 `opportunities.json`，其 `reviewQueue` 按未截止、临近截止、未来报名、未知窗口排序列出待复核条目。招聘更新先读该队列，优先补核即将截止且缺依据的机会，再扩充数量。
+
+报名时间和原文核验是两个状态：不能因日期未到、域名属于官方、搜索摘要有结果而写入核验通过。`content/招聘/evidence.json` 追加带时间戳的记录，保留失败尝试；只读到截止时间而未读到投递入口时不得声称两项都核验。通过记录需含 `fields: [deadline, application]`、原文 URL、字段签名、核查说明、带时区的 `checkedAt` 和 `reviewAfter`。本轮采用72小时复核期，属于编辑复核周期，不承诺公告期间不变化。
+
+字段签名由 `automation.opportunity_evidence.signature(item)` 生成，不手工伪造。证据只能覆盖实际读到的字段；岗位附件未读，学历、人数、薪资继续待核。访问超时写 `outcome: unavailable`，不改写为职位关闭。修改关键报名字段后，旧记录自动失效。此队列不新增外部调度器或付费服务。
