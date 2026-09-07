@@ -3559,10 +3559,29 @@ def international_museum_governance_relevance(record: dict) -> bool:
     return False
 
 
+def international_heritage_signals(record: dict) -> set[str]:
+    """Recognize an object plus a professional action, not English buzzwords alone."""
+    text = _editorial_context(record)
+    signals = set()
+    heritage_object = bool(re.search(r"\b(?:cultural heritage|documentary heritage|manuscripts?|museums?|historic sites?|archaeolog\w*)\b", text))
+    if (heritage_object or "heritage emergency fund" in text) and re.search(
+        r"\b(?:emergency fund|emergency (?:response|rescue|preservation)|disaster (?:risk|response|recovery)|climate (?:resilience|challenge))\b", text
+    ):
+        signals.add("heritage_emergency_response")
+    if re.search(r"\b(?:documentary heritage|memory of the world)\b", text) and re.search(r"\b(?:prize|laureates?|award(?:ed)?)\b", text):
+        signals.add("documentary_heritage_recognition")
+    if re.search(r"\barchaeolog\w*\b", text) and re.search(r"\b(?:discover(?:y|ies|ed)?|excavation|new findings|reveals?|uncover(?:ed)?)\b", text):
+        signals.add("archaeological_new_knowledge")
+    if heritage_object and re.search(r"\b(?:digiti[sz](?:ation|ing|ed|e)|3d scanning|digital (?:preservation|reconstruction|archive))\b", text):
+        signals.add("digital_heritage_practice")
+    return signals
+
+
 def is_high_value_record(record: dict) -> bool:
     text = _editorial_context(record)
     return (
         any(term.lower() in text for term in HIGH_VALUE_TERMS)
+        or bool(international_heritage_signals(record))
         or high_level_cultural_diplomacy_signal(record)
         or international_museum_governance_relevance(record)
         or heritage_governance_signal(record)["matched"]
@@ -3791,16 +3810,17 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     def hit(terms):
         return any(term.lower() in text for term in terms)
 
+    international_signals = international_heritage_signals(record)
     policy = hit(POLICY_PRIORITY_TERMS)
     national_policy = policy and hit(NATIONAL_POLICY_TERMS)
     major_discovery = hit(MAJOR_DISCOVERY_TERMS)
-    archaeology_discovery = hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))
+    archaeology_discovery = (hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))) or "archaeological_new_knowledge" in international_signals
     security = hit(SECURITY_PRIORITY_TERMS)
     museum_collection_incident = museum_collection_or_public_incident(record)
     repatriation = hit(REPATRIATION_TERMS)
-    heritage = hit(HERITAGE_RECOGNITION_TERMS)
+    heritage = hit(HERITAGE_RECOGNITION_TERMS) or "documentary_heritage_recognition" in international_signals
     museum_project = hit(MUSEUM_PROJECT_TERMS)
-    digital = hit(DIGITAL_PRIORITY_TERMS)
+    digital = hit(DIGITAL_PRIORITY_TERMS) or "digital_heritage_practice" in international_signals
     cooperation = hit(COOPERATION_TERMS)
     museum_governance = international_museum_governance_relevance(record)
     heritage_governance = heritage_governance_signal(record)
@@ -3809,6 +3829,9 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     high_level_cultural_diplomacy = high_level_cultural_diplomacy_signal(record)
     salience = public_salience(record)
 
+    if "heritage_emergency_response" in international_signals:
+        score += 36
+        reasons.append("heritage_emergency_response")
     if national_policy:
         score += 58
         reasons.append("national_or_industry_policy")
@@ -4319,6 +4342,7 @@ def build_query_family_summary(report_records: list[dict], query_audits: list[di
     search results are independent news items.
     """
     family_order = [family["id"] for family in QUERY_FAMILIES]
+    family_order.extend(sorted({a.get("queryFamily") for a in (query_audits or []) if a.get("queryFamily")} - set(family_order)))
     family_rank = {family_id: index for index, family_id in enumerate(family_order)}
     audits_by_family = {family_id: [] for family_id in family_order}
     for audit in query_audits or []:
@@ -4675,6 +4699,23 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         [], {"status": "not_run", "targetDate": required_date.isoformat(), "seedCount": 0, "seedRecordIds": [], "seeds": []}
     )
     radar_audit["_records"] = radar_records
+    supply_recovery = {"status": "not_run", "reason": "replay_or_discovery_only"}
+    if execute_query_search and perform_evidence_upgrade:
+        from automation.supply_recovery import recovery_plan, execute_recovery
+        preview = build_audit(required_date, raw, statuses, query_results or [], query_audits or [],
+                              perform_evidence_upgrade=False, radar_audit=radar_audit)
+        supply_recovery = recovery_plan(preview)
+        if supply_recovery["required"]:
+            recovered, recovery_audits = execute_recovery(required_date, supply_recovery, QUERY_BACKENDS, _execute_one_query)
+            query_results = (query_results or []) + recovered
+            query_audits = (query_audits or []) + recovery_audits
+            supply_recovery.update(status="completed", queriesAttempted=len(recovery_audits),
+                                   queriesSucceeded=sum(bool(a.get("success")) for a in recovery_audits),
+                                   rawRecords=len(recovered), queryAudits=recovery_audits)
+            successes = supply_recovery["queriesSucceeded"]
+            supply_recovery["status"] = "completed" if successes == len(recovery_audits) else "partial" if successes else "failed"
+        else:
+            supply_recovery["status"] = "not_needed"
     audit = build_audit(
         required_date,
         raw,
@@ -4684,6 +4725,15 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         perform_evidence_upgrade=perform_evidence_upgrade,
         radar_audit=radar_audit,
     )
+    supply_recovery["qualifiedAfter"] = len(audit.get("candidateEvaluation", {}).get("finalEditorialPool", {}).get("events", []))
+    supply_recovery["targetMet"] = supply_recovery["qualifiedAfter"] >= 5
+    supply_recovery["qualifiedAfterDefinition"] = "final pool after historical dedup and evidence upgrade; not a causal estimate of supplementary search gains"
+    audit["supplyRecovery"] = supply_recovery
+    if supply_recovery.get("queriesAttempted"):
+        from automation.supply_recovery import QUERIES as RECOVERY_QUERIES
+        audit["queryFamilies"].extend({"id": "supply-recovery-" + scope, "scope": scope,
+                                       "queries": list(RECOVERY_QUERIES[scope])}
+                                      for scope in supply_recovery["scopes"])
     if write:
         DISCOVERY_DIR.mkdir(parents=True, exist_ok=True)
         (DISCOVERY_DIR / "README.md").write_text(
