@@ -1,0 +1,356 @@
+{
+  "mode": "live existing-source evidence resolution; 20 second timeout and per-pass response cache; no mocked transport, no publication",
+  "distinctInputUrls": 1,
+  "checks": [
+    {
+      "title": "南京总统府历史文化街区保护规划公布",
+      "checkedAt": "2026-09-08T05:11:58+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "matchScore": 100,
+            "matchReasons": [
+              "normalized_title_equal"
+            ],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "南京总统府历史文化街区保护规划公布",
+          "tier": "A",
+          "retrieved": true,
+          "bodyCharacters": 232,
+          "matched": true,
+          "error": null,
+          "method": "existing_report",
+          "articleVerified": true,
+          "articleVerification": {},
+          "eventMatch": {
+            "matched": true,
+            "score": 100,
+            "reasons": [
+              "normalized_title_equal"
+            ],
+            "eventAnchors": [
+              "南京总统府历史文化街区保护规划公布",
+              "京总统府历史文化",
+              "化街区保护规划公",
+              "南京总统府历史文",
+              "历史文化街区保护",
+              "史文化街区保护规",
+              "府历史文化街区保",
+              "总统府历史文化街"
+            ],
+            "bodyAnchors": [
+              "南京总统府历史文化街区保护规划公布",
+              "京总统府历史文化",
+              "化街区保护规划公",
+              "南京总统府历史文",
+              "历史文化街区保护",
+              "史文化街区保护规",
+              "府历史文化街区保",
+              "总统府历史文化街"
+            ],
+            "actionOverlap": [
+              "policy"
+            ],
+            "actionConflict": false,
+            "eventKindOverlap": [
+              "policy"
+            ]
+          }
+        }
+      },
+      "source": {
+        "name": "南京总统府历史文化街区保护规划公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-f4e8f5567ba77a07a371",
+        "publicationDateBasis": "digest_publication"
+      },
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+      "checkedAt": "2026-09-08T05:11:58+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "matchScore": 100,
+            "matchReasons": [
+              "normalized_title_equal"
+            ],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+          "tier": "A",
+          "retrieved": true,
+          "bodyCharacters": 213,
+          "matched": true,
+          "error": null,
+          "method": "existing_report",
+          "articleVerified": true,
+          "articleVerification": {},
+          "eventMatch": {
+            "matched": true,
+            "score": 100,
+            "reasons": [
+              "normalized_title_equal"
+            ],
+            "eventAnchors": [
+              "在吉尔吉斯斯坦红河遗址取得突破性进展",
+              "吉尔吉斯斯坦红河",
+              "吉斯斯坦红河遗址",
+              "在吉尔吉斯斯坦红",
+              "址取得突破性进展",
+              "坦红河遗址取得突",
+              "尔吉斯斯坦红河遗",
+              "斯坦红河遗址取得"
+            ],
+            "bodyAnchors": [
+              "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+              "中吉联合考古在吉",
+              "古在吉尔吉斯斯坦",
+              "合考古在吉尔吉斯",
+              "吉尔吉斯斯坦红河",
+              "吉斯斯坦红河遗址",
+              "吉联合考古在吉尔",
+              "在吉尔吉斯斯坦红"
+            ],
+            "actionOverlap": [
+              "cooperation"
+            ],
+            "actionConflict": false,
+            "eventKindOverlap": [
+              "archaeology",
+              "cooperation"
+            ]
+          }
+        }
+      },
+      "source": {
+        "name": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-8255029b081364c5695f",
+        "publicationDateBasis": "digest_publication"
+      },
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+      "checkedAt": "2026-09-08T05:11:58+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "matchScore": 100,
+            "matchReasons": [
+              "normalized_title_equal"
+            ],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+          "tier": "A",
+          "retrieved": true,
+          "bodyCharacters": 188,
+          "matched": true,
+          "error": null,
+          "method": "existing_report",
+          "articleVerified": true,
+          "articleVerification": {},
+          "eventMatch": {
+            "matched": true,
+            "score": 100,
+            "reasons": [
+              "normalized_title_equal"
+            ],
+            "eventAnchors": [
+              "深圳市非国有博物馆扶持资金管理办法",
+              "博物馆扶持资金管",
+              "国有博物馆扶持资",
+              "圳市非国有博物馆",
+              "市非国有博物馆扶",
+              "扶持资金管理办法",
+              "有博物馆扶持资金",
+              "深圳市非国有博物"
+            ],
+            "bodyAnchors": [
+              "深圳市非国有博物馆扶持资金管理办法",
+              "博物馆扶持资金管",
+              "国有博物馆扶持资",
+              "圳市非国有博物馆",
+              "市非国有博物馆扶",
+              "扶持资金管理办法",
+              "有博物馆扶持资金",
+              "深圳市非国有博物"
+            ],
+            "actionOverlap": [
+              "policy"
+            ],
+            "actionConflict": false,
+            "eventKindOverlap": [
+              "museum",
+              "policy"
+            ]
+          }
+        }
+      },
+      "source": {
+        "name": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-77c8c8ee554d98ab2669",
+        "publicationDateBasis": "digest_publication"
+      },
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "绍兴南山遗址发掘成果公布",
+      "checkedAt": "2026-09-08T05:11:58+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "ok",
+            "articleMatched": true,
+            "matchScore": 100,
+            "matchReasons": [
+              "normalized_title_equal"
+            ],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "绍兴南山遗址发掘成果公布",
+          "tier": "A",
+          "retrieved": true,
+          "bodyCharacters": 222,
+          "matched": true,
+          "error": null,
+          "method": "existing_report",
+          "articleVerified": true,
+          "articleVerification": {},
+          "eventMatch": {
+            "matched": true,
+            "score": 100,
+            "reasons": [
+              "normalized_title_equal"
+            ],
+            "eventAnchors": [
+              "绍兴南山遗址发掘成果公布",
+              "兴南山遗址发掘成",
+              "南山遗址发掘成果",
+              "山遗址发掘成果公",
+              "绍兴南山遗址发掘",
+              "兴南山遗址发掘",
+              "南山遗址发掘成",
+              "山遗址发掘成果"
+            ],
+            "bodyAnchors": [
+              "绍兴南山遗址发掘成果公布",
+              "兴南山遗址发掘成",
+              "南山遗址发掘成果",
+              "山遗址发掘成果公",
+              "绍兴南山遗址发掘",
+              "兴南山遗址发掘",
+              "南山遗址发掘成",
+              "山遗址发掘成果"
+            ],
+            "actionOverlap": [
+              "archaeology"
+            ],
+            "actionConflict": false,
+            "eventKindOverlap": [
+              "archaeology"
+            ]
+          }
+        }
+      },
+      "source": {
+        "name": "绍兴南山遗址发掘成果公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-030c3cde69a3d0eb16d6",
+        "publicationDateBasis": "digest_publication"
+      },
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    }
+  ]
+}

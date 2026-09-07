@@ -15,8 +15,19 @@ class RecoveryTests(unittest.TestCase):
         self.assertFalse(plan['publicationQuota'])
 
     def test_missing_scope_gets_targeted_recovery(self):
-        self.assertEqual(recovery_plan(self.preview(['domestic'] * 7))['scopes'], ['international'])
-        self.assertFalse(recovery_plan(self.preview(['domestic'] * 3 + ['international'] * 3))['required'])
+        self.assertEqual(recovery_plan(self.preview(['domestic'] * 12))['scopes'], ['international'])
+        self.assertFalse(recovery_plan(self.preview(['domestic'] * 6 + ['international'] * 6))['required'])
+
+    def test_five_to_eleven_candidates_do_not_stop_recovery(self):
+        from automation.supply_recovery import supply_assessment
+        for total in (5, 6, 9, 11):
+            scopes=['domestic']*(total-1)+['international']
+            self.assertTrue(recovery_plan(self.preview(scopes))['required'])
+            result=supply_assessment(self.preview(scopes)['candidateEvaluation']['finalEditorialPool']['events'])
+            self.assertFalse(result['targetMet'])
+            self.assertFalse(result['publicationGoalVerified'])
+            self.assertEqual(result['desiredPublicationRange'],[6,9])
+        self.assertFalse(supply_assessment([{'scope':'domestic'}]*20)['targetMet'])
 
     def test_failed_search_is_preserved_without_losing_other_results(self):
         calls = Mock(side_effect=[RuntimeError('timeout'), ([{'title': 'lead'}], {'success': True}), ([], {'success': True}), ([], {'success': True})])

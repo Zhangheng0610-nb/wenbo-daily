@@ -17,6 +17,8 @@ import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import contextmanager
+from contextvars import ContextVar
 from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
 from html.parser import HTMLParser
@@ -910,10 +912,29 @@ def publisher_recovery_hosts_for_record(record: dict) -> list[str]:
     return sorted(hosts)
 
 
+def named_site_conflict(current: dict, previous: dict) -> bool:
+    """Different explicitly named sites cannot be unified by a shared team."""
+    def names(row):
+        title = clean_discovery_title(row.get("representativeTitle") or row.get("title", ""))
+        result = set()
+        for name in re.findall(r"[\u4e00-\u9fff]{2,30}遗址", title):
+            name = re.split(r"在|位于|考古队|考古|发现|公布|保护", name)[-1]
+            name = re.sub(r"(?:神庙|古城)?遗址$", "", name)
+            if len(name) >= 2 and name not in {"重要", "文化", "文物", "全国", "中国"}:
+                result.add(name)
+        return result
+    left, right = names(current), names(previous)
+    return bool(left and right and not any(a in b or b in a for a in left for b in right))
+
+
 def event_match_details(event: dict, result: dict, body: str = "") -> dict:
     """Explain whether an article is about the event, independent of its tier."""
     event_title = clean_discovery_title(event.get("representativeTitle") or event.get("title", ""))
     result_title = clean_discovery_title(result.get("title", ""))
+    if named_site_conflict(event, result):
+        return {"matched": False, "score": 0, "reasons": ["different_named_site"],
+                "eventAnchors": [], "bodyAnchors": [], "actionOverlap": [],
+                "actionConflict": True, "eventKindOverlap": []}
     if named_policy_conflict(event, result):
         return {'matched': False, 'score': 0, 'reasons': ['different_named_policy'],
                 'eventAnchors': [], 'bodyAnchors': [], 'actionOverlap': [],
@@ -1259,6 +1280,8 @@ def canonical_event_identity(record: dict) -> str:
 def event_report_relation(current: dict, previous: dict) -> tuple[str, str] | None:
     """Find same-event reports without treating similar subjects as one event."""
     # A source document may be a multi-item digest, not one event.
+    if named_site_conflict(current, previous):
+        return None
     if named_policy_conflict(current, previous):
         return None
     left_segment = current.get("contentItemId") or current.get("content_item_id")
@@ -2692,12 +2715,36 @@ def metadata_urls(base_url: str, body: str) -> list[str]:
     return candidates
 
 
+EVIDENCE_FETCH_TIMEOUT_SECONDS = 20
+_EVIDENCE_FETCH_CACHE = ContextVar("evidence_fetch_cache", default=None)
+
+
+@contextmanager
+def evidence_fetch_session():
+    """Cache source responses only within one evidence pass, including failures."""
+    token = _EVIDENCE_FETCH_CACHE.set({})
+    try:
+        yield
+    finally:
+        _EVIDENCE_FETCH_CACHE.reset(token)
+
+
 def resolve_evidence_url(url: str) -> tuple[str, str, str | None]:
+    cache = _EVIDENCE_FETCH_CACHE.get()
+    if cache is not None and url in cache:
+        return cache[url]
+    result = _fetch_evidence_url(url)
+    if cache is not None and len(cache) < 128:
+        cache[url] = result
+    return result
+
+
+def _fetch_evidence_url(url: str) -> tuple[str, str, str | None]:
     """Follow redirects/canonical metadata and retrieve a bounded source sample."""
     url, _ = unwrap_redirect_url(url)
     request = Request(url, headers={"User-Agent": SEARCH_USER_AGENT, "Accept": "text/html,application/xhtml+xml,*/*"})
     try:
-        with SEARCH_OPENER.open(request, timeout=8) as response:
+        with SEARCH_OPENER.open(request, timeout=EVIDENCE_FETCH_TIMEOUT_SECONDS) as response:
             resolved = response.geturl() or url
             body = response.read(256_000).decode("utf-8", errors="replace")
         # A publisher page may explicitly expose the canonical/original URL.
@@ -2712,7 +2759,7 @@ def resolve_evidence_url(url: str) -> tuple[str, str, str | None]:
                 continue
             try:
                 follow_request = Request(candidate, headers={"User-Agent": SEARCH_USER_AGENT, "Accept": "text/html,application/xhtml+xml,*/*"})
-                with SEARCH_OPENER.open(follow_request, timeout=8) as follow_response:
+                with SEARCH_OPENER.open(follow_request, timeout=EVIDENCE_FETCH_TIMEOUT_SECONDS) as follow_response:
                     followed = follow_response.geturl() or candidate
                     followed_body = follow_response.read(256_000).decode("utf-8", errors="replace")
                 return followed, followed_body, None
@@ -2877,6 +2924,11 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
 
 
 def run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
+    with evidence_fetch_session():
+        return _run_evidence_upgrade(required_date, events)
+
+
+def _run_evidence_upgrade(required_date: date, events: list[dict]) -> dict:
     """Actually search, retrieve and assess evidence for queued event candidates."""
     queue = select_evidence_upgrade_queue(events)
     queued = queue["events"]
@@ -3245,6 +3297,8 @@ def duplicate_relation(current: dict, previous: dict) -> tuple[str, str] | None:
             return ("same_day_duplicate" if distance == 0 else "historical_duplicate", "same normalized title within event window")
     if current_url and previous_url and current_url == previous_url and left_segment == right_segment:
         return ("same_day_duplicate" if current.get("publishedDate") == previous.get("publishedDate") else "historical_duplicate", "same canonical URL")
+    if named_site_conflict(current, previous):
+        return None
     if event_action_conflict(current, previous):
         # A shared institution or place cannot override an explicit action
         # conflict such as closure versus protest or governance versus closure.
@@ -4533,16 +4587,23 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
         _index_relation_row(previous, history_order + history_index, relation_index)
     for record_index, record in enumerate(combined):
         relation = None
-        for previous in _indexed_relation_candidates(record, relation_index):
+        predecessors = _indexed_relation_candidates(record, relation_index)
+        # Published history is the authority. A same-batch title variant must
+        # not intercept the match and hide the already-published event root.
+        predecessors.sort(key=lambda row: row.get("historicalSource") != "published_daily_markdown")
+        for previous in predecessors:
             relation = duplicate_relation(record, previous)
             if relation:
                 break
         if relation:
             status, reason = relation
+            if previous.get("historicalSource") == "published_daily_markdown" and status == "same_day_duplicate":
+                status = "historical_duplicate"
             record["duplicateStatus"] = status
             record["duplicateReason"] = reason
             record["duplicateOf"] = (
                 previous.get("historicalCanonicalEventId")
+                or previous.get("historicalItemId")
                 or previous.get("canonicalEventId")
                 or previous.get("title")
             )
@@ -4685,19 +4746,20 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
                     "sourceDomains": row.get("sourceDomains"),
                     "publisherDomains": row.get("publisherDomains"),
                     "discoveryReports": row.get("discoveryReports"),
+                    **{key: row.get(key) for key in ("contentItemId", "isDigestItem", "sourceDocumentTitle", "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel") if key in row},
                 }
                 for row in event_candidates
             ],
             "pool": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount", "editorialPriorityRank", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "freshnessTier", "candidateDisposition", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "filterReasons", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "museumCollectionOrPublicIncident", "publicSalience", "independentCoverageCount", "editorialPriorityRank", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeStatus", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts", "contentItemId", "isDigestItem", "sourceDocumentTitle", "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel")}
                 for row in evaluation["pool"]
             ],
             "highPriorityEvidenceQueue": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts", "contentItemId", "isDigestItem", "sourceDocumentTitle", "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel")}
                 for row in evaluation["highPriorityEvidenceQueue"]
             ],
             "mediumPriorityEvidenceQueue": [
-                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts")}
+                {k: row.get(k) for k in ("eventId", "title", "representativeTitle", "url", "publishedDate", "scope", "reportCount", "sourceDomains", "publisherDomains", "editorialPriorityScore", "editorialPriorityLabel", "editorialReasons", "highLevelCulturalDiplomacy", "claimRisk", "evidenceTierAtDiscovery", "evidenceTierAfterUpgrade", "evidenceQueueClass", "nearThresholdRescueEligible", "nearThresholdRescueAttempted", "previousEditorialRejection", "previousEditorialRejectionDate", "previousEditorialRejectionOf", "previousEditorialRejectionReason", "previousEditorialRejectionLedgerPath", "evidenceUpgradeAttempted", "evidenceUpgradeResult", "evidenceFailureReason", "evidenceFailureType", "evidenceSources", "evidenceUpgradeQueries", "evidenceUpgradeSourcesChecked", "evidenceResolutionAttempts", "contentItemId", "isDigestItem", "sourceDocumentTitle", "publicationDateBasis", "eventDate", "eventDateStatus", "sourceRegionLabel")}
                 for row in evaluation["mediumPriorityEvidenceQueue"]
             ],
             "provisionalWouldBeSelected": [
@@ -4762,8 +4824,9 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         [], {"status": "not_run", "targetDate": required_date.isoformat(), "seedCount": 0, "seedRecordIds": [], "seeds": []}
     )
     from automation.digest_discovery import expand_batches
+    digest_cache = {}
     (raw, query_results, radar_records), digest_audits = expand_batches(
-        [raw, query_results or [], radar_records], fetch
+        [raw, query_results or [], radar_records], fetch, document_cache=digest_cache
     ) if execute_query_search else ([raw, query_results or [], radar_records], [])
     radar_audit["_records"] = radar_records
     supply_recovery = {"status": "not_run", "reason": "replay_or_discovery_only"}
@@ -4774,11 +4837,14 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         supply_recovery = recovery_plan(preview)
         if supply_recovery["required"]:
             recovered, recovery_audits = execute_recovery(required_date, supply_recovery, QUERY_BACKENDS, _execute_one_query)
+            recovered_raw_count = len(recovered)
+            (recovered,), recovery_digest_audits = expand_batches([recovered], fetch, document_cache=digest_cache)
+            digest_audits.extend(recovery_digest_audits)
             query_results = (query_results or []) + recovered
             query_audits = (query_audits or []) + recovery_audits
             supply_recovery.update(status="completed", queriesAttempted=len(recovery_audits),
                                    queriesSucceeded=sum(bool(a.get("success")) for a in recovery_audits),
-                                   rawRecords=len(recovered), queryAudits=recovery_audits)
+                                   rawRecords=recovered_raw_count, expandedRecords=len(recovered), queryAudits=recovery_audits)
             successes = supply_recovery["queriesSucceeded"]
             supply_recovery["status"] = "completed" if successes == len(recovery_audits) else "partial" if successes else "failed"
         else:
@@ -4792,8 +4858,8 @@ def run(required_date: date, *, window_days: int = 7, query_results: list[dict] 
         perform_evidence_upgrade=perform_evidence_upgrade,
         radar_audit=radar_audit,
     )
-    supply_recovery["qualifiedAfter"] = len(audit.get("candidateEvaluation", {}).get("finalEditorialPool", {}).get("events", []))
-    supply_recovery["targetMet"] = supply_recovery["qualifiedAfter"] >= 5
+    from automation.supply_recovery import supply_assessment
+    supply_recovery.update(supply_assessment(audit.get("candidateEvaluation", {}).get("finalEditorialPool", {}).get("events", [])))
     supply_recovery["qualifiedAfterDefinition"] = "final pool after historical dedup and evidence upgrade; not a causal estimate of supplementary search gains"
     audit["supplyRecovery"] = supply_recovery
     audit["digestExpansion"] = digest_audits

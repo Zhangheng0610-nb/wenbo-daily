@@ -1,0 +1,169 @@
+{
+  "mode": "live existing-source evidence resolution from exported candidate pool; no mocked transport, no publication",
+  "checks": [
+    {
+      "title": "南京总统府历史文化街区保护规划公布",
+      "checkedAt": "2026-09-08T05:09:32+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "failed",
+            "articleMatched": false,
+            "matchScore": 0,
+            "matchReasons": [],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "南京总统府历史文化街区保护规划公布",
+          "tier": "A",
+          "retrieved": false,
+          "bodyCharacters": 0,
+          "matched": false,
+          "error": "TimeoutError: timed out",
+          "method": "existing_report",
+          "failureClassification": "network_timeout",
+          "articleVerified": false,
+          "articleVerification": {},
+          "eventMatch": {}
+        }
+      },
+      "source": null,
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+      "checkedAt": "2026-09-08T05:09:32+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "failed",
+            "articleMatched": false,
+            "matchScore": 0,
+            "matchReasons": [],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+          "tier": "A",
+          "retrieved": false,
+          "bodyCharacters": 0,
+          "matched": false,
+          "error": "TimeoutError: timed out",
+          "method": "existing_report",
+          "failureClassification": "network_timeout",
+          "articleVerified": false,
+          "articleVerification": {},
+          "eventMatch": {}
+        }
+      },
+      "source": null,
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+      "checkedAt": "2026-09-08T05:09:32+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "failed",
+            "articleMatched": false,
+            "matchScore": 0,
+            "matchReasons": [],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+          "tier": "A",
+          "retrieved": false,
+          "bodyCharacters": 0,
+          "matched": false,
+          "error": "TimeoutError: timed out",
+          "method": "existing_report",
+          "failureClassification": "network_timeout",
+          "articleVerified": false,
+          "articleVerification": {},
+          "eventMatch": {}
+        }
+      },
+      "source": null,
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    },
+    {
+      "title": "绍兴南山遗址发掘成果公布",
+      "checkedAt": "2026-09-08T05:09:32+08:00",
+      "outcome": {
+        "attempts": [
+          {
+            "method": "existing_report",
+            "inputUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "resolvedUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+            "domain": "www.ncha.gov.cn",
+            "publisherDomain": "www.ncha.gov.cn",
+            "sourceRelationship": "primary",
+            "fetchStatus": "failed",
+            "articleMatched": false,
+            "matchScore": 0,
+            "matchReasons": [],
+            "evidenceTier": "A"
+          }
+        ],
+        "checked": {
+          "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "publisherDomain": "www.ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "title": "绍兴南山遗址发掘成果公布",
+          "tier": "A",
+          "retrieved": false,
+          "bodyCharacters": 0,
+          "matched": false,
+          "error": "TimeoutError: timed out",
+          "method": "existing_report",
+          "failureClassification": "network_timeout",
+          "articleVerified": false,
+          "articleVerification": {},
+          "eventMatch": {}
+        }
+      },
+      "source": null,
+      "publicationDecision": "not_reviewed",
+      "eventDateStatus": "requires_editorial_verification"
+    }
+  ]
+}

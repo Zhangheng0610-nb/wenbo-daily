@@ -46,6 +46,20 @@ class DigestTests(unittest.TestCase):
                 right={'title':previous,'publishedDate':'2026-09-04'}
                 self.assertEqual(duplicate_relation(left,right) is not None,expected)
 
+    def test_saved_candidate_keeps_segment_identity_for_later_verification(self):
+        records=digest_records(PARENT,PAGE)
+        with patch('automation.daily_discovery.load_history',return_value=[]), patch('automation.daily_discovery.load_recent_editorial_rejections',return_value=[]):
+            audit=build_audit(date(2026,9,7),records,[],[],perform_evidence_upgrade=False)
+        pool=audit['candidateEvaluation']['pool']
+        self.assertTrue(pool)
+        for row in pool:
+            self.assertTrue(row['isDigestItem'])
+            self.assertEqual(row['publicationDateBasis'],'digest_publication')
+            self.assertIn(row['contentItemId'],[r['contentItemId'] for r in records])
+            with patch('automation.daily_discovery.resolve_evidence_url',return_value=(PARENT['url'],'<div id="zw"></div>',None)):
+                _,source=resolve_evidence_attempt(row,row,'existing_report')
+            self.assertIsNone(source)
+
     def test_fetch_once_and_keep_discovery_provenance(self):
         radar=dict(PARENT,discoverySourceType='fixed_panel_radar')
         with patch('automation.digest_discovery.digest_records',wraps=digest_records):
@@ -54,6 +68,21 @@ class DigestTests(unittest.TestCase):
         self.assertEqual(len(calls),1)
         self.assertEqual(batches[1][0]['discoverySourceType'],'fixed_panel_radar')
         self.assertEqual(audits[0]['items'],2)
+
+    def test_supplementary_phase_uses_same_digest_budget_and_cache(self):
+        cache, calls = {}, []
+        fetch=lambda url:(calls.append(url) or PAGE)
+        first,_=expand_batches([[PARENT]],fetch,max_documents=1,document_cache=cache)
+        later=dict(PARENT,discoverySourceType='supplementary_search')
+        second,audits=expand_batches([[later]],fetch,max_documents=1,document_cache=cache)
+        self.assertEqual(len(calls),1)
+        self.assertEqual(len(second[0]),2)
+        self.assertEqual(second[0][0]['discoverySourceType'],'supplementary_search')
+        self.assertEqual(audits,[])
+        other=dict(PARENT,url=PARENT['url'].replace('204716','204717'))
+        limited,_=expand_batches([[other]],fetch,max_documents=1,document_cache=cache)
+        self.assertEqual(limited[0],[other])
+        self.assertEqual(len(calls),1)
 
     def test_failed_parser_preserves_container_for_audit(self):
         batches,audits=expand_batches([[PARENT]],lambda _: '<html>unavailable</html>')

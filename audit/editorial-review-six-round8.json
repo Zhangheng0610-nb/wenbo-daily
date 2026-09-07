@@ -1,0 +1,131 @@
+{
+  "status": "six review drafts, not a published daily",
+  "coverageWindow": "2026-09-01 through 2026-09-07 publication window; event dates can be earlier",
+  "items": [
+    {
+      "title": "南京总统府历史文化街区保护规划公布",
+      "scope": "domestic",
+      "source": {
+        "name": "南京总统府历史文化街区保护规划公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-f4e8f5567ba77a07a371",
+        "publicationDateBasis": "digest_publication"
+      },
+      "verifiedAt": "2026-09-08T05:11:58+08:00",
+      "sourcePublishedDate": "2026-09-06",
+      "eventDate": "2026-09-03",
+      "summary": "9月6日国家文物局摘编介绍，南京总统府历史文化街区保护规划于9月3日正式公布，保护对象涵盖整体格局、历史建筑和街巷等，并划分展览、旅游服务、休闲和文化体验功能片区。",
+      "commentary": "这份规划值得关注的，是保护尺度从单体文物延伸到街区格局。博物馆联动和旅游服务能否改善公共使用，要看后续项目如何处理历史街巷、风貌与客流之间的关系。功能分区只是规划安排，不能提前算作保护活化成效；下一步应追踪实施项目与保护要求是否一致。",
+      "publicationDecision": "not_published",
+      "editorialBoundary": "官方摘编的分项报道；未核实精确事件日时保留为空，不把摘编发布日期当作事件发生日。"
+    },
+    {
+      "title": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+      "scope": "international",
+      "source": {
+        "name": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-8255029b081364c5695f",
+        "publicationDateBasis": "digest_publication"
+      },
+      "verifiedAt": "2026-09-08T05:11:58+08:00",
+      "sourcePublishedDate": "2026-09-06",
+      "eventDate": "2026-09-01",
+      "summary": "国家文物局摘编转述陕西省考古研究院9月1日披露的成果：中吉联合考古在红河遗址结合激光雷达、数字建模和系统勘探，认为该城址由至少四五座城址构成。",
+      "commentary": "这项成果的信息增量不只是使用了数字技术，而是技术与系统发掘共同改变了对城址结构的认识。对数字考古项目，值得检验的是遥感判断如何被地面勘探和发掘支持，而非展示用了多少设备。多座城址的年代及相互关系，仍需后续材料说明，不能把空间识别直接当成城市发展史的定论。",
+      "publicationDecision": "not_published",
+      "editorialBoundary": "官方摘编的分项报道；未核实精确事件日时保留为空，不把摘编发布日期当作事件发生日。"
+    },
+    {
+      "title": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+      "scope": "domestic",
+      "source": {
+        "name": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-77c8c8ee554d98ab2669",
+        "publicationDateBasis": "digest_publication"
+      },
+      "verifiedAt": "2026-09-08T05:11:58+08:00",
+      "sourcePublishedDate": "2026-09-06",
+      "eventDate": null,
+      "summary": "国家文物局9月6日摘编介绍，深圳修订非国有博物馆扶持资金管理办法，调整资助结构，支持原创展览、社会教育、学术研究等业务，并将馆藏特色学术专著出版纳入资助。",
+      "commentary": "政策关注点转向办馆业务，比单纯奖励新增场馆更接近博物馆的公共价值。但项目投入并不自动带来服务质量：资助如何评审、成果如何验收，以及小型专业馆能否公平参与，才决定政策效果。摘编没有列出具体比例和申请条件，后续应核对办法原文，不能据此给出申报指南。",
+      "publicationDecision": "not_published",
+      "editorialBoundary": "官方摘编的分项报道；未核实精确事件日时保留为空，不把摘编发布日期当作事件发生日。"
+    },
+    {
+      "title": "绍兴南山遗址发掘成果公布",
+      "scope": "domestic",
+      "source": {
+        "name": "绍兴南山遗址发掘成果公布",
+        "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true,
+        "publisher": "www.ncha.gov.cn",
+        "publisherDomain": "ncha.gov.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-06",
+        "contentItemId": "digest-030c3cde69a3d0eb16d6",
+        "publicationDateBasis": "digest_publication"
+      },
+      "verifiedAt": "2026-09-08T05:11:58+08:00",
+      "sourcePublishedDate": "2026-09-06",
+      "eventDate": null,
+      "summary": "国家文物局9月6日摘编介绍，绍兴南山遗址东区2021年11月至2026年4月的发掘，揭露以东周遗存为主的大型聚落，土台与河道系统构成其主要空间特征。",
+      "commentary": "这条新闻的价值在于把目光从越国都城移向城郊聚落：土台、河道与生活遗迹可以为讨论都城外围的组织方式提供材料。坑沟数量和出土器物本身并不能直接证明具体社会结构；更值得追踪的是空间关系、分期和功能研究。此次公布的是多年发掘成果，不是当天新启动的考古项目。",
+      "publicationDecision": "not_published",
+      "editorialBoundary": "官方摘编的分项报道；未核实精确事件日时保留为空，不把摘编发布日期当作事件发生日。"
+    },
+    {
+      "title": "联合国教科文组织公布世界记忆奖得主，表彰加沙文献遗产抢救与数字化工作",
+      "sourceUrl": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+      "sourcePublishedDate": "2026-09-04",
+      "sourceUpdatedDate": "2026-09-07",
+      "articleVerified": true,
+      "summary": "联合国教科文组织宣布，两位巴勒斯坦文献遗产保护人员获2026年教科文组织／直指世界记忆奖。其工作包括濒危手稿的记录、数字化、修复和紧急抢救；原文介绍了逾2.5万页手稿数字化及专业修复实验室建设。",
+      "commentary": "以扫描页数衡量数字化项目，容易漏掉实体藏品抢救和持续保存的条件。这次获奖工作把数字化、手稿修复实验室与应急保存程序连在一起，值得文博机构借鉴的是技术记录如何进入灾害与冲突应对，而非把数字副本当作项目终点。获奖肯定了已有工作，不能据此推断当地文献风险已经解除。",
+      "evidenceBoundary": "原文发布日期与最后更新日期分开记录；不把网页更新自动视为新的获奖事件，也不推断全部藏品已经安全。",
+      "scope": "international",
+      "publicationDecision": "not_published",
+      "verificationNote": "原文核验沿用先前记录，本轮未重抓该原文。"
+    },
+    {
+      "title": "教科文组织披露刚果遗产气候风险考察，涉及遗产地与博物馆",
+      "sourceUrl": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+      "sourcePublishedDate": "2026-09-04",
+      "eventDateRange": [
+        "2026-08-03",
+        "2026-08-08"
+      ],
+      "articleVerified": true,
+      "summary": "教科文组织9月4日介绍，遗产应急基金支持的联合考察于8月3日至8日在刚果进行。团队走访遗产地及博物馆，识别气候变化相关风险、评估脆弱性并提出应对建议。",
+      "commentary": "这次考察把文化、环境和民防部门纳入同一风险评估，并将博物馆与遗产地一起检查。它提示文博机构，气候适应需要落实到具体地点的脆弱性和跨部门响应。原文只说明完成考察并形成建议，尚不足以评价工程实施或保护成效；报道日期也不能被写成行动发生日期。",
+      "evidenceBoundary": "8月考察、9月发布结果，时效性应由编辑进一步判断；不作为9月7日新启动项目刊出。",
+      "scope": "international",
+      "publicationDecision": "not_published",
+      "verificationNote": "原文核验沿用先前记录，本轮未重抓该原文。"
+    }
+  ]
+}

@@ -26,8 +26,11 @@ def digest_records(parent, page):
     return result
 
 
-def expand_batches(batches, fetcher, max_documents=3):
-    documents, audits = {}, []
+def expand_batches(batches, fetcher, max_documents=3, document_cache=None):
+    # A run may discover digests in both initial and supplementary search.
+    # Share the same fetch budget/cache across those phases, never across runs.
+    documents = document_cache if document_cache is not None else {}
+    audits = []
     for batch in batches:
         for record in batch:
             url = record.get('url', '')

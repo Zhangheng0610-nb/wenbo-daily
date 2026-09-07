@@ -2,7 +2,11 @@
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 
-TARGET_CANDIDATES = 5
+# Qualified leads still face editorial rejection. Aim above the desired
+# 6–9 published stories, without imposing a publication quota or ceiling.
+MINIMUM_PUBLICATION_RANGE = [3, 5]
+DESIRED_PUBLICATION_RANGE = [6, 9]
+TARGET_CANDIDATES = 12
 QUERIES = {
     'domestic': ('site:gov.cn 文物 保护', 'site:chinanews.com.cn 考古 发现',
                  'site:news.cn 博物馆 开馆', 'site:gov.cn 文物 数字化'),
@@ -17,14 +21,17 @@ def recovery_plan(preview):
               for scope in QUERIES}
     reasons = []
     if len(events) < TARGET_CANDIDATES:
-        reasons.append('fewer_than_five_qualified_candidates')
+        reasons.append('below_editorial_candidate_buffer')
     missing = [scope for scope, count in counts.items() if not count]
     if missing:
         reasons.append('scope_has_no_qualified_candidate')
     scopes = list(QUERIES) if len(events) < TARGET_CANDIDATES else missing
     return {'required': bool(reasons), 'reasons': reasons, 'qualifiedBefore': len(events),
             'scopeCountsBefore': counts, 'scopes': scopes, 'maxPasses': 1,
-            'targetCandidates': TARGET_CANDIDATES, 'publicationQuota': False}
+            'targetCandidates': TARGET_CANDIDATES, 'publicationQuota': False,
+            'minimumPublicationRange': MINIMUM_PUBLICATION_RANGE,
+            'desiredPublicationRange': DESIRED_PUBLICATION_RANGE,
+            'publicationMaximum': None}
 
 
 def execute_recovery(required_date, plan, backends, execute_one):
@@ -46,3 +53,18 @@ def execute_recovery(required_date, plan, backends, execute_one):
             records.extend(found)
             audits.append(audit)
     return records, audits
+
+
+def supply_assessment(events):
+    """Candidate readiness is not evidence of publication quality or coverage."""
+    counts = {scope: sum(e.get('scope', 'domestic') == scope for e in events) for scope in QUERIES}
+    missing = [scope for scope, count in counts.items() if not count]
+    ready = len(events) >= TARGET_CANDIDATES and not missing
+    return {'qualifiedAfter':len(events), 'targetMet':ready,
+            'targetCandidates':TARGET_CANDIDATES, 'scopeCountsAfter':counts,
+            'missingScopesAfter':missing, 'candidateShortfall':max(0,TARGET_CANDIDATES-len(events)),
+            'minimumPublicationRange':MINIMUM_PUBLICATION_RANGE,
+            'desiredPublicationRange':DESIRED_PUBLICATION_RANGE,
+            'publicationMaximum':None, 'publicationQuota':False,
+            'publicationGoalVerified':False,
+            'targetMetDefinition':'candidate buffer reached with domestic and international leads; not published output or measured coverage'}
