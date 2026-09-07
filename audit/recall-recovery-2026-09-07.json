@@ -1,0 +1,124 @@
+{
+  "targetDate": "2026-09-07",
+  "referenceSet": "2026-09-07 verified recovery and repeat controls",
+  "limitation": "Small curated diagnostic set, not overall recall; final pool is not publication.",
+  "referenceCount": 7,
+  "expectationsMet": 4,
+  "events": [
+    {
+      "id": "jikji-prize",
+      "title": "联合国教科文组织公布世界记忆奖得主，表彰加沙文献遗产抢救与数字化工作",
+      "scope": "international",
+      "expected": "review_candidate",
+      "stage": "final_pool",
+      "expectationMet": true,
+      "discoveredReports": 1,
+      "eventIds": [
+        "event-c24c9a216937"
+      ],
+      "duplicateTargets": [],
+      "candidateDecisions": [
+        {
+          "candidateDisposition": "evidence_qualified",
+          "filterReasons": [],
+          "evidenceUpgradeResult": null,
+          "evidenceFailureReason": null
+        }
+      ]
+    },
+    {
+      "id": "congo-risk-assessment",
+      "title": "教科文组织披露刚果遗产气候风险考察，涉及遗产地与博物馆",
+      "scope": "international",
+      "expected": "review_candidate",
+      "stage": "final_pool",
+      "expectationMet": true,
+      "discoveredReports": 1,
+      "eventIds": [
+        "event-2b083ded7c0e"
+      ],
+      "duplicateTargets": [],
+      "candidateDecisions": [
+        {
+          "candidateDisposition": "evidence_qualified",
+          "filterReasons": [],
+          "evidenceUpgradeResult": null,
+          "evidenceFailureReason": null
+        }
+      ]
+    },
+    {
+      "id": "digest-6b6011597a26c6f20a98",
+      "title": "国家文物局印发《考古出土（出水）文物移交管理办法（试行）》",
+      "scope": "domestic",
+      "expected": "suppress_repeat",
+      "stage": "historical_suppression",
+      "expectationMet": false,
+      "discoveredReports": 2,
+      "eventIds": [],
+      "duplicateTargets": [
+        "《考古出土（出水）文物移交管理办法（试行）》解读 - 川观新闻",
+        "考古文物移交有时间表了！国家文物局发布试行办法"
+      ],
+      "candidateDecisions": []
+    },
+    {
+      "id": "digest-126af1baf3a119c7da88",
+      "title": "全国文物地震安全工作交流会召开",
+      "scope": "domestic",
+      "expected": "suppress_repeat",
+      "stage": "before_candidate_pool",
+      "expectationMet": false,
+      "discoveredReports": 2,
+      "eventIds": [],
+      "duplicateTargets": [
+        "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
+      ],
+      "candidateDecisions": []
+    },
+    {
+      "id": "digest-39a7263331f84967caa8",
+      "title": "中埃联合考古队在塞赫迈特神庙遗址取得重要发现",
+      "scope": "domestic",
+      "expected": "suppress_repeat",
+      "stage": "before_candidate_pool",
+      "expectationMet": false,
+      "discoveredReports": 4,
+      "eventIds": [],
+      "duplicateTargets": [
+        "中埃联合考古队新发现一批重要遗迹和文物"
+      ],
+      "candidateDecisions": []
+    },
+    {
+      "id": "digest-117a5607844a1024a22b",
+      "title": "上海加强博物馆陈列展览内容审核",
+      "scope": "domestic",
+      "expected": "suppress_repeat",
+      "stage": "historical_suppression",
+      "expectationMet": true,
+      "discoveredReports": 1,
+      "eventIds": [],
+      "duplicateTargets": [
+        "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点"
+      ],
+      "candidateDecisions": []
+    },
+    {
+      "id": "digest-109cb457a327aaca774b",
+      "title": "河南支援和田文物考古工作站揭牌",
+      "scope": "domestic",
+      "expected": "suppress_repeat",
+      "stage": "historical_suppression",
+      "expectationMet": true,
+      "discoveredReports": 1,
+      "eventIds": [],
+      "duplicateTargets": [
+        "河南省支援和田文物考古工作站正式揭牌"
+      ],
+      "candidateDecisions": []
+    }
+  ],
+  "mode": "Offline current-code replay plus previously fetched UNESCO/digest inputs; no live collection or evidence upgrade, no publication.",
+  "assessedCount": 7
+}

@@ -15,6 +15,7 @@ from html import unescape, escape
 import json
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
@@ -4188,6 +4189,30 @@ def scan_page(spec: dict, start: date, end: date) -> tuple[dict, list[dict]]:
     return status, records
 
 
+def scan_sources(specs: list[dict], start: date, end: date) -> tuple[list[dict], list[dict]]:
+    """Bound source concurrency and retain per-source freshness/failure evidence."""
+    def scan(spec):
+        started, clock = now_cn(), time.monotonic()
+        try:
+            status, records = scan_page(spec, start, end)
+        except Exception as exc:
+            status, records = ({"sourceId": spec["sourceId"], "name": spec["name"],
+                                "scope": spec["scope"], "url": spec["url"],
+                                "status": "parse_failed", "windowResults": 0, "rawResults": 0,
+                                "linksSeen": 0, "datedLinks": 0, "outsideWindow": 0, "undatedLinks": 0,
+                                "note": f"{type(exc).__name__}: {exc}"}, [])
+        status = dict(status, checkedAt=started, completedAt=now_cn(),
+                      elapsedSeconds=round(time.monotonic() - clock, 3),
+                      windowStart=start.isoformat(), windowEnd=end.isoformat())
+        return status, records
+    statuses, records = [], []
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        for status, found in pool.map(scan, specs):
+            statuses.append(status)
+            records.extend(found)
+    return statuses, records
+
+
 def load_json(path: Path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -4728,11 +4753,7 @@ def build_audit(required_date: date, raw_records: list[dict], scan_statuses: lis
 
 def run(required_date: date, *, window_days: int = 7, query_results: list[dict] | None = None, query_audits: list[dict] | None = None, execute_query_search: bool = True, perform_evidence_upgrade: bool = True, include_fixed_panel_radar: bool = True, write: bool = False, output_path: Path | None = None) -> dict:
     start = required_date - timedelta(days=window_days - 1)
-    statuses, raw = [], []
-    for spec in SOURCE_SCANS:
-        status, rows = scan_page(spec, start, required_date)
-        statuses.append(status)
-        raw.extend(rows)
+    statuses, raw = scan_sources(SOURCE_SCANS, start, required_date)
     if execute_query_search and query_audits is None:
         searched, audits = execute_queries(required_date, start, required_date)
         query_results = (query_results or []) + searched

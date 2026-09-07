@@ -1,0 +1,242 @@
+{
+  "mode": "live source batch scan only; no publication",
+  "statuses": [
+    {
+      "sourceId": "unesco-news",
+      "name": "UNESCO新闻",
+      "scope": "international",
+      "url": "https://www.unesco.org/en/newsroom/news",
+      "status": "checked",
+      "linksSeen": 224,
+      "datedLinks": 100,
+      "outsideWindow": 76,
+      "undatedLinks": 124,
+      "rawResults": 100,
+      "windowResults": 24,
+      "note": "",
+      "checkedAt": "2026-09-08T01:32:54+08:00",
+      "completedAt": "2026-09-08T01:33:04+08:00",
+      "elapsedSeconds": 9.932,
+      "windowStart": "2026-09-01",
+      "windowEnd": "2026-09-07"
+    }
+  ],
+  "records": [
+    {
+      "title": "Story Read, write and lead: Meet the Quechua women of Cusco who are rewriting their stories 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/read-write-and-lead-meet-quechua-women-cusco-who-are-rewriting-their-stories",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Young Leaders Call for a New Culture of Peace 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/young-leaders-call-new-culture-peace",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "Story Hellmuth Sievers: a life dedicated to understanding the ocean and tsunamis 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/hellmuth-sievers-life-dedicated-understanding-ocean-and-tsunamis",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Ocean Decade endorsement accelerates partnerships and data sharing for coastal resilience 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.ioc.unesco.org/en/articles/ocean-decade-endorsement-accelerates-partnerships-and-data-sharing-coastal-resilience",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News UNESCO and countries in Latin America and the Caribbean prepare to present the results of ERCE 2025, the region’s leading assessment of student learning 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/unesco-and-countries-latin-america-and-caribbean-prepare-present-results-erce-2025-regions-leading",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News University of Oxford and UNESCO launch free online course on Freedom of Expression for Judicial Actors 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/university-oxford-and-unesco-launch-free-online-course-freedom-expression-judicial-actors",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News UNESCO strengthens citizenship among Indigenous and vulnerable populations living around natural World Heritage sites in Cameroon. 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/unesco-strengthens-citizenship-among-indigenous-and-vulnerable-populations-living-around-natural",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Communities living around Manovo Gounda St Floris National Park in the Central African Republic strengthen their capacities in sustainable entrepreneurship 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/communities-living-around-manovo-gounda-st-floris-national-park-central-african-republic-strengthen",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Cameroon: Towards a Renewed Legal Framework for the Film Sector 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/cameroon-towards-renewed-legal-framework-film-sector",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "Story When a conversation becomes a calling 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/when-conversation-becomes-calling",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Culture for Sustainable Development: New UN Decade, a renewed global ambition 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/culture-sustainable-development-new-un-decade-renewed-global-ambition",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Consultancy for Development and Dissemination of Advocacy, Knowledge Sharing and Visibility Materials 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/consultancy-development-and-dissemination-advocacy-knowledge-sharing-and-visibility-materials",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News UNESCO and SEDECO strengthen Oaxaca's biocultural heritage and economic development 4 September 2026",
+      "publishedDate": "2026-09-04",
+      "url": "https://www.unesco.org/en/articles/unesco-and-sedeco-strengthen-oaxacas-biocultural-heritage-and-economic-development",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "Story From recovery to resilience: Helping schools in Viet Nam prepare for future disasters 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "url": "https://www.unesco.org/en/articles/recovery-resilience-helping-schools-viet-nam-prepare-future-disasters",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News UNESCO brings together experts to analyze what explains changes in learning outcomes in Latin America and the Caribbean 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "url": "https://www.unesco.org/en/articles/unesco-brings-together-experts-analyze-what-explains-changes-learning-outcomes-latin-america-and",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Joint recommendations advance rights-based digital platforms and media governance in the Western Balkans 3 September 2026",
+      "publishedDate": "2026-09-03",
+      "url": "https://www.unesco.org/en/articles/joint-recommendations-advance-rights-based-digital-platforms-and-media-governance-western-balkans",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Suriname Advances Responsible AI Governance with UNESCO’s RAM 2.0 2 September 2026",
+      "publishedDate": "2026-09-02",
+      "url": "https://www.unesco.org/en/articles/suriname-advances-responsible-ai-governance-unescos-ram-20",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News New UNESCO research reveals opportunities and challenges facing South Africa’s digital content creators 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "url": "https://www.unesco.org/en/articles/new-unesco-research-reveals-opportunities-and-challenges-facing-south-africas-digital-content",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Beyond 2030: Shaping the future of education for sustainable development 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "url": "https://www.unesco.org/en/articles/beyond-2030-shaping-future-education-sustainable-development",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Young people from China explore AI through media and information literacy at UNESCO Headquarters 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "url": "https://www.unesco.org/en/articles/young-people-china-explore-ai-through-media-and-information-literacy-unesco-headquarters",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "Story UNESCO supports the Hyrcanian Forest Wildfire Recovery and Preparedness Initiative 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "url": "https://www.unesco.org/en/articles/unesco-supports-hyrcanian-forest-wildfire-recovery-and-preparedness-initiative",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    },
+    {
+      "title": "News Bringing Khanbogd – Shar Tsav Geopark to the international stage 1 September 2026",
+      "publishedDate": "2026-09-01",
+      "url": "https://www.unesco.org/en/articles/bringing-khanbogd-shar-tsav-geopark-international-stage",
+      "discoveredVia": "unesco-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "unesco.org"
+    }
+  ]
+}

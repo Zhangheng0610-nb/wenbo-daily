@@ -1,0 +1,126 @@
+{
+  "name": "2026-09-07 verified recovery and repeat controls",
+  "selection": "Two previously read UNESCO articles plus five manually checked published-repeat controls; diagnostic, not exhaustive or representative.",
+  "events": [
+    {
+      "id": "jikji-prize",
+      "title": "联合国教科文组织公布世界记忆奖得主，表彰加沙文献遗产抢救与数字化工作",
+      "scope": "international",
+      "urls": [
+        "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize"
+      ],
+      "titleAliases": [
+        "Palestinian Documentary Heritage Professionals"
+      ],
+      "expected": "review_candidate",
+      "sourcePublishedDate": "2026-09-04",
+      "verification": "audit/recovered-editorial-samples.json",
+      "editorialBoundary": "原文发布日期与最后更新日期分开记录；不把网页更新自动视为新的获奖事件，也不推断全部藏品已经安全。"
+    },
+    {
+      "id": "congo-risk-assessment",
+      "title": "教科文组织披露刚果遗产气候风险考察，涉及遗产地与博物馆",
+      "scope": "international",
+      "urls": [
+        "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage"
+      ],
+      "titleAliases": [
+        "Heritage Resilience in Congo"
+      ],
+      "expected": "review_candidate",
+      "sourcePublishedDate": "2026-09-04",
+      "verification": "audit/recovered-editorial-samples.json",
+      "editorialBoundary": "8月考察、9月发布结果，时效性应由编辑进一步判断；不作为9月7日新启动项目刊出。"
+    },
+    {
+      "id": "digest-6b6011597a26c6f20a98",
+      "title": "国家文物局印发《考古出土（出水）文物移交管理办法（试行）》",
+      "scope": "domestic",
+      "urls": [
+        "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+      ],
+      "sharedDocument": true,
+      "titleAliases": [
+        "国家文物局印发《考古出土（出水）文物移交管理办法（试行）》",
+        "考古文物移交有时间表了！国家文物局发布试行办法"
+      ],
+      "expected": "suppress_repeat",
+      "verification": "audit/digest-expansion-replay.json",
+      "expectedHistoricalTitles": [
+        "考古文物移交有时间表了！国家文物局发布试行办法"
+      ]
+    },
+    {
+      "id": "digest-126af1baf3a119c7da88",
+      "title": "全国文物地震安全工作交流会召开",
+      "scope": "domestic",
+      "urls": [
+        "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+      ],
+      "sharedDocument": true,
+      "titleAliases": [
+        "全国文物地震安全工作交流会召开",
+        "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
+      ],
+      "expected": "suppress_repeat",
+      "verification": "audit/digest-expansion-replay.json",
+      "expectedHistoricalTitles": [
+        "国家文物局与中国地震局联合召开全国文物地震安全工作交流会"
+      ]
+    },
+    {
+      "id": "digest-39a7263331f84967caa8",
+      "title": "中埃联合考古队在塞赫迈特神庙遗址取得重要发现",
+      "scope": "domestic",
+      "urls": [
+        "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+      ],
+      "sharedDocument": true,
+      "titleAliases": [
+        "中埃联合考古队在塞赫迈特神庙遗址取得重要发现",
+        "中埃联合考古队在塞赫迈特神庙遗址发现重要遗迹"
+      ],
+      "expected": "suppress_repeat",
+      "verification": "audit/digest-expansion-replay.json",
+      "expectedHistoricalTitles": [
+        "中埃联合考古队在塞赫迈特神庙遗址发现重要遗迹"
+      ]
+    },
+    {
+      "id": "digest-117a5607844a1024a22b",
+      "title": "上海加强博物馆陈列展览内容审核",
+      "scope": "domestic",
+      "urls": [
+        "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+      ],
+      "sharedDocument": true,
+      "titleAliases": [
+        "上海加强博物馆陈列展览内容审核",
+        "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点"
+      ],
+      "expected": "suppress_repeat",
+      "verification": "audit/digest-expansion-replay.json",
+      "expectedHistoricalTitles": [
+        "上海文物局发文加强博物馆陈列展览内容审核工作，明确核查重点"
+      ]
+    },
+    {
+      "id": "digest-109cb457a327aaca774b",
+      "title": "河南支援和田文物考古工作站揭牌",
+      "scope": "domestic",
+      "urls": [
+        "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+      ],
+      "sharedDocument": true,
+      "titleAliases": [
+        "河南支援和田文物考古工作站揭牌",
+        "河南省支援和田文物考古工作站正式揭牌"
+      ],
+      "expected": "suppress_repeat",
+      "verification": "audit/digest-expansion-replay.json",
+      "expectedHistoricalTitles": [
+        "河南省支援和田文物考古工作站正式揭牌"
+      ]
+    }
+  ]
+}
