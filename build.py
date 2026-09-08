@@ -1792,7 +1792,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     else:
         quality_html = ''
 
-    toc_html = '<div class="toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
+    toc_html = '<nav class="reading-tools" aria-label="阅读导航"><a href="#report-toc">本期目录</a><a href="../reading.html">我的收藏</a><a href="#product-main">返回顶部 ↑</a></nav><div class="toc" id="report-toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
     for item in data['toc_items']:
         toc_html += f'      <li><a href="#{item["id"]}">{item["title"]}</a></li>\n'
     toc_html += '    </ol>\n  </details>\n</div>'
@@ -1914,7 +1914,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 <body>
 
 <header>
-  <h1>🏛️ 每日文博资讯</h1>
+  <h1>每日文博资讯</h1>
   <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
 
@@ -3199,7 +3199,7 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
 </head>
 <body>
 <header>
-  <h1>🏛️ 每日文博资讯</h1>
+  <h1>每日文博资讯</h1>
   <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
 </header>
 <main>
@@ -3211,7 +3211,7 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
   <a href="jobs.html">招聘</a>
 </nav>
 <form class="search-wrap" action="search.html" method="get" role="search">
-  <input type="search" name="q" placeholder="🔍 输入关键词，查看全部相关文章" autocomplete="off" aria-label="搜索新闻" required>
+  <input type="search" name="q" placeholder="搜索新闻、机构与地点" autocomplete="off" aria-label="搜索新闻" required>
   <button class="search-submit" type="submit">搜索</button>
 </form>
 <section class="hero" aria-labelledby="today-heading">

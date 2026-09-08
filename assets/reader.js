@@ -16,5 +16,23 @@
  document.querySelectorAll('[data-save-id]').forEach(b=>b.addEventListener('click',()=>{const old=saved;const exists=saved.some(x=>x.id===b.dataset.saveId||safePath(x.url)===safePath(b.dataset.saveUrl));if(exists)saved=saved.filter(x=>x.id!==b.dataset.saveId&&safePath(x.url)!==safePath(b.dataset.saveUrl));else {if(saved.length>=500){if(message)message.textContent='已达到500条收藏，请先移除部分条目。';return;}const path=safePath(b.dataset.saveUrl);if(!path)return;saved=[{id:b.dataset.saveId,title:b.dataset.saveTitle,url:path},...saved];}if(!persist()){saved=old;return;}controls();if(message)message.textContent=exists?'已取消收藏。':'已收藏，可在首页“我的收藏”中查看。';}));
  controls();render();
  const filter=document.getElementById('reader-topic');
- if(filter){const params=new URLSearchParams(location.search);if([...filter.options].some(o=>o.value===params.get('topic')))filter.value=params.get('topic');const apply=()=>{let shown=0;document.querySelectorAll('.reader-entry').forEach(row=>{row.hidden=!!filter.value&&!row.dataset.topics.includes(filter.value);if(!row.hidden)shown++;});document.getElementById('reader-result').textContent=shown?`显示 ${shown} 条`:'当前展示范围内暂无匹配；可用全站搜索查询历史内容。';};filter.addEventListener('change',()=>{const url=new URL(location.href);if(filter.value)url.searchParams.set('topic',filter.value);else url.searchParams.delete('topic');history.replaceState(null,'',url);apply();});apply();}
+ if(filter){
+  const query=document.getElementById('reader-query'), more=document.getElementById('reader-more'), period=document.getElementById('reader-period');
+  const latest=document.querySelector('.reader-feed').dataset.latest;
+  const entries=[...document.querySelectorAll('.reader-feed .reader-entry')];
+  let limit=6;
+  function restore(){const p=new URLSearchParams(location.search);filter.value=[...filter.options].some(o=>o.value===p.get('topic'))?p.get('topic'):'';query.value=p.get('readerq')||'';period.value=p.get('period')==='all'?'all':'earlier';limit=6;apply();}
+  function apply(){
+   const words=query.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+   const matched=entries.filter(row=>(period.value==='all'||row.dataset.reportDate!==latest)&&(!filter.value||row.dataset.topics.includes(filter.value))&&words.every(w=>row.textContent.toLocaleLowerCase().includes(w)));
+   const visible=new Set(matched.slice(0,limit));entries.forEach(row=>row.hidden=!visible.has(row));
+   document.getElementById('reader-result').textContent=matched.length?`${period.value==='all'?'近两周':'此前新闻'}共 ${matched.length} 条 · 已显示 ${Math.min(limit,matched.length)} 条`:'没有匹配新闻，试试其他关键词或全站搜索。';
+   more.hidden=matched.length<=limit;more.textContent=`再看 ${Math.min(6,Math.max(0,matched.length-limit))} 条`;
+  }
+  function sync(){limit=6;const url=new URL(location.href);for(const [key,value] of [['topic',filter.value],['readerq',query.value],['period',period.value==='all'?'all':'']]){if(value)url.searchParams.set(key,value);else url.searchParams.delete(key);}history.replaceState(null,'',url);apply();}
+  period.addEventListener('change',sync);filter.addEventListener('change',sync);query.addEventListener('input',sync);
+  document.getElementById('reader-reset').addEventListener('click',()=>{query.value='';filter.value='';period.value='earlier';sync();query.focus();});
+  more.addEventListener('click',()=>{const previous=limit;limit+=6;apply();const shown=entries.filter(row=>!row.hidden);shown[previous]?.querySelector('h3 a')?.focus();});
+  window.addEventListener('popstate',restore);restore();
+ }
 })();
