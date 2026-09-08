@@ -1,0 +1,10 @@
+{
+  "mode": "same revised report; URL-only gate versus segment-aware gate",
+  "oldErrors": [
+    "duplicate source URL in report: http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+  ],
+  "newErrors": [],
+  "approvedSharedUrls": [
+    "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html"
+  ]
+}

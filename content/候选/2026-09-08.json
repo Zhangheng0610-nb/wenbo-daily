@@ -6,14 +6,16 @@
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
   "internationalDiscoveryStatus": "checked",
-  "internationalDiscoveryNote": "完整 broad discovery 142/142 查询成功；国际 finalEditorialPool 中选入中吉联合考古和 UNESCO A 级文献遗产两条事件，其他国际候选逐条保留并说明未选原因。",
-  "candidatePoolDefinition": "本次正式编辑唯一输入为 content/发现/2026-09-08.json 的 candidateEvaluation.finalEditorialPool.events；未拼接其他 editorial pool。",
+  "internationalDiscoveryNote": "保留早间142/142查询记录；本次国际选入中吉考古、加沙文献保护和刚果遗产风险评估三项独立动向。",
+  "candidatePoolDefinition": "唯一编辑输入为 content/复核/2026-09-08-editorial-replay.json 的 finalEditorialPool；19个事件完整继承早间发现池，未新增或拼接其他事件。",
   "editorialReview": {
-    "reviewedAt": "2026-09-08T07:47:17+08:00",
+    "status": "completed",
+    "reviewedAt": "2026-09-08T12:20:19+08:00",
     "reviewedEvents": 19,
-    "selectedEvents": 4,
-    "rejectedEvents": 15,
-    "note": "19 个 evidence-qualified 事件均完成逐条编辑复核；选入 4 条，拒绝 15 条。"
+    "selectedEvents": 7,
+    "rejectedEvents": 10,
+    "deferredEvents": 2,
+    "note": "同一19事件编辑池复核；恢复三条被URL/同源限制排除的独立事件，另两条暂缓补充编辑背景。"
   },
   "candidates": [
     {
@@ -26,9 +28,28 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
       "publisher": "ncha.gov.cn",
-      "evidenceSources": [{"name": "南京总统府历史文化街区保护规划公布", "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "南京总统府历史文化街区保护规划公布",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "publisher": "ncha.gov.cn",
+          "publisherDomain": "ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "publishedDate": "2026-09-06",
+          "contentItemId": "digest-f4e8f5567ba77a07a371",
+          "publicationDateBasis": "digest_publication"
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["文化遗产", "文物保护", "国内", "江苏"],
+      "topic": [
+        "文化遗产",
+        "文物保护",
+        "国内",
+        "江苏"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -46,7 +67,11 @@
       "finalEditorialReason": "规划把文保对象、历史街巷、古树名木和博物馆联动纳入同一治理框架，具体说明了保护如何进入街区运营。",
       "editorialPriorityScore": 100,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["policy_or_governance_update", "sustained_public_attention", "primary_freshness"],
+      "editorialReasons": [
+        "policy_or_governance_update",
+        "sustained_public_attention",
+        "primary_freshness"
+      ],
       "dailyItemNumber": 1,
       "dailyItemTitle": "南京总统府历史文化街区保护规划公布"
     },
@@ -60,15 +85,34 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
       "publisher": "ncha.gov.cn",
-      "evidenceSources": [{"name": "《深圳市非国有博物馆扶持资金管理办法》修订发布", "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "《深圳市非国有博物馆扶持资金管理办法》修订发布",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "publisher": "ncha.gov.cn",
+          "publisherDomain": "ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "publishedDate": "2026-09-06",
+          "contentItemId": "digest-77c8c8ee554d98ab2669",
+          "publicationDateBasis": "digest_publication"
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["博物馆", "行业治理", "国内", "广东"],
+      "topic": [
+        "博物馆",
+        "行业治理",
+        "国内",
+        "广东"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "rejected",
-      "decisionReason": "虽然政策内容具体且证据合格，但日报校验要求同一来源 URL 不重复；本期保留同页中更适合展开且有独立替代证据的事件。",
-      "selectedForDaily": false,
+      "decision": "selected",
+      "decisionReason": "扶持办法调整原创展览、社会教育与学术研究资助，并新增学术专著支持，具有独立制度增量；条目已单独核验，同页其他事件不构成重复。",
+      "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "发现审计中存在同日其他政策线索，账本仅保留深圳非国有博物馆扶持办法这一 canonical event。",
       "discoveredVia": "ncha-wenwu-news",
@@ -76,11 +120,16 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "政策本身具备专业价值，但与同一国家文物局摘编页的其他事件存在来源 URL 复用，本期不在日报重复使用该页。",
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "扶持办法调整原创展览、社会教育与学术研究资助，并新增学术专著支持，具有独立制度增量；条目已单独核验，同页其他事件不构成重复。",
       "editorialPriorityScore": 100,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["national_or_industry_policy", "primary_freshness"]
+      "editorialReasons": [
+        "national_or_industry_policy",
+        "primary_freshness"
+      ],
+      "dailyItemNumber": 2,
+      "dailyItemTitle": "深圳修订非国有博物馆扶持办法，资助转向原创展览与学术研究"
     },
     {
       "candidateId": "daily-20260908-003",
@@ -92,15 +141,33 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
       "publisher": "ncha.gov.cn",
-      "evidenceSources": [{"name": "绍兴南山遗址发掘成果公布", "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "绍兴南山遗址发掘成果公布",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "publisher": "ncha.gov.cn",
+          "publisherDomain": "ncha.gov.cn",
+          "sourceRelationship": "primary",
+          "publishedDate": "2026-09-06",
+          "contentItemId": "digest-030c3cde69a3d0eb16d6",
+          "publicationDateBasis": "digest_publication"
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国内", "浙江"],
+      "topic": [
+        "考古",
+        "国内",
+        "浙江"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "rejected",
-      "decisionReason": "连续发掘材料具有专业价值，但原始证据与本期另一条国家文物局摘编事件复用同一页面；为避免重复来源 URL，暂不入选。",
-      "selectedForDaily": false,
+      "decision": "selected",
+      "decisionReason": "多年发掘揭示东周城郊聚落的土台与河道结构，提供越国都城外围研究的新材料；条目已单独核验，不因共用摘编页面排除。",
+      "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "国家文物局摘编中的独立条目，未与同页其他考古事件合并。",
       "discoveredVia": "ncha-wenwu-news",
@@ -108,11 +175,16 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "考古材料专业增量明确，但本期不重复使用同一国家文物局摘编页面。",
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "多年发掘揭示东周城郊聚落的土台与河道结构，提供越国都城外围研究的新材料；条目已单独核验，不因共用摘编页面排除。",
       "editorialPriorityScore": 62,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["substantive_archaeological_discovery_or_new_knowledge", "primary_freshness"]
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ],
+      "dailyItemNumber": 3,
+      "dailyItemTitle": "绍兴南山遗址揭示东周大型聚落的新面貌"
     },
     {
       "candidateId": "daily-20260908-004",
@@ -124,9 +196,21 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
       "publisher": "ncha.gov.cn",
-      "evidenceSources": [{"name": "共解丝路密码 中吉联合考古取得突破性进展", "url": "https://www.chinanews.com.cn/gn/2026/09-01/10687771.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "共解丝路密码 中吉联合考古取得突破性进展",
+          "url": "https://www.chinanews.com.cn/gn/2026/09-01/10687771.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国际", "吉尔吉斯斯坦"],
+      "topic": [
+        "考古",
+        "国际",
+        "吉尔吉斯斯坦"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
@@ -144,8 +228,12 @@
       "finalEditorialReason": "事件同时具备遗址认识的新材料和可核对的技术合作落点，符合国际合作的实质性门槛。",
       "editorialPriorityScore": 96,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["major_archaeological_or_heritage_discovery_signal", "meaningful_institutional_or_international_cooperation", "primary_freshness"],
-      "dailyItemNumber": 3,
+      "editorialReasons": [
+        "major_archaeological_or_heritage_discovery_signal",
+        "meaningful_institutional_or_international_cooperation",
+        "primary_freshness"
+      ],
+      "dailyItemNumber": 5,
       "dailyItemTitle": "中吉联合考古在吉尔吉斯斯坦红河遗址取得突破性进展"
     },
     {
@@ -158,9 +246,22 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
       "publisher": "unesco.org",
-      "evidenceSources": [{"name": "Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize", "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize",
+          "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["文献遗产", "文化遗产", "国际", "巴勒斯坦"],
+      "topic": [
+        "文献遗产",
+        "文化遗产",
+        "国际",
+        "巴勒斯坦"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
@@ -178,8 +279,11 @@
       "finalEditorialReason": "事件把文献数字化、修复实验室和冲突中的应急保护连成具体实践，专业增量不止于奖项本身。",
       "editorialPriorityScore": 58,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["heritage_recognition_or_world_heritage_update", "backfill_freshness"],
-      "dailyItemNumber": 4,
+      "editorialReasons": [
+        "heritage_recognition_or_world_heritage_update",
+        "backfill_freshness"
+      ],
+      "dailyItemNumber": 6,
       "dailyItemTitle": "加沙文献遗产保护者获 2026 年 UNESCO/Jikji 记忆世界奖"
     },
     {
@@ -192,14 +296,27 @@
       "discoverySourceType": "query_search",
       "discoveryUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOS3YzS1JRVWE4M2dIYWtGOXI0Qk1JbFFubHk0Ukw2YXlMOHc3M1NWUVpfQUlVRzNvNTVpSTlHRjA0bTdMTHllbWE1SGFrTzB2bXdTNzhMb0Fkd2ExS3ZESjhlMHFYVkpTZ3l1UnZrY1pXSl9xVDNZajlBZGlqc0F3V1A4TlRnVE91empTV05lSmQyZw?oc=5",
       "publisher": "winnipeg.citynews.ca",
-      "evidenceSources": [{"name": "Winnipeg’s historic St. Boniface Museum gets $400K federal funding for restoration work", "url": "https://winnipeg.citynews.ca/2026/09/07/winnipeg-st-boniface-museum-funding-restoration/", "tier": "provisional_B", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "Winnipeg’s historic St. Boniface Museum gets $400K federal funding for restoration work",
+          "url": "https://winnipeg.citynews.ca/2026/09/07/winnipeg-st-boniface-museum-funding-restoration/",
+          "tier": "provisional_B",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "provisional_B",
-      "topic": ["博物馆", "文物保护", "国际", "加拿大"],
+      "topic": [
+        "博物馆",
+        "文物保护",
+        "国际",
+        "加拿大"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "rejected",
-      "decisionReason": "虽有文章级 provisional_B，但当前仅单一地方媒体直接证据；在今日已有 UNESCO A 级国际遗产事件的情况下，不把较低层级资金新闻列入五条日报。",
+      "decision": "deferred",
+      "decisionReason": "文章已达到 provisional_B 证据门槛；本次尚需核清修复对象、资金用途与工程阶段，才能判断具体保护实践增量，暂缓选入。",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "notes": "保留在候选账本中，拒绝不等于删除发现记录。",
@@ -208,11 +325,15 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "证据可核对但层级和专业增量不足以超过本期已选国际事件。",
+      "finalEditorialDecision": "deferred",
+      "finalEditorialReason": "文章已达到 provisional_B 证据门槛；本次尚需核清修复对象、资金用途与工程阶段，才能判断具体保护实践增量，暂缓选入。",
       "editorialPriorityScore": 86,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["museum_or_cultural_institution_governance", "sustained_public_attention", "primary_freshness"]
+      "editorialReasons": [
+        "museum_or_cultural_institution_governance",
+        "sustained_public_attention",
+        "primary_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-007",
@@ -224,14 +345,27 @@
       "discoverySourceType": "query_search",
       "discoveryUrl": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOG1NdHpMVExCLUR0bzFLRWJKLWpKTGFmSkd2ZVJ1SWt4SHZ4X3daSWs2b3FHY2NVSVVnbFVKYWI2WVYtQ0ViVWZqVlBTV0toaDBMSkEwdHFieFNvcFVSY3k1Z1QzbHRfVEZwSWlwcU84dXBMbWlUdkdMbW1rQ0RzaWEyakJWclhnM1BPYlZjLWhPUExt?oc=5",
       "publisher": "andoveradvertiser.co.uk",
-      "evidenceSources": [{"name": "Andover museum could be set to receive £150K funding", "url": "https://www.andoveradvertiser.co.uk/news/26517863.andover-museum-set-receive-150k-funding/", "tier": "provisional_B", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "Andover museum could be set to receive £150K funding",
+          "url": "https://www.andoveradvertiser.co.uk/news/26517863.andover-museum-set-receive-150k-funding/",
+          "tier": "provisional_B",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "provisional_B",
-      "topic": ["博物馆", "行业治理", "国际", "英国"],
+      "topic": [
+        "博物馆",
+        "行业治理",
+        "国际",
+        "英国"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "rejected",
-      "decisionReason": "文章级事实可核对，但地方博物馆资金包的专业外溢性有限，本期不以低层级单一报道挤占更具方法和制度增量的条目。",
+      "decision": "deferred",
+      "decisionReason": "文章已达到 provisional_B 证据门槛；本次尚需核清救助资金的落实状态、博物馆存续风险与后续安排，暂缓选入。",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "notes": "保留可核对的直接原文，未将其写成已获最终拨款的确定事实。",
@@ -240,11 +374,15 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "仅有地方资金新闻的单一 provisional_B 证据，专业覆盖不足。",
+      "finalEditorialDecision": "deferred",
+      "finalEditorialReason": "文章已达到 provisional_B 证据门槛；本次尚需核清救助资金的落实状态、博物馆存续风险与后续安排，暂缓选入。",
       "editorialPriorityScore": 80,
       "editorialPriorityLabel": "high",
-      "editorialReasons": ["museum_or_cultural_institution_governance", "sustained_public_attention", "backfill_freshness"]
+      "editorialReasons": [
+        "museum_or_cultural_institution_governance",
+        "sustained_public_attention",
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-008",
@@ -256,9 +394,22 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
       "publisher": "ncha.gov.cn",
-      "evidenceSources": [{"name": "仰韶时代与中华文明形成学术研讨会召开", "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "仰韶时代与中华文明形成学术研讨会召开",
+          "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "行业治理", "国内", "河南"],
+      "topic": [
+        "考古",
+        "行业治理",
+        "国内",
+        "河南"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -276,7 +427,10 @@
       "finalEditorialReason": "常规学术会议报道，缺少本期所需的具体成果增量。",
       "editorialPriorityScore": 62,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["substantive_archaeological_discovery_or_new_knowledge", "primary_freshness"]
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-009",
@@ -288,15 +442,29 @@
       "discoverySourceType": "source_scan",
       "discoveryUrl": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
       "publisher": "unesco.org",
-      "evidenceSources": [{"name": "Heritage Resilience in Congo", "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "Heritage Resilience in Congo",
+          "url": "https://www.unesco.org/en/articles/heritage-resilience-congo-unesco-and-government-take-action-climate-challenge-support-heritage",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true,
+          "checkedAt": "2026-09-08T12:20:19+08:00"
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["文化遗产", "文物保护", "国际", "刚果"],
+      "topic": [
+        "文化遗产",
+        "文物保护",
+        "国际",
+        "刚果"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "rejected",
-      "decisionReason": "UNESCO A 级原文可核对，但本期国际版面已选入更具体的文献遗产保护实践；为避免同源国际条目过密，暂不重复入选。",
-      "selectedForDaily": false,
+      "decision": "selected",
+      "decisionReason": "9月4日报道的跨部门遗产风险考察覆盖博物馆与遗产地，形成脆弱性评估和建议；与文献遗产奖项为独立事件，明确区分8月考察与9月报道。",
+      "selectedForDaily": true,
       "dedupStatus": "unique_event",
       "notes": "拒绝是版面和专业增量判断，不代表事件或来源不实。",
       "discoveredVia": "unesco-news",
@@ -304,11 +472,16 @@
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "同为 UNESCO A 级遗产保护事件，但本期已有更具体、可展开的文献遗产保护案例。",
+      "finalEditorialDecision": "selected",
+      "finalEditorialReason": "9月4日报道的跨部门遗产风险考察覆盖博物馆与遗产地，形成脆弱性评估和建议；与文献遗产奖项为独立事件，明确区分8月考察与9月报道。",
       "editorialPriorityScore": 58,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["heritage_emergency_response", "backfill_freshness"]
+      "editorialReasons": [
+        "heritage_emergency_response",
+        "backfill_freshness"
+      ],
+      "dailyItemNumber": 7,
+      "dailyItemTitle": "教科文组织披露刚果遗产气候风险考察，覆盖博物馆与遗产地"
     },
     {
       "candidateId": "daily-20260908-010",
@@ -320,9 +493,22 @@
       "discoverySourceType": "query_search",
       "discoveryUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTE11VmhGLUtqbmVRV3pjLVlFa3JWcEVXNFczNGN5ejl6Z2xtQXI4eDBFZnJ3Q2Y2UVZPaGhTT2VrR1BaLVIxSk9sbTY4RnJqUHl0WWY0YlN3dWhLQXFjNnlUb0VySXRPUHZGaEE?oc=5",
       "publisher": "chinanews.com.cn",
-      "evidenceSources": [{"name": "“龟兹与世界”壁画大展以复原复刻形式让流失海外文物“精神回归”", "url": "http://www.chinanews.com.cn/cul/2026/09-07/10692221.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "“龟兹与世界”壁画大展以复原复刻形式让流失海外文物“精神回归”",
+          "url": "http://www.chinanews.com.cn/cul/2026/09-07/10692221.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["博物馆", "展览", "国内", "新疆"],
+      "topic": [
+        "博物馆",
+        "展览",
+        "国内",
+        "北京"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -340,8 +526,11 @@
       "finalEditorialReason": "展览以复原复刻把流失海外壁画转为可研究、可观看的公共文化内容，且使用独立中国新闻网 A 级原文。",
       "editorialPriorityScore": 56,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["significant_museum_or_exhibition_project", "primary_freshness"],
-      "dailyItemNumber": 2,
+      "editorialReasons": [
+        "significant_museum_or_exhibition_project",
+        "primary_freshness"
+      ],
+      "dailyItemNumber": 4,
       "dailyItemTitle": "龟兹壁画大展以复原复刻让流失海外文物“精神回归”"
     },
     {
@@ -354,9 +543,21 @@
       "discoverySourceType": "query_search",
       "discoveryUrl": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNbWRpN3o1VC1VVk1DSFpTZ3o4RmtzYm9SQmdSWGR6bS1acjRpWVF5cV9RY2FnRmN2ZUV4eVBRclM3T2tpWmpxTEI3YTN2OEhKd0VPTTZhSlNCVnFfM0ZaQmpqMUdReEZWaXktRXQ5Z2JNVnJXUldQV3NPWnVpbHJPMklQMlU2YTlZcGNCVng5OFJ6Vm9yQVJ6VmWmM3d014aWVDbDQ0UVFYTkhOcl9URm5GUlpBVUN3dklnQ1lFUU5oaFdEckotd0hja3RtZHJvallmR2lJ?oc=5",
       "publisher": "timesofindia.indiatimes.com",
-      "evidenceSources": [{"name": "Archaeologists call for excavation after temple relic found in Ganjam", "url": "https://timesofindia.indiatimes.com/city/bhubaneswar/archaeologists-call-for-excavation-after-temple-relic-found-in-ganjam/articleshow/133711193.cms", "tier": "provisional_B", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "Archaeologists call for excavation after temple relic found in Ganjam",
+          "url": "https://timesofindia.indiatimes.com/city/bhubaneswar/archaeologists-call-for-excavation-after-temple-relic-found-in-ganjam/articleshow/133711193.cms",
+          "tier": "provisional_B",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "provisional_B",
-      "topic": ["考古", "国际", "印度"],
+      "topic": [
+        "考古",
+        "国际",
+        "印度"
+      ],
       "domestic": false,
       "international": true,
       "scope": "international",
@@ -374,7 +575,10 @@
       "finalEditorialReason": "处于线索和呼吁阶段，缺少可发布的考古实质进展。",
       "editorialPriorityScore": 56,
       "editorialPriorityLabel": "medium",
-      "editorialReasons": ["substantive_archaeological_discovery_or_new_knowledge", "backfill_freshness"]
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-012",
@@ -386,9 +590,20 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
       "publisher": "kaogu.cssn.cn",
-      "evidenceSources": [{"name": "西周王畿多元人群互动交融的考古学观察", "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "西周王畿多元人群互动交融的考古学观察",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国内"],
+      "topic": [
+        "考古",
+        "国内"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -406,7 +621,9 @@
       "finalEditorialReason": "学术价值明确但本期新材料表达不如已选考古事件具体。",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["primary_freshness"]
+      "editorialReasons": [
+        "primary_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-013",
@@ -418,9 +635,20 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
       "publisher": "news.cn",
-      "evidenceSources": [{"name": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色", "url": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色",
+          "url": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["文化遗产", "国内"],
+      "topic": [
+        "文化遗产",
+        "国内"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -438,7 +666,9 @@
       "finalEditorialReason": "文化展示属性强，专业增量不足。",
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["primary_freshness"]
+      "editorialReasons": [
+        "primary_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-014",
@@ -450,9 +680,21 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
       "publisher": "kaogu.cssn.cn",
-      "evidenceSources": [{"name": "茌平教场铺——龙山文化遗址的发掘与研究", "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "茌平教场铺——龙山文化遗址的发掘与研究",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国内", "山东"],
+      "topic": [
+        "考古",
+        "国内",
+        "山东"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -470,7 +712,9 @@
       "finalEditorialReason": "专业性合格但回溯新鲜度和版面优先级较低。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-015",
@@ -482,9 +726,21 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
       "publisher": "kaogu.cssn.cn",
-      "evidenceSources": [{"name": "汉杜陵陵园遗址（增订本）", "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "汉杜陵陵园遗址（增订本）",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国内", "陕西"],
+      "topic": [
+        "考古",
+        "国内",
+        "陕西"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -502,7 +758,9 @@
       "finalEditorialReason": "资料发布而非当日实质事件进展。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-016",
@@ -514,9 +772,21 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
       "publisher": "kaogu.cssn.cn",
-      "evidenceSources": [{"name": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究", "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "国内", "福建"],
+      "topic": [
+        "考古",
+        "国内",
+        "福建"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -534,7 +804,9 @@
       "finalEditorialReason": "专业论文型成果，回溯新鲜度和版面优先级较低。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-017",
@@ -546,9 +818,22 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
       "publisher": "xinhuanet.com",
-      "evidenceSources": [{"name": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级", "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+          "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["博物馆", "公共文化", "国内", "甘肃"],
+      "topic": [
+        "博物馆",
+        "公共文化",
+        "国内",
+        "甘肃"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -566,7 +851,9 @@
       "finalEditorialReason": "宣传性较强，缺少可单独发布的行业机制变化。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-018",
@@ -578,9 +865,22 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
       "publisher": "xinhuanet.com",
-      "evidenceSources": [{"name": "嘎仙洞遗址：一方石刻祝文 一部民族融合史", "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+          "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["文化遗产", "考古", "国内", "内蒙古"],
+      "topic": [
+        "文化遗产",
+        "考古",
+        "国内",
+        "内蒙古"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -598,7 +898,9 @@
       "finalEditorialReason": "历史普及属性较强，缺少本期所需的新进展。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     },
     {
       "candidateId": "daily-20260908-019",
@@ -610,9 +912,21 @@
       "discoverySourceType": "fixed_panel_radar",
       "discoveryUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
       "publisher": "kaogu.cssn.cn",
-      "evidenceSources": [{"name": "2016—2026年中国纺织考古学科发展综述", "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml", "tier": "A", "role": "evidence-upgrade", "articleVerified": true}],
+      "evidenceSources": [
+        {
+          "name": "2016—2026年中国纺织考古学科发展综述",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+          "tier": "A",
+          "role": "evidence-upgrade",
+          "articleVerified": true
+        }
+      ],
       "evidenceTier": "A",
-      "topic": ["考古", "文化遗产", "国内"],
+      "topic": [
+        "考古",
+        "文化遗产",
+        "国内"
+      ],
       "domestic": true,
       "international": false,
       "scope": "domestic",
@@ -630,8 +944,25 @@
       "finalEditorialReason": "学科综述属于背景资料，不是本期优先的即时事件。",
       "editorialPriorityScore": 22,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["backfill_freshness"]
+      "editorialReasons": [
+        "backfill_freshness"
+      ]
     }
   ],
-  "summary": {"discovered": 19, "selected": 4, "rejected": 15, "deferred": 0, "needsVerification": 0}
+  "summary": {
+    "discovered": 19,
+    "selected": 7,
+    "rejected": 10,
+    "deferred": 2,
+    "needsVerification": 0
+  },
+  "editorialInputPath": "content/复核/2026-09-08-editorial-replay.json",
+  "revision": {
+    "revisionType": "same_day_editorial_revision",
+    "revisedAt": "2026-09-08T12:20:19+08:00",
+    "editorialInputPath": "content/复核/2026-09-08-editorial-replay.json",
+    "discoveryAuditUnchanged": true,
+    "revisionReason": "修复发布校验与独立摘编条目身份冲突；同源不再作为单独拒稿理由。原始发现池及19个eventId保持不变。",
+    "runtimeEnrichment": true
+  }
 }

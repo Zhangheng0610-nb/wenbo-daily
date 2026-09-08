@@ -1,0 +1,57 @@
+{
+  "revisedAt": "2026-09-08T12:20:19+08:00",
+  "baseGitCommit": "6169806",
+  "baseDiscoveryAuditSha256": "6d8a368cb68783971bb58e8dc8837a90421d62fd3aac8a0e624bd7e81d2587c4",
+  "discoveryAuditUnchanged": true,
+  "before": {
+    "discovered": 19,
+    "selected": 4,
+    "rejected": 15,
+    "deferred": 0,
+    "needsVerification": 0
+  },
+  "after": {
+    "discovered": 19,
+    "selected": 7,
+    "rejected": 10,
+    "deferred": 2,
+    "needsVerification": 0
+  },
+  "decisionChanges": [
+    {
+      "eventId": "event-0b196742e887",
+      "title": "深圳修订非国有博物馆扶持办法，资助转向原创展览与学术研究",
+      "before": "rejected",
+      "after": "selected",
+      "reason": "扶持办法调整原创展览、社会教育与学术研究资助，并新增学术专著支持，具有独立制度增量；条目已单独核验，同页其他事件不构成重复。"
+    },
+    {
+      "eventId": "event-7be9f219acc7",
+      "title": "绍兴南山遗址揭示东周大型聚落的新面貌",
+      "before": "rejected",
+      "after": "selected",
+      "reason": "多年发掘揭示东周城郊聚落的土台与河道结构，提供越国都城外围研究的新材料；条目已单独核验，不因共用摘编页面排除。"
+    },
+    {
+      "eventId": "event-956583110db0",
+      "title": "Winnipeg’s historic St. Boniface Museum gets $400K federal funding for restoration work",
+      "before": "rejected",
+      "after": "deferred",
+      "reason": "文章已达到 provisional_B 证据门槛；本次尚需核清修复对象、资金用途与工程阶段，才能判断具体保护实践增量，暂缓选入。"
+    },
+    {
+      "eventId": "event-514a7ea3d063",
+      "title": "Major Andover museum could be saved with £150k funding package - Andover Advertiser",
+      "before": "rejected",
+      "after": "deferred",
+      "reason": "文章已达到 provisional_B 证据门槛；本次尚需核清救助资金的落实状态、博物馆存续风险与后续安排，暂缓选入。"
+    },
+    {
+      "eventId": "event-2b083ded7c0e",
+      "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+      "before": "rejected",
+      "after": "selected",
+      "reason": "9月4日报道的跨部门遗产风险考察覆盖博物馆与遗产地，形成脆弱性评估和建议；与文献遗产奖项为独立事件，明确区分8月考察与9月报道。"
+    }
+  ]
+}

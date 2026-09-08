@@ -126,6 +126,31 @@ def check_daily_structure(path):
     return errors
 
 
+def _approved_shared_source_urls(path, items=None):
+    """Cross-check selected segment evidence against the declared editorial pool."""
+    from automation.source_segments import approved_shared_urls
+    try:
+        payload = json.loads((CONTENT / '候选' / f'{path.stem}.json').read_text(encoding='utf-8'))
+        reference = payload.get('editorialInputPath') or payload.get('discoveryAuditPath')
+        if not reference:
+            return set()
+        target = (ROOT / reference).resolve()
+        if not target.is_relative_to(ROOT.resolve()):
+            return set()
+        audit = json.loads(target.read_text(encoding='utf-8'))
+        pool = audit.get('finalEditorialPool') or audit.get('candidateEvaluation', {}).get('finalEditorialPool', {})
+        if items is None:
+            parsed = parse_md(path)
+            items = parsed.get('ordered_items') or parsed['domestic'] + parsed['international']
+        approved = approved_shared_urls(items, payload.get('candidates', []), pool.get('events', []))
+        # An extra copy inside a paragraph is not a second verified event.
+        raw_urls = [canonical_url(url) for url in URL_RE.findall(path.read_text(encoding='utf-8'))]
+        return {url for url in approved if raw_urls.count(url) == sum(
+            canonical_url(source.get('url', '')) == url for item in items for source in item.get('sources', []))}
+    except (OSError, ValueError, TypeError, AttributeError):
+        return set()
+
+
 def daily_structure_warnings(path):
     """Report suspicious cross-item source reuse without guessing semantics."""
     data = parse_md(path)
@@ -135,10 +160,11 @@ def daily_structure_warnings(path):
         for source in item.get('sources') or []:
             normalized = canonical_url(source.get('url', ''))
             by_url.setdefault(normalized, []).append(item.get('title', ''))
+    approved = _approved_shared_source_urls(path, items) if any(len(v) > 1 for v in by_url.values()) else set()
     return [
         f'source URL shared by distinct daily items: {url} ({" / ".join(titles)})'
         for url, titles in by_url.items()
-        if url and len(set(titles)) > 1
+        if url and len(set(titles)) > 1 and url not in approved
     ]
 
 
@@ -168,6 +194,8 @@ def check_daily(path, strict=True):
     text = path.read_text(encoding='utf-8')
     urls = URL_RE.findall(text)
     provisional_urls = _provisional_evidence_urls_for_report(path)
+    normalized_urls = [canonical_url(url) for url in urls]
+    approved_shared = _approved_shared_source_urls(path) if len(set(normalized_urls)) < len(normalized_urls) else set()
     seen = set()
     for url in urls:
         info = source_info(url)
@@ -176,7 +204,7 @@ def check_daily(path, strict=True):
             if strict:
                 errors.append(message)
         normalized = canonical_url(url)
-        if normalized in seen and strict:
+        if normalized in seen and strict and normalized not in approved_shared:
             errors.append(f'duplicate source URL in report: {normalized}')
         seen.add(normalized)
     if text.count('### ') and len(urls) < text.count('### '):

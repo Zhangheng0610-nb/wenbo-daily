@@ -201,3 +201,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 `qualifiedAfter` 是最终证据回溯后的候选数量，不是补查的因果增益。若补查仅增加原始记录、没有增加可用事件，优先修复直接来源与原文解析，不继续堆搜索查询。英文遗产专业规则现在要求“对象 + 行动”匹配：遗产应急响应、文献遗产认可、考古新认识、遗产数字保存；一般教育、媒体和气候新闻不靠国际机构名头加分。
 
 原文核验现在按轮次复用最多 128 个 URL 的响应（包括失败），网络超时设为 20 秒；下一轮清空缓存。同一摘编不同条目必须保留 contentItemId 并分别核验自身段落。补查阶段也展开摘编，与初次发现共用三篇预算。见 PRODUCT_ROUND8.md。
+
+### 共享官方摘编的发布规则
+
+同一 URL 可承载多个独立事件。保留 finalEditorialPool.evidenceSources 内的 contentItemId、articleVerified 和 publicationDateBasis，复制到对应选中候选的 evidenceSources；dailyItemNumber / dailyItemTitle 必须与正文一致。发布校验会核对唯一编辑输入中的同一 eventId 和条目证据；相同条目、无核验或伪造编号仍失败。不要删除有效新闻来绕过 URL 重复错误。发生同日修订时保留原始发现文件，按现有受控复核规范另写 artifact。
