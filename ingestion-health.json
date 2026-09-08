@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "latestReport": "2026-09-08",
   "days": [
     {
@@ -118,5 +118,65 @@
       "lateArrivalCount": null
     }
   ],
+  "observations": {
+    "panel": [
+      {
+        "sourceId": "ncha",
+        "checkedAt": "2026-09-08T07:13:56+08:00",
+        "status": "no_update",
+        "scanStatus": "checked",
+        "rawCount": 5,
+        "note": ""
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "checkedAt": "2026-09-08T07:14:17+08:00",
+        "status": "no_update",
+        "scanStatus": "checked",
+        "rawCount": 0,
+        "note": ""
+      },
+      {
+        "sourceId": "archaeology",
+        "checkedAt": "2026-09-08T07:14:18+08:00",
+        "status": "no_update",
+        "scanStatus": "checked",
+        "rawCount": 15,
+        "note": ""
+      },
+      {
+        "sourceId": "museum-association",
+        "checkedAt": "2026-09-08T07:14:20+08:00",
+        "status": "partial",
+        "scanStatus": "partial",
+        "rawCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "checkedAt": "2026-09-08T07:14:21+08:00",
+        "status": "partial",
+        "scanStatus": "partial",
+        "rawCount": 245,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "checkedAt": "2026-09-08T07:14:54+08:00",
+        "status": "partial",
+        "scanStatus": "partial",
+        "rawCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
+      }
+    ],
+    "digital": {
+      "checkedAt": "2026-09-08T07:43:19+08:00",
+      "status": "scan_success_no_update",
+      "contentItemsNew": 0,
+      "fetchFailed": 0,
+      "parseFailed": 0,
+      "note": "近期分页扫描完成；未发现新的数字化来源页或内容条目。"
+    }
+  },
   "meaning": "Fixed-panel counts are source articles by publication date; they are not unique events or proof of full coverage. Build time is not collection time."
 }

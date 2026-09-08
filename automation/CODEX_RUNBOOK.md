@@ -207,3 +207,9 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 同一 URL 可承载多个独立事件。保留 finalEditorialPool.evidenceSources 内的 contentItemId、articleVerified 和 publicationDateBasis，复制到对应选中候选的 evidenceSources；dailyItemNumber / dailyItemTitle 必须与正文一致。发布校验会核对唯一编辑输入中的同一 eventId 和条目证据；相同条目、无核验或伪造编号仍失败。不要删除有效新闻来绕过 URL 重复错误。发生同日修订时保留原始发现文件，按现有受控复核规范另写 artifact。
 
 从 2026-09-08 起，候选账本校验检查明确的技术性拒稿理由：对证据合格且不是重复事件的候选，不能使用“同一来源 URL 不重复”“同源过密”“五条日报”等理由直接拒绝。校验失败时应重新核对新闻价值、独立条目证据或真正缺失的背景，保留真实判断；不得机械改成 selected，也不得只换措辞掩盖原决定。
+
+### 第十一轮补充
+
+- 中国文物报按同一期全部版面扫描；缺版/空壳不能标为完整。期报不存在不代表整个行业没有新闻。
+- 驾驶舱从 ingestion-health.json 的 observations 读取真实检查记录，构建时间不更新采集新鲜度。
+- 编辑复核跨平台文件可显式声明 baseDiscoveryAuditHashMode=lf-normalized-v1，仅将 CRLF 规范为 LF 后计算 SHA-256；旧记录默认 raw。不得改动原始发现内容来迁就哈希。

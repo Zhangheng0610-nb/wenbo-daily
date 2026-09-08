@@ -47,7 +47,11 @@ def _resolved_path(root, reference):
     return path
 
 
-def _sha256(path):
+def _sha256(path, mode='raw'):
+    if mode == 'lf-normalized-v1':
+        return hashlib.sha256(path.read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+    if mode != 'raw':
+        raise ValueError('unsupported audit hash mode')
     digest = hashlib.sha256()
     with path.open('rb') as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b''):
@@ -134,7 +138,10 @@ def validate_editorial_input(ledger_path, payload, root=None):
         errors.append(f'editorial replay base discovery audit missing: {discovery_ref}')
     else:
         expected_hash = replay.get('baseDiscoveryAuditSha256')
-        if not isinstance(expected_hash, str) or expected_hash.lower() != _sha256(base_path):
+        hash_mode = replay.get('baseDiscoveryAuditHashMode', 'raw')
+        if hash_mode not in ('raw', 'lf-normalized-v1'):
+            errors.append('unsupported baseDiscoveryAuditHashMode')
+        elif not isinstance(expected_hash, str) or expected_hash.lower() != _sha256(base_path, hash_mode):
             errors.append('editorial replay baseDiscoveryAuditSha256 does not match immutable discovery audit')
     query_audits = replay.get('queryAudits')
     if not isinstance(query_audits, list) or not query_audits:

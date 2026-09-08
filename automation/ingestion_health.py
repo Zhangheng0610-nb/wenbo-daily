@@ -9,6 +9,31 @@ def load(path):
     return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
 
 
+def collection_observations(root):
+    """Latest actual attempts, independently of the latest published daily."""
+    panel = {}
+    for path in sorted((root / 'content/监测').glob('????-??-??.json')):
+        for entry in load(path).get('coverage', []):
+            if entry.get('runType') != 'live' or entry.get('mode') != 'operational':
+                continue
+            stamp = entry.get('checkedAt') or ''
+            source = entry.get('sourceId')
+            if source and stamp and stamp > (panel.get(source, {}).get('checkedAt') or ''):
+                panel[source] = {key: entry.get(key) for key in
+                                 ('sourceId', 'checkedAt', 'status', 'scanStatus', 'rawCount', 'note')}
+    digital = {}
+    for path in sorted((root / 'content/数字趋势监测').glob('????-??-??.json')):
+        entry = load(path)
+        stamp = entry.get('checkedAt') or ''
+        # Historical scans cannot establish today's collection health.
+        if stamp[:10] != entry.get('date') or entry.get('runType') == 'replay':
+            continue
+        if stamp > (digital.get('checkedAt') or ''):
+            digital = {key: entry.get(key) for key in
+                       ('checkedAt', 'status', 'contentItemsNew', 'fetchFailed', 'parseFailed', 'note')}
+    return {'panel': list(panel.values()), 'digital': digital}
+
+
 def write_health(root, latest):
     root = Path(root)
     rows = []
@@ -35,7 +60,8 @@ def write_health(root, latest):
                          'digitalNewItems': digital.get('contentItemsNew'),
                          'publicationWindow': panel.get('scanAudit', {}).get('publicationWindow'),
                          'lateArrivalCount': panel.get('scanAudit', {}).get('lateArrivalCount')})
-    result = {'schemaVersion': 1, 'latestReport': latest, 'days': rows,
+    result = {'schemaVersion': 2, 'latestReport': latest, 'days': rows,
+              'observations': collection_observations(root),
               'meaning': 'Fixed-panel counts are source articles by publication date; they are not unique events or proof of full coverage. Build time is not collection time.'}
     (root / 'ingestion-health.json').write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     def show(value):
@@ -47,5 +73,18 @@ def write_health(root, latest):
         f"{r['usableDiscoverySources']}/{r['discoverySources']}",
         f"{show(r['queriesSucceeded'])}/{show(r['queriesAttempted'])}", r['selected'],
         r['digitalCheckedAt'], r['digitalNewItems'])) + '</tr>' for r in rows)
-    (root / 'data-health.html').write_text('''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>采集与更新记录 | 文博</title><style>main{max-width:1120px;margin:auto;padding:24px}th,td{padding:12px;text-align:left;border-bottom:1px solid #8997ac55}table{border-collapse:collapse;min-width:940px}p{line-height:1.8}.table-scroll{overflow:auto}td{font-variant-numeric:tabular-nums;white-space:nowrap}@media(max-width:600px){main{padding:16px 0}main h1{font-size:26px;line-height:1.4}}details{margin:16px 0}</style></head><body><main><h1>采集与更新记录</h1><p>页面重新构建不等于抓到了新新闻。时间均为北京时间。这里分别列出原站检查、可解析的发现入口、搜索执行和日报入选结果，帮助判断内容少在哪一步。</p><details><summary>如何理解这些数字</summary><p>固定源文章量按原文发布日期统计，包含补收与历史记录，不等于独立事件量。发现入口只有解析到带日期链接才计入可用；零条解析结果不能证明原站没有新闻。数字新增为 0 表示该次没有新增，未记录表示缺少运行证据。</p></details><div class="table-scroll" role="region" aria-label="最近七期采集记录，可横向滚动" tabindex="0"><table><thead><tr><th>日期</th><th>固定源实际检查时间</th><th>固定源文章</th><th>发现入口可解析/总数</th><th>搜索成功/尝试</th><th>日报入选</th><th>数字趋势检查时间</th><th>数字新增</th></tr></thead><tbody>''' + body + '''</tbody></table></div><p>日报采用近 7 天发现窗口；正式固定源巡检也回看近 7 天，补收保留原文日期，实际发现时间另行记录。早间日报涵盖截至检查时可核实的信息，不代表当天尚未发生的全部新闻。</p><p><a href="index.html">阅读日报</a> · <a href="command-center/">行业观察</a> · <a href="ingestion-health.json">下载运行记录</a></p></main></body></html>''', encoding='utf-8')
+    names = {row['id']: row['name'] for row in load(root / 'heatmap-data.json').get('coverage', {}).get('panel', [])}
+    states = {'success': '检查完成，有收录', 'no_update': '检查完成，本期无新增',
+              'partial': '部分覆盖', 'failed': '检查失败', 'parse_failed': '解析失败'}
+    observation_rows = ''.join('<tr><td>' + show(names.get(row['sourceId'], row['sourceId'])) +
+        '</td><td>' + show(row.get('checkedAt')) + '</td><td>' +
+        show(states.get(row.get('status'), '状态未知')) + '</td><td>' +
+        show(row.get('rawCount')) + '</td><td>' + show(row.get('note') or '—') + '</td></tr>'
+        for row in result['observations']['panel'])
+    observations_html = ('<h2>各信源最近一次实际检查</h2><p>以下保留最近一次尝试，失败不会被先前成功记录遮盖。'
+                         '历史回放不计入实际检查；是否延迟请结合检查时间判断。</p>'
+                         '<div class="table-scroll" role="region" aria-label="各信源检查记录，可横向滚动" tabindex="0">'
+                         '<table><thead><tr><th>信源</th><th>检查时间</th><th>当次结果</th><th>原始发现</th><th>说明</th>'
+                         '</tr></thead><tbody>' + observation_rows + '</tbody></table></div>')
+    (root / 'data-health.html').write_text('''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>采集与更新记录 | 文博</title><style>main{max-width:1120px;margin:auto;padding:24px}th,td{padding:12px;text-align:left;border-bottom:1px solid #8997ac55}table{border-collapse:collapse;min-width:940px}p{line-height:1.8}.table-scroll{overflow:auto}td{font-variant-numeric:tabular-nums;white-space:nowrap}td:last-child{white-space:normal;min-width:160px;max-width:440px}@media(max-width:600px){main{padding:16px 0}main h1{font-size:26px;line-height:1.4}}details{margin:16px 0}</style></head><body><main><h1>采集与更新记录</h1><p>页面重新构建不等于抓到了新新闻。时间均为北京时间。这里分别列出原站检查、可解析的发现入口、搜索执行和日报入选结果，帮助判断内容少在哪一步。</p><details><summary>如何理解这些数字</summary><p>固定源文章量按原文发布日期统计，包含补收与历史记录，不等于独立事件量。发现入口只有解析到带日期链接才计入可用；零条解析结果不能证明原站没有新闻。数字新增为 0 表示该次没有新增，未记录表示缺少运行证据。</p></details><div class="table-scroll" role="region" aria-label="最近七期采集记录，可横向滚动" tabindex="0"><table><thead><tr><th>日期</th><th>固定源实际检查时间</th><th>固定源文章</th><th>发现入口可解析/总数</th><th>搜索成功/尝试</th><th>日报入选</th><th>数字趋势检查时间</th><th>数字新增</th></tr></thead><tbody>''' + body + '''</tbody></table></div><p>日报采用近 7 天发现窗口；正式固定源巡检也回看近 7 天，补收保留原文日期，实际发现时间另行记录。早间日报涵盖截至检查时可核实的信息，不代表当天尚未发生的全部新闻。</p>''' + observations_html + '''<p><a href="index.html">阅读日报</a> · <a href="command-center/">行业观察</a> · <a href="ingestion-health.json">下载运行记录</a></p></main></body></html>''', encoding='utf-8')
     return result

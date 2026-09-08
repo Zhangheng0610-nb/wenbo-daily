@@ -1,7 +1,8 @@
 {
   "revisedAt": "2026-09-08T12:20:19+08:00",
   "baseGitCommit": "6169806",
-  "baseDiscoveryAuditSha256": "b726ad2085cf60b2a413354872481f9bfb906ee9d90b174486abbb29ed8dcaba",
+  "baseDiscoveryAuditSha256": "6d8a368cb68783971bb58e8dc8837a90421d62fd3aac8a0e624bd7e81d2587c4",
+  "baseDiscoveryAuditHashMode": "lf-normalized-v1",
   "discoveryAuditUnchanged": true,
   "before": {
     "discovered": 19,

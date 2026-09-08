@@ -417,6 +417,8 @@ def crawl_cultural_relics_news(start: date, end: date) -> tuple[list[dict], bool
         raise failure or RuntimeError(f"{issue_url}: request failed")
 
     checked = 0
+    edition_failures = 0
+    unrecognized_issues = 0
     with ThreadPoolExecutor(max_workers=8) as pool:
         futures = [pool.submit(read_issue, published) for published in dates]
         for future in as_completed(futures):
@@ -427,13 +429,40 @@ def crawl_cultural_relics_news(start: date, end: date) -> tuple[list[dict], bool
             checked += 1
             issue_date = published.isoformat()
             issue_url = base + "/DigitPager/paper/publishdate/" + issue_date
-            # An unavailable date may render a shell page. Only accept links
-            # whose embedded issue date matches the date we asked for.
-            for text, url in links(page, issue_url):
-                if "/paperDetail/" in url and f"publishdate/{issue_date}/" in url:
-                    found[url] = candidate("cultural-relics-news", published, text, url)
-    complete = checked == len(dates)
-    note = "中国文物报逐日期数字报档案已回溯。" if complete else "中国文物报数字报有日期请求失败，当前仅计为部分回溯。"
+            issue_links = links(page, issue_url)
+            # Every edition has its own article list. The default issue page
+            # usually contains only page one; following article links alone
+            # silently loses the other seven (or more) editions.
+            editions = sorted({url for _text, url in issue_links
+                               if urlsplit(url).hostname == urlsplit(base).hostname
+                               and re.search(r"/DigitPager/paper/id/\d+/publishdate/" + re.escape(issue_date) + r"(?:/|$)", urlsplit(url).path)})
+            pages = [page]
+            if len(editions) > 32:
+                edition_failures += 1
+            for edition_url in editions[:32]:
+                try:
+                    edition_page = fetch(edition_url)
+                except RuntimeError:
+                    edition_failures += 1
+                    continue
+                if not any('/paperDetail/' in url and f'publishdate/{issue_date}/' in url
+                           for _text, url in links(edition_page, edition_url)):
+                    edition_failures += 1
+                pages.append(edition_page)
+            matched = 0
+            for source_page in pages:
+                for text, url in links(source_page, issue_url):
+                    if (urlsplit(url).hostname == urlsplit(base).hostname
+                            and "/paperDetail/" in url and f"publishdate/{issue_date}/" in url):
+                        found[url] = candidate("cultural-relics-news", published, text, url)
+                        matched += 1
+            if not matched and '您请求的日期报纸不存在' not in page:
+                unrecognized_issues += 1
+    complete = checked == len(dates) and not edition_failures and not unrecognized_issues
+    note = (f"中国文物报逐日期及逐版面扫描：请求成功 {checked}/{len(dates)} 天，"
+            f"版面失败 {edition_failures}，无法识别期页 {unrecognized_issues}；"
+            "不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。")
+
     return list(found.values()), complete, note
 
 

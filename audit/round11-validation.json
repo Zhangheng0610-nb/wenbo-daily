@@ -1,0 +1,28 @@
+{
+  "http": [
+    {
+      "path": "command-center/",
+      "status": 200,
+      "bytes": 54251
+    },
+    {
+      "path": "data-health.html",
+      "status": 200,
+      "bytes": 5181
+    },
+    {
+      "path": "ingestion-health.json",
+      "status": 200,
+      "bytes": 5510
+    },
+    {
+      "path": "lib/collection-status.js",
+      "status": 200,
+      "bytes": 1969
+    }
+  ],
+  "browser": "Local navigation blocked with net::ERR_BLOCKED_BY_CLIENT; desktop/mobile visual acceptance not completed.",
+  "tests": 256,
+  "newspaperLiveAudit": "audit/round11-newspaper-live.json",
+  "publicationData": "No daily articles or original discovery ledgers rewritten."
+}
