@@ -205,3 +205,5 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 ### 共享官方摘编的发布规则
 
 同一 URL 可承载多个独立事件。保留 finalEditorialPool.evidenceSources 内的 contentItemId、articleVerified 和 publicationDateBasis，复制到对应选中候选的 evidenceSources；dailyItemNumber / dailyItemTitle 必须与正文一致。发布校验会核对唯一编辑输入中的同一 eventId 和条目证据；相同条目、无核验或伪造编号仍失败。不要删除有效新闻来绕过 URL 重复错误。发生同日修订时保留原始发现文件，按现有受控复核规范另写 artifact。
+
+从 2026-09-08 起，候选账本校验检查明确的技术性拒稿理由：对证据合格且不是重复事件的候选，不能使用“同一来源 URL 不重复”“同源过密”“五条日报”等理由直接拒绝。校验失败时应重新核对新闻价值、独立条目证据或真正缺失的背景，保留真实判断；不得机械改成 selected，也不得只换措辞掩盖原决定。

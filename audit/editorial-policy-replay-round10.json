@@ -1,0 +1,48 @@
+{
+  "mode": "same-day real ledger comparison, no new discovery or publication",
+  "before": {
+    "date": "2026-09-08",
+    "flaggedCount": 4,
+    "events": [
+      {
+        "eventId": "event-0b196742e887",
+        "title": "深圳修订非国有博物馆扶持办法，资助转向原创展览与学术研究",
+        "issues": [
+          "shared_document_quota"
+        ],
+        "reason": "政策本身具备专业价值，但与同一国家文物局摘编页的其他事件存在来源 URL 复用，本期不在日报重复使用该页。"
+      },
+      {
+        "eventId": "event-7be9f219acc7",
+        "title": "绍兴南山遗址揭示东周大型聚落的新面貌",
+        "issues": [
+          "shared_document_quota"
+        ],
+        "reason": "考古材料专业增量明确，但本期不重复使用同一国家文物局摘编页面。"
+      },
+      {
+        "eventId": "event-956583110db0",
+        "title": "Winnipeg’s historic St. Boniface Museum gets $400K federal funding for restoration work",
+        "issues": [
+          "fixed_story_quota"
+        ],
+        "reason": "证据可核对但层级和专业增量不足以超过本期已选国际事件。"
+      },
+      {
+        "eventId": "event-2b083ded7c0e",
+        "title": "News Heritage Resilience in Congo: UNESCO and the Government Take Action on the Climate Challenge with Support from the Heritage Emergency Fund 4 September 2026",
+        "issues": [
+          "publisher_quota"
+        ],
+        "reason": "同为 UNESCO A 级遗产保护事件，但本期已有更具体、可展开的文献遗产保护案例。"
+      }
+    ],
+    "definition": "Explicit disallowed quota reasons; review the decision, never auto-select the story."
+  },
+  "after": {
+    "date": "2026-09-08",
+    "flaggedCount": 0,
+    "events": [],
+    "definition": "Explicit disallowed quota reasons; review the decision, never auto-select the story."
+  }
+}

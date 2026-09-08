@@ -384,6 +384,11 @@ def validate(path, report_path=None):
     errors.extend(validate_discovery_audit(path, payload))
     editorial_input_errors, editorial_pool_ids = validate_editorial_input(path, payload)
     errors.extend(editorial_input_errors)
+    # Prospective gate: preserve pre-migration historical ledger vocabulary.
+    if isinstance(payload.get('date'), str) and payload['date'] >= '2026-09-08':
+        from automation.editorial_policy import review_policy_audit
+        for issue in review_policy_audit(payload)['events']:
+            errors.append(f"{issue['eventId']}: editorial quota reason needs review ({', '.join(issue['issues'])}); do not auto-select or discard valid segment evidence")
     ids = set()
     for index, candidate in enumerate(candidates, 1):
         label = f'candidate {index}'
