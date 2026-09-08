@@ -250,20 +250,24 @@
     .search-detail { padding: 0 14px 13px; }
   }
 </style>
-<link rel="stylesheet" href="assets/product.css"><script src="assets/product.js" defer></script><script src="assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="feed.xml"><link rel="canonical" href="https://zhangheng666.top/search.html">
+<link rel="stylesheet" href="assets/product.css?v=64e8d5c1d10f"><script src="assets/product.js" defer></script><script src="assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="feed.xml"><link rel="canonical" href="https://zhangheng666.top/search.html">
 </head>
-<body class="product-page"><div class="product-bar" data-product-shell><a class="skip-link" href="#product-main">跳到正文</a><a class="product-brand" href="index.html">文博<span>DAILY</span></a><nav aria-label="全站导航"><a href="index.html">资讯</a><a href="command-center/">行业观察</a><a href="jobs.html">机会</a><a href="archive.html">档案</a><a href="search.html" aria-current="page">搜索</a></nav></div>
+<body class="product-page"><div class="product-bar" data-product-shell><a class="skip-link" href="#product-main">跳到正文</a><a class="product-brand" href="index.html">文博<span>DAILY</span></a><nav aria-label="全站导航"><a href="index.html">资讯</a><a href="command-center/">行业观察</a><a href="jobs.html">机会</a><a href="archive.html">档案</a><a href="search.html" aria-current="page">搜索</a><a href="reading.html">收藏</a></nav></div>
 <header class="search-head">
   <p><a class="back" href="index.html">← 返回首页</a></p>
   <h1>搜索资讯与机会</h1>
-  <p class="meta">检索完整关键词；空格分隔的多个关键词须同时出现。包含日报、周报、月报与岗位。</p>
+  <p class="meta">按关键词、收录日期或内容类型查找。</p>
 </header>
 
 <main tabindex="-1" id="product-main">
   <form class="search-wrap" action="search.html" method="get" role="search">
-    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词" required>
+    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词">
     <label class="search-type">范围<select name="type" id="search-type"><option value="all">全部内容</option><option value="daily">日报</option><option value="opportunities">招聘与实习</option><option value="weekly">周报</option><option value="monthly">月报</option></select></label>
+    <label class="search-type">收录起日<input type="date" name="from" id="search-from"></label>
+    <label class="search-type">收录止日<input type="date" name="to" id="search-to"></label>
+    <label class="search-type">排序<select name="sort" id="search-sort"><option value="latest">最新优先</option><option value="relevance">匹配度优先</option></select></label>
     <button class="search-submit" type="submit">搜索</button>
+    <a class="search-reset" href="search.html">重置</a>
   </form>
   <p id="summary" class="search-summary">请输入关键词开始搜索。</p>
   <section id="results" aria-live="polite"><div class="search-empty">正在加载搜索索引…</div></section>
@@ -358,8 +362,8 @@ function renderHit(hit, words) {
   const body = item ? (item.body || item.commentary || item.progress || '') : (record.text || '');
   const tags = item && Array.isArray(item.tags) ? item.tags.map(function(tag) { return '<span class="search-tag">#' + escapeHtml(tag) + '</span>'; }).join('') : '';
   const sources = item ? sourceList(item.sources) : '';
-  return '<details class="search-result">' +
-    '<summary>' + highlight(title, words) + '</summary>' +
+  return '<article class="search-result">' +
+    '<h2><a href="' + escapeHtml(href) + '">' + highlight(title, words) + '</a></h2>' +
     '<div class="search-detail">' +
       '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
       (item && item.auditLabel ? '<p class="evidence-audit">' + escapeHtml(item.auditLabel + '：' + item.auditNote) + '</p>' : '') +
@@ -368,14 +372,23 @@ function renderHit(hit, words) {
       (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
       '<p class="search-open"><a href="' + escapeHtml(href) + '">查看完整条目 →</a></p>' +
     '</div>' +
-    '</details>';
+    '</article>';
 }
 function renderSearch(data, rawQuery) {
   const query = String(rawQuery || '').trim().toLowerCase();
   queryInput.value = rawQuery || '';
-  if (!query) {
-    summary.textContent = '请输入关键词开始搜索。';
-    results.innerHTML = '<div class="search-empty">搜索日报、周报、月报及招聘档案中的完整关键词。</div>';
+  const params = new URLSearchParams(location.search);
+  const sort = params.get('sort') === 'relevance' ? 'relevance' : 'latest';
+  const validDate = value => /^\d{4}-\d{2}-\d{2}$/.test(value || '') && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0,10) === value;
+  const from = validDate(params.get('from')) ? params.get('from') : '';
+  const to = validDate(params.get('to')) ? params.get('to') : '';
+  document.getElementById('search-sort').value = sort;
+  document.getElementById('search-from').value = from;
+  document.getElementById('search-to').value = to;
+  if (from && to && from > to) {
+    summary.textContent = '起日不能晚于止日。';
+    results.innerHTML = '<p class="search-empty">请调整收录日期范围。</p>';
+    document.getElementById('search-more').hidden = true;
     return;
   }
   const groups = queryGroups(query);
@@ -383,9 +396,11 @@ function renderSearch(data, rawQuery) {
   const hits = [];
   const seen = new Set();
   const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
-  const kind = new URLSearchParams(location.search).get('type') || 'all';
+  const requestedKind = params.get('type');
+  const kind = ['daily','opportunities','weekly','monthly'].includes(requestedKind) ? requestedKind : 'all';
   document.getElementById('search-type').value = kind;
   records.forEach(function(record) {
+    if ((from || to) && (!validDate(record.date) || (from && record.date < from) || (to && record.date > to))) return;
     if(kind !== 'all' && (kind === 'opportunities' ? !['jobs','intern'].includes(record.type) : record.type !== kind)) return;
     const items = Array.isArray(record.items) ? record.items : [];
     if (items.length) {
@@ -405,12 +420,13 @@ function renderSearch(data, rawQuery) {
       }
     }
   });
-  hits.sort(function(a, b) { return b.score - a.score || String(b.record.date || '').localeCompare(String(a.record.date || '')); });
-  summary.textContent = '找到 ' + hits.length + ' 条匹配条目（按匹配度排序，保留不同报告记录）';
+  hits.sort(function(a, b) { const dateOrder = String(b.record.date || '').localeCompare(String(a.record.date || '')); return sort === 'latest' ? dateOrder || b.score - a.score : b.score - a.score || dateOrder; });
+  // 保留不同报告记录：此处按条目地址去重，不推断事件同一性。
+  summary.textContent = (query ? '找到 ' : '浏览 ') + hits.length + ' 条 · ' + (sort === 'latest' ? '最新优先' : '匹配度优先');
   let visible = 30;
   const more = document.getElementById('search-more');
   function draw() {
-    results.innerHTML = hits.length ? hits.slice(0, visible).map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配条目。可以换一个更具体或更常见的关键词。</div>';
+    results.innerHTML = hits.length ? hits.slice(0, visible).map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配条目。试试缩短关键词、扩大日期范围，或<a href="search.html">重置筛选</a>。</div>';
     more.hidden = visible >= hits.length;
     more.textContent = '显示更多结果（已显示 ' + Math.min(visible,hits.length) + ' / ' + hits.length + '）';
   }

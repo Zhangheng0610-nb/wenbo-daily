@@ -1,0 +1,30 @@
+{
+  "round": 16,
+  "homepageNewsCards": 7,
+  "dailyArticles": 7,
+  "allHomepageArticleAnchorsExist": true,
+  "datedArchiveIssues": 71,
+  "pagesWithCurrentCssAndCollectionNav": 84,
+  "cssVersion": "64e8d5c1d10f",
+  "lightTheme": "black-white-gray",
+  "darkTheme": "deep-navy",
+  "accent": "restrained blue; amber/red for warnings",
+  "httpChecks": {
+    "index.html": 200,
+    "reports/2026-09-08.html": 200,
+    "archive.html?month=2026-08": 200,
+    "search.html?q=考古": 200,
+    "reading.html": 200,
+    "command-center/": 200,
+    "assets/archive.js": 200,
+    "assets/product.css?v=64e8d5c1d10f": 200
+  },
+  "browserVisualAcceptance": "pending-local-preview; cloud browser policy blocks local files",
+  "automatedTests": {
+    "run": 270,
+    "failures": 0,
+    "errors": 0
+  },
+  "productValidation": "84 pages passed",
+  "dailyValidation": "2026-09-08 passed"
+}

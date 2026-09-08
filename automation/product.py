@@ -8,7 +8,7 @@ import re
 import xml.etree.ElementTree as ET
 
 ORIGIN = 'https://zhangheng666.top'
-NAV = [('index.html', '资讯'), ('command-center/', '行业观察'), ('jobs.html', '机会'), ('archive.html', '档案'), ('search.html', '搜索')]
+NAV = [('index.html', '资讯'), ('command-center/', '行业观察'), ('jobs.html', '机会'), ('archive.html', '档案'), ('search.html', '搜索'), ('reading.html', '收藏')]
 
 
 def job_id(item):
@@ -34,8 +34,7 @@ def safe_url(value):
 
 
 def decorate(html, path):
-    if 'data-product-shell' in html:
-        return html
+    asset_version = hashlib.sha256((Path(__file__).resolve().parents[1] / 'assets/product.css').read_bytes()).hexdigest()[:12]
     prefix = '../' * (len(Path(path).parts) - 1)
     active = 'archive.html' if path.startswith('reports/') else path
     if path == 'intern.html':
@@ -46,7 +45,12 @@ def decorate(html, path):
         active = 'command-center/'
     links = ''.join(f'<a href="{prefix}{url}"' + (' aria-current="page"' if active == url else '') + f'>{label}</a>' for url, label in NAV)
     nav = f'<div class="product-bar" data-product-shell><a class="skip-link" href="#product-main">跳到正文</a><a class="product-brand" href="{prefix}index.html">文博<span>DAILY</span></a><nav aria-label="全站导航">{links}</nav></div>'
-    head = f'<link rel="stylesheet" href="{prefix}assets/product.css"><script src="{prefix}assets/product.js" defer></script><script src="{prefix}assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="{prefix}feed.xml">'
+    if 'data-product-shell' in html:
+        html = re.sub(r'(href="(?:\.\./)*assets/product\.css)(?:\?v=[0-9a-f]+)?(")',
+                      lambda match: match[1] + '?v=' + asset_version + match[2], html)
+        return re.sub(r'<nav aria-label="全站导航">.*?</nav>',
+                      lambda match: '<nav aria-label="全站导航">' + links + '</nav>', html, count=1, flags=re.S)
+    head = f'<link rel="stylesheet" href="{prefix}assets/product.css?v={asset_version}"><script src="{prefix}assets/product.js" defer></script><script src="{prefix}assets/reader.js" defer></script><link rel="alternate" type="application/rss+xml" title="每日文博资讯" href="{prefix}feed.xml">'
     canonical = ORIGIN + ('/' if path == 'index.html' else '/' + path)
     if 'rel="canonical"' not in html:
         head += f'<link rel="canonical" href="{canonical}">'

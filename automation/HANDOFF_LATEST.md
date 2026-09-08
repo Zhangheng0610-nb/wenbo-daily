@@ -1,17 +1,13 @@
-# 累积第十一至十五轮的本地接续
+# 截至第十六轮的完整接续
 
-用户电脑暂不在身边，第十一轮尚未交给本地推送。使用 wenbo-complete-round15.bundle 一份即可，无需叠加第十一轮或其他旧包。完整历史分支：improve/product-reliability，包含已推送 origin/main 16a9b85 及后续五轮。
+使用 wenbo-complete-round16.bundle，一份包含完整历史。目标分支 improve/product-reliability。不要依次导入旧包。
 
-1. 保护本地修改，fetch origin；在独立整合分支安全合并 bundle 与最新 main。不得 force push。
-2. 阅读 PRODUCT_ROUND11.md、PRODUCT_ROUND12.md、PRODUCT_ROUND13.md、PRODUCT_ROUND14.md、PRODUCT_ROUND15.md、CONTENT_STYLE.md 和 CODEX_RUNBOOK.md，不从头审计，不转向招聘。
-3. 运行 python -m unittest discover -s automation -p 'test_*.py'；python build.py；python automation/validate_project.py --date 2026-09-08；python automation/validate_product.py；git diff --check。若日报日期已推进，另验最新日期。
-4. Windows 复核哈希沿用显式 lf-normalized-v1，不手动改回 CRLF raw 哈希，不修改原始发现文件。
-5. 本地浏览器验收桌面/手机驾驶舱、采集记录概览卡、图表筛选和跳转。云端仅完成构建/静态/逻辑验证，视觉验收尚未完成。
-6. 用户把本包交给你后，按已授权的安全整合和正常 push 流程上线；分支保护走正常 PR，不强推。部署检查新脚本 collection-status.js、健康 observations 和概览卡。
-7. 下一次正常早间任务验证报纸全部版面、真实补收雷达、ICOM/ICCROM 适配器进入既有候选流程；新增列表线索不是原文核验通过，不得全部自动入选。
+1. 保护本地未提交修改，fetch origin，在独立整合分支合并 bundle 和最新主线；保留双方每日数据，不覆盖远端新日报，不 force push。
+2. 阅读 PRODUCT_ROUND11.md 至 PRODUCT_ROUND16.md、CONTENT_STYLE.md、CODEX_RUNBOOK.md。前轮若已合并，按祖先关系整合新增提交，不重复从头审计。
+3. 执行 python -m unittest discover -s automation -p 'test_*.py'；python build.py；python automation/validate_project.py --date 2026-09-08；python automation/validate_product.py；git diff --check。如日报已推进，再检查最新日期。
+4. 先本地预览，暂不 push，等用户确认外观。最新偏好：浅色黑白灰主色、深色深蓝，少量适配的提示/重点色可以使用，不能恢复绿色主题。请展示桌面和手机首页、日报的浅色及深色截图。
+5. 新版识别：首页“文博日报”大标题、整期全部新闻卡片、第一条深色主卡；日报桌面左侧目录。检查 CSS 请求含 ?v= 内容哈希并正常加载，避免旧缓存。测试全部标题跳转、目录锚点、筛选、查看更多、收藏、键盘访问、手机横向溢出。另检查搜索日期范围/排序/空关键词浏览，以及档案按月份筛选折叠历史。270 项自动化测试通过，浏览器视觉验收仍待本地完成。
+6. Round15 界面提交 cf8fc6739f2e2c78842fe97a484222c87cd2344e，Round16 为后续独立提交。用户不喜欢时可单独调整或撤回这两轮界面，保留 Round14 及以前的数据改进，不 reset 或强推主线。
+7. Windows 哈希验证仍使用 lf-normalized-v1，不回写原始发现账本。正常早间运行继续验证信源、抓取和事件去重，不把 UI 校验通过当作全自动运营已经达标。
 
-目标保持：每日 6–9 条高价值国内外文博新闻是满意状态，3–5 仅底线，不凑数。同一来源或摘编页面可以包含不同事件，不按信源配额压稿。记录实际失败和漏报，不因测试通过就宣称全自动运营已达标。
-
-本轮新增英文事件优先级修复。重点确认普通政治新闻不再获得文博治理加分，真实文物返还和考古发现进入核验顺序。Speed Museum 返还已有八月报道，不得根据九月文章日期直接当成本周新事件发布。
-
-本轮包含首页和日报阅读体验改版。重点验收近两周完整筛选、默认此前新闻/全部范围切换、6 条分页、清除筛选、键盘焦点、日报固定目录及深浅色与手机布局。云端交互回归通过，真实浏览器视觉验收尚待完成。
+持续目标：日报每日 6–9 条高价值国内外新闻是满意状态，3–5 只是底线，10+ 不封顶，不凑数。下一轮重点是旧事件/新报道的日期判定和真实供给验收。

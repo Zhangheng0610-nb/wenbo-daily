@@ -48,7 +48,7 @@ class ProductTests(unittest.TestCase):
     def test_nested_routes_and_idempotent_shell(self):
         base='<html><head><title>测试</title></head><body><main>正文</main><footer></footer></body></html>'
         html=decorate(base,'reports/2026-09-06.html')
-        self.assertIn('href="../assets/product.css"',html)
+        self.assertRegex(html, r'href="../assets/product\.css\?v=[0-9a-f]{12}"')
         self.assertIn('href="../jobs.html"',html)
         self.assertEqual(html.count('id="product-main"'),1)
         self.assertEqual(decorate(html,'reports/2026-09-06.html'),html)
