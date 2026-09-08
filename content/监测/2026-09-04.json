@@ -102,6 +102,213 @@
   ],
   "items": [
     {
+      "recordId": "operational-20260904-archaeology-0015-6066078shtml",
+      "date": "2026-09-04",
+      "title": "《考古出土（出水）文物移交管理办法（试行）》解读",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066078.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0014-6066076shtml",
+      "date": "2026-09-04",
+      "title": "国家文物局发布考古出土（出水）文物移交管理办法",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066076.shtml"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0018-6066094shtml",
+      "date": "2026-09-04",
+      "title": "把服务习近平总书记和党中央为人民做学问作为真正的政绩——中国社会科学院树立和践行正确政绩观学...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066094.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0013-6066097shtml",
+      "date": "2026-09-04",
+      "title": "汉杜陵陵园遗址（增订本）",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0017-6066093shtml",
+      "date": "2026-09-04",
+      "title": "社科要闻 | 中国社会科学院召开树立和践行正确政绩观学习教育总结会",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066093.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0012-6066083shtml",
+      "date": "2026-09-04",
+      "title": "茌平教场铺——龙山文化遗址的发掘与研究",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
+      "recordId": "operational-20260904-archaeology-0016-6066073shtml",
+      "date": "2026-09-04",
+      "title": "集大成 开新局： 以大历史观把握习近平党建思想的原创性贡献",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066073.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
+    },
+    {
       "recordId": "backfill-20260904-ncha-0006-22204668html",
       "date": "2026-09-04",
       "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",

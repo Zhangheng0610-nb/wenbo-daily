@@ -128,6 +128,43 @@
       "origin": "archive-backfill",
       "observedAt": "2026-09-07T13:36:45.217447+08:00",
       "observationDate": "2026-09-07"
+    },
+    {
+      "recordId": "operational-20260902-xinhua-wenbo-0002-38838ccchtml",
+      "date": "2026-09-02",
+      "title": "中埃联合考古队新发现一批重要遗迹和文物",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "上海",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "上海"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+        "duplicateUrls": [
+          "http://sh.xinhuanet.com/20260902/9f6316a247e74f38844353f057a9f413/c.html"
+        ]
+      },
+      "observedAt": "2026-09-08T07:13:56+08:00",
+      "observationDate": "2026-09-08"
     }
   ],
   "runType": "live",
