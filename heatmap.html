@@ -170,7 +170,7 @@
     <div class="panel map-panel">
       <div class="panel-head"><h2>地区关注度分布</h2><span>本页最高值为 100</span></div>
       <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-      <p class="map-note">颜色越深，表示本页追踪的权威来源近期更集中地报道了该地区。无色不等于当地没有文博活动；资料积累不足时，不应用它判断各地真实活跃程度。</p>
+      <p class="map-note">颜色越深，固定信源对该地区的报道越集中。</p>
     </div>
     <div class="panel rank-panel">
       <div class="panel-head"><h2>地区关注度排序</h2><span id="rank-note">正在核对资料完整度</span></div>
@@ -375,7 +375,7 @@ function renderCoverage() {
 function renderQuality() {
   var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
   var types=s.operationalRecordTypes||{};
-  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。样本积累量不等于每天巡检完成度；上方覆盖率仅计算正式实时巡检。';
+  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。';
 
 }
 function updateMeta() {

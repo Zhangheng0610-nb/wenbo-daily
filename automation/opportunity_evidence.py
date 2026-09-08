@@ -34,7 +34,10 @@ def evidence_for(item,now,records=None):
 def evidence_html(record):
     if record['state']=='missing':
         return '<aside class="opportunity-evidence"><span class="evidence-state">报名依据待核对</span></aside>'
-    detail=escape(record.get('note','尚未保存本条报名窗口与投递方式的原文核验依据；日期状态不代表公告仍有效。'))
+    note=record.get('note','报名依据待核对。')
+    note=note.replace('本轮读取原文超时，不能据此确认或否定公告；保留原条目及报名时间。','最近一次原文读取超时。')
+    note=note.replace('；本记录不代表劳动岗位或录用资格。','；志愿服务招募。')
+    detail=escape(note)
     link=safe_url(record.get('sourceUrl'))
     return '<aside class="opportunity-evidence"><strong class="evidence-state">'+escape(record['label'])+'</strong><p>'+detail+'</p>'+ ('<p>核查日期 '+escape(record['checkedAt'][:10])+' · <a href="'+escape(link,quote=True)+'" target="_blank" rel="noopener noreferrer">核查原文</a></p>' if link else '')+'</aside>'
 

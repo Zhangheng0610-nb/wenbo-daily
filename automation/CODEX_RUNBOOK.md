@@ -219,3 +219,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 - 广域发现新增 ICOM/ICCROM 官方新闻卡片；source_listing 日期不等于 articleVerified，不按信源权威自动判定新闻价值。
 - 固定源雷达即使缺少今天账本，也读取完整七天窗口，并显式记录 todayAvailable；历史入库仅在存在真实后续观察证据时补入，不重新标记发布日期。
 - 查看 audit/round12-candidate-bridge.json 的诊断边界：恢复发现仍要经过拆分、原文核验、历史去重和编辑，不得把发现数量当日报产量。
+
+### 面向读者的文案
+
+遵循 CONTENT_STYLE.md：正文优先事实与判断，删去重复免责声明、AI 自我辩解和实现细节。保留具体日期、来源、异常和事实限定。

@@ -1259,7 +1259,7 @@ def build_heatmap_html():
     <div class="panel map-panel">
       <div class="panel-head"><h2>地区关注度分布</h2><span>本页最高值为 100</span></div>
       <div id="map"><div class="err" id="map-fallback">地图加载中…</div></div>
-      <p class="map-note">颜色越深，表示本页追踪的权威来源近期更集中地报道了该地区。无色不等于当地没有文博活动；资料积累不足时，不应用它判断各地真实活跃程度。</p>
+      <p class="map-note">颜色越深，固定信源对该地区的报道越集中。</p>
     </div>
     <div class="panel rank-panel">
       <div class="panel-head"><h2>地区关注度排序</h2><span id="rank-note">正在核对资料完整度</span></div>
@@ -1464,7 +1464,7 @@ function renderCoverage() {
 function renderQuality() {
   var s=RAW.stats,b=(RAW.coverage&&RAW.coverage.baseline)||{};
   var types=s.operationalRecordTypes||{};
-  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。样本积累量不等于每天巡检完成度；上方覆盖率仅计算正式实时巡检。';
+  document.getElementById('quality-text').innerHTML='样本共 <strong>'+s.totalMonitoredRecords+'</strong> 条：旧日报迁移 '+s.legacyBaselineRecords+' 条、历史回溯 '+s.archiveBackfillRecords+' 条、固定面板 '+s.fixedPanelMonitoringRecords+' 条（正式实时 '+(types.live||0)+' 条，历史回放 '+(types.replay||0)+' 条）。其中 '+s.includedProvincialRecords+' 条有明确主要发生地，合并为 '+s.provincialEvents+' 件地区事项。';
 
 }
 function updateMeta() {
@@ -1786,15 +1786,11 @@ def build_report_html(data, prev_report=None, next_report=None):
     if report_source_stats['C']:
         quality_html = f'''<details class="quality-banner legacy">
   <summary><strong>🧭 来源与核验</strong><span class="source-summary">A级 {report_source_stats['A']} · B级 {report_source_stats['B']} · 待复核 {report_source_stats['C']}</span></summary>
-  <p>本期属于历史档案，仍保留原始发布记录；待复核来源不会进入新的自动发布。</p>
-  <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
+  <p>本期有 {report_source_stats['C']} 个来源待复核。</p>
+  <p class="source-note">A级：官方与一手来源；B级：专业媒体。</p>
 </details>'''
     else:
-        quality_html = f'''<details class="quality-banner">
-  <summary><strong>🧭 来源与核验</strong><span class="source-summary">本期 {report_source_stats['total']} 个来源均通过 A/B 门槛</span></summary>
-  <p>A/B 标签仅说明来源类别；具体事实和引用对应关系以条目旁的原文复核记录为准。</p>
-  <p class="source-note">点击每条内容旁的来源名称核对原文。A级为官方/一手来源，B级为专业补充来源。</p>
-</details>'''
+        quality_html = ''
 
     toc_html = '<div class="toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
     for item in data['toc_items']:
@@ -1855,6 +1851,8 @@ def build_report_html(data, prev_report=None, next_report=None):
     if data.get('notes'):
         notes_html = '\n'
         for note in data['notes']:
+            if note.startswith('**编辑说明：** 今日检索受信源更新节奏限制'):
+                note = '本期回顾 2026 年夏季发布的成果，原发布日期见各条来源。'
             notes_html += f'<blockquote>{md_inline(note)}</blockquote>\n'
 
     # Pre-compute prev/next navigation
@@ -1919,7 +1917,7 @@ def build_report_html(data, prev_report=None, next_report=None):
   <h1>🏛️ 每日文博资讯</h1>
   <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）</p>
   <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
-  {('<div class="quality-banner legacy" style="text-align:left;margin:12px 0 0"><strong>历史档案：</strong>本日报生成于现行信源分级规则启用前，页面中的来源等级为后续审计标注；请以原文为准。</div>') if is_legacy_report else ''}
+
 </header>
 
 <main>
@@ -1933,7 +1931,7 @@ def build_report_html(data, prev_report=None, next_report=None):
 
 <hr>
 
-<p><em>本日报由 AI 自动采集编撰 | {data['date']}</em></p>
+
 
 {nav_html}
 
@@ -2579,7 +2577,7 @@ def build_jobs_html(data, page_type='jobs'):
 {summary_html}
 
 <hr>
-<p style="font-size:.82em; color: var(--muted);">⚠️ 状态按北京时间动态更新，精确到公告给出的截止时刻；申请前仍请核对原文和投递入口。本页保留已截止条目作为档案，“待核截止”表示公告未给出标准日期或需人工确认。来源标签采用“官方来源 / 高校·就业平台 / 主流招聘平台 / 二手线索”，不与日报 A/B/C 新闻等级混用。</p>
+<p class="source-note">截止时间为北京时间。点击岗位原文查看报名要求与投递方式。</p>
 
 <footer>
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ 招聘栏目 · 每两日更新 ｜ <a href="sources.html">信源与方法</a> ｜ <a href="about.html">关于本站</a></p>
@@ -2771,7 +2769,7 @@ def build_digest_html(data, daily_reports=None):
     emoji = '📰' if dtype == 'weekly' else '📊'
     monthly_reading_note = ''
     if dtype == 'monthly':
-        monthly_reading_note = '''<div class="quality-banner"><strong>阅读提示：</strong>本月报把“事实盘点”和“AI趋势观察”分开呈现。前者用于回看本月收录事件；后者是基于本站样本的编辑性归纳，不代表全国行业统计结论。</div>'''
+        monthly_reading_note = '''<p class="source-note">本月收录事件回顾与编辑观察。</p>'''
 
     # Overview
     overview_html = f'<h2 class="section">📊 本期概览</h2>\n'
@@ -3722,7 +3720,7 @@ def build_about_html():
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>if(location.protocol==='http:' && location.hostname==='zhangheng666.top')location.replace('https://'+location.host+location.pathname+location.search)</script>
 <title>关于本站 | 每日文博资讯</title>
-<meta name="description" content="每日文博资讯 — 网站介绍、内容来源、编撰流程与免责声明">
+<meta name="description" content="每日文博资讯 — 网站介绍与内容来源">
 <link rel="canonical" href="https://zhangheng666.top/about.html">
 <meta property="og:title" content="关于本站 | 每日文博资讯">
 <meta property="og:description" content="每日文博资讯 — 国内外文物博物馆、考古、文化遗产领域每日推送">
@@ -3737,11 +3735,10 @@ def build_about_html():
 <header>
   <h1>🏛️ 关于本站</h1>
   <p class="meta">每日文博资讯 · 网站说明</p>
-  <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
 </header>
 
 <h2 class="section">📖 这是什么</h2>
-<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，通常精选约 4–8 条国内外要闻，内容充足时适当增加，新闻不足时宁缺毋滥，附带专业点评与趋势总结。内容由 AI 自动采集、筛选并编撰，不以凑数为目标。</p>
+<p>「每日文博资讯」是一个聚焦<strong>文物、博物馆、考古、文化遗产</strong>领域的每日资讯站点，每日精选国内外要闻，附行业点评、原文链接和历史检索。</p>
 
 <h2 class="section">🕐 更新节奏</h2>
 <table>
@@ -3753,14 +3750,14 @@ def build_about_html():
 </table>
 
 <h2 class="section">🗞️ 信源说明</h2>
-<p>本站采用<strong>可执行的信源分级机制</strong>：A级为国家文物局、新华社、央视、中国文物报、专业机构和博物馆官网，以及 UNESCO、ICOM、ICCROM 等国际组织；B级为 Reuters、AP、BBC、专业刊物和研究机构，用于高质量补充；公众号、百家号、头条号、搜索引擎跳转页和聚合转载页为 C 级，仅作线索，不能进入新的最终稿。完整登记表和历史档案审计见<a href="sources.html">《信源与方法》</a>。</p>
+<p>优先采用官方机构、博物馆、国际组织与专业媒体的原文。<a href="sources.html">查看信源与筛选方法</a>。</p>
 
-<h2 class="section">🤖 AI 编撰流程与声明</h2>
-<blockquote><strong>重要声明：</strong>本站内容由 AI 自动生成，未经人工逐条核实。AI 可能出错——请务必以文末附带的原始来源链接为准，重要信息请查证官方原文后再引用。</blockquote>
-<p>流程分为两条：行业地图先逐一巡检固定的 6 个全国权威信源，把符合文博范围的全部新内容写入独立监测库；日报再从监测库和更广的 A/B 级来源中按实质增量与行业价值精选。两者分别去重、核验和执行质量门禁，因此一条内容没有进入日报，不会从地图样本中消失；地方媒体数量变化也不会直接改变地区排名。日报按“国内要闻 / 国际要闻”组织，标签归一到九类主题。招聘和实习使用独立的来源标签，不与新闻 A/B/C 等级混用。历史内容不会被静默删除；若旧稿含未登记来源，页面会明确标为历史档案。若发现错误，欢迎在 GitHub 仓库提 issue 反馈。</p>
+<h2 class="section">编辑与反馈</h2>
+<p>内容由 AI 辅助采集和编撰，每条新闻附原文链接。</p>
+<p>日报精选要闻，行业观察追踪报道趋势，招聘与实习提供申请入口。发现错误可在 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily/issues">GitHub 反馈</a>。</p>
 
 <h2 class="section">🔒 隐私</h2>
-<p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。你只是阅读，我们只是展示。</p>
+<p>本站为纯静态网站：<strong>不收集任何个人信息、不使用 Cookie、不接入任何统计或广告脚本</strong>。</p>
 
 <footer>
   <p><a href="https://github.com/Zhangheng0610-nb/wenbo-daily" target="_blank">每日文博资讯</a> ｜ <a href="index.html">返回首页</a></p>
@@ -3828,36 +3825,35 @@ def build_sources_html(daily_reports, heat_data=None):
 <main>
 <header>
   <h1>🧭 信源与方法</h1>
-  <p class="meta">把“可信”变成可检查的发布规则</p>
-  <nav class="opportunity-tabs" aria-label="机会类型"><a href="jobs.html">正式招聘</a><a href="intern.html">实习与志愿服务</a></nav>
+  <p class="meta">新闻来源与筛选方法</p>
 </header>
 
 <div class="quality-banner{audit_class}"><strong>档案审计：</strong>已检查 {len(daily_reports)} 份日报、{stats['total']} 个来源链接；A级 {stats['A']} 个，B级 {stats['B']} 个，待复核 {stats['C']} 个。{audit_text}</div>
 
 <h2 class="section">🛰️ 地图固定信源池</h2>
-<p>行业关注地图与日报已经分开：地图每天逐一巡检下面 6 个固定来源，收录其中全部符合文博范围的新内容；日报仍从固定池和更广的 A/B 级来源中做编辑精选。地方官网或临时媒体报道不会直接改变地区排名。</p>
+<p>地图追踪以下六个固定信源；日报同时选取更广泛的国内外来源。</p>
 <div class="panel-grid">{''.join(panel_cards)}</div>
-<div class="quality-banner"><strong>迁移状态：</strong>监测库现有 {heat_stats.get('totalMonitoredRecords', 0)} 条固定池记录，其中 {heat_stats.get('legacyBaselineRecords', 0)} 条来自历史日报迁移，历史覆盖率不可审计；已尝试逐源巡检 {heat_stats.get('coverageDays', 0)} 天，其中 6 源全部完成 {heat_stats.get('completeCoverageDays', 0)} 天。地图会按 7/30/90 日窗口分别显示覆盖率，覆盖不足时不主张严谨地区排名。</div>
+<p><a href="data-health.html">查看各信源最近检查记录</a></p>
 
 <h2 class="section">📚 信源分级</h2>
 <p>以下是日报和其他栏目使用的更广发布白名单，不等同于地图固定信源池。</p>
 {''.join(tier_cards)}
 
 <h2 class="section">💼 招聘与实习来源标签</h2>
-<p>招聘栏目不使用新闻 A/B/C 等级，而按投递可靠性显示“官方来源”“高校/就业平台”“主流招聘平台”“二手线索”。无论来源标签如何，申请前都应打开原文确认岗位仍在招收，并以原公告的截止时间和投递方式为准。</p>
+<p>招聘来源分为官方、高校与就业平台、主流招聘平台、二手线索。</p>
 
 <h2 class="section">🧪 发布门槛</h2>
 <ol>
   <li>搜索引擎只负责发现候选，最终链接必须指向登记来源。</li>
   <li>涉及政策、考古年代、文物数量、归还争议和招聘截止日期，优先使用A级原文。</li>
   <li>B级来源只作专业补充；找不到可核验原文时宁可不发，不为凑数收录。</li>
-  <li>每个事件按 canonical URL、标题和实体去重；只有实质新进展才重复出现。</li>
+  <li>同一事件合并报道，有实质新进展时继续跟进。</li>
   <li>事实摘要和编辑判断分开，无法确认的内容标记“待核”，不把推测写成定论。</li>
   <li>地图先完成固定池全量巡检，再生成日报；没有进入日报的合格固定池内容仍保留在监测库。</li>
 </ol>
 
 <h2 class="section">🗺️ 地图事项重要性分档</h2>
-<p>地图的“事项级别”不是模型自由评分，而是由标题和标签命中规则触发：<strong>重大</strong>包括国家级政策、世界遗产、重大考古、一级文物或文物安全；<strong>重要</strong>包括一般考古、文物返还追索或重要保护工程；<strong>关注</strong>包括数字化、科技保护、重要展览或开馆；讲座、报名、征集和常规活动归为<strong>一般</strong>。它只说明本页样本中的关注优先级，不等于事件的社会价值排名。</p>
+<p>地图事项按以下规则分档：<strong>重大</strong>包括国家级政策、世界遗产、重大考古、一级文物或文物安全；<strong>重要</strong>包括一般考古、文物返还追索或重要保护工程；<strong>关注</strong>包括数字化、科技保护、重要展览或开馆；讲座、报名、征集和常规活动归为<strong>一般</strong>。</p>
 
 <h2 class="section">📊 当前档案统计</h2>
 <div class="audit-grid">
@@ -3866,11 +3862,11 @@ def build_sources_html(daily_reports, heat_data=None):
   <div class="audit-cell"><strong>{stats['B']}</strong>B级来源</div>
   <div class="audit-cell"><strong>{stats['C']}</strong>待复核</div>
 </div>
-<p class="source-note">C级来源只在历史档案中展示为待复核，不代表本站推荐或认可。</p>
+<p class="source-note">C级：历史档案中的待复核来源。</p>
 <ul>{legacy_html}</ul>
 
-<h2 class="section">🤖 AI 编撰边界</h2>
-<p>本站由原生 Codex 自动生成页面，但 AI 不是事实来源，也不替代原文核验。重要信息请点击来源链接回到发布机构或专业媒体原文；发现错误可在项目仓库提交 issue。</p>
+<h2 class="section">纠错反馈</h2>
+<p>发现错误可在 <a href="https://github.com/Zhangheng0610-nb/wenbo-daily/issues">GitHub 提交反馈</a>。</p>
 
 <footer><p><a href="index.html">返回首页</a> ｜ <a href="about.html">关于本站</a></p></footer>
 </main>

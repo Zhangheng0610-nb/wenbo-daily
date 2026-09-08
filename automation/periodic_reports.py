@@ -447,7 +447,7 @@ def build_periodic_html(data):
     for row in data.get("evidence", []):
         sources = " ".join(_source_link(source) for source in row.get("sources", []))
         evidence_rows.append(f'<li><strong>{html.escape(row.get("title", ""))}</strong> · <a href="../{html.escape(row.get("report", ""), quote=True)}">{html.escape(row.get("reportLabel", "日报"))}</a><br>{sources}</li>')
-    evidence_html = '<details class="periodic-evidence"><summary>🔎 来源与证据索引（默认折叠）</summary><p class="muted">报告判断 → 对应日报条目 → 原始来源。以下证据仅来自已有日报。</p><ol>' + ''.join(evidence_rows) + '</ol></details>' if evidence_rows else '<details class="periodic-evidence"><summary>🔎 来源与证据索引（默认折叠）</summary><p class="muted">当前没有可回溯的来源记录。</p></details>'
+    evidence_html = '<details class="periodic-evidence"><summary>🔎 来源索引</summary><p class="muted">查看对应日报与原文。</p><ol>' + ''.join(evidence_rows) + '</ol></details>' if evidence_rows else '<details class="periodic-evidence"><summary>🔎 来源索引</summary><p class="muted">当前没有可回溯的来源记录。</p></details>'
     quality_html = ''.join(f'<li>{html.escape(note)}</li>' for note in data.get("qualityNotes", []))
 
     return f'''<!DOCTYPE html>
@@ -478,7 +478,7 @@ def build_periodic_html(data):
 {upcoming_html}
 <section class="periodic-section"><h2>数据质量与适用范围</h2><ul>{quality_html}</ul></section>
 {evidence_html}
-<footer>本页面由周期报告组件生成。报告事实来自日报及其可回溯来源；编辑性归纳只表示本站样本内观察，不代表全国行业统计。</footer>
+<footer></footer>
 </main></body></html>'''
 
 

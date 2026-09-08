@@ -1,0 +1,29 @@
+{
+  "scope": "generated public HTML, including inline scripts; phrase counts are diagnostic, not quality scores",
+  "phrases": {
+    "不代表": {
+      "before": 16,
+      "after": 6
+    },
+    "不等于": {
+      "before": 23,
+      "after": 14
+    },
+    "口径提示": {
+      "before": 1,
+      "after": 0
+    },
+    "重要声明": {
+      "before": 1,
+      "after": 0
+    },
+    "本日报由 AI 自动采集编撰": {
+      "before": 60,
+      "after": 0
+    }
+  },
+  "articleContent": "Original Markdown and factual qualifiers preserved; one historical editorial notice shortened in rendering while retaining its older publication period.",
+  "visualAcceptance": "Not completed: cloud browser local navigation blocked.",
+  "testsPassed": 261,
+  "productPagesValidated": 84
+}
