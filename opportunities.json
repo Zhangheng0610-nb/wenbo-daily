@@ -1,88 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-08T07:47:32.620281+08:00",
+  "generatedAt": "2026-09-09T07:38:12.281859+08:00",
   "items": [
-    {
-      "id": "job-7991f577633daf",
-      "kind": "jobs",
-      "institution": "📍 成都武侯祠博物馆游客服务中心",
-      "position": "会计 1 名",
-      "deadline": "2026-09-08 17:00",
-      "deadlineAt": "2026-09-08T17:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "jobId": "job-7991f577633daf",
-        "signature": "9bdddb4bca6e44892eef58741d552f16d3506af991a9d94ef85a13bfa9770a6e",
-        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
-        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
-        "outcome": "supported",
-        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
-        "method": "public_web_extraction",
-        "fields": [
-          "deadline",
-          "application"
-        ],
-        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
-      },
-      "url": "jobs.html?status=all#job-7991f577633daf"
-    },
-    {
-      "id": "job-29fcffae075624",
-      "kind": "jobs",
-      "institution": "📍 成都武侯祠博物馆游客服务中心",
-      "position": "行政文员 1 名",
-      "deadline": "2026-09-08 17:00",
-      "deadlineAt": "2026-09-08T17:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "jobId": "job-29fcffae075624",
-        "signature": "b515294f12f6bbedaae24f9bef86d8371a6a96ae8468e1917a471cee4d85c21e",
-        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
-        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
-        "outcome": "supported",
-        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
-        "method": "public_web_extraction",
-        "fields": [
-          "deadline",
-          "application"
-        ],
-        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
-      },
-      "url": "jobs.html?status=all#job-29fcffae075624"
-    },
-    {
-      "id": "job-0da777c31649df",
-      "kind": "jobs",
-      "institution": "📍 成都武侯祠博物馆游客服务中心",
-      "position": "综合服务岗 1 名",
-      "deadline": "2026-09-08 17:00",
-      "deadlineAt": "2026-09-08T17:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "jobId": "job-0da777c31649df",
-        "signature": "f9172e48ecc2a2b5307c7e8df3c9fdb4a9a1ad4ee5c60910074c2694548a655f",
-        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
-        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
-        "outcome": "supported",
-        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
-        "method": "public_web_extraction",
-        "fields": [
-          "deadline",
-          "application"
-        ],
-        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
-      },
-      "url": "jobs.html?status=all#job-0da777c31649df"
-    },
     {
       "id": "job-801e32262a0e35",
       "kind": "jobs",
@@ -241,6 +160,87 @@
         "label": "报名信息尚无逐项核验记录"
       },
       "url": "jobs.html?status=all#job-a09affce851611"
+    },
+    {
+      "id": "job-7991f577633daf",
+      "kind": "jobs",
+      "institution": "📍 成都武侯祠博物馆游客服务中心",
+      "position": "会计 1 名",
+      "deadline": "2026-09-08 17:00",
+      "deadlineAt": "2026-09-08T17:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "jobId": "job-7991f577633daf",
+        "signature": "9bdddb4bca6e44892eef58741d552f16d3506af991a9d94ef85a13bfa9770a6e",
+        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+        "outcome": "supported",
+        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-7991f577633daf"
+    },
+    {
+      "id": "job-29fcffae075624",
+      "kind": "jobs",
+      "institution": "📍 成都武侯祠博物馆游客服务中心",
+      "position": "行政文员 1 名",
+      "deadline": "2026-09-08 17:00",
+      "deadlineAt": "2026-09-08T17:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "jobId": "job-29fcffae075624",
+        "signature": "b515294f12f6bbedaae24f9bef86d8371a6a96ae8468e1917a471cee4d85c21e",
+        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+        "outcome": "supported",
+        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-29fcffae075624"
+    },
+    {
+      "id": "job-0da777c31649df",
+      "kind": "jobs",
+      "institution": "📍 成都武侯祠博物馆游客服务中心",
+      "position": "综合服务岗 1 名",
+      "deadline": "2026-09-08 17:00",
+      "deadlineAt": "2026-09-08T17:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "jobId": "job-0da777c31649df",
+        "signature": "f9172e48ecc2a2b5307c7e8df3c9fdb4a9a1ad4ee5c60910074c2694548a655f",
+        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
+        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+        "outcome": "supported",
+        "sourceUrl": "https://wuhouci.net.cn/bwggg-detail/749880419930886144",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-0da777c31649df"
     },
     {
       "id": "job-8f6f7c34f49284",

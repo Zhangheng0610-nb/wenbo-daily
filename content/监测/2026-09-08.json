@@ -100,7 +100,249 @@
       "scanStatus": "partial"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "operational-20260908-archaeology-0037-6066491shtml",
+      "date": "2026-09-08",
+      "title": "内蒙古陈巴尔虎旗岗嘎墓地发掘报告",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260908_6066491.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业",
+        "内蒙古"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-archaeology-0040-6066484shtml",
+      "date": "2026-09-08",
+      "title": "分子考古学解码人与犬的同行史",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260908_6066484.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-archaeology-0041-6066398shtml",
+      "date": "2026-09-08",
+      "title": "新发现｜浙江绍兴南山遗址发掘收获",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260908_6066398.shtml"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "浙江",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "浙江"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-archaeology-0042-6066483shtml",
+      "date": "2026-09-08",
+      "title": "社科要闻 | 高翔会见越共中央理论委员会主席阮春胜",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260908_6066483.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-archaeology-0039-6066480shtml",
+      "date": "2026-09-08",
+      "title": "越南冯原文化的牙璋",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260908_6066480.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-archaeology-0038-6066401shtml",
+      "date": "2026-09-08",
+      "title": "龙山时代陕北地区的巨变",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260908_6066401.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-museum-association-0043-ntentid14774",
+      "date": "2026-09-08",
+      "title": "中国博物馆协会藏品保护与管理专委会关于开展案例征集与研讨活动的通知",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14774"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "展览",
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "展览",
+        "博物馆",
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260908-xinhua-wenbo-0044-f536c4bchtml",
+      "date": "2026-09-08",
+      "title": "边疆考古作答“何以中国”",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260908/8234e9c657174a8288fd3e5f2f536c4b/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

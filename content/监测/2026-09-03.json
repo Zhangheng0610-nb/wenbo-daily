@@ -279,6 +279,437 @@
       "observationDate": "2026-09-08"
     },
     {
+      "recordId": "operational-20260903-cultural-relics-news-0010-2874id112773",
+      "date": "2026-09-03",
+      "title": "2025年度文化遗产图书展示交流活动启动",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22874/id/112773"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "文化遗产"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0013-2875id112779",
+      "date": "2026-09-03",
+      "title": "《考古出土（出水）文物移交管理办法（试行）》解读",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22875/id/112779"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0019-2880id112792",
+      "date": "2026-09-03",
+      "title": "一面浮雕墙，百年考古史",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22880/id/112792"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0009-2874id112771",
+      "date": "2026-09-03",
+      "title": "中埃塞赫迈特神庙遗址联合考古最新成果发布",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22874/id/112771"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0017-2878id112787",
+      "date": "2026-09-03",
+      "title": "云阳杨沙村汉墓出土铜雀名称和功用探析",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22878/id/112787"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22878/id/112787",
+        "duplicateUrls": [
+          "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22879/id/112790"
+        ]
+      },
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0007-2873id112769",
+      "date": "2026-09-03",
+      "title": "加强国有文物资源数据治理 推动文物事业高质量发展",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22873/id/112769"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22873/id/112769",
+        "duplicateUrls": [
+          "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22874/id/112777"
+        ]
+      },
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0008-2873id112770",
+      "date": "2026-09-03",
+      "title": "国家文物局出台《考古出土（出水）文物移交管理办法（试行）》",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22873/id/112770"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0020-2880id112793",
+      "date": "2026-09-03",
+      "title": "心永同在——记台山市华侨文化博物馆",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22880/id/112793"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0011-2874id112776",
+      "date": "2026-09-03",
+      "title": "文化遗产传播人才培训班在赤峰举办",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22874/id/112776"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0015-2877id112783",
+      "date": "2026-09-03",
+      "title": "文物见证豫疆千年交融 写在“华夏文明之光——河南文物珍宝展”开展之际",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22877/id/112783"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "河南"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0016-2878id112786",
+      "date": "2026-09-03",
+      "title": "汉墓出土陶烤炉的考古学观察与文化意蕴",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22878/id/112786"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0014-2877id112782",
+      "date": "2026-09-03",
+      "title": "福建省馆藏文物定级工作的实践与思考",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22877/id/112782"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "福建",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "福建"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0012-2875id112778",
+      "date": "2026-09-03",
+      "title": "考古出土（出水）文物移交管理办法（试行）",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22875/id/112778"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260903-cultural-relics-news-0018-2880id112791",
+      "date": "2026-09-03",
+      "title": "跟随考古，寻访千年前的山东",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-03/paperId/22880/id/112791"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-09T07:15:05+08:00",
+      "observationDate": "2026-09-09"
+    },
+    {
       "recordId": "operational-20260903-ncha-0001-22204652html",
       "date": "2026-09-03",
       "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
