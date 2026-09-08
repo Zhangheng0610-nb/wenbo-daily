@@ -1,0 +1,68 @@
+{
+  "mode": "live production adapters, discovery only",
+  "checkedAt": "2026-09-08T09:29:24.123201+00:00",
+  "sources": [
+    {
+      "sourceId": "icom-news",
+      "name": "国际博物馆协会新闻",
+      "scope": "international",
+      "url": "https://icom.museum/en/news/",
+      "status": "checked",
+      "linksSeen": 20,
+      "datedLinks": 20,
+      "outsideWindow": 18,
+      "undatedLinks": 0,
+      "rawResults": 20,
+      "windowResults": 2,
+      "note": "",
+      "latestPublishedDate": "2026-09-07",
+      "checkedAt": "2026-09-08T17:29:14+08:00",
+      "completedAt": "2026-09-08T17:29:24+08:00",
+      "elapsedSeconds": 9.679,
+      "windowStart": "2026-09-02",
+      "windowEnd": "2026-09-08"
+    },
+    {
+      "sourceId": "iccrom-news",
+      "name": "ICCROM保护与修复新闻",
+      "scope": "international",
+      "url": "https://www.iccrom.org/news-events/news",
+      "status": "checked",
+      "linksSeen": 10,
+      "datedLinks": 10,
+      "outsideWindow": 10,
+      "undatedLinks": 0,
+      "rawResults": 10,
+      "windowResults": 0,
+      "note": "",
+      "latestPublishedDate": "2026-08-18",
+      "checkedAt": "2026-09-08T17:29:14+08:00",
+      "completedAt": "2026-09-08T17:29:22+08:00",
+      "elapsedSeconds": 8.486,
+      "windowStart": "2026-09-02",
+      "windowEnd": "2026-09-08"
+    }
+  ],
+  "records": [
+    {
+      "title": "Museums and intangible cultural heritage: a memoir and a meditation",
+      "publishedDate": "2026-09-07",
+      "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+      "discoveredVia": "icom-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "icom.museum",
+      "publicationDateBasis": "source_listing"
+    },
+    {
+      "title": "Call for papers Museum International: ‘Artificial Intelligence in Museums’",
+      "publishedDate": "2026-09-03",
+      "url": "https://icom.museum/en/news/call-for-papers-museum-international-artificial-intelligence-in-museums/",
+      "discoveredVia": "icom-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "icom.museum",
+      "publicationDateBasis": "source_listing"
+    }
+  ]
+}

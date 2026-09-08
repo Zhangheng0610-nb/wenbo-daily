@@ -1,0 +1,978 @@
+{
+  "mode": "saved monitoring + live official listing records; no article fetch or publication",
+  "records": [
+    {
+      "title": "一周文物动态摘编（8.29-9.4）",
+      "publishedDate": "2026-09-06",
+      "url": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+      "discoveredVia": "fixed-panel-radar",
+      "discoverySourceType": "fixed_panel_radar",
+      "discoverySource": "国家文物局固定源监测",
+      "sourceDomain": "www.ncha.gov.cn",
+      "sourcePublisherUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+      "scope": "domestic",
+      "dailyScopeHint": "domestic",
+      "dailyScopeHintMethod": "title_and_monitoring_semantics",
+      "monitoringRecordId": "backfill-20260906-ncha-0007-22204716html",
+      "monitoringOrigin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07",
+      "monitoringPath": "content/监测/2026-09-06.json",
+      "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+      "monitoringScope": "unassigned",
+      "monitoringLocationTier": "unassigned",
+      "monitoringPrimaryProvince": "",
+      "notes": "固定源语义标签：政策行业",
+      "discoveredAt": "2026-09-08T17:29:24+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-9ecf52dca9c1",
+      "eventCandidateDisposition": "deferred",
+      "eventEditorialPriorityScore": 28,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "publishedDate": "2026-09-04",
+      "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+      "discoveredVia": "fixed-panel-radar",
+      "discoverySourceType": "fixed_panel_radar",
+      "discoverySource": "国家文物局固定源监测",
+      "sourceDomain": "www.ncha.gov.cn",
+      "sourcePublisherUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+      "scope": "domestic",
+      "dailyScopeHint": "domestic",
+      "dailyScopeHintMethod": "title_and_monitoring_semantics",
+      "monitoringRecordId": "backfill-20260904-ncha-0006-22204668html",
+      "monitoringOrigin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07",
+      "monitoringPath": "content/监测/2026-09-04.json",
+      "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+      "monitoringScope": "national",
+      "monitoringLocationTier": "national",
+      "monitoringPrimaryProvince": "",
+      "notes": "固定源语义标签：政策行业",
+      "discoveredAt": "2026-09-08T17:29:24+08:00",
+      "duplicateStatus": "historical_duplicate",
+      "duplicateReason": "same normalized title within event window",
+      "duplicateOf": "2026-09-04#item1",
+      "duplicateOfTitle": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "newDevelopment": false
+    },
+    {
+      "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+      "publishedDate": "2026-09-02",
+      "url": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+      "discoveredVia": "fixed-panel-radar",
+      "discoverySourceType": "fixed_panel_radar",
+      "discoverySource": "国家文物局固定源监测",
+      "sourceDomain": "www.ncha.gov.cn",
+      "sourcePublisherUrl": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+      "scope": "domestic",
+      "dailyScopeHint": "domestic",
+      "dailyScopeHintMethod": "title_and_monitoring_semantics",
+      "monitoringRecordId": "backfill-20260902-ncha-0004-22204633html",
+      "monitoringOrigin": "archive-backfill",
+      "observedAt": "2026-09-07T13:36:45.217447+08:00",
+      "observationDate": "2026-09-07",
+      "monitoringPath": "content/监测/2026-09-02.json",
+      "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+      "monitoringScope": "national",
+      "monitoringLocationTier": "national",
+      "monitoringPrimaryProvince": "",
+      "notes": "固定源语义标签：政策行业",
+      "discoveredAt": "2026-09-08T17:29:24+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-99acc4dd0f5d",
+      "eventCandidateDisposition": "rejected",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "Museums and intangible cultural heritage: a memoir and a meditation",
+      "publishedDate": "2026-09-07",
+      "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+      "discoveredVia": "icom-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "icom.museum",
+      "publicationDateBasis": "source_listing",
+      "discoveredAt": "2026-09-08T17:29:24+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-df6a0aed3d1e",
+      "eventCandidateDisposition": "evidence_qualified",
+      "eventEditorialPriorityScore": 28,
+      "eventEditorialPriorityLabel": "low"
+    },
+    {
+      "title": "Call for papers Museum International: ‘Artificial Intelligence in Museums’",
+      "publishedDate": "2026-09-03",
+      "url": "https://icom.museum/en/news/call-for-papers-museum-international-artificial-intelligence-in-museums/",
+      "discoveredVia": "icom-news",
+      "discoverySourceType": "source_scan",
+      "scope": "international",
+      "sourceDomain": "icom.museum",
+      "publicationDateBasis": "source_listing",
+      "discoveredAt": "2026-09-08T17:29:24+08:00",
+      "duplicateStatus": "unique_event",
+      "newDevelopment": false,
+      "eventId": "event-cbee35bd144b",
+      "eventCandidateDisposition": "deferred",
+      "eventEditorialPriorityScore": 22,
+      "eventEditorialPriorityLabel": "low"
+    }
+  ],
+  "evaluationSummary": {
+    "rawRecords": 30,
+    "eventCandidateCount": 24,
+    "deduplicatedReports": 24,
+    "candidateEvaluationPool": 10,
+    "evidenceQualified": 10,
+    "needsVerification": 0,
+    "highPriorityCandidates": 0,
+    "highPriorityEvidenceQueue": 0,
+    "highPriorityNeedsVerification": 0,
+    "highPriorityEvidenceQueueEvents": 0,
+    "mediumPriorityEvidenceQueueEvents": 0,
+    "previousEditorialRejectionCount": 0,
+    "evidenceUpgradeAttempted": 0,
+    "evidenceUpgradeQualified": 0,
+    "evidenceUpgradeFailed": 0,
+    "evidenceUpgradeAmbiguous": 0,
+    "rejected": 10,
+    "deferred": 4,
+    "provisionalWouldBeSelected": 0,
+    "editorialPriorityCounts": {
+      "high": 0,
+      "medium": 0,
+      "low": 24
+    },
+    "eventCandidatePriorityCounts": {
+      "high": 0,
+      "medium": 0,
+      "low": 24
+    },
+    "rawRecordPriorityCounts": {
+      "high": 4,
+      "medium": 1,
+      "low": 25
+    },
+    "dispositionCounts": {
+      "evidence_qualified": 10,
+      "rejected": 10,
+      "deferred": 4
+    }
+  },
+  "finalPool": {
+    "status": "pending_editorial_review",
+    "rawQualifiedEvents": 10,
+    "canonicalUniqueEvents": 10,
+    "historicalDuplicates": 6,
+    "historicalDuplicateDefinition": "unique published-event targets excluded before evidence qualification",
+    "editoriallyReviewed": 0,
+    "events": [
+      {
+        "eventId": "event-4691f5806df0",
+        "title": "西周王畿多元人群互动交融的考古学观察",
+        "representativeTitle": "西周王畿多元人群互动交融的考古学观察",
+        "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+        "publishedDate": "2026-09-07",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "西周王畿多元人群互动交融的考古学观察",
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+            "publishedDate": "2026-09-07",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260907-archaeology-0022-6066212shtml",
+            "monitoringPath": "content/监测/2026-09-07.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-0bc9963624ab",
+        "title": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色",
+        "representativeTitle": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色",
+        "url": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+        "publishedDate": "2026-09-07",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "www.news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色",
+            "url": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+            "publishedDate": "2026-09-07",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "www.news.cn",
+            "sourcePublisherUrl": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：文化遗产",
+            "monitoringRecordId": "operational-20260907-xinhua-wenbo-0024-830d57fchtml",
+            "monitoringPath": "content/监测/2026-09-07.json",
+            "originalSourceUrl": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "news.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-df6a0aed3d1e",
+        "title": "Museums and intangible cultural heritage: a memoir and a meditation",
+        "representativeTitle": "Museums and intangible cultural heritage: a memoir and a meditation",
+        "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+        "publishedDate": "2026-09-07",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "icom.museum"
+        ],
+        "publisherDomains": [
+          "icom.museum"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "Museums and intangible cultural heritage: a memoir and a meditation",
+            "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+            "publishedDate": "2026-09-07",
+            "discoveredVia": "icom-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "icom.museum",
+            "duplicateStatus": "unique_event",
+            "publicationDateBasis": "source_listing",
+            "publisherDomain": "icom.museum"
+          }
+        ]
+      },
+      {
+        "eventId": "event-62d8b836d14d",
+        "title": "茌平教场铺——龙山文化遗址的发掘与研究",
+        "representativeTitle": "茌平教场铺——龙山文化遗址的发掘与研究",
+        "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+        "publishedDate": "2026-09-04",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "茌平教场铺——龙山文化遗址的发掘与研究",
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260904-archaeology-0012-6066083shtml",
+            "monitoringPath": "content/监测/2026-09-04.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-f0354c0a0350",
+        "title": "汉杜陵陵园遗址（增订本）",
+        "representativeTitle": "汉杜陵陵园遗址（增订本）",
+        "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+        "publishedDate": "2026-09-04",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "汉杜陵陵园遗址（增订本）",
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+            "publishedDate": "2026-09-04",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260904-archaeology-0013-6066097shtml",
+            "monitoringPath": "content/监测/2026-09-04.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-fc497c8b023f",
+        "title": "第八届中国边疆考古学术研讨会召开",
+        "representativeTitle": "第八届中国边疆考古学术研讨会召开",
+        "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "第八届中国边疆考古学术研讨会召开",
+            "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260903-archaeology-0007-6065836shtml",
+            "monitoringPath": "content/监测/2026-09-03.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-48d14bc1bfb2",
+        "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+        "representativeTitle": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+        "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古、福建",
+            "monitoringRecordId": "operational-20260903-archaeology-0004-6065848shtml",
+            "monitoringPath": "content/监测/2026-09-03.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "福建",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      },
+      {
+        "eventId": "event-383ed18cff22",
+        "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+        "representativeTitle": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+        "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "www.gs.xinhuanet.com"
+        ],
+        "publisherDomains": [
+          "gs.xinhuanet.com"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+            "url": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "www.gs.xinhuanet.com",
+            "sourcePublisherUrl": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：博物馆、政策行业、甘肃",
+            "monitoringRecordId": "operational-20260903-xinhua-wenbo-0010-d807d46chtml",
+            "monitoringPath": "content/监测/2026-09-03.json",
+            "originalSourceUrl": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "甘肃",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "gs.xinhuanet.com"
+          }
+        ]
+      },
+      {
+        "eventId": "event-42e9284a480c",
+        "title": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+        "representativeTitle": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+        "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "nmg.xinhuanet.com"
+        ],
+        "publisherDomains": [
+          "nmg.xinhuanet.com"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+            "url": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "nmg.xinhuanet.com",
+            "sourcePublisherUrl": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古、文物保护、文化遗产、内蒙古",
+            "monitoringRecordId": "operational-20260903-xinhua-wenbo-0002-dba9621chtml",
+            "monitoringPath": "content/监测/2026-09-03.json",
+            "originalSourceUrl": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "内蒙古",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "nmg.xinhuanet.com"
+          }
+        ]
+      },
+      {
+        "eventId": "event-59c2ffe790df",
+        "title": "2016—2026年中国纺织考古学科发展综述——以冷门绝学建设推动中国特色纺织文化遗产的系统性保护",
+        "representativeTitle": "2016—2026年中国纺织考古学科发展综述——以冷门绝学建设推动中国特色纺织文化遗产的系统性保护",
+        "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+        "publishedDate": "2026-09-03",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "publisherDomains": [
+          "kaogu.cssn.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceUpgradeAttempted": null,
+        "evidenceUpgradeResult": null,
+        "evidenceSources": [
+          {
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+            "tier": "A"
+          }
+        ],
+        "evidenceResolutionAttempts": null,
+        "discoveryReports": [
+          {
+            "title": "2016—2026年中国纺织考古学科发展综述——以冷门绝学建设推动中国特色纺织文化遗产的系统性保护",
+            "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+            "publishedDate": "2026-09-03",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "中国考古网固定源监测",
+            "sourceDomain": "kaogu.cssn.cn",
+            "sourcePublisherUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古、文化遗产",
+            "monitoringRecordId": "operational-20260903-archaeology-0003-6065843shtml",
+            "monitoringPath": "content/监测/2026-09-03.json",
+            "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "kaogu.cssn.cn"
+          }
+        ]
+      }
+    ],
+    "finalHistoricalGuard": {
+      "status": "completed",
+      "checkedEvents": 24,
+      "retainedEvents": 24,
+      "historicalDuplicates": 0,
+      "derivativeCommentary": 0,
+      "excludedEventIds": []
+    }
+  }
+}

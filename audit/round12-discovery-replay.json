@@ -1,0 +1,352 @@
+{
+  "checkedAt": "2026-09-08T09:27:36.151243+00:00",
+  "mode": "Parser replay of live-fetched official listings; no article verification or publication",
+  "sources": [
+    {
+      "status": {
+        "sourceId": "icom-news",
+        "name": "国际博物馆协会新闻",
+        "scope": "international",
+        "url": "https://icom.museum/en/news/",
+        "status": "checked",
+        "linksSeen": 20,
+        "datedLinks": 20,
+        "outsideWindow": 18,
+        "undatedLinks": 0,
+        "rawResults": 20,
+        "windowResults": 2,
+        "note": ""
+      },
+      "records": [
+        {
+          "title": "Museums and intangible cultural heritage: a memoir and a meditation",
+          "publishedDate": "2026-09-07",
+          "url": "https://icom.museum/en/news/museums-and-intangible-cultural-heritage-a-memoir-and-a-meditation/",
+          "discoveredVia": "icom-news",
+          "discoverySourceType": "source_scan",
+          "scope": "international",
+          "sourceDomain": "icom.museum",
+          "publicationDateBasis": "source_listing"
+        },
+        {
+          "title": "Call for papers Museum International: ‘Artificial Intelligence in Museums’",
+          "publishedDate": "2026-09-03",
+          "url": "https://icom.museum/en/news/call-for-papers-museum-international-artificial-intelligence-in-museums/",
+          "discoveredVia": "icom-news",
+          "discoverySourceType": "source_scan",
+          "scope": "international",
+          "sourceDomain": "icom.museum",
+          "publicationDateBasis": "source_listing"
+        }
+      ]
+    },
+    {
+      "status": {
+        "sourceId": "iccrom-news",
+        "name": "ICCROM保护与修复新闻",
+        "scope": "international",
+        "url": "https://www.iccrom.org/news-events/news",
+        "status": "checked",
+        "linksSeen": 10,
+        "datedLinks": 10,
+        "outsideWindow": 10,
+        "undatedLinks": 0,
+        "rawResults": 10,
+        "windowResults": 0,
+        "note": ""
+      },
+      "records": []
+    }
+  ],
+  "radar": {
+    "status": "scan_success_with_update",
+    "targetDate": "2026-09-08",
+    "monitoringPath": "content/监测/2026-09-08.json",
+    "runType": "live",
+    "todayAvailable": true,
+    "days": [
+      {
+        "date": "2026-09-08",
+        "available": true,
+        "seedCount": 0,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-07",
+        "available": true,
+        "seedCount": 3,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-06",
+        "available": true,
+        "seedCount": 2,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-05",
+        "available": true,
+        "seedCount": 0,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-04",
+        "available": true,
+        "seedCount": 8,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-03",
+        "available": true,
+        "seedCount": 11,
+        "runType": "live"
+      },
+      {
+        "date": "2026-09-02",
+        "available": true,
+        "seedCount": 2,
+        "runType": "live"
+      }
+    ],
+    "seedCount": 26,
+    "seedRecordIds": [
+      "operational-20260907-archaeology-0022-6066212shtml",
+      "operational-20260907-ncha-0023-22204719html",
+      "operational-20260907-xinhua-wenbo-0024-830d57fchtml",
+      "operational-20260906-archaeology-0020-6066122shtml",
+      "backfill-20260906-ncha-0007-22204716html",
+      "operational-20260904-archaeology-0015-6066078shtml",
+      "operational-20260904-archaeology-0014-6066076shtml",
+      "operational-20260904-archaeology-0018-6066094shtml",
+      "operational-20260904-archaeology-0013-6066097shtml",
+      "operational-20260904-archaeology-0017-6066093shtml",
+      "operational-20260904-archaeology-0012-6066083shtml",
+      "operational-20260904-archaeology-0016-6066073shtml",
+      "backfill-20260904-ncha-0006-22204668html",
+      "operational-20260903-archaeology-0003-6065843shtml",
+      "operational-20260903-archaeology-0008-6065840shtml",
+      "operational-20260903-archaeology-0006-6065831shtml",
+      "operational-20260903-archaeology-0004-6065848shtml",
+      "operational-20260903-archaeology-0007-6065836shtml",
+      "operational-20260903-archaeology-0005-6065833shtml",
+      "operational-20260903-ncha-0001-22204652html",
+      "operational-20260903-xinhua-wenbo-0004-0ee9d38chtml",
+      "operational-20260903-xinhua-wenbo-0002-dba9621chtml",
+      "operational-20260903-xinhua-wenbo-0010-d807d46chtml",
+      "operational-20260903-xinhua-wenbo-0003-609a43cchtml",
+      "backfill-20260902-ncha-0004-22204633html",
+      "operational-20260902-xinhua-wenbo-0002-38838ccchtml"
+    ],
+    "publicationWindowStart": "2026-09-02",
+    "seeds": [
+      {
+        "monitoringRecordId": "operational-20260907-archaeology-0022-6066212shtml",
+        "title": "西周王畿多元人群互动交融的考古学观察",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260907_6066212.shtml",
+        "publishedDate": "2026-09-07",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260907-ncha-0023-22204719html",
+        "title": "文博日历丨白露登高 不必远行 案头有山便是秋天",
+        "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/7/art_722_204719.html",
+        "publishedDate": "2026-09-07",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260907-xinhua-wenbo-0024-830d57fchtml",
+        "title": "白露丨海霞邀你走进黔闽传统村落，共探稻作丰收与橘林秋色",
+        "originalSourceUrl": "https://www.news.cn/politics/20260907/2ccc2448ed124a37ad26a5cfb830d57f/c.html",
+        "publishedDate": "2026-09-07",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260906-archaeology-0020-6066122shtml",
+        "title": "坚持党的领导是中国特色社会主义最本质的特征",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260906_6066122.shtml",
+        "publishedDate": "2026-09-06",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "backfill-20260906-ncha-0007-22204716html",
+        "title": "一周文物动态摘编（8.29-9.4）",
+        "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/6/art_722_204716.html",
+        "publishedDate": "2026-09-06",
+        "monitoringOrigin": "archive-backfill",
+        "observedAt": "2026-09-07T13:36:45.217447+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0015-6066078shtml",
+        "title": "《考古出土（出水）文物移交管理办法（试行）》解读",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066078.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0014-6066076shtml",
+        "title": "国家文物局发布考古出土（出水）文物移交管理办法",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260904_6066076.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0018-6066094shtml",
+        "title": "把服务习近平总书记和党中央为人民做学问作为真正的政绩——中国社会科学院树立和践行正确政绩观学...",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066094.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0013-6066097shtml",
+        "title": "汉杜陵陵园遗址（增订本）",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066097.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0017-6066093shtml",
+        "title": "社科要闻 | 中国社会科学院召开树立和践行正确政绩观学习教育总结会",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066093.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0012-6066083shtml",
+        "title": "茌平教场铺——龙山文化遗址的发掘与研究",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/jbbg/202609/t20260904_6066083.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260904-archaeology-0016-6066073shtml",
+        "title": "集大成 开新局： 以大历史观把握习近平党建思想的原创性贡献",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260904_6066073.shtml",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "backfill-20260904-ncha-0006-22204668html",
+        "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+        "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+        "publishedDate": "2026-09-04",
+        "monitoringOrigin": "archive-backfill",
+        "observedAt": "2026-09-07T13:36:45.217447+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0003-6065843shtml",
+        "title": "2016—2026年中国纺织考古学科发展综述——以冷门绝学建设推动中国特色纺织文化遗产的系统性保护",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065843.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0008-6065840shtml",
+        "title": "一间书屋打开的“思想之窗”",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065840.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0006-6065831shtml",
+        "title": "社科要闻 | 加强中华民族共同体意识研究 为推动民族团结进步事业提供学理支撑",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065831.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0004-6065848shtml",
+        "title": "福建安溪县下草埔遗址小块积铁的高温块炼铁技术研究",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260903_6065848.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0007-6065836shtml",
+        "title": "第八届中国边疆考古学术研讨会召开",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260903_6065836.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-archaeology-0005-6065833shtml",
+        "title": "贺兰山新发现“四马拉车”岩画",
+        "originalSourceUrl": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260903_6065833.shtml",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-ncha-0001-22204652html",
+        "title": "广西壮族自治区党委书记陈刚在南宁调研文化和文物保护工作时强调 加强文物保护守护文...",
+        "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/3/art_722_204652.html",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": null
+      },
+      {
+        "monitoringRecordId": "operational-20260903-xinhua-wenbo-0004-0ee9d38chtml",
+        "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+        "originalSourceUrl": "https://www.news.cn/politics/leaders/20260903/800e09d7185c45e4800776e340ee9d38/c.html",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": null
+      },
+      {
+        "monitoringRecordId": "operational-20260903-xinhua-wenbo-0002-dba9621chtml",
+        "title": "嘎仙洞遗址：一方石刻祝文 一部民族融合史",
+        "originalSourceUrl": "http://nmg.xinhuanet.com/20260903/923e8833b5c64d56a4bc7b7b5dba9621/c.html",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": null
+      },
+      {
+        "monitoringRecordId": "operational-20260903-xinhua-wenbo-0010-d807d46chtml",
+        "title": "国网兰州供电公司：高效服务甘肃省博物馆 助力文旅产业转型升级",
+        "originalSourceUrl": "http://www.gs.xinhuanet.com/20260903/5db330f5af82477bbda5bb0fbd807d46/c.html",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260903-xinhua-wenbo-0003-609a43cchtml",
+        "title": "陈刚在南宁调研文化和文物保护工作",
+        "originalSourceUrl": "http://www.gx.xinhuanet.com/20260903/7bd0c8bdd23946cbb85b29afc609a43c/c.html",
+        "publishedDate": "2026-09-03",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": null
+      },
+      {
+        "monitoringRecordId": "backfill-20260902-ncha-0004-22204633html",
+        "title": "尹弘在景德镇调研时强调 高标准高质量做好申遗“后半篇文章” 持续擦亮景德镇“千年...",
+        "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/2/art_722_204633.html",
+        "publishedDate": "2026-09-02",
+        "monitoringOrigin": "archive-backfill",
+        "observedAt": "2026-09-07T13:36:45.217447+08:00"
+      },
+      {
+        "monitoringRecordId": "operational-20260902-xinhua-wenbo-0002-38838ccchtml",
+        "title": "中埃联合考古队新发现一批重要遗迹和文物",
+        "originalSourceUrl": "https://www.news.cn/ci/20260902/3d98db12183943a4bfec37ee038838cc/c.html",
+        "publishedDate": "2026-09-02",
+        "monitoringOrigin": "fixed-panel-monitoring",
+        "observedAt": "2026-09-08T07:13:56+08:00"
+      }
+    ]
+  }
+}

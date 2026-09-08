@@ -36,6 +36,7 @@ else:
     ROOT = Path(__file__).resolve().parents[1]
 
 from automation.backfill_monitoring import fetch, links
+from automation.news_cards import news_cards
 from automation.governance import (
     canonical_publisher_domain,
     canonical_url,
@@ -122,6 +123,10 @@ SOURCE_SCANS = (
         "url": "https://archaeology.org/news/",
         "domain": "archaeology.org",
     },
+    {'sourceId': 'icom-news', 'name': '国际博物馆协会新闻', 'kind': 'source_scan',
+     'scope': 'international', 'url': 'https://icom.museum/en/news/', 'domain': 'icom.museum'},
+    {'sourceId': 'iccrom-news', 'name': 'ICCROM保护与修复新闻', 'kind': 'source_scan',
+     'scope': 'international', 'url': 'https://www.iccrom.org/news-events/news', 'domain': 'iccrom.org'},
 )
 
 QUERY_FAMILIES = (
@@ -417,15 +422,20 @@ def parse_date(value: str) -> date | None:
             return date(*(int(part) for part in match.groups()))
         except ValueError:
             continue
-    # Official international indexes use visible dates such as "4 September
-    # 2026" even when their article URLs contain no date.
-    english = re.search(r"\b(\d{1,2})\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+(20\d{2})\b", text, re.I)
-    if english:
-        months = {name.lower(): i for i, name in enumerate(("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), 1)}
-        try:
-            return date(int(english[3]), months[english[2].lower()], int(english[1]))
-        except ValueError:
-            pass
+    months = {name.lower(): i for i, name in enumerate(("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), 1)}
+    months.update({name[:3]: number for name, number in list(months.items())})
+    month_pattern = '|'.join(months)
+    patterns = ((rf"\b(\d{{1,2}})\s+({month_pattern})\.?\s+(20\d{{2}})\b", False),
+                (rf"\b({month_pattern})\.?\s+(\d{{1,2}}),?\s+(20\d{{2}})\b", True))
+    for pattern, month_first in patterns:
+        match = re.search(pattern, text, re.I)
+        if match:
+            day, month = (match[2], match[1]) if month_first else (match[1], match[2])
+            try:
+                return date(int(match[3]), months[month.lower()], int(day))
+            except ValueError:
+                pass
+
     return None
 
 
@@ -1496,8 +1506,8 @@ def infer_editorial_scope(group: list[dict], scopes: list[str], scope_hints: lis
     return "domestic"
 
 
-def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_path: Path | None = None) -> tuple[list[dict], dict]:
-    """Turn only same-day fixed-panel items into one-way daily radar reports."""
+def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_path: Path | None = None, observation_cutoff: date | None = None) -> tuple[list[dict], dict]:
+    """Read one publication day, including evidenced later operational arrivals."""
     path = monitoring_path or (MONITORING_DIR / f"{required_date.isoformat()}.json")
     items = payload.get("items") if isinstance(payload, dict) else []
     seeds = []
@@ -1507,8 +1517,24 @@ def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_pat
     for item in items:
         if not isinstance(item, dict):
             continue
-        if item.get("origin") != "fixed-panel-monitoring" or item.get("date") != required_date.isoformat():
+        if item.get("date") != required_date.isoformat() or item.get("runType") == "replay" or payload.get("runType") == "replay":
             continue
+        origin = item.get("origin")
+        if origin != "fixed-panel-monitoring":
+            # An operational overlap scan may preserve the original archive
+            # identity while recording a real later observation. Don't lose
+            # that evidence merely because its origin wasn't renamed.
+            observed = str(item.get("observedAt") or "")
+            observation_day = str(item.get("observationDate") or "")
+            try:
+                observed_time = datetime.fromisoformat(observed)
+                valid_observation = bool(observed_time.tzinfo) and date.fromisoformat(observation_day) == observed_time.date()
+            except ValueError:
+                valid_observation = False
+            if (not valid_observation or origin != "archive-backfill" or not observation_day
+                    or observed[:10] != observation_day
+                    or not (required_date.isoformat() < observation_day <= (observation_cutoff or required_date).isoformat())):
+                continue
         record_id = str(item.get("recordId") or "").strip()
         if not record_id or record_id in seen_ids:
             continue
@@ -1533,6 +1559,9 @@ def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_pat
             "dailyScopeHint": daily_scope,
             "dailyScopeHintMethod": scope_method,
             "monitoringRecordId": record_id,
+            "monitoringOrigin": origin,
+            "observedAt": item.get("observedAt"),
+            "observationDate": item.get("observationDate"),
             "monitoringPath": path.relative_to(ROOT).as_posix() if path.is_absolute() else str(path).replace("\\", "/"),
             "originalSourceUrl": original_url,
             "monitoringScope": item.get("scope"),
@@ -1557,28 +1586,29 @@ def fixed_panel_radar_records(required_date: date, payload: dict, monitoring_pat
 
 
 def load_fixed_panel_radar(required_date: date) -> tuple[list[dict], dict]:
-    """Load same-day monitoring only; missing monitoring is not treated as no-update."""
-    path = MONITORING_DIR / f"{required_date.isoformat()}.json"
-    if not path.exists():
-        return [], {
-            "status": "not_available",
-            "monitoringPath": path.relative_to(ROOT).as_posix(),
-            "targetDate": required_date.isoformat(),
-            "seedCount": 0,
-            "seedRecordIds": [],
-            "seeds": [],
-        }
-    payload = load_json(path, {})
-    records, audit = fixed_panel_radar_records(required_date, payload, path)
-    for offset in range(1, 7):
+    """Load the full publication window even if today's scan is absent."""
+    records, days = [], []
+    for offset in range(7):
         day = required_date - timedelta(days=offset)
-        earlier = MONITORING_DIR / f"{day.isoformat()}.json"
-        extra, _ = fixed_panel_radar_records(day, load_json(earlier, {}), earlier)
+        path = MONITORING_DIR / f"{day.isoformat()}.json"
+        present = path.exists()
+        payload = load_json(path, {})
+        extra, detail = fixed_panel_radar_records(day, payload, path, required_date)
         records.extend(extra)
-    audit.update(seedCount=len(records), seedRecordIds=[r["monitoringRecordId"] for r in records],
-                 publicationWindowStart=(required_date - timedelta(days=6)).isoformat(),
-                 seeds=[{k: r.get(k) for k in ("monitoringRecordId", "title", "originalSourceUrl", "publishedDate")} for r in records])
-    audit["status"] = "scan_success_with_update" if records else audit["status"]
+        days.append({'date': day.isoformat(), 'available': present,
+                     'seedCount': len(extra), 'runType': payload.get('runType')})
+    audit = {
+        'status': 'scan_success_with_update' if records else ('scan_success_no_update' if all(d['available'] for d in days) else 'not_available'),
+        'targetDate': required_date.isoformat(),
+        'monitoringPath': (MONITORING_DIR / f"{required_date.isoformat()}.json").relative_to(ROOT).as_posix(),
+        'runType': days[0]['runType'],
+        'todayAvailable': days[0]['available'],
+        'days': days,
+        'seedCount': len(records),
+        'seedRecordIds': [r['monitoringRecordId'] for r in records],
+        'publicationWindowStart': (required_date - timedelta(days=6)).isoformat(),
+        'seeds': [{k: r.get(k) for k in ('monitoringRecordId', 'title', 'originalSourceUrl', 'publishedDate', 'monitoringOrigin', 'observedAt')} for r in records],
+    }
     return records, audit
 
 
@@ -4215,13 +4245,17 @@ def scan_page(spec: dict, start: date, end: date) -> tuple[dict, list[dict]]:
         return status, []
     status["status"] = "checked"
     records = []
-    for anchor_title, url in links(page, spec["url"]):
+    structured = spec['sourceId'] in ('icom-news', 'iccrom-news')
+    entries = news_cards(page, spec) if structured else [(title, url, title) for title, url in links(page, spec['url'])]
+    for anchor_title, url, date_text in entries:
         status["linksSeen"] += 1
-        published = parse_date(url) or parse_date(anchor_title)
+        published = parse_date(date_text) if structured else (parse_date(url) or parse_date(date_text))
         if not published:
             status["undatedLinks"] += 1
             continue
         status["datedLinks"] += 1
+        if published <= end:
+            status['latestPublishedDate'] = max(status.get('latestPublishedDate') or '', published.isoformat())
         status["rawResults"] += 1
         if not (start <= published <= end):
             status["outsideWindow"] += 1
@@ -4236,6 +4270,10 @@ def scan_page(spec: dict, start: date, end: date) -> tuple[dict, list[dict]]:
             "sourceDomain": spec["domain"],
         }
         records.append(record)
+    if structured:
+        # A listing date is discovery evidence, not article verification.
+        for record in records:
+            record['publicationDateBasis'] = 'source_listing'
     status["windowResults"] = len(records)
     if not status["datedLinks"]:
         status["status"] = "parse_failed"

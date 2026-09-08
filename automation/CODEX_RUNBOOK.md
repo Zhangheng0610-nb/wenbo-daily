@@ -213,3 +213,9 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 - 中国文物报按同一期全部版面扫描；缺版/空壳不能标为完整。期报不存在不代表整个行业没有新闻。
 - 驾驶舱从 ingestion-health.json 的 observations 读取真实检查记录，构建时间不更新采集新鲜度。
 - 编辑复核跨平台文件可显式声明 baseDiscoveryAuditHashMode=lf-normalized-v1，仅将 CRLF 规范为 LF 后计算 SHA-256；旧记录默认 raw。不得改动原始发现内容来迁就哈希。
+
+### 第十二轮补充
+
+- 广域发现新增 ICOM/ICCROM 官方新闻卡片；source_listing 日期不等于 articleVerified，不按信源权威自动判定新闻价值。
+- 固定源雷达即使缺少今天账本，也读取完整七天窗口，并显式记录 todayAvailable；历史入库仅在存在真实后续观察证据时补入，不重新标记发布日期。
+- 查看 audit/round12-candidate-bridge.json 的诊断边界：恢复发现仍要经过拆分、原文核验、历史去重和编辑，不得把发现数量当日报产量。
