@@ -1,0 +1,112 @@
+{
+  "mode": "offline priority replay, fixed saved event groups; no dedup rerun or evidence verification",
+  "baseCommit": "8e83e98",
+  "eventCount": 1098,
+  "changedCount": 11,
+  "newlyAbove55": 3,
+  "noLongerAbove55": 8,
+  "changes": [
+    {
+      "eventId": "event-a13753f06b0e",
+      "title": "News Joint recommendations advance rights-based digital platforms and media governance in the Western Balkans 3 September 2026",
+      "before": 64,
+      "after": 22,
+      "reasonsAfter": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-3095337e0c76",
+      "title": "Smithsonian showdown intensifies as Trump administration issues a stark new warning - Fox News",
+      "before": 22,
+      "after": 64,
+      "reasonsAfter": [
+        "museum_or_cultural_institution_governance",
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-c69417d301cb",
+      "title": "Litigation Tracker: Legal Challenges to Trump Administration Actions - Just Security",
+      "before": 64,
+      "after": 22,
+      "reasonsAfter": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-f614c30ad642",
+      "title": "Minns Labor Government doubles funding to support community recognition of veterans’ service across NSW - The National Tribune",
+      "before": 70,
+      "after": 28,
+      "reasonsAfter": [
+        "primary_freshness"
+      ]
+    },
+    {
+      "eventId": "event-0c5cae95db9a",
+      "title": "San Diego arts organizations cut staff due to funding struggles. Some former employees claim ‘financial mismanagement’",
+      "before": 64,
+      "after": 22,
+      "reasonsAfter": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-94e030cae888",
+      "title": "Proposed bill would bar taxpayer funding for AI surveillance cameras - KPVI",
+      "before": 64,
+      "after": 22,
+      "reasonsAfter": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-1dbb4a8efbc3",
+      "title": "Speed Art Museum completes first repatriation of Indigenous artifacts - The Louisville Cardinal",
+      "before": 22,
+      "after": 58,
+      "reasonsAfter": [
+        "repatriation_or_recovery_update",
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-fd08e8de8147",
+      "title": "Here's a list of the individuals, including James Comey, targeted by the Trump administration",
+      "before": 70,
+      "after": 28,
+      "reasonsAfter": [
+        "primary_freshness"
+      ]
+    },
+    {
+      "eventId": "event-e44ffeb0ebfa",
+      "title": "Trump administration to end tax-exempt status over school discrimination - KPVI",
+      "before": 64,
+      "after": 22,
+      "reasonsAfter": [
+        "backfill_freshness"
+      ]
+    },
+    {
+      "eventId": "event-a7cfe5315b58",
+      "title": "15,000-year-old cave art discovery could rewrite the story of Ireland’s first humans - HeritageDaily",
+      "before": 28,
+      "after": 62,
+      "reasonsAfter": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ]
+    },
+    {
+      "eventId": "event-9c1da12f467e",
+      "title": "Far-right triumph in eastern Germany leaves migrants questioning their future - Reuters",
+      "before": 70,
+      "after": 28,
+      "reasonsAfter": [
+        "primary_freshness"
+      ]
+    }
+  ]
+}

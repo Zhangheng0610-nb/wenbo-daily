@@ -338,7 +338,7 @@ INTERNATIONAL_MUSEUM_GOVERNANCE_TERMS = (
 )
 INTERNATIONAL_MUSEUM_ANCHOR_TERMS = (
     "museum", "museums", "gallery", "galleries", "cultural institution", "heritage institution",
-    "public museum", "collection", "archive",
+    "public museum", "museum collection", "art collection", "national archives", "heritage archive",
 )
 NATIONAL_POLICY_TERMS = ("国家文物局", "文化和旅游部", "全国范围", "全国博物馆", "国家级")
 ARCHAEOLOGY_DISCOVERY_TERMS = ("考古发现", "考古发掘", "发掘成果", "成果公布", "研究揭示", "研究成果", "新发现", "新认识", "出土", "墓地发现", "遗址发现")
@@ -3648,37 +3648,13 @@ def is_relevant_record(record: dict) -> bool:
     return False
 
 
-_GOVERNANCE_COMMON_CAPITALIZED_WORDS = {
-    "The", "White", "House", "Trump", "Biden", "Federal", "Agencies", "Government",
-    "Administration", "Support", "Reuters", "News", "United", "States", "America",
-}
-
-
 def international_museum_governance_relevance(record: dict) -> bool:
-    """Keep governance discovery narrow without requiring a museum word in the headline.
-
-    International institutions are often referred to by a proper name alone
-    (for example, an institution's short name).  When a result came from this
-    narrowly scoped museum-governance family, a governance action plus either
-    an explicit institution anchor or a non-generic capitalized organization
-    token is sufficient for discovery relevance.  It is not evidence.
-    """
+    """Require a museum/heritage subject; capitalization is not an institution."""
     text = _editorial_context(record)
     if not any(term in text for term in INTERNATIONAL_MUSEUM_GOVERNANCE_TERMS):
         return False
-    if any(term in text for term in INTERNATIONAL_MUSEUM_ANCHOR_TERMS):
-        return True
-    titles = [record.get("title", ""), record.get("representativeTitle", "")]
-    titles.extend(
-        report.get("title", "")
-        for report in record.get("discoveryReports", [])
-        if isinstance(report, dict)
-    )
-    for title in titles:
-        tokens = re.findall(r"\b[A-Z][A-Za-z0-9’'-]{3,}\b", str(title or ""))
-        if any(token not in _GOVERNANCE_COMMON_CAPITALIZED_WORDS for token in tokens[1:]):
-            return True
-    return False
+    anchors = INTERNATIONAL_MUSEUM_ANCHOR_TERMS + ('smithsonian', 'louvre', 'guggenheim', 'rijksmuseum', 'atwater kent building')
+    return any(re.search(r'\b' + re.escape(term) + r'\b', text) for term in anchors)
 
 
 def international_heritage_signals(record: dict) -> set[str]:
@@ -3692,8 +3668,14 @@ def international_heritage_signals(record: dict) -> set[str]:
         signals.add("heritage_emergency_response")
     if re.search(r"\b(?:documentary heritage|memory of the world)\b", text) and re.search(r"\b(?:prize|laureates?|award(?:ed)?)\b", text):
         signals.add("documentary_heritage_recognition")
-    if re.search(r"\barchaeolog\w*\b", text) and re.search(r"\b(?:discover(?:y|ies|ed)?|excavation|new findings|reveals?|uncover(?:ed)?)\b", text):
+    archaeological_object = re.search(r"\b(?:archaeolog\w*|cave art|rock art|ancient tombs?|ancient settlements?)\b", text)
+    if archaeological_object and re.search(r"\b(?:discover(?:s|y|ies|ed|ing)?|excavation|new findings|reveals?|uncover(?:s|ed)?)\b", text):
         signals.add("archaeological_new_knowledge")
+    cultural_property = re.search(r"\b(?:arti?facts?|artefacts?|antiquities|bronzes|cultural (?:objects|property)|indigenous (?:artifacts|remains)|ancestral remains)\b", text)
+    return_action = re.search(r"\b(?:repatriat(?:e|es|ed|ing)|restitut(?:ed|ion agreement))\b", text) or re.search(
+        r"\b(?:completes?|announces?|agrees?|begins?|orders?|approves?)\b.{0,80}\brepatriation\b", text)
+    if cultural_property and return_action:
+        signals.add('cultural_property_repatriation')
     if heritage_object and re.search(r"\b(?:digiti[sz](?:ation|ing|ed|e)|3d scanning|digital (?:preservation|reconstruction|archive))\b", text):
         signals.add("digital_heritage_practice")
     return signals
@@ -3939,7 +3921,7 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     archaeology_discovery = (hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))) or "archaeological_new_knowledge" in international_signals
     security = hit(SECURITY_PRIORITY_TERMS)
     museum_collection_incident = museum_collection_or_public_incident(record)
-    repatriation = hit(REPATRIATION_TERMS)
+    repatriation = hit(REPATRIATION_TERMS) or "cultural_property_repatriation" in international_signals
     heritage = hit(HERITAGE_RECOGNITION_TERMS) or "documentary_heritage_recognition" in international_signals
     museum_project = hit(MUSEUM_PROJECT_TERMS)
     digital = hit(DIGITAL_PRIORITY_TERMS) or "digital_heritage_practice" in international_signals

@@ -223,3 +223,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 ### 面向读者的文案
 
 遵循 CONTENT_STYLE.md：正文优先事实与判断，删去重复免责声明、AI 自我辩解和实现细节。保留具体日期、来源、异常和事实限定。
+
+### 第十四轮补充
+
+优先级只决定核验顺序；英文大写词不等于文博机构，文物返还等需同时识别文化对象与行动。出现近期报道时检查是否为旧事重报，事件时间与文章发布时间分别记录。Speed Museum 个案见 PRODUCT_ROUND14.md。

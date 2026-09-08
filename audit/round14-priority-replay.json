@@ -1,0 +1,582 @@
+{
+  "mode": "offline priority comparison on saved Sep 8 event candidates; no new source evidence or publication",
+  "events": [
+    {
+      "title": "Smithsonian showdown intensifies as Trump administration issues a stark new warning - Fox News",
+      "before": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Litigation Tracker: Legal Challenges to Trump Administration Actions - Just Security",
+      "before": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Proposed bill would bar taxpayer funding for AI surveillance cameras - KPVI",
+      "before": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Speed Art Museum completes first repatriation of Indigenous artifacts - The Louisville Cardinal",
+      "before": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 58,
+        "label": "medium",
+        "reasons": [
+          "repatriation_or_recovery_update",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Smithsonian showdown intensifies as Trump administration issues a stark new warning - WFIN",
+      "before": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Trump administration to end tax-exempt status over school discrimination - KPVI",
+      "before": {
+        "score": 64,
+        "label": "medium",
+        "reasons": [
+          "museum_or_cultural_institution_governance",
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-03"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Archaeologists discover previously unknown talayot at Son Fornés - HeritageDaily",
+      "before": {
+        "score": 62,
+        "label": "medium",
+        "reasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 62,
+        "label": "medium",
+        "reasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "15,000-year-old cave art discovery could rewrite the story of Ireland’s first humans - HeritageDaily",
+      "before": {
+        "score": 28,
+        "label": "low",
+        "reasons": [
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 62,
+        "label": "medium",
+        "reasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "primary_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    },
+    {
+      "title": "Trump moves to strip tax-exempt status from schools that consider race - Reuters",
+      "before": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      },
+      "after": {
+        "score": 22,
+        "label": "low",
+        "reasons": [
+          "backfill_freshness"
+        ],
+        "highLevelCulturalDiplomacy": false,
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-04"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1
+      }
+    }
+  ]
+}
