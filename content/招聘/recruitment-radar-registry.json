@@ -1,6 +1,6 @@
 {
   "schema": "recruitment-radar-registry-v1",
-  "updatedAt": "2026-09-06",
+  "updatedAt": "2026-09-09",
   "policy": "Radar sources are discovery-only. A listing is publishable only after a direct detail/application source is verified.",
   "sources": [
     {
@@ -59,6 +59,51 @@
       "active": false,
       "lastVerified": null,
       "notes": "旧规则只有昵称，没有可审计URL或__biz；在身份与入口核验前不自动抓取。"
+    },
+    {
+      "name": "高校人才网博物馆岗位",
+      "url": "https://www.gaoxiaojob.com/hotword/awbe850624",
+      "scope": "博物馆岗位及公告",
+      "type": "professional_recruitment_site",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": null,
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+    },
+    {
+      "name": "高校人才网博物馆实习",
+      "url": "https://www.gaoxiaojob.com/hotword/syzh709134",
+      "scope": "博物馆实习",
+      "type": "professional_recruitment_site",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": null,
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+    },
+    {
+      "name": "高校人才网考古专题",
+      "url": "https://www.gaoxiaojob.com/column/134.html",
+      "scope": "考古招聘",
+      "type": "professional_recruitment_site",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": null,
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+    },
+    {
+      "name": "中国陈列展览网文博招聘",
+      "url": "https://www.chinaclzl.com/djgz_1/55.html",
+      "scope": "文博招聘汇总",
+      "type": "professional_recruitment_site",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": null,
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。",
+      "inlineDigest": true
     }
   ]
 }

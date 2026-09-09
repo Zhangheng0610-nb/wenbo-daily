@@ -1,13 +1,14 @@
-# 截至第十六轮的完整接续
+# 截至第十七轮的完整接续
 
-使用 wenbo-complete-round16.bundle，一份包含完整历史。目标分支 improve/product-reliability。不要依次导入旧包。
+只导入 wenbo-complete-round17.bundle，包含完整历史和第十六轮界面改版。分支 improve/product-reliability。用户目前电脑不在身边，拿到包后再本地接续即可。
 
-1. 保护本地未提交修改，fetch origin，在独立整合分支合并 bundle 和最新主线；保留双方每日数据，不覆盖远端新日报，不 force push。
-2. 阅读 PRODUCT_ROUND11.md 至 PRODUCT_ROUND16.md、CONTENT_STYLE.md、CODEX_RUNBOOK.md。前轮若已合并，按祖先关系整合新增提交，不重复从头审计。
-3. 执行 python -m unittest discover -s automation -p 'test_*.py'；python build.py；python automation/validate_project.py --date 2026-09-08；python automation/validate_product.py；git diff --check。如日报已推进，再检查最新日期。
-4. 先本地预览，暂不 push，等用户确认外观。最新偏好：浅色黑白灰主色、深色深蓝，少量适配的提示/重点色可以使用，不能恢复绿色主题。请展示桌面和手机首页、日报的浅色及深色截图。
-5. 新版识别：首页“文博日报”大标题、整期全部新闻卡片、第一条深色主卡；日报桌面左侧目录。检查 CSS 请求含 ?v= 内容哈希并正常加载，避免旧缓存。测试全部标题跳转、目录锚点、筛选、查看更多、收藏、键盘访问、手机横向溢出。另检查搜索日期范围/排序/空关键词浏览，以及档案按月份筛选折叠历史。270 项自动化测试通过，浏览器视觉验收仍待本地完成。
-6. Round15 界面提交 cf8fc6739f2e2c78842fe97a484222c87cd2344e，Round16 为后续独立提交。用户不喜欢时可单独调整或撤回这两轮界面，保留 Round14 及以前的数据改进，不 reset 或强推主线。
-7. Windows 哈希验证仍使用 lf-normalized-v1，不回写原始发现账本。正常早间运行继续验证信源、抓取和事件去重，不把 UI 校验通过当作全自动运营已经达标。
+1. 保护本地修改，fetch origin，在独立分支安全合并最新 main 和 bundle；保留最新日报、招聘、历史台账，不 force push。
+2. 阅读 PRODUCT_ROUND17.md、PRODUCT_ROUND16.md、CODEX_RUNBOOK.md。用户已明确本轮招聘/实习优先，不再沿用“招聘暂缓”的旧交接要求。
+3. 运行 `python -m unittest discover -s automation -p 'test_*.py'`、`python build.py`、`python automation/validate_project.py --date 2026-09-08`、`python automation/validate_product.py`、`git diff --check`。另外校验本地最新日报日期。Windows 原始发现哈希沿用 lf-normalized-v1。
+4. 先预览桌面/手机首页、日报、招聘、实习，暂不 push，待用户确认前轮外观。浅色黑白灰主色、深色深蓝，允许少量合适的提示色。不要恢复绿色主题。
+5. 本轮新增发现队列32条（不是32条新岗位）。先读 content/招聘/review-queue.json 和 audit/round17-recruitment-replay.json，核对是否已被本地主线收录，避免重复。
+6. 云端旧新闻搜索144次实测132次解析成功，但大量无关；新普通网页搜索8次样本也返回无关内容，已新增相关性失败判定。因此不要把成功响应视为覆盖成功。先运行 `python automation/recruitment_discovery.py --date YYYY-MM-DD --full-sweep --plan-only --output audit/recruitment-plan.json`；使用现有 Codex 网页搜索补查并按导入格式记录，再用 --input-results 回放，不要求用户购买新 API。
+7. 详情材料里的邮箱、日期片段、附件只是核验辅助，不能自动升为 verified 或默认仍在招。未读取岗位表不得声称拆分完毕。微信公众号无法访问时保留缺口并查公开转载或原单位，不能假报已巡检。
+8. 沿用现有日常任务执行新版运行手册：每日招聘发现、队列核验，有合格新增即发布；每周全国补查。脚本本身未创建任何新调度任务，需要核对本地原有任务是否读取最新手册。
 
-持续目标：日报每日 6–9 条高价值国内外新闻是满意状态，3–5 只是底线，10+ 不封顶，不凑数。下一轮重点是旧事件/新报道的日期判定和真实供给验收。
+第十六轮独立提交 7e44309，可单独调整或回退界面；数据采集改造保留。下一步目标是对外部真实有效岗位做漏报对账并完成入库，不用原始搜索数量冒充产品价值。

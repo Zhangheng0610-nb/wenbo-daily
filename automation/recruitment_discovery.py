@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small, auditable discovery layer for the two-day recruitment update.
+"""Auditable recruitment discovery, directory scans and persistent review queue.
 
 Search and industry-radar results are leads.  Publication still requires a
 readable detail/application page and a manual or deterministic verification
@@ -14,7 +14,7 @@ import json
 import re
 import sys
 from collections import OrderedDict
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -23,7 +23,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from automation.daily_discovery import QUERY_BACKENDS, _execute_one_query
+from automation.recruitment_search import BACKENDS as QUERY_BACKENDS, execute_query as _execute_one_query
+from automation.recruitment_sources import query_plan, scan_directories, navigational_url
 
 CN_TZ = timezone(timedelta(hours=8))
 RADAR_REGISTRY = ROOT / "content" / "招聘" / "recruitment-radar-registry.json"
@@ -56,10 +57,10 @@ RECRUITMENT_QUERY_FAMILIES = OrderedDict([
     )),
 ])
 
-RECRUITMENT_TERMS = ("招聘", "招录", "公开招聘", "编外", "岗位", "实习", "见习", "博士后", "招募")
+RECRUITMENT_TERMS = ("招聘", "招录", "公开招聘", "编外", "岗位", "实习", "见习", "博士后", "招募", "實習", "見習", "博士後")
 HERITAGE_TERMS = (
     "博物馆", "博物院", "纪念馆", "美术馆", "考古院", "考古研究院", "文物考古研究所", "文物保护研究所",
-    "文物", "文博", "文保", "文化遗产", "数字文博",
+    "文物", "文博", "文保", "文化遗产", "数字文博", "博物館", "紀念館", "美術館", "文化遺產", "敦煌研究院",
 )
 HERITAGE_ROLE_TERMS = ("陈列", "展览", "社教", "公共教育", "讲解", "策展", "藏品")
 UMBRELLA_TERMS = ("文化和旅游厅", "文化和旅游局", "文广旅局", "文旅厅", "文旅局", "文物局")
@@ -112,7 +113,9 @@ def _position_from_title(title: str) -> str:
 def candidate_identity(candidate: dict) -> str:
     parts = (
         candidate.get("institution"), candidate.get("position"),
-        candidate.get("recruitmentBatch"),
+        candidate.get("recruitmentBatch") or candidate.get("deadline") or candidate.get("sourceSectionKey"),
+        candidate.get("positionCode"),
+        candidate.get("deadline"),
     )
     return "|".join(compact(part) for part in parts)
 
@@ -124,7 +127,7 @@ def build_candidate(record: dict) -> dict:
     base = {
         "institution": institution,
         "position": position,
-        "recruitmentBatch": record.get("recruitmentBatch") or ((re.search(r"(20\d{2}年(?:\d{1,2}月|上半年|下半年))", title) or [""])[0]),
+        "recruitmentBatch": record.get("recruitmentBatch") or ((re.search(r"(20\d{2}年(?:\d{1,2}月|上半年|下半年|第[一二三四五六七八九十\d]+批)?)", title) or [""])[0]),
         "announcementTitle": record.get("announcementTitle") or title,
         "discoveredAt": record.get("discoveredAt") or now_cn(),
         "discoverySource": record.get("sourceDomain") or record.get("discoverySource") or record.get("discoveredVia") or "query_search",
@@ -132,7 +135,8 @@ def build_candidate(record: dict) -> dict:
         "discoveryQuery": record.get("discoveryQuery") or "",
         "publishedDate": record.get("publishedDate") or "",
         "deadline": record.get("deadline") or "",
-        "targetPage": record.get("targetPage") or ("intern" if any(term in title for term in ("实习", "见习", "实践")) else "jobs"),
+        "targetPage": record.get("targetPage") or ("intern" if any(term in title for term in ("实习", "见习", "实践", "實習", "見習", "志愿", "志願")) else "jobs"),
+        "opportunityType": record.get("opportunityType") or ("volunteer" if any(t in title for t in ("志愿","志願")) else "internship" if any(t in title for t in ("实习","實習","见习","見習")) else "postdoc" if any(t in title for t in ("博士后","博士後")) else "employment"),
         "verificationSource": record.get("verificationSource") or "",
         "verificationStatus": record.get("verificationStatus") or "pending",
         "verificationPageType": record.get("verificationPageType") or "",
@@ -153,6 +157,7 @@ def expand_umbrella_rows(rows: list[list], source: dict) -> list[dict]:
     header = [str(value or "").replace("\n", "").strip() for value in rows[header_index]]
     institution_col = next((i for i, value in enumerate(header) if "招聘单位" in value), 1)
     position_col = next((i for i, value in enumerate(header) if "岗位名称" in value), 3 if len(header) > 3 else 2)
+    code_col = next((i for i, value in enumerate(header) if "岗位代码" in value or "岗位编码" in value), None)
     count_col = next((i for i, value in enumerate(header) if "招聘人数" in value), None)
     found = []
     for row in rows[header_index + 1:]:
@@ -165,6 +170,7 @@ def expand_umbrella_rows(rows: list[list], source: dict) -> list[dict]:
             **source,
             "institution": institution,
             "position": position,
+            "positionCode": str(values[code_col]) if code_col is not None and code_col < len(values) else "",
             "headcount": values[count_col] if count_col is not None and count_col < len(values) else None,
             "missStage": "umbrella_notice_not_expanded",
             "decisionReason": "attachment_row_requires_verification",
@@ -229,32 +235,29 @@ def _load_registry() -> dict:
     return json.loads(RADAR_REGISTRY.read_text(encoding="utf-8"))
 
 
-def _execute_queries(start: date, end: date) -> tuple[list[dict], list[dict]]:
-    tasks = []
-    for family_id, queries in RECRUITMENT_QUERY_FAMILIES.items():
-        family = {"id": f"recruitment-{family_id}", "scope": "domestic"}
-        for backend in QUERY_BACKENDS:
-            for query in queries:
-                tasks.append((family_id, family, backend, query))
-    results = [None] * len(tasks)
-    with ThreadPoolExecutor(max_workers=min(16, len(tasks))) as pool:
-        futures = {
-            pool.submit(_execute_one_query, family, backend, query, start, end): index
-            for index, (_, family, backend, query) in enumerate(tasks)
-        }
-        for future in as_completed(futures):
-            results[futures[future]] = future.result()
-    records, audits = [], []
-    for task, result in zip(tasks, results):
-        family_id, _, _, _ = task
-        found, audit = result
-        audit["recruitmentQueryFamily"] = family_id
-        records.extend(found)
-        audits.append(audit)
-    return records, audits
+def _execute_queries(start: date, end: date, *, full_sweep=False, max_queries=None):
+    plan = query_plan(end, RECRUITMENT_QUERY_FAMILIES, _load_registry(), full_sweep=full_sweep)
+    tasks = [(task, backend) for task in plan for backend in QUERY_BACKENDS]
+    if max_queries is not None:
+        tasks = tasks[:max_queries]
+    def execute(task_backend):
+        task, backend = task_backend
+        family = {"id": "recruitment-" + task["family"], "scope": "domestic"}
+        window_start = min(start, end - timedelta(days=task["lookbackDays"] - 1))
+        try:
+            found, audit = _execute_one_query(family, backend, task["query"], window_start, end)
+        except Exception as exc:
+            found, audit = [], {"success": False, "failure": str(exc)[:240], "acceptedRawCount": 0}
+        audit.update(recruitmentQueryFamily=task["family"], plannedQuery=task["query"], windowStart=window_start.isoformat(), windowEnd=end.isoformat())
+        if task.get("sourceUrls"):audit["radarSourceUrls"] = task["sourceUrls"]
+        if task.get("region"):audit["region"] = task["region"]
+        return found, audit
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        results=list(pool.map(execute,tasks))
+    return [r for rows,_ in results for r in rows], [a for _,a in results]
 
 
-def _source_coverage(audits: list[dict], registry: dict) -> list[dict]:
+def _source_coverage(audits: list[dict], registry: dict, directory_audits=None) -> list[dict]:
     rows = []
     channel_map = OrderedDict([
         ("official institution searches", "official_institution"),
@@ -262,44 +265,53 @@ def _source_coverage(audits: list[dict], registry: dict) -> list[dict]:
         ("professional recruitment sites", "professional_recruitment"),
         ("school employment sites", "school_employment"),
         ("Zhejiang regional searches", "zhejiang_regional"),
+        ("internship searches", "internship"),
+        ("nationwide rotation", "national_rotation"),
+        ("long-running vacancies", "open_ended"),
     ])
     for name, family in channel_map.items():
         related = [row for row in audits if row.get("recruitmentQueryFamily") == family]
         successes = sum(bool(row.get("success")) for row in related)
         rows.append({
             "channel": name,
-            "status": "success" if related and successes == len(related) else ("partial" if successes else "failed"),
+            "status": "not_checked" if not related else "success" if successes == len(related) else ("partial" if successes else "failed"),
             "attempted": len(related), "succeeded": successes,
-            "result": "no_result" if related and not sum(row.get("acceptedRawCount", 0) for row in related) else "results_found",
+            "result": "unknown" if not related or successes < len(related) else ("no_result" if not sum(row.get("acceptedRawCount", 0) for row in related) else "results_found"),
         })
     active = [row for row in registry.get("sources", []) if row.get("active")]
-    radar_families = {
-        "professional_recruitment_site": "professional_recruitment",
-        "school_employment_site": "school_employment",
-    }
-    radar_checks = []
     for source in active:
-        family = radar_families.get(source.get("type"))
-        related = [row for row in audits if row.get("recruitmentQueryFamily") == family]
-        radar_checks.append(bool(related and any(row.get("success") for row in related)))
-    rows.append({
-        "channel": "recruitment radar",
-        "status": "success" if radar_checks and all(radar_checks) else ("partial" if any(radar_checks) else "failed"),
-        "attempted": len(active), "succeeded": sum(radar_checks),
-        "result": "discovery-only radar queries checked; direct detail verification still required" if active else "no active machine-readable radar endpoint",
-    })
+        direct = [a for a in (directory_audits or []) if a.get("sourceUrl") == source["url"]]
+        searches = [a for a in audits if source["url"] in a.get("radarSourceUrls", [])]
+        rows.append({
+            "channel": source["name"], "sourceUrl": source["url"],
+            "status": direct[-1]["status"] if direct else "not_checked",
+            "method": "direct_directory" if direct else "not_checked",
+            "searchAttempts": len(searches), "searchSucceeded": sum(bool(a.get("success")) for a in searches),
+            "result": direct[-1].get("result", "unknown") if direct else "directory_not_checked",
+        })
     return rows
 
 
-def build_ledger(run_date: date, records: list[dict], audits: list[dict], reviews: list[dict] | None = None, *, last_successful: date | None = None) -> dict:
+def keep_discovery_record(record):
+    if navigational_url(record.get("url", "")):return False
+    title=record.get("title", "")
+    if is_recruitment_candidate(title,record.get("snippet", "")):return True
+    # Government umbrella notices often name museums only in an attachment.
+    family=record.get("queryFamily", "")
+    query=record.get("discoveryQuery", "")
+    umbrella="government_umbrella" in family or ("national_rotation" in family and "事业单位" in query)
+    return umbrella and any(term in title for term in ("招聘","人才引进","招录"))
+
+
+def build_ledger(run_date: date, records: list[dict], audits: list[dict], reviews: list[dict] | None = None, *, last_successful: date | None = None, directory_audits=None) -> dict:
     start, end = rolling_window(run_date, last_successful)
-    candidates = [build_candidate(record) for record in records if is_recruitment_candidate(record.get("title", ""), record.get("snippet", ""))]
+    candidates = [build_candidate(record) for record in records if keep_discovery_record(record)]
     candidates.extend(build_candidate(row) for row in (reviews or []))
     candidates = deduplicate_candidates(candidates)
     counts = {key: sum(row.get("decision") == key for row in candidates) for key in ("included", "rejected", "pending", "duplicate")}
     registry = _load_registry()
     family_summary = []
-    for family in RECRUITMENT_QUERY_FAMILIES:
+    for family in list(RECRUITMENT_QUERY_FAMILIES) + ["internship", "national_rotation", "registered_radar", "open_ended"]:
         related = [row for row in audits if row.get("recruitmentQueryFamily") == family]
         family_summary.append({
             "family": family,
@@ -319,7 +331,9 @@ def build_ledger(run_date: date, records: list[dict], audits: list[dict], review
         "queriesAttempted": len(audits),
         "queriesSucceeded": sum(bool(row.get("success")) for row in audits),
         "queriesFailed": sum(not row.get("success") for row in audits),
-        "sourceCoverage": _source_coverage(audits, registry),
+        "sourceCoverage": _source_coverage(audits, registry, directory_audits),
+        "directoryAudits": directory_audits or [],
+        "rawRecords": records,
         "queryFamilySummary": family_summary,
         "queryAudits": audits,
         "rawResultCount": len(records),
@@ -353,6 +367,37 @@ def validate_ledger(payload: dict) -> list[str]:
     return errors
 
 
+def persistent_review_queue(root, ledger):
+    """Retain unresolved leads across runs; newest explicit decision wins."""
+    root=Path(root); rows={}
+    paths=sorted((root/"content/招聘/发现").glob("*.json"))
+    ledgers=[json.loads(p.read_text(encoding="utf-8")) for p in paths if p.stem <= ledger["date"]]
+    queue_path=root/"content/招聘/review-queue.json"
+    if queue_path.exists():
+        previous=json.loads(queue_path.read_text(encoding="utf-8"))
+        if previous.get("asOf", "") <= ledger["date"]:
+            ledgers.append({"date":previous.get("asOf",ledger["date"]),"candidates":previous.get("candidates",[])})
+    ledgers.sort(key=lambda batch:batch["date"])
+    for batch in ledgers+[ledger]:
+        for candidate in batch.get("candidates",[]):
+            key=candidate_identity(candidate)
+            old=rows.get(key)
+            current=dict(candidate)
+            current["firstSeen"]=old.get("firstSeen") if old else candidate.get("firstSeen",batch["date"])
+            current["lastSeen"]=batch["date"]
+            # A raw rediscovery must not erase an explicit editorial decision.
+            if old and old.get("decision") in ("included","rejected") and current.get("decision")=="pending":
+                current={**old,"lastSeen":batch["date"]}
+            rows[key]=current
+    pending=[r for r in rows.values() if r.get("decision")=="pending"]
+    def priority(row):
+        year=re.search(r"20\d{2}",row.get("announcementTitle", ""))
+        older=bool(year and int(year[0]) < int(ledger["date"][:4]))
+        return (older,row.get("targetPage")!="intern",row["firstSeen"],row.get("institution",""))
+    pending.sort(key=priority)
+    return {"schema":"recruitment-review-queue-v1","asOf":ledger["date"],"pendingCount":len(pending),"candidates":pending}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", type=date.fromisoformat, required=True)
@@ -361,25 +406,64 @@ def main() -> int:
     parser.add_argument("--input-results", type=Path)
     parser.add_argument("--no-live", action="store_true")
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--plan-only", action="store_true", help="Export queries for the existing Codex web-search tool; no network")
+    parser.add_argument("--full-sweep", action="store_true", help="All provinces; 90-day catch-up")
+    parser.add_argument("--max-queries", type=int, help="Bounded diagnostic sample, never a full coverage run")
+    parser.add_argument("--inspect-limit", type=int, default=12, help="Bounded detail-page dossiers; no automatic verification")
+    parser.add_argument("--output", type=Path, help="Separate audit output; does not overwrite production ledger")
     args = parser.parse_args()
     start, end = rolling_window(args.date, args.last_successful_date)
+    if args.plan_only:
+        payload={"date":args.date.isoformat(),"queryPlan":query_plan(args.date,RECRUITMENT_QUERY_FAMILIES,_load_registry(),full_sweep=args.full_sweep),"importFormat":{"records":[{"title":"公告标题","url":"原文或公告详情URL","snippet":"搜索摘要","publishedDate":"仅有明确依据才填","queryFamily":"recruitment-计划中的family"}],"queryAudits":[{"recruitmentQueryFamily":"计划中的family","actualQuery":"实际检索词","backend":"codex-web-search","success":True,"acceptedRawCount":0}]}}
+        text=json.dumps(payload,ensure_ascii=False,indent=2)+"\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(text,encoding="utf-8")
+        else:print(text)
+        return 0
+    if args.max_queries is not None and args.max_queries < 0:
+        parser.error("--max-queries must be nonnegative")
+    if args.write and args.max_queries is not None:
+        parser.error("diagnostic samples must use --output, not --write")
+    directory_audits=[]
     if args.input_results:
         source = json.loads(args.input_results.read_text(encoding="utf-8"))
         records, audits = source.get("records", []), source.get("queryAudits", [])
     elif args.no_live:
         records, audits = [], []
     else:
-        records, audits = _execute_queries(start, end)
+        records, audits = _execute_queries(start, end, full_sweep=args.full_sweep, max_queries=args.max_queries)
+        from automation.backfill_monitoring import fetch
+        direct_records, directory_audits = scan_directories(_load_registry(), fetch, checked_at=now_cn())
+        records.extend(direct_records)
     reviews = json.loads(args.review_file.read_text(encoding="utf-8")).get("candidates", []) if args.review_file else []
-    ledger = build_ledger(args.date, records, audits, reviews, last_successful=args.last_successful_date)
+    ledger = build_ledger(args.date, records, audits, reviews, last_successful=args.last_successful_date, directory_audits=directory_audits)
+    ledger["queryPlan"]=query_plan(args.date, RECRUITMENT_QUERY_FAMILIES, _load_registry(), full_sweep=args.full_sweep)
+    ledger["coverageMode"]="sample" if args.max_queries is not None else ("replay" if args.input_results or args.no_live else "full_sweep" if args.full_sweep else "daily_rotation")
+    ledger["queryWindowStart"]=min((a.get("windowStart", start.isoformat()) for a in audits), default=start.isoformat())
+    ledger["windowStart"]=ledger["queryWindowStart"]
+    ledger["minimumQueryLookbackDays"]=90 if args.full_sweep else 30
+    ledger["historicalDirectoryLeadsRetained"]=True
+    ledger["reviewQueue"]=persistent_review_queue(ROOT, ledger)
+    if not args.no_live and not args.input_results and args.inspect_limit > 0:
+        from automation.recruitment_detail import inspect_candidates
+        from automation.backfill_monitoring import fetch
+        ledger["detailDossiers"]=inspect_candidates(ledger["reviewQueue"]["candidates"],fetch,now_cn(),min(args.inspect_limit,24))
     errors = validate_ledger(ledger)
     if errors:
         print("\n".join(f"ERROR: {error}" for error in errors), file=sys.stderr)
         return 1
+    if args.output:
+        args.output.parent.mkdir(parents=True,exist_ok=True)
+        args.output.write_text(json.dumps(ledger,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     if args.write:
         DISCOVERY_DIR.mkdir(parents=True, exist_ok=True)
         path = DISCOVERY_DIR / f"{args.date.isoformat()}.json"
+        if path.exists():
+            snapshots=DISCOVERY_DIR/"runs";snapshots.mkdir(exist_ok=True)
+            stamp=datetime.now(CN_TZ).strftime("%Y%m%dT%H%M%S%f")
+            (snapshots/f"{args.date.isoformat()}-before-{stamp}.json").write_bytes(path.read_bytes())
         path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        (DISCOVERY_DIR.parent/"review-queue.json").write_text(json.dumps(ledger["reviewQueue"],ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         print(path)
     print(json.dumps({key: ledger[key] for key in (
         "date", "windowStart", "windowEnd", "queriesAttempted", "queriesSucceeded",

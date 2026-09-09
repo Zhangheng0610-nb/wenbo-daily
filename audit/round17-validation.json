@@ -1,0 +1,38 @@
+{
+  "date": "2026-09-09",
+  "dailyPlannedWebQueries": 75,
+  "regionalCoverageOverSevenDays": 31,
+  "pendingQueue": 32,
+  "emptyNextRunRetainsQueue": true,
+  "verifiedNewListingsAdded": 0,
+  "newsBackendLiveRun": {
+    "queries": 144,
+    "transportOrParserSuccess": 132,
+    "failed": 12,
+    "rawRecords": 609
+  },
+  "webBackendLiveSample": {
+    "queries": 8,
+    "relevantSearchResults": 0,
+    "postReview": "unrelated responses; now classified as failure"
+  },
+  "directoryScan": {
+    "sources": 4,
+    "noticeLeads": 22,
+    "inlineDigestNotices": 12
+  },
+  "limitations": [
+    "No claim of near-total coverage",
+    "Web backend requires local recall validation or Codex web-search import",
+    "Attachments and WeChat gaps remain",
+    "No new listings published without verification"
+  ],
+  "tests": {
+    "run": 284,
+    "failures": 0,
+    "errors": 0
+  },
+  "build": "passed",
+  "productPagesValidated": 84,
+  "dailyValidated": "2026-09-08"
+}

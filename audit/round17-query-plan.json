@@ -1,0 +1,431 @@
+{
+  "date": "2026-09-09",
+  "queryPlan": [
+    {
+      "family": "official_institution",
+      "query": "博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物院 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 公开招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 编外",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 讲解员 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 社教 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 展览 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 文保 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "考古院 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "考古研究院 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "文物考古研究所 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "文物保护 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "文物保护中心 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "文化遗产 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "数字文博 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "official_institution",
+      "query": "博物馆 数字化 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文化和旅游厅 直属事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文化和旅游局 下属事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文广旅局 下属事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文物局 直属事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文旅厅 事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "government_umbrella",
+      "query": "文旅局 编外 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "professional_recruitment",
+      "query": "site:gaoxiaojob.com 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "professional_recruitment",
+      "query": "site:shiyebian.com 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "professional_recruitment",
+      "query": "site:gaoxiaojob.com 考古 文物 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "professional_recruitment",
+      "query": "site:shiyebian.com 文旅厅 直属事业单位 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "school_employment",
+      "query": "site:ncss.cn 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "school_employment",
+      "query": "site:edu.cn 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "school_employment",
+      "query": "site:edu.cn 考古 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "school_employment",
+      "query": "site:edu.cn 文物保护 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 杭州 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 宁波 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 温州 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 绍兴 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 台州 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 嘉兴 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 湖州 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 金华 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 衢州 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 舟山 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "zhejiang_regional",
+      "query": "浙江 丽水 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 实习生 招募",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物院 实习 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "考古 实习 招募",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 学生助理 招募",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 见习 岗位",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "文物修复 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "美术馆 策展 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 公共教育 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 数字化 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "site:edu.cn 博物馆 实习生",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "site:mp.weixin.qq.com 博物馆 实习 招募",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "博物馆 长期招聘 实习",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "香港 博物館 實習 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "澳门 博物馆 招聘",
+      "lookbackDays": 30
+    },
+    {
+      "family": "internship",
+      "query": "台湾 博物館 實習 招募",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "山西 博物馆 考古 招聘",
+      "region": "山西",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "山西 人力资源 事业单位 文物 招聘",
+      "region": "山西",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "山西 博物馆 实习",
+      "region": "山西",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "浙江 博物馆 考古 招聘",
+      "region": "浙江",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "浙江 人力资源 事业单位 文物 招聘",
+      "region": "浙江",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "浙江 博物馆 实习",
+      "region": "浙江",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "湖南 博物馆 考古 招聘",
+      "region": "湖南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "湖南 人力资源 事业单位 文物 招聘",
+      "region": "湖南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "湖南 博物馆 实习",
+      "region": "湖南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "云南 博物馆 考古 招聘",
+      "region": "云南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "云南 人力资源 事业单位 文物 招聘",
+      "region": "云南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "national_rotation",
+      "query": "云南 博物馆 实习",
+      "region": "云南",
+      "lookbackDays": 30
+    },
+    {
+      "family": "registered_radar",
+      "query": "site:www.gaoxiaojob.com 博物馆 招聘 实习",
+      "sourceUrl": "https://www.gaoxiaojob.com/column/254.html",
+      "sourceUrls": [
+        "https://www.gaoxiaojob.com/column/254.html",
+        "https://www.gaoxiaojob.com/hotword/awbe850624",
+        "https://www.gaoxiaojob.com/hotword/syzh709134",
+        "https://www.gaoxiaojob.com/column/134.html"
+      ],
+      "lookbackDays": 30
+    },
+    {
+      "family": "registered_radar",
+      "query": "site:www.shiyebian.com 博物馆 招聘 实习",
+      "sourceUrl": "https://www.shiyebian.com/",
+      "sourceUrls": [
+        "https://www.shiyebian.com/"
+      ],
+      "lookbackDays": 30
+    },
+    {
+      "family": "registered_radar",
+      "query": "site:www.ncss.cn 博物馆 招聘 实习",
+      "sourceUrl": "https://www.ncss.cn/",
+      "sourceUrls": [
+        "https://www.ncss.cn/"
+      ],
+      "lookbackDays": 30
+    },
+    {
+      "family": "registered_radar",
+      "query": "site:www.chinaclzl.com 博物馆 招聘 实习",
+      "sourceUrl": "https://www.chinaclzl.com/djgz_1/55.html",
+      "sourceUrls": [
+        "https://www.chinaclzl.com/djgz_1/55.html"
+      ],
+      "lookbackDays": 30
+    },
+    {
+      "family": "open_ended",
+      "query": "博物馆 长期招聘",
+      "lookbackDays": 365
+    },
+    {
+      "family": "open_ended",
+      "query": "博物馆 实习 长期 招募",
+      "lookbackDays": 365
+    },
+    {
+      "family": "open_ended",
+      "query": "考古 博士后 招聘",
+      "lookbackDays": 365
+    }
+  ],
+  "importFormat": {
+    "records": [
+      {
+        "title": "公告标题",
+        "url": "原文或公告详情URL",
+        "snippet": "搜索摘要",
+        "publishedDate": "仅有明确依据才填",
+        "queryFamily": "recruitment-计划中的family"
+      }
+    ],
+    "queryAudits": [
+      {
+        "recruitmentQueryFamily": "计划中的family",
+        "actualQuery": "实际检索词",
+        "backend": "codex-web-search",
+        "success": true,
+        "acceptedRawCount": 0
+      }
+    ]
+  }
+}

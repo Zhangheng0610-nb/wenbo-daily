@@ -8,11 +8,11 @@
 
 - 每天：先生成 `content/监测/YYYY-MM-DD.json`，逐一登记固定信源池的巡检结果和全部合格候选。
 - 每天：生成 `content/日报/YYYY-MM-DD.md`。
-- 偶数日：更新 `content/招聘/jobs.md` 和 `content/招聘/intern.md`。
+- 每日：运行独立招聘发现、处理跨日待核队列；有通过核验的新岗位即更新 `content/招聘/jobs.md` 和 `content/招聘/intern.md`，不等偶数日。
 - 周日：生成当周周报。
 - 每月 1 日：汇总上月月报，不要把当月第一天误写成完整月报。
 
-固定信源巡检是地图的数据任务，日报是编辑精选任务，两者不能混为一谈。招聘、周报、月报只在对应日期执行，不应互相重复搜索或重复报道。
+固定信源巡检是地图的数据任务，日报是编辑精选任务，两者不能混为一谈。招聘发现每日独立执行；周报、月报按对应日期执行，不应互相重复搜索或重复报道。
 
 ## 内容与信源
 
@@ -61,7 +61,12 @@
 4. 每次招聘更新先复查旧岗位：已过截止时间的标为已截止或移出可申请列表；当日、次日和 3 天内截止的岗位置顶，并在标题或截止字段写出具体日期和时间，不能只写“尽快”。
 5. 扩大检索地域和岗位类型：全国博物馆、考古队/研究所、高校文博岗位、文物保护修复、展览与公共教育、数字文博、文化遗产项目及相关企业均可纳入；按真实性、仍可投递和信息完整度排序，不按来源等级机械排除。
 6. 同一岗位合并重复信息，优先保留官方投递入口，同时可附招聘平台链接用于补充；找不到有效投递方式就不收录。
-7. 偶数日正式更新先运行独立招聘发现，使用上次成功更新向前 7 天的重叠窗口，避免搜索引擎延迟造成永久漏报。不得用“上轮没有”作为跳过仍有效公告的理由。
+7. 每日运行 `python automation/recruitment_discovery.py --date YYYY-MM-DD --last-successful-date YYYY-MM-DD --write`。普通检索至少回看 30 天，长期招募专项回看一年；全国 31 地区七天轮巡，每日实习专项与登记目录直采。首次接续或每周一次加 `--full-sweep` 做 90 天全国补查。不得用“发布时间较早”排除仍有效岗位。
+   - 招聘使用独立网页搜索，不使用日报的 News RSS。若返回结果与招聘无关、全部超时或结构失败，不能报成功/无新岗；在同一任务中使用 Codex 自带网页搜索按 `queryPlan` 补查失败查询，使用 `--plan-only --output audit/recruitment-plan.json` 取得查询及导入格式；导出 `records`/`queryAudits` 后通过 `--input-results` 复核。无需新增付费 API。若工具不可用则保留失败并报告，不伪造覆盖。
+   - 读取 `content/招聘/review-queue.json` 与本轮 `detailDossiers`，先核查原文投递、截止与岗位表，然后更新 Markdown 和 evidence.json。不能把 readable、邮箱提取成功当 verified；网页岗位附件需实际读取。
+   - pending 跨日保留，included/rejected 必须有具体理由。重复公告合并来源；不同年份、批次和岗位代码不得误合并。同 URL 汇总可能有多家招聘单位。
+   - `--max-queries` 是诊断抽样，不是完整覆盖；`--output audit/...json` 只保存实测，不替代正式台账。脚本不自动把候选塞进可申请列表。
+   - 每条登记入口分别记录 direct_directory 的成功/失败/结构待核；站内搜索成功不等于该目录已检查。微信公众号不能访问时保留缺口，走公开转载与原单位核对，不宣称覆盖全部公众号。
 8. 检索必须分开记录机构直招、政府/人社/文旅主管部门 umbrella 公告、专业招聘站、学校就业网和招聘雷达。主管部门公告标题不含博物馆时，仍要展开正文和岗位表，按实际招聘单位/岗位拆分。
 9. `content/招聘/recruitment-radar-registry.json` 只登记可审计的雷达入口；行业公众号和汇总站默认 `discoveryOnly=true`，必须回到官方公告、明确详情或直接投递入口才能发布。只有昵称而没有 URL/`__biz` 的公众号不得伪装成已检查雷达。
 10. 每轮将查询、coverage、入选、拒绝、待核和重复候选写入 `content/招聘/发现/YYYY-MM-DD.json`。“没有新岗位”只能用于成功检查且结果为空的渠道；`failed`/`partial` 不得改写为 `no_result`。
@@ -151,7 +156,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
    博物馆公共事件需同时具备机构、藏品/标本对象和真实损害或管理影响锚点；`publicSalience` 只统计去重后的独立发布方、来源类型和跨日实质跟进，不能用原始 `reportCount` 替代，也不能绕过事件/历史去重或 A/B 证据门槛。明星参观、普通活动和单纯流量争议不得仅凭传播量升级。
 
 5. 所有事实、日期、数量、地点和来源链接必须由原文支持；同一事件的不同来源作为证据合并，不重复列为新闻。去重顺序是：广泛发现 → 当天事件聚类 → 近 7—14 天历史事件核对 → evidence 核验 → editorial selection。当天同一事件只保留 canonical event；历史转载记录保留在 discovery audit 中并写明 `duplicateOf`；有明确新增事实的记录标记 `new_development`，不能因标题相似被误杀。
-6. 按日期判断是否执行招聘、周报、月报；不要把所有栏目都重复搜一遍。
+6. 招聘发现每日执行；周报、月报按日期判断，不重复采集。
 7. 正式每日任务先运行 `python digital_trend.py --incremental`，扫描国家文物局「文物新闻」近期分页，更新 `digital-data.json`，并写入 `content/数字趋势监测/YYYY-MM-DD.json`；确认扫描成功后再运行 `python build.py` 重建静态页面。普通 `python build.py` 只做页面构建（内部使用 `--build-only`），不联网采集、不更新数字趋势数据或覆盖记录。
 8. 运行 `python automation/validate_project.py --date YYYY-MM-DD`；该检查会强制要求当日 6 源覆盖登记和固定池域名匹配。历史档案可用 `--all` 检查，`--strict-all` 仅用于专项清理。
 9. 检查 `git status`、`git diff --check`、`heatmap-data.json`、`sources.html`、`search-index.json` 和生成文件；确认没有未预期的改动。
