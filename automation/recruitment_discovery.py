@@ -25,6 +25,7 @@ if str(ROOT) not in sys.path:
 
 from automation.recruitment_search import BACKENDS as QUERY_BACKENDS, execute_query as _execute_one_query
 from automation.recruitment_sources import query_plan, scan_directories, navigational_url
+from automation.recruitment_review import apply_review_decisions, review_signature
 
 CN_TZ = timezone(timedelta(hours=8))
 RADAR_REGISTRY = ROOT / "content" / "招聘" / "recruitment-radar-registry.json"
@@ -386,16 +387,17 @@ def persistent_review_queue(root, ledger):
             current["firstSeen"]=old.get("firstSeen") if old else candidate.get("firstSeen",batch["date"])
             current["lastSeen"]=batch["date"]
             # A raw rediscovery must not erase an explicit editorial decision.
-            if old and old.get("decision") in ("included","rejected") and current.get("decision")=="pending":
+            if old and old.get("decision") in ("included","rejected","duplicate") and current.get("decision")=="pending" and review_signature(old) == review_signature(current):
                 current={**old,"lastSeen":batch["date"]}
             rows[key]=current
-    pending=[r for r in rows.values() if r.get("decision")=="pending"]
+    reviewed, applied = apply_review_decisions(root, list(rows.values()), ledger["date"])
+    pending=[r for r in reviewed if r.get("decision")=="pending"]
     def priority(row):
         year=re.search(r"20\d{2}",row.get("announcementTitle", ""))
         older=bool(year and int(year[0]) < int(ledger["date"][:4]))
         return (older,row.get("targetPage")!="intern",row["firstSeen"],row.get("institution",""))
     pending.sort(key=priority)
-    return {"schema":"recruitment-review-queue-v1","asOf":ledger["date"],"pendingCount":len(pending),"candidates":pending}
+    return {"schema":"recruitment-review-queue-v1","asOf":ledger["date"],"pendingCount":len(pending),"appliedReviewCount":len(applied),"appliedReviews":applied,"candidates":pending}
 
 
 def main() -> int:

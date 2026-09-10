@@ -1,0 +1,168 @@
+{
+  "schema": "recruitment-review-decisions-v1",
+  "decisions": [
+    {
+      "candidateId": "recruit-d5dce307ade6",
+      "signature": "40ee1dcf07acb5ff8b67e5d7197fd1843c4673c1197b8ab7ff3a9b36e6fd55a6",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-d5dce307ade6",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-c80129733d43",
+      "signature": "5598517812fe74d48f5aed48ac499cba6425aff735ef7996e55d7a2bb2879938",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-c80129733d43",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-9adbf3ceaa0f",
+      "signature": "09d8357a1dfe9e9494293aa8815327989bcba01ba39aec7d4fa23198dbfd0e46",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-9adbf3ceaa0f",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-ace3f38b6bed",
+      "signature": "093e1a1ed0b6e45f83e62044b5187ec250e3ebcfb3183ed7aaa43199ec2b7561",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-ace3f38b6bed",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-6e9da508b673",
+      "signature": "7ab4f51160b6ee334830ba190da86dc695b6f6c0022c0e4b67d11d99a7e1ab6f",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-6e9da508b673",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-e5dae966075c",
+      "signature": "7a04842a85519d732fe66adec45c23e9d872396b0a5a61f59f349a423371791e",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-e5dae966075c",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-86ad76a7a701",
+      "signature": "060363c38697e00bbbc69b5c1c9060e37eac77ca572ab36fc1e4c957cf73b8a2",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-86ad76a7a701",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-2513cbc2a9c6",
+      "signature": "a0c1f3afb316b3ecc982978ea32c44cfc73a392fc138f6db006d0a534583aaac",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-2513cbc2a9c6",
+          "url": "https://www.chinaclzl.com/djgz_1/55.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-22525bc094e6",
+      "signature": "9fe453f2cb17723ac8a0e24a03a45158fb0eb159a36f1a1accd395094c1d0d36",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "audit/round18-recruitment-review.json",
+          "candidateId": "recruit-22525bc094e6",
+          "url": "https://www.gaoxiaojob.com/announcement/detail/414443.html"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-759e92d2680b",
+      "signature": "f3a817aa5ee218cc76fee62998b1ea2a29c539c63e532feb62b1fd76d5468e24",
+      "decision": "duplicate",
+      "reason": "same_notice_and_position_batch_extraction_upgrade",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "candidateId": "recruit-2ab223828790",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE05S2x5cTlYNmlfZG9XNEpYeGJJSG1YaHFDU09oOGExVzFLeVZCREVhamttekhTU0RwTk9tYm1oMEFzQ29ZZy1SLWdfUGlPeTZ1b1BLYkkyWThCNTROSGh5ZnUxcGFvblIxS3c?oc=5",
+          "matchedFields": [
+            "institution",
+            "position",
+            "positionCode",
+            "announcementTitle",
+            "discoveryUrl",
+            "sourceSectionKey",
+            "deadline"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-cc5d0ac34264",
+      "signature": "9784c649049334e1c1cd5271fc31a3d4c55860b9ca75e48c242f48ad6f8f08ce",
+      "decision": "duplicate",
+      "reason": "same_september_taizhou_security_equipment_role_already_listed",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "evidence": [
+        {
+          "path": "content/招聘/jobs.md",
+          "heading": "浙江省台州市博物馆 — 安全和设备管理岗位 1 名",
+          "url": "https://www.tzrc.cn/zxDetail?noticeTypeId=100002&noticeId=167264",
+          "scope": "去重比对；未重新核验原岗位报名信息"
+        }
+      ]
+    }
+  ]
+}
