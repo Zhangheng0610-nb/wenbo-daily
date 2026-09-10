@@ -3894,6 +3894,9 @@ def public_salience(record: dict) -> dict:
     }
 
 
+from automation.daily_scope import daily_scope_rejection
+
+
 def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     """Score news value before evidence qualification, without using source tier."""
     title = record.get("title", "") or ""
@@ -4021,6 +4024,10 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
             reasons.append("routine_or_peripheral_activity_penalty")
     if not reasons:
         reasons.append("general_relevance_only")
+    scope_rejection = daily_scope_rejection(record)
+    if scope_rejection:
+        score = 0
+        reasons.append(scope_rejection)
     score = max(0, min(100, score))
     label = "high" if score >= 70 else "medium" if score >= 45 else "low"
     return {
@@ -4069,6 +4076,10 @@ def evaluate_candidate_pool(
             disposition = "rejected"
         if not is_relevant_record(record):
             reasons.append("not_wenbo_relevant")
+            disposition = "rejected"
+        scope_rejection = daily_scope_rejection(record)
+        if scope_rejection:
+            reasons.append(scope_rejection)
             disposition = "rejected"
         high_value = is_high_value_record(record)
         routine = any(term.lower() in (record.get("title", "") or "").lower() for term in ROUTINE_TERMS)

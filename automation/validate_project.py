@@ -192,6 +192,10 @@ def check_daily(path, strict=True):
     if not path.exists() or path.stat().st_size == 0:
         return [f'missing or empty: {path}']
     text = path.read_text(encoding='utf-8')
+    from automation.daily_scope import daily_scope_rejection
+    for heading in re.findall(r'^###\s+\d+\.\s+(.+)$', text, re.M):
+        if strict and daily_scope_rejection({'title': heading}):
+            errors.append(f'daily scope excludes academic discussion: {heading}')
     urls = URL_RE.findall(text)
     provisional_urls = _provisional_evidence_urls_for_report(path)
     normalized_urls = [canonical_url(url) for url in urls]

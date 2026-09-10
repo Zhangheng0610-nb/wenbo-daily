@@ -420,6 +420,9 @@ def validate(path, report_path=None):
             'same_day_duplicate', 'historical_duplicate', 'derivative_commentary'
         }:
             errors.append(f'{label}: selected candidate cannot have {candidate.get("dedupStatus")}')
+        from automation.daily_scope import daily_scope_rejection
+        if candidate.get('decision') == 'selected' and daily_scope_rejection(candidate):
+            errors.append(f'{label}: academic_discussion_without_industry_action cannot be selected for daily')
         scope = candidate.get('scope')
         if scope not in {'domestic', 'regional', 'international'}:
             errors.append(f'{label}: scope must be domestic, regional, or international')
