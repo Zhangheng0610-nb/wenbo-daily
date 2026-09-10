@@ -1,0 +1,73 @@
+{
+  "checkedAt": "2026-09-10T16:12:58+00:00",
+  "sourceHtmlSha256": "738712c06318a8c5036393343669e9a91ec73e8774b6f0646f8c6f4cd88fd971",
+  "method": "live retrieval of Xinhua article and scoped paragraph retention; offline validation at original publication ledger date",
+  "sourceDocumentScope": "one source paragraph, not complete article",
+  "candidate": {
+    "candidateId": "daily-20260909-005",
+    "eventId": "event-d3b900855b57",
+    "title": "法国雷诺阿博物馆两幅遭窃画作被找到",
+    "publishedDate": "2026-09-09",
+    "discoveredAt": "2026-09-09T07:18:59+08:00",
+    "discoverySource": "新华网文博固定源监测",
+    "discoverySourceType": "fixed_panel_radar",
+    "discoveryUrl": "https://www.news.cn/20260909/8801636f302441989db890d21bc4c72e/c.html",
+    "publisher": "news.cn",
+    "evidenceSources": [
+      {
+        "url": "https://www.news.cn/20260909/8801636f302441989db890d21bc4c72e/c.html",
+        "tier": "A",
+        "role": "evidence-upgrade",
+        "articleVerified": true
+      }
+    ],
+    "evidenceTier": "A",
+    "topic": [
+      "博物馆",
+      "藏品安全",
+      "国际",
+      "法国"
+    ],
+    "domestic": false,
+    "international": true,
+    "scope": "international",
+    "decision": "selected",
+    "decisionReason": "四幅画作被盗后两幅找回、两幅仍失踪，博物馆闭馆，构成当天的藏品安全与运营事件。",
+    "selectedForDaily": true,
+    "dedupStatus": "unique_event",
+    "notes": "按事件实际发生地改正为国际栏目；使用新华网 A 级原文。",
+    "discoveredVia": "fixed-panel-radar",
+    "discoveryQuery": null,
+    "duplicateOf": null,
+    "duplicateReason": null,
+    "newDevelopment": false,
+    "finalEditorialDecision": "selected",
+    "finalEditorialReason": "藏品安全事件具有即时运营影响。",
+    "editorialPriorityScore": 28,
+    "editorialPriorityLabel": "low",
+    "editorialReasons": [
+      "primary_freshness"
+    ],
+    "dailyItemNumber": 5,
+    "dailyItemTitle": "法国雷诺阿博物馆两幅遭窃画作被找到",
+    "industryAction": {
+      "kind": "security_incident",
+      "actor": "雷诺阿博物馆",
+      "action": "两幅在博物馆的花园内被找到",
+      "change": "此次盗窃的四幅画作中，两幅已被找到；仍有两幅下落不明。",
+      "eventDate": "2026-09-08",
+      "timeBasis": "event_date",
+      "dateExcerpt": "8日清晨",
+      "sourceUrl": "https://www.news.cn/20260909/8801636f302441989db890d21bc4c72e/c.html",
+      "sourceExcerpt": "新华社巴黎9月8日电（记者张百慧 崔可欣）位于法国东南部城市滨海卡涅的雷诺阿博物馆8日清晨4幅画作遭窃，截至目前其中两幅在博物馆的花园内被找到。",
+      "sourceDocumentPath": "audit/action-sources/f0526cb80cf6f70397c2f0b06172282845f0fc543d5b832f2cf971d3c13a899d.json",
+      "sourceDocumentSha256": "f0526cb80cf6f70397c2f0b06172282845f0fc543d5b832f2cf971d3c13a899d"
+    }
+  },
+  "result": {
+    "actualSourceReceipt": "passed",
+    "inventedRecoveryOfAllFour": "rejected",
+    "oldEventWithFreshArticle": "rejected"
+  },
+  "publicationAction": "none; existing published event is a regression sample, not new daily supply"
+}

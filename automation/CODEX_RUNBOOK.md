@@ -243,3 +243,15 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 明确负例：云阳杨沙村汉墓出土铜雀名称和功用探析；分子考古学解码人与犬的同行史；内蒙古陈巴尔虎旗岗嘎墓地发掘报告；风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚（日报改题为“石质文物保护把检测、建模和材料试验连在一起”）。以上不得再进入日报或以改标题方式绕过。
 
 先判断产品范围，再评分、核验证据和选择。脚本 daily_scope.py 提供确定性底线，未命中关键词不代表自动符合范围，编辑仍须逐条核查动作。少稿时继续扩大有效新闻召回，不能用学术内容凑到6—9条。固定六源监测可以保留这些原始记录，但必须与日报精选分开。
+
+### 入选前记录行业动作原文（自2026-09-11）
+
+先发现、再读原文、再决定是否入选。只对 selected 候选强制 industryAction，不对原始发现或 needs_verification 强制，避免尚未核验的有效线索被提前丢掉。以下字段由运行日报的 Codex 在阅读原文后填写，网站前台不显示。
+
+- kind：policy、funding、institution_operation、project_milestone、exhibition、repatriation、security_incident、archaeological_discovery、heritage_designation、international_cooperation 之一。论文发表/技术综述不是事件类别。类别合格不等于新闻价值合格。
+- actor、action：原文中的主体与具体动作短语，保留原文语言；change 用中文说明新增变化，不能只写意义评价。
+- eventDate：这一动作的日期（YYYY-MM-DD），须在日报当天及前6天内。timeBasis 为 event_date 或 announcement_date；新宣布的未来展览使用宣布日期，不能填未来开幕日；长周期项目报道须找到近期里程碑，不能将页面更新时间替代事件时间。
+- sourceUrl：必须对应该候选 evidenceSources 中 articleVerified=true 的原文。sourceExcerpt 为连续原句，包含 actor、action 和 dateExcerpt；dateExcerpt 是原文时间依据。编辑须核对“8日”“昨日”等相对日期与原文日期/时区，校验器不代替语义判断。
+- 保存已实际读取的正文或对应段落：`from automation.daily_scope import save_action_source`，调用 `save_action_source(ROOT, source_url, fetched_text, retrieved_at)`，将返回的 sourceDocumentPath、sourceDocumentSha256 放入 industryAction。不得把自己写的摘要当成 fetched_text；不必重复联网获取已有可信读取结果。哈希使用UTF-8及LF标准化，兼容Windows。
+
+原文片段必须能在保存的来源文档中找到。没有动作、日期或可核验正文则待核/拒绝，继续补查其他新闻；不能伪造片段、把研究结论改写成工程落地、把整份汇总的日期套给旧事件。借原有未来日报的新门槛要求，不批量伪造历史证明。完整真实格式见 audit/round20-industry-action-live.json；其中雷诺阿事件只是已发布回归样本，不得再次作为新新闻发布。

@@ -33,3 +33,102 @@ def daily_scope_rejection(record: dict) -> str | None:
     if any(re.search(pattern, title, re.I) for pattern in ACTION_PATTERNS):
         return None
     return 'academic_discussion_without_industry_action'
+
+
+INDUSTRY_ACTION_REQUIRED_FROM = '2026-09-11'
+INDUSTRY_ACTION_KINDS = frozenset({
+    'policy', 'funding', 'institution_operation', 'project_milestone',
+    'exhibition', 'repatriation', 'security_incident', 'archaeological_discovery',
+    'heritage_designation', 'international_cooperation',
+})
+
+
+def industry_action_errors(candidate: dict, ledger_date: str, root=None) -> list[str]:
+    """Check source-grounded action receipts at publication, not at discovery.
+
+This validates provenance/shape, not truth or semantic entailment. Editors must
+read the source; an authenticated source can still report a non-news topic.
+"""
+    from datetime import date
+    from pathlib import Path
+    import json
+    import hashlib
+    from automation.governance import canonical_url
+    if candidate.get('decision') != 'selected':
+        return []
+    proof = candidate.get('industryAction')
+    if ledger_date < INDUSTRY_ACTION_REQUIRED_FROM and proof is None:
+        return []
+    if not isinstance(proof, dict):
+        return ['industryAction required: identify the recent action in source text']
+    errors = []
+    if not isinstance(proof.get('kind'), str) or proof['kind'] not in INDUSTRY_ACTION_KINDS:
+        errors.append('industryAction.kind must describe an industry event, not academic publication')
+    for field in ('actor', 'action', 'change', 'sourceUrl', 'sourceExcerpt', 'dateExcerpt'):
+        if not isinstance(proof.get(field), str) or not proof[field].strip():
+            errors.append(f'industryAction.{field} required')
+    excerpt = proof.get('sourceExcerpt') if isinstance(proof.get('sourceExcerpt'), str) else ''
+    normalized = lambda value: re.sub(r'\s+', ' ', value).strip().casefold()
+    for field in ('actor', 'action', 'dateExcerpt'):
+        value = proof.get(field)
+        if isinstance(value, str) and value.strip() and normalized(value) not in normalized(excerpt):
+            errors.append(f'industryAction.{field} must occur in the source excerpt')
+    if len(excerpt.strip()) < 20:
+        errors.append('industryAction.sourceExcerpt too short to establish an event')
+    if proof.get('timeBasis') not in ('event_date', 'announcement_date'):
+        errors.append('industryAction.timeBasis must be event_date or announcement_date, not article publication date')
+    try:
+        event_date = date.fromisoformat(proof.get('eventDate', ''))
+        age = (date.fromisoformat(ledger_date) - event_date).days
+        if not 0 <= age <= 6:
+            errors.append('industryAction.eventDate outside the seven-day event window; identify a recent new development')
+    except (TypeError, ValueError):
+        errors.append('industryAction.eventDate must be an ISO calendar date')
+    url = proof.get('sourceUrl')
+    sources = candidate.get('evidenceSources')
+    if not isinstance(sources, list):
+        sources = []
+    verified_urls = {canonical_url(source['url']) for source in sources
+                     if isinstance(source, dict) and isinstance(source.get('url'), str)
+                     and source.get('articleVerified') is True}
+    if not isinstance(url, str) or canonical_url(url) not in verified_urls:
+        errors.append('industryAction.sourceUrl must reference article-verified evidence for this candidate')
+    # Match the quote against a retained document, not against an editor's
+    # newly written summary. Normalize line endings for Chinese Windows.
+    root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
+    try:
+        reference = proof.get('sourceDocumentPath')
+        if not isinstance(reference, str) or not reference:
+            raise ValueError('sourceDocumentPath required')
+        path = (root / reference).resolve()
+        if not path.is_relative_to(root.resolve()) or path.suffix != '.json':
+            raise ValueError('sourceDocumentPath must be a repository JSON document')
+        raw = path.read_text(encoding='utf-8').replace('\r\n', '\n')
+        if hashlib.sha256(raw.encode('utf-8')).hexdigest() != proof.get('sourceDocumentSha256'):
+            raise ValueError('source document hash mismatch')
+        document = json.loads(raw)
+        if canonical_url(document.get('url', '')) != canonical_url(url or ''):
+            raise ValueError('source document URL does not match sourceUrl')
+        text = document.get('text')
+        if not isinstance(text, str) or not excerpt.strip() or normalized(excerpt) not in normalized(text):
+            raise ValueError('sourceExcerpt must occur in retained source text')
+    except (OSError, ValueError, TypeError, AttributeError) as exc:
+        errors.append(f'industryAction evidence: {exc}')
+    return errors
+
+
+def save_action_source(root, url: str, text: str, retrieved_at: str) -> dict:
+    """Persist already fetched article text; performs no fetch or verification."""
+    import hashlib
+    import json
+    from pathlib import Path
+    if not url.startswith(('https://', 'http://')) or not text.strip():
+        raise ValueError('HTTP source URL and nonempty article text required')
+    raw = json.dumps({'url': url, 'retrievedAt': retrieved_at, 'text': text.replace('\r\n', '\n')},
+                     ensure_ascii=False, indent=2) + '\n'
+    digest = hashlib.sha256(raw.encode('utf-8')).hexdigest()
+    relative = f'audit/action-sources/{digest}.json'
+    path = Path(root) / relative
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(raw, encoding='utf-8')
+    return {'sourceDocumentPath': relative, 'sourceDocumentSha256': digest}
