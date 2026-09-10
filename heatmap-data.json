@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-09",
-  "asOf": "2026-09-09",
+  "generated": "2026-09-10",
+  "asOf": "2026-09-10",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6234,6 +6234,108 @@
         "duplicatesSkipped": 34,
         "scanStatus": "partial",
         "date": "2026-09-09"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-10T22:54:02+08:00",
+        "candidateCount": 2,
+        "note": "",
+        "rawCount": 17,
+        "eligibleCount": 17,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-10"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-10T22:55:00+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-10"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-10T22:54:00+08:00",
+        "candidateCount": 0,
+        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 3，无法识别期页 0；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。",
+        "rawCount": 6,
+        "eligibleCount": 4,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-10"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-10T22:54:03+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-10"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-10T22:53:38+08:00",
+        "candidateCount": 4,
+        "note": "",
+        "rawCount": 7,
+        "eligibleCount": 7,
+        "acceptedThisRun": 4,
+        "retainedExisting": 0,
+        "finalItemCount": 4,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-10"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "failed",
+        "checkedAt": "2026-09-10T22:54:04+08:00",
+        "candidateCount": 0,
+        "note": "固定来源扫描失败：The read operation timed out",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "failed",
+        "date": "2026-09-10"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6250,43 +6352,43 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 552,
-    "includedProvincialRecords": 125,
-    "provincialEvents": 105,
-    "nationalEvents": 38,
+    "totalMonitoredRecords": 563,
+    "includedProvincialRecords": 126,
+    "provincialEvents": 106,
+    "nationalEvents": 41,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 65,
-    "operationalRecords": 65,
+    "fixedPanelMonitoringRecords": 76,
+    "operationalRecords": 76,
     "operationalRecordTypes": {
-      "live": 46,
+      "live": 57,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 65
+      "fixed-panel-monitoring": 76
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 483,
+    "analysisRecords": 494,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 65
+      "fixed-panel-monitoring": 76
     },
     "excludedNonPanel": 0,
-    "unassigned": 298,
+    "unassigned": 304,
     "panelSourceCount": 6,
-    "coverageDays": 103,
+    "coverageDays": 104,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 343,
+    "successfulSourceChecks": 345,
     "coverageStatuses": {
-      "success": 145,
+      "success": 147,
       "no_update": 198,
-      "partial": 275,
-      "failed": 0
+      "partial": 278,
+      "failed": 1
     },
     "coverageByMode": {
       "archive-backfill": {
@@ -6295,15 +6397,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 78,
-        "good": 70,
-        "days": 13
+        "checks": 84,
+        "good": 72,
+        "days": 14
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 78,
+    "operationalCoverageChecks": 84,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 13,
+    "operationalCoverageDays": 14,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6311,25 +6413,79 @@
         "days": 4
       },
       "live": {
-        "checks": 54,
-        "good": 46,
-        "days": 9
+        "checks": 60,
+        "good": 48,
+        "days": 10
       }
     },
-    "liveOperationalCoverageChecks": 54,
-    "liveOperationalCoverageDays": 9,
+    "liveOperationalCoverageChecks": 60,
+    "liveOperationalCoverageDays": 10,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 79,
-      "cultural-relics-news": 119,
-      "archaeology": 222,
-      "museum-association": 30,
+      "ncha": 83,
+      "cultural-relics-news": 123,
+      "archaeology": 224,
+      "museum-association": 31,
       "xinhua-wenbo": 19,
       "cctv-wenbo": 14
     }
   },
   "events": [
+    {
+      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护",
+        "江西"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-034b449e3f",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
     {
       "title": "新发现｜浙江绍兴南山遗址发掘收获",
       "firstDate": "2026-09-08",
@@ -12521,6 +12677,169 @@
   ],
   "nationalEvents": [
     {
+      "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-6698e0964b",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-25957f27ac",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "关于举办“2026年自然科技博物馆专业人员综合能力提升培训班”的通知",
+      "firstDate": "2026-09-09",
+      "lastDate": "2026-09-09",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业"
+      ],
+      "impact": 45.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-09",
+          "title": "关于举办“2026年自然科技博物馆专业人员综合能力提升培训班”的通知",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14775",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14775",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-9a3aacf49f",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14775",
+          "host": "chinamuseum.org.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "museum-association"
+        }
+      ]
+    },
+    {
       "title": "中国博物馆协会藏品保护与管理专委会关于开展案例征集与研讨活动的通知",
       "firstDate": "2026-09-08",
       "lastDate": "2026-09-08",
@@ -12574,6 +12893,83 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "museum-association"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "firstDate": "2026-09-04",
+      "lastDate": "2026-09-05",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-05",
+          "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112796",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112796",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-04",
+          "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-fd7f6fa41d",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112796",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -12653,59 +13049,6 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "archaeology"
-        }
-      ]
-    },
-    {
-      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
-      "firstDate": "2026-09-04",
-      "lastDate": "2026-09-04",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "政策行业"
-      ],
-      "tags": [
-        "政策行业"
-      ],
-      "impact": 80.0,
-      "scope": "national",
-      "reports": [
-        {
-          "date": "2026-09-04",
-          "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
-          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "国家文物局",
-              "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
-              "host": "ncha.gov.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "ncha"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-fd7f6fa41d",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "重要",
-      "primaryTheme": "政策行业",
-      "sources": [
-        {
-          "name": "国家文物局",
-          "url": "http://www.ncha.gov.cn/art/2026/9/4/art_722_204668.html",
-          "host": "ncha.gov.cn",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "ncha"
         }
       ]
     },

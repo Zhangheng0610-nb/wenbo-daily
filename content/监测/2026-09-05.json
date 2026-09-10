@@ -100,7 +100,124 @@
       "scanStatus": "checked"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "operational-20260905-cultural-relics-news-0012-2881id112799",
+      "date": "2026-09-05",
+      "title": "两大文明双向奔赴 中埃联合考古成果丰硕",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112799"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260905-cultural-relics-news-0009-2881id112794",
+      "date": "2026-09-05",
+      "title": "习近平和彭丽媛同埃及总统塞西夫妇共同参观大埃及博物馆",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112794"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260905-cultural-relics-news-0010-2881id112796",
+      "date": "2026-09-05",
+      "title": "国家文物局与中国地震局联合召开全国文物地震安全工作交流会",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112796"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260905-cultural-relics-news-0011-2881id112798",
+      "date": "2026-09-05",
+      "title": "连片成势 薪火相传——革命文物保护利用片区建设工作巡礼之一",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-05/paperId/22881/id/112798"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

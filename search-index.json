@@ -11015,6 +11015,158 @@
     ]
   },
   {
+    "type": "daily",
+    "path": "reports/2026-09-10.html",
+    "title": "🏛️ 每日文博资讯 | 2026年9月10日（周四）",
+    "date": "2026-09-10",
+    "weekday": "周四",
+    "domestic_count": 4,
+    "international_count": 3,
+    "items": [
+      {
+        "id": "item1",
+        "number": 1,
+        "title": "中国黄金博物馆将于9月19日开馆",
+        "body": "9月19日，中国黄金博物馆将正式开馆。报道介绍，项目依托有200余年采金史的夹皮沟金矿，汇集2327件（组）展品和660张历史图片，并设置展馆、工业遗存和矿洞体验等空间；开馆前，展陈细节和项目收尾仍在推进。",
+        "commentary": "这座馆的看点不只是“黄金”主题，而是把200余年的采矿史、工业遗存和红色故事放进同一条参观线路。9月19日开馆只是节点，展陈能否把矿山生产、地方历史与博物馆叙事真正接起来，决定它是一个项目落成，还是一处可持续使用的工业遗产场馆。",
+        "tags": [
+          "博物馆",
+          "展览",
+          "国内",
+          "吉林"
+        ],
+        "sources": [
+          {
+            "name": "凤凰网：黄金博物馆即将开馆，省委书记会见中国黄金集团董事长",
+            "url": "https://news.ifeng.com/c/8wJUk6NXaS0"
+          },
+          {
+            "name": "凤凰网：开馆在即，吉林市委书记要求高标准完成收尾",
+            "url": "https://news.ifeng.com/c/8wJ0zfniqcj"
+          }
+        ]
+      },
+      {
+        "id": "item2",
+        "number": 2,
+        "title": "人工智能进入文物保护具体环节",
+        "body": "光明网报道，中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐举行，近500名专家围绕人工智能与文物保护交流。新疆龟兹研究院介绍了克孜尔石窟壁画的AI辅助数字修复和高光谱识别，国家文物局考古研究中心展示考古木材树种识别，12种现代木材分类准确率达94.2%。",
+        "commentary": "这场年会的价值不在于再宣布“AI很重要”，而在于展示技术已经进入壁画修复方案、不可见信息识别和考古材料筛查。克孜尔石窟仍由专家作最终判断，木材识别也采用“快速筛查—专家复核”；文物真实性、完整性和最小干预没有被技术便利取代。",
+        "tags": [
+          "文物保护",
+          "数字文博",
+          "国内"
+        ],
+        "sources": [
+          {
+            "name": "光明网：《人工智能时代，文物保护如何“智”变》",
+            "url": "https://news.gmw.cn/2026-09/09/content_38991565.htm"
+          }
+        ]
+      },
+      {
+        "id": "item3",
+        "number": 3,
+        "title": "石质文物保护把检测、建模和材料试验连在一起",
+        "body": "国家文物局介绍，中国文化遗产研究院围绕石窟、石刻和岩土质文物保护开展长期研究。在河南浚县大伾山摩崖大佛保护中，团队使用地质雷达、光谱仪和三维激光扫描记录裂隙、材料与病害分布，并配合脱盐和材料试验；全国石窟寺调查已涉及28个省份的5986处遗址。",
+        "commentary": "石质文物保护最难的地方，往往不是修复表面，而是判断石体内部病害如何发展。大伾山项目把雷达、光谱和三维模型用于同一处摩崖大佛，说明技术已进入检测、记录和方案验证环节；这类方法也解释了为什么不同石窟不能套用一套修复配方。",
+        "tags": [
+          "文物保护",
+          "科技保护",
+          "国内"
+        ],
+        "sources": [
+          {
+            "name": "国家文物局：风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+            "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html"
+          }
+        ]
+      },
+      {
+        "id": "item4",
+        "number": 4,
+        "title": "全国革命文物保护利用片区建设工作会召开",
+        "body": "9月10日，全国革命文物保护利用片区建设工作会在江西赣州召开。会议提出以片区建设统筹文物本体与历史环境保护，推进精细管理和技术保护，完善展陈体系，并让优质文化资源更好服务基层群众。",
+        "commentary": "片区建设把革命文物从单点保护拉到区域协同：文物本体、历史环境、展陈和公共服务被放在同一张工作清单上。会议仍属于部署性信息，尚未公布具体项目、经费或考核结果；后续能否落到片区规划和保护工程，才是这项安排的实际增量。",
+        "tags": [
+          "革命文物",
+          "政策行业",
+          "国内",
+          "江西"
+        ],
+        "sources": [
+          {
+            "name": "国家文物局：全国革命文物保护利用片区建设工作会在江西赣州召开",
+            "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html"
+          }
+        ]
+      },
+      {
+        "id": "item5",
+        "number": 5,
+        "title": "阿拉斯加大学北方博物馆获资助打造巴士展览",
+        "body": "阿拉斯加大学北方博物馆获得30万美元美国博物馆与图书馆服务研究所资助，用于围绕电影《荒野生存》相关的巴士142建设展览。项目包括博物馆室内展览和馆外展区，巴士已完成保护处理，现有资助还将用于继续完善展示空间。",
+        "commentary": "这笔资助把一件高传播度的物件转成了博物馆的长期展示项目：巴士142不只被陈列，还被放回阿拉斯加的自然、历史与地方生活中解释。室内展览与馆外展区并行，也让“网红物件”从一次性参观热点变成可持续运营的公共教育内容。",
+        "tags": [
+          "博物馆",
+          "公共文化",
+          "国际",
+          "美国"
+        ],
+        "sources": [
+          {
+            "name": "Fairbanks Daily News-Miner：UA Museum gets federal grant to support 'Into the Wild' bus exhibits",
+            "url": "https://www.newsminer.com/news/alaska_news/ua-museum-gets-federal-grant-to-support-into-the-wild-bus-exhibits/article_1947a017-92e5-44e6-90dc-c0c5fc605bf0.html"
+          }
+        ],
+        "originalTitle": "UA Museum gets federal grant to support 'Into the Wild' bus exhibits - Fairbanks Daily News-Miner"
+      },
+      {
+        "id": "item6",
+        "number": 6,
+        "title": "史密森学会秘书长隆尼·邦奇辞职",
+        "body": "ABC News 9月9日报道，史密森学会秘书长隆尼·邦奇宣布卸任。他曾任美国国家非裔美国人历史与文化博物馆创馆馆长，并担任史密森学会秘书长七年。报道将辞职置于特朗普政府持续批评史密森领导层、威胁联邦资金和支持的背景下。",
+        "commentary": "这不是此前“联邦机构是否继续支持史密森”的重复报道，而是机构内部已经发生的人事变化。秘书长职位连接史密森的博物馆、科研和教育体系；邦奇的离任让外部政策压力开始具体影响治理层。现有报道确认了辞职及背景，继任安排和长期机构影响尚未确定。",
+        "tags": [
+          "博物馆",
+          "行业治理",
+          "国际",
+          "美国"
+        ],
+        "sources": [
+          {
+            "name": "ABC News：Smithsonian Secretary Lonnie Bunch resigns amid attacks from Trump administration",
+            "url": "https://abcnews.com/US/smithsonian-secretary-lonnie-bunch-resigns-amid-attacks-trump/story?id=136278030"
+          },
+          {
+            "name": "Northeast Times：Smithsonian’s First Black Secretary Steps Down After Seven Years Under Fire",
+            "url": "https://northeasttimes.com/2026/09/08/smithsonian-s-first-black-secretary-steps-down-after-seven-years-under-fire/"
+          }
+        ],
+        "originalTitle": "Smithsonian Secretary Lonnie Bunch resigns amid attacks from Trump administration - ABC News - Breaking News, Latest News and Videos"
+      },
+      {
+        "id": "item7",
+        "number": 7,
+        "title": "中突联合考古把多语种记录和共同发掘带到突尼斯遗址",
+        "body": "国家文物局考古研究中心介绍，2023年中方与突尼斯国家文化遗产研究院等组建联合考古队，在本·阿鲁斯森林遗址开展为期四年的发掘、保护与展示。项目已调查13万平方米、发掘1700平方米，厘清神庙祭拜区、居住区、公共浴场和手工作坊等功能分区，并建立多语种数字记录体系。",
+        "commentary": "这项合作的专业落点不是一次出土清单，而是把田野标准、双语数据库和三维记录一起带到突尼斯遗址。中方团队没有照搬国内流程，而是与突方共同制定本地化标准；13万平方米调查和四类功能区的确认，显示合作已进入共同作业、共同解释的阶段。",
+        "tags": [
+          "考古",
+          "国际合作",
+          "国际",
+          "突尼斯"
+        ],
+        "sources": [
+          {
+            "name": "国家文物局：国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+            "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "type": "weekly",
     "path": "reports/weekly-2026-08-09.html",
     "title": "📰 文博资讯周报 | 2026年8月3日 — 8月9日",

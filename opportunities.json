@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-09T07:38:12.281859+08:00",
+  "generatedAt": "2026-09-10T23:27:04.352962+08:00",
   "items": [
     {
       "id": "job-801e32262a0e35",
@@ -183,8 +183,8 @@
           "application"
         ],
         "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-7991f577633daf"
     },
@@ -210,8 +210,8 @@
           "application"
         ],
         "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-29fcffae075624"
     },
@@ -237,8 +237,8 @@
           "application"
         ],
         "note": "官方公告支持报名截止时间和投递邮箱；具体学历、人数与薪资仍须核对岗位附件。属于馆属企业招聘。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-0da777c31649df"
     },
@@ -669,8 +669,8 @@
           "application"
         ],
         "note": "官方公告支持9月15日截止、扫码报名和志愿服务性质；本记录不代表劳动岗位或录用资格。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "intern.html?status=all#job-03d4917849af6a"
     },
@@ -999,6 +999,7 @@
     "job-097a4eb13bf520",
     "job-0e5f1058a5cc6f",
     "job-56be98e36251a7",
+    "job-03d4917849af6a",
     "job-228c2b07aacd46",
     "job-040981bcb60298",
     "job-f9c1568b685e5c",
@@ -1039,7 +1040,7 @@
   ],
   "counts": {
     "total": 62,
-    "recentEvidence": 4,
-    "reviewNeeded": 45
+    "recentEvidence": 0,
+    "reviewNeeded": 46
   }
 }

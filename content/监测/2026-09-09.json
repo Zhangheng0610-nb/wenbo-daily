@@ -102,6 +102,37 @@
   ],
   "items": [
     {
+      "recordId": "operational-20260909-museum-association-0024-ntentid14775",
+      "date": "2026-09-09",
+      "title": "关于举办“2026年自然科技博物馆专业人员综合能力提升培训班”的通知",
+      "sources": [
+        {
+          "sourceId": "museum-association",
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14775"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
       "recordId": "operational-20260909-xinhua-wenbo-0045-bc4c72echtml",
       "date": "2026-09-09",
       "title": "法国雷诺阿博物馆两幅遭窃画作被找到",

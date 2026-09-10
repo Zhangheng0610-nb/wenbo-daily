@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "date": "2026-09-10",
+  "mode": "operational",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "mode": "operational",
+      "runType": "live",
+      "status": "success",
+      "checkedAt": "2026-09-10T22:53:38+08:00",
+      "candidateCount": 4,
+      "note": "",
+      "rawCount": 7,
+      "eligibleCount": 7,
+      "acceptedThisRun": 4,
+      "retainedExisting": 0,
+      "finalItemCount": 4,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-10T22:54:00+08:00",
+      "candidateCount": 0,
+      "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 3，无法识别期页 0；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。",
+      "rawCount": 6,
+      "eligibleCount": 4,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    },
+    {
+      "sourceId": "archaeology",
+      "mode": "operational",
+      "runType": "live",
+      "status": "success",
+      "checkedAt": "2026-09-10T22:54:02+08:00",
+      "candidateCount": 2,
+      "note": "",
+      "rawCount": 17,
+      "eligibleCount": 17,
+      "acceptedThisRun": 2,
+      "retainedExisting": 0,
+      "finalItemCount": 2,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "museum-association",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-10T22:54:03+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+      "rawCount": 2,
+      "eligibleCount": 2,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "failed",
+      "checkedAt": "2026-09-10T22:54:04+08:00",
+      "candidateCount": 0,
+      "note": "固定来源扫描失败：The read operation timed out",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "failed"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-10T22:55:00+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "operational-20260910-archaeology-0026-6066899shtml",
+      "date": "2026-09-10",
+      "title": "社科要闻 | 中国社会科学院党组理论学习中心组深入学习习近平经济思想和习近平总书记关于中国式现代...",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260910_6066899.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-archaeology-0025-6066906shtml",
+      "date": "2026-09-10",
+      "title": "蓝色颜料小史——材料、技术与区域互动",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260910_6066906.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-ncha-0030-22204768html",
+      "date": "2026-09-10",
+      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护",
+        "江西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-ncha-0029-22204760html",
+      "date": "2026-09-10",
+      "title": "回望烽火来路 凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走...",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204760.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-ncha-0027-22204756html",
+      "date": "2026-09-10",
+      "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-ncha-0028-22204758html",
+      "date": "2026-09-10",
+      "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-10T22:53:38+08:00",
+      "observationDate": "2026-09-10"
+    }
+  ],
+  "runType": "live",
+  "scanAudit": {
+    "scanner": "automation/backfill_monitoring.py",
+    "mode": "operational",
+    "runType": "live",
+    "completed": true,
+    "checkedAt": "2026-09-10T22:53:38+08:00",
+    "replay": false,
+    "publicationWindow": {
+      "start": "2026-09-04",
+      "end": "2026-09-10"
+    },
+    "lateArrivalCount": 24,
+    "sources": {
+      "ncha": {
+        "rawCount": 7,
+        "eligibleCount": 7,
+        "acceptedCount": 4,
+        "rawDiscovered": 7,
+        "scopeQualified": 7,
+        "acceptedThisRun": 4,
+        "retainedExisting": 0,
+        "finalItemCount": 4,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "cultural-relics-news": {
+        "rawCount": 6,
+        "eligibleCount": 4,
+        "acceptedCount": 0,
+        "rawDiscovered": 6,
+        "scopeQualified": 4,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      },
+      "archaeology": {
+        "rawCount": 17,
+        "eligibleCount": 17,
+        "acceptedCount": 2,
+        "rawDiscovered": 17,
+        "scopeQualified": 17,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "museum-association": {
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedCount": 0,
+        "rawDiscovered": 2,
+        "scopeQualified": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      },
+      "xinhua-wenbo": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "failed"
+      },
+      "cctv-wenbo": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      }
+    }
+  }
+}

@@ -1,11 +1,30 @@
 {
   "schemaVersion": 2,
-  "latestReport": "2026-09-09",
+  "latestReport": "2026-09-10",
   "days": [
+    {
+      "date": "2026-09-10",
+      "checkedAt": "2026-09-10T22:55:00+08:00",
+      "panelItems": 6,
+      "panelChecks": 6,
+      "usableDiscoverySources": 8,
+      "discoverySources": 10,
+      "queriesAttempted": 158,
+      "queriesSucceeded": 158,
+      "selected": 7,
+      "digitalCheckedAt": "2026-09-10T23:19:09+08:00",
+      "digitalStatus": "scan_success_no_update",
+      "digitalNewItems": 0,
+      "publicationWindow": {
+        "start": "2026-09-04",
+        "end": "2026-09-10"
+      },
+      "lateArrivalCount": 24
+    },
     {
       "date": "2026-09-09",
       "checkedAt": "2026-09-09T07:16:14+08:00",
-      "panelItems": 1,
+      "panelItems": 2,
       "panelChecks": 6,
       "usableDiscoverySources": 8,
       "discoverySources": 10,
@@ -75,7 +94,7 @@
     {
       "date": "2026-09-05",
       "checkedAt": "2026-09-05T07:15:55+08:00",
-      "panelItems": 0,
+      "panelItems": 4,
       "panelChecks": 6,
       "usableDiscoverySources": 6,
       "discoverySources": 8,
@@ -103,69 +122,53 @@
       "digitalNewItems": 0,
       "publicationWindow": null,
       "lateArrivalCount": null
-    },
-    {
-      "date": "2026-09-03",
-      "checkedAt": "2026-09-03T13:58:54+08:00",
-      "panelItems": 25,
-      "panelChecks": 6,
-      "usableDiscoverySources": 5,
-      "discoverySources": 8,
-      "queriesAttempted": 126,
-      "queriesSucceeded": 126,
-      "selected": 3,
-      "digitalCheckedAt": "2026-09-03T13:17:06+08:00",
-      "digitalStatus": "scan_success_no_update",
-      "digitalNewItems": 0,
-      "publicationWindow": null,
-      "lateArrivalCount": null
     }
   ],
   "observations": {
     "panel": [
       {
         "sourceId": "ncha",
-        "checkedAt": "2026-09-09T07:15:05+08:00",
-        "status": "no_update",
+        "checkedAt": "2026-09-10T22:53:38+08:00",
+        "status": "success",
         "scanStatus": "checked",
-        "rawCount": 4,
+        "rawCount": 7,
         "note": ""
       },
       {
         "sourceId": "cultural-relics-news",
-        "checkedAt": "2026-09-09T07:15:28+08:00",
+        "checkedAt": "2026-09-10T22:54:00+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 29,
-        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 4，无法识别期页 1；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。"
+        "rawCount": 6,
+        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 3，无法识别期页 0；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。"
       },
       {
         "sourceId": "archaeology",
-        "checkedAt": "2026-09-09T07:15:36+08:00",
-        "status": "no_update",
+        "checkedAt": "2026-09-10T22:54:02+08:00",
+        "status": "success",
         "scanStatus": "checked",
-        "rawCount": 21,
+        "rawCount": 17,
         "note": ""
       },
       {
         "sourceId": "museum-association",
-        "checkedAt": "2026-09-09T07:15:38+08:00",
+        "checkedAt": "2026-09-10T22:54:03+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 1,
+        "rawCount": 2,
         "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
       },
       {
         "sourceId": "xinhua-wenbo",
-        "checkedAt": "2026-09-09T07:15:40+08:00",
-        "status": "partial",
-        "scanStatus": "partial",
-        "rawCount": 248,
-        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
+        "checkedAt": "2026-09-10T22:54:04+08:00",
+        "status": "failed",
+        "scanStatus": "failed",
+        "rawCount": 0,
+        "note": "固定来源扫描失败：The read operation timed out"
       },
       {
         "sourceId": "cctv-wenbo",
-        "checkedAt": "2026-09-09T07:16:14+08:00",
+        "checkedAt": "2026-09-10T22:55:00+08:00",
         "status": "partial",
         "scanStatus": "partial",
         "rawCount": 0,
@@ -173,7 +176,7 @@
       }
     ],
     "digital": {
-      "checkedAt": "2026-09-09T07:38:04+08:00",
+      "checkedAt": "2026-09-10T23:19:09+08:00",
       "status": "scan_success_no_update",
       "contentItemsNew": 0,
       "fetchFailed": 0,
