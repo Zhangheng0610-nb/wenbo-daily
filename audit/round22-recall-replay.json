@@ -1,0 +1,299 @@
+{
+  "remoteCommit": "5c92f60f4e0ed455729d6185a037651a748dcc1b",
+  "method": "offline replay of identical published candidates with pre-change versus current evaluator; no extra queries or article verification",
+  "sampleCount": 15,
+  "changedCount": 4,
+  "newlyPublishedEvents": 0,
+  "rows": [
+    {
+      "date": "2026-09-09",
+      "title": "边疆考古作答“何以中国”",
+      "eventId": "event-3a6cba53b965",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "title": "法国雷诺阿博物馆两幅遭窃画作被找到",
+      "eventId": "event-d3b900855b57",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 71,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "title": "温尼伯圣博尼法斯博物馆获 40 万加元联邦修复资金",
+      "eventId": "event-884ee67a88ce",
+      "before": {
+        "editorialPriorityScore": 70,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      },
+      "after": {
+        "editorialPriorityScore": 70,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "title": "英国安多佛两座博物馆拟获 15 万英镑长期资金",
+      "eventId": "event-e344a96cd9dc",
+      "before": {
+        "editorialPriorityScore": 64,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      },
+      "after": {
+        "editorialPriorityScore": 64,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "title": "爱尔兰洞穴艺术发现或将人类活动线索推前至约 1.5 万年前",
+      "eventId": "event-a7cfe5315b58",
+      "before": {
+        "editorialPriorityScore": 22,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "not_queued"
+      },
+      "after": {
+        "editorialPriorityScore": 56,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "黄金博物馆即将开馆，省委书记会见中国黄金集团董事长",
+      "eventId": "event-441fd61e58c9",
+      "before": {
+        "editorialPriorityScore": 56,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      },
+      "after": {
+        "editorialPriorityScore": 56,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "人工智能时代，文物保护如何“智”变",
+      "eventId": "event-c9440c3b8ed0",
+      "before": {
+        "editorialPriorityScore": 52,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 52,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+      "eventId": "event-f35da9b8eb83",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "UA Museum gets federal grant to support 'Into the Wild' bus exhibits - Fairbanks Daily News-Miner",
+      "eventId": "event-4a2f9016d9bb",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "not_queued"
+      },
+      "after": {
+        "editorialPriorityScore": 70,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "Smithsonian Secretary Lonnie Bunch resigns amid attacks from Trump administration - ABC News - Breaking News, Latest News and Videos",
+      "eventId": "event-a78ed03f5b98",
+      "before": {
+        "editorialPriorityScore": 82,
+        "candidateDisposition": "rejected",
+        "filterReasons": [
+          "not_wenbo_relevant"
+        ],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 82,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+      "eventId": "event-6e7995e08c00",
+      "before": {
+        "editorialPriorityScore": 48,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 48,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "title": "第八届文化遗产保护与数字化国际学术论坛在京开幕",
+      "eventId": "event-fefdce2b84e9",
+      "before": {
+        "editorialPriorityScore": 52,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 52,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "title": "加拿大圣博尼法斯博物馆获 40 万加元联邦修复资金",
+      "eventId": "event-bd675ed2d898",
+      "before": {
+        "editorialPriorityScore": 64,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      },
+      "after": {
+        "editorialPriorityScore": 64,
+        "candidateDisposition": "needs_verification",
+        "filterReasons": [
+          "discovery_only_needs_evidence_upgrade"
+        ],
+        "evidenceQueueClass": "priority"
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "title": "全国首套海上保护区数据集面世",
+      "eventId": "event-386f1bd2a887",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "title": "“澄江生物群”化石精品展在陕西自然博物馆启幕",
+      "eventId": "event-778017d56b1e",
+      "before": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      },
+      "after": {
+        "editorialPriorityScore": 28,
+        "candidateDisposition": "evidence_qualified",
+        "filterReasons": [],
+        "evidenceQueueClass": "not_eligible"
+      }
+    }
+  ],
+  "historicalFundingCheck": {
+    "current": "加拿大圣博尼法斯博物馆获 40 万加元联邦修复资金",
+    "previous": "温尼伯圣博尼法斯博物馆获 40 万加元联邦修复资金",
+    "before": null,
+    "after": [
+      "historical_duplicate",
+      "same named museum, restoration funding amount and currency"
+    ]
+  }
+}
