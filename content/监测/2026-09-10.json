@@ -277,6 +277,170 @@
       "runType": "live",
       "observedAt": "2026-09-10T22:53:38+08:00",
       "observationDate": "2026-09-10"
+    },
+    {
+      "recordId": "operational-20260910-xinhua-wenbo-0027-aa56005chtml",
+      "date": "2026-09-10",
+      "title": "“澄江生物群”化石精品展在陕西自然博物馆启幕",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.sn.xinhuanet.com/20260910/c8ced43824f6450aa408c88e9aa56005/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览",
+        "博物馆",
+        "国际交流"
+      ],
+      "tags": [
+        "展览",
+        "博物馆",
+        "国际交流",
+        "陕西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260910-xinhua-wenbo-0031-5789776chtml",
+      "date": "2026-09-10",
+      "title": "奔“县”游丨寻迹千年古城，在艺术山居“慢生活”",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/local/20260910/ad739f869a2d4150adba5017f5789776/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策行业",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260910-xinhua-wenbo-0029-52cb0efchtml",
+      "date": "2026-09-10",
+      "title": "秦兵马俑发掘保护开启新模式",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260910/b8d69ec0fa4a4c72ba783dabb52cb0ef/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "文化遗产",
+        "陕西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260910-xinhua-wenbo-0028-de2f3b7chtml",
+      "date": "2026-09-10",
+      "title": "第八届文化遗产保护与数字化国际学术论坛在京开幕",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260910/1a05f75a93e3429e9065c1073de2f3b7/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览",
+        "文化遗产",
+        "数字化"
+      ],
+      "tags": [
+        "展览",
+        "文化遗产",
+        "数字化",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260910-xinhua-wenbo-0030-d2b3dc4chtml",
+      "date": "2026-09-10",
+      "title": "这些卡伦遗址见证边疆戍边历史",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/local/20260910/46db1167acf0461e8d370bcaad2b3dc4/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "新疆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
     }
   ],
   "runType": "live",

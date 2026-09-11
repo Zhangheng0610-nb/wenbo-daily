@@ -1,0 +1,357 @@
+{
+  "version": 1,
+  "date": "2026-09-11",
+  "mode": "operational",
+  "coverage": [
+    {
+      "sourceId": "ncha",
+      "mode": "operational",
+      "runType": "live",
+      "status": "no_update",
+      "checkedAt": "2026-09-11T08:05:20+08:00",
+      "candidateCount": 0,
+      "note": "",
+      "rawCount": 6,
+      "eligibleCount": 6,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "cultural-relics-news",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-11T08:05:41+08:00",
+      "candidateCount": 0,
+      "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 3，无法识别期页 0；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。",
+      "rawCount": 6,
+      "eligibleCount": 4,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    },
+    {
+      "sourceId": "archaeology",
+      "mode": "operational",
+      "runType": "live",
+      "status": "success",
+      "checkedAt": "2026-09-11T08:05:44+08:00",
+      "candidateCount": 2,
+      "note": "",
+      "rawCount": 12,
+      "eligibleCount": 12,
+      "acceptedThisRun": 2,
+      "retainedExisting": 0,
+      "finalItemCount": 2,
+      "duplicatesSkipped": 0,
+      "scanStatus": "checked"
+    },
+    {
+      "sourceId": "museum-association",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-11T08:05:45+08:00",
+      "candidateCount": 0,
+      "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+      "rawCount": 2,
+      "eligibleCount": 2,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    },
+    {
+      "sourceId": "xinhua-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-11T08:05:46+08:00",
+      "candidateCount": 3,
+      "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+      "rawCount": 264,
+      "eligibleCount": 12,
+      "acceptedThisRun": 3,
+      "retainedExisting": 0,
+      "finalItemCount": 3,
+      "duplicatesSkipped": 28,
+      "scanStatus": "partial"
+    },
+    {
+      "sourceId": "cctv-wenbo",
+      "mode": "operational",
+      "runType": "live",
+      "status": "partial",
+      "checkedAt": "2026-09-11T08:06:37+08:00",
+      "candidateCount": 0,
+      "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+      "rawCount": 0,
+      "eligibleCount": 0,
+      "acceptedThisRun": 0,
+      "retainedExisting": 0,
+      "finalItemCount": 0,
+      "duplicatesSkipped": 0,
+      "scanStatus": "partial"
+    }
+  ],
+  "items": [
+    {
+      "recordId": "operational-20260911-archaeology-0033-6066923shtml",
+      "date": "2026-09-11",
+      "title": "刍议田野出土文物保护修复的原真性构建——以文化遗产保护研究中心文物保护修复为例",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260911_6066923.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260911-archaeology-0032-6066920shtml",
+      "date": "2026-09-11",
+      "title": "续说“西阴纹”：纪念西阴遗址发掘100周年",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260911_6066920.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260911-xinhua-wenbo-0036-0db1d90chtml",
+      "date": "2026-09-11",
+      "title": "全国首套海上保护区数据集面世",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "国际交流",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260911-xinhua-wenbo-0034-fb8b7a0chtml",
+      "date": "2026-09-11",
+      "title": "奔“县”游｜寻迹千年古城，在艺术山居“慢生活”",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.sd.xinhuanet.com/20260911/6957263415e443d2bc82962e4fb8b7a0/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策行业",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
+      "recordId": "operational-20260911-xinhua-wenbo-0035-d46f01dchtml",
+      "date": "2026-09-11",
+      "title": "首套海上保护区数据集面世",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "国际交流",
+        "政策行业",
+        "天津"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
+        "duplicateUrls": [
+          "https://www.xinhuanet.com/20260911/a770d18bf6434c649fae80cafd46f01d/c.html"
+        ]
+      },
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    }
+  ],
+  "runType": "live",
+  "scanAudit": {
+    "scanner": "automation/backfill_monitoring.py",
+    "mode": "operational",
+    "runType": "live",
+    "completed": true,
+    "checkedAt": "2026-09-11T08:05:20+08:00",
+    "replay": false,
+    "publicationWindow": {
+      "start": "2026-09-05",
+      "end": "2026-09-11"
+    },
+    "lateArrivalCount": 31,
+    "sources": {
+      "ncha": {
+        "rawCount": 6,
+        "eligibleCount": 6,
+        "acceptedCount": 0,
+        "rawDiscovered": 6,
+        "scopeQualified": 6,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "cultural-relics-news": {
+        "rawCount": 6,
+        "eligibleCount": 4,
+        "acceptedCount": 0,
+        "rawDiscovered": 6,
+        "scopeQualified": 4,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      },
+      "archaeology": {
+        "rawCount": 12,
+        "eligibleCount": 12,
+        "acceptedCount": 2,
+        "rawDiscovered": 12,
+        "scopeQualified": 12,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "status": "checked"
+      },
+      "museum-association": {
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedCount": 0,
+        "rawDiscovered": 2,
+        "scopeQualified": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      },
+      "xinhua-wenbo": {
+        "rawCount": 264,
+        "eligibleCount": 12,
+        "acceptedCount": 3,
+        "rawDiscovered": 264,
+        "scopeQualified": 12,
+        "acceptedThisRun": 3,
+        "retainedExisting": 0,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 28,
+        "status": "partial"
+      },
+      "cctv-wenbo": {
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedCount": 0,
+        "rawDiscovered": 0,
+        "scopeQualified": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "status": "partial"
+      }
+    }
+  }
+}

@@ -1792,7 +1792,7 @@ def build_report_html(data, prev_report=None, next_report=None):
     else:
         quality_html = ''
 
-    toc_html = '<nav class="reading-tools" aria-label="阅读导航"><a href="#report-toc">本期目录</a><a href="../reading.html">我的收藏</a><a href="#product-main">返回顶部 ↑</a></nav><div class="toc" id="report-toc">\n  <details open>\n    <summary><strong>📑 目录</strong></summary>\n    <ol>\n'
+    toc_html = '<nav class="reading-tools" aria-label="阅读导航"><a href="#report-toc">本期目录</a><a href="../reading.html">我的收藏</a><a href="#product-main">返回顶部 ↑</a></nav><div class="toc" id="report-toc">\n  <details open>\n    <summary><strong>本期目录</strong></summary>\n    <ol>\n'
     for item in data['toc_items']:
         toc_html += f'      <li><a href="#{item["id"]}">{item["title"]}</a></li>\n'
     toc_html += '    </ol>\n  </details>\n</div>'
@@ -1811,7 +1811,7 @@ def build_report_html(data, prev_report=None, next_report=None):
                 cls = 'tag tag-' + escape(tag, quote=True)
                 tags_html += f' <a class="{cls}" href="../search.html?q={quote(tag)}">#{escape(tag)}</a>'
 
-        html = f'<h3 id="{item["id"]}">{item["number"]}. {escape(_daily_display_title(item))}{tags_html}</h3>\n'
+        html = f'<article class="daily-story" aria-labelledby="{item["id"]}"><h3 id="{item["id"]}">{item["number"]}. {escape(_daily_display_title(item))}{tags_html}</h3>\n'
 
         html += audit_html(audit_for(data['date'], item))
         if item['sources']:
@@ -1827,7 +1827,7 @@ def build_report_html(data, prev_report=None, next_report=None):
         if item['commentary']:
             html += f'<blockquote><strong>点评：</strong> {md_inline(item["commentary"])}</blockquote>\n'
 
-        return html + '<hr>\n\n'
+        return html + '</article>\n\n'
 
     report_items_html = ''
     last_section = None
@@ -1916,18 +1916,20 @@ def build_report_html(data, prev_report=None, next_report=None):
 <header>
   <h1>每日文博资讯</h1>
   <p class="meta">{data['date']} · {data['weekday']} ｜ 共 {total} 条（国内 {data['domestic_count']} + 国际/区域 {data['international_count']}）</p>
-  <p style="margin-top:4px;font-size:.85em"><a href="../index.html">← 返回目录</a></p>
+  <p class="daily-home"><a href="../index.html">← 全部新闻</a></p>
 
 </header>
 
 <main>
 
-{toc_html}
-
+<div class="daily-layout">
+<aside class="daily-index" aria-label="本期导航">{toc_html}</aside>
+<div class="daily-content">
 {report_items_html}
 {trends_html}{notes_html}
-
 {quality_html}
+</div>
+</div>
 
 <hr>
 
@@ -3044,16 +3046,26 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
     latest_domestic = latest_daily.get('domestic_count', 0) if latest_daily else 0
     latest_regional = latest_daily.get('international_count', 0) if latest_daily else 0
     latest_total = latest_domestic + latest_regional
-    hero_items = _report_items_in_order(latest_daily)[:3] if latest_daily else []
+    hero_items = _report_items_in_order(latest_daily) if latest_daily else []
     hero_links = []
-    for item in hero_items:
+    for index, item in enumerate(hero_items):
         item_id = escape(str(item.get('id', '')), quote=True)
-        item_title = escape(str(item.get('title', '')))
-        hero_links.append(f'<li><a href="reports/{escape(latest_date, quote=True)}.html#{item_id}">{item_title}</a></li>')
-    hero_list = ''.join(hero_links) or '<li class="muted">今日暂无已发布日报</li>'
-    remaining = max(0, latest_total - len(hero_items))
-    hero_more = f'<span class="hero-more">另外 {remaining} 条</span>' if remaining else ''
-    hero_more_line = f'  {hero_more}\n' if hero_more else ''
+        item_title = escape(_daily_display_title(item))
+        href = f'reports/{escape(latest_date, quote=True)}.html#{item_id}'
+        # Excerpts come from the published report, never generated marketing copy.
+        plain_body = re.sub(r'[*_`]', '', str(item.get('body') or ''))
+        limit = 180 if index == 0 else 90
+        excerpt = escape(plain_body[:limit]) + ('…' if len(plain_body) > limit else '')
+        sources = ' / '.join(dict.fromkeys(str(source.get('name', '')) for source in item.get('sources', [])))
+        topic = ' · '.join(item.get('tags', [])[:2]) or '文博动向'
+        hero_links.append(f'''<article class="edition-story{' edition-lead' if index == 0 else ''}">
+  <div class="edition-label"><span>{escape(topic)}</span><span>{index + 1:02d}</span></div>
+  <h3><a href="{href}">{item_title}</a></h3>
+  <p class="edition-excerpt">{excerpt}</p>
+  <div class="edition-source">{escape(sources)}</div>
+  <a class="edition-read" href="{href}">阅读与点评 <span aria-hidden="true">↗</span></a>
+</article>''')
+    hero_list = ''.join(hero_links) or '<p class="muted">暂无已发布日报</p>'
 
     has_jobs = bool(recruitment_data and recruitment_data.get('sections'))
     has_intern = bool(intern_data and intern_data.get('sections'))
@@ -3198,9 +3210,9 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
 {index_css}
 </head>
 <body>
-<header>
-  <h1>每日文博资讯</h1>
-  <p class="sub">国内外文物博物馆 · 考古 · 文化遗产 ｜ 每日推送</p>
+<header class="news-masthead">
+  <div><p class="masthead-kicker">博物馆 / 考古 / 文化遗产</p><h1>文博日报</h1></div>
+  <a class="masthead-archive" href="archive.html">往期日报 ↗</a>
 </header>
 <main>
 <nav class="quick-nav" aria-label="主要栏目">
@@ -3219,12 +3231,12 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
     <h2 id="today-heading" class="hero-title">今日精选 · {escape(latest_date or '—')}</h2>
     <span class="badge">最新</span>
   </div>
-  <ul class="hero-list">{hero_list}</ul>
-{hero_more_line}   <div class="hero-meta">共 {latest_total} 条 · 国内 {latest_domestic} · 区域/国际 {latest_regional}</div>
-   <a class="hero-link" href="{escape(latest_href, quote=True)}">阅读今日日报 →</a>
+  <div class="hero-meta">共 {latest_total} 条 · 国内 {latest_domestic} · 区域/国际 {latest_regional}</div>
+  <div class="edition-grid">{hero_list}</div>
+  <a class="hero-link" href="{escape(latest_href, quote=True)}">连续阅读本期日报 →</a>
 </section>
 <section aria-labelledby="recent-heading">
-  <div class="section-header" id="recent-heading">最近更新</div>
+  <div class="section-header" id="recent-heading">专题与机会</div>
   <div class="compact-grid">{''.join(compact_cards)}</div>
 </section>
 <section class="archive-summary" aria-labelledby="archive-heading">
@@ -3251,7 +3263,7 @@ def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
         total = report.get('domestic_count', 0) + report.get('international_count', 0)
         badge = ' <span class="badge">最新</span>' if latest else ''
         return f'''
-<a class="archive-card" href="reports/{escape(report_date, quote=True)}.html">
+<a class="archive-card" data-issue-date="{escape(report_date, quote=True)}" href="reports/{escape(report_date, quote=True)}.html">
   <strong>📅 {escape(report_date)}</strong>{badge}
   <span class="archive-muted">{escape(str(report.get('weekday', '')))} · 共 {total} 条 · 国内 {report.get('domestic_count', 0)} · 区域/国际 {report.get('international_count', 0)}</span>
 </a>'''
@@ -3262,7 +3274,7 @@ def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
         item_count = len(report.get('items') or [])
         count_text = f'共 {item_count} 条要闻' if item_count else '综合编辑观察'
         return f'''
-<a class="archive-card" href="reports/{kind}-{escape(ref_date, quote=True)}.html">
+<a class="archive-card" data-issue-date="{escape(ref_date, quote=True)}" href="reports/{kind}-{escape(ref_date, quote=True)}.html">
   <strong>{icon} {escape(date_range)}</strong>
   <span class="archive-muted">{escape(count_text)}</span>
 </a>'''
@@ -3281,6 +3293,8 @@ def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
 </details>'''
         return f'<section class="archive-group"><h2>{title} <span>{len(entries)} 条</span></h2>{visible}{older_block}</section>'
 
+    months = sorted({str(r['date'])[:7] for r in daily_reports} | {str(r['ref_date'])[:7] for r in weekly_reports + monthly_reports}, reverse=True)
+    month_options = ''.join(f'<option value="{escape(month, quote=True)}">{escape(month)}</option>' for month in months)
     daily_cards = [daily_card(report, i == 0) for i, report in enumerate(daily_reports)]
     weekly_cards = [periodic_card(report, 'weekly', '📰') for report in weekly_reports]
     monthly_cards = [periodic_card(report, 'monthly', '📊') for report in monthly_reports]
@@ -3322,18 +3336,20 @@ def build_archive(daily_reports, weekly_reports=None, monthly_reports=None):
 </head>
 <body>
 <header>
-  <h1>🏛️ 文博资讯档案</h1>
+  <h1>往期日报与专题</h1>
   <p>浏览全部日报、周报和月报历史记录</p>
 </header>
 <main>
   <a class="back" href="index.html">← 返回首页</a>
-  {archive_group('📅 日报', daily_cards, 2, '暂无日报记录')}
-  {archive_group('📰 周报', weekly_cards, 1, '暂无周报记录')}
-  {archive_group('📊 月报', monthly_cards, 1, '暂无月报记录')}
+  <div class="archive-controls"><label for="archive-month">期号月份</label><select id="archive-month"><option value="">全部月份</option>{month_options}</select><a href="search.html">按关键词查新闻 ↗</a><p id="archive-result" role="status" aria-live="polite"></p></div>
+  {archive_group('日报', daily_cards, 7, '暂无日报记录')}
+  {archive_group('周报', weekly_cards, 1, '暂无周报记录')}
+  {archive_group('月报', monthly_cards, 1, '暂无月报记录')}
 </main>
 <footer>
   <p><a href="index.html">每日文博资讯</a> · <a href="search.html">搜索全部档案</a> · <a href="sources.html">信源与方法</a></p>
 </footer>
+<script src="assets/archive.js" defer></script>
 <button id="collapse-floating" class="collapse-floating" type="button" aria-label="收起当前展开的档案栏目">↑ 收起本栏</button>
 <script>
 let activeOlderGroup = null;
@@ -3431,14 +3447,18 @@ __SEARCH_CSS__
 <header class="search-head">
   <p><a class="back" href="index.html">← 返回首页</a></p>
   <h1>搜索资讯与机会</h1>
-  <p class="meta">检索完整关键词；空格分隔的多个关键词须同时出现。包含日报、周报、月报与岗位。</p>
+  <p class="meta">按关键词、收录日期或内容类型查找。</p>
 </header>
 
 <main>
   <form class="search-wrap" action="search.html" method="get" role="search">
-    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词" required>
+    <input id="query" name="q" type="search" placeholder="输入关键词，例如：国家文物局、考古、数字化" autocomplete="off" aria-label="搜索关键词">
     <label class="search-type">范围<select name="type" id="search-type"><option value="all">全部内容</option><option value="daily">日报</option><option value="opportunities">招聘与实习</option><option value="weekly">周报</option><option value="monthly">月报</option></select></label>
+    <label class="search-type">收录起日<input type="date" name="from" id="search-from"></label>
+    <label class="search-type">收录止日<input type="date" name="to" id="search-to"></label>
+    <label class="search-type">排序<select name="sort" id="search-sort"><option value="latest">最新优先</option><option value="relevance">匹配度优先</option></select></label>
     <button class="search-submit" type="submit">搜索</button>
+    <a class="search-reset" href="search.html">重置</a>
   </form>
   <p id="summary" class="search-summary">请输入关键词开始搜索。</p>
   <section id="results" aria-live="polite"><div class="search-empty">正在加载搜索索引…</div></section>
@@ -3533,8 +3553,8 @@ function renderHit(hit, words) {
   const body = item ? (item.body || item.commentary || item.progress || '') : (record.text || '');
   const tags = item && Array.isArray(item.tags) ? item.tags.map(function(tag) { return '<span class="search-tag">#' + escapeHtml(tag) + '</span>'; }).join('') : '';
   const sources = item ? sourceList(item.sources) : '';
-  return '<details class="search-result">' +
-    '<summary>' + highlight(title, words) + '</summary>' +
+  return '<article class="search-result">' +
+    '<h2><a href="' + escapeHtml(href) + '">' + highlight(title, words) + '</a></h2>' +
     '<div class="search-detail">' +
       '<div class="search-meta"><span class="search-kind">' + escapeHtml(typeLabels[record.type] || '档案') + '</span>' + escapeHtml(record.date || '') + '</div>' +
       (item && item.auditLabel ? '<p class="evidence-audit">' + escapeHtml(item.auditLabel + '：' + item.auditNote) + '</p>' : '') +
@@ -3543,14 +3563,23 @@ function renderHit(hit, words) {
       (sources ? '<div class="search-source">来源：' + sources + '</div>' : '') +
       '<p class="search-open"><a href="' + escapeHtml(href) + '">查看完整条目 →</a></p>' +
     '</div>' +
-    '</details>';
+    '</article>';
 }
 function renderSearch(data, rawQuery) {
   const query = String(rawQuery || '').trim().toLowerCase();
   queryInput.value = rawQuery || '';
-  if (!query) {
-    summary.textContent = '请输入关键词开始搜索。';
-    results.innerHTML = '<div class="search-empty">搜索日报、周报、月报及招聘档案中的完整关键词。</div>';
+  const params = new URLSearchParams(location.search);
+  const sort = params.get('sort') === 'relevance' ? 'relevance' : 'latest';
+  const validDate = value => /^\\d{4}-\\d{2}-\\d{2}$/.test(value || '') && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0,10) === value;
+  const from = validDate(params.get('from')) ? params.get('from') : '';
+  const to = validDate(params.get('to')) ? params.get('to') : '';
+  document.getElementById('search-sort').value = sort;
+  document.getElementById('search-from').value = from;
+  document.getElementById('search-to').value = to;
+  if (from && to && from > to) {
+    summary.textContent = '起日不能晚于止日。';
+    results.innerHTML = '<p class="search-empty">请调整收录日期范围。</p>';
+    document.getElementById('search-more').hidden = true;
     return;
   }
   const groups = queryGroups(query);
@@ -3558,9 +3587,11 @@ function renderSearch(data, rawQuery) {
   const hits = [];
   const seen = new Set();
   const records = (Array.isArray(data) ? data : []).slice().sort(function(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
-  const kind = new URLSearchParams(location.search).get('type') || 'all';
+  const requestedKind = params.get('type');
+  const kind = ['daily','opportunities','weekly','monthly'].includes(requestedKind) ? requestedKind : 'all';
   document.getElementById('search-type').value = kind;
   records.forEach(function(record) {
+    if ((from || to) && (!validDate(record.date) || (from && record.date < from) || (to && record.date > to))) return;
     if(kind !== 'all' && (kind === 'opportunities' ? !['jobs','intern'].includes(record.type) : record.type !== kind)) return;
     const items = Array.isArray(record.items) ? record.items : [];
     if (items.length) {
@@ -3580,12 +3611,13 @@ function renderSearch(data, rawQuery) {
       }
     }
   });
-  hits.sort(function(a, b) { return b.score - a.score || String(b.record.date || '').localeCompare(String(a.record.date || '')); });
-  summary.textContent = '找到 ' + hits.length + ' 条匹配条目（按匹配度排序，保留不同报告记录）';
+  hits.sort(function(a, b) { const dateOrder = String(b.record.date || '').localeCompare(String(a.record.date || '')); return sort === 'latest' ? dateOrder || b.score - a.score : b.score - a.score || dateOrder; });
+  // 保留不同报告记录：此处按条目地址去重，不推断事件同一性。
+  summary.textContent = (query ? '找到 ' : '浏览 ') + hits.length + ' 条 · ' + (sort === 'latest' ? '最新优先' : '匹配度优先');
   let visible = 30;
   const more = document.getElementById('search-more');
   function draw() {
-    results.innerHTML = hits.length ? hits.slice(0, visible).map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配条目。可以换一个更具体或更常见的关键词。</div>';
+    results.innerHTML = hits.length ? hits.slice(0, visible).map(function(hit) { return renderHit(hit, words); }).join('') : '<div class="search-empty">没有找到匹配条目。试试缩短关键词、扩大日期范围，或<a href="search.html">重置筛选</a>。</div>';
     more.hidden = visible >= hits.length;
     more.textContent = '显示更多结果（已显示 ' + Math.min(visible,hits.length) + ' / ' + hits.length + '）';
   }

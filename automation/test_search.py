@@ -14,7 +14,7 @@ class SearchTests(unittest.TestCase):
         bundled = Path(r"C:\Users\张衡\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe")
         return str(bundled) if bundled.exists() else "node"
 
-    def _run_render_search(self, query, expected_fragment='reports/2026-08-29.html#item3'):
+    def _run_render_search(self, query, expected_fragment='reports/2026-08-29.html#item3', params=''):
         source = (ROOT / "search.html").read_text(encoding="utf-8")
         script = r'''
 const fs = require('fs');
@@ -31,7 +31,7 @@ function element(id) {
 const context = {
   console,
   URLSearchParams,
-  location: {search: ''},
+  location: {search: process.argv[4] || ''},
   Set,
   Array,
   Math,
@@ -68,6 +68,7 @@ const data = [{
         sources: [{name: 'ABC News original English headline', url: 'https://example.com/abc'}]
       }]
 }];
+data.push({...data[0],date:'2026-09-05',path:'reports/2026-09-05.html',items:[{...data[0].items[0],title:'新增行业动态',body:'长春考古会议后续消息'}]});
 context.renderSearch(data, process.argv[2]);
 const result = element('results');
 if (!result.innerHTML.includes(process.argv[3])) throw new Error('expected result missing');
@@ -76,13 +77,28 @@ process.stdout.write(result.innerHTML);
         env = os.environ.copy()
         env["PYTHONIOENCODING"] = "utf-8"
         return subprocess.run(
-            [self._node(), "-e", script, str(ROOT / "search.html"), query, expected_fragment],
+            [self._node(), "-e", script, str(ROOT / "search.html"), query, expected_fragment, params],
             check=True,
             capture_output=True,
             text=True,
             encoding="utf-8",
             env=env,
         ).stdout
+
+    def test_date_range_is_inclusive_and_does_not_return_older_issues(self):
+        output = self._run_render_search('考古', 'reports/2026-09-05.html#item3', '?from=2026-09-05&to=2026-09-05')
+        self.assertNotIn('reports/2026-08-29.html', output)
+
+    def test_sort_switch_changes_order_without_losing_matches(self):
+        latest = self._run_render_search('考古')
+        relevance = self._run_render_search('考古', params='?sort=relevance')
+        self.assertLess(latest.index('2026-09-05.html'), latest.index('2026-08-29.html'))
+        self.assertLess(relevance.index('2026-08-29.html'), relevance.index('2026-09-05.html'))
+
+    def test_empty_query_browses_and_inverted_dates_show_recovery(self):
+        self.assertIn('2026-09-05.html', self._run_render_search(''))
+        self.assertIn('请调整收录日期范围', self._run_render_search('', '请调整收录日期范围', '?from=2026-09-06&to=2026-09-01'))
+        self.assertIn('2026-08-29.html', self._run_render_search('考古', params='?type=invalid&from=2026-02-31'))
 
     def test_render_search_queries_do_not_throw_and_return_expected_item(self):
         for query in ("政策行业", "长春考古会议", "考古", "长春考古会议"):

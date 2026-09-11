@@ -133,6 +133,38 @@
       "observationDate": "2026-09-10"
     },
     {
+      "recordId": "operational-20260909-xinhua-wenbo-0019-4194cf2chtml",
+      "date": "2026-09-09",
+      "title": "吉林推出秋季文旅系列活动 黄金博物馆即将开馆",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://jl.xinhuanet.com/20260909/4d187cb472b446cbb44cf59f04194cf2/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "吉林",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "吉林"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
+    },
+    {
       "recordId": "operational-20260909-xinhua-wenbo-0045-bc4c72echtml",
       "date": "2026-09-09",
       "title": "法国雷诺阿博物馆两幅遭窃画作被找到",
@@ -168,6 +200,40 @@
       },
       "observedAt": "2026-09-09T07:15:05+08:00",
       "observationDate": "2026-09-09"
+    },
+    {
+      "recordId": "operational-20260909-xinhua-wenbo-0020-c967546chtml",
+      "date": "2026-09-09",
+      "title": "秦兵马俑发掘保护开启新模式",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/photo/20260909/2bdc5299b1014531ac16eb921c967546/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "文化遗产",
+        "陕西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-11T08:05:20+08:00",
+      "observationDate": "2026-09-11"
     }
   ],
   "runType": "live",

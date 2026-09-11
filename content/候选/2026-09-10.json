@@ -18,12 +18,19 @@
     "status": "completed",
     "reviewedAt": "2026-09-10T23:22:29+08:00",
     "reviewedEvents": 10,
-    "selectedEvents": 7,
-    "rejectedEvents": 3,
+    "selectedEvents": 6,
+    "rejectedEvents": 4,
     "deferredEvents": 0,
-    "note": "选入 7 条；拒绝 1 条非文博事件、1 条已发布历史重复和 1 条常规培训通知。"
+    "note": "选入 6 条；本次补充纠正一条纯学术内容的历史误选，另拒绝非文博事件、已发布历史重复和常规培训通知。"
   },
-  "summary": {"discovered": 10, "selected": 7, "rejected": 3, "deferred": 0, "needsVerification": 0},
+  "revision": {
+    "revisionType": "historical_editorial_correction",
+    "revisedAt": "2026-09-11T00:01:55+08:00",
+    "editorialInputPath": "content/发现/2026-09-10.json",
+    "discoveryAuditUnchanged": true,
+    "revisionReason": "保留不可变 discovery audit；依据第十九轮日报选稿边界，纠正一条纯学术内容的历史误选。"
+  },
+  "summary": {"discovered": 10, "selected": 6, "rejected": 4, "deferred": 0, "needsVerification": 0},
   "candidates": [
     {
       "candidateId": "daily-20260910-001",
@@ -116,23 +123,21 @@
       "domestic": true,
       "international": false,
       "scope": "domestic",
-      "decision": "selected",
-      "decisionReason": "国家文物局文章同时介绍石窟石刻调查、雷达与光谱检测、三维扫描和材料试验，给出可复核的石质文物保护方法。",
-      "selectedForDaily": true,
+      "decision": "rejected",
+      "decisionReason": "这是石质文物保护方法与研究工作的介绍，虽有检测、建模和材料试验，但没有近期具体行业动作，不进入日报。",
+      "selectedForDaily": false,
       "dedupStatus": "unique_event",
-      "notes": "使用国家文物局 A 级原文；不把技术报道改写成单一项目已经解决全部石质文物病害。",
+      "notes": "保留国家文物局 A 级原文和发现 provenance；本次依据第十九轮选稿边界纠正历史误选。",
       "discoveredVia": "ncha-wenwu-news",
       "discoveryQuery": null,
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "finalEditorialDecision": "selected",
-      "finalEditorialReason": "检测、建模和材料试验已连接到石质文物的病害识别与保护方案。",
-      "editorialPriorityScore": 28,
+      "finalEditorialDecision": "rejected",
+      "finalEditorialReason": "academic_discussion_without_industry_action",
+      "editorialPriorityScore": 0,
       "editorialPriorityLabel": "low",
-      "editorialReasons": ["primary_freshness"],
-      "dailyItemNumber": 3,
-      "dailyItemTitle": "石质文物保护把检测、建模和材料试验连在一起"
+      "editorialReasons": ["primary_freshness", "academic_discussion_without_industry_action"]
     },
     {
       "candidateId": "daily-20260910-004",
@@ -167,7 +172,7 @@
       "editorialPriorityScore": 28,
       "editorialPriorityLabel": "low",
       "editorialReasons": ["primary_freshness"],
-      "dailyItemNumber": 4,
+      "dailyItemNumber": 3,
       "dailyItemTitle": "全国革命文物保护利用片区建设工作会召开"
     },
     {
@@ -203,7 +208,7 @@
       "editorialPriorityScore": 86,
       "editorialPriorityLabel": "high",
       "editorialReasons": ["museum_or_cultural_institution_governance", "sustained_public_attention", "primary_freshness"],
-      "dailyItemNumber": 5,
+      "dailyItemNumber": 4,
       "dailyItemTitle": "阿拉斯加大学北方博物馆获资助打造巴士展览"
     },
     {
@@ -240,7 +245,7 @@
       "editorialPriorityScore": 70,
       "editorialPriorityLabel": "high",
       "editorialReasons": ["museum_or_cultural_institution_governance", "primary_freshness"],
-      "dailyItemNumber": 6,
+      "dailyItemNumber": 5,
       "dailyItemTitle": "史密森学会秘书长隆尼·邦奇辞职"
     },
     {
@@ -276,7 +281,7 @@
       "editorialPriorityScore": 48,
       "editorialPriorityLabel": "medium",
       "editorialReasons": ["meaningful_institutional_or_international_cooperation", "primary_freshness"],
-      "dailyItemNumber": 7,
+      "dailyItemNumber": 6,
       "dailyItemTitle": "中突联合考古把多语种记录和共同发掘带到突尼斯遗址"
     },
     {

@@ -1,0 +1,23 @@
+{
+  "recruitmentTests": {
+    "passed": 31,
+    "command": "python -m unittest automation.test_recruitment_discovery automation.test_recruitment_sources automation.test_recruitment_review"
+  },
+  "fullSuite": "incomplete: execution session reported network approval cancelled; no full-suite pass claimed",
+  "build": "passed",
+  "projectValidation": {
+    "date": "2026-09-08",
+    "result": "passed"
+  },
+  "productValidation": {
+    "pages": 84,
+    "result": "passed"
+  },
+  "diffCheck": "passed",
+  "queueReplay": {
+    "2026-09-10": 21,
+    "2026-09-11": 21
+  },
+  "newVerifiedPublishedPositions": 0,
+  "visualAcceptance": "pending local preview"
+}
