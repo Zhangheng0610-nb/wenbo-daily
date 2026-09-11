@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-10",
-  "asOf": "2026-09-10",
+  "generated": "2026-09-11",
+  "asOf": "2026-09-11",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6336,6 +6336,108 @@
         "duplicatesSkipped": 0,
         "scanStatus": "failed",
         "date": "2026-09-10"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-11T08:05:44+08:00",
+        "candidateCount": 2,
+        "note": "",
+        "rawCount": 12,
+        "eligibleCount": 12,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-11"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-11T08:06:37+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-11"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-11T08:05:41+08:00",
+        "candidateCount": 0,
+        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 3，无法识别期页 0；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。",
+        "rawCount": 6,
+        "eligibleCount": 4,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-11"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-11T08:05:45+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-11"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-11T08:05:20+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 6,
+        "eligibleCount": 6,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-11"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-11T08:05:46+08:00",
+        "candidateCount": 3,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 264,
+        "eligibleCount": 12,
+        "acceptedThisRun": 3,
+        "retainedExisting": 0,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 28,
+        "scanStatus": "partial",
+        "date": "2026-09-11"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6352,42 +6454,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 563,
-    "includedProvincialRecords": 126,
-    "provincialEvents": 106,
-    "nationalEvents": 41,
+    "totalMonitoredRecords": 575,
+    "includedProvincialRecords": 135,
+    "provincialEvents": 113,
+    "nationalEvents": 42,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 76,
-    "operationalRecords": 76,
+    "fixedPanelMonitoringRecords": 88,
+    "operationalRecords": 88,
     "operationalRecordTypes": {
-      "live": 57,
+      "live": 69,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 76
+      "fixed-panel-monitoring": 88
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 494,
+    "analysisRecords": 506,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 76
+      "fixed-panel-monitoring": 88
     },
     "excludedNonPanel": 0,
-    "unassigned": 304,
+    "unassigned": 306,
     "panelSourceCount": 6,
-    "coverageDays": 104,
+    "coverageDays": 105,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 345,
+    "successfulSourceChecks": 347,
     "coverageStatuses": {
-      "success": 147,
-      "no_update": 198,
-      "partial": 278,
+      "success": 148,
+      "no_update": 199,
+      "partial": 282,
       "failed": 1
     },
     "coverageByMode": {
@@ -6397,15 +6499,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 84,
-        "good": 72,
-        "days": 14
+        "checks": 90,
+        "good": 74,
+        "days": 15
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 84,
+    "operationalCoverageChecks": 90,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 14,
+    "operationalCoverageDays": 15,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6413,25 +6515,293 @@
         "days": 4
       },
       "live": {
-        "checks": 60,
-        "good": 48,
-        "days": 10
+        "checks": 66,
+        "good": 50,
+        "days": 11
       }
     },
-    "liveOperationalCoverageChecks": 60,
-    "liveOperationalCoverageDays": 10,
+    "liveOperationalCoverageChecks": 66,
+    "liveOperationalCoverageDays": 11,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
       "ncha": 83,
       "cultural-relics-news": 123,
-      "archaeology": 224,
+      "archaeology": 226,
       "museum-association": 31,
-      "xinhua-wenbo": 19,
+      "xinhua-wenbo": 29,
       "cctv-wenbo": 14
     }
   },
   "events": [
+    {
+      "title": "奔“县”游｜寻迹千年古城，在艺术山居“慢生活”",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-11",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策行业",
+        "山东"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-11",
+          "title": "奔“县”游｜寻迹千年古城，在艺术山居“慢生活”",
+          "url": "http://www.sd.xinhuanet.com/20260911/6957263415e443d2bc82962e4fb8b7a0/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.sd.xinhuanet.com/20260911/6957263415e443d2bc82962e4fb8b7a0/c.html",
+              "host": "sd.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "title": "奔“县”游丨寻迹千年古城，在艺术山居“慢生活”",
+          "url": "https://www.news.cn/local/20260910/ad739f869a2d4150adba5017f5789776/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/local/20260910/ad739f869a2d4150adba5017f5789776/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-ba8a09d4e7",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "关注",
+      "primaryTheme": "文化遗产",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/local/20260910/ad739f869a2d4150adba5017f5789776/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        },
+        {
+          "name": "新华网文博",
+          "url": "http://www.sd.xinhuanet.com/20260911/6957263415e443d2bc82962e4fb8b7a0/c.html",
+          "host": "sd.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "首套海上保护区数据集面世",
+      "firstDate": "2026-09-11",
+      "lastDate": "2026-09-11",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "国际交流",
+        "政策行业",
+        "天津"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-11",
+          "title": "首套海上保护区数据集面世",
+          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-bf1e2e2858",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "国际交流",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "秦兵马俑发掘保护开启新模式",
+      "firstDate": "2026-09-09",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古",
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "文化遗产",
+        "陕西"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "秦兵马俑发掘保护开启新模式",
+          "url": "https://www.news.cn/culture/20260910/b8d69ec0fa4a4c72ba783dabb52cb0ef/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260910/b8d69ec0fa4a4c72ba783dabb52cb0ef/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-09",
+          "title": "秦兵马俑发掘保护开启新模式",
+          "url": "https://www.news.cn/photo/20260909/2bdc5299b1014531ac16eb921c967546/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/photo/20260909/2bdc5299b1014531ac16eb921c967546/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b8fa734c62",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260910/b8d69ec0fa4a4c72ba783dabb52cb0ef/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "“澄江生物群”化石精品展在陕西自然博物馆启幕",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览",
+        "博物馆",
+        "国际交流"
+      ],
+      "tags": [
+        "展览",
+        "博物馆",
+        "国际交流",
+        "陕西"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "“澄江生物群”化石精品展在陕西自然博物馆启幕",
+          "url": "http://www.sn.xinhuanet.com/20260910/c8ced43824f6450aa408c88e9aa56005/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.sn.xinhuanet.com/20260910/c8ced43824f6450aa408c88e9aa56005/c.html",
+              "host": "sn.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-48ca3168c2",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://www.sn.xinhuanet.com/20260910/c8ced43824f6450aa408c88e9aa56005/c.html",
+          "host": "sn.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
       "firstDate": "2026-09-10",
@@ -6483,6 +6853,174 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "第八届文化遗产保护与数字化国际学术论坛在京开幕",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览",
+        "文化遗产",
+        "数字化"
+      ],
+      "tags": [
+        "展览",
+        "文化遗产",
+        "数字化",
+        "北京"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "第八届文化遗产保护与数字化国际学术论坛在京开幕",
+          "url": "https://www.news.cn/culture/20260910/1a05f75a93e3429e9065c1073de2f3b7/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260910/1a05f75a93e3429e9065c1073de2f3b7/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-2eeb504eea",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260910/1a05f75a93e3429e9065c1073de2f3b7/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "这些卡伦遗址见证边疆戍边历史",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "新疆"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "这些卡伦遗址见证边疆戍边历史",
+          "url": "https://www.news.cn/local/20260910/46db1167acf0461e8d370bcaad2b3dc4/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/local/20260910/46db1167acf0461e8d370bcaad2b3dc4/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-6e260fa821",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/local/20260910/46db1167acf0461e8d370bcaad2b3dc4/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "吉林推出秋季文旅系列活动 黄金博物馆即将开馆",
+      "firstDate": "2026-09-09",
+      "lastDate": "2026-09-09",
+      "primaryProvince": "吉林",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "吉林"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-09",
+          "title": "吉林推出秋季文旅系列活动 黄金博物馆即将开馆",
+          "url": "http://jl.xinhuanet.com/20260909/4d187cb472b446cbb44cf59f04194cf2/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://jl.xinhuanet.com/20260909/4d187cb472b446cbb44cf59f04194cf2/c.html",
+              "host": "jl.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b1caf666cb",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://jl.xinhuanet.com/20260909/4d187cb472b446cbb44cf59f04194cf2/c.html",
+          "host": "jl.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
         }
       ]
     },
@@ -12676,6 +13214,61 @@
     }
   ],
   "nationalEvents": [
+    {
+      "title": "全国首套海上保护区数据集面世",
+      "firstDate": "2026-09-11",
+      "lastDate": "2026-09-11",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "国际交流",
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-11",
+          "title": "全国首套海上保护区数据集面世",
+          "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-38a1bf64fb",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260911/0df3ecb0694e45fab51ab19170db1d90/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
       "firstDate": "2026-09-10",
