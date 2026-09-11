@@ -18,6 +18,13 @@ def industry_signals(record: dict) -> set[str]:
             signals.add('museum_governance_action')
     if re.search(r'洞穴艺术|岩画|\b(?:cave art|rock art)\b',text) and re.search(r'新发现|发现.*(?:人类活动|年代|万年前)|\b(?:discover(?:y|ies|ed)?|uncovered|reveals?)\b',text):
         signals.add('archaeological_discovery_action')
+    # Field discoveries often name the object and period without using the
+    # literal word archaeology (e.g. "Roman-Era Mosaic Floor Unearthed").
+    field_action = re.search(r"\b(?:excavated|unearthed|uncovered|found|discover(?:s|ed)?)\b", text)
+    field_object = re.search(r"\b(?:burial platforms?|cemeter(?:y|ies)|mosaics?|pottery|settlements?|baths?|tombs?|game boards?|combs?)\b", text)
+    period_or_archaeologist = re.search(r"\b(?:ancient|roman(?:-era)?|medieval|bronze age|neolithic|paleolithic|ottoman|archaeologists?)\b", text)
+    if field_action and field_object and (period_or_archaeologist or 'burial platform' in text):
+        signals.add('archaeological_discovery_action')
     return signals
 
 

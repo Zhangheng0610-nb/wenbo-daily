@@ -1,0 +1,19 @@
+{
+  "relatedTestsPassed": 57,
+  "projectValidation": {
+    "date": "2026-09-08",
+    "result": "passed"
+  },
+  "productValidation": {
+    "pages": 84,
+    "result": "passed"
+  },
+  "diffCheck": "passed",
+  "liveListingChecks": 2,
+  "liveArticleChecks": 2,
+  "rawLinkRecords": 64,
+  "deduplicatedRecords": 48,
+  "isolatedFinalCandidates": 9,
+  "newPublishedEvents": 0,
+  "fullSuite": "not run; focused backfill, source, recruitment-source and editorial regression"
+}

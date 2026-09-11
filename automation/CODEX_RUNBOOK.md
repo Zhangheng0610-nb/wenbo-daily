@@ -255,3 +255,7 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 - 保存已实际读取的正文或对应段落：`from automation.daily_scope import save_action_source`，调用 `save_action_source(ROOT, source_url, fetched_text, retrieved_at)`，将返回的 sourceDocumentPath、sourceDocumentSha256 放入 industryAction。不得把自己写的摘要当成 fetched_text；不必重复联网获取已有可信读取结果。哈希使用UTF-8及LF标准化，兼容Windows。
 
 原文片段必须能在保存的来源文档中找到。没有动作、日期或可核验正文则待核/拒绝，继续补查其他新闻；不能伪造片段、把研究结论改写成工程落地、把整份汇总的日期套给旧事件。借原有未来日报的新门槛要求，不批量伪造历史证明。完整真实格式见 audit/round20-industry-action-live.json；其中雷诺阿事件只是已发布回归样本，不得再次作为新新闻发布。
+
+### 来源解析故障（Round23）
+
+中新文化栏目使用https://www.chinanews.com.cn/wy/，旧/cul/只返回meta跳转。公共fetch已处理gzip/deflate，损坏压缩、超限、未知编码会明确失败。不能把HTTP200、解码乱码或仅有跳转指令的页面记作正常无更新。来源恢复后仍执行同一事件去重、行业范围和原文动作核查，不能直接把栏目链接批量升为articleVerified。

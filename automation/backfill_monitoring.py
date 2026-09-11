@@ -124,6 +124,37 @@ def source_opener():
     return DIRECT_OPENER if route == "direct" else SEARCH_OPENER
 
 
+MAX_SOURCE_BYTES = 20 * 1024 * 1024
+
+
+def decode_source_response(raw: bytes, content_encoding: str = "") -> str:
+    """Decode HTTP compression before character encoding, with a size bound."""
+    import gzip
+    import io
+    import zlib
+    if len(raw) > MAX_SOURCE_BYTES:
+        raise ValueError("source response exceeds size limit")
+    coding = (content_encoding or "").strip().lower()
+    if coding in ("gzip", "x-gzip") or (not coding and raw.startswith(b"\x1f\x8b")):
+        with gzip.GzipFile(fileobj=io.BytesIO(raw)) as compressed:
+            raw = compressed.read(MAX_SOURCE_BYTES + 1)
+    elif coding == "deflate":
+        inflater = zlib.decompressobj()
+        raw = inflater.decompress(raw, MAX_SOURCE_BYTES + 1)
+        if len(raw) <= MAX_SOURCE_BYTES and not inflater.eof:
+            raise ValueError("incomplete deflate source response")
+    elif coding not in ("", "identity"):
+        raise ValueError(f"unsupported source content encoding: {coding}")
+    if len(raw) > MAX_SOURCE_BYTES:
+        raise ValueError("decoded source exceeds size limit")
+    for encoding in ("utf-8", "gb18030"):
+        try:
+            return raw.decode(encoding)
+        except UnicodeDecodeError:
+            pass
+    return raw.decode("utf-8", errors="replace")
+
+
 def fetch(url: str) -> str:
     """Fetch public HTML, favouring HTTP where older government sites require it."""
     urls = [url]
@@ -136,18 +167,14 @@ def fetch(url: str) -> str:
         request = Request(target, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"})
         try:
             with source_opener().open(request, timeout=20) as response:
-                raw = response.read()
+                raw = response.read(MAX_SOURCE_BYTES + 1)
+                content_encoding = response.headers.get("Content-Encoding", "")
             break
         except (URLError, HTTPError) as exc:
             failure = exc
     else:
         raise RuntimeError(f"{url}: {failure}") from failure
-    for encoding in ("utf-8", "gb18030"):
-        try:
-            return raw.decode(encoding)
-        except UnicodeDecodeError:
-            pass
-    return raw.decode("utf-8", errors="replace")
+    return decode_source_response(raw, content_encoding)
 
 
 def plain(value: str) -> str:

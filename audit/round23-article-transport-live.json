@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Burial Platform Excavated at Peru’s Chan Chan",
+    "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+    "checkedAt": "2026-09-11T08:12:08+00:00",
+    "decodedHtmlSha256": "c716c1748449df359798b406ccac824ca5540e4050f9dce1ef3b71bc7c7c099c",
+    "characters": 5260,
+    "titlePresent": true,
+    "status": "readable",
+    "articleVerified": false,
+    "reason": "transport and title validation only; event timing and source claims still require editorial review",
+    "editorialInspection": "Read article text: concrete excavation findings described; exact discovery/announcement date and primary citation still require verification before selection"
+  },
+  {
+    "title": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+    "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+    "checkedAt": "2026-09-11T08:12:08+00:00",
+    "decodedHtmlSha256": "bbec43f11290fa78fe09100fe1284669a28ba6b77bd095a78389320031e2a9f4",
+    "characters": 5142,
+    "titlePresent": true,
+    "status": "readable",
+    "articleVerified": false,
+    "reason": "transport and title validation only; event timing and source claims still require editorial review",
+    "editorialInspection": "Read article text: concrete excavation findings described; exact discovery/announcement date and primary citation still require verification before selection"
+  }
+]

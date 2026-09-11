@@ -1,9 +1,9 @@
-# 截至第二十二轮的完整接续
+# 截至第二十三轮的完整接续
 
-只导入wenbo-complete-round22.bundle；包含完整历史以及之前日报、招聘、UI改动。分支improve/product-reliability。不需要逐个导入旧包，不force push。
+只导入wenbo-complete-round23.bundle；包含完整历史以及之前日报、招聘、UI改动。分支improve/product-reliability。不需要逐个导入旧包，不force push。
 
 1. 保护本地修改，fetch origin，在独立整合分支合并最新main与bundle，保留最新日报、招聘及原始发现台账，不用云端较旧首页覆盖本地主线新内容。
-2. 已观察origin/main为5c92f60：Round19已被c692fa4整合，四条学术误选已修订。先检查最新状态，勿重复改写完成的修订。阅读PRODUCT_ROUND22.md、PRODUCT_ROUND21.md、PRODUCT_ROUND20.md和CODEX_RUNBOOK.md。
+2. 已观察origin/main为5c92f60：Round19已被c692fa4整合，四条学术误选已修订。先检查最新状态，勿重复改写完成的修订。阅读PRODUCT_ROUND23.md、PRODUCT_ROUND22.md、PRODUCT_ROUND21.md、PRODUCT_ROUND20.md和CODEX_RUNBOOK.md。
 3. Round22恢复机构治理、拨款、安全事件、洞穴艺术发现的召回/优先核查。用当前完整抓取结果做受控回放与原文核验，不把过去已刊样本当新新闻。
 4. 9月11日圣博尼法斯40万加元修复资金重复了9月9日：按审计校正最新日报及候选决策、目录、数量、生成产物，保留原始发现和修订说明。如已有后续修订先对账，不重复处理。不凑数。
 5. Round20：9月11日起selected候选须有industryAction和实际原文段落文件。现有主线未必已生成这些字段；按原文补核，缺证据则待核，不能批量伪造或关闭门槛。字段和保存方法见运行手册末节。保持Windows UTF-8及LF哈希规范。
@@ -11,3 +11,5 @@
 7. 运行全量测试、python build.py、最新日期的项目校验、python automation/validate_product.py及git diff --check。优先核查新门槛的真实失败原因，不靠改措辞或跳过测试过关。
 8. 本地预览390px/1440px、浅色/深色首页和日报。Round21已去掉黑色主新闻大底，改白底+灰阶；深色为统一深蓝。不要恢复绿色。CSS采用内容哈希，确认预览引用新版本。UI独立提交d4fa6ed，可以单独调整或回退，保留数据与日报改造。
 9. 用户此前要求本地视觉确认；先提供预览。已有当前会话后续部署授权则遵从最新授权，否则待视觉确认后再push。
+
+Round23恢复两处真实断供：中新网文化入口改为/wy/；公共fetch先解压gzip/deflate再解码。两源现场恢复64条链接，隔离回放9条候选，不等于9条新增新闻。合并后用最新完整历史重跑采集与去重，原文核验后入选。勿复制隔离审计覆盖原始生产发现，也勿直接把黄金博物馆等已刊条目再次发布。没有网络路由或外部付费服务变更。

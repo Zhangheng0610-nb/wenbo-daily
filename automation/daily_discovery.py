@@ -88,7 +88,7 @@ SOURCE_SCANS = (
         "name": "中国新闻网文化栏目",
         "kind": "source_scan",
         "scope": "domestic",
-        "url": "https://www.chinanews.com.cn/cul/",
+        "url": "https://www.chinanews.com.cn/wy/",
         "domain": "chinanews.com.cn",
     },
     {

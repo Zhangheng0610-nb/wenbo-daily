@@ -35,3 +35,11 @@ class IndustrySignalsTests(unittest.TestCase):
         for title in ['加拿大圣博尼法斯博物馆获50万加元修复资金','加拿大圣博尼法斯博物馆获40万美元修复资金','加拿大圣博尼法斯博物馆获40万加元展览资金','加拿大另一家新博物馆获40万加元修复资金','加拿大圣博尼法斯博物馆追加40万加元修复资金','加拿大圣博尼法斯博物馆被取消40万加元修复资金','加拿大圣博尼法斯博物馆获500,000加元修复资金']:
             self.assertFalse(same_restoration_funding({'title':title,'publishedDate':'2026-09-11'},old),title)
         self.assertFalse(same_restoration_funding({**old,'publishedDate':'2026-10-11'},old))
+
+    def test_field_discovery_titles_without_word_archaeology_are_recalled(self):
+        for title in ['Burial Platform Excavated at Peru’s Chan Chan', 'Roman-Era Mosaic Floor Unearthed in Northern Turkey', 'Medieval Pottery Workshop Uncovered in Tbilisi', 'Lavish Roman Bath Excavated in Eastern Serbia', 'Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City']:
+            self.assertIn('archaeological_discovery_action',industry_signals({'title':title}))
+            self.assertNotEqual(self.evaluate(title)['candidateDisposition'],'rejected')
+    def test_reanalysis_and_modern_findings_do_not_get_field_discovery_signal(self):
+        for title in ['Paleolithic Child’s Teeth Reexamined','Neolithic Bones From Spain Show Evidence of Cannibalism','New pottery shop found near city hall','Bath products discovered at supermarket']:
+            self.assertNotIn('archaeological_discovery_action',industry_signals({'title':title}))
