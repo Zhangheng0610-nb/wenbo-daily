@@ -11190,7 +11190,7 @@
     "date": "2026-09-12",
     "weekday": "周六",
     "domestic_count": 4,
-    "international_count": 1,
+    "international_count": 3,
     "items": [
       {
         "id": "item1",
@@ -11286,6 +11286,44 @@
           {
             "name": "ICOM：Strengthening Museum Security to Protect Cultural Heritage",
             "url": "https://icom.museum/en/news/strengthening-museum-security-to-protect-cultural-heritage/"
+          }
+        ]
+      },
+      {
+        "id": "item6",
+        "number": 6,
+        "title": "秘鲁昌昌古城发现新的墓葬平台",
+        "body": "《Archaeology Magazine》9月10日报道，秘鲁北部昌昌古城的Gran Chimú Palace发现一座葬礼平台，中央室和两侧房间出土38名约600年前的奇穆人遗骸，并发现贝壳、铜和黄金制品。",
+        "commentary": "这条发现的价值不只在于墓葬数量，而在于平台的空间结构仍可辨认：中央室、两侧房间和通向中央室的阶梯，把奇穆社会的葬仪和建筑安排留在同一处实物证据里。报道能确认的是昌昌古城的一处发掘，不宜据此推演整个奇穆王国的葬制。",
+        "tags": [
+          "考古",
+          "文化遗产",
+          "国际",
+          "秘鲁"
+        ],
+        "sources": [
+          {
+            "name": "Archaeology Magazine：Burial Platform Excavated at Peru’s Chan Chan",
+            "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/"
+          }
+        ]
+      },
+      {
+        "id": "item7",
+        "number": 7,
+        "title": "土耳其北部古城出土罗马时代马赛克地面",
+        "body": "《Archaeology Magazine》9月9日报道，土耳其北部古城Pompeiopolis一座古代巴西利卡出土几何纹马赛克地面和Eros雕像头部；地面约覆盖1100平方英尺，年代约为公元4世纪。",
+        "commentary": "这里值得记住的不是“又发现一块马赛克”，而是地面与建筑使用变化、年代层次连在一起：巴西利卡中央殿的几何纹地面属于公元4世纪，Eros头像则可追溯至更早的建造阶段。两类遗存并置，让古城从单一遗址名称变成可观察的历史空间。",
+        "tags": [
+          "考古",
+          "文化遗产",
+          "国际",
+          "土耳其"
+        ],
+        "sources": [
+          {
+            "name": "Archaeology Magazine：Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+            "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/"
           }
         ]
       }

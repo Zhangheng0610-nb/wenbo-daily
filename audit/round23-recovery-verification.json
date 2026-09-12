@@ -1,0 +1,152 @@
+{
+  "schema": "round23-recovery-verification-v1",
+  "date": "2026-09-12",
+  "generatedAt": "2026-09-12T13:58:28+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-12.json",
+  "baseDiscoveryAuditSha256": "ed11fc1cd9a5bcf25d33bec224976a68a6db4ed12ee095163dfcf5b8520f5a98",
+  "discoveryAuditUnchanged": true,
+  "recoveryAuditPath": "content/复核/2026-09-12-round23-discovery-recovery.json",
+  "recoveryStats": {
+    "sourceScansAttempted": 10,
+    "sourceScansSucceeded": 10,
+    "queriesAttempted": 142,
+    "queriesSucceeded": 142,
+    "queriesFailed": 0,
+    "rawRecords": 1404,
+    "eventCandidates": 1233,
+    "candidateEvaluationPool": 207,
+    "evidenceQualified": 19,
+    "finalEditorialPoolBeforeLatestHistoryCorrection": 19,
+    "finalEditorialPoolAfterLatestHistoryCorrection": 17
+  },
+  "verifiedCandidates": [
+    {
+      "eventId": "event-beeee63bc38a",
+      "title": "Burial Platform Excavated at Peru’s Chan Chan",
+      "sourceUrl": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 128043,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "selected"
+    },
+    {
+      "eventId": "event-2fc6fc877bd1",
+      "title": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+      "sourceUrl": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 165258,
+      "eventMatchScore": 84,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "selected"
+    },
+    {
+      "eventId": "event-72376f8df293",
+      "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+      "sourceUrl": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 121919,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected"
+    },
+    {
+      "eventId": "event-3cf24bd87d68",
+      "title": "Another Unusual Burial Found at Ancient Polish Cemetery",
+      "sourceUrl": "https://archaeology.org/news/2026/09/09/another-unusual-burial-found-at-ancient-polish-cemetery/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 120896,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected"
+    },
+    {
+      "eventId": "event-71529b4ac626",
+      "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+      "sourceUrl": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 165271,
+      "eventMatchScore": 84,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected"
+    },
+    {
+      "eventId": "event-b05cc8d10109",
+      "title": "Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City",
+      "sourceUrl": "https://archaeology.org/news/2026/09/08/bronze-age-game-board-and-comb-uncovered-in-irans-burnt-city/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 122817,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected"
+    },
+    {
+      "eventId": "event-3ab033957b0f",
+      "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+      "sourceUrl": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+      "tier": "B",
+      "articleVerified": true,
+      "bodyCharacters": 175481,
+      "eventMatchScore": 84,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected"
+    },
+    {
+      "eventId": "event-0cf5bba08607",
+      "title": "广西博物馆推新展呈现古籍与瓷器上的文学人物图像",
+      "sourceUrl": "https://www.chinanews.com.cn/cul/2026/09-09/10693431.shtml",
+      "tier": "A",
+      "articleVerified": true,
+      "bodyCharacters": 4306,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "rejected",
+      "reason": "low editorial priority / routine exhibition announcement"
+    },
+    {
+      "eventId": "event-1973f583e710",
+      "title": "中国黄金博物馆迎客 讲述“中国黄金第一矿”兴衰",
+      "sourceUrl": "https://www.chinanews.com.cn/cul/2026/09-09/10693328.shtml",
+      "tier": "A",
+      "articleVerified": true,
+      "bodyCharacters": 4113,
+      "eventMatchScore": 100,
+      "verificationStatus": "article_verified",
+      "editorialDecision": "historical_duplicate",
+      "duplicateOf": "2026-09-10#item1"
+    }
+  ],
+  "latestHistoricalDedupCorrections": [
+    {
+      "eventId": "event-b53824b03b5e",
+      "historicalStatus": "historical_duplicate",
+      "duplicateOf": "2026-09-10#item5",
+      "duplicateOfTitle": "史密森学会秘书长隆尼·邦奇辞职",
+      "newDevelopment": false,
+      "reason": "同一事件已在正式日报发布；本次报道没有独立的新动作或新事实。"
+    },
+    {
+      "eventId": "event-8a3b6901b4e5",
+      "historicalStatus": "historical_duplicate",
+      "duplicateOf": "2026-09-10#item5",
+      "duplicateOfTitle": "史密森学会秘书长隆尼·邦奇辞职",
+      "newDevelopment": false,
+      "reason": "同一事件已在正式日报发布；本次报道没有独立的新动作或新事实。"
+    },
+    {
+      "eventId": "event-1973f583e710",
+      "historicalStatus": "historical_duplicate",
+      "duplicateOf": "2026-09-10#item1",
+      "duplicateOfTitle": "中国黄金博物馆将于9月19日开馆",
+      "newDevelopment": false,
+      "reason": "同一事件已在正式日报发布；本次报道没有独立的新动作或新事实。"
+    }
+  ],
+  "editorialDecisionNote": "恢复候选先进行直接文章读取与正文事件匹配，再按最新正式日报历史检查；未以恢复数量设定选稿配额。"
+}

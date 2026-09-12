@@ -10,7 +10,7 @@ from automation.daily_discovery import event_report_relation, event_actions
 
 class LiveDedupTests(unittest.TestCase):
     def test_labelled_live_pairs(self):
-        pairs=json.loads((Path(__file__).resolve().parents[1]/'audit/dedup-labelled-pairs.json').read_text())
+        pairs=json.loads((Path(__file__).resolve().parents[1]/'audit/dedup-labelled-pairs.json').read_text(encoding='utf-8'))
         for pair in pairs:
             with self.subTest(left=pair['left']['title'], right=pair['right']['title']):
                 self.assertEqual(bool(event_report_relation(pair['left'], pair['right'])), pair['sameEvent'])

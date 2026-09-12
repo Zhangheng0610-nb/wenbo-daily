@@ -1,0 +1,21 @@
+[
+  {
+    "date": "2026-09-09",
+    "url": "https://winnipeg.citynews.ca/video/2026/09/07/winnipegs-historic-st-boniface-museum-gets-400k-in-federal-funding-for-restoration-work/",
+    "status": "fetched",
+    "excerpts": [
+      "Winnipeg’s historic St. Boniface Museum gets $400K in federal funding for restoration work. September 7, 2026 6:52 pm CST."
+    ],
+    "scope": "video headline and dated caption; no transcript read"
+  },
+  {
+    "date": "2026-09-11",
+    "url": "https://ca.news.yahoo.com/more-funding-renovations-announced-st-195304228.html",
+    "status": "fetched",
+    "excerpts": [
+      "The federal government announced $400,000 in supports during an event Monday celebrating 175 years since the building — a former Grey Nuns convent and mission house — was completed.",
+      "The $400,000 will be disbursed over the next two years, the federal government said in a news release."
+    ],
+    "scope": "article paragraphs read; duplicate assessment based on institution, grant amount, purpose and timing"
+  }
+]

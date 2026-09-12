@@ -1,0 +1,624 @@
+[
+  {
+    "status": {
+      "sourceId": "chinanews-cultural",
+      "name": "中国新闻网文化栏目",
+      "scope": "domestic",
+      "url": "https://www.chinanews.com.cn/wy/",
+      "status": "checked",
+      "linksSeen": 297,
+      "datedLinks": 61,
+      "outsideWindow": 6,
+      "undatedLinks": 236,
+      "rawResults": 61,
+      "windowResults": 55,
+      "note": "",
+      "latestPublishedDate": "2026-09-11"
+    },
+    "records": [
+      {
+        "title": "中国儿童艺术剧院经典儿童剧《鹬·蚌·鱼》巴西热演 中国儿童艺术剧院经典儿童剧《鹬·蚌·鱼》巴西热演",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/gj/2026/09-11/10694429.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "杜达梅尔履新纽约爱乐首秀在无线电城音乐厅上演 杜达梅尔履新纽约爱乐首秀在无线电城音乐厅上演",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694534.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "东宁草地音乐会搭建中俄边城文化交流桥 东宁草地音乐会搭建中俄边城文化交流桥",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694647.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "从文创新品到科技互动 在服贸会打开北京文博新空间 从文创新品到科技互动 在服贸会打开北京文博新空间",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693767.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-舞剧《栋梁》杭州首演 再现林徽因梁思成一代学人风骨",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694683.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-东宁草地音乐会搭建中俄边城文化交流桥",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694647.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-桂剧《七步吟》亮相梅兰芳大剧院 本土艺术与经典故事相融",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694625.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-杜达梅尔履新纽约爱乐首秀在无线电城音乐厅上演",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694534.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-第十一届“炫彩世界”文化展示交流活动在北京开幕",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10694287.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-（乡村行·看振兴）从一出戏到一座村：浙江金华“婺剧村”觅新声",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10694203.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-国际青年走进天津杨柳青 沉浸式探寻千年运河文脉",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10694143.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-第十届平遥国际电影展发布官方海报和主题",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10694116.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-“阅·见西部”第三季全民阅读推广活动在新疆哈密举办",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693961.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-西部公共图书馆2026年学术研讨会在新疆哈密举办",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693960.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-（走进中国乡村）四川绵竹年画村千年手艺吸引海内外游客",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693873.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-多国嘉宾走读西安 体验千年古韵新风",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693869.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-沿黄21家文博单位齐聚宁夏 共商黄河文化传承发展新路径",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693853.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-四川绵竹年画村：一幅年画里的中华民族共有精神家园",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/mz/2026/09-10/10693852.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-守艺亦传心：百年太谷饼第五代传人的“掌上”非遗路",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693789.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-从文创新品到科技互动 在服贸会打开北京文博新空间",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693767.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-3000年前，金沙先民的主食是啥？",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693769.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-美国华美协进社中国美术馆推重磅新展回顾60载历程",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693669.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-新疆石河子举办2026年“中国诗歌之城”第四届诵读大赛总决赛",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693576.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "-“兰花·遇鉴千年古都”国际文化沙龙在西安举办",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693577.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "杜达梅尔履新纽约爱乐首秀在无线电城音乐厅上演",
+        "publishedDate": "2026-09-11",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-11/10694534.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "四川绵竹年画村千年手艺吸引海内外游客",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693873.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "张震岳、蔡依林，分获第四届浪潮音乐大赏最佳男女歌手",
+        "publishedDate": "2026-09-08",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-08/10692679.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "“红飘带之行——沈尧伊长征路写生作品展”启幕",
+        "publishedDate": "2026-09-08",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-08/10692674.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "第十届平遥国际电影展公布“藏龙·短片”“平遥一角”入围名单",
+        "publishedDate": "2026-09-08",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-08/10692427.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "从文创新品到科技互动 在服贸会打开北京文博新空间",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693767.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "（走进中国乡村）四川绵竹年画村千年手艺吸引海内外游客",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693873.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "守艺亦传心：百年太谷饼第五代传人的“掌上”非遗路",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693789.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "多国嘉宾走读西安 体验千年古韵新风",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693869.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "3000年前，金沙先民的主食是啥？",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693769.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "美国华美协进社中国美术馆推重磅新展回顾60载历程",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693669.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "西部公共图书馆2026年学术研讨会在新疆哈密举办",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693960.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "沿黄21家文博单位齐聚宁夏 共商黄河文化传承发展新路径",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693853.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "第十届平遥国际电影展发布官方海报和主题",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10694116.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "“阅·见西部”第三季全民阅读推广活动在新疆哈密举办",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693961.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "中新网评：“葫芦娃爷爷”的美好生活不该变成流量素材 2026-09-08 21:06:33",
+        "publishedDate": "2026-09-08",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-08/10692892.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "“女孩赴港看演唱会把全家低保看没了”？律师解读“高消费”认定 2026-09-07 19:24:50",
+        "publishedDate": "2026-09-07",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-07/10692141.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "多国嘉宾走读西安 体验千年古韵新风 2026-09-10 12:48:14",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-10/10693869.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "晋苏开展文旅交流合作 山西文旅巡展拓展长三角市场 2026-09-09 20:22:21",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693494.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "2026当代国际戏剧节暨“剧荟北京”艺术季开幕 2026-09-05 23:29:20",
+        "publishedDate": "2026-09-05",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-05/10691187.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "“青年伙伴计划—绘画100”作品展在杭州启幕",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693531.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "广西博物馆推新展呈现古籍与瓷器上的文学人物图像",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693431.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "中国黄金博物馆迎客 讲述“中国黄金第一矿”兴衰",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693328.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "原创歌剧《霜晨月》在哈尔滨上演 再现“八女投江”同心报国壮举",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns-d/2026/09-10/news1068465.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "四川绵竹年画研学年超5万人次 民族元素促产业发展",
+        "publishedDate": "2026-09-10",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns-d/2026/09-10/news1068445.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "重庆57岁大叔历时九年 绣出30米长《清明上河图》十字绣",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns/2026/09-09/news1068349.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "走进三星堆：遇见中华文明多元一体",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns-d/2026/09-09/news1068345.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "《欢迎来龙餐馆》在澳大利亚首映",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/yl/shipin/cns-d/2026/09-09/news1068347.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "武汉多处山体有摩崖石刻 系难得历史遗存",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns-d/2026/09-09/news1068305.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "香港举办张国荣诞辰70年纪念展 其生前经纪人陈淑芬现场多次哽咽",
+        "publishedDate": "2026-09-09",
+        "url": "https://www.chinanews.com.cn/yl/shipin/cns-d/2026/09-09/news1068302.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      },
+      {
+        "title": "山西发现860余年前金代墓地买卖契约",
+        "publishedDate": "2026-09-08",
+        "url": "https://www.chinanews.com.cn/cul/shipin/cns-d/2026/09-08/news1068224.shtml",
+        "discoveredVia": "chinanews-cultural",
+        "discoverySourceType": "source_scan",
+        "scope": "domestic",
+        "sourceDomain": "chinanews.com.cn"
+      }
+    ],
+    "decodedHtmlSha256": "f887d86cbbd1436cb1e1212ea2f518aa5a30f5011485ab92eee4a6d81535c4ca",
+    "retainedResponseObservedAt": "2026-09-11T08:09:16+00:00",
+    "observationTimeBasis": "local save time immediately after live response retrieval",
+    "previousFailure": "legacy entry contains only meta refresh to /wy/"
+  },
+  {
+    "status": {
+      "sourceId": "archaeology-magazine",
+      "name": "Archaeology Magazine新闻",
+      "scope": "international",
+      "url": "https://archaeology.org/news/",
+      "status": "checked",
+      "linksSeen": 79,
+      "datedLinks": 20,
+      "outsideWindow": 11,
+      "undatedLinks": 59,
+      "rawResults": 20,
+      "windowResults": 9,
+      "note": "",
+      "latestPublishedDate": "2026-09-10"
+    },
+    "records": [
+      {
+        "title": "Neolithic Bones From Spain Show Evidence of Cannibalism",
+        "publishedDate": "2026-09-10",
+        "url": "https://archaeology.org/news/2026/09/10/neolithic-bones-from-spain-show-evidence-of-cannibalism/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Burial Platform Excavated at Peru’s Chan Chan",
+        "publishedDate": "2026-09-10",
+        "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Another Unusual Burial Found at Ancient Polish Cemetery",
+        "publishedDate": "2026-09-09",
+        "url": "https://archaeology.org/news/2026/09/09/another-unusual-burial-found-at-ancient-polish-cemetery/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+        "publishedDate": "2026-09-09",
+        "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+        "publishedDate": "2026-09-10",
+        "url": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+        "publishedDate": "2026-09-09",
+        "url": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Paleolithic Child’s Teeth Reexamined",
+        "publishedDate": "2026-09-08",
+        "url": "https://archaeology.org/news/2026/09/08/paleolithic-childs-teeth-re-examined/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+        "publishedDate": "2026-09-08",
+        "url": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      },
+      {
+        "title": "Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City",
+        "publishedDate": "2026-09-08",
+        "url": "https://archaeology.org/news/2026/09/08/bronze-age-game-board-and-comb-uncovered-in-irans-burnt-city/",
+        "discoveredVia": "archaeology-magazine",
+        "discoverySourceType": "source_scan",
+        "scope": "international",
+        "sourceDomain": "archaeology.org"
+      }
+    ],
+    "decodedHtmlSha256": "227885cc38626095daf450e924c00593a61e49c3ea5b66f15293fab534b95a4c",
+    "retainedResponseObservedAt": "2026-09-11T08:09:25+00:00",
+    "observationTimeBasis": "local save time immediately after live response retrieval",
+    "previousFailure": "compressed gzip bytes were decoded as characters before HTML parsing"
+  }
+]

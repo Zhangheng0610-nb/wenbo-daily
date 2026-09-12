@@ -1,0 +1,19 @@
+{
+  "relatedTestsPassed": 64,
+  "fundingGuardFollowupTestsPassed": 6,
+  "realPublishedCandidateReplay": 15,
+  "candidatePriorityOrRecallChanges": 4,
+  "historicalDuplicateRegression": "passed",
+  "livePagesRetrieved": 2,
+  "newPublishedEvents": 0,
+  "projectValidation": {
+    "date": "2026-09-08",
+    "result": "passed"
+  },
+  "productValidation": {
+    "pages": 84,
+    "result": "passed"
+  },
+  "diffCheck": "passed",
+  "fullSuite": "not run; focused regression only"
+}

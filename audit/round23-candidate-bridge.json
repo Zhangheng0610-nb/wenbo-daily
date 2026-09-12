@@ -1,0 +1,650 @@
+{
+  "mode": "two-source isolated offline replay after live fetch",
+  "date": "2026-09-11",
+  "historyThrough": "2026-09-08 local published reports; must replay against latest main before publication",
+  "networkEvidenceUpgrade": false,
+  "rawLinkRecords": 64,
+  "deduplicatedResults": 48,
+  "finalCandidateCount": 9,
+  "events": [
+    {
+      "eventId": "event-beeee63bc38a",
+      "title": "Burial Platform Excavated at Peru’s Chan Chan",
+      "representativeTitle": "Burial Platform Excavated at Peru’s Chan Chan",
+      "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+      "publishedDate": "2026-09-10",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 62,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-10"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Burial Platform Excavated at Peru’s Chan Chan",
+          "url": "https://archaeology.org/news/2026/09/10/burial-platform-excavated-at-perus-chan-chan/",
+          "publishedDate": "2026-09-10",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-2fc6fc877bd1",
+      "title": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+      "representativeTitle": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+      "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+      "publishedDate": "2026-09-09",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 62,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-09"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Roman-Era Mosaic Floor Unearthed in Northern Turkey",
+          "url": "https://archaeology.org/news/2026/09/09/roman-era-mosaic-floor-unearthed-in-northern-turkey/",
+          "publishedDate": "2026-09-09",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-72376f8df293",
+      "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+      "representativeTitle": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+      "url": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+      "publishedDate": "2026-09-09",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 62,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-09"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+          "url": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+          "publishedDate": "2026-09-09",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-3cf24bd87d68",
+      "title": "Another Unusual Burial Found at Ancient Polish Cemetery",
+      "representativeTitle": "Another Unusual Burial Found at Ancient Polish Cemetery",
+      "url": "https://archaeology.org/news/2026/09/09/another-unusual-burial-found-at-ancient-polish-cemetery/",
+      "publishedDate": "2026-09-09",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 62,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-09"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/09/another-unusual-burial-found-at-ancient-polish-cemetery/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Another Unusual Burial Found at Ancient Polish Cemetery",
+          "url": "https://archaeology.org/news/2026/09/09/another-unusual-burial-found-at-ancient-polish-cemetery/",
+          "publishedDate": "2026-09-09",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-71529b4ac626",
+      "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+      "representativeTitle": "Lavish Roman Bath Excavated in Eastern Serbia",
+      "url": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+      "publishedDate": "2026-09-08",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "backfill_3_7d",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 56,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "backfill_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-08"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+          "url": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+          "publishedDate": "2026-09-08",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-b05cc8d10109",
+      "title": "Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City",
+      "representativeTitle": "Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City",
+      "url": "https://archaeology.org/news/2026/09/08/bronze-age-game-board-and-comb-uncovered-in-irans-burnt-city/",
+      "publishedDate": "2026-09-08",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "backfill_3_7d",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 56,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "backfill_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-08"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/08/bronze-age-game-board-and-comb-uncovered-in-irans-burnt-city/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Bronze Age Game Board and Comb Uncovered in Iran’s Burnt City",
+          "url": "https://archaeology.org/news/2026/09/08/bronze-age-game-board-and-comb-uncovered-in-irans-burnt-city/",
+          "publishedDate": "2026-09-08",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-3ab033957b0f",
+      "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+      "representativeTitle": "Medieval Pottery Workshop Uncovered in Tbilisi",
+      "url": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+      "publishedDate": "2026-09-10",
+      "scope": "international",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "archaeology.org"
+      ],
+      "publisherDomains": [
+        "archaeology.org"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 50,
+      "editorialPriorityLabel": "medium",
+      "editorialReasons": [
+        "substantive_archaeological_discovery_or_new_knowledge",
+        "primary_freshness",
+        "routine_or_peripheral_activity_penalty"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-10"
+        ],
+        "sourceTypes": [
+          "other_publisher"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "B",
+      "evidenceTierAfterUpgrade": "B",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+          "tier": "B"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+          "url": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+          "publishedDate": "2026-09-10",
+          "discoveredVia": "archaeology-magazine",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "archaeology.org",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "archaeology.org"
+        }
+      ]
+    },
+    {
+      "eventId": "event-0cf5bba08607",
+      "title": "广西博物馆推新展呈现古籍与瓷器上的文学人物图像",
+      "representativeTitle": "广西博物馆推新展呈现古籍与瓷器上的文学人物图像",
+      "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693431.shtml",
+      "publishedDate": "2026-09-09",
+      "scope": "domestic",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "chinanews.com.cn"
+      ],
+      "publisherDomains": [
+        "chinanews.com.cn"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 28,
+      "editorialPriorityLabel": "low",
+      "editorialReasons": [
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-09"
+        ],
+        "sourceTypes": [
+          "central_media"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "A",
+      "evidenceTierAfterUpgrade": "A",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693431.shtml",
+          "tier": "A"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "广西博物馆推新展呈现古籍与瓷器上的文学人物图像",
+          "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693431.shtml",
+          "publishedDate": "2026-09-09",
+          "discoveredVia": "chinanews-cultural",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "chinanews.com.cn",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "chinanews.com.cn"
+        }
+      ]
+    },
+    {
+      "eventId": "event-1973f583e710",
+      "title": "中国黄金博物馆迎客 讲述“中国黄金第一矿”兴衰",
+      "representativeTitle": "中国黄金博物馆迎客 讲述“中国黄金第一矿”兴衰",
+      "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693328.shtml",
+      "publishedDate": "2026-09-09",
+      "scope": "domestic",
+      "candidateDisposition": "evidence_qualified",
+      "reportCount": 1,
+      "sourceDomains": [
+        "chinanews.com.cn"
+      ],
+      "publisherDomains": [
+        "chinanews.com.cn"
+      ],
+      "freshnessTier": "primary_0_48h",
+      "newDevelopment": false,
+      "claimRisk": "ordinary",
+      "editorialPriorityScore": 28,
+      "editorialPriorityLabel": "low",
+      "editorialReasons": [
+        "primary_freshness"
+      ],
+      "museumCollectionOrPublicIncident": false,
+      "heritageGovernance": {
+        "matched": false,
+        "national": false,
+        "hasSubject": false,
+        "hasAction": false,
+        "hasNationalScope": false
+      },
+      "publicSalience": {
+        "level": "normal",
+        "independentCoverageCount": 1,
+        "publisherDiversity": 1,
+        "sourceTypeDiversity": 1,
+        "coverageDates": [
+          "2026-09-09"
+        ],
+        "sourceTypes": [
+          "central_media"
+        ],
+        "reason": "limited_or_unconfirmed_independent_coverage"
+      },
+      "independentCoverageCount": 1,
+      "evidenceTierAtDiscovery": "A",
+      "evidenceTierAfterUpgrade": "A",
+      "evidenceUpgradeStatus": "not_needed",
+      "evidenceUpgradeAttempted": null,
+      "evidenceUpgradeResult": null,
+      "evidenceSources": [
+        {
+          "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693328.shtml",
+          "tier": "A"
+        }
+      ],
+      "evidenceResolutionAttempts": null,
+      "discoveryReports": [
+        {
+          "title": "中国黄金博物馆迎客 讲述“中国黄金第一矿”兴衰",
+          "url": "https://www.chinanews.com.cn/cul/2026/09-09/10693328.shtml",
+          "publishedDate": "2026-09-09",
+          "discoveredVia": "chinanews-cultural",
+          "discoverySourceType": "source_scan",
+          "sourceDomain": "chinanews.com.cn",
+          "duplicateStatus": "unique_event",
+          "publisherDomain": "chinanews.com.cn"
+        }
+      ]
+    }
+  ],
+  "newPublishedEvents": 0
+}

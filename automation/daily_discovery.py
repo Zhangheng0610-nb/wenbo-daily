@@ -88,7 +88,7 @@ SOURCE_SCANS = (
         "name": "中国新闻网文化栏目",
         "kind": "source_scan",
         "scope": "domestic",
-        "url": "https://www.chinanews.com.cn/cul/",
+        "url": "https://www.chinanews.com.cn/wy/",
         "domain": "chinanews.com.cn",
     },
     {
@@ -3382,6 +3382,9 @@ def historical_published_event_relation(current: dict, previous: dict) -> tuple[
     """Match a publishable event against one formally published daily item."""
     if substantive_new_development(current, previous):
         return None
+    from automation.industry_signals import same_restoration_funding
+    if same_restoration_funding(current, previous):
+        return ("historical_duplicate", "same named museum, restoration funding amount and currency")
     current_urls = [url for url in record_source_urls(current) if not is_search_wrapper_url(url)]
     previous_urls = [url for url in record_source_urls(previous) if not is_search_wrapper_url(url)]
     current_canonical = {canonical_article_url(url) for url in current_urls} - {""}
@@ -3607,7 +3610,12 @@ def international_wire_relevance(record: dict) -> bool:
     return has_institution or has_archaeology or has_heritage
 
 
+from automation.industry_signals import industry_signals
+
+
 def is_relevant_record(record: dict) -> bool:
+    if industry_signals(record):
+        return True
     text = " ".join(str(record.get(key) or "") for key in ("title", "summary", "body", "notes")).lower()
     family_ids = list(record.get("queryFamilies") or [])
     if record.get("queryFamily"):
@@ -3650,6 +3658,8 @@ def is_relevant_record(record: dict) -> bool:
 
 def international_museum_governance_relevance(record: dict) -> bool:
     """Require a museum/heritage subject; capitalization is not an institution."""
+    if "museum_governance_action" in industry_signals(record):
+        return True
     text = _editorial_context(record)
     if not any(term in text for term in INTERNATIONAL_MUSEUM_GOVERNANCE_TERMS):
         return False
@@ -3682,6 +3692,8 @@ def international_heritage_signals(record: dict) -> set[str]:
 
 
 def is_high_value_record(record: dict) -> bool:
+    if industry_signals(record):
+        return True
     text = _editorial_context(record)
     return (
         any(term.lower() in text for term in HIGH_VALUE_TERMS)
@@ -3921,8 +3933,8 @@ def editorial_priority(record: dict, required_date: date | None = None) -> dict:
     policy = hit(POLICY_PRIORITY_TERMS)
     national_policy = policy and hit(NATIONAL_POLICY_TERMS)
     major_discovery = hit(MAJOR_DISCOVERY_TERMS)
-    archaeology_discovery = (hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))) or "archaeological_new_knowledge" in international_signals
-    security = hit(SECURITY_PRIORITY_TERMS)
+    archaeology_discovery = (hit(ARCHAEOLOGY_DISCOVERY_TERMS) and hit(("考古", "遗址", "墓", "文物"))) or "archaeological_new_knowledge" in international_signals or "archaeological_discovery_action" in industry_signals(record)
+    security = hit(SECURITY_PRIORITY_TERMS) or "museum_security_event" in industry_signals(record)
     museum_collection_incident = museum_collection_or_public_incident(record)
     repatriation = hit(REPATRIATION_TERMS) or "cultural_property_repatriation" in international_signals
     heritage = hit(HERITAGE_RECOGNITION_TERMS) or "documentary_heritage_recognition" in international_signals

@@ -21,13 +21,13 @@ class ContinuityTests(unittest.TestCase):
             with patch.object(monitoring, 'MONITORING', root):
                 monitoring.merge_write(date(2026,9,1), date(2026,9,7), rows, outcomes, mode='operational', checked_at='2026-09-07T07:15:00+08:00')
                 monitoring.merge_write(date(2026,9,1), date(2026,9,7), rows, outcomes, mode='operational', checked_at='2026-09-07T08:15:00+08:00')
-            recovered = json.loads(path.read_text())
+            recovered = json.loads(path.read_text(encoding='utf-8'))
             self.assertEqual(recovered['coverage'], yesterday['coverage'])
             self.assertEqual(len(recovered['items']), 1)
             self.assertEqual(recovered['items'][0]['date'], '2026-09-06')
             self.assertEqual(recovered['items'][0]['observationDate'], '2026-09-07')
             self.assertEqual(recovered['items'][0]['observedAt'], '2026-09-07T07:15:00+08:00')
-            self.assertEqual(json.loads((root/'2026-09-07.json').read_text())['scanAudit']['lateArrivalCount'], 1)
+            self.assertEqual(json.loads((root/'2026-09-07.json').read_text(encoding='utf-8'))['scanAudit']['lateArrivalCount'], 1)
             self.assertFalse((root/'2026-09-01.json').exists())
 
     def test_radar_recovers_yesterday_without_redating(self):
@@ -35,8 +35,8 @@ class ContinuityTests(unittest.TestCase):
             root = Path(tmp)
             today = {'date': '2026-09-07', 'runType': 'live', 'items': []}
             item = monitoring.as_record(monitoring.candidate('ncha', date(2026,9,6), '河北文物保护修缮工程完成', 'https://www.ncha.gov.cn/art/2026/9/6/art_722_1.html'), 1, origin='fixed-panel-monitoring', run_type='live')
-            (root/'2026-09-07.json').write_text(json.dumps(today))
-            (root/'2026-09-06.json').write_text(json.dumps({'items': [item]}))
+            (root/'2026-09-07.json').write_text(json.dumps(today), encoding='utf-8')
+            (root/'2026-09-06.json').write_text(json.dumps({'items': [item]}), encoding='utf-8')
             with patch.object(discovery, 'MONITORING_DIR', root), patch.object(discovery, 'ROOT', root):
                 records, audit = discovery.load_fixed_panel_radar(date(2026,9,7))
             self.assertEqual(len(records), 1)
