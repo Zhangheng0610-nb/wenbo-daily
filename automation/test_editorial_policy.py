@@ -7,7 +7,7 @@ class EditorialPolicyTests(unittest.TestCase):
         return rejection_policy_issues(dict(decision='rejected',evidenceTier='A',dedupStatus='unique_event',decisionReason=reason,**extra))
 
     def test_actual_shared_url_and_publisher_quota_reasons_are_flagged(self):
-        for text in ('日报校验要求同一来源 URL 不重复','为避免重复来源 URL，暂不入选','与其他事件存在来源 URL 复用', '为避免同源国际条目过密，暂不重复入选', '不把新闻列入五条日报'):
+        for text in ('日报校验要求同一来源 URL 不重复','为避免重复来源 URL，暂不入选','与其他事件存在来源 URL 复用', '为避免同源国际条目过密，暂不重复入选', '不把新闻列入五条日报', '按同一专业来源的有界覆盖原则暂不扩充', '与本期条目存在同源竞争', '同一专业来源已有更具体的考古发现入选'):
             self.assertTrue(self.check(text),text)
 
     def test_editorial_value_rejections_remain_valid(self):

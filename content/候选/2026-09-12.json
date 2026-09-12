@@ -3,12 +3,12 @@
   "date": "2026-09-12",
   "scope": "daily-editorial",
   "discoveryAuditPath": "content/发现/2026-09-12.json",
-  "editorialInputPath": "content/复核/2026-09-12-editorial-replay.json",
+  "editorialInputPath": "content/复核/2026-09-12-round24-editorial-replay.json",
   "discoveryCompleted": true,
   "internationalDiscoveryChecked": true,
   "internationalDiscoveryStatus": "checked",
   "internationalDiscoveryNote": "修复后的完整broad discovery为142/142查询成功；恢复候选已进入同一受控replay，并按最新历史正式日报重新去重。",
-  "candidatePoolDefinition": "唯一正式编辑输入为 content/复核/2026-09-12-editorial-replay.json 的 finalEditorialPool；原始 discovery audit 仅用于追溯并保持不变，历史重复事件以审计行保留，不与其他候选池拼接。",
+  "candidatePoolDefinition": "唯一正式编辑输入为 content/复核/2026-09-12-round24-editorial-replay.json 的 finalEditorialPool；content/复核/2026-09-12-editorial-replay.json 仅作为上一轮输入溯源，原始 discovery audit 仅用于追溯并保持不变，历史重复事件以审计行保留，不与其他候选池拼接。",
   "productionRun": {
     "status": "recovered",
     "runType": "controlled_recovery",
@@ -26,28 +26,30 @@
     "completedAt": "2026-09-12T13:58:28+08:00"
   },
   "revision": {
-    "revisionType": "same_day_editorial_revision",
-    "revisedAt": "2026-09-12T13:58:28+08:00",
-    "editorialInputPath": "content/复核/2026-09-12-editorial-replay.json",
+    "revisionType": "historical_editorial_correction",
+    "revisedAt": "2026-09-12T16:03:20+00:00",
+    "editorialInputPath": "content/复核/2026-09-12-round24-editorial-replay.json",
     "discoveryAuditUnchanged": true,
-    "runtimeEnrichment": true,
-    "revisionReason": "基于修复后的完整采集入口完成受控恢复；恢复候选均经原文核验，并按最新历史正式日报排除黄金博物馆和史密森学会已发布事件，未以固定条数补稿。"
+    "runtimeEnrichment": false,
+    "revisionReason": "Round24纠正三条技术配额拒稿：一条确认时间过窗、两条待核，不改变已发布7条。",
+    "previousEditorialInputPath": "content/复核/2026-09-12-editorial-replay.json"
   },
   "editorialReview": {
     "status": "completed",
-    "reviewedAt": "2026-09-12T13:58:28+08:00",
+    "reviewedAt": "2026-09-12T16:03:20+00:00",
     "reviewedEvents": 17,
     "selectedEvents": 7,
-    "rejectedEvents": 13,
+    "rejectedEvents": 11,
     "deferredEvents": 0,
-    "note": "唯一编辑池17个事件逐条复核；另保留3条历史重复审计行。选入5条原池事件和2条B级专业考古报道，不设固定条数。"
+    "note": "17事件编辑池：7选入、8拒绝、2待核；另保留3条历史重复审计行。",
+    "needsVerification": 2
   },
   "summary": {
     "discovered": 20,
     "selected": 7,
-    "rejected": 13,
+    "rejected": 11,
     "deferred": 0,
-    "needsVerification": 0,
+    "needsVerification": 2,
     "historicalDuplicateAuditRows": 3,
     "finalEditorialPoolEvents": 17,
     "recoveryRawRecords": 1404,
@@ -444,26 +446,32 @@
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "rejected",
-      "decisionReason": "B级专业来源正文可核验，但与本期已选考古条目同源且信息增量较弱；按同一专业来源的有界覆盖原则暂不扩充。",
+      "decision": "needs_verification",
+      "decisionReason": "专业转载描述聚落范围的新判断；安纳多卢原始报道页面可读元数据日期为2026-09-07，但本次仅取到标题、未取得正文，尚不能区分本轮调查与2015年等既有发现的时间边界。保留待核原始正文及新增调查的公布时间。",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "notes": "保留在本次唯一finalEditorialPool中，已完成原文证据与编辑判断。",
+      "notes": "Round24重新读取专业转载并沿引用链核查；结论及边界见audit/round24-editorial-review.json。",
       "editorialPriorityScore": 56,
       "editorialPriorityLabel": "medium",
       "editorialReasons": [
         "substantive_archaeological_discovery_or_new_knowledge",
         "backfill_freshness"
       ],
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "B级专业来源正文可核验，但与本期已选考古条目同源且信息增量较弱；按同一专业来源的有界覆盖原则暂不扩充。",
+      "finalEditorialDecision": "needs_verification",
+      "finalEditorialReason": "专业转载描述聚落范围的新判断；安纳多卢原始报道页面可读元数据日期为2026-09-07，但本次仅取到标题、未取得正文，尚不能区分本轮调查与2015年等既有发现的时间边界。保留待核原始正文及新增调查的公布时间。",
       "previousEditorialRejection": false,
       "previousEditorialRejectionDate": null,
       "previousEditorialRejectionOf": null,
-      "previousEditorialRejectionReason": null
+      "previousEditorialRejectionReason": null,
+      "followupReview": {
+        "reviewedAt": "2026-09-12T16:03:20+00:00",
+        "originalCitationUrl": "https://www.aa.com.tr/en/europe/archaeology-sheds-new-light-on-suleyman-the-magnificent-s-final-campaign-in-hungary/4049905",
+        "status": "needs_verification",
+        "auditPath": "audit/round24-editorial-review.json"
+      }
     },
     {
       "candidateId": "candidate-2026-09-12-event-3cf24bd87d68",
@@ -537,13 +545,13 @@
       "international": true,
       "scope": "international",
       "decision": "rejected",
-      "decisionReason": "B级专业来源正文可核验，但发布时间较早、与本期已选考古条目存在同源竞争，暂不进入本期日报。",
+      "decisionReason": "沿引用链读取Live Science原报道，发布时间为2026-09-03，正文明确指向9月3日研究机构声明；9月8日专业媒体转述没有提供新的独立动作。相对9月12日日报已超出七天事件窗口，不以转载日期刷新事件。",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "notes": "保留在本次唯一finalEditorialPool中，已完成原文证据与编辑判断。",
+      "notes": "Round24重新读取专业转载并沿引用链核查；结论及边界见audit/round24-editorial-review.json。",
       "editorialPriorityScore": 56,
       "editorialPriorityLabel": "medium",
       "editorialReasons": [
@@ -551,11 +559,20 @@
         "backfill_freshness"
       ],
       "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "B级专业来源正文可核验，但发布时间较早、与本期已选考古条目存在同源竞争，暂不进入本期日报。",
+      "finalEditorialReason": "沿引用链读取Live Science原报道，发布时间为2026-09-03，正文明确指向9月3日研究机构声明；9月8日专业媒体转述没有提供新的独立动作。相对9月12日日报已超出七天事件窗口，不以转载日期刷新事件。",
       "previousEditorialRejection": false,
       "previousEditorialRejectionDate": null,
       "previousEditorialRejectionOf": null,
-      "previousEditorialRejectionReason": null
+      "previousEditorialRejectionReason": null,
+      "followupReview": {
+        "reviewedAt": "2026-09-12T16:03:20+00:00",
+        "originalCitationUrl": "https://www.livescience.com/archaeology/romans/lavish-private-bath-used-by-roman-emperor-and-high-status-residents-discovered-at-imperial-palace-in-serbia",
+        "status": "rejected",
+        "auditPath": "audit/round24-editorial-review.json"
+      },
+      "firstReportedDate": "2026-09-03",
+      "eventDate": "2026-09-03",
+      "eventDateStatus": "original_report_cites_dated_statement"
     },
     {
       "candidateId": "candidate-2026-09-12-event-b05cc8d10109",
@@ -628,14 +645,14 @@
       "domestic": false,
       "international": true,
       "scope": "international",
-      "decision": "rejected",
-      "decisionReason": "B级专业来源正文可核验，但优先级为50，且同一专业来源已有更具体的考古发现入选，本期不以固定数量补稿。",
+      "decision": "needs_verification",
+      "decisionReason": "已读取The Independent原报道，发布时间为2026-09-09，正文描述第比利斯道路施工发现地下陶器作坊；道路工程始于夏季，现有正文未说明具体发现或正式公布日期，需核对首发报道/现场通报后再判断事件时效与价值。",
       "selectedForDaily": false,
       "dedupStatus": "unique_event",
       "duplicateOf": null,
       "duplicateReason": null,
       "newDevelopment": false,
-      "notes": "保留在本次唯一finalEditorialPool中，已完成原文证据与编辑判断。",
+      "notes": "Round24重新读取专业转载并沿引用链核查；结论及边界见audit/round24-editorial-review.json。",
       "editorialPriorityScore": 50,
       "editorialPriorityLabel": "medium",
       "editorialReasons": [
@@ -643,12 +660,18 @@
         "primary_freshness",
         "routine_or_peripheral_activity_penalty"
       ],
-      "finalEditorialDecision": "rejected",
-      "finalEditorialReason": "B级专业来源正文可核验，但优先级为50，且同一专业来源已有更具体的考古发现入选，本期不以固定数量补稿。",
+      "finalEditorialDecision": "needs_verification",
+      "finalEditorialReason": "已读取The Independent原报道，发布时间为2026-09-09，正文描述第比利斯道路施工发现地下陶器作坊；道路工程始于夏季，现有正文未说明具体发现或正式公布日期，需核对首发报道/现场通报后再判断事件时效与价值。",
       "previousEditorialRejection": false,
       "previousEditorialRejectionDate": null,
       "previousEditorialRejectionOf": null,
-      "previousEditorialRejectionReason": null
+      "previousEditorialRejectionReason": null,
+      "followupReview": {
+        "reviewedAt": "2026-09-12T16:03:20+00:00",
+        "originalCitationUrl": "https://www.the-independent.com/news/science/archaeology/tbilisi-georgia-pottery-national-museum-b3047374.html",
+        "status": "needs_verification",
+        "auditPath": "audit/round24-editorial-review.json"
+      }
     },
     {
       "candidateId": "candidate-2026-09-12-event-8c10a7ee4893",

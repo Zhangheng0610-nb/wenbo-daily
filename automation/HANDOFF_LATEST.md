@@ -1,15 +1,25 @@
-# 截至第二十三轮的完整接续
+# Round24 独立增量接续
 
-只导入wenbo-complete-round23.bundle；包含完整历史以及之前日报、招聘、UI改动。分支improve/product-reliability。不需要逐个导入旧包，不force push。
+用户已部署之前各轮，这次只导入 `wenbo-round24-incremental.bundle`。
 
-1. 保护本地修改，fetch origin，在独立整合分支合并最新main与bundle，保留最新日报、招聘及原始发现台账，不用云端较旧首页覆盖本地主线新内容。
-2. 已观察origin/main为5c92f60：Round19已被c692fa4整合，四条学术误选已修订。先检查最新状态，勿重复改写完成的修订。阅读PRODUCT_ROUND23.md、PRODUCT_ROUND22.md、PRODUCT_ROUND21.md、PRODUCT_ROUND20.md和CODEX_RUNBOOK.md。
-3. Round22恢复机构治理、拨款、安全事件、洞穴艺术发现的召回/优先核查。用当前完整抓取结果做受控回放与原文核验，不把过去已刊样本当新新闻。
-4. 9月11日圣博尼法斯40万加元修复资金重复了9月9日：按审计校正最新日报及候选决策、目录、数量、生成产物，保留原始发现和修订说明。如已有后续修订先对账，不重复处理。不凑数。
-5. Round20：9月11日起selected候选须有industryAction和实际原文段落文件。现有主线未必已生成这些字段；按原文补核，缺证据则待核，不能批量伪造或关闭门槛。字段和保存方法见运行手册末节。保持Windows UTF-8及LF哈希规范。
-6. 招聘review-decisions.json要保留；32条旧待核已处理11条，剩21条不是21个已验证在招岗位。合并最新主线后重新去重和核对，不覆写本地最新岗位。招聘广域检索有效性仍待改善。
-7. 运行全量测试、python build.py、最新日期的项目校验、python automation/validate_product.py及git diff --check。优先核查新门槛的真实失败原因，不靠改措辞或跳过测试过关。
-8. 本地预览390px/1440px、浅色/深色首页和日报。Round21已去掉黑色主新闻大底，改白底+灰阶；深色为统一深蓝。不要恢复绿色。CSS采用内容哈希，确认预览引用新版本。UI独立提交d4fa6ed，可以单独调整或回退，保留数据与日报改造。
-9. 用户此前要求本地视觉确认；先提供预览。已有当前会话后续部署授权则遵从最新授权，否则待视觉确认后再push。
+- 必需基线：`14ebaca22f4679d7c25575bdf97d9b5186962839`
+- 包内分支：`improve/product-reliability`
+- 阅读：`automation/PRODUCT_ROUND24.md`
+- 不要重复导入旧完整包，不 force push。
 
-Round23恢复两处真实断供：中新网文化入口改为/wy/；公共fetch先解压gzip/deflate再解码。两源现场恢复64条链接，隔离回放9条候选，不等于9条新增新闻。合并后用最新完整历史重跑采集与去重，原文核验后入选。勿复制隔离审计覆盖原始生产发现，也勿直接把黄金博物馆等已刊条目再次发布。没有网络路由或外部付费服务变更。
+## 本地 Codex 操作
+
+1. 检查本地工作树，保护未提交修改；fetch origin。用 `git cat-file -t 14ebaca22f4679d7c25575bdf97d9b5186962839` 确认已有基线。缺基线先从正常远端取回，不能跳过 bundle 校验。
+2. `git bundle verify <包路径>`；`git fetch <包路径> improve/product-reliability:review/round24-import`。若该分支已存在，先检查是否已整合，不覆盖未知本地分支。
+3. 从最新 `origin/main` 建立独立整合分支，再合并 `review/round24-import`。保留最新日报、招聘和原始发现账本。本轮更改 9 月 12 日三条候选决策及派生复核；如果主线又复核过同一事件，逐条对账，避免覆盖更晚证据。
+4. 运行全量测试、`python build.py`、最新日期的项目校验、`python automation/validate_product.py` 和 `git diff --check`。另运行 `python automation/validate_candidates.py --date 2026-09-12` 核查历史修订。当前云端结果为 330 测试通过、构建与 88 页产品校验通过。
+5. 构建后的页面从合并内容生成，不采用云端旧页面覆盖最新日报。CSS 没有本轮视觉改动；跨平台原始字节哈希可能变化，另核对真实样式内容。日期推进也可能自然更新招聘截止标签。
+6. 推送遵从用户当前会话授权；本包已包含代码和复核证据，不包含线上部署。使用普通合并/推送流程，禁止强制推送。
+
+## 必须保留的边界
+
+- 原始发现与原复核输入未修改；Round24 是独立历史编辑修订，候选仍发布 7 条，另 2 条待核。
+- `originalCitationLinks` 的链接是待核引用，不是自动验证通过。不得批量改 `articleVerified` 或绕过 `industryAction` / 原文证据门槛。
+- `PRODUCT_ROUND24.md` 和 audit 文件写明原始报道时间；不要按二次报道日期重新发布旧事件。
+- 页面仍遵从黑白灰浅色、深蓝深色，不恢复绿色或黑底主新闻。
+- 下一轮优先完整采集到入选的真实转化测量；全站优化尚未完成。

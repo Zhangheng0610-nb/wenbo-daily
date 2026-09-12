@@ -35,7 +35,7 @@ if __package__ in (None, ""):
 else:
     ROOT = Path(__file__).resolve().parents[1]
 
-from automation.backfill_monitoring import fetch, links
+from automation.backfill_monitoring import fetch, links, read_source_response
 from automation.news_cards import news_cards
 from automation.governance import (
     canonical_publisher_domain,
@@ -2639,8 +2639,8 @@ def article_metadata(body: str) -> dict:
 
 
 def visible_article_text(body: str) -> str:
-    value = re.sub(r"<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>", " ", body or "", flags=re.I | re.S)
-    return re.sub(r"\s+", " ", unescape(re.sub(r"<[^>]+>", " ", value))).strip()
+    from automation.article_content import article_content
+    return article_content(body)[0]
 
 
 def is_search_wrapper_url(url: str) -> bool:
@@ -2776,7 +2776,7 @@ def _fetch_evidence_url(url: str) -> tuple[str, str, str | None]:
     try:
         with SEARCH_OPENER.open(request, timeout=EVIDENCE_FETCH_TIMEOUT_SECONDS) as response:
             resolved = response.geturl() or url
-            body = response.read(256_000).decode("utf-8", errors="replace")
+            body = read_source_response(response)
         # A publisher page may explicitly expose the canonical/original URL.
         # Follow only a non-aggregator HTTP(S) metadata target, and keep the
         # first page as a fallback if the metadata target is unavailable.
@@ -2791,7 +2791,7 @@ def _fetch_evidence_url(url: str) -> tuple[str, str, str | None]:
                 follow_request = Request(candidate, headers={"User-Agent": SEARCH_USER_AGENT, "Accept": "text/html,application/xhtml+xml,*/*"})
                 with SEARCH_OPENER.open(follow_request, timeout=EVIDENCE_FETCH_TIMEOUT_SECONDS) as follow_response:
                     followed = follow_response.geturl() or candidate
-                    followed_body = follow_response.read(256_000).decode("utf-8", errors="replace")
+                    followed_body = read_source_response(follow_response)
                 return followed, followed_body, None
             except Exception:
                 continue
@@ -2893,7 +2893,9 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         article_result = dict(result)
         article_result["title"] = metadata.get("title") or result.get("title", "")
         match_details = event_match_details(event, article_result, body)
-        matched = bool(match_details.get("matched"))
+        matched = bool(match_details.get("matched")) and bool(visible_article_text(body))
+        if not visible_article_text(body):
+            match_details = {**match_details, "matched": False, "bodyMissing": True}
         if actual.get("tier") not in {"A", "B"}:
             provisional, verification = article_level_provisional_b(event, result, resolved_url, body)
             matched = provisional
@@ -2929,8 +2931,13 @@ def resolve_evidence_attempt(event: dict, result: dict, method: str) -> tuple[di
         checked["failureClassification"] = resolution_failure_type(resolve_error)
     elif wrapper_page:
         checked["failureClassification"] = "search_wrapper"
+    elif not visible_article_text(body):
+        checked["failureClassification"] = "empty_body"
     elif not matched:
         checked["failureClassification"] = "article_body_fetched_semantic_mismatch"
+    from automation.article_content import article_citations, article_content
+    checked["bodyExtractionScope"] = article_content(body)[1] if not resolve_error else "unavailable"
+    checked["originalCitationLinks"] = article_citations(body, resolved_url) if not resolve_error else []
     checked["articleVerified"] = bool(matched and evidence_tier in {"A", "B", "provisional_B"})
     checked["articleVerification"] = verification
     checked["eventMatch"] = match_details
