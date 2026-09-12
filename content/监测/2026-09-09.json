@@ -102,6 +102,35 @@
   ],
   "items": [
     {
+      "recordId": "operational-20260909-cctv-wenbo-0013-b260909shtml",
+      "date": "2026-09-09",
+      "title": "《探索·发现》 20260909 考古零距离（19）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
       "recordId": "operational-20260909-museum-association-0024-ntentid14775",
       "date": "2026-09-09",
       "title": "关于举办“2026年自然科技博物馆专业人员综合能力提升培训班”的通知",

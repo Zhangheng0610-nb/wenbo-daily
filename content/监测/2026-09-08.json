@@ -280,6 +280,35 @@
       "observationDate": "2026-09-09"
     },
     {
+      "recordId": "operational-20260908-cctv-wenbo-0010-u260908shtml",
+      "date": "2026-09-08",
+      "title": "《探索·发现》 20260908 考古零距离（18）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
       "recordId": "operational-20260908-museum-association-0043-ntentid14774",
       "date": "2026-09-08",
       "title": "中国博物馆协会藏品保护与管理专委会关于开展案例征集与研讨活动的通知",

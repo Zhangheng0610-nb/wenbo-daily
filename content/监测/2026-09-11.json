@@ -73,7 +73,7 @@
       "runType": "live",
       "status": "partial",
       "checkedAt": "2026-09-11T08:05:46+08:00",
-      "candidateCount": 3,
+      "candidateCount": 2,
       "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
       "rawCount": 264,
       "eligibleCount": 12,
@@ -164,6 +164,64 @@
       "observationDate": "2026-09-11"
     },
     {
+      "recordId": "operational-20260911-ncha-0030-22204785html",
+      "date": "2026-09-11",
+      "title": "国家文物局党组2026年巡视工作动员部署会召开",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
+      "recordId": "operational-20260911-ncha-0029-22204779html",
+      "date": "2026-09-11",
+      "title": "新闻联播 |【文化中国行】让长城文化在保护与传承中生生不息",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
       "recordId": "operational-20260911-xinhua-wenbo-0036-0db1d90chtml",
       "date": "2026-09-11",
       "title": "全国首套海上保护区数据集面世",
@@ -223,45 +281,6 @@
       "selectedForDaily": false,
       "origin": "fixed-panel-monitoring",
       "runType": "live",
-      "observedAt": "2026-09-11T08:05:20+08:00",
-      "observationDate": "2026-09-11"
-    },
-    {
-      "recordId": "operational-20260911-xinhua-wenbo-0035-d46f01dchtml",
-      "date": "2026-09-11",
-      "title": "首套海上保护区数据集面世",
-      "sources": [
-        {
-          "sourceId": "xinhua-wenbo",
-          "name": "新华网文博",
-          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "天津",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.62,
-      "themes": [
-        "国际交流",
-        "政策行业"
-      ],
-      "tags": [
-        "国际交流",
-        "政策行业",
-        "天津"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring",
-      "runType": "live",
-      "duplicateProvenance": {
-        "rule": "same_source_same_day_normalized_title",
-        "canonicalUrl": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
-        "duplicateUrls": [
-          "https://www.xinhuanet.com/20260911/a770d18bf6434c649fae80cafd46f01d/c.html"
-        ]
-      },
       "observedAt": "2026-09-11T08:05:20+08:00",
       "observationDate": "2026-09-11"
     }

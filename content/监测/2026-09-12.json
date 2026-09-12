@@ -160,6 +160,36 @@
       "observationDate": "2026-09-12"
     },
     {
+      "recordId": "operational-20260912-ncha-0034-22204795html",
+      "date": "2026-09-12",
+      "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "新疆"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
       "recordId": "operational-20260912-xinhua-wenbo-0042-1fb93c9chtml",
       "date": "2026-09-12",
       "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
@@ -258,6 +288,44 @@
       "observationDate": "2026-09-12"
     },
     {
+      "recordId": "operational-20260912-xinhua-wenbo-0036-21ec81dchtml",
+      "date": "2026-09-12",
+      "title": "奥地利电影博物馆举办中国早期电影回顾展",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260912/2c0e90ef5acb44658c4e8bab321ec81d/c.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆",
+        "国际交流"
+      ],
+      "tags": [
+        "博物馆",
+        "国际交流"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/20260912/2c0e90ef5acb44658c4e8bab321ec81d/c.html",
+        "duplicateUrls": [
+          "https://www.xinhuanet.com/20260912/2c0e90ef5acb44658c4e8bab321ec81d/c.html"
+        ]
+      },
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
+    },
+    {
       "recordId": "operational-20260912-xinhua-wenbo-0040-b581b17chtml",
       "date": "2026-09-12",
       "title": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
@@ -290,6 +358,45 @@
       "runType": "live",
       "observedAt": "2026-09-12T12:14:36+08:00",
       "observationDate": "2026-09-12"
+    },
+    {
+      "recordId": "operational-20260912-xinhua-wenbo-0037-bb12ff4chtml",
+      "date": "2026-09-12",
+      "title": "良渚博物院推出“琮谱”特展展现玉琮流传",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260912/6c6015a58e09431d906622f1bbb12ff4/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "浙江",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "博物馆",
+        "浙江"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/20260912/6c6015a58e09431d906622f1bbb12ff4/c.html",
+        "duplicateUrls": [
+          "https://www.news.cn/politics/20260912/f436c4f81aeb4c4d83109095a9b13a75/c.html"
+        ]
+      },
+      "observedAt": "2026-09-13T07:15:09+08:00",
+      "observationDate": "2026-09-13"
     }
   ],
   "runType": "live",

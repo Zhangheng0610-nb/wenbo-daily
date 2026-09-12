@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-12",
-  "asOf": "2026-09-12",
+  "generated": "2026-09-13",
+  "asOf": "2026-09-13",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6428,7 +6428,7 @@
         "runType": "live",
         "status": "partial",
         "checkedAt": "2026-09-11T08:05:46+08:00",
-        "candidateCount": 3,
+        "candidateCount": 2,
         "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
         "rawCount": 264,
         "eligibleCount": 12,
@@ -6540,6 +6540,108 @@
         "duplicatesSkipped": 26,
         "scanStatus": "partial",
         "date": "2026-09-12"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-13T07:15:31+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 13,
+        "eligibleCount": 13,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-13"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-13T07:16:14+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 3,
+        "eligibleCount": 3,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-13"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-13T07:15:30+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-13"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-13T07:15:33+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-13"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-13T07:15:09+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 8,
+        "eligibleCount": 8,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-13"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-13T07:15:35+08:00",
+        "candidateCount": 0,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 275,
+        "eligibleCount": 11,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 35,
+        "scanStatus": "partial",
+        "date": "2026-09-13"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6556,42 +6658,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 581,
-    "includedProvincialRecords": 139,
-    "provincialEvents": 117,
-    "nationalEvents": 42,
+    "totalMonitoredRecords": 588,
+    "includedProvincialRecords": 140,
+    "provincialEvents": 118,
+    "nationalEvents": 43,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 94,
-    "operationalRecords": 94,
+    "fixedPanelMonitoringRecords": 101,
+    "operationalRecords": 101,
     "operationalRecordTypes": {
-      "live": 75,
+      "live": 82,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 94
+      "fixed-panel-monitoring": 101
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 512,
+    "analysisRecords": 519,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 94
+      "fixed-panel-monitoring": 101
     },
     "excludedNonPanel": 0,
-    "unassigned": 308,
+    "unassigned": 313,
     "panelSourceCount": 6,
-    "coverageDays": 106,
+    "coverageDays": 107,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 350,
+    "successfulSourceChecks": 353,
     "coverageStatuses": {
       "success": 149,
-      "no_update": 201,
-      "partial": 285,
+      "no_update": 204,
+      "partial": 288,
       "failed": 1
     },
     "coverageByMode": {
@@ -6601,15 +6703,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 96,
-        "good": 77,
-        "days": 16
+        "checks": 102,
+        "good": 80,
+        "days": 17
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 96,
+    "operationalCoverageChecks": 102,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 16,
+    "operationalCoverageDays": 17,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6617,22 +6719,22 @@
         "days": 4
       },
       "live": {
-        "checks": 72,
-        "good": 53,
-        "days": 12
+        "checks": 78,
+        "good": 56,
+        "days": 13
       }
     },
-    "liveOperationalCoverageChecks": 72,
-    "liveOperationalCoverageDays": 12,
+    "liveOperationalCoverageChecks": 78,
+    "liveOperationalCoverageDays": 13,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 83,
+      "ncha": 86,
       "cultural-relics-news": 123,
       "archaeology": 228,
       "museum-association": 31,
-      "xinhua-wenbo": 33,
-      "cctv-wenbo": 14
+      "xinhua-wenbo": 34,
+      "cctv-wenbo": 17
     }
   },
   "events": [
@@ -6744,6 +6846,62 @@
           "name": "新华网文博",
           "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
           "host": "hb.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "良渚博物院推出“琮谱”特展展现玉琮流传",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "浙江",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "博物馆",
+        "浙江"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "良渚博物院推出“琮谱”特展展现玉琮流传",
+          "url": "https://www.news.cn/20260912/6c6015a58e09431d906622f1bbb12ff4/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/20260912/6c6015a58e09431d906622f1bbb12ff4/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-29580e4340",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260912/6c6015a58e09431d906622f1bbb12ff4/c.html",
+          "host": "news.cn",
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
@@ -6865,6 +7023,60 @@
       ]
     },
     {
+      "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "新疆"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
+          "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-4daa893245",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
       "title": "奔“县”游｜寻迹千年古城，在艺术山居“慢生活”",
       "firstDate": "2026-09-10",
       "lastDate": "2026-09-11",
@@ -6938,62 +7150,6 @@
           "name": "新华网文博",
           "url": "http://www.sd.xinhuanet.com/20260911/6957263415e443d2bc82962e4fb8b7a0/c.html",
           "host": "sd.xinhuanet.com",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "xinhua-wenbo"
-        }
-      ]
-    },
-    {
-      "title": "首套海上保护区数据集面世",
-      "firstDate": "2026-09-11",
-      "lastDate": "2026-09-11",
-      "primaryProvince": "天津",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.62,
-      "themes": [
-        "国际交流",
-        "政策行业"
-      ],
-      "tags": [
-        "国际交流",
-        "政策行业",
-        "天津"
-      ],
-      "impact": 60.0,
-      "scope": "province",
-      "reports": [
-        {
-          "date": "2026-09-11",
-          "title": "首套海上保护区数据集面世",
-          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "新华网文博",
-              "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
-              "host": "news.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "xinhua-wenbo"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-bf1e2e2858",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "关注",
-      "primaryTheme": "国际交流",
-      "sources": [
-        {
-          "name": "新华网文博",
-          "url": "https://www.news.cn/20260911/a770d18bf6434c649fae80cafd46f01d/c.html",
-          "host": "news.cn",
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
@@ -13596,6 +13752,59 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局党组2026年巡视工作动员部署会召开",
+      "firstDate": "2026-09-11",
+      "lastDate": "2026-09-11",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-11",
+          "title": "国家文物局党组2026年巡视工作动员部署会召开",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-2372460871",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
         }
       ]
     },
