@@ -1,0 +1,68 @@
+[
+  {
+    "eventId": "event-72376f8df293",
+    "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+    "url": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+    "resolvedUrl": "https://archaeology.org/news/2026/09/09/archaeologists-discover-extent-of-settlement-around-ottoman-sultans-tomb/",
+    "checkedAt": "2026-09-12T16:00:18+00:00",
+    "error": null,
+    "bodyCharacters": 1697,
+    "replacementCharacters": 0,
+    "titlePresent": true,
+    "originalCitationLinks": [
+      {
+        "name": "The Anadolu Agency",
+        "url": "https://www.aa.com.tr/en/europe/archaeology-sheds-new-light-on-suleyman-the-magnificent-s-final-campaign-in-hungary/4049905",
+        "context": "SZIGETVAR, HUNGARY— The Anadolu Agency reports that excavations in southern Hungary at Szigetvar Castle have determined that Turbek, a settlement that developed around the tomb of the Ottoman sultan Suleiman the Magnificent, was larger and more affluent than previously thought. Suleiman died the day before his siege of the castle ended in 1566. His son, Selim II, built a tomb at the site, and it eventually became a place of pilgrimage. Researcher",
+        "status": "unverified_citation"
+      }
+    ],
+    "decodedHtmlSha256": "d66ae2073346432f83858464d2fbffd540b4993fc124719b387429494bb48f98",
+    "articleVerified": false,
+    "scope": "live automatic evidence transport and source citation extraction, not publication approval"
+  },
+  {
+    "eventId": "event-71529b4ac626",
+    "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+    "url": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+    "resolvedUrl": "https://archaeology.org/news/2026/09/08/lavish-roman-bath-excavated-in-eastern-serbia/",
+    "checkedAt": "2026-09-12T16:00:18+00:00",
+    "error": null,
+    "bodyCharacters": 1097,
+    "replacementCharacters": 0,
+    "titlePresent": true,
+    "originalCitationLinks": [
+      {
+        "name": "Live Science",
+        "url": "https://www.livescience.com/archaeology/romans/lavish-private-bath-used-by-roman-emperor-and-high-status-residents-discovered-at-imperial-palace-in-serbia",
+        "context": "BELGRADE, SERBIA—According to a Live Science report, a private bath has been found at the bottom of a monumental tower at the fortified imperial palace at Vrelo-Šarkamen. The complex belonged to Galerius Valerius Maximinus, who was Roman emperor from A.D. 310 to 313, when he committed suicide after losing a civil war. A team of researchers from Serbia’s Institute of Archaeology was surprised to discover the lavish bath—complete with heated floors",
+        "status": "unverified_citation"
+      }
+    ],
+    "decodedHtmlSha256": "fe8fb4d1c4f09c7421e6f5f73f06300d9469883998708bd9d2fb7e11538cc83c",
+    "articleVerified": false,
+    "scope": "live automatic evidence transport and source citation extraction, not publication approval"
+  },
+  {
+    "eventId": "event-3ab033957b0f",
+    "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+    "url": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+    "resolvedUrl": "https://archaeology.org/news/2026/09/10/medieval-pottery-workshop-uncovered-in-tbilisi/",
+    "checkedAt": "2026-09-12T16:00:18+00:00",
+    "error": null,
+    "bodyCharacters": 709,
+    "replacementCharacters": 0,
+    "titlePresent": true,
+    "originalCitationLinks": [
+      {
+        "name": "The Independent",
+        "url": "https://www.the-independent.com/news/science/archaeology/tbilisi-georgia-pottery-national-museum-b3047374.html",
+        "context": "TBILISI, GEORGIA—According to a report in The Independent , roadwork in central Tbilisi has revealed a 1,000-year-old pottery workshop. Founded in the fourth century A.D. , Tbilisi had become a stop on the Silk Road by the tenth century. Over the course of the medieval period, the city was ruled by the Umayyad Caliphate in Damascus, the Abbasid Caliphate in Baghdad, and the Seljuk Empire. “Tbilisi was always multicultural, a real center for the r",
+        "status": "unverified_citation"
+      }
+    ],
+    "decodedHtmlSha256": "b0af0d583cfecc90109b9af79a634029b25683408decfa03000892c89a76fe8b",
+    "articleVerified": false,
+    "scope": "live automatic evidence transport and source citation extraction, not publication approval"
+  }
+]

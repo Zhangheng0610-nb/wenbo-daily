@@ -155,6 +155,14 @@ def decode_source_response(raw: bytes, content_encoding: str = "") -> str:
     return raw.decode("utf-8", errors="replace")
 
 
+def read_source_response(response) -> str:
+    """Read a complete bounded HTTP payload before decompressing it."""
+    raw = response.read(MAX_SOURCE_BYTES + 1)
+    headers = getattr(response, "headers", {})
+    coding = headers.get("Content-Encoding", "")
+    return decode_source_response(raw, coding)
+
+
 def fetch(url: str) -> str:
     """Fetch public HTML, favouring HTTP where older government sites require it."""
     urls = [url]
@@ -162,19 +170,17 @@ def fetch(url: str) -> str:
     if parts.scheme == "https" and parts.hostname in HTTP_FALLBACK_HOSTS:
         urls.append(urlunsplit(("http", parts.netloc, parts.path, parts.query, parts.fragment)))
     failure: Exception | None = None
-    raw = b""
     for target in urls:
         request = Request(target, headers={"User-Agent": USER_AGENT, "Accept": "text/html,*/*"})
         try:
             with source_opener().open(request, timeout=20) as response:
-                raw = response.read(MAX_SOURCE_BYTES + 1)
-                content_encoding = response.headers.get("Content-Encoding", "")
+                body = read_source_response(response)
             break
         except (URLError, HTTPError) as exc:
             failure = exc
     else:
         raise RuntimeError(f"{url}: {failure}") from failure
-    return decode_source_response(raw, content_encoding)
+    return body
 
 
 def plain(value: str) -> str:

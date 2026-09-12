@@ -1,0 +1,45 @@
+{
+  "baseCommit": "14ebaca22f4679d7c25575bdf97d9b5186962839",
+  "reviewedAt": "2026-09-12T16:03:20+00:00",
+  "previousEditorialInputPath": "content/复核/2026-09-12-editorial-replay.json",
+  "records": [
+    {
+      "eventId": "event-72376f8df293",
+      "title": "Archaeologists Discover Extent of Settlement Around Ottoman Sultan's Tomb",
+      "beforeDecision": "rejected",
+      "beforeReason": "B级专业来源正文可核验，但与本期已选考古条目同源且信息增量较弱；按同一专业来源的有界覆盖原则暂不扩充。",
+      "afterDecision": "needs_verification",
+      "afterReason": "专业转载描述聚落范围的新判断；安纳多卢原始报道页面可读元数据日期为2026-09-07，但本次仅取到标题、未取得正文，尚不能区分本轮调查与2015年等既有发现的时间边界。保留待核原始正文及新增调查的公布时间。",
+      "originalCitationUrl": "https://www.aa.com.tr/en/europe/archaeology-sheds-new-light-on-suleyman-the-magnificent-s-final-campaign-in-hungary/4049905",
+      "reviewedAt": "2026-09-12T16:03:20+00:00"
+    },
+    {
+      "eventId": "event-71529b4ac626",
+      "title": "Lavish Roman Bath Excavated in Eastern Serbia",
+      "beforeDecision": "rejected",
+      "beforeReason": "B级专业来源正文可核验，但发布时间较早、与本期已选考古条目存在同源竞争，暂不进入本期日报。",
+      "afterDecision": "rejected",
+      "afterReason": "沿引用链读取Live Science原报道，发布时间为2026-09-03，正文明确指向9月3日研究机构声明；9月8日专业媒体转述没有提供新的独立动作。相对9月12日日报已超出七天事件窗口，不以转载日期刷新事件。",
+      "originalCitationUrl": "https://www.livescience.com/archaeology/romans/lavish-private-bath-used-by-roman-emperor-and-high-status-residents-discovered-at-imperial-palace-in-serbia",
+      "reviewedAt": "2026-09-12T16:03:20+00:00"
+    },
+    {
+      "eventId": "event-3ab033957b0f",
+      "title": "Medieval Pottery Workshop Uncovered in Tbilisi",
+      "beforeDecision": "rejected",
+      "beforeReason": "B级专业来源正文可核验，但优先级为50，且同一专业来源已有更具体的考古发现入选，本期不以固定数量补稿。",
+      "afterDecision": "needs_verification",
+      "afterReason": "已读取The Independent原报道，发布时间为2026-09-09，正文描述第比利斯道路施工发现地下陶器作坊；道路工程始于夏季，现有正文未说明具体发现或正式公布日期，需核对首发报道/现场通报后再判断事件时效与价值。",
+      "originalCitationUrl": "https://www.the-independent.com/news/science/archaeology/tbilisi-georgia-pottery-national-museum-b3047374.html",
+      "reviewedAt": "2026-09-12T16:03:20+00:00"
+    }
+  ],
+  "bathDateEvidence": {
+    "url": "https://www.livescience.com/archaeology/romans/lavish-private-bath-used-by-roman-emperor-and-high-status-residents-discovered-at-imperial-palace-in-serbia",
+    "publishedTime": "2026-09-03T20:20:28Z",
+    "excerpt": "the latest discovery was made by a research team from the Institute of Archaeology, an independent research institution in Serbia, according to a Sept. 3 statement."
+  },
+  "newPublishedEvents": 0,
+  "unchangedSelectedCount": 7,
+  "immutableDiscoverySha256": "a6cc2a1312804c64265f2b89d455af36e12725bff82cb676b0e3909e5e0d258b"
+}
