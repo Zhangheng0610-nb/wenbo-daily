@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-11",
-  "asOf": "2026-09-11",
+  "generated": "2026-09-12",
+  "asOf": "2026-09-12",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6438,6 +6438,108 @@
         "duplicatesSkipped": 28,
         "scanStatus": "partial",
         "date": "2026-09-11"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-12T12:14:58+08:00",
+        "candidateCount": 2,
+        "note": "",
+        "rawCount": 14,
+        "eligibleCount": 14,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-12"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-12T12:15:37+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 6,
+        "eligibleCount": 6,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-12"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-12T12:14:58+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 0,
+        "eligibleCount": 0,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-12"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-12T12:14:59+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 2,
+        "eligibleCount": 2,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-12"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-12T12:14:36+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 8,
+        "eligibleCount": 8,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-12"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-12T12:15:01+08:00",
+        "candidateCount": 4,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 269,
+        "eligibleCount": 13,
+        "acceptedThisRun": 4,
+        "retainedExisting": 0,
+        "finalItemCount": 4,
+        "duplicatesSkipped": 26,
+        "scanStatus": "partial",
+        "date": "2026-09-12"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6454,42 +6556,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 575,
-    "includedProvincialRecords": 135,
-    "provincialEvents": 113,
+    "totalMonitoredRecords": 581,
+    "includedProvincialRecords": 139,
+    "provincialEvents": 117,
     "nationalEvents": 42,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 88,
-    "operationalRecords": 88,
+    "fixedPanelMonitoringRecords": 94,
+    "operationalRecords": 94,
     "operationalRecordTypes": {
-      "live": 69,
+      "live": 75,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 88
+      "fixed-panel-monitoring": 94
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 506,
+    "analysisRecords": 512,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 88
+      "fixed-panel-monitoring": 94
     },
     "excludedNonPanel": 0,
-    "unassigned": 306,
+    "unassigned": 308,
     "panelSourceCount": 6,
-    "coverageDays": 105,
+    "coverageDays": 106,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 347,
+    "successfulSourceChecks": 350,
     "coverageStatuses": {
-      "success": 148,
-      "no_update": 199,
-      "partial": 282,
+      "success": 149,
+      "no_update": 201,
+      "partial": 285,
       "failed": 1
     },
     "coverageByMode": {
@@ -6499,15 +6601,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 90,
-        "good": 74,
-        "days": 15
+        "checks": 96,
+        "good": 77,
+        "days": 16
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 90,
+    "operationalCoverageChecks": 96,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 15,
+    "operationalCoverageDays": 16,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6515,25 +6617,253 @@
         "days": 4
       },
       "live": {
-        "checks": 66,
-        "good": 50,
-        "days": 11
+        "checks": 72,
+        "good": 53,
+        "days": 12
       }
     },
-    "liveOperationalCoverageChecks": 66,
-    "liveOperationalCoverageDays": 11,
+    "liveOperationalCoverageChecks": 72,
+    "liveOperationalCoverageDays": 12,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
       "ncha": 83,
       "cultural-relics-news": 123,
-      "archaeology": 226,
+      "archaeology": 228,
       "museum-association": 31,
-      "xinhua-wenbo": 29,
+      "xinhua-wenbo": 33,
       "cctv-wenbo": 14
     }
   },
   "events": [
+    {
+      "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古",
+        "国际交流"
+      ],
+      "tags": [
+        "考古",
+        "国际交流",
+        "云南"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
+          "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+              "host": "yn.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-1e79b07c55",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+          "host": "yn.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "政策行业",
+        "湖北"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
+          "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+              "host": "hb.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-c835e9bcaf",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+          "host": "hb.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "千岛湖畔 多国代表探寻中国生态修复经验",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "浙江",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文物保护",
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "国际交流",
+        "政策行业",
+        "浙江"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "千岛湖畔 多国代表探寻中国生态修复经验",
+          "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-d9ed60bfda",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "唤醒十四载“沉睡”时光 泾源县“泾河博物馆”项目签约落地",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "宁夏",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "宁夏"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "唤醒十四载“沉睡”时光 泾源县“泾河博物馆”项目签约落地",
+          "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+              "host": "nx.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-19e2576a0f",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+          "host": "nx.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "奔“县”游｜寻迹千年古城，在艺术山居“慢生活”",
       "firstDate": "2026-09-10",

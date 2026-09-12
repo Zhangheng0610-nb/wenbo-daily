@@ -1,0 +1,20 @@
+{
+ "version": 1,
+ "date": "2026-09-12",
+ "checkedAt": "2026-09-12T12:48:19+08:00",
+ "scanMode": "incremental",
+ "scanWindow": {
+  "start": "2026-09-06",
+  "end": "2026-09-12"
+ },
+ "sourceColumn": 722,
+ "paginationPagesChecked": 1,
+ "sourcePagesChecked": 8,
+ "sourcePagesNew": 0,
+ "contentItemsNew": 0,
+ "duplicatesSkipped": 0,
+ "fetchFailed": 0,
+ "parseFailed": 0,
+ "status": "scan_success_no_update",
+ "note": "近期分页扫描完成；未发现新的数字化来源页或内容条目。"
+}

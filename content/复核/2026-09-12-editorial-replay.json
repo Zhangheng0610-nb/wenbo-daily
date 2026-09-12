@@ -1,0 +1,1188 @@
+{
+  "schema": "daily-editorial-replay-v1",
+  "schemaVersion": 1,
+  "date": "2026-09-12",
+  "runType": "replay",
+  "replayType": "formal-editorial-replay",
+  "revisedAt": "2026-09-12T12:41:00+08:00",
+  "replayedAt": "2026-09-12T12:41:00+08:00",
+  "replayCutoff": "2026-09-12T12:41:00+08:00",
+  "baseDiscoveryAuditPath": "content/发现/2026-09-12.json",
+  "baseDiscoveryAuditSha256": "ed11fc1cd9a5bcf25d33bec224976a68a6db4ed12ee095163dfcf5b8520f5a98",
+  "baseDiscoveryAuditHashMode": "raw",
+  "discoveryAuditUnchanged": true,
+  "inputMode": "immutable_discovery_snapshot_final_editorial_pool",
+  "reason": "在不可变的2026-09-12 broad discovery snapshot上逐条复核全部13个finalEditorialPool事件；只使用该池，未拼接其他新闻候选。",
+  "runtimeEnrichment": true,
+  "evidenceNetworkExecuted": true,
+  "queryAudits": [
+    {
+      "queryFamily": "policy-governance",
+      "actualQuery": "文物 政策 管理办法 通知 施行 after:2026-09-06 before:2026-09-13",
+      "executedAt": "2026-09-12T12:16:13+08:00",
+      "success": true,
+      "returnedResultCount": 0,
+      "acceptedRawCount": 0,
+      "note": "摘要审计；完整142条查询审计保留于baseDiscoveryAuditPath。"
+    },
+    {
+      "queryFamily": "international-wire",
+      "actualQuery": "site:apnews.com archaeology after:2026-09-06 before:2026-09-13",
+      "executedAt": "2026-09-12T12:16:18+08:00",
+      "success": true,
+      "returnedResultCount": 3,
+      "acceptedRawCount": 3,
+      "note": "摘要审计；完整142条查询审计保留于baseDiscoveryAuditPath。"
+    }
+  ],
+  "replayFunnel": {
+    "sourceScansAttempted": 10,
+    "sourceScansSucceeded": 8,
+    "queriesAttempted": 142,
+    "queriesSucceeded": 142,
+    "queriesFailed": 0,
+    "queryLayerStatus": "checked",
+    "rawResults": 1322,
+    "deduplicatedResults": 1179,
+    "candidateEvaluationPool": 13,
+    "evidenceQualified": 13,
+    "reviewedEvents": 13,
+    "selectedEvents": 5,
+    "rejectedEvents": 8,
+    "deferredEvents": 0,
+    "needsVerification": 0
+  },
+  "dedupAudit": {
+    "status": "completed",
+    "input": "finalEditorialPool",
+    "checkedEvents": 13,
+    "retainedEvents": 13,
+    "sameDayDuplicateEvents": 0,
+    "historicalDuplicates": 55,
+    "note": "沿用原始 discovery audit 的事件聚类和历史去重；未拼接其他候选池。"
+  },
+  "evidenceQualification": {
+    "status": "completed",
+    "sourceAudit": "content/发现/2026-09-12.json",
+    "attempted": 13,
+    "qualified": 13,
+    "failed": 0,
+    "ambiguous": 0,
+    "note": "仅复核 discovery audit 已标记 evidence_qualified 的13个事件；每个最终决定均保留原始证据边界。"
+  },
+  "editorialReview": {
+    "status": "completed",
+    "reviewedAt": "2026-09-12T12:41:00+08:00",
+    "reviewedEvents": 13,
+    "selectedEvents": 5,
+    "rejectedEvents": 8,
+    "deferredEvents": 0,
+    "note": "选入5条具有近期具体行业动作的事件；拒绝生态治理考察、报名通知、栏目回看及背景性/宣传性内容，未以固定条数补稿。"
+  },
+  "finalEditorialPool": {
+    "status": "completed",
+    "rawQualifiedEvents": 13,
+    "canonicalUniqueEvents": 13,
+    "historicalDuplicates": 55,
+    "editoriallyReviewed": 13,
+    "finalHistoricalGuard": "保留 discovery audit 的历史去重与 previous_editorial_rejection 结果。",
+    "events": [
+      {
+        "eventId": "event-05c39ef1a236",
+        "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
+        "representativeTitle": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
+        "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+        "publishedDate": "2026-09-12",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "yn.xinhuanet.com"
+        ],
+        "publisherDomains": [
+          "yn.xinhuanet.com"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 82,
+        "editorialPriorityLabel": "high",
+        "editorialReasons": [
+          "substantive_archaeological_discovery_or_new_knowledge",
+          "meaningful_institutional_or_international_cooperation",
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-12"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
+            "url": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+            "publishedDate": "2026-09-12",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "yn.xinhuanet.com",
+            "sourcePublisherUrl": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古、国际交流、云南",
+            "monitoringRecordId": "operational-20260912-xinhua-wenbo-0042-1fb93c9chtml",
+            "monitoringPath": "content/监测/2026-09-12.json",
+            "originalSourceUrl": "http://yn.xinhuanet.com/20260912/3139667720c44391a828b66261fb93c9/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "云南",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "yn.xinhuanet.com"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "新华网当天报道省文物考古研究所等团队确认鹤庆蝙蝠洞出土人类化石属于丹尼索瓦人，并明确了西南地区首次古蛋白质组学鉴定和唯一长骨标本等实质性新发现；属于可核验的考古新认识，而非泛论文介绍。"
+      },
+      {
+        "eventId": "event-6ad8cf4d4484",
+        "title": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
+        "representativeTitle": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
+        "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+        "publishedDate": "2026-09-12",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "hb.xinhuanet.com"
+        ],
+        "publisherDomains": [
+          "hb.xinhuanet.com"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 64,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "heritage_recognition_or_world_heritage_update",
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-12"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "熔古铸今续新篇——湖北黄石创建国家历史文化名城观察",
+            "url": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+            "publishedDate": "2026-09-12",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "hb.xinhuanet.com",
+            "sourcePublisherUrl": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：文物保护、文化遗产、政策行业、湖北",
+            "monitoringRecordId": "operational-20260912-xinhua-wenbo-0040-b581b17chtml",
+            "monitoringPath": "content/监测/2026-09-12.json",
+            "originalSourceUrl": "http://hb.xinhuanet.com/20260912/77ee1d055e234ba8868025f56b581b17/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "湖北",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "hb.xinhuanet.com"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "文章主要是黄石申报国家历史文化名城以来的遗存盘点和活化利用观察，发布时间虽为当日，但未呈现本期新批准、启动、验收或运营调整等可定位的近期动作，保留在发现审计，不进入日报。"
+      },
+      {
+        "eventId": "event-8c10a7ee4893",
+        "title": "唤醒十四载“沉睡”时光 泾源县“泾河博物馆”项目签约落地",
+        "representativeTitle": "唤醒十四载“沉睡”时光 泾源县“泾河博物馆”项目签约落地",
+        "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+        "publishedDate": "2026-09-12",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "www.nx.xinhuanet.com"
+        ],
+        "publisherDomains": [
+          "nx.xinhuanet.com"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 48,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "meaningful_institutional_or_international_cooperation",
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-12"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "唤醒十四载“沉睡”时光 泾源县“泾河博物馆”项目签约落地",
+            "url": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+            "publishedDate": "2026-09-12",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "www.nx.xinhuanet.com",
+            "sourcePublisherUrl": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：博物馆、政策行业、宁夏",
+            "monitoringRecordId": "operational-20260912-xinhua-wenbo-0041-7c002e4chtml",
+            "monitoringPath": "content/监测/2026-09-12.json",
+            "originalSourceUrl": "http://www.nx.xinhuanet.com/20260912/fa20aeccaf66463ebe753b14f7c002e4/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "宁夏",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "nx.xinhuanet.com"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "9月11日泾源县政府与社会投资主体签署协议，3000万元社会资本将把闲置14年的游客服务中心改造为泾河博物馆，项目时间表和15年运营机制均已公布，构成明确的机构建设与运营动作。"
+      },
+      {
+        "eventId": "event-1e419d08d3a3",
+        "title": "千岛湖畔 多国代表探寻中国生态修复经验",
+        "representativeTitle": "千岛湖畔 多国代表探寻中国生态修复经验",
+        "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+        "publishedDate": "2026-09-12",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "www.news.cn"
+        ],
+        "publisherDomains": [
+          "news.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 48,
+        "editorialPriorityLabel": "medium",
+        "editorialReasons": [
+          "meaningful_institutional_or_international_cooperation",
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-12"
+          ],
+          "sourceTypes": [
+            "central_media"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "千岛湖畔 多国代表探寻中国生态修复经验",
+            "url": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+            "publishedDate": "2026-09-12",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "新华网文博固定源监测",
+            "sourceDomain": "www.news.cn",
+            "sourcePublisherUrl": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：文物保护、国际交流、政策行业、浙江",
+            "monitoringRecordId": "operational-20260912-xinhua-wenbo-0043-3d0cb08chtml",
+            "monitoringPath": "content/监测/2026-09-12.json",
+            "originalSourceUrl": "https://www.news.cn/20260912/94b25c31ba4f4d29911de592a3d0cb08/c.html",
+            "monitoringScope": "province",
+            "monitoringLocationTier": "title",
+            "monitoringPrimaryProvince": "浙江",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "news.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "报道核心是世界银行生态文明知识交流项目对千岛湖流域生态修复经验的考察，缺少文物、博物馆或文化遗产对象，不属于本产品范围。"
+      },
+      {
+        "eventId": "event-fbf6ad17f94f",
+        "title": "新闻联播 |【文化中国行】让长城文化在保护与传承中生生不息",
+        "representativeTitle": "新闻联播 |【文化中国行】让长城文化在保护与传承中生生不息",
+        "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+        "publishedDate": "2026-09-11",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 2,
+        "sourceDomains": [
+          "ncha.gov.cn",
+          "www.ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-11"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "新闻联播 |【文化中国行】让长城文化在保护与传承中生生不息",
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          },
+          {
+            "title": "新闻联播 |【文化中国行】让长城文化在保护与传承中生生不息",
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "国家文物局固定源监测",
+            "sourceDomain": "www.ncha.gov.cn",
+            "sourcePublisherUrl": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+            "duplicateStatus": "same_day_duplicate",
+            "duplicateOrigin": "same_url_fixed_panel_radar",
+            "notes": "固定源语义标签：政策行业",
+            "monitoringRecordId": "operational-20260911-ncha-0034-22204779html",
+            "monitoringPath": "content/监测/2026-09-11.json",
+            "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204779.html",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "国家文物局转载的央视新闻报道确认界岭口长城金台保护修缮近期完成，并写明原材料、原工艺、原形制和最小干预原则，同时呈现保护员巡查及村史馆展示，具有具体保护工程与管理实践增量。"
+      },
+      {
+        "eventId": "event-8954aa032aa7",
+        "title": "国家文物局党组2026年巡视工作动员部署会召开",
+        "representativeTitle": "国家文物局党组2026年巡视工作动员部署会召开",
+        "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+        "publishedDate": "2026-09-11",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 2,
+        "sourceDomains": [
+          "ncha.gov.cn",
+          "www.ncha.gov.cn"
+        ],
+        "publisherDomains": [
+          "ncha.gov.cn"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": true,
+          "hasNationalScope": true
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-11"
+          ],
+          "sourceTypes": [
+            "official_institution"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "国家文物局党组2026年巡视工作动员部署会召开",
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "ncha-wenwu-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "ncha.gov.cn",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "ncha.gov.cn"
+          },
+          {
+            "title": "国家文物局党组2026年巡视工作动员部署会召开",
+            "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "国家文物局固定源监测",
+            "sourceDomain": "www.ncha.gov.cn",
+            "sourcePublisherUrl": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+            "duplicateStatus": "same_day_duplicate",
+            "duplicateOrigin": "same_url_fixed_panel_radar",
+            "notes": "固定源语义标签：政策行业",
+            "monitoringRecordId": "operational-20260911-ncha-0035-22204785html",
+            "monitoringPath": "content/监测/2026-09-11.json",
+            "originalSourceUrl": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+            "monitoringScope": "national",
+            "monitoringLocationTier": "national",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "ncha.gov.cn"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "国家文物局9月11日召开动员部署会并宣布2026年巡视组长授权及任务分工，2个巡视组将对4家直属单位党委和2个局管社会组织党组织开展巡视，属于影响直属单位治理的具体制度执行安排。"
+      },
+      {
+        "eventId": "event-970d6fc54b9e",
+        "title": "Strengthening Museum Security to Protect Cultural Heritage",
+        "representativeTitle": "Strengthening Museum Security to Protect Cultural Heritage",
+        "url": "https://icom.museum/en/news/strengthening-museum-security-to-protect-cultural-heritage/",
+        "publishedDate": "2026-09-11",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "icom.museum"
+        ],
+        "publisherDomains": [
+          "icom.museum"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-11"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://icom.museum/en/news/strengthening-museum-security-to-protect-cultural-heritage/",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "Strengthening Museum Security to Protect Cultural Heritage",
+            "url": "https://icom.museum/en/news/strengthening-museum-security-to-protect-cultural-heritage/",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "icom-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "icom.museum",
+            "duplicateStatus": "unique_event",
+            "publicationDateBasis": "source_listing",
+            "publisherDomain": "icom.museum"
+          }
+        ],
+        "finalEditorialDecision": "selected",
+        "finalEditorialReason": "ICOM官网确认与INTERPOL合作开展博物馆安全行业调查，计划以调查结果支持2028年发布博物馆安全指南；这是面向馆藏安全治理的国际行业行动，不把背景盗窃报道写成已完成的指南。"
+      },
+      {
+        "eventId": "event-5c5afdafb978",
+        "title": "News Call for Applications: 2026 International Youth Forum on Creativity and Heritage along the Silk Roads 11 September 2026",
+        "representativeTitle": "News Call for Applications: 2026 International Youth Forum on Creativity and Heritage along the Silk Roads 11 September 2026",
+        "url": "https://www.unesco.org/en/articles/call-applications-2026-international-youth-forum-creativity-and-heritage-along-silk-roads",
+        "publishedDate": "2026-09-11",
+        "scope": "international",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "unesco.org"
+        ],
+        "publisherDomains": [
+          "unesco.org"
+        ],
+        "freshnessTier": "primary_0_48h",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 28,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "primary_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-11"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://www.unesco.org/en/articles/call-applications-2026-international-youth-forum-creativity-and-heritage-along-silk-roads",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "News Call for Applications: 2026 International Youth Forum on Creativity and Heritage along the Silk Roads 11 September 2026",
+            "url": "https://www.unesco.org/en/articles/call-applications-2026-international-youth-forum-creativity-and-heritage-along-silk-roads",
+            "publishedDate": "2026-09-11",
+            "discoveredVia": "unesco-news",
+            "discoverySourceType": "source_scan",
+            "sourceDomain": "unesco.org",
+            "duplicateStatus": "unique_event",
+            "publisherDomain": "unesco.org"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "UNESCO页面是国际青年论坛报名通知，属于机会/活动公告；按日报规则不作为行业新闻，招聘与实习另行处理。"
+      },
+      {
+        "eventId": "event-1e8fa72f7356",
+        "title": "《探索·发现》 20260909 考古零距离（19）",
+        "representativeTitle": "《探索·发现》 20260909 考古零距离（19）",
+        "url": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml",
+        "publishedDate": "2026-09-09",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "tv.cctv.cn"
+        ],
+        "publisherDomains": [
+          "tv.cctv.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-09"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "《探索·发现》 20260909 考古零距离（19）",
+            "url": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml",
+            "publishedDate": "2026-09-09",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260909-cctv-wenbo-0018-b260909shtml",
+            "monitoringPath": "content/监测/2026-09-09.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/09/VIDEscyjs9rgnVjAKpGKrNAb260909.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "央视《探索·发现》节目页面属于栏目播出内容，未在标题或审计记录中形成新的考古、保护或机构运营动作，不作为日报事件。"
+      },
+      {
+        "eventId": "event-211212639d91",
+        "title": "《探索·发现》 20260908 考古零距离（18）",
+        "representativeTitle": "《探索·发现》 20260908 考古零距离（18）",
+        "url": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml",
+        "publishedDate": "2026-09-08",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "tv.cctv.cn"
+        ],
+        "publisherDomains": [
+          "tv.cctv.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-08"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "《探索·发现》 20260908 考古零距离（18）",
+            "url": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml",
+            "publishedDate": "2026-09-08",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260908-cctv-wenbo-0015-u260908shtml",
+            "monitoringPath": "content/监测/2026-09-08.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/08/VIDEdZMGgFAlTNXIyac58HFU260908.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "央视《探索·发现》节目页面属于固定源回看栏目，未呈现新的行业动作，不进入日报。"
+      },
+      {
+        "eventId": "event-705c11ad3395",
+        "title": "《探索·发现》 20260907 考古零距离（17）",
+        "representativeTitle": "《探索·发现》 20260907 考古零距离（17）",
+        "url": "https://tv.cctv.cn/2026/09/07/VIDEitXao0vnmqRXayicFIxu260907.shtml",
+        "publishedDate": "2026-09-07",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "tv.cctv.cn"
+        ],
+        "publisherDomains": [
+          "tv.cctv.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-07"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://tv.cctv.cn/2026/09/07/VIDEitXao0vnmqRXayicFIxu260907.shtml",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "《探索·发现》 20260907 考古零距离（17）",
+            "url": "https://tv.cctv.cn/2026/09/07/VIDEitXao0vnmqRXayicFIxu260907.shtml",
+            "publishedDate": "2026-09-07",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/07/VIDEitXao0vnmqRXayicFIxu260907.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260907-cctv-wenbo-0007-u260907shtml",
+            "monitoringPath": "content/监测/2026-09-07.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/07/VIDEitXao0vnmqRXayicFIxu260907.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "央视《探索·发现》节目页面属于固定源回看栏目，未呈现新的行业动作，不进入日报。"
+      },
+      {
+        "eventId": "event-c5c7db45f2ad",
+        "title": "《考古公开课》 20260905 往事越千年·西汉风云之文景之治（上）",
+        "representativeTitle": "《考古公开课》 20260905 往事越千年·西汉风云之文景之治（上）",
+        "url": "https://tv.cctv.cn/2026/09/06/VIDEiZdWhxvKJZOjknyeHjDa260906.shtml",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 2,
+        "sourceDomains": [
+          "tv.cctv.cn"
+        ],
+        "publisherDomains": [
+          "tv.cctv.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://tv.cctv.cn/2026/09/06/VIDEiZdWhxvKJZOjknyeHjDa260906.shtml",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "《考古公开课》 20260905 往事越千年·西汉风云之文景之治（上）",
+            "url": "https://tv.cctv.cn/2026/09/06/VIDEiZdWhxvKJZOjknyeHjDa260906.shtml",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/06/VIDEiZdWhxvKJZOjknyeHjDa260906.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260906-cctv-wenbo-0003-a260906shtml",
+            "monitoringPath": "content/监测/2026-09-06.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/06/VIDEiZdWhxvKJZOjknyeHjDa260906.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          },
+          {
+            "title": "《考古公开课》 20260905 往事越千年·西汉风云之文景之治（下）",
+            "url": "https://tv.cctv.cn/2026/09/06/VIDEx8L4HVvPOJAEDspibCCy260906.shtml",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/06/VIDEx8L4HVvPOJAEDspibCCy260906.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260906-cctv-wenbo-0004-y260906shtml",
+            "monitoringPath": "content/监测/2026-09-06.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/06/VIDEx8L4HVvPOJAEDspibCCy260906.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "央视《考古公开课》节目页面属于固定源回看栏目，未呈现新的行业动作，不进入日报。"
+      },
+      {
+        "eventId": "event-fb0c02a2f8ad",
+        "title": "《探索·发现》 20260906 考古零距离（16）",
+        "representativeTitle": "《探索·发现》 20260906 考古零距离（16）",
+        "url": "https://tv.cctv.cn/2026/09/06/VIDEJFhyL5g07b8i33JAMVxN260906.shtml",
+        "publishedDate": "2026-09-06",
+        "scope": "domestic",
+        "candidateDisposition": "evidence_qualified",
+        "reportCount": 1,
+        "sourceDomains": [
+          "tv.cctv.cn"
+        ],
+        "publisherDomains": [
+          "tv.cctv.cn"
+        ],
+        "freshnessTier": "backfill_3_7d",
+        "newDevelopment": false,
+        "claimRisk": "ordinary",
+        "editorialPriorityScore": 22,
+        "editorialPriorityLabel": "low",
+        "editorialReasons": [
+          "backfill_freshness"
+        ],
+        "museumCollectionOrPublicIncident": false,
+        "heritageGovernance": {
+          "matched": false,
+          "national": false,
+          "hasSubject": false,
+          "hasAction": false,
+          "hasNationalScope": false
+        },
+        "publicSalience": {
+          "level": "normal",
+          "independentCoverageCount": 1,
+          "publisherDiversity": 1,
+          "sourceTypeDiversity": 1,
+          "coverageDates": [
+            "2026-09-06"
+          ],
+          "sourceTypes": [
+            "other_publisher"
+          ],
+          "reason": "limited_or_unconfirmed_independent_coverage"
+        },
+        "independentCoverageCount": 1,
+        "evidenceTierAtDiscovery": "A",
+        "evidenceTierAfterUpgrade": "A",
+        "evidenceUpgradeStatus": "not_needed",
+        "evidenceSources": [
+          {
+            "url": "https://tv.cctv.cn/2026/09/06/VIDEJFhyL5g07b8i33JAMVxN260906.shtml",
+            "tier": "A",
+            "articleVerified": true
+          }
+        ],
+        "discoveredVia": null,
+        "discoveryQuery": null,
+        "discoveryReports": [
+          {
+            "title": "《探索·发现》 20260906 考古零距离（16）",
+            "url": "https://tv.cctv.cn/2026/09/06/VIDEJFhyL5g07b8i33JAMVxN260906.shtml",
+            "publishedDate": "2026-09-06",
+            "discoveredVia": "fixed-panel-radar",
+            "discoverySourceType": "fixed_panel_radar",
+            "discoverySource": "央视网文博与央视新闻固定源监测",
+            "sourceDomain": "tv.cctv.cn",
+            "sourcePublisherUrl": "https://tv.cctv.cn/2026/09/06/VIDEJFhyL5g07b8i33JAMVxN260906.shtml",
+            "duplicateStatus": "unique_event",
+            "notes": "固定源语义标签：考古",
+            "monitoringRecordId": "operational-20260906-cctv-wenbo-0002-n260906shtml",
+            "monitoringPath": "content/监测/2026-09-06.json",
+            "originalSourceUrl": "https://tv.cctv.cn/2026/09/06/VIDEJFhyL5g07b8i33JAMVxN260906.shtml",
+            "monitoringScope": "unassigned",
+            "monitoringLocationTier": "unassigned",
+            "monitoringPrimaryProvince": "",
+            "dailyScopeHint": "domestic",
+            "publisherDomain": "tv.cctv.cn"
+          }
+        ],
+        "finalEditorialDecision": "rejected",
+        "finalEditorialReason": "央视《探索·发现》节目页面属于固定源回看栏目，未呈现新的行业动作，不进入日报."
+      }
+    ]
+  }
+}

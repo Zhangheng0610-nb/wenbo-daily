@@ -1,82 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-11T08:24:59.509482+08:00",
+  "generatedAt": "2026-09-12T12:52:19.064259+08:00",
   "items": [
-    {
-      "id": "job-801e32262a0e35",
-      "kind": "jobs",
-      "institution": "📍 云南省博物馆",
-      "position": "文创开发与销售（专业技术岗位） 1 名",
-      "deadline": "2026-09-11 18:00（通过初审后缴费至9月13日24:00）",
-      "deadlineAt": "2026-09-11T18:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-801e32262a0e35"
-    },
-    {
-      "id": "job-36f3c5a500ce0d",
-      "kind": "jobs",
-      "institution": "📍 云南省博物馆",
-      "position": "陈列展览形式设计（专业技术岗位） 1 名",
-      "deadline": "2026-09-11 18:00（通过初审后缴费至9月13日24:00）",
-      "deadlineAt": "2026-09-11T18:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-36f3c5a500ce0d"
-    },
-    {
-      "id": "job-549919fcb22ab1",
-      "kind": "jobs",
-      "institution": "📍 镇江博物馆",
-      "position": "文物修复人员 1 名",
-      "deadline": "2026-09-11 16:00",
-      "deadlineAt": "2026-09-11T16:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-549919fcb22ab1"
-    },
-    {
-      "id": "job-73cc210623397c",
-      "kind": "jobs",
-      "institution": "📍 茅山新四军纪念馆",
-      "position": "讲解员 1 名",
-      "deadline": "2026-09-11 16:00",
-      "deadlineAt": "2026-09-11T16:00:00+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-73cc210623397c"
-    },
-    {
-      "id": "job-097a4eb13bf520",
-      "kind": "jobs",
-      "institution": "📍 南京大学档案馆、校史博物馆",
-      "position": "专业、技术人员（若干）",
-      "deadline": "2026-09-11",
-      "deadlineAt": "2026-09-11T23:59:59+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "jobs.html?status=all#job-097a4eb13bf520"
-    },
     {
       "id": "job-56be98e36251a7",
       "kind": "jobs",
@@ -87,8 +12,20 @@
       "opensAt": null,
       "timeStatus": "open",
       "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
+        "jobId": "job-56be98e36251a7",
+        "signature": "8efe12256a2da68f130bbf4ae2486ca5d4999d154de1e8e203974d08bfa68ae4",
+        "checkedAt": "2026-09-12T12:39:21+08:00",
+        "reviewAfter": "2026-09-15T12:39:21+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://www.gaoxiaojob.com/announcement/detail/428189.html",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "详情页支持台州市博物馆岗位、9月13日截止和tzbwgbgs@163.com邮箱投递；来源为C级专业招聘站，申请前核对原文。",
+        "state": "changed",
+        "label": "报名信息已变更，需重新核验"
       },
       "url": "jobs.html?status=all#job-56be98e36251a7"
     },
@@ -103,16 +40,19 @@
       "timeStatus": "upcoming",
       "evidence": {
         "jobId": "job-133ffdd922a5b9",
-        "signature": "e83b1970a387519820fc5c90e592908f38b241429415a0383c78befbf1cba50b",
-        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
-        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
-        "outcome": "unavailable",
+        "signature": "8f2f8538fccaf34b7f86ff5e5462a0079a407442083f2889c81f1bb246c31866",
+        "checkedAt": "2026-09-12T12:39:21+08:00",
+        "reviewAfter": "2026-09-15T12:39:21+08:00",
+        "outcome": "supported",
         "sourceUrl": "https://www.dpm.org.cn/classify_detail/379103.html",
         "method": "public_web_extraction",
-        "fields": [],
-        "note": "本轮读取原文超时，不能据此确认或否定公告；保留原条目及报名时间。",
-        "state": "unavailable",
-        "label": "本次原文未能读取"
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "故宫官网支持第二批次2026年9月15日至10月20日、2026年两批次拟招17名及公邮gugongboshihou@dpm.org.cn；此前超时记录保留。",
+        "state": "changed",
+        "label": "报名信息已变更，需重新核验"
       },
       "url": "jobs.html?status=all#job-133ffdd922a5b9"
     },
@@ -243,19 +183,79 @@
       "url": "jobs.html?status=all#job-0da777c31649df"
     },
     {
-      "id": "job-8f6f7c34f49284",
+      "id": "job-801e32262a0e35",
       "kind": "jobs",
-      "institution": "上海博物馆",
-      "position": "公开招聘工作人员 4 名",
-      "deadline": "2026-09-11 17:00",
-      "deadlineAt": "2026-09-11T17:00:00+08:00",
+      "institution": "📍 云南省博物馆",
+      "position": "文创开发与销售（专业技术岗位） 1 名",
+      "deadline": "2026-09-11 18:00（通过初审后缴费至9月13日24:00）",
+      "deadlineAt": "2026-09-11T18:00:00+08:00",
       "opensAt": null,
-      "timeStatus": "open",
+      "timeStatus": "closed",
       "evidence": {
         "state": "missing",
         "label": "报名信息尚无逐项核验记录"
       },
-      "url": "jobs.html?status=all#job-8f6f7c34f49284"
+      "url": "jobs.html?status=all#job-801e32262a0e35"
+    },
+    {
+      "id": "job-36f3c5a500ce0d",
+      "kind": "jobs",
+      "institution": "📍 云南省博物馆",
+      "position": "陈列展览形式设计（专业技术岗位） 1 名",
+      "deadline": "2026-09-11 18:00（通过初审后缴费至9月13日24:00）",
+      "deadlineAt": "2026-09-11T18:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-36f3c5a500ce0d"
+    },
+    {
+      "id": "job-549919fcb22ab1",
+      "kind": "jobs",
+      "institution": "📍 镇江博物馆",
+      "position": "文物修复人员 1 名",
+      "deadline": "2026-09-11 16:00",
+      "deadlineAt": "2026-09-11T16:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-549919fcb22ab1"
+    },
+    {
+      "id": "job-73cc210623397c",
+      "kind": "jobs",
+      "institution": "📍 茅山新四军纪念馆",
+      "position": "讲解员 1 名",
+      "deadline": "2026-09-11 16:00",
+      "deadlineAt": "2026-09-11T16:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-73cc210623397c"
+    },
+    {
+      "id": "job-097a4eb13bf520",
+      "kind": "jobs",
+      "institution": "📍 南京大学档案馆、校史博物馆",
+      "position": "专业、技术人员（若干）",
+      "deadline": "2026-09-11",
+      "deadlineAt": "2026-09-11T23:59:59+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-097a4eb13bf520"
     },
     {
       "id": "job-228c2b07aacd46",
@@ -468,6 +468,21 @@
       "url": "jobs.html?status=all#job-dda27e8f5ae0dd"
     },
     {
+      "id": "job-8f6f7c34f49284",
+      "kind": "jobs",
+      "institution": "上海博物馆",
+      "position": "公开招聘工作人员 4 名",
+      "deadline": "2026-09-11 17:00",
+      "deadlineAt": "2026-09-11T17:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "state": "missing",
+        "label": "报名信息尚无逐项核验记录"
+      },
+      "url": "jobs.html?status=all#job-8f6f7c34f49284"
+    },
+    {
       "id": "job-e8550570fa7d00",
       "kind": "jobs",
       "institution": "四川省文物考古研究院",
@@ -642,8 +657,20 @@
       "opensAt": null,
       "timeStatus": "open",
       "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
+        "jobId": "job-0e5f1058a5cc6f",
+        "signature": "2fc01bf2ce579596773fecda2a35210cc6fcb35edd24f7b36aaa03f430609a66",
+        "checkedAt": "2026-09-12T12:39:21+08:00",
+        "reviewAfter": "2026-09-15T12:39:21+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://brightonmuseums.org.uk/job-opportunity-curator-x2/",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "官网支持两名Curator、英国时间9月13日17:00截止和recruitment@rpmt.org.uk投递；岗位要求申请人自行具备英国工作权。",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
       },
       "url": "jobs.html?status=all#job-0e5f1058a5cc6f"
     },
@@ -658,9 +685,9 @@
       "timeStatus": "open",
       "evidence": {
         "jobId": "job-03d4917849af6a",
-        "signature": "b185aa63e0ffdc244b0ae782098dd28888b85c4981399a266c346df3b09e0258",
-        "checkedAt": "2026-09-07T05:08:25.369199+00:00",
-        "reviewAfter": "2026-09-10T05:08:25.369199+00:00",
+        "signature": "5d6661642ca20799b85dfa9e5de5f829b408cf87af610169f59857c53e30ebbb",
+        "checkedAt": "2026-09-12T12:47:54+08:00",
+        "reviewAfter": "2026-09-15T12:47:54+08:00",
         "outcome": "supported",
         "sourceUrl": "https://www.pgm.org.cn/pgm/zxgg/202608/cd2fc6cea77b4581b1e06e26a76a282b.shtml",
         "method": "public_web_extraction",
@@ -668,9 +695,9 @@
           "deadline",
           "application"
         ],
-        "note": "官方公告支持9月15日截止、扫码报名和志愿服务性质；本记录不代表劳动岗位或录用资格。",
-        "state": "stale",
-        "label": "核验记录已过复核期"
+        "note": "故宫博物院官网当前公告支持2026年度志愿者招募、9月15日截止和扫码报名；本记录不代表劳动岗位或录用资格。",
+        "state": "changed",
+        "label": "报名信息已变更，需重新核验"
       },
       "url": "intern.html?status=all#job-03d4917849af6a"
     },
@@ -834,8 +861,20 @@
       "opensAt": null,
       "timeStatus": "check",
       "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
+        "jobId": "job-0065d3e0c4966c",
+        "signature": "e8b9b2b184a7e9a9e18b9c3eb0f22051367962fcaafc1d4427990898bf09ad13",
+        "checkedAt": "2026-09-12T12:39:21+08:00",
+        "reviewAfter": "2026-09-15T12:39:21+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://www.mplus.org.hk/sc/join-the-team/m-internship/",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "M+官网支持2026年9月至2027年8月实习期、当前接受申请及按团队进入Workday投递；官网未公布统一截止日期。",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
       },
       "url": "intern.html?status=all#job-0065d3e0c4966c"
     },
@@ -991,13 +1030,6 @@
     }
   ],
   "reviewQueue": [
-    "job-549919fcb22ab1",
-    "job-73cc210623397c",
-    "job-8f6f7c34f49284",
-    "job-801e32262a0e35",
-    "job-36f3c5a500ce0d",
-    "job-097a4eb13bf520",
-    "job-0e5f1058a5cc6f",
     "job-56be98e36251a7",
     "job-03d4917849af6a",
     "job-228c2b07aacd46",
@@ -1031,7 +1063,6 @@
     "job-a049bd6977a04e",
     "job-c7827d0e9057e5",
     "job-6e87e0e226113f",
-    "job-0065d3e0c4966c",
     "job-bdd9c949c40953",
     "job-1d57d0b5711bf4",
     "job-95a9f23e3fc075",
@@ -1040,7 +1071,7 @@
   ],
   "counts": {
     "total": 62,
-    "recentEvidence": 0,
-    "reviewNeeded": 46
+    "recentEvidence": 2,
+    "reviewNeeded": 38
   }
 }
