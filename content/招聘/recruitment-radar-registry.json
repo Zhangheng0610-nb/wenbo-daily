@@ -1,6 +1,6 @@
 {
   "schema": "recruitment-radar-registry-v1",
-  "updatedAt": "2026-09-09",
+  "updatedAt": "2026-09-13",
   "policy": "Radar sources are discovery-only. A listing is publishable only after a direct detail/application source is verified.",
   "sources": [
     {
@@ -69,7 +69,9 @@
       "discoveryOnly": true,
       "directScan": true,
       "lastVerified": null,
-      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "failed"
     },
     {
       "name": "高校人才网博物馆实习",
@@ -80,7 +82,9 @@
       "discoveryOnly": true,
       "directScan": true,
       "lastVerified": null,
-      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "failed"
     },
     {
       "name": "高校人才网考古专题",
@@ -91,7 +95,9 @@
       "discoveryOnly": true,
       "directScan": true,
       "lastVerified": null,
-      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。"
+      "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "failed"
     },
     {
       "name": "中国陈列展览网文博招聘",
@@ -101,9 +107,167 @@
       "active": true,
       "discoveryOnly": true,
       "directScan": true,
-      "lastVerified": null,
+      "lastVerified": "2026-09-13",
       "notes": "公开检索确认入口；可读取性和候选链接以本轮 direct_directory 审计为准。",
-      "inlineDigest": true
+      "inlineDigest": true,
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "中国国家博物馆招聘",
+      "url": "https://www.chnmuseum.cn/shxg/gbzp/",
+      "scope": "机构直招与实习",
+      "type": "official_institution",
+      "institution": "中国国家博物馆",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": null,
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "failed"
+    },
+    {
+      "name": "故宫博物院学术与博士后公告",
+      "url": "https://www.dpm.org.cn/about/dynamic.html",
+      "scope": "机构直招与实习",
+      "type": "official_institution",
+      "institution": "故宫博物院",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": "2026-09-13",
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "首都博物馆公告",
+      "url": "https://www.capitalmuseum.org.cn/",
+      "scope": "机构直招与实习",
+      "type": "official_institution",
+      "institution": "首都博物馆",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": "2026-09-13",
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "清华艺博招聘须知",
+      "url": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/",
+      "scope": "机构直招与实习",
+      "type": "official_institution",
+      "institution": "清华大学艺术博物馆",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": "2026-09-13",
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "M+毕业生实习",
+      "url": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "scope": "机构直招与实习",
+      "type": "official_institution",
+      "institution": "M+博物馆",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": "2026-09-13",
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "applicationUrlPrefix": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/",
+      "programName": "2026—2027 毕业生实习",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "中国社会科学院招聘公告",
+      "url": "https://www.cssn.cn/ggzp/",
+      "scope": "社科院及考古机构公告",
+      "type": "official_recruitment_site",
+      "institution": "",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "lastVerified": "2026-09-13",
+      "followPages": 2,
+      "notes": "入口检查与候选数量见 round25 招聘实测；招录进度公告单独记录，不作为新岗位。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "上海市人社局招聘公告",
+      "url": "https://rsj.sh.gov.cn/tzpgg_17408/",
+      "scope": "主管部门公告及附件",
+      "type": "official_recruitment_site",
+      "institution": "",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "followPages": 2,
+      "umbrellaNotices": true,
+      "lastVerified": "2026-09-13",
+      "notes": "从已刊原公告的栏目路径接入；真实可读性与覆盖见 round25 招聘审计。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
+    },
+    {
+      "name": "陕西省文物局人事招聘",
+      "url": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/",
+      "scope": "主管部门公告及附件",
+      "type": "official_recruitment_site",
+      "institution": "",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "followPages": 2,
+      "umbrellaNotices": true,
+      "lastVerified": null,
+      "notes": "从已刊原公告的栏目路径接入；真实可读性与覆盖见 round25 招聘审计。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "failed"
+    },
+    {
+      "name": "镇江市文广旅局通知公告",
+      "url": "https://wgl.zhenjiang.gov.cn/wgl/tzgg/",
+      "scope": "主管部门公告及附件",
+      "type": "official_recruitment_site",
+      "institution": "",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "followPages": 2,
+      "umbrellaNotices": true,
+      "lastVerified": null,
+      "notes": "从已刊原公告的栏目路径接入；真实可读性与覆盖见 round25 招聘审计。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "partial"
+    },
+    {
+      "name": "四川大学博物馆",
+      "url": "https://sum.scu.edu.cn/",
+      "scope": "高校博物馆实习与招聘",
+      "type": "official_institution",
+      "institution": "四川大学博物馆",
+      "active": true,
+      "discoveryOnly": true,
+      "directScan": true,
+      "followPages": 2,
+      "umbrellaNotices": false,
+      "lastVerified": "2026-09-13",
+      "notes": "从已刊原公告的栏目路径接入；真实可读性与覆盖见 round25 招聘审计。",
+      "lastCheckedAt": "2026-09-13T12:03:19+08:00",
+      "lastScanStatus": "success"
     }
   ]
 }

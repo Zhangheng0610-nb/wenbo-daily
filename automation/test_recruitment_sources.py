@@ -79,7 +79,7 @@ class RecruitmentWebSearchTests(unittest.TestCase):
  def test_undated_job_keeps_snippet_without_turning_application_date_into_publication(self):
   from unittest.mock import patch,MagicMock
   from automation.recruitment_search import execute_query
-  response=MagicMock();response.status=200;response.read.return_value='<li class="b_algo"><h2><a href="https://example.org/job">某博物馆招聘</a></h2><p>报名截止2026年9月15日。提供实习。</p></li>'.encode()
+  response=MagicMock();response.status=200;response.headers={};response.read.return_value='<li class="b_algo"><h2><a href="https://example.org/job">某博物馆招聘</a></h2><p>报名截止2026年9月15日。提供实习。</p></li>'.encode()
   response.__enter__.return_value=response
   with patch('automation.recruitment_search.SEARCH_OPENER.open',return_value=response):
    rows,audit=execute_query({'id':'recruitment-internship','scope':'domestic'},{'id':'bing-web'},'博物馆 招聘',date(2026,8,9),date(2026,9,9))
@@ -89,7 +89,7 @@ class RecruitmentReliabilityTests(unittest.TestCase):
  def test_irrelevant_web_response_is_failed_not_no_new_jobs(self):
   from unittest.mock import patch,MagicMock
   from automation.recruitment_search import execute_query
-  response=MagicMock();response.status=200;response.read.return_value=b'<li class="b_algo"><h2><a href="https://example.org/house">House for sale</a></h2><p>House prices and property.</p></li>';response.__enter__.return_value=response
+  response=MagicMock();response.status=200;response.headers={};response.read.return_value=b'<li class="b_algo"><h2><a href="https://example.org/house">House for sale</a></h2><p>House prices and property.</p></li>';response.__enter__.return_value=response
   with patch('automation.recruitment_search.SEARCH_OPENER.open',return_value=response):
    rows,audit=execute_query({'id':'recruitment-internship','scope':'domestic'},{'id':'bing-web'},'博物馆 实习',date(2026,8,9),date(2026,9,9))
   self.assertEqual(rows,[]);self.assertFalse(audit['success']);self.assertEqual(audit['failure'],'no_recruitment_relevance_in_returned_results')

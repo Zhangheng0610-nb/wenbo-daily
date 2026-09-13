@@ -58,10 +58,10 @@ RECRUITMENT_QUERY_FAMILIES = OrderedDict([
     )),
 ])
 
-RECRUITMENT_TERMS = ("招聘", "招录", "公开招聘", "编外", "岗位", "实习", "见习", "博士后", "招募", "實習", "見習", "博士後")
+RECRUITMENT_TERMS = ("招收", "徵才", "招聘", "招录", "公开招聘", "编外", "岗位", "实习", "见习", "博士后", "招募", "實習", "見習", "博士後")
 HERITAGE_TERMS = (
     "博物馆", "博物院", "纪念馆", "美术馆", "考古院", "考古研究院", "文物考古研究所", "文物保护研究所",
-    "文物", "文博", "文保", "文化遗产", "数字文博", "博物館", "紀念館", "美術館", "文化遺產", "敦煌研究院",
+    "考古研究所", "艺博", "文物", "文博", "文保", "文化遗产", "数字文博", "博物館", "紀念館", "美術館", "文化遺產", "敦煌研究院",
 )
 HERITAGE_ROLE_TERMS = ("陈列", "展览", "社教", "公共教育", "讲解", "策展", "藏品")
 UMBRELLA_TERMS = ("文化和旅游厅", "文化和旅游局", "文广旅局", "文旅厅", "文旅局", "文物局")
@@ -300,7 +300,8 @@ def keep_discovery_record(record):
     # Government umbrella notices often name museums only in an attachment.
     family=record.get("queryFamily", "")
     query=record.get("discoveryQuery", "")
-    umbrella="government_umbrella" in family or ("national_rotation" in family and "事业单位" in query)
+    umbrella=("government_umbrella" in family or ("national_rotation" in family and "事业单位" in query)
+              or (record.get("discoverySourceType")=="recruitment_directory" and record.get("decisionReason")=="umbrella_notice_needs_attachment_inspection"))
     return umbrella and any(term in title for term in ("招聘","人才引进","招录"))
 
 
@@ -400,13 +401,34 @@ def persistent_review_queue(root, ledger):
     return {"schema":"recruitment-review-queue-v1","asOf":ledger["date"],"pendingCount":len(pending),"appliedReviewCount":len(applied),"appliedReviews":applied,"candidates":pending}
 
 
+def collect_discovery_inputs(start, end, *, input_data=None, no_live=False,
+                             directories_only=False, full_sweep=False, max_queries=None):
+    """Importing web search must not silently disable independent directory scans."""
+    if input_data is not None:
+        records = list(input_data.get('records', input_data.get('rawRecords', [])))
+        audits = list(input_data.get('queryAudits', []))
+        directory_audits = list(input_data.get('directoryAudits', []))
+    elif no_live or directories_only:
+        records, audits, directory_audits = [], [], []
+    else:
+        records, audits = _execute_queries(start, end, full_sweep=full_sweep, max_queries=max_queries)
+        directory_audits = []
+    if not no_live:
+        from automation.backfill_monitoring import fetch
+        direct_records, current_audits = scan_directories(_load_registry(), fetch, checked_at=now_cn())
+        records.extend(direct_records)
+        directory_audits.extend(current_audits)
+    return records, audits, directory_audits
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", type=date.fromisoformat, required=True)
     parser.add_argument("--last-successful-date", type=date.fromisoformat)
     parser.add_argument("--review-file", type=Path)
     parser.add_argument("--input-results", type=Path)
-    parser.add_argument("--no-live", action="store_true")
+    parser.add_argument("--no-live", action="store_true", help="Offline replay only; preserve imported directory audits")
+    parser.add_argument("--directories-only", action="store_true", help="Run registered directories without web search; never claims full-web coverage")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--plan-only", action="store_true", help="Export queries for the existing Codex web-search tool; no network")
     parser.add_argument("--full-sweep", action="store_true", help="All provinces; 90-day catch-up")
@@ -426,27 +448,21 @@ def main() -> int:
         parser.error("--max-queries must be nonnegative")
     if args.write and args.max_queries is not None:
         parser.error("diagnostic samples must use --output, not --write")
-    directory_audits=[]
-    if args.input_results:
-        source = json.loads(args.input_results.read_text(encoding="utf-8"))
-        records, audits = source.get("records", []), source.get("queryAudits", [])
-    elif args.no_live:
-        records, audits = [], []
-    else:
-        records, audits = _execute_queries(start, end, full_sweep=args.full_sweep, max_queries=args.max_queries)
-        from automation.backfill_monitoring import fetch
-        direct_records, directory_audits = scan_directories(_load_registry(), fetch, checked_at=now_cn())
-        records.extend(direct_records)
+    source = json.loads(args.input_results.read_text(encoding="utf-8")) if args.input_results else None
+    records, audits, directory_audits = collect_discovery_inputs(
+        start, end, input_data=source, no_live=args.no_live, directories_only=args.directories_only,
+        full_sweep=args.full_sweep, max_queries=args.max_queries,
+    )
     reviews = json.loads(args.review_file.read_text(encoding="utf-8")).get("candidates", []) if args.review_file else []
     ledger = build_ledger(args.date, records, audits, reviews, last_successful=args.last_successful_date, directory_audits=directory_audits)
     ledger["queryPlan"]=query_plan(args.date, RECRUITMENT_QUERY_FAMILIES, _load_registry(), full_sweep=args.full_sweep)
-    ledger["coverageMode"]="sample" if args.max_queries is not None else ("replay" if args.input_results or args.no_live else "full_sweep" if args.full_sweep else "daily_rotation")
+    ledger["coverageMode"]="sample" if args.max_queries is not None else ("directories_only" if args.directories_only and not args.no_live else "replay_plus_directories" if args.input_results and not args.no_live else "replay" if args.input_results or args.no_live else "full_sweep" if args.full_sweep else "daily_rotation")
     ledger["queryWindowStart"]=min((a.get("windowStart", start.isoformat()) for a in audits), default=start.isoformat())
     ledger["windowStart"]=ledger["queryWindowStart"]
     ledger["minimumQueryLookbackDays"]=90 if args.full_sweep else 30
     ledger["historicalDirectoryLeadsRetained"]=True
     ledger["reviewQueue"]=persistent_review_queue(ROOT, ledger)
-    if not args.no_live and not args.input_results and args.inspect_limit > 0:
+    if not args.no_live and args.inspect_limit > 0:
         from automation.recruitment_detail import inspect_candidates
         from automation.backfill_monitoring import fetch
         ledger["detailDossiers"]=inspect_candidates(ledger["reviewQueue"]["candidates"],fetch,now_cn(),min(args.inspect_limit,24))

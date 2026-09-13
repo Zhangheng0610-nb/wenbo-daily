@@ -7,8 +7,8 @@
   "replayedAt": "2026-09-13T07:32:50+08:00",
   "replayCutoff": "2026-09-13T07:32:50+08:00",
   "baseDiscoveryAuditPath": "content/发现/2026-09-13.json",
-  "baseDiscoveryAuditSha256": "89c74b3097fe51e48a7faef722f9f74414368f9f0da004014259be4c5208a0b6",
-  "baseDiscoveryAuditHashMode": "raw",
+  "baseDiscoveryAuditSha256": "9ba88b5a9a08c89be606f07badc8f3f62b1e06cd1c981fbaf6aa901abc82f787",
+  "baseDiscoveryAuditHashMode": "lf-normalized-v1",
   "discoveryAuditUnchanged": true,
   "inputMode": "immutable_discovery_snapshot",
   "reason": "在唯一 broad discovery finalEditorialPool 上完成逐条行业动作复核；原始发现审计保持不可变，未拼接其他候选池。",
@@ -4585,5 +4585,15 @@
         "selectedForDaily": false
       }
     ]
+  },
+  "baseHashNormalization": {
+    "path": "content/复核/2026-09-13-editorial-replay.json",
+    "originalMode": "raw",
+    "originalSha256": "89c74b3097fe51e48a7faef722f9f74414368f9f0da004014259be4c5208a0b6",
+    "originalLineEndings": "CRLF",
+    "newMode": "lf-normalized-v1",
+    "newSha256": "9ba88b5a9a08c89be606f07badc8f3f62b1e06cd1c981fbaf6aa901abc82f787",
+    "discoveryBytesChanged": false,
+    "editorialDecisionsChanged": false
   }
 }

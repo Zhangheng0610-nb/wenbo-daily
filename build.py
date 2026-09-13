@@ -3054,7 +3054,7 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
         href = f'reports/{escape(latest_date, quote=True)}.html#{item_id}'
         # Excerpts come from the published report, never generated marketing copy.
         plain_body = re.sub(r'[*_`]', '', str(item.get('body') or ''))
-        limit = 180 if index == 0 else 90
+        limit = 110 if index == 0 else 80
         excerpt = escape(plain_body[:limit]) + ('…' if len(plain_body) > limit else '')
         sources = ' / '.join(dict.fromkeys(str(source.get('name', '')) for source in item.get('sources', [])))
         topic = ' · '.join(item.get('tags', [])[:2]) or '文博动向'
@@ -3062,8 +3062,8 @@ def build_homepage(daily_reports, weekly_reports=None, monthly_reports=None, rec
   <div class="edition-label"><span>{escape(topic)}</span><span>{index + 1:02d}</span></div>
   <h3><a href="{href}">{item_title}</a></h3>
   <p class="edition-excerpt">{excerpt}</p>
-  <div class="edition-source">{escape(sources)}</div>
-  <a class="edition-read" href="{href}">阅读与点评 <span aria-hidden="true">↗</span></a>
+  <div class="edition-footer"><span class="edition-source">{escape(sources)}</span>
+  <a class="edition-read" href="{href}" aria-label="阅读与点评：{item_title}">阅读全文 <span aria-hidden="true">↗</span></a></div>
 </article>''')
     hero_list = ''.join(hero_links) or '<p class="muted">暂无已发布日报</p>'
 
@@ -4192,7 +4192,7 @@ def main():
     import digital_trend
     digital_trend.main(['--build-only'])
     import build_command_center
-    build_command_center.main()
+    build_command_center.main(daily_reports)
     from automation.product import finish_site
     finish_site(SITE_DIR, daily_reports)
 

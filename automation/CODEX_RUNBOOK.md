@@ -259,3 +259,13 @@ python automation/validate_periodic_reports.py --type monthly --key YYYY-MM
 ### 来源解析故障（Round23）
 
 中新文化栏目使用https://www.chinanews.com.cn/wy/，旧/cul/只返回meta跳转。公共fetch已处理gzip/deflate，损坏压缩、超限、未知编码会明确失败。不能把HTTP200、解码乱码或仅有跳转指令的页面记作正常无更新。来源恢复后仍执行同一事件去重、行业范围和原文动作核查，不能直接把栏目链接批量升为articleVerified。
+
+### Round25：数字化栏目与招聘直采
+
+- 数字趋势每日增量回看14天，并读取普通文章正文；标题未命中不再直接跳过。国家文物局正文取 `#zoom`，学术探讨过滤继续生效。查看监测文件中的 `ordinaryBodyChecks`，区分无数字信号、正文不可读和范围排除。
+- 构建自动生成 `digital-news.json`，将近两周已刊数字化报道显示在行业观察中。此新闻流按编辑事件去重，国家文物局历史图表继续使用原来的统计分母。
+- 招聘 `--input-results` 导入外部网页搜索后仍执行目录直采；只有显式 `--no-live` 才完全离线，并保留导入的 `directoryAudits`。网络检索暂不可用时，可运行 `python automation/recruitment_discovery.py --date YYYY-MM-DD --directories-only --write`；账本明确标为 `directories_only`，不代表已执行全国搜索。
+- 目录采集支持已登记机构的简写标题、限定投递路径和最多两页后续分页。招聘进度通知记录在 `lifecycleUpdates`。主管部门总公告仍须展开岗位要求，不把全部事业单位公告直接发布成文博岗位。
+- 最新人工复核结果在 `review-decisions.json`；采集账本保留当时快照，当前 `review-queue.json` 才是待办状态。Round25将川大公告拆成三个已刊岗位，并处理六条已刊/过期队列项。
+- 新的复核输入必须使用 `baseDiscoveryAuditHashMode: lf-normalized-v1`，哈希计算为 `sha256(path.read_bytes().replace(b'\r\n', b'\n'))`。不再创建依赖Windows换行的raw哈希。旧记录迁移先验证原哈希确实对应CRLF字节，只改哈希元数据并保存迁移审计，不能放宽校验或改写原始发现。
+- CI使用Python3.12，与现有嵌套f-string语法及本轮验证环境一致。

@@ -1,7 +1,91 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T07:40:02.541325+08:00",
+  "generatedAt": "2026-09-13T21:01:41.879246+08:00",
   "items": [
+    {
+      "id": "job-44632fb38bdb69",
+      "kind": "jobs",
+      "institution": "四川大学博物馆",
+      "position": "自然科学系列研学专员 1 名",
+      "deadline": "2026-09-18 12:00（北京时间）",
+      "deadlineAt": "2026-09-18T12:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "open",
+      "evidence": {
+        "jobId": "job-44632fb38bdb69",
+        "signature": "08a01b985a023a27d617b615c06ef631095909921221ec3c253d94a4de810938",
+        "checkedAt": "2026-09-13T12:07:48+08:00",
+        "reviewAfter": "2026-09-16T12:07:48+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+        "method": "public_html_body_review",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
+        "auditPath": "audit/round25-scu-recruitment-evidence.json",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-44632fb38bdb69"
+    },
+    {
+      "id": "job-54d3bd929c68e9",
+      "kind": "jobs",
+      "institution": "四川大学博物馆",
+      "position": "社会教育专员 1 名",
+      "deadline": "2026-09-18 12:00（北京时间）",
+      "deadlineAt": "2026-09-18T12:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "open",
+      "evidence": {
+        "jobId": "job-54d3bd929c68e9",
+        "signature": "0049f9d1f1a3f4d7d3fdd90c123902cd2acd166f577e401a2648b468a4b1bf13",
+        "checkedAt": "2026-09-13T12:07:48+08:00",
+        "reviewAfter": "2026-09-16T12:07:48+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+        "method": "public_html_body_review",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
+        "auditPath": "audit/round25-scu-recruitment-evidence.json",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-54d3bd929c68e9"
+    },
+    {
+      "id": "job-86d4d12d9e6276",
+      "kind": "jobs",
+      "institution": "四川大学博物馆",
+      "position": "物业安保部工程及安全专员 1 名",
+      "deadline": "2026-09-18 12:00（北京时间）",
+      "deadlineAt": "2026-09-18T12:00:00+08:00",
+      "opensAt": null,
+      "timeStatus": "open",
+      "evidence": {
+        "jobId": "job-86d4d12d9e6276",
+        "signature": "83d7ecce535c77f4e6989e9a5cb1e13fe190c6cc8d82bd3a86581430bad29fde",
+        "checkedAt": "2026-09-13T12:07:48+08:00",
+        "reviewAfter": "2026-09-16T12:07:48+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+        "method": "public_html_body_review",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
+        "auditPath": "audit/round25-scu-recruitment-evidence.json",
+        "state": "recent",
+        "label": "报名窗口与入口已核对"
+      },
+      "url": "jobs.html?status=all#job-86d4d12d9e6276"
+    },
     {
       "id": "job-56be98e36251a7",
       "kind": "jobs",
@@ -1070,8 +1154,8 @@
     "job-d3f8f544020b5b"
   ],
   "counts": {
-    "total": 62,
-    "recentEvidence": 2,
+    "total": 65,
+    "recentEvidence": 5,
     "reviewNeeded": 38
   }
 }

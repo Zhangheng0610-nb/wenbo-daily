@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-09-13",
+  "scope": "published_reporting_latest_issue_minus_13_days",
+  "countUnit": "editorial_event",
+  "items": [
+    {
+      "eventId": "event-fefdce2b84e9",
+      "title": "文化遗产保护与数字化论坛在京开幕，发布中希数字遗产联合实验室旗舰项目",
+      "summary": "9月9日，以“共鸣：活态遗产·数智未来”为主题的第八届文化遗产保护与数字化国际学术论坛在北京开幕。论坛汇聚全球20余个国家和地区的专家学者及文化、科技、产业领域代表，现场发布中希数字遗产联合实验室旗舰项目，并安排技术展示和公众参与。",
+      "reportDate": "2026-09-11",
+      "publishedDate": "2026-09-10",
+      "reportUrl": "reports/2026-09-11.html#item1",
+      "sources": [
+        {
+          "title": "新华网：第八届文化遗产保护与数字化国际学术论坛在京开幕",
+          "url": "https://www.news.cn/culture/20260910/1a05f75a93e3429e9065c1073de2f3b7/c.html"
+        }
+      ],
+      "topics": [
+        "数字保护与数字采集"
+      ],
+      "matchedKeywords": [
+        "数字化"
+      ]
+    },
+    {
+      "eventId": "event-c9440c3b8ed0",
+      "title": "人工智能进入文物保护具体环节",
+      "summary": "光明网报道，中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐举行，近500名专家围绕人工智能与文物保护交流。新疆龟兹研究院介绍了克孜尔石窟壁画的AI辅助数字修复和高光谱识别，国家文物局考古研究中心展示考古木材树种识别，12种现代木材分类准确率达94.2%。",
+      "reportDate": "2026-09-10",
+      "publishedDate": "2026-09-09",
+      "reportUrl": "reports/2026-09-10.html#item2",
+      "sources": [
+        {
+          "title": "光明网：《人工智能时代，文物保护如何“智”变》",
+          "url": "https://news.gmw.cn/2026-09/09/content_38991565.htm"
+        }
+      ],
+      "topics": [
+        "AI、三维扫描与科技考古"
+      ],
+      "matchedKeywords": [
+        "人工智能",
+        "AI"
+      ]
+    },
+    {
+      "eventId": "event-c50ed7cefa13",
+      "title": "龟兹壁画大展以复原复刻让流失海外文物“精神回归”",
+      "summary": "“龟兹与世界”壁画大展9月7日在慕田峪长城数字博物馆开幕。展览以流失海外龟兹壁画的复原复刻为主线，汇聚学术研究、艺术复原和文化遗产保护等力量，尝试让流失海外的丝路壁画通过可观看、可研究的方式重新进入公共文化场景。",
+      "reportDate": "2026-09-08",
+      "publishedDate": "2026-09-07",
+      "reportUrl": "reports/2026-09-08.html#item4",
+      "sources": [
+        {
+          "title": "中国新闻网：“龟兹与世界”壁画大展以复原复刻形式让流失海外文物“精神回归”",
+          "url": "http://www.chinanews.com.cn/cul/2026/09-07/10692221.shtml"
+        }
+      ],
+      "topics": [
+        "数字博物馆与公共服务"
+      ],
+      "matchedKeywords": [
+        "数字博物馆"
+      ]
+    },
+    {
+      "eventId": "event-c24c9a216937",
+      "title": "加沙文献遗产保护者获 2026 年 UNESCO/Jikji 记忆世界奖",
+      "summary": "UNESCO宣布，Abdul Latif Hashim 与 Haneen Al-Amassi 获评2026年 UNESCO/Jikji 记忆世界奖，以表彰他们在加沙极端困难条件下抢救、保存和数字化文献遗产的工作。两人已数字化超过2.5万页马穆鲁克和奥斯曼时期手稿，并建立加沙首个专业手稿修复实验室，同时制定应急保存方案、抢救濒危文献收藏。",
+      "reportDate": "2026-09-08",
+      "publishedDate": "2026-09-04",
+      "reportUrl": "reports/2026-09-08.html#item6",
+      "sources": [
+        {
+          "title": "UNESCO：Palestinian Documentary Heritage Professionals to Receive 2026 UNESCO/Jikji Memory of the World Prize",
+          "url": "https://www.unesco.org/en/articles/palestinian-documentary-heritage-professionals-receive-2026-unesco/jikji-memory-world-prize"
+        }
+      ],
+      "topics": [],
+      "matchedKeywords": [
+        "数字化"
+      ]
+    },
+    {
+      "eventId": "event-fa123656a2d4",
+      "title": "美国博物馆联盟提出博物馆 AI 治理三原则",
+      "summary": "美国博物馆联盟8月31日发布文章，提出博物馆使用人工智能时应遵循“避免伤害、维护信任、创造价值”三原则，并讨论隐私安全、知识产权、专业责任、透明披露、人员培训和机构使命等问题。",
+      "reportDate": "2026-09-05",
+      "publishedDate": "2026-08-31",
+      "reportUrl": "reports/2026-09-05.html#item2",
+      "sources": [
+        {
+          "title": "American Alliance of Museums：The Three Laws of AI Governance",
+          "url": "https://www.aam-us.org/2026/08/31/the-three-laws-of-ai-governance/"
+        }
+      ],
+      "topics": [
+        "AI、三维扫描与科技考古"
+      ],
+      "matchedKeywords": [
+        "AI",
+        "人工智能"
+      ]
+    },
+    {
+      "eventId": "event-8a00bfd6d6d9",
+      "title": "（文化中国行）景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+      "summary": "9月4日，中新社探访景德镇古陶瓷基因库：1.6万余片青花龙缸残片经三维扫描获得数字编号，断口、弧度和纹饰等信息被转成可计算数据，AI辅助识别断裂面和纹样、进行瓷片拼对；项目还与89家机构尝试共建世界瓷器互动地图。",
+      "reportDate": "2026-09-05",
+      "publishedDate": "2026-09-04",
+      "reportUrl": "reports/2026-09-05.html#item3",
+      "sources": [
+        {
+          "title": "中国新闻网：景德镇古陶瓷基因库赋予千年瓷片“数字新生”",
+          "url": "http://www.chinanews.com.cn/sh/2026/09-04/10690243.shtml"
+        }
+      ],
+      "topics": [
+        "AI、三维扫描与科技考古"
+      ],
+      "matchedKeywords": [
+        "AI",
+        "三维扫描"
+      ]
+    },
+    {
+      "eventId": "entry-2026-09-01-item3",
+      "title": "河北将数字化智能化深度融入文物保护全链条",
+      "summary": "光明网8月31日刊发河北日报报道，河北正从全域感知监测、预防性干预、数字化存续、智能修复辅助和协同治理等方面推进文物保护数字化。报道介绍，河北已完成988处文物保护单位数字化采集，并在正定隆兴寺、山海关、金山岭长城、行唐故郡遗址等项目中使用三维扫描、传感监测、无人机和现场实验室等技术。",
+      "reportDate": "2026-09-01",
+      "publishedDate": "2026-08-31",
+      "reportUrl": "reports/2026-09-01.html#item3",
+      "sources": [
+        {
+          "title": "光明网：科技赋能“智护”文物，河北将数字化智能化深度融入文物保护全链条",
+          "url": "https://difang.gmw.cn/2026-08/31/content_38975846.htm"
+        }
+      ],
+      "topics": [
+        "数字保护与数字采集",
+        "AI、三维扫描与科技考古"
+      ],
+      "matchedKeywords": [
+        "数字化",
+        "数字化采集",
+        "三维扫描"
+      ]
+    },
+    {
+      "eventId": "entry-2026-09-01-item5",
+      "title": "贺兰山新发现“四马拉车”岩画",
+      "summary": "新华社8月28日报道，贺兰山岩画管理处工作人员在岩画复查中发现一幅罕见的“四马拉车”岩画，这是贺兰山岩画中首次发现的同类题材。画面位于洪积扇区域一块半埋岩石上，尺寸约24×20厘米，采用凿刻技法，刻痕深度约1.5毫米。相关机构已完成岩画区域测绘和本体数字化留存，新发现也将纳入数字化保护体系。",
+      "reportDate": "2026-09-01",
+      "publishedDate": "2026-08-28",
+      "reportUrl": "reports/2026-09-01.html#item5",
+      "sources": [
+        {
+          "title": "央视网：贺兰山新发现“四马拉车”岩画",
+          "url": "https://news.cctv.com/2026/08/28/ARTIAXT3eCBoqNkhxSpafudc260828.shtml"
+        }
+      ],
+      "topics": [
+        "数字保护与数字采集"
+      ],
+      "matchedKeywords": [
+        "数字化",
+        "数字化保护"
+      ]
+    }
+  ]
+}

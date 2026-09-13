@@ -90,24 +90,51 @@ class DirectoryLinks(HTMLParser):
 
 
 def scan_directory(source, fetcher, *, checked_at):
-    from automation.recruitment_discovery import is_recruitment_candidate
+    from automation.recruitment_discovery import is_recruitment_candidate, RECRUITMENT_TERMS
     url=source['url'];audit={'sourceUrl':url,'sourceName':source['name'],'checkedAt':checked_at,'method':'direct_directory','status':'failed','candidateLinks':0}
     try:
         html=fetcher(url)
         if any(marker in html[:15000] for marker in ('环境异常','访问验证','访问过于频繁','验证码','Access Denied')):
             raise ValueError('access_challenge')
         parser=DirectoryLinks();parser.feed(html)
-        records=[];seen=set()
+        records=[];seen=set();updates=[]
+        # Follow only explicit next-page links within the registered directory.
+        pages=[url]; failures=[]
+        for _ in range(min(int(source.get('followPages', 0)), 2)):
+            next_url=next((urljoin(pages[-1],h) for h,t in parser.links if t.strip() in ('下一页','下页','Next','Next page') and urlsplit(urljoin(pages[-1],h)).scheme in ('http','https') and urlsplit(urljoin(pages[-1],h)).hostname==urlsplit(url).hostname and urlsplit(urljoin(pages[-1],h)).path.startswith(urlsplit(url).path.rsplit('/',1)[0]+'/') and urljoin(pages[-1],h) not in pages),None)
+            if not next_url:break
+            try:
+                following=fetcher(next_url)
+                if any(marker in following[:15000] for marker in ('环境异常','访问验证','验证码','Access Denied')):raise ValueError('access_challenge')
+                pages.append(next_url);extra=DirectoryLinks();extra.feed(following)
+                parser.links.extend((urljoin(next_url,h),t) for h,t in extra.links)
+            except Exception as exc:failures.append(str(exc)[:200]);break
+        audit.update(pagesChecked=pages,paginationFailures=failures)
         for href,title in parser.links:
             link=urldefrag(urljoin(url,href))[0]
             if urlsplit(link).scheme not in ('https','http') or link==url or link in seen or navigational_url(link):continue
-            if not is_recruitment_candidate(title):continue
+            # Registered institutional context rescues headlines such as “实习生招募”.
+            # External links inherit it only for an explicitly registered application path.
+            if title.strip() in ('招聘','招聘信息','人才招聘','招聘公告','实习','Internships','Careers'):continue
+            application=bool(source.get('applicationUrlPrefix') and link.startswith(source['applicationUrlPrefix']))
+            umbrella=bool(source.get('umbrellaNotices') and urlsplit(link).hostname==urlsplit(url).hostname and re.search(r'事业单位.*(?:招聘|招考)|(?:招聘|招考).*事业单位',title))
+            contextual=bool(source.get('institution') and source.get('type')=='official_institution' and urlsplit(link).hostname==urlsplit(url).hostname and any(term in title for term in RECRUITMENT_TERMS))
+            if not is_recruitment_candidate(title) and not contextual and not application and not umbrella:continue
             seen.add(link)
+            headline=re.split(r'\s+20\d{2}\s*[/.]\s*\d{1,2}\s*[/.]\s*\d{1,2}',title,maxsplit=1)[0].strip().removesuffix('查看详情').strip()
+            if re.search(r'(?:拟(?:录|聘)用|入围(?:考察|面试)|进入面试|资格(?:复审|审查)|(?:笔试|面试)(?:成绩|名单)|体检)[^。]{0,24}(?:公告|公示|通知|名单|人员信息)$',headline):
+                updates.append({'title':title,'url':link});continue
+            if application:
+                title=source['institution']+' — '+source.get('programName','招聘')+'：'+title
+            elif contextual and not is_recruitment_candidate(title):
+                title=source['institution']+' — '+title
             records.append({'title':title,'url':link,'publishedDate':'','discoveredAt':checked_at,'discoverySource':source['name'],'discoverySourceType':'recruitment_directory','directoryUrl':url,'verificationStatus':'pending','decisionReason':'directory_lead_requires_detail_and_application_check'})
+            if contextual or application:records[-1]['institution']=source['institution']
+            if umbrella:records[-1]['decisionReason']='umbrella_notice_needs_attachment_inspection'
             if len(records)>=100:break
         if source.get('inlineDigest'):
             inline=inline_digest_records(html,source,checked_at);records.extend(inline);audit['inlineNotices']=len(inline)
-        audit.update(status='success' if records else 'partial',candidateLinks=len(records),parsedLinks=len(parser.links),result='candidate_links' if records else 'no_candidate_links_structure_or_content_requires_review')
+        audit.update(status='partial' if failures else 'success' if records or updates else 'partial',candidateLinks=len(records),parsedLinks=len(parser.links),lifecycleUpdates=updates,result='candidate_links' if records else 'workflow_updates_only' if updates else 'no_candidate_links_structure_or_content_requires_review')
         return records,audit
     except Exception as exc:
         audit['error']=f'{type(exc).__name__}: {str(exc)[:240]}'

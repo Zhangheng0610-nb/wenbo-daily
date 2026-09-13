@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-09-13T12:04:07+08:00",
+  "records": [
+    {
+      "url": "https://www.cssn.cn/ggzp/202608/t20260826_6064644.shtml",
+      "deadline": "2026-09-11",
+      "dateExcerpt": "应聘人员请于2026年9月11日前",
+      "method": "public_html_body_review"
+    },
+    {
+      "url": "https://www.cssn.cn/ggzp/202606/t20260601_5999874.shtml",
+      "deadline": "2026-06-14",
+      "dateExcerpt": "应聘人员请于2026年6月14日前",
+      "method": "public_source_text_from_web_search"
+    }
+  ]
+}

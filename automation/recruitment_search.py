@@ -1,6 +1,7 @@
 """Web search for vacancies, independent of the daily-news RSS backends."""
 from urllib.request import Request
 from urllib.parse import urlencode,urlsplit
+from automation.backfill_monitoring import decode_source_response
 from automation.daily_discovery import SEARCH_OPENER,SEARCH_USER_AGENT,_BingHtmlResultParser,actual_query,unwrap_redirect_url
 
 BACKENDS=({'id':'bing-web','name':'Bing Web'},)
@@ -15,7 +16,7 @@ def execute_query(family,backend,query,start,end):
         with SEARCH_OPENER.open(request,timeout=12) as response:
             raw=response.read(2_000_001)
             if len(raw)>2_000_000:raise ValueError('oversized_search_response')
-            html=raw.decode('utf-8',errors='replace')
+            html=decode_source_response(raw,response.headers.get('Content-Encoding',''))
             audit['httpStatus']=response.status
         parser=_BingHtmlResultParser();parser.feed(html)
         if not parser.results and not any(s in html for s in ('没有找到','There are no results','No results found')):raise ValueError('no_parseable_web_results')

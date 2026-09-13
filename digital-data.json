@@ -6,45 +6,45 @@
   "end": "2026-09-13"
  },
  "stats": {
-  "total": 273,
+  "total": 275,
   "title_hit": 26,
   "digest_extra": 647,
   "levels": {
-   "core": 218,
+   "core": 220,
    "ext": 12,
    "tech": 43
   },
   "digest_articles": 512,
-  "unique_source_pages": 156,
+  "unique_source_pages": 158,
   "source_article_total": 13781,
   "source_unique_pages": 4783,
-  "overall_share": 3.26,
+  "overall_share": 3.3,
   "topic_unique_counts": {
-   "数字保护与数字采集": 80,
+   "数字保护与数字采集": 81,
    "AI、三维扫描与科技考古": 73,
-   "数字展览与沉浸式体验": 81,
+   "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_article_count": 225,
+  "classified_article_count": 227,
   "unclassified_article_count": 48,
-  "matched_record_count": 273,
-  "content_item_count": 273,
+  "matched_record_count": 275,
+  "content_item_count": 275,
   "digest_content_item_count": 243,
-  "standalone_content_item_count": 30,
-  "digital_source_pages": 156,
+  "standalone_content_item_count": 32,
+  "digital_source_pages": 158,
   "digest_source_pages": 126,
-  "standalone_source_pages": 30,
+  "standalone_source_pages": 32,
   "topic_content_item_counts": {
-   "数字保护与数字采集": 80,
+   "数字保护与数字采集": 81,
    "AI、三维扫描与科技考古": 73,
-   "数字展览与沉浸式体验": 81,
+   "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_content_item_count": 225,
+  "classified_content_item_count": 227,
   "unclassified_content_item_count": 48
  },
  "quality": {
@@ -53,9 +53,9 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-13T07:34:40+08:00",
+  "last_incremental_scan_at": "2026-09-13T11:57:11+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-09-07",
+   "start": "2026-08-31",
    "end": "2026-09-13"
   }
  },
@@ -5077,6 +5077,55 @@
    "from_digest": true,
    "digest_title": "中国语言资源保护工程成果展示馆开馆",
    "evidence_snippet": "…教育部、国家语委“中国语言资源保护工程”标志性成果，汇集全国汉语方言、少数民族语言和语言文化共计1800余点海量语料，以数字化展陈为主要手段，精选全国文博单位珍藏的语言文字类文物，打造沉浸式、融合式、体验式三位一体的新型语言文化展陈空间。“语言长河 生生不息”专题展览同日开幕并将长期展出。此外，国家关键领域语言科技赋能联盟成立，“语言资源科学保护、开发利用与…",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/10/art_722_204760.html",
+   "display_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "source_url": "/art/2026/9/10/art_722_204760.html",
+   "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "is_digest_item": false,
+   "t": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "d": "2026-09-10",
+   "u": "/art/2026/9/10/art_722_204760.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "VR",
+    "沉浸式"
+   ],
+   "from_digest": false,
+   "digest_title": "",
+   "evidence_snippet": "…愿者讲解员何莉正娓娓道来：“请大家看，照片上这位老人，就是我的爷爷何木林，他是一名老红军……” 她身后，丰富的馆藏史料与数字化展陈、声光电场景复原、VR沉浸式体验等现代技术，让观众身临其境，真切触摸到那段峥嵘岁月的艰辛与荣光。 近年来，长征沿线各地推动红色文化与旅游业深度融合，精心打造了一批以红色文化为主题的旅游景区和线路。红色资源在新时代焕发新光彩，化作推…",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/10/art_722_204756.html",
+   "display_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "source_url": "/art/2026/9/10/art_722_204756.html",
+   "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "is_digest_item": false,
+   "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "d": "2026-09-10",
+   "u": "/art/2026/9/10/art_722_204756.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字化采集",
+    "数字科技",
+    "科技赋能"
+   ],
+   "from_digest": false,
+   "digest_title": "",
+   "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
    "admission_reason": "strong-body"
   }
  ],
@@ -11409,14 +11458,58 @@
   },
   {
    "key": "2026-09",
-   "count": 0,
-   "content_item_count": 0,
-   "source_page_count": 0,
-   "unique_count": 0,
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 2,
+   "unique_count": 2,
    "source_count": 13,
    "source_unique_count": 13,
-   "share": 0.0,
-   "items": []
+   "share": 15.38,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204760.html",
+     "display_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "source_url": "/art/2026/9/10/art_722_204760.html",
+     "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…愿者讲解员何莉正娓娓道来：“请大家看，照片上这位老人，就是我的爷爷何木林，他是一名老红军……” 她身后，丰富的馆藏史料与数字化展陈、声光电场景复原、VR沉浸式体验等现代技术，让观众身临其境，真切触摸到那段峥嵘岁月的艰辛与荣光。 近年来，长征沿线各地推动红色文化与旅游业深度融合，精心打造了一批以红色文化为主题的旅游景区和线路。红色资源在新时代焕发新光彩，化作推…",
+     "matched_keywords": [
+      "数字化",
+      "VR",
+      "沉浸式"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204760.html",
+     "t": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204756.html",
+     "display_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "source_url": "/art/2026/9/10/art_722_204756.html",
+     "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
+     "matched_keywords": [
+      "数字化",
+      "数字化采集",
+      "数字科技",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204756.html",
+     "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "l": "core"
+    }
+   ]
   }
  ],
  "by_week": [
@@ -20355,14 +20448,58 @@
   },
   {
    "key": "2026-W37",
-   "count": 0,
-   "content_item_count": 0,
-   "source_page_count": 0,
-   "unique_count": 0,
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 2,
+   "unique_count": 2,
    "source_count": 8,
    "source_unique_count": 8,
-   "share": 0.0,
-   "items": []
+   "share": 25.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204760.html",
+     "display_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "source_url": "/art/2026/9/10/art_722_204760.html",
+     "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…愿者讲解员何莉正娓娓道来：“请大家看，照片上这位老人，就是我的爷爷何木林，他是一名老红军……” 她身后，丰富的馆藏史料与数字化展陈、声光电场景复原、VR沉浸式体验等现代技术，让观众身临其境，真切触摸到那段峥嵘岁月的艰辛与荣光。 近年来，长征沿线各地推动红色文化与旅游业深度融合，精心打造了一批以红色文化为主题的旅游景区和线路。红色资源在新时代焕发新光彩，化作推…",
+     "matched_keywords": [
+      "数字化",
+      "VR",
+      "沉浸式"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204760.html",
+     "t": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204756.html",
+     "display_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "source_url": "/art/2026/9/10/art_722_204756.html",
+     "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
+     "matched_keywords": [
+      "数字化",
+      "数字化采集",
+      "数字科技",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204756.html",
+     "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "l": "core"
+    }
+   ]
   }
  ],
  "by_day": [
@@ -43784,14 +43921,58 @@
   },
   {
    "key": "2026-09-10",
-   "count": 0,
-   "content_item_count": 0,
-   "source_page_count": 0,
-   "unique_count": 0,
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 2,
+   "unique_count": 2,
    "source_count": 4,
    "source_unique_count": 4,
-   "share": 0.0,
-   "items": []
+   "share": 50.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204760.html",
+     "display_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "source_url": "/art/2026/9/10/art_722_204760.html",
+     "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…愿者讲解员何莉正娓娓道来：“请大家看，照片上这位老人，就是我的爷爷何木林，他是一名老红军……” 她身后，丰富的馆藏史料与数字化展陈、声光电场景复原、VR沉浸式体验等现代技术，让观众身临其境，真切触摸到那段峥嵘岁月的艰辛与荣光。 近年来，长征沿线各地推动红色文化与旅游业深度融合，精心打造了一批以红色文化为主题的旅游景区和线路。红色资源在新时代焕发新光彩，化作推…",
+     "matched_keywords": [
+      "数字化",
+      "VR",
+      "沉浸式"
+     ],
+     "topics": [
+      "数字展览与沉浸式体验"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204760.html",
+     "t": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/10/art_722_204756.html",
+     "display_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "source_url": "/art/2026/9/10/art_722_204756.html",
+     "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
+     "matched_keywords": [
+      "数字化",
+      "数字化采集",
+      "数字科技",
+      "科技赋能"
+     ],
+     "topics": [
+      "数字保护与数字采集"
+     ],
+     "d": "2026-09-10",
+     "u": "/art/2026/9/10/art_722_204756.html",
+     "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "l": "core"
+    }
+   ]
   },
   {
    "key": "2026-09-11",
@@ -43869,13 +44050,13 @@
   },
   {
    "key": "2026",
-   "count": 58,
-   "content_item_count": 58,
-   "source_page_count": 28,
-   "unique_count": 28,
+   "count": 60,
+   "content_item_count": 60,
+   "source_page_count": 30,
+   "unique_count": 30,
    "source_count": 556,
    "source_unique_count": 296,
-   "share": 9.46
+   "share": 10.14
   }
  ],
  "content_items": [
@@ -48861,9 +49042,74 @@
     "数字展览与沉浸式体验"
    ],
    "is_digest_item": true
+  },
+  {
+   "content_item_id": "/art/2026/9/10/art_722_204760.html",
+   "display_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "source_url": "/art/2026/9/10/art_722_204760.html",
+   "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "digest_title": "",
+   "date": "2026-09-10",
+   "level": "core",
+   "matched_keywords": [
+    "数字化",
+    "VR",
+    "沉浸式"
+   ],
+   "evidence_snippet": "…愿者讲解员何莉正娓娓道来：“请大家看，照片上这位老人，就是我的爷爷何木林，他是一名老红军……” 她身后，丰富的馆藏史料与数字化展陈、声光电场景复原、VR沉浸式体验等现代技术，让观众身临其境，真切触摸到那段峥嵘岁月的艰辛与荣光。 近年来，长征沿线各地推动红色文化与旅游业深度融合，精心打造了一批以红色文化为主题的旅游景区和线路。红色资源在新时代焕发新光彩，化作推…",
+   "topics": [
+    "数字展览与沉浸式体验"
+   ],
+   "is_digest_item": false
+  },
+  {
+   "content_item_id": "/art/2026/9/10/art_722_204756.html",
+   "display_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "source_url": "/art/2026/9/10/art_722_204756.html",
+   "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "digest_title": "",
+   "date": "2026-09-10",
+   "level": "core",
+   "matched_keywords": [
+    "数字化",
+    "数字化采集",
+    "数字科技",
+    "科技赋能"
+   ],
+   "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
+   "topics": [
+    "数字保护与数字采集"
+   ],
+   "is_digest_item": false
   }
  ],
  "source_pages": [
+  {
+   "source_page_id": "/art/2026/9/10/art_722_204760.html",
+   "source_url": "/art/2026/9/10/art_722_204760.html",
+   "source_page_title": "回望烽火来路   凝聚前行伟力 ——写在“赓续长征精神 奋进复兴征程——记者再走长征路”主题采访启动之际",
+   "date": "2026-09-10",
+   "is_digest_page": false,
+   "content_item_ids": [
+    "/art/2026/9/10/art_722_204760.html"
+   ],
+   "content_item_count": 1,
+   "digest_content_item_count": 0,
+   "standalone_content_item_count": 1
+  },
+  {
+   "source_page_id": "/art/2026/9/10/art_722_204756.html",
+   "source_url": "/art/2026/9/10/art_722_204756.html",
+   "source_page_title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+   "date": "2026-09-10",
+   "is_digest_page": false,
+   "content_item_ids": [
+    "/art/2026/9/10/art_722_204756.html"
+   ],
+   "content_item_count": 1,
+   "digest_content_item_count": 0,
+   "standalone_content_item_count": 1
+  },
   {
    "source_page_id": "/art/2026/8/29/art_722_204565.html",
    "source_url": "/art/2026/8/29/art_722_204565.html",
