@@ -308,9 +308,11 @@ function init(data) {{
     if (!index[key]) index[key] = {{}};
     if (!index[key][itemKey]) index[key][itemKey] = item;
   }}
+  function itemDate(item) {{ return item.date || item.d || ''; }}
   (data.content_items || data.items || []).forEach(function(item) {{
     (item.topics || []).forEach(function(topic){{ addUnique(topicItems, topic, item); }});
-    addUnique(yearItems, item.d.slice(0, 4), item);
+    var date = itemDate(item);
+    if (date) addUnique(yearItems, date.slice(0, 4), item);
   }});
 
   function indexValues(index, key) {{
@@ -551,14 +553,18 @@ function init(data) {{
     return items.map(function(it) {{
       var isDigest = Boolean(it.is_digest_item || it.digest_title);
       var title = it.display_title || it.digest_title || it.t || '未命名内容条目';
-      var source = isDigest ? '摘编内条目 · 来源：' + (it.source_page_title || it.t || '一周文物动态摘编') + ' · 国家文物局 · ' + it.d
-        : '来源：国家文物局 · ' + it.d;
+      var date = itemDate(it);
+      var rawUrl = it.source_url || it.u || '';
+      var articleUrl = /^https?:\\/\\//i.test(rawUrl) ? encodeURI(rawUrl) : 'https://www.ncha.gov.cn' + encodeURI(rawUrl);
+      var level = it.level || it.l || '';
+      var source = isDigest ? '摘编内条目 · 来源：' + (it.source_page_title || it.t || '一周文物动态摘编') + ' · 国家文物局 · ' + date
+        : '来源：国家文物局 · ' + date;
       var evidence = it.evidence_snippet ? '<span class="p-evidence"><strong>证据：</strong>' + escapeHtml(it.evidence_snippet) + '</span>' : '';
       return '<div class="p-item ' + (isDigest ? 'p-digest-item' : '') + '">' +
-        '<span class="p-date">' + escapeHtml(it.d) + '</span>' +
-        '<span class="p-title"><a href="https://www.ncha.gov.cn' + encodeURI(it.u || it.source_url || '') + '" target="_blank" rel="noopener">' + escapeHtml(title) + '</a>' +
+        '<span class="p-date">' + escapeHtml(date) + '</span>' +
+        '<span class="p-title"><a href="' + escapeHtml(articleUrl) + '" target="_blank" rel="noopener">' + escapeHtml(title) + '</a>' +
         '<small class="p-source">' + escapeHtml(source) + '</small></span>' +
-        '<span class="p-level ' + escapeHtml(it.l) + '">' + escapeHtml(LEVEL_NAMES[it.l] || it.l) + '</span>' + evidence +
+        '<span class="p-level ' + escapeHtml(level) + '">' + escapeHtml(LEVEL_NAMES[level] || level) + '</span>' + evidence +
         '</div>';
     }}).join('');
   }}

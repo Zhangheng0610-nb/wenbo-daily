@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-09-13T13:04:27.718792+00:00",
+  "tests": 345,
+  "productPages": 90,
+  "httpChecks": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 100213
+    },
+    {
+      "path": "jobs.html",
+      "status": 200,
+      "bytes": 78683
+    },
+    {
+      "path": "intern.html",
+      "status": 200,
+      "bytes": 46005
+    },
+    {
+      "path": "command-center/index.html",
+      "status": 200,
+      "bytes": 57856
+    },
+    {
+      "path": "data-health.html",
+      "status": 200,
+      "bytes": 5677
+    },
+    {
+      "path": "digital-trends.html",
+      "status": 200,
+      "bytes": 35609
+    },
+    {
+      "path": "digital-news.json",
+      "status": 200,
+      "bytes": 8268
+    },
+    {
+      "path": "assets/product.css",
+      "status": 200,
+      "bytes": 27677
+    }
+  ],
+  "changedJsonFilesChecked": 19,
+  "digitalNewsEvents": 8,
+  "publishedJobs": 43,
+  "newVerifiedRoles": 3,
+  "browserVisualAcceptance": "not_performed",
+  "allDailyReportsValidated": 65,
+  "historicalSharedSourceWarnings": 6
+}

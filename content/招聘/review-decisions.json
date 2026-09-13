@@ -163,6 +163,90 @@
           "scope": "去重比对；未重新核验原岗位报名信息"
         }
       ]
+    },
+    {
+      "candidateId": "recruit-ae469d74af9d",
+      "signature": "6889a43091f3380ba8772b3db2c2ba9f27b29e18f1b37dae500c4ebe74dfa08f",
+      "decision": "duplicate",
+      "reason": "同一展览项目实习公告已收录 intern.md。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/202608/t20260831_20874.shtml",
+          "scope": "与已刊岗位逐项去重对账",
+          "path": "content/招聘/intern.md"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-834119b82692",
+      "signature": "790b8d957c3f7e1650b3788527fbd56aec28079e1dae2b6972d37cbbc0a22d23",
+      "decision": "duplicate",
+      "reason": "同一事业发展部实习公告已收录 intern.md。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://www.artmuseum.tsinghua.edu.cn/news/dtxw/202606/t20260630_20779.shtml",
+          "scope": "与已刊岗位逐项去重对账",
+          "path": "content/招聘/intern.md"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-8d316c1bddfb",
+      "signature": "f4cd8409fc21e72438d756cc4949b32c44238c1ec280ef0f664d419be349f44b",
+      "decision": "duplicate",
+      "reason": "已按正文拆分为三个岗位，收录至 jobs.md；截止与投递依据见 Round25 审计。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://sum.scu.edu.cn/info/1086/3622.htm",
+          "scope": "与已刊岗位逐项去重对账",
+          "path": "audit/round25-scu-recruitment-evidence.json"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-9862f94aaadc",
+      "signature": "cfd4cf485818e4588cabf80e8c90121b77d7f0ea84d3fc353b7986f96b562353",
+      "decision": "rejected",
+      "reason": "原公告报名截止为2026年9月11日，已过期。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://www.cssn.cn/ggzp/202608/t20260826_6064644.shtml",
+          "scope": "原公告报名时间核查",
+          "path": "audit/round25-recruitment-expired.json"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-7480a47e9cba",
+      "signature": "0cd584ddc5c725ec3d62621a0c62a077e8f107db8068921a7aec660196986779",
+      "decision": "rejected",
+      "reason": "原公告报名截止为2026年6月14日，已过期。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://www.cssn.cn/ggzp/202606/t20260601_5999874.shtml",
+          "scope": "原公告报名时间核查",
+          "path": "audit/round25-recruitment-expired.json"
+        }
+      ]
+    },
+    {
+      "candidateId": "recruit-7fdc96464d94",
+      "signature": "5aa11ee968b1943310c9e164a97e7434e084a2cfac906213659077569acd5ffb",
+      "decision": "duplicate",
+      "reason": "同一2026年博士后招募公告已收录 jobs.md，含9月15日至10月20日第二批报名窗口。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "evidence": [
+        {
+          "url": "https://www.dpm.org.cn/classify_detail/379103.html",
+          "scope": "与已刊岗位逐项去重对账",
+          "path": "content/招聘/jobs.md"
+        }
+      ]
     }
   ]
 }

@@ -244,3 +244,53 @@ body.product-page:has(#results),body.product-page:has(.archive-controls){max-wid
 @media(max-width:600px){body.product-page:has(#results),body.product-page:has(.archive-controls){padding:12px 16px}.product-page:has(#results) .search-wrap{padding:14px;gap:10px}.product-page:has(#results) .search-type{flex-basis:calc(50% - 10px)}.product-page .search-result{padding:18px}.product-page .search-result h2{font-size:19px}.product-page .archive-group{padding:16px}.archive-controls a{margin-left:0}.product-bar nav a{padding:8px 4px}}
 
 .collapse-floating[hidden]{display:none}
+
+/* Round25: compact scanning, with clear title / synopsis / source hierarchy. */
+.edition-story h3{font-weight:700;line-height:1.5}
+.edition-story .edition-excerpt{line-height:1.7;color:var(--muted);margin-bottom:12px}
+.edition-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.edition-footer .edition-source{margin:0;min-width:0;flex:1;font-size:12px;line-height:1.5}
+.edition-footer .edition-read{flex-shrink:0;border:0;margin:0;gap:8px;min-height:44px}
+.product-page .reader-entry .reader-meta{font-size:12px;color:var(--muted);line-height:1.5}
+.product-page .reader-entry .reader-excerpt{font-size:14px;line-height:1.7;color:var(--muted)}
+.product-page .reader-entry h3{font-weight:700;line-height:1.5}
+.product-page .event-history summary{font-size:12px;display:flex;align-items:center;min-height:44px;padding:0}
+@media(max-width:600px){
+ .product-page .news-masthead{padding:12px 0 16px;margin-bottom:14px}
+ .product-page .news-masthead h1{font-size:24px;max-width:none}
+ .news-masthead .masthead-kicker{margin-bottom:6px}
+ .edition-grid{gap:0;border-top:1px solid var(--border)}
+ .edition-story,.edition-lead{padding:14px 0 8px;border:0;border-bottom:1px solid var(--border);border-radius:0;background:transparent;box-shadow:none}
+ .edition-label{font-size:11px;line-height:1.4;color:var(--muted)}
+ .edition-story h3,.edition-lead h3{font-size:18px;line-height:1.5;letter-spacing:0;margin:7px 0}
+ .edition-lead h3{font-size:21px}
+ .edition-story h3 a{display:block;min-height:44px}
+ .edition-story .edition-excerpt,.edition-lead .edition-excerpt{font-size:13px;line-height:1.65;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .edition-footer{gap:10px;margin-top:2px}
+ .edition-footer .edition-read{font-size:12px}
+ .edition-footer .edition-source{font-size:11px}
+ .product-page:has(.edition-grid) .hero-link{margin:14px 0 26px}
+ .reader-heading h2{font-size:20px;margin:8px 0 12px}
+ .product-page:has(.edition-grid) .reader-entry{padding:14px 0 8px;border:0;border-bottom:1px solid var(--border);margin:0;border-radius:0;background:transparent}
+ .product-page:has(.edition-grid) .reader-entry h3{font-size:17px;margin:6px 0;line-height:1.5}
+ .reader-entry h3 a{display:block;min-height:44px}
+ .product-page .reader-entry .reader-excerpt{font-size:13px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .product-page:has(.edition-grid) .reader-entry .save-entry{margin:0;min-height:44px;font-size:12px;background:transparent}
+ .product-page:has(.edition-grid) .event-history{margin:0;max-width:calc(100% - 90px)}
+ .product-page .daily-story h3[id^="item"]{font-size:21px;line-height:1.5;font-weight:700}
+ .daily-story .source-row{font-size:12px;line-height:1.6}
+ .daily-story p{font-size:15px;line-height:1.85}
+}
+
+.digital-news{margin:24px 0 32px;padding:20px 24px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.digital-news h2{color:var(--text);font-size:24px;margin:0}
+.digital-news-item{padding:16px 0;border-bottom:1px solid var(--border)}
+.digital-news-item:last-child{border-bottom:0}
+.digital-news .digital-news-meta{color:var(--muted);font-size:12px;line-height:1.6;margin:0 0 5px}
+.digital-news-item h3{font-size:18px;line-height:1.55;color:var(--text);margin:4px 0 8px}
+.digital-news-item h3 a{color:inherit;text-decoration:none}
+.digital-news .digital-news-excerpt{font-size:14px;line-height:1.7;color:var(--muted);margin:0}
+.digital-news summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:13px;color:var(--accent)}
+.digital-news details a{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.digital-news-more>summary{font-weight:650}
+@media(max-width:600px){.digital-news{padding:16px;margin:18px 0}.digital-news h2{font-size:20px}.digital-news-item h3{font-size:17px}.digital-news .digital-news-excerpt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px}}

@@ -44,7 +44,7 @@ PROXY_TMPL = (BASE + '/module/jslib/jquery/jpage/dataproxy.jsp'
 START_DATE = date(2021, 1, 1)
 END_DATE = date.today()
 CN_TZ = timezone(timedelta(hours=8))
-INCREMENTAL_WINDOW_DAYS = 7
+INCREMENTAL_WINDOW_DAYS = 14
 INCREMENTAL_MAX_PAGES = 5
 
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
@@ -219,8 +219,9 @@ def fetch(url, retries=3, timeout=15):
     last_err = None
     for i in range(retries):
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read().decode('utf-8', errors='replace')
+            from automation.backfill_monitoring import source_opener, read_source_response
+            with source_opener().open(req, timeout=timeout) as r:
+                return read_source_response(r)
         except Exception as e:
             last_err = e
             time.sleep(1.2 * (i + 1))
@@ -452,11 +453,14 @@ def evidence_snippet(body, keywords, limit=180):
 
 def html_to_text(html):
     """Small, dependency-free body extractor for weak title candidates."""
-    text = re.sub(r'<script[\s\S]*?</script>', ' ', html or '', flags=re.I)
-    text = re.sub(r'<style[\s\S]*?</style>', ' ', text, flags=re.I)
-    text = re.sub(r'<[^>]+>', '\n', text)
-    text = re.sub(r'&(?:nbsp|amp|lt|gt|quot|#39);', ' ', text, flags=re.I)
-    return ' '.join(text.split())
+    from automation.news_cards import CardParser
+    from automation.article_content import walk, prose, article_content
+    parser = CardParser()
+    parser.feed(html or '')
+    # NCHA's article body is #zoom; navigation is outside this container.
+    bodies = [node for node in walk(parser.root) if node['attrs'].get('id') == 'zoom']
+    return prose(bodies[0]) if bodies else article_content(html)[0]
+
 
 
 def enrich_weak_title_candidate(item):
@@ -616,7 +620,7 @@ def dedup_and_filter(items):
     for v in seen.values():
         title = v.get('digest_title') if v.get('from_digest') else v.get('title', '')
         body = v.get('digest_body', '') if v.get('from_digest') else v.get('body', '')
-        admission = admission_for_record(title, body, allow_body_only=v.get('from_digest', False))
+        admission = admission_for_record(title, body, allow_body_only=v.get('from_digest', False) or bool(v.get('body_scanned')))
         if admission:
             v['level'] = admission['level']
             v['word'] = admission['word']
@@ -987,7 +991,7 @@ def _write_incremental_coverage(required_date, checked_at, *, window_start,
                                  source_pages_checked=0, source_pages_new=0,
                                  content_items_new=0, duplicates_skipped=0,
                                  fetch_failed=0, parse_failed=0, status='not_run',
-                                 pages_checked=0, note=''):
+                                 pages_checked=0, note='', body_audits=None):
     os.makedirs(DIGITAL_MONITOR_DIR, exist_ok=True)
     payload = {
         'version': 1,
@@ -1005,6 +1009,7 @@ def _write_incremental_coverage(required_date, checked_at, *, window_start,
         'parseFailed': parse_failed,
         'status': status,
         'note': note,
+        'ordinaryBodyChecks': body_audits or [],
     }
     path = os.path.join(DIGITAL_MONITOR_DIR, f'{required_date.isoformat()}.json')
     with open(path, 'w', encoding='utf-8') as handle:
@@ -1058,6 +1063,7 @@ def run_incremental(end_date=None, window_days=INCREMENTAL_WINDOW_DAYS):
     title_hit_count = 0
     fetch_failed = 0
     parse_failed = 0
+    body_audits = []
     for item in new_page_candidates:
         if DIGEST_PATTERN.search(item['title']):
             body_html = fetch(BASE + item['url'])
@@ -1072,22 +1078,27 @@ def run_incremental(end_date=None, window_days=INCREMENTAL_WINDOW_DAYS):
             digest_extra_count += len(extracted)
             matched_records.extend(extracted)
             continue
-        title_matches = keyword_matches(item['title'])
-        if not title_matches:
+        from automation.daily_scope import daily_scope_rejection
+        if daily_scope_rejection(item):
+            body_audits.append({'url': item['url'], 'status': 'excluded_scope'})
             continue
-        title_hit_count += 1
-        if any(match['strength'] == 'weak' for match in title_matches) and not any(
-                match['strength'] == 'strong' for match in title_matches):
-            body_html = fetch(BASE + item['url'])
-            if not body_html:
-                fetch_failed += 1
-                continue
-            body = html_to_text(body_html)
-            admission = admission_for_record(item['title'], body)
-            if admission:
-                admission['body'] = body
-        else:
-            admission = admission_for_record(item['title'])
+        title_matches = keyword_matches(item['title'])
+        title_hit_count += bool(title_matches)
+        body_html = fetch(BASE + item['url'])
+        if not body_html:
+            fetch_failed += 1
+            body_audits.append({'url': item['url'], 'status': 'fetch_failed'})
+            continue
+        body = html_to_text(body_html)
+        if not body:
+            parse_failed += 1
+            body_audits.append({'url': item['url'], 'status': 'empty_body'})
+            continue
+        admission = admission_for_record(item['title'], body, allow_body_only=True)
+        body_audits.append({'url': item['url'], 'status': 'matched' if admission else 'no_digital_signal',
+                           'bodyCharacters': len(body), 'titleMatched': bool(title_matches),
+                           'bodySha256': hashlib.sha256(body.encode('utf-8')).hexdigest()})
+
         if admission:
             item = dict(item)
             item['level'] = admission['level']
@@ -1096,6 +1107,8 @@ def run_incremental(end_date=None, window_days=INCREMENTAL_WINDOW_DAYS):
             item['admission_reason'] = admission['reason']
             item['evidence_snippet'] = admission.get('evidence_snippet', '')
             item['from_digest'] = False
+            item['body_scanned'] = True
+            item['body'] = body
             matched_records.append(item)
 
     data, content_items_new, duplicate_items = merge_incremental_data(
@@ -1121,7 +1134,7 @@ def run_incremental(end_date=None, window_days=INCREMENTAL_WINDOW_DAYS):
         source_pages_checked=len(recent_items), source_pages_new=source_pages_new,
         content_items_new=content_items_new, duplicates_skipped=duplicates_skipped,
         fetch_failed=fetch_failed, parse_failed=parse_failed, status=status,
-        pages_checked=pages_checked, note=note,
+        pages_checked=pages_checked, note=note, body_audits=body_audits,
     )
     with open(DATA_PATH, 'w', encoding='utf-8') as handle:
         json.dump(data, handle, ensure_ascii=False, indent=1)

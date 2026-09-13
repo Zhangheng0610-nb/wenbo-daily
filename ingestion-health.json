@@ -12,9 +12,9 @@
       "queriesAttempted": 158,
       "queriesSucceeded": 158,
       "selected": 5,
-      "digitalCheckedAt": "2026-09-13T07:34:40+08:00",
-      "digitalStatus": "scan_success_no_update",
-      "digitalNewItems": 0,
+      "digitalCheckedAt": "2026-09-13T11:57:11+08:00",
+      "digitalStatus": "scan_success_with_update",
+      "digitalNewItems": 2,
       "publicationWindow": {
         "start": "2026-09-07",
         "end": "2026-09-13"
@@ -185,12 +185,12 @@
       }
     ],
     "digital": {
-      "checkedAt": "2026-09-13T07:34:40+08:00",
-      "status": "scan_success_no_update",
-      "contentItemsNew": 0,
+      "checkedAt": "2026-09-13T11:57:11+08:00",
+      "status": "scan_success_with_update",
+      "contentItemsNew": 2,
       "fetchFailed": 0,
       "parseFailed": 0,
-      "note": "近期分页扫描完成；未发现新的数字化来源页或内容条目。"
+      "note": ""
     }
   },
   "meaning": "Fixed-panel counts are source articles by publication date; they are not unique events or proof of full coverage. Build time is not collection time."

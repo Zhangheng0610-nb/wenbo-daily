@@ -18,8 +18,8 @@ def inspect_detail(candidate,fetcher,checked_at):
     try:
         html=fetcher(url)
         if any(s in html[:15000] for s in ('环境异常','访问验证','验证码','Access Denied')):raise ValueError('access_challenge')
-        clean=re.sub(r'<(script|style)\b[^>]*>.*?</\1>', ' ',html,flags=re.S|re.I)
-        text=re.sub(r'\s+',' ',unescape(re.sub(r'<[^>]+>',' ',clean)))
+        from automation.article_content import article_content
+        text=article_content(html)[0]
         if len(text)<100:raise ValueError('insufficient_text')
         parser=DirectoryLinks();parser.feed(html)
         attachments=[]

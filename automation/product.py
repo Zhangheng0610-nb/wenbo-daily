@@ -34,7 +34,7 @@ def safe_url(value):
 
 
 def decorate(html, path):
-    asset_version = hashlib.sha256((Path(__file__).resolve().parents[1] / 'assets/product.css').read_bytes()).hexdigest()[:12]
+    asset_version = hashlib.sha256((Path(__file__).resolve().parents[1] / 'assets/product.css').read_bytes().replace(b'\r\n', b'\n')).hexdigest()[:12]
     prefix = '../' * (len(Path(path).parts) - 1)
     active = 'archive.html' if path.startswith('reports/') else path
     if path == 'intern.html':

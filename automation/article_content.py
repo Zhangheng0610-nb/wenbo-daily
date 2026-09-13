@@ -17,9 +17,9 @@ def walk(node):
         stack.extend(reversed(n['children']))
 
 
-def ignored(node):
+def ignored(node, allow_form=False):
     attrs=node['attrs']
-    return (node['tag'] in OMIT_TAGS or 'hidden' in attrs or attrs.get('aria-hidden')=='true'
+    return ((node['tag'] in OMIT_TAGS and not (allow_form and node['tag']=='form')) or 'hidden' in attrs or attrs.get('aria-hidden')=='true'
             or any(OMIT_CLASS.search(c) for c in (attrs.get('class') or '').split()))
 
 
@@ -35,11 +35,19 @@ def prose(node):
 @lru_cache(maxsize=4)
 def article_content(body):
     parser=CardParser();parser.feed(body or '')
-    all_nodes=list(walk(parser.root))
+    # Some university CMS templates wrap their article in a form. Allow that
+    # wrapper while locating a known body, but still prune hidden/navigation trees.
+    all_nodes=[];stack=[parser.root]
+    while stack:
+        node=stack.pop()
+        if isinstance(node,str) or ignored(node,allow_form=True):continue
+        all_nodes.append(node)
+        stack.extend(reversed(node['children']))
     articles=[n for n in all_nodes if n['tag']=='article' and not ignored(n)]
     headed=[n for n in articles if any(c['tag']=='h1' for c in walk(n))]
     mains=[n for n in all_nodes if n['tag']=='main' and not ignored(n)]
-    root=headed[0] if headed else articles[0] if len(articles)==1 else mains[0] if len(mains)==1 else parser.root
+    cms=[n for n in all_nodes if n['attrs'].get('id','').startswith('vsb_content_') or 'v_news_content' in (n['attrs'].get('class') or '').split()]
+    root=cms[0] if cms else headed[0] if headed else articles[0] if len(articles)==1 else mains[0] if len(mains)==1 else parser.root
     citations=[]
     stack=[root]
     while stack:

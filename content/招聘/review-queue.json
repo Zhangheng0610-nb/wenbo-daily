@@ -1,8 +1,8 @@
 {
   "schema": "recruitment-review-queue-v1",
-  "asOf": "2026-09-12",
-  "pendingCount": 24,
-  "appliedReviewCount": 2,
+  "asOf": "2026-09-13",
+  "pendingCount": 40,
+  "appliedReviewCount": 16,
   "appliedReviews": [
     {
       "candidateId": "recruit-cc5d0ac34264",
@@ -17,15 +17,425 @@
       "reason": "same_notice_and_position_batch_extraction_upgrade",
       "reviewedAt": "2026-09-10T15:30:11+00:00",
       "signature": "f3a817aa5ee218cc76fee62998b1ea2a29c539c63e532feb62b1fd76d5468e24"
+    },
+    {
+      "candidateId": "recruit-c80129733d43",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "5598517812fe74d48f5aed48ac499cba6425aff735ef7996e55d7a2bb2879938"
+    },
+    {
+      "candidateId": "recruit-d5dce307ade6",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "40ee1dcf07acb5ff8b67e5d7197fd1843c4673c1197b8ab7ff3a9b36e6fd55a6"
+    },
+    {
+      "candidateId": "recruit-6e9da508b673",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "7ab4f51160b6ee334830ba190da86dc695b6f6c0022c0e4b67d11d99a7e1ab6f"
+    },
+    {
+      "candidateId": "recruit-86ad76a7a701",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "060363c38697e00bbbc69b5c1c9060e37eac77ca572ab36fc1e4c957cf73b8a2"
+    },
+    {
+      "candidateId": "recruit-e5dae966075c",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "7a04842a85519d732fe66adec45c23e9d872396b0a5a61f59f349a423371791e"
+    },
+    {
+      "candidateId": "recruit-ace3f38b6bed",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "093e1a1ed0b6e45f83e62044b5187ec250e3ebcfb3183ed7aaa43199ec2b7561"
+    },
+    {
+      "candidateId": "recruit-9adbf3ceaa0f",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "09d8357a1dfe9e9494293aa8815327989bcba01ba39aec7d4fa23198dbfd0e46"
+    },
+    {
+      "candidateId": "recruit-2513cbc2a9c6",
+      "decision": "rejected",
+      "reason": "source_application_window_expired",
+      "reviewedAt": "2026-09-10T15:30:11+00:00",
+      "signature": "a0c1f3afb316b3ecc982978ea32c44cfc73a392fc138f6db006d0a534583aaac"
+    },
+    {
+      "candidateId": "recruit-7fdc96464d94",
+      "decision": "duplicate",
+      "reason": "同一2026年博士后招募公告已收录 jobs.md，含9月15日至10月20日第二批报名窗口。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "5aa11ee968b1943310c9e164a97e7434e084a2cfac906213659077569acd5ffb"
+    },
+    {
+      "candidateId": "recruit-ae469d74af9d",
+      "decision": "duplicate",
+      "reason": "同一展览项目实习公告已收录 intern.md。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "6889a43091f3380ba8772b3db2c2ba9f27b29e18f1b37dae500c4ebe74dfa08f"
+    },
+    {
+      "candidateId": "recruit-834119b82692",
+      "decision": "duplicate",
+      "reason": "同一事业发展部实习公告已收录 intern.md。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "790b8d957c3f7e1650b3788527fbd56aec28079e1dae2b6972d37cbbc0a22d23"
+    },
+    {
+      "candidateId": "recruit-9862f94aaadc",
+      "decision": "rejected",
+      "reason": "原公告报名截止为2026年9月11日，已过期。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "cfd4cf485818e4588cabf80e8c90121b77d7f0ea84d3fc353b7986f96b562353"
+    },
+    {
+      "candidateId": "recruit-7480a47e9cba",
+      "decision": "rejected",
+      "reason": "原公告报名截止为2026年6月14日，已过期。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "0cd584ddc5c725ec3d62621a0c62a077e8f107db8068921a7aec660196986779"
+    },
+    {
+      "candidateId": "recruit-8d316c1bddfb",
+      "decision": "duplicate",
+      "reason": "已按正文拆分为三个岗位，收录至 jobs.md；截止与投递依据见 Round25 审计。",
+      "reviewedAt": "2026-09-13T20:58:13+08:00",
+      "signature": "f4cd8409fc21e72438d756cc4949b32c44238c1ec280ef0f664d419be349f44b"
     }
   ],
   "candidates": [
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Hong Kong Visual Culture)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Hong Kong Visual Culture)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-2027---Curatorial--Hong-Kong-Visual-Culture-_R6918-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-92f1aec141d1",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Sigg Visual Art)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Sigg Visual Art)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27---Curatorial--Visual-Art---Sigg-_R6919-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-d467da5ec138",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Moving Image)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Moving Image)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27----Curatorial--Moving-Image-_R6916-1",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-05714d85b06d",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Design and Architecture)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Curatorial (Design and Architecture)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-2027---Curatorial--Design-and-Architecture-_R6914-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-c20c8339104f",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Digital Content",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Digital Content",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-2027----Curatorial--Digital-Content-_R6922-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-804b462d8c5e",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Editorial & Publishing (Publishing)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Editorial & Publishing (Publishing)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-2027---Curatorial--Editorial---Publishing---Publishing-_R6923-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-79130d26fd1e",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Learning and Interpretation (Engagement)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Learning and Interpretation (Engagement)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27--Curatorial--Learning-and-Interpretation--Engagement--_R6921-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-6b76a68cbe7a",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Learning and Interpretation (Interpretation)",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Learning and Interpretation (Interpretation)",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27--Curatorial--Learning-and-Interpretation--Interpretation--_R6920-5",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-61f9b0e84212",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Collection, Archives and Library",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Collection, Archives and Library",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27---Collection-and-Exhibition--Collection--Archives---Library-_R6911-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-046b5dbe123f",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Exhibition Design",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Exhibition Design",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27---Collection-and-Exhibition--Design-_R6913-5",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-d745f607f312",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：E-commerce and Project",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：E-commerce and Project",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27---Museum-Operations--E-commerce-and-Project-_R6915",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-98a393af457e",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "M+博物馆",
+      "position": "M+博物馆 — 2026—2027 毕业生实习：Visitor Services",
+      "recruitmentBatch": "",
+      "announcementTitle": "M+博物馆 — 2026—2027 毕业生实习：Visitor Services",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "M+毕业生实习",
+      "discoveryUrl": "https://wd3.myworkdaysite.com/recruiting/wkcda/External/job/Hong-Kong/M--Internship-Programme-2026-27---Museum-Operations--Visitor-Services-_R6917-4",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "internship",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.mplus.org.hk/en/join-the-team/m-internship/",
+      "candidateId": "recruit-37df221cd74b",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
     {
       "institution": "世博会博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "世博会博物馆 — 实习招募",
-      "discoveredAt": "2026-09-12T12:27:54+08:00",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -50,8 +460,34 @@
       ],
       "candidateId": "recruit-ab7535399692",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-12",
-      "lastSeen": "2026-09-12"
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "首都博物馆",
+      "position": "29 2026.07 首都博物馆志愿者招募公告",
+      "recruitmentBatch": "",
+      "announcementTitle": "29 2026.07 首都博物馆志愿者招募公告",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "首都博物馆公告",
+      "discoveryUrl": "https://www.capitalmuseum.org.cn/news/e9a6a6cc9a864f7c8ed160c72164a23c",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "intern",
+      "opportunityType": "volunteer",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.capitalmuseum.org.cn/",
+      "candidateId": "recruit-0a658ec2dcf6",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待核验文博机构",
@@ -77,7 +513,7 @@
       "candidateId": "recruit-626b72f8a578",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-06",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "云南省文化和旅游厅",
@@ -105,7 +541,7 @@
       "candidateId": "recruit-74adcdcd05e2",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-08",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "北京市文物局",
@@ -131,7 +567,7 @@
       "candidateId": "recruit-27717046125a",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "年渭南市澄城县博物馆",
@@ -155,7 +591,7 @@
       "candidateId": "recruit-396ee36a9fa0",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -190,7 +626,7 @@
         }
       ],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -240,7 +676,7 @@
         }
       ],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -269,7 +705,7 @@
       "candidateId": "recruit-5d03f4d42296",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -298,7 +734,7 @@
       "candidateId": "recruit-2ebb644fdde0",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -327,7 +763,7 @@
       "candidateId": "recruit-97f93704009b",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -356,7 +792,7 @@
       "candidateId": "recruit-16a8bbb3ee8d",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "成都博物馆",
@@ -382,7 +818,7 @@
       "candidateId": "recruit-e1863a4c01ac",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "甘肃炳灵寺文物保护研究所",
@@ -411,7 +847,7 @@
       "candidateId": "recruit-2ab223828790",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "福耀科技大学博物馆",
@@ -437,7 +873,7 @@
       "candidateId": "recruit-5b155aa82050",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "山西省晋江市博物馆",
@@ -465,7 +901,7 @@
       "candidateId": "recruit-507e5ebc68dd",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -499,7 +935,7 @@
         }
       ],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -527,14 +963,40 @@
       "candidateId": "recruit-d3cb3861462a",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "上海博物馆",
+      "position": "上海博物馆公开招聘公告",
+      "recruitmentBatch": "",
+      "announcementTitle": "上海博物馆公开招聘公告",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "上海市人社局招聘公告",
+      "discoveryUrl": "https://rsj.sh.gov.cn/tzpgg_17408/20260825/t0035_1443267.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://rsj.sh.gov.cn/tzpgg_17408/",
+      "candidateId": "recruit-17c23da1edf1",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "东莞市博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "东莞市博物馆 — 招聘公告",
-      "discoveredAt": "2026-09-12T12:27:54+08:00",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -559,15 +1021,15 @@
       ],
       "candidateId": "recruit-442031bdb68d",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-12",
-      "lastSeen": "2026-09-12"
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "信宜市博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "信宜市博物馆 — 招聘公告",
-      "discoveredAt": "2026-09-12T12:27:54+08:00",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -592,8 +1054,60 @@
       ],
       "candidateId": "recruit-6d66c36d5ee7",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-12",
-      "lastSeen": "2026-09-12"
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "待展开单位",
+      "position": "/ 事业单位公开招聘",
+      "recruitmentBatch": "",
+      "announcementTitle": "/ 事业单位公开招聘",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "上海市人社局招聘公告",
+      "discoveryUrl": "https://rsj.sh.gov.cn/tsydwgkzp_17406/index.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "umbrella_notice_needs_attachment_inspection",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://rsj.sh.gov.cn/tzpgg_17408/",
+      "candidateId": "recruit-beae81b84039",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
+    },
+    {
+      "institution": "清华大学艺术博物馆",
+      "position": "工作人员",
+      "recruitmentBatch": "",
+      "announcementTitle": "清华大学艺术博物馆招聘工作人员",
+      "discoveredAt": "2026-09-13T12:03:19+08:00",
+      "discoverySource": "清华艺博招聘须知",
+      "discoveryUrl": "https://mp.weixin.qq.com/s/zIor4c-O3Yom9puVTJXT8g",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/",
+      "candidateId": "recruit-8bc14f33b6ac",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-13",
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "云南省腾冲市文化和旅游局",
@@ -619,7 +1133,7 @@
       "candidateId": "recruit-713a6619d85e",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "山东省文化和旅游厅",
@@ -645,7 +1159,7 @@
       "candidateId": "recruit-9ed8e114720a",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "待展开单位",
@@ -671,7 +1185,7 @@
       "candidateId": "recruit-a3b8d3f0d5d8",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "成都金沙遗址博物馆",
@@ -697,7 +1211,7 @@
       "candidateId": "recruit-18acfe8bdd30",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     },
     {
       "institution": "湖北省文物考古研究院",
@@ -723,7 +1237,7 @@
       "candidateId": "recruit-113d237ceb47",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-12"
+      "lastSeen": "2026-09-13"
     }
   ]
 }

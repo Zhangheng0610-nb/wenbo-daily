@@ -51,8 +51,9 @@ HTML = r'''<!doctype html>
     <section class="kpis" aria-label="行业关注指标"><div class="kpi"><div class="kpi-label">独立事项</div><div class="kpi-value" id="i-events">—</div><div class="kpi-note" id="i-events-note">已合并连续报道</div></div><div class="kpi"><div class="kpi-label">涉及地区</div><div class="kpi-value" id="i-provinces">—</div><div class="kpi-note">仅主要发生地进入地图</div></div><div class="kpi"><div class="kpi-label" id="i-leader-label">关注最高地区</div><div class="kpi-value" id="i-leader">—</div><div class="kpi-note" id="i-leader-note">全国归一化指数</div></div><div class="kpi"><div class="kpi-label">正式运行覆盖</div><div class="kpi-value" id="i-sources">—</div><div class="kpi-note" id="i-sources-note">正式检查有效信源 / 固定池 · 历史回溯覆盖见数据质量区域</div></div></section>
       <div class="grid-main"><section class="panel industry-map-view"><div class="panel-title"><span>全国行业关注分布</span><small id="map-window">固定权威信源 · 近30天</small></div><div id="map"></div><div class="map-foot"><span id="map-scale-note">当前筛选范围内，最高关注度为 100。</span><strong id="map-hint">点击省份筛选事项</strong></div></section><section class="panel industry-events-view"><div class="panel-title"><span>重点事项</span><small id="industry-list-summary">—</small></div><div class="event-list" id="industry-list"><div class="empty">正在读取监测记录…</div></div><button class="load-more" id="industry-more" type="button" hidden></button></section></div>
     </section>
+      <!-- DIGITAL_NEWS -->
       <section class="module" id="digital-module" data-mobile-view="trend" aria-labelledby="digital-title">
-      <div class="module-head"><div><div class="module-kicker">MODULE 02 · NCHA ARTICLE SAMPLE</div><h2 id="digital-title">数字化趋势</h2><p>国家文物局报道中的数字化动向。</p></div><a class="module-link" href="../digital-trends.html">完整数字化趋势 →</a></div>
+      <div class="module-head"><div><div class="module-kicker">MODULE 02 · NCHA ARTICLE SAMPLE</div><h2 id="digital-title">国家文物局报道趋势</h2><p>报道量与主题分布。</p></div><a class="module-link" href="../digital-trends.html">完整数字化趋势 →</a></div>
       <div class="local-toolbar" aria-label="数字化趋势筛选"><span class="toolbar-label">观察范围</span><div class="segmented" id="digital-window"><button data-range="90d" class="active">近90天</button><button data-range="12m">近12个月</button><button data-range="3y">近3年</button><button data-range="all">全部</button></div><select id="digital-topic" class="filter" aria-label="数字化方向筛选"><option value="">全部数字化方向</option></select><button type="button" class="clear" id="digital-clear">清除本模块筛选</button><div class="chips" id="digital-chips"></div><div class="mobile-view-switch" id="digital-view-switch" role="tablist" aria-label="数字化趋势视图"><button type="button" data-digital-view="trend" class="active" role="tab" aria-selected="true">趋势</button><button type="button" data-digital-view="topics" role="tab" aria-selected="false">方向</button><button type="button" data-digital-view="articles" role="tab" aria-selected="false">原文</button></div></div>
       <section class="kpis" aria-label="数字化趋势指标"><div class="kpi"><div class="kpi-label">数字化内容条目</div><div class="kpi-value" id="d-articles">—</div><div class="kpi-note" id="d-articles-note">当前范围内的实际报道/摘编条目</div></div><div class="kpi"><div class="kpi-label">来源页覆盖比例</div><div class="kpi-value" id="d-share">—<span class="kpi-unit">%</span></div><div class="kpi-note">涉及数字化的来源页 ÷ 同期全部来源页</div></div><div class="kpi"><div class="kpi-label">已归类内容条目</div><div class="kpi-value" id="d-classified">—</div><div class="kpi-note" id="d-classified-note">可多标签，不互斥</div></div><div class="kpi"><div class="kpi-label">待归类条目</div><div class="kpi-value" id="d-unclassified">—</div><div class="kpi-note">待归类</div></div></section>
       <div class="grid-lower"><section class="panel digital-trend-view"><div class="panel-title"><span>趋势变化</span><small id="trend-note">近90天按周统计</small></div><div id="trend-chart" class="chart"></div><p class="panel-help">点击趋势点查看对应报道。</p></section><section class="panel digital-topic-view"><div class="panel-title"><span>数字化行业方向</span><small id="topic-summary">—</small></div><div class="topic-list" id="topics"></div></section></div>
@@ -117,9 +118,14 @@ HTML = r'''<!doctype html>
 </html>'''
 
 
-def main():
+def main(reports=None):
+    from automation.digital_news import write_digital_news
+    if reports is None:
+        from build import parse_md
+        reports = [parse_md(p) for p in sorted((SITE_DIR/'content/日报').glob('20??-??-??.md'))]
+    news = write_digital_news(SITE_DIR, reports)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    OUT_FILE.write_text(HTML, encoding="utf-8")
+    OUT_FILE.write_text(HTML.replace("<!-- DIGITAL_NEWS -->", news), encoding="utf-8")
     print(f"Command center: {OUT_FILE}")
 
 
