@@ -3560,12 +3560,23 @@ def reflow_resolver_discovered_candidates(required_date: date, records: list[dic
     if not records:
         return {"records": [], "events": [], "evaluation": {"records": []}}
     history = load_history(required_date)
+    # Resolver output can contain many unrelated search results.  Preserve
+    # the previous comparison order while narrowing comparisons to rows that
+    # share a conservative deduplication anchor; the relation function stays
+    # authoritative, so this changes performance without changing decisions.
+    relation_index: dict[tuple[str, str], dict[int, dict]] = {}
+    for order, previous in enumerate(known_events):
+        _index_relation_row(previous, order, relation_index)
+    history_order = len(known_events) + len(records)
+    for history_index, previous in enumerate(history):
+        _index_relation_row(previous, history_order + history_index, relation_index)
     annotated = []
-    for original in records:
+    for record_index, original in enumerate(records):
         row = dict(original)
         relation = None
         matched_previous = None
-        for previous in known_events + annotated + history:
+        predecessors = _indexed_relation_candidates(row, relation_index)
+        for previous in predecessors:
             relation = duplicate_relation(row, previous)
             if relation:
                 matched_previous = previous
@@ -3580,6 +3591,7 @@ def reflow_resolver_discovered_candidates(required_date: date, records: list[dic
             )
             row["newDevelopment"] = relation[0] == "new_development"
         annotated.append(row)
+        _index_relation_row(row, len(known_events) + record_index, relation_index)
     events = aggregate_event_candidates(annotated)
     evaluation = evaluate_candidate_pool(required_date, events)
     return {"records": annotated, "events": events, "evaluation": evaluation}

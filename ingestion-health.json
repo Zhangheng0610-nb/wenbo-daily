@@ -1,11 +1,30 @@
 {
   "schemaVersion": 2,
-  "latestReport": "2026-09-13",
+  "latestReport": "2026-09-14",
   "days": [
+    {
+      "date": "2026-09-14",
+      "checkedAt": "2026-09-14T12:09:04+08:00",
+      "panelItems": 4,
+      "panelChecks": 6,
+      "usableDiscoverySources": 10,
+      "discoverySources": 10,
+      "queriesAttempted": 158,
+      "queriesSucceeded": 158,
+      "selected": 4,
+      "digitalCheckedAt": "2026-09-14T19:46:49+08:00",
+      "digitalStatus": "scan_success_with_update",
+      "digitalNewItems": 2,
+      "publicationWindow": {
+        "start": "2026-09-08",
+        "end": "2026-09-14"
+      },
+      "lateArrivalCount": 46
+    },
     {
       "date": "2026-09-13",
       "checkedAt": "2026-09-13T07:16:14+08:00",
-      "panelItems": 0,
+      "panelItems": 4,
       "panelChecks": 6,
       "usableDiscoverySources": 10,
       "discoverySources": 10,
@@ -100,7 +119,7 @@
     {
       "date": "2026-09-08",
       "checkedAt": "2026-09-08T07:14:54+08:00",
-      "panelItems": 9,
+      "panelItems": 20,
       "panelChecks": 6,
       "usableDiscoverySources": 6,
       "discoverySources": 8,
@@ -115,53 +134,37 @@
         "end": "2026-09-08"
       },
       "lateArrivalCount": 24
-    },
-    {
-      "date": "2026-09-07",
-      "checkedAt": "2026-09-07T07:14:45+08:00",
-      "panelItems": 4,
-      "panelChecks": 6,
-      "usableDiscoverySources": 5,
-      "discoverySources": 8,
-      "queriesAttempted": 142,
-      "queriesSucceeded": 142,
-      "selected": 2,
-      "digitalCheckedAt": "2026-09-07T07:36:00+08:00",
-      "digitalStatus": "scan_success_no_update",
-      "digitalNewItems": 0,
-      "publicationWindow": null,
-      "lateArrivalCount": null
     }
   ],
   "observations": {
     "panel": [
       {
         "sourceId": "ncha",
-        "checkedAt": "2026-09-13T07:15:09+08:00",
+        "checkedAt": "2026-09-14T12:07:58+08:00",
         "status": "no_update",
         "scanStatus": "checked",
-        "rawCount": 8,
+        "rawCount": 10,
         "note": ""
       },
       {
         "sourceId": "cultural-relics-news",
-        "checkedAt": "2026-09-13T07:15:30+08:00",
+        "checkedAt": "2026-09-14T12:08:19+08:00",
         "status": "no_update",
         "scanStatus": "checked",
-        "rawCount": 0,
+        "rawCount": 23,
         "note": ""
       },
       {
         "sourceId": "archaeology",
-        "checkedAt": "2026-09-13T07:15:31+08:00",
+        "checkedAt": "2026-09-14T12:08:24+08:00",
         "status": "no_update",
         "scanStatus": "checked",
-        "rawCount": 13,
+        "rawCount": 12,
         "note": ""
       },
       {
         "sourceId": "museum-association",
-        "checkedAt": "2026-09-13T07:15:33+08:00",
+        "checkedAt": "2026-09-14T12:08:26+08:00",
         "status": "partial",
         "scanStatus": "partial",
         "rawCount": 2,
@@ -169,15 +172,15 @@
       },
       {
         "sourceId": "xinhua-wenbo",
-        "checkedAt": "2026-09-13T07:15:35+08:00",
+        "checkedAt": "2026-09-14T12:08:27+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 275,
+        "rawCount": 269,
         "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
       },
       {
         "sourceId": "cctv-wenbo",
-        "checkedAt": "2026-09-13T07:16:14+08:00",
+        "checkedAt": "2026-09-14T12:09:04+08:00",
         "status": "partial",
         "scanStatus": "partial",
         "rawCount": 3,
@@ -185,7 +188,7 @@
       }
     ],
     "digital": {
-      "checkedAt": "2026-09-13T11:57:11+08:00",
+      "checkedAt": "2026-09-14T19:46:49+08:00",
       "status": "scan_success_with_update",
       "contentItemsNew": 2,
       "fetchFailed": 0,

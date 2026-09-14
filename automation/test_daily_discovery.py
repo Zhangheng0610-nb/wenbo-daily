@@ -58,6 +58,7 @@ from automation.daily_discovery import (
     near_threshold_rescue_eligible,
     select_evidence_upgrade_queue,
     previous_editorial_rejection_relation,
+    reflow_resolver_discovered_candidates,
 )
 
 
@@ -1372,6 +1373,38 @@ class DailyDiscoveryTests(unittest.TestCase):
         candidate = result["resolverDiscoveredCandidates"][0]
         self.assertEqual(candidate["resolverDepth"], 1)
         self.assertEqual(candidate["resolverParentEventId"], "event-parent")
+
+    @patch("automation.daily_discovery.load_history", return_value=[])
+    @patch("automation.daily_discovery.duplicate_relation", wraps=duplicate_relation)
+    def test_resolver_reflow_indexes_unrelated_known_events(self, duplicate_relation_mock, _load_history):
+        target = {
+            "title": "某遗址公布新发现",
+            "url": "https://example.test/resolver",
+            "publishedDate": "2026-09-14",
+            "entity": "某遗址",
+            "eventType": "archaeology",
+        }
+        known_events = [
+            {
+                "title": f"另一个机构发布第 {index} 项无关动态",
+                "url": f"https://example.test/unrelated-{index}",
+                "publishedDate": "2026-09-14",
+            }
+            for index in range(60)
+        ] + [{
+            "title": "某遗址公布新发现",
+            "url": "https://example.test/known",
+            "publishedDate": "2026-09-14",
+            "entity": "某遗址",
+            "eventType": "archaeology",
+        }]
+        result = reflow_resolver_discovered_candidates(
+            __import__("datetime").date(2026, 9, 14),
+            [target],
+            known_events,
+        )
+        self.assertEqual(result["records"][0]["duplicateStatus"], "same_day_duplicate")
+        self.assertLess(duplicate_relation_mock.call_count, len(known_events))
 
     def test_query_families_cover_recall_benchmark_semantics(self):
         queries = {query for family in QUERY_FAMILIES for query in family["queries"]}

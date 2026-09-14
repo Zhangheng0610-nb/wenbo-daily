@@ -1,50 +1,50 @@
 {
- "generated": "2026-09-13",
+ "generated": "2026-09-14",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-09-13"
+  "end": "2026-09-14"
  },
  "stats": {
-  "total": 275,
+  "total": 277,
   "title_hit": 26,
-  "digest_extra": 647,
+  "digest_extra": 649,
   "levels": {
-   "core": 220,
+   "core": 221,
    "ext": 12,
-   "tech": 43
+   "tech": 44
   },
-  "digest_articles": 512,
-  "unique_source_pages": 158,
-  "source_article_total": 13781,
-  "source_unique_pages": 4783,
-  "overall_share": 3.3,
+  "digest_articles": 513,
+  "unique_source_pages": 159,
+  "source_article_total": 13784,
+  "source_unique_pages": 4786,
+  "overall_share": 3.32,
   "topic_unique_counts": {
-   "数字保护与数字采集": 81,
-   "AI、三维扫描与科技考古": 73,
+   "数字保护与数字采集": 82,
+   "AI、三维扫描与科技考古": 75,
    "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_article_count": 227,
+  "classified_article_count": 229,
   "unclassified_article_count": 48,
-  "matched_record_count": 275,
-  "content_item_count": 275,
-  "digest_content_item_count": 243,
+  "matched_record_count": 277,
+  "content_item_count": 277,
+  "digest_content_item_count": 245,
   "standalone_content_item_count": 32,
-  "digital_source_pages": 158,
-  "digest_source_pages": 126,
+  "digital_source_pages": 159,
+  "digest_source_pages": 127,
   "standalone_source_pages": 32,
   "topic_content_item_counts": {
-   "数字保护与数字采集": 81,
-   "AI、三维扫描与科技考古": 73,
+   "数字保护与数字采集": 82,
+   "AI、三维扫描与科技考古": 75,
    "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
    "数字传播与国际交流": 12
   },
-  "classified_content_item_count": 227,
+  "classified_content_item_count": 229,
   "unclassified_content_item_count": 48
  },
  "quality": {
@@ -53,10 +53,10 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-13T11:57:11+08:00",
+  "last_incremental_scan_at": "2026-09-14T19:46:49+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-08-31",
-   "end": "2026-09-13"
+   "start": "2026-09-01",
+   "end": "2026-09-14"
   }
  },
  "topic_info": [
@@ -5126,6 +5126,55 @@
    "from_digest": false,
    "digest_title": "",
    "evidence_snippet": "…建起官方机构、非政府组织、国际学者联动的长效协作纽带，跳出传统单一技术援助模式，实现中外学术力量平等共建。 依托标准化、数字化、多元化的工作模式，短短四年间，联合考古队交出扎实答卷：完成遗址周边13万平方米考古调查，累计发掘1700平方米，厘清神庙祭拜区、居住区、公共洗浴区、手工作坊四大功能分区；出土建筑构件、陶器、玻璃器、动植物遗存等大量实物，填补了我国在…",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+   "display_title": "中国文物保护技术协会第十四次学术年会开幕",
+   "source_url": "/art/2026/9/13/art_722_204819.html",
+   "source_page_title": "一周文物动态摘编（9.5-9.12）",
+   "is_digest_item": true,
+   "t": "中国文物保护技术协会第十四次学术年会开幕",
+   "d": "2026-09-13",
+   "u": "/art/2026/9/13/art_722_204819.html",
+   "l": "tech",
+   "w": "人工智能",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "人工智能",
+    "AI"
+   ],
+   "from_digest": true,
+   "digest_title": "中国文物保护技术协会第十四次学术年会开幕",
+   "evidence_snippet": "…新疆维吾尔自治区文化和旅游厅、文物局、文物考古研究所支持的中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐开幕。年会以“人工智能·范式跃迁：AI时代的文物保护科技创新”为主题，来自全国文博单位、高等院校、科研机构及企业的470余名代表参会。年会设1个主会场和6个分会场，96位专家学者围绕文物病害智能感知、石窟与土遗址保护、出土与馆藏文物保护修复等议题研讨。",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-c4df665defef",
+   "display_title": "全国首家中子文化遗产保护实验室成立",
+   "source_url": "/art/2026/9/13/art_722_204819.html",
+   "source_page_title": "一周文物动态摘编（9.5-9.12）",
+   "is_digest_item": true,
+   "t": "全国首家中子文化遗产保护实验室成立",
+   "d": "2026-09-13",
+   "u": "/art/2026/9/13/art_722_204819.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [
+    "数字保护与数字采集",
+    "AI、三维扫描与科技考古"
+   ],
+   "matched_keywords": [
+    "数字化",
+    "数字化保护",
+    "数字孪生",
+    "人工智能"
+   ],
+   "from_digest": true,
+   "digest_title": "全国首家中子文化遗产保护实验室成立",
+   "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
    "admission_reason": "strong-body"
   }
  ],
@@ -11458,13 +11507,13 @@
   },
   {
    "key": "2026-09",
-   "count": 2,
-   "content_item_count": 2,
-   "source_page_count": 2,
-   "unique_count": 2,
-   "source_count": 13,
-   "source_unique_count": 13,
-   "share": 15.38,
+   "count": 4,
+   "content_item_count": 4,
+   "source_page_count": 3,
+   "unique_count": 3,
+   "source_count": 16,
+   "source_unique_count": 16,
+   "share": 18.75,
    "items": [
     {
      "content_item_id": "/art/2026/9/10/art_722_204760.html",
@@ -11507,6 +11556,49 @@
      "d": "2026-09-10",
      "u": "/art/2026/9/10/art_722_204756.html",
      "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+     "display_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "is_digest_item": true,
+     "evidence_snippet": "…新疆维吾尔自治区文化和旅游厅、文物局、文物考古研究所支持的中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐开幕。年会以“人工智能·范式跃迁：AI时代的文物保护科技创新”为主题，来自全国文博单位、高等院校、科研机构及企业的470余名代表参会。年会设1个主会场和6个分会场，96位专家学者围绕文物病害智能感知、石窟与土遗址保护、出土与馆藏文物保护修复等议题研讨。",
+     "matched_keywords": [
+      "人工智能",
+      "AI"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "中国文物保护技术协会第十四次学术年会开幕",
+     "l": "tech"
+    },
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-c4df665defef",
+     "display_title": "全国首家中子文化遗产保护实验室成立",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "全国首家中子文化遗产保护实验室成立",
+     "is_digest_item": true,
+     "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护",
+      "数字孪生",
+      "人工智能"
+     ],
+     "topics": [
+      "数字保护与数字采集",
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "全国首家中子文化遗产保护实验室成立",
      "l": "core"
     }
    ]
@@ -20448,13 +20540,13 @@
   },
   {
    "key": "2026-W37",
-   "count": 2,
-   "content_item_count": 2,
-   "source_page_count": 2,
-   "unique_count": 2,
-   "source_count": 8,
-   "source_unique_count": 8,
-   "share": 25.0,
+   "count": 4,
+   "content_item_count": 4,
+   "source_page_count": 3,
+   "unique_count": 3,
+   "source_count": 11,
+   "source_unique_count": 11,
+   "share": 27.27,
    "items": [
     {
      "content_item_id": "/art/2026/9/10/art_722_204760.html",
@@ -20497,6 +20589,49 @@
      "d": "2026-09-10",
      "u": "/art/2026/9/10/art_722_204756.html",
      "t": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+     "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+     "display_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "is_digest_item": true,
+     "evidence_snippet": "…新疆维吾尔自治区文化和旅游厅、文物局、文物考古研究所支持的中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐开幕。年会以“人工智能·范式跃迁：AI时代的文物保护科技创新”为主题，来自全国文博单位、高等院校、科研机构及企业的470余名代表参会。年会设1个主会场和6个分会场，96位专家学者围绕文物病害智能感知、石窟与土遗址保护、出土与馆藏文物保护修复等议题研讨。",
+     "matched_keywords": [
+      "人工智能",
+      "AI"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "中国文物保护技术协会第十四次学术年会开幕",
+     "l": "tech"
+    },
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-c4df665defef",
+     "display_title": "全国首家中子文化遗产保护实验室成立",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "全国首家中子文化遗产保护实验室成立",
+     "is_digest_item": true,
+     "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护",
+      "数字孪生",
+      "人工智能"
+     ],
+     "topics": [
+      "数字保护与数字采集",
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "全国首家中子文化遗产保护实验室成立",
      "l": "core"
     }
    ]
@@ -43995,6 +44130,61 @@
    "source_unique_count": 1,
    "share": 0.0,
    "items": []
+  },
+  {
+   "key": "2026-09-13",
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 3,
+   "source_unique_count": 3,
+   "share": 33.33,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+     "display_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "中国文物保护技术协会第十四次学术年会开幕",
+     "is_digest_item": true,
+     "evidence_snippet": "…新疆维吾尔自治区文化和旅游厅、文物局、文物考古研究所支持的中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐开幕。年会以“人工智能·范式跃迁：AI时代的文物保护科技创新”为主题，来自全国文博单位、高等院校、科研机构及企业的470余名代表参会。年会设1个主会场和6个分会场，96位专家学者围绕文物病害智能感知、石窟与土遗址保护、出土与馆藏文物保护修复等议题研讨。",
+     "matched_keywords": [
+      "人工智能",
+      "AI"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "中国文物保护技术协会第十四次学术年会开幕",
+     "l": "tech"
+    },
+    {
+     "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-c4df665defef",
+     "display_title": "全国首家中子文化遗产保护实验室成立",
+     "source_url": "/art/2026/9/13/art_722_204819.html",
+     "source_page_title": "一周文物动态摘编（9.5-9.12）",
+     "digest_title": "全国首家中子文化遗产保护实验室成立",
+     "is_digest_item": true,
+     "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
+     "matched_keywords": [
+      "数字化",
+      "数字化保护",
+      "数字孪生",
+      "人工智能"
+     ],
+     "topics": [
+      "数字保护与数字采集",
+      "AI、三维扫描与科技考古"
+     ],
+     "d": "2026-09-13",
+     "u": "/art/2026/9/13/art_722_204819.html",
+     "t": "全国首家中子文化遗产保护实验室成立",
+     "l": "core"
+    }
+   ]
   }
  ],
  "by_year": [
@@ -44050,13 +44240,13 @@
   },
   {
    "key": "2026",
-   "count": 60,
-   "content_item_count": 60,
-   "source_page_count": 30,
-   "unique_count": 30,
-   "source_count": 556,
-   "source_unique_count": 296,
-   "share": 10.14
+   "count": 62,
+   "content_item_count": 62,
+   "source_page_count": 31,
+   "unique_count": 31,
+   "source_count": 559,
+   "source_unique_count": 299,
+   "share": 10.37
   }
  ],
  "content_items": [
@@ -49081,9 +49271,62 @@
     "数字保护与数字采集"
    ],
    "is_digest_item": false
+  },
+  {
+   "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+   "display_title": "中国文物保护技术协会第十四次学术年会开幕",
+   "source_url": "/art/2026/9/13/art_722_204819.html",
+   "source_page_title": "一周文物动态摘编（9.5-9.12）",
+   "digest_title": "中国文物保护技术协会第十四次学术年会开幕",
+   "date": "2026-09-13",
+   "level": "tech",
+   "matched_keywords": [
+    "人工智能",
+    "AI"
+   ],
+   "evidence_snippet": "…新疆维吾尔自治区文化和旅游厅、文物局、文物考古研究所支持的中国文物保护技术协会第十四次学术年会在新疆乌鲁木齐开幕。年会以“人工智能·范式跃迁：AI时代的文物保护科技创新”为主题，来自全国文博单位、高等院校、科研机构及企业的470余名代表参会。年会设1个主会场和6个分会场，96位专家学者围绕文物病害智能感知、石窟与土遗址保护、出土与馆藏文物保护修复等议题研讨。",
+   "topics": [
+    "AI、三维扫描与科技考古"
+   ],
+   "is_digest_item": true
+  },
+  {
+   "content_item_id": "/art/2026/9/13/art_722_204819.html#digest-c4df665defef",
+   "display_title": "全国首家中子文化遗产保护实验室成立",
+   "source_url": "/art/2026/9/13/art_722_204819.html",
+   "source_page_title": "一周文物动态摘编（9.5-9.12）",
+   "digest_title": "全国首家中子文化遗产保护实验室成立",
+   "date": "2026-09-13",
+   "level": "core",
+   "matched_keywords": [
+    "数字化",
+    "数字化保护",
+    "数字孪生",
+    "人工智能"
+   ],
+   "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
+   "topics": [
+    "数字保护与数字采集",
+    "AI、三维扫描与科技考古"
+   ],
+   "is_digest_item": true
   }
  ],
  "source_pages": [
+  {
+   "source_page_id": "/art/2026/9/13/art_722_204819.html",
+   "source_url": "/art/2026/9/13/art_722_204819.html",
+   "source_page_title": "一周文物动态摘编（9.5-9.12）",
+   "date": "2026-09-13",
+   "is_digest_page": true,
+   "content_item_ids": [
+    "/art/2026/9/13/art_722_204819.html#digest-4af26c594d7d",
+    "/art/2026/9/13/art_722_204819.html#digest-c4df665defef"
+   ],
+   "content_item_count": 2,
+   "digest_content_item_count": 2,
+   "standalone_content_item_count": 0
+  },
   {
    "source_page_id": "/art/2026/9/10/art_722_204760.html",
    "source_url": "/art/2026/9/10/art_722_204760.html",

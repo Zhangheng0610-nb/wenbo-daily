@@ -309,6 +309,333 @@
       "observationDate": "2026-09-13"
     },
     {
+      "recordId": "operational-20260908-cultural-relics-news-0013-2888id112829",
+      "date": "2026-09-08",
+      "title": "博物馆内，“互动”非“乱动”",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22888/id/112829"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0017-2890id112834",
+      "date": "2026-09-08",
+      "title": "垄上春秋铸就曾国华章 文脉传承激活千年遗址——京山苏家垄遗址考古发现、保护传承与活化利用之路",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22890/id/112834"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0018-2891id112836",
+      "date": "2026-09-08",
+      "title": "基于制备瓷质部件的残损陶瓷文物修复技术与实践研究",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22891/id/112836"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0010-2886id112822",
+      "date": "2026-09-08",
+      "title": "大型历史文化纪录片《大邑商》播出",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22886/id/112822"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0008-2885id112819",
+      "date": "2026-09-08",
+      "title": "守文化边疆 筑精神家园——我国边疆地区博物馆建设发展观察",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22885/id/112819"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22885/id/112819",
+        "duplicateUrls": [
+          "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22886/id/112824"
+        ]
+      },
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0016-2889id112832",
+      "date": "2026-09-08",
+      "title": "曲阜“三孔”：世界遗产保护的“守”与“进”",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22889/id/112832"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "文化遗产"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0015-2889id112831",
+      "date": "2026-09-08",
+      "title": "法治·科技·研究·传承——海龙屯遗址保护利用实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22889/id/112831"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0014-2888id112830",
+      "date": "2026-09-08",
+      "title": "烟台市福山区近现代文物建筑修缮保护与活化利用研究",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22888/id/112830"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0009-2886id112820",
+      "date": "2026-09-08",
+      "title": "虹卧北涧三百年——一座国保廊桥的系统性守护",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22886/id/112820"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0012-2887id112827",
+      "date": "2026-09-08",
+      "title": "赓续红色文脉 讲好革命故事 第四届“晋冀鲁豫四省革命文物优秀讲解交流推介活动”在山东海阳举办",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22887/id/112827"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "山东"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
+      "recordId": "operational-20260908-cultural-relics-news-0011-2887id112826",
+      "date": "2026-09-08",
+      "title": "连片保护赋能红色传承——革命文物保护利用片区建设工作巡礼之二",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-08/paperId/22887/id/112826"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-14T12:07:58+08:00",
+      "observationDate": "2026-09-14"
+    },
+    {
       "recordId": "operational-20260908-museum-association-0043-ntentid14774",
       "date": "2026-09-08",
       "title": "中国博物馆协会藏品保护与管理专委会关于开展案例征集与研讨活动的通知",

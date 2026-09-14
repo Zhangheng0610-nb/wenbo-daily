@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T21:59:17.166649+08:00",
+  "generatedAt": "2026-09-14T19:51:36.482766+08:00",
   "items": [
     {
       "id": "job-44632fb38bdb69",
@@ -85,33 +85,6 @@
         "label": "报名窗口与入口已核对"
       },
       "url": "jobs.html?status=all#job-86d4d12d9e6276"
-    },
-    {
-      "id": "job-56be98e36251a7",
-      "kind": "jobs",
-      "institution": "📍 浙江省台州市博物馆",
-      "position": "安全和设备管理岗位 1 名",
-      "deadline": "2026-09-13",
-      "deadlineAt": "2026-09-13T23:59:59+08:00",
-      "opensAt": null,
-      "timeStatus": "open",
-      "evidence": {
-        "jobId": "job-56be98e36251a7",
-        "signature": "8efe12256a2da68f130bbf4ae2486ca5d4999d154de1e8e203974d08bfa68ae4",
-        "checkedAt": "2026-09-12T12:39:21+08:00",
-        "reviewAfter": "2026-09-15T12:39:21+08:00",
-        "outcome": "supported",
-        "sourceUrl": "https://www.gaoxiaojob.com/announcement/detail/428189.html",
-        "method": "public_web_extraction",
-        "fields": [
-          "deadline",
-          "application"
-        ],
-        "note": "详情页支持台州市博物馆岗位、9月13日截止和tzbwgbgs@163.com邮箱投递；来源为C级专业招聘站，申请前核对原文。",
-        "state": "changed",
-        "label": "报名信息已变更，需重新核验"
-      },
-      "url": "jobs.html?status=all#job-56be98e36251a7"
     },
     {
       "id": "job-133ffdd922a5b9",
@@ -340,6 +313,33 @@
         "label": "报名信息尚无逐项核验记录"
       },
       "url": "jobs.html?status=all#job-097a4eb13bf520"
+    },
+    {
+      "id": "job-56be98e36251a7",
+      "kind": "jobs",
+      "institution": "📍 浙江省台州市博物馆",
+      "position": "安全和设备管理岗位 1 名",
+      "deadline": "2026-09-13",
+      "deadlineAt": "2026-09-13T23:59:59+08:00",
+      "opensAt": null,
+      "timeStatus": "closed",
+      "evidence": {
+        "jobId": "job-56be98e36251a7",
+        "signature": "8efe12256a2da68f130bbf4ae2486ca5d4999d154de1e8e203974d08bfa68ae4",
+        "checkedAt": "2026-09-12T12:39:21+08:00",
+        "reviewAfter": "2026-09-15T12:39:21+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://www.gaoxiaojob.com/announcement/detail/428189.html",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "详情页支持台州市博物馆岗位、9月13日截止和tzbwgbgs@163.com邮箱投递；来源为C级专业招聘站，申请前核对原文。",
+        "state": "changed",
+        "label": "报名信息已变更，需重新核验"
+      },
+      "url": "jobs.html?status=all#job-56be98e36251a7"
     },
     {
       "id": "job-228c2b07aacd46",
@@ -739,7 +739,7 @@
       "deadline": "2026-09-13 17:00（英国时间）",
       "deadlineAt": "2026-09-13T17:00:00+01:00",
       "opensAt": null,
-      "timeStatus": "open",
+      "timeStatus": "closed",
       "evidence": {
         "jobId": "job-0e5f1058a5cc6f",
         "signature": "2fc01bf2ce579596773fecda2a35210cc6fcb35edd24f7b36aaa03f430609a66",
@@ -1114,7 +1114,6 @@
     }
   ],
   "reviewQueue": [
-    "job-56be98e36251a7",
     "job-03d4917849af6a",
     "job-228c2b07aacd46",
     "job-040981bcb60298",
@@ -1156,6 +1155,6 @@
   "counts": {
     "total": 65,
     "recentEvidence": 5,
-    "reviewNeeded": 38
+    "reviewNeeded": 37
   }
 }

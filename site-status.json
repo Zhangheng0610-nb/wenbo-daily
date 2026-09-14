@@ -1,6 +1,6 @@
 {
-  "latestReport": "2026-09-13",
-  "monitoringDate": "2026-09-13",
+  "latestReport": "2026-09-14",
+  "monitoringDate": "2026-09-14",
   "operational": true,
   "completeSources": 3,
   "expectedSources": 6,
@@ -8,32 +8,32 @@
     {
       "sourceId": "ncha",
       "status": "no_update",
-      "checkedAt": "2026-09-13T07:15:09+08:00"
+      "checkedAt": "2026-09-14T12:07:58+08:00"
     },
     {
       "sourceId": "cultural-relics-news",
       "status": "no_update",
-      "checkedAt": "2026-09-13T07:15:30+08:00"
+      "checkedAt": "2026-09-14T12:08:19+08:00"
     },
     {
       "sourceId": "archaeology",
       "status": "no_update",
-      "checkedAt": "2026-09-13T07:15:31+08:00"
+      "checkedAt": "2026-09-14T12:08:24+08:00"
     },
     {
       "sourceId": "museum-association",
       "status": "partial",
-      "checkedAt": "2026-09-13T07:15:33+08:00"
+      "checkedAt": "2026-09-14T12:08:26+08:00"
     },
     {
       "sourceId": "xinhua-wenbo",
       "status": "partial",
-      "checkedAt": "2026-09-13T07:15:35+08:00"
+      "checkedAt": "2026-09-14T12:08:27+08:00"
     },
     {
       "sourceId": "cctv-wenbo",
       "status": "partial",
-      "checkedAt": "2026-09-13T07:16:14+08:00"
+      "checkedAt": "2026-09-14T12:09:04+08:00"
     }
   ]
 }
