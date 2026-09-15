@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-09-14",
+  "asOf": "2026-09-15",
   "scope": "published_reporting_latest_issue_minus_13_days",
   "countUnit": "editorial_event",
   "items": [
@@ -123,50 +123,6 @@
       "matchedKeywords": [
         "AI",
         "三维扫描"
-      ]
-    },
-    {
-      "eventId": "entry-2026-09-01-item3",
-      "title": "河北将数字化智能化深度融入文物保护全链条",
-      "summary": "光明网8月31日刊发河北日报报道，河北正从全域感知监测、预防性干预、数字化存续、智能修复辅助和协同治理等方面推进文物保护数字化。报道介绍，河北已完成988处文物保护单位数字化采集，并在正定隆兴寺、山海关、金山岭长城、行唐故郡遗址等项目中使用三维扫描、传感监测、无人机和现场实验室等技术。",
-      "reportDate": "2026-09-01",
-      "publishedDate": "2026-08-31",
-      "reportUrl": "reports/2026-09-01.html#item3",
-      "sources": [
-        {
-          "title": "光明网：科技赋能“智护”文物，河北将数字化智能化深度融入文物保护全链条",
-          "url": "https://difang.gmw.cn/2026-08/31/content_38975846.htm"
-        }
-      ],
-      "topics": [
-        "数字保护与数字采集",
-        "AI、三维扫描与科技考古"
-      ],
-      "matchedKeywords": [
-        "数字化",
-        "数字化采集",
-        "三维扫描"
-      ]
-    },
-    {
-      "eventId": "entry-2026-09-01-item5",
-      "title": "贺兰山新发现“四马拉车”岩画",
-      "summary": "新华社8月28日报道，贺兰山岩画管理处工作人员在岩画复查中发现一幅罕见的“四马拉车”岩画，这是贺兰山岩画中首次发现的同类题材。画面位于洪积扇区域一块半埋岩石上，尺寸约24×20厘米，采用凿刻技法，刻痕深度约1.5毫米。相关机构已完成岩画区域测绘和本体数字化留存，新发现也将纳入数字化保护体系。",
-      "reportDate": "2026-09-01",
-      "publishedDate": "2026-08-28",
-      "reportUrl": "reports/2026-09-01.html#item5",
-      "sources": [
-        {
-          "title": "央视网：贺兰山新发现“四马拉车”岩画",
-          "url": "https://news.cctv.com/2026/08/28/ARTIAXT3eCBoqNkhxSpafudc260828.shtml"
-        }
-      ],
-      "topics": [
-        "数字保护与数字采集"
-      ],
-      "matchedKeywords": [
-        "数字化",
-        "数字化保护"
       ]
     }
   ]

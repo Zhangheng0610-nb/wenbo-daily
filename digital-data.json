@@ -1,50 +1,50 @@
 {
- "generated": "2026-09-14",
+ "generated": "2026-09-15",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-09-14"
+  "end": "2026-09-15"
  },
  "stats": {
-  "total": 277,
+  "total": 278,
   "title_hit": 26,
   "digest_extra": 649,
   "levels": {
    "core": 221,
    "ext": 12,
-   "tech": 44
+   "tech": 45
   },
   "digest_articles": 513,
-  "unique_source_pages": 159,
-  "source_article_total": 13784,
-  "source_unique_pages": 4786,
-  "overall_share": 3.32,
+  "unique_source_pages": 160,
+  "source_article_total": 13785,
+  "source_unique_pages": 4787,
+  "overall_share": 3.34,
   "topic_unique_counts": {
    "数字保护与数字采集": 82,
-   "AI、三维扫描与科技考古": 75,
+   "AI、三维扫描与科技考古": 76,
    "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
-   "数字传播与国际交流": 12
+   "数字传播与国际交流": 13
   },
-  "classified_article_count": 229,
+  "classified_article_count": 230,
   "unclassified_article_count": 48,
-  "matched_record_count": 277,
-  "content_item_count": 277,
+  "matched_record_count": 278,
+  "content_item_count": 278,
   "digest_content_item_count": 245,
-  "standalone_content_item_count": 32,
-  "digital_source_pages": 159,
+  "standalone_content_item_count": 33,
+  "digital_source_pages": 160,
   "digest_source_pages": 127,
-  "standalone_source_pages": 32,
+  "standalone_source_pages": 33,
   "topic_content_item_counts": {
    "数字保护与数字采集": 82,
-   "AI、三维扫描与科技考古": 75,
+   "AI、三维扫描与科技考古": 76,
    "数字展览与沉浸式体验": 82,
    "数字博物馆与公共服务": 30,
    "数字档案、数据库与知识平台": 49,
-   "数字传播与国际交流": 12
+   "数字传播与国际交流": 13
   },
-  "classified_content_item_count": 229,
+  "classified_content_item_count": 230,
   "unclassified_content_item_count": 48
  },
  "quality": {
@@ -53,10 +53,10 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-14T19:46:49+08:00",
+  "last_incremental_scan_at": "2026-09-15T12:18:36+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-09-01",
-   "end": "2026-09-14"
+   "start": "2026-09-02",
+   "end": "2026-09-15"
   }
  },
  "topic_info": [
@@ -5175,6 +5175,30 @@
    "from_digest": true,
    "digest_title": "全国首家中子文化遗产保护实验室成立",
    "evidence_snippet": "…文物考古研究院透露，该院已在绵阳分别与上海交通大学、中子科学与技术全国重点实验室签署合作协议，成立全国首家中子文化遗产保护实验室。三方将以三星堆等重要文物为研究对象，在无损检测、材料分析、数字化保护、智能技术应用等方面探索实践，借助中子、同步辐射等大科学装置和人工智能、数字孪生技术，开展文物内部结构解析、材料组成研究、工艺信息提取、病害识别与风险评估等工作。",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/15/art_722_204846.html",
+   "display_title": "2026年国家网络安全宣传周开幕",
+   "source_url": "/art/2026/9/15/art_722_204846.html",
+   "source_page_title": "2026年国家网络安全宣传周开幕",
+   "is_digest_item": false,
+   "t": "2026年国家网络安全宣传周开幕",
+   "d": "2026-09-15",
+   "u": "/art/2026/9/15/art_722_204846.html",
+   "l": "tech",
+   "w": "人工智能",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字传播与国际交流"
+   ],
+   "matched_keywords": [
+    "人工智能",
+    "信息化"
+   ],
+   "from_digest": false,
+   "digest_title": "",
+   "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
    "admission_reason": "strong-body"
   }
  ],
@@ -11507,13 +11531,13 @@
   },
   {
    "key": "2026-09",
-   "count": 4,
-   "content_item_count": 4,
-   "source_page_count": 3,
-   "unique_count": 3,
-   "source_count": 16,
-   "source_unique_count": 16,
-   "share": 18.75,
+   "count": 5,
+   "content_item_count": 5,
+   "source_page_count": 4,
+   "unique_count": 4,
+   "source_count": 17,
+   "source_unique_count": 17,
+   "share": 23.53,
    "items": [
     {
      "content_item_id": "/art/2026/9/10/art_722_204760.html",
@@ -11600,6 +11624,27 @@
      "u": "/art/2026/9/13/art_722_204819.html",
      "t": "全国首家中子文化遗产保护实验室成立",
      "l": "core"
+    },
+    {
+     "content_item_id": "/art/2026/9/15/art_722_204846.html",
+     "display_title": "2026年国家网络安全宣传周开幕",
+     "source_url": "/art/2026/9/15/art_722_204846.html",
+     "source_page_title": "2026年国家网络安全宣传周开幕",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
+     "matched_keywords": [
+      "人工智能",
+      "信息化"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古",
+      "数字传播与国际交流"
+     ],
+     "d": "2026-09-15",
+     "u": "/art/2026/9/15/art_722_204846.html",
+     "t": "2026年国家网络安全宣传周开幕",
+     "l": "tech"
     }
    ]
   }
@@ -20633,6 +20678,39 @@
      "u": "/art/2026/9/13/art_722_204819.html",
      "t": "全国首家中子文化遗产保护实验室成立",
      "l": "core"
+    }
+   ]
+  },
+  {
+   "key": "2026-W38",
+   "count": 1,
+   "content_item_count": 1,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 1,
+   "source_unique_count": 1,
+   "share": 100.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/15/art_722_204846.html",
+     "display_title": "2026年国家网络安全宣传周开幕",
+     "source_url": "/art/2026/9/15/art_722_204846.html",
+     "source_page_title": "2026年国家网络安全宣传周开幕",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
+     "matched_keywords": [
+      "人工智能",
+      "信息化"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古",
+      "数字传播与国际交流"
+     ],
+     "d": "2026-09-15",
+     "u": "/art/2026/9/15/art_722_204846.html",
+     "t": "2026年国家网络安全宣传周开幕",
+     "l": "tech"
     }
    ]
   }
@@ -44185,6 +44263,39 @@
      "l": "core"
     }
    ]
+  },
+  {
+   "key": "2026-09-15",
+   "count": 1,
+   "content_item_count": 1,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 1,
+   "source_unique_count": 1,
+   "share": 100.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/15/art_722_204846.html",
+     "display_title": "2026年国家网络安全宣传周开幕",
+     "source_url": "/art/2026/9/15/art_722_204846.html",
+     "source_page_title": "2026年国家网络安全宣传周开幕",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
+     "matched_keywords": [
+      "人工智能",
+      "信息化"
+     ],
+     "topics": [
+      "AI、三维扫描与科技考古",
+      "数字传播与国际交流"
+     ],
+     "d": "2026-09-15",
+     "u": "/art/2026/9/15/art_722_204846.html",
+     "t": "2026年国家网络安全宣传周开幕",
+     "l": "tech"
+    }
+   ]
   }
  ],
  "by_year": [
@@ -44240,13 +44351,13 @@
   },
   {
    "key": "2026",
-   "count": 62,
-   "content_item_count": 62,
-   "source_page_count": 31,
-   "unique_count": 31,
-   "source_count": 559,
-   "source_unique_count": 299,
-   "share": 10.37
+   "count": 63,
+   "content_item_count": 63,
+   "source_page_count": 32,
+   "unique_count": 32,
+   "source_count": 560,
+   "source_unique_count": 300,
+   "share": 10.67
   }
  ],
  "content_items": [
@@ -49310,9 +49421,41 @@
     "AI、三维扫描与科技考古"
    ],
    "is_digest_item": true
+  },
+  {
+   "content_item_id": "/art/2026/9/15/art_722_204846.html",
+   "display_title": "2026年国家网络安全宣传周开幕",
+   "source_url": "/art/2026/9/15/art_722_204846.html",
+   "source_page_title": "2026年国家网络安全宣传周开幕",
+   "digest_title": "",
+   "date": "2026-09-15",
+   "level": "tech",
+   "matched_keywords": [
+    "人工智能",
+    "信息化"
+   ],
+   "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
+   "topics": [
+    "AI、三维扫描与科技考古",
+    "数字传播与国际交流"
+   ],
+   "is_digest_item": false
   }
  ],
  "source_pages": [
+  {
+   "source_page_id": "/art/2026/9/15/art_722_204846.html",
+   "source_url": "/art/2026/9/15/art_722_204846.html",
+   "source_page_title": "2026年国家网络安全宣传周开幕",
+   "date": "2026-09-15",
+   "is_digest_page": false,
+   "content_item_ids": [
+    "/art/2026/9/15/art_722_204846.html"
+   ],
+   "content_item_count": 1,
+   "digest_content_item_count": 0,
+   "standalone_content_item_count": 1
+  },
   {
    "source_page_id": "/art/2026/9/13/art_722_204819.html",
    "source_url": "/art/2026/9/13/art_722_204819.html",

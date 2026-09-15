@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-14T19:51:36.482766+08:00",
+  "generatedAt": "2026-09-15T12:22:17.567729+08:00",
   "items": [
     {
       "id": "job-44632fb38bdb69",
@@ -94,7 +94,7 @@
       "deadline": "2026-09-15 至 2026-10-20",
       "deadlineAt": "2026-10-20T23:59:59+08:00",
       "opensAt": "2026-09-15T00:00:00+08:00",
-      "timeStatus": "upcoming",
+      "timeStatus": "open",
       "evidence": {
         "jobId": "job-133ffdd922a5b9",
         "signature": "8f2f8538fccaf34b7f86ff5e5462a0079a407442083f2889c81f1bb246c31866",
@@ -1115,10 +1115,10 @@
   ],
   "reviewQueue": [
     "job-03d4917849af6a",
+    "job-133ffdd922a5b9",
     "job-228c2b07aacd46",
     "job-040981bcb60298",
     "job-f9c1568b685e5c",
-    "job-133ffdd922a5b9",
     "job-12e520e702f544",
     "job-b1a464d3e6562e",
     "job-91cb886561abc4",

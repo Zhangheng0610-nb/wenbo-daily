@@ -1,11 +1,30 @@
 {
   "schemaVersion": 2,
-  "latestReport": "2026-09-14",
+  "latestReport": "2026-09-15",
   "days": [
+    {
+      "date": "2026-09-15",
+      "checkedAt": "2026-09-15T07:22:43+08:00",
+      "panelItems": 3,
+      "panelChecks": 6,
+      "usableDiscoverySources": 10,
+      "discoverySources": 10,
+      "queriesAttempted": 158,
+      "queriesSucceeded": 158,
+      "selected": 1,
+      "digitalCheckedAt": "2026-09-15T12:18:36+08:00",
+      "digitalStatus": "scan_success_with_update",
+      "digitalNewItems": 1,
+      "publicationWindow": {
+        "start": "2026-09-09",
+        "end": "2026-09-15"
+      },
+      "lateArrivalCount": 29
+    },
     {
       "date": "2026-09-14",
       "checkedAt": "2026-09-14T12:09:04+08:00",
-      "panelItems": 4,
+      "panelItems": 5,
       "panelChecks": 6,
       "usableDiscoverySources": 10,
       "discoverySources": 10,
@@ -115,32 +134,13 @@
         "end": "2026-09-09"
       },
       "lateArrivalCount": 44
-    },
-    {
-      "date": "2026-09-08",
-      "checkedAt": "2026-09-08T07:14:54+08:00",
-      "panelItems": 20,
-      "panelChecks": 6,
-      "usableDiscoverySources": 6,
-      "discoverySources": 8,
-      "queriesAttempted": 142,
-      "queriesSucceeded": 142,
-      "selected": 7,
-      "digitalCheckedAt": "2026-09-08T07:43:19+08:00",
-      "digitalStatus": "scan_success_no_update",
-      "digitalNewItems": 0,
-      "publicationWindow": {
-        "start": "2026-09-02",
-        "end": "2026-09-08"
-      },
-      "lateArrivalCount": 24
     }
   ],
   "observations": {
     "panel": [
       {
         "sourceId": "ncha",
-        "checkedAt": "2026-09-14T12:07:58+08:00",
+        "checkedAt": "2026-09-15T07:21:44+08:00",
         "status": "no_update",
         "scanStatus": "checked",
         "rawCount": 10,
@@ -148,49 +148,49 @@
       },
       {
         "sourceId": "cultural-relics-news",
-        "checkedAt": "2026-09-14T12:08:19+08:00",
-        "status": "no_update",
-        "scanStatus": "checked",
-        "rawCount": 23,
-        "note": ""
+        "checkedAt": "2026-09-15T07:22:06+08:00",
+        "status": "partial",
+        "scanStatus": "partial",
+        "rawCount": 0,
+        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 8，无法识别期页 1；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。"
       },
       {
         "sourceId": "archaeology",
-        "checkedAt": "2026-09-14T12:08:24+08:00",
-        "status": "no_update",
+        "checkedAt": "2026-09-15T07:22:10+08:00",
+        "status": "success",
         "scanStatus": "checked",
-        "rawCount": 12,
+        "rawCount": 9,
         "note": ""
       },
       {
         "sourceId": "museum-association",
-        "checkedAt": "2026-09-14T12:08:26+08:00",
+        "checkedAt": "2026-09-15T07:22:11+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 2,
+        "rawCount": 1,
         "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
       },
       {
         "sourceId": "xinhua-wenbo",
-        "checkedAt": "2026-09-14T12:08:27+08:00",
+        "checkedAt": "2026-09-15T07:22:12+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 269,
+        "rawCount": 249,
         "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
       },
       {
         "sourceId": "cctv-wenbo",
-        "checkedAt": "2026-09-14T12:09:04+08:00",
+        "checkedAt": "2026-09-15T07:22:43+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 3,
+        "rawCount": 1,
         "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
       }
     ],
     "digital": {
-      "checkedAt": "2026-09-14T19:46:49+08:00",
+      "checkedAt": "2026-09-15T12:18:36+08:00",
       "status": "scan_success_with_update",
-      "contentItemsNew": 2,
+      "contentItemsNew": 1,
       "fetchFailed": 0,
       "parseFailed": 0,
       "note": ""

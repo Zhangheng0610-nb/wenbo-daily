@@ -133,6 +133,40 @@
       "observationDate": "2026-09-14"
     },
     {
+      "recordId": "operational-20260914-xinhua-wenbo-0029-7cf8220chtml",
+      "date": "2026-09-14",
+      "title": "2026中国（北京）国际精品陶瓷展览会于11月举办",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/house/20260914/ed98dad3a056443aa5b3e638a7cf8220/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览",
+        "国际交流",
+        "政策行业"
+      ],
+      "tags": [
+        "展览",
+        "国际交流",
+        "政策行业",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-15T07:21:44+08:00",
+      "observationDate": "2026-09-15"
+    },
+    {
       "recordId": "operational-20260914-xinhua-wenbo-0050-5705ba5chtml",
       "date": "2026-09-14",
       "title": "土耳其阿弗罗狄西亚古城",
