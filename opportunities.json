@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-15T12:22:17.567729+08:00",
+  "generatedAt": "2026-09-16T23:03:28.069890+08:00",
   "items": [
     {
       "id": "job-44632fb38bdb69",
@@ -25,8 +25,8 @@
         ],
         "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
         "auditPath": "audit/round25-scu-recruitment-evidence.json",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-44632fb38bdb69"
     },
@@ -53,8 +53,8 @@
         ],
         "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
         "auditPath": "audit/round25-scu-recruitment-evidence.json",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-54d3bd929c68e9"
     },
@@ -81,8 +81,8 @@
         ],
         "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
         "auditPath": "audit/round25-scu-recruitment-evidence.json",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "jobs.html?status=all#job-86d4d12d9e6276"
     },
@@ -753,10 +753,37 @@
           "application"
         ],
         "note": "官网支持两名Curator、英国时间9月13日17:00截止和recruitment@rpmt.org.uk投递；岗位要求申请人自行具备英国工作权。",
+        "state": "stale",
+        "label": "核验记录已过复核期"
+      },
+      "url": "jobs.html?status=all#job-0e5f1058a5cc6f"
+    },
+    {
+      "id": "job-98be1a548fa804",
+      "kind": "intern",
+      "institution": "📍 清华大学艺术博物馆",
+      "position": "展览项目实习生 8—10 名",
+      "deadline": "官方公告未注明统一截止日期；实习时间为2026年9月至12月，原则上不少于1个月、每周到岗不少于3天",
+      "deadlineAt": null,
+      "opensAt": null,
+      "timeStatus": "check",
+      "evidence": {
+        "jobId": "job-98be1a548fa804",
+        "signature": "40ae902670fcbc09d37759584bc487b44d829ef0144d90288cdc37300a9cb2dc",
+        "checkedAt": "2026-09-16T22:59:08+08:00",
+        "reviewAfter": "2026-09-19T22:59:08+08:00",
+        "outcome": "supported",
+        "sourceUrl": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/202608/t20260831_20874.shtml",
+        "method": "public_web_extraction",
+        "fields": [
+          "deadline",
+          "application"
+        ],
+        "note": "清华艺博官方招募页支持2026年9月至12月工作期、8—10人、申请表下载及bwg邮箱投递；公告未注明统一报名截止日期，申请前核对原文。",
         "state": "recent",
         "label": "报名窗口与入口已核对"
       },
-      "url": "jobs.html?status=all#job-0e5f1058a5cc6f"
+      "url": "intern.html?status=all#job-98be1a548fa804"
     },
     {
       "id": "job-03d4917849af6a",
@@ -766,7 +793,7 @@
       "deadline": "2026-09-15",
       "deadlineAt": "2026-09-15T23:59:59+08:00",
       "opensAt": null,
-      "timeStatus": "open",
+      "timeStatus": "closed",
       "evidence": {
         "jobId": "job-03d4917849af6a",
         "signature": "5d6661642ca20799b85dfa9e5de5f829b408cf87af610169f59857c53e30ebbb",
@@ -784,21 +811,6 @@
         "label": "报名信息已变更，需重新核验"
       },
       "url": "intern.html?status=all#job-03d4917849af6a"
-    },
-    {
-      "id": "job-9dfd285c267181",
-      "kind": "intern",
-      "institution": "📍 清华大学艺术博物馆",
-      "position": "展览项目实习生 8—10 名",
-      "deadline": "",
-      "deadlineAt": null,
-      "opensAt": null,
-      "timeStatus": "check",
-      "evidence": {
-        "state": "missing",
-        "label": "报名信息尚无逐项核验记录"
-      },
-      "url": "intern.html?status=all#job-9dfd285c267181"
     },
     {
       "id": "job-b9e6a4da997acc",
@@ -957,8 +969,8 @@
           "application"
         ],
         "note": "M+官网支持2026年9月至2027年8月实习期、当前接受申请及按团队进入Workday投递；官网未公布统一截止日期。",
-        "state": "recent",
-        "label": "报名窗口与入口已核对"
+        "state": "stale",
+        "label": "核验记录已过复核期"
       },
       "url": "intern.html?status=all#job-0065d3e0c4966c"
     },
@@ -1114,7 +1126,9 @@
     }
   ],
   "reviewQueue": [
-    "job-03d4917849af6a",
+    "job-44632fb38bdb69",
+    "job-54d3bd929c68e9",
+    "job-86d4d12d9e6276",
     "job-133ffdd922a5b9",
     "job-228c2b07aacd46",
     "job-040981bcb60298",
@@ -1136,7 +1150,6 @@
     "job-8cdff02483b43c",
     "job-985e628e8bc99c",
     "job-0c4e1b024b290c",
-    "job-9dfd285c267181",
     "job-b9e6a4da997acc",
     "job-a826137822ef35",
     "job-d298c8834c4bfe",
@@ -1146,6 +1159,7 @@
     "job-a049bd6977a04e",
     "job-c7827d0e9057e5",
     "job-6e87e0e226113f",
+    "job-0065d3e0c4966c",
     "job-bdd9c949c40953",
     "job-1d57d0b5711bf4",
     "job-95a9f23e3fc075",
@@ -1154,7 +1168,7 @@
   ],
   "counts": {
     "total": 65,
-    "recentEvidence": 5,
-    "reviewNeeded": 37
+    "recentEvidence": 1,
+    "reviewNeeded": 39
   }
 }

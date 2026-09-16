@@ -1,11 +1,30 @@
 {
   "schemaVersion": 2,
-  "latestReport": "2026-09-15",
+  "latestReport": "2026-09-16",
   "days": [
+    {
+      "date": "2026-09-16",
+      "checkedAt": "2026-09-16T22:13:01+08:00",
+      "panelItems": 7,
+      "panelChecks": 6,
+      "usableDiscoverySources": 10,
+      "discoverySources": 10,
+      "queriesAttempted": 142,
+      "queriesSucceeded": 142,
+      "selected": 9,
+      "digitalCheckedAt": "2026-09-16T23:00:11+08:00",
+      "digitalStatus": "scan_success_no_update",
+      "digitalNewItems": 0,
+      "publicationWindow": {
+        "start": "2026-09-10",
+        "end": "2026-09-16"
+      },
+      "lateArrivalCount": 61
+    },
     {
       "date": "2026-09-15",
       "checkedAt": "2026-09-15T07:22:43+08:00",
-      "panelItems": 3,
+      "panelItems": 8,
       "panelChecks": 6,
       "usableDiscoverySources": 10,
       "discoverySources": 10,
@@ -24,7 +43,7 @@
     {
       "date": "2026-09-14",
       "checkedAt": "2026-09-14T12:09:04+08:00",
-      "panelItems": 5,
+      "panelItems": 6,
       "panelChecks": 6,
       "usableDiscoverySources": 10,
       "discoverySources": 10,
@@ -43,7 +62,7 @@
     {
       "date": "2026-09-13",
       "checkedAt": "2026-09-13T07:16:14+08:00",
-      "panelItems": 4,
+      "panelItems": 5,
       "panelChecks": 6,
       "usableDiscoverySources": 10,
       "discoverySources": 10,
@@ -62,7 +81,7 @@
     {
       "date": "2026-09-12",
       "checkedAt": "2026-09-12T12:15:37+08:00",
-      "panelItems": 9,
+      "panelItems": 23,
       "panelChecks": 6,
       "usableDiscoverySources": 8,
       "discoverySources": 10,
@@ -100,7 +119,7 @@
     {
       "date": "2026-09-10",
       "checkedAt": "2026-09-10T22:55:00+08:00",
-      "panelItems": 11,
+      "panelItems": 23,
       "panelChecks": 6,
       "usableDiscoverySources": 8,
       "discoverySources": 10,
@@ -115,85 +134,66 @@
         "end": "2026-09-10"
       },
       "lateArrivalCount": 24
-    },
-    {
-      "date": "2026-09-09",
-      "checkedAt": "2026-09-09T07:16:14+08:00",
-      "panelItems": 5,
-      "panelChecks": 6,
-      "usableDiscoverySources": 8,
-      "discoverySources": 10,
-      "queriesAttempted": 158,
-      "queriesSucceeded": 158,
-      "selected": 5,
-      "digitalCheckedAt": "2026-09-09T07:38:04+08:00",
-      "digitalStatus": "scan_success_no_update",
-      "digitalNewItems": 0,
-      "publicationWindow": {
-        "start": "2026-09-03",
-        "end": "2026-09-09"
-      },
-      "lateArrivalCount": 44
     }
   ],
   "observations": {
     "panel": [
       {
         "sourceId": "ncha",
-        "checkedAt": "2026-09-15T07:21:44+08:00",
+        "checkedAt": "2026-09-16T22:11:46+08:00",
         "status": "no_update",
         "scanStatus": "checked",
-        "rawCount": 10,
+        "rawCount": 11,
         "note": ""
       },
       {
         "sourceId": "cultural-relics-news",
-        "checkedAt": "2026-09-15T07:22:06+08:00",
-        "status": "partial",
-        "scanStatus": "partial",
-        "rawCount": 0,
-        "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 8，无法识别期页 1；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。"
+        "checkedAt": "2026-09-16T22:12:09+08:00",
+        "status": "no_update",
+        "scanStatus": "checked",
+        "rawCount": 39,
+        "note": ""
       },
       {
         "sourceId": "archaeology",
-        "checkedAt": "2026-09-15T07:22:10+08:00",
+        "checkedAt": "2026-09-16T22:12:13+08:00",
         "status": "success",
         "scanStatus": "checked",
-        "rawCount": 9,
+        "rawCount": 12,
         "note": ""
       },
       {
         "sourceId": "museum-association",
-        "checkedAt": "2026-09-15T07:22:11+08:00",
+        "checkedAt": "2026-09-16T22:12:15+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 1,
+        "rawCount": 3,
         "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。"
       },
       {
         "sourceId": "xinhua-wenbo",
-        "checkedAt": "2026-09-15T07:22:12+08:00",
+        "checkedAt": "2026-09-16T22:12:16+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 249,
+        "rawCount": 267,
         "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。"
       },
       {
         "sourceId": "cctv-wenbo",
-        "checkedAt": "2026-09-15T07:22:43+08:00",
+        "checkedAt": "2026-09-16T22:13:01+08:00",
         "status": "partial",
         "scanStatus": "partial",
-        "rawCount": 1,
+        "rawCount": 5,
         "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。"
       }
     ],
     "digital": {
-      "checkedAt": "2026-09-15T12:18:36+08:00",
-      "status": "scan_success_with_update",
-      "contentItemsNew": 1,
+      "checkedAt": "2026-09-16T23:00:11+08:00",
+      "status": "scan_success_no_update",
+      "contentItemsNew": 0,
       "fetchFailed": 0,
       "parseFailed": 0,
-      "note": ""
+      "note": "近期分页扫描完成；未发现新的数字化来源页或内容条目。"
     }
   },
   "meaning": "Fixed-panel counts are source articles by publication date; they are not unique events or proof of full coverage. Build time is not collection time."

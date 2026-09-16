@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "date": "2026-09-15",
+  "date": "2026-09-16",
   "mode": "operational",
   "coverage": [
     {
@@ -8,11 +8,11 @@
       "mode": "operational",
       "runType": "live",
       "status": "no_update",
-      "checkedAt": "2026-09-15T07:21:44+08:00",
+      "checkedAt": "2026-09-16T22:11:46+08:00",
       "candidateCount": 0,
       "note": "",
-      "rawCount": 10,
-      "eligibleCount": 9,
+      "rawCount": 11,
+      "eligibleCount": 10,
       "acceptedThisRun": 0,
       "retainedExisting": 0,
       "finalItemCount": 0,
@@ -23,28 +23,28 @@
       "sourceId": "cultural-relics-news",
       "mode": "operational",
       "runType": "live",
-      "status": "partial",
-      "checkedAt": "2026-09-15T07:22:06+08:00",
+      "status": "no_update",
+      "checkedAt": "2026-09-16T22:12:09+08:00",
       "candidateCount": 0,
-      "note": "中国文物报逐日期及逐版面扫描：请求成功 7/7 天，版面失败 8，无法识别期页 1；不存在期报只表示该数字报入口未提供该期，不代表行业没有新闻。",
-      "rawCount": 0,
-      "eligibleCount": 0,
+      "note": "",
+      "rawCount": 39,
+      "eligibleCount": 24,
       "acceptedThisRun": 0,
       "retainedExisting": 0,
       "finalItemCount": 0,
-      "duplicatesSkipped": 0,
-      "scanStatus": "partial"
+      "duplicatesSkipped": 3,
+      "scanStatus": "checked"
     },
     {
       "sourceId": "archaeology",
       "mode": "operational",
       "runType": "live",
       "status": "success",
-      "checkedAt": "2026-09-15T07:22:10+08:00",
+      "checkedAt": "2026-09-16T22:12:13+08:00",
       "candidateCount": 3,
       "note": "",
-      "rawCount": 9,
-      "eligibleCount": 9,
+      "rawCount": 12,
+      "eligibleCount": 12,
       "acceptedThisRun": 3,
       "retainedExisting": 0,
       "finalItemCount": 3,
@@ -56,14 +56,14 @@
       "mode": "operational",
       "runType": "live",
       "status": "partial",
-      "checkedAt": "2026-09-15T07:22:11+08:00",
-      "candidateCount": 0,
+      "checkedAt": "2026-09-16T22:12:15+08:00",
+      "candidateCount": 1,
       "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
-      "rawCount": 1,
-      "eligibleCount": 1,
-      "acceptedThisRun": 0,
+      "rawCount": 3,
+      "eligibleCount": 3,
+      "acceptedThisRun": 1,
       "retainedExisting": 0,
-      "finalItemCount": 0,
+      "finalItemCount": 1,
       "duplicatesSkipped": 0,
       "scanStatus": "partial"
     },
@@ -72,15 +72,15 @@
       "mode": "operational",
       "runType": "live",
       "status": "partial",
-      "checkedAt": "2026-09-15T07:22:12+08:00",
-      "candidateCount": 0,
+      "checkedAt": "2026-09-16T22:12:16+08:00",
+      "candidateCount": 3,
       "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
-      "rawCount": 249,
-      "eligibleCount": 12,
-      "acceptedThisRun": 0,
+      "rawCount": 267,
+      "eligibleCount": 14,
+      "acceptedThisRun": 3,
       "retainedExisting": 0,
-      "finalItemCount": 0,
-      "duplicatesSkipped": 31,
+      "finalItemCount": 3,
+      "duplicatesSkipped": 30,
       "scanStatus": "partial"
     },
     {
@@ -88,11 +88,11 @@
       "mode": "operational",
       "runType": "live",
       "status": "partial",
-      "checkedAt": "2026-09-15T07:22:43+08:00",
+      "checkedAt": "2026-09-16T22:13:01+08:00",
       "candidateCount": 0,
       "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
-      "rawCount": 1,
-      "eligibleCount": 1,
+      "rawCount": 5,
+      "eligibleCount": 5,
       "acceptedThisRun": 0,
       "retainedExisting": 0,
       "finalItemCount": 0,
@@ -102,44 +102,14 @@
   ],
   "items": [
     {
-      "recordId": "operational-20260915-archaeology-0032-6067238shtml",
-      "date": "2026-09-15",
-      "title": "新发现 | 山东淄博小高后李文化遗址考古勘探收获及相关认识",
+      "recordId": "operational-20260916-archaeology-0063-6067483shtml",
+      "date": "2026-09-16",
+      "title": "中国泥河湾盆地发现约60万年前古人类系统性屠宰加工证据",
       "sources": [
         {
           "sourceId": "archaeology",
           "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260915_6067238.shtml"
-        }
-      ],
-      "scope": "province",
-      "primaryProvince": "山东",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "山东"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring",
-      "runType": "live",
-      "observedAt": "2026-09-15T07:21:44+08:00",
-      "observationDate": "2026-09-15"
-    },
-    {
-      "recordId": "operational-20260915-archaeology-0030-6067239shtml",
-      "date": "2026-09-15",
-      "title": "跨越太平洋的文明之约",
-      "sources": [
-        {
-          "sourceId": "archaeology",
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xsqy/kycg/xslw/202609/t20260915_6067239.shtml"
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202609/t20260916_6067483.shtml"
         }
       ],
       "scope": "unassigned",
@@ -157,47 +127,18 @@
       "selectedForDaily": false,
       "origin": "fixed-panel-monitoring",
       "runType": "live",
-      "observedAt": "2026-09-15T07:21:44+08:00",
-      "observationDate": "2026-09-15"
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
     },
     {
-      "recordId": "operational-20260915-archaeology-0031-6067237shtml",
-      "date": "2026-09-15",
-      "title": "边疆，文明交流交融的前沿——来自第八届中国边疆考古学术研讨会的声音",
+      "recordId": "operational-20260916-archaeology-0064-6067468shtml",
+      "date": "2026-09-16",
+      "title": "新闻直播间 | 探秘世界古代文明核心区 中埃联合考古取得多项新成果",
       "sources": [
         {
           "sourceId": "archaeology",
           "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202609/t20260915_6067237.shtml"
-        }
-      ],
-      "scope": "unassigned",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "unassigned",
-      "locationConfidence": 0.0,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古"
-      ],
-      "impact": 60,
-      "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring",
-      "runType": "live",
-      "observedAt": "2026-09-15T07:21:44+08:00",
-      "observationDate": "2026-09-15"
-    },
-    {
-      "recordId": "operational-20260915-cctv-wenbo-0057-u260915shtml",
-      "date": "2026-09-15",
-      "title": "《探索·发现》 20260915 考古零距离（22）",
-      "sources": [
-        {
-          "sourceId": "cctv-wenbo",
-          "name": "央视网文博与央视新闻",
-          "url": "https://tv.cctv.cn/2026/09/15/VIDExcoP7TwgsFvUkWMMwxZu260915.shtml"
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260916_6067468.shtml"
         }
       ],
       "scope": "unassigned",
@@ -219,28 +160,29 @@
       "observationDate": "2026-09-16"
     },
     {
-      "recordId": "operational-20260915-museum-association-0059-ntentid14777",
-      "date": "2026-09-15",
-      "title": "第二届“博协杯”全国博物馆讲解大赛决赛获奖名单",
+      "recordId": "operational-20260916-archaeology-0062-6067484shtml",
+      "date": "2026-09-16",
+      "title": "第四届中国实验室考古研讨会在内蒙古呼伦贝尔举办",
       "sources": [
         {
-          "sourceId": "museum-association",
-          "name": "中国博物馆协会",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14777"
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202609/t20260916_6067484.shtml"
         }
       ],
-      "scope": "national",
-      "primaryProvince": "",
+      "scope": "province",
+      "primaryProvince": "内蒙古",
       "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
+      "locationTier": "title",
+      "locationConfidence": 0.9,
       "themes": [
-        "博物馆"
+        "考古"
       ],
       "tags": [
-        "博物馆"
+        "考古",
+        "内蒙古"
       ],
-      "impact": 80,
+      "impact": 60,
       "selectedForDaily": false,
       "origin": "fixed-panel-monitoring",
       "runType": "live",
@@ -248,43 +190,14 @@
       "observationDate": "2026-09-16"
     },
     {
-      "recordId": "operational-20260915-museum-association-0058-ntentid14776",
-      "date": "2026-09-15",
-      "title": "讲解传文脉 赛会育英才 第二届“博协杯”全国博物馆讲解大赛决赛在扬州圆满落幕",
+      "recordId": "operational-20260916-museum-association-0065-ntentid14778",
+      "date": "2026-09-16",
+      "title": "国际博协藏品保护委员会第21届大会在挪威奥斯陆开幕",
       "sources": [
         {
           "sourceId": "museum-association",
           "name": "中国博物馆协会",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14776"
-        }
-      ],
-      "scope": "national",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "博物馆"
-      ],
-      "tags": [
-        "博物馆"
-      ],
-      "impact": 80,
-      "selectedForDaily": false,
-      "origin": "fixed-panel-monitoring",
-      "runType": "live",
-      "observedAt": "2026-09-16T22:11:46+08:00",
-      "observationDate": "2026-09-16"
-    },
-    {
-      "recordId": "operational-20260915-ncha-0060-22204846html",
-      "date": "2026-09-15",
-      "title": "2026年国家网络安全宣传周开幕",
-      "sources": [
-        {
-          "sourceId": "ncha",
-          "name": "国家文物局",
-          "url": "http://www.ncha.gov.cn/art/2026/9/15/art_722_204846.html"
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14778"
         }
       ],
       "scope": "unassigned",
@@ -293,12 +206,14 @@
       "locationTier": "unassigned",
       "locationConfidence": 0.0,
       "themes": [
-        "展览"
+        "展览",
+        "国际交流"
       ],
       "tags": [
-        "展览"
+        "展览",
+        "国际交流"
       ],
-      "impact": 80,
+      "impact": 60,
       "selectedForDaily": false,
       "origin": "fixed-panel-monitoring",
       "runType": "live",
@@ -306,14 +221,83 @@
       "observationDate": "2026-09-16"
     },
     {
-      "recordId": "operational-20260915-xinhua-wenbo-0061-79c3997chtml",
-      "date": "2026-09-15",
-      "title": "“地球的红飘带——文学中的红军长征”展览在京开幕",
+      "recordId": "operational-20260916-xinhua-wenbo-0068-150b647chtml",
+      "date": "2026-09-16",
+      "title": "山东博物馆举办“泰山：东方岱宗 万物始生”展",
       "sources": [
         {
           "sourceId": "xinhua-wenbo",
           "name": "新华网文博",
-          "url": "https://www.news.cn/politics/20260915/55059f5f97a9472d86d5857db79c3997/c.html"
+          "url": "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "山东"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260916-xinhua-wenbo-0066-ecb889bchtml",
+      "date": "2026-09-16",
+      "title": "活力中国调研行丨走进铜绿山国家考古遗址公园",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260916/5123a8015c9f4c7baacee6ea0ecb889b/c.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文化遗产"
+      ],
+      "tags": [
+        "考古",
+        "文化遗产"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/ci/20260916/5123a8015c9f4c7baacee6ea0ecb889b/c.html",
+        "duplicateUrls": [
+          "https://www.news.cn/culture/20260916/5724d51639e04d07a22fb3145fbfe69b/c.html",
+          "https://www.xinhuanet.com/ci/20260916/5123a8015c9f4c7baacee6ea0ecb889b/c.html"
+        ]
+      },
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260916-xinhua-wenbo-0067-4ac0868chtml",
+      "date": "2026-09-16",
+      "title": "第三届新时代考古学与博物馆学融合发展学术研讨会在京举行",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260916/0e71e1f4edc04e4e85281aa9f4ac0868/c.html"
         }
       ],
       "scope": "province",
@@ -322,10 +306,12 @@
       "locationTier": "title",
       "locationConfidence": 0.62,
       "themes": [
-        "展览"
+        "博物馆",
+        "考古"
       ],
       "tags": [
-        "展览",
+        "博物馆",
+        "考古",
         "北京"
       ],
       "impact": 60,
@@ -342,20 +328,20 @@
     "mode": "operational",
     "runType": "live",
     "completed": true,
-    "checkedAt": "2026-09-15T07:21:44+08:00",
+    "checkedAt": "2026-09-16T22:11:46+08:00",
     "replay": false,
     "publicationWindow": {
-      "start": "2026-09-09",
-      "end": "2026-09-15"
+      "start": "2026-09-10",
+      "end": "2026-09-16"
     },
-    "lateArrivalCount": 29,
+    "lateArrivalCount": 61,
     "sources": {
       "ncha": {
-        "rawCount": 10,
-        "eligibleCount": 9,
+        "rawCount": 11,
+        "eligibleCount": 10,
         "acceptedCount": 0,
-        "rawDiscovered": 10,
-        "scopeQualified": 9,
+        "rawDiscovered": 11,
+        "scopeQualified": 10,
         "acceptedThisRun": 0,
         "retainedExisting": 0,
         "finalItemCount": 0,
@@ -363,23 +349,23 @@
         "status": "checked"
       },
       "cultural-relics-news": {
-        "rawCount": 0,
-        "eligibleCount": 0,
+        "rawCount": 39,
+        "eligibleCount": 24,
         "acceptedCount": 0,
-        "rawDiscovered": 0,
-        "scopeQualified": 0,
+        "rawDiscovered": 39,
+        "scopeQualified": 24,
         "acceptedThisRun": 0,
         "retainedExisting": 0,
         "finalItemCount": 0,
-        "duplicatesSkipped": 0,
-        "status": "partial"
+        "duplicatesSkipped": 3,
+        "status": "checked"
       },
       "archaeology": {
-        "rawCount": 9,
-        "eligibleCount": 9,
+        "rawCount": 12,
+        "eligibleCount": 12,
         "acceptedCount": 3,
-        "rawDiscovered": 9,
-        "scopeQualified": 9,
+        "rawDiscovered": 12,
+        "scopeQualified": 12,
         "acceptedThisRun": 3,
         "retainedExisting": 0,
         "finalItemCount": 3,
@@ -387,35 +373,35 @@
         "status": "checked"
       },
       "museum-association": {
-        "rawCount": 1,
-        "eligibleCount": 1,
-        "acceptedCount": 0,
-        "rawDiscovered": 1,
-        "scopeQualified": 1,
-        "acceptedThisRun": 0,
+        "rawCount": 3,
+        "eligibleCount": 3,
+        "acceptedCount": 1,
+        "rawDiscovered": 3,
+        "scopeQualified": 3,
+        "acceptedThisRun": 1,
         "retainedExisting": 0,
-        "finalItemCount": 0,
+        "finalItemCount": 1,
         "duplicatesSkipped": 0,
         "status": "partial"
       },
       "xinhua-wenbo": {
-        "rawCount": 249,
-        "eligibleCount": 12,
-        "acceptedCount": 0,
-        "rawDiscovered": 249,
-        "scopeQualified": 12,
-        "acceptedThisRun": 0,
+        "rawCount": 267,
+        "eligibleCount": 14,
+        "acceptedCount": 3,
+        "rawDiscovered": 267,
+        "scopeQualified": 14,
+        "acceptedThisRun": 3,
         "retainedExisting": 0,
-        "finalItemCount": 0,
-        "duplicatesSkipped": 31,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 30,
         "status": "partial"
       },
       "cctv-wenbo": {
-        "rawCount": 1,
-        "eligibleCount": 1,
+        "rawCount": 5,
+        "eligibleCount": 5,
         "acceptedCount": 0,
-        "rawDiscovered": 1,
-        "scopeQualified": 1,
+        "rawDiscovered": 5,
+        "scopeQualified": 5,
         "acceptedThisRun": 0,
         "retainedExisting": 0,
         "finalItemCount": 0,

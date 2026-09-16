@@ -102,6 +102,35 @@
   ],
   "items": [
     {
+      "recordId": "operational-20260914-cctv-wenbo-0049-r260914shtml",
+      "date": "2026-09-14",
+      "title": "《探索·发现》 20260914 考古零距离（21）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/14/VIDEAWCV0NkafPlbrSrAylor260914.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
       "recordId": "operational-20260914-cctv-wenbo-0047-l260913shtml",
       "date": "2026-09-14",
       "title": "记者从9月13日下午举行的新闻发布会上获悉，本届服贸会在峰会论坛、洽谈推介、展览展示、成果发布等方面亮点纷呈，达成7类共1200余项成果。一起来梳理盘点服贸会“成绩单”。",

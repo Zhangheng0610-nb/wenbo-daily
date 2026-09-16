@@ -160,6 +160,429 @@
       "observationDate": "2026-09-12"
     },
     {
+      "recordId": "operational-20260912-cctv-wenbo-0028-x260912shtml",
+      "date": "2026-09-12",
+      "title": "《考古公开课》 20260912 往事越千年·孝陵往事（上）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/12/VIDE9HM98lJHR6z4DfQy61fx260912.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cctv-wenbo-0029-j260912shtml",
+      "date": "2026-09-12",
+      "title": "《考古公开课》 20260912 往事越千年·孝陵往事（下）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/12/VIDEGnCP4baWtbhXgxWY5NWJ260912.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0030-2900id112861",
+      "date": "2026-09-12",
+      "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112861"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "新疆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "新疆"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0038-2902id112872",
+      "date": "2026-09-12",
+      "title": "三维叙事 数字展览——云梦睡虎地简牍数字化展陈实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112872"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览",
+        "数字化"
+      ],
+      "tags": [
+        "展览",
+        "数字化"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0033-2901id112866",
+      "date": "2026-09-12",
+      "title": "云南蝙蝠洞遗址考古取得重要成果 多学科综合研究重建丹尼索瓦人在我国西南地区的生存图景",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112866"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "云南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0034-2901id112867",
+      "date": "2026-09-12",
+      "title": "以良法护石刻 以监督促传承 四川资阳用好地方条例推动安岳石刻保护利用",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112867"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "四川"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0041-2903id112875",
+      "date": "2026-09-12",
+      "title": "保护长城资源 讲好长城故事",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22903/id/112875"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0032-2900id112864",
+      "date": "2026-09-12",
+      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112864"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护",
+        "江西"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0031-2900id112863",
+      "date": "2026-09-12",
+      "title": "国家文物局党组2026年巡视工作动员部署会召开",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112863"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0037-2901id112871",
+      "date": "2026-09-12",
+      "title": "大汶口遗址考古新发现学术研讨会暨山东省考古遗址保护利用工作交流会在泰安召开",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112871"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0039-2902id112873",
+      "date": "2026-09-12",
+      "title": "守护红色根脉 凝聚民族精神——辽宁东北抗日义勇军纪念馆探索革命文物保护利用路径",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112873"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "文物保护"
+      ],
+      "tags": [
+        "博物馆",
+        "文物保护",
+        "辽宁"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0040-2902id112874",
+      "date": "2026-09-12",
+      "title": "科技赋能焕新展陈 礼乐文脉绽放新彩——随州市博物馆升级改造与活化利用实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112874"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "展览",
+        "博物馆"
+      ],
+      "tags": [
+        "展览",
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0036-2901id112870",
+      "date": "2026-09-12",
+      "title": "第八届文化遗产保护与数字化国际学术论坛在京举办",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112870"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文化遗产",
+        "数字化",
+        "国际交流"
+      ],
+      "tags": [
+        "文化遗产",
+        "数字化",
+        "国际交流"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260912-cultural-relics-news-0035-2901id112869",
+      "date": "2026-09-12",
+      "title": "陕西举办全省等级博物馆及文物古建单位消防骨干培训班",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112869"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "陕西"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
       "recordId": "operational-20260912-ncha-0034-22204795html",
       "date": "2026-09-12",
       "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",

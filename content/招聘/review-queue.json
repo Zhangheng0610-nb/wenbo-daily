@@ -1,7 +1,7 @@
 {
   "schema": "recruitment-review-queue-v1",
-  "asOf": "2026-09-14",
-  "pendingCount": 53,
+  "asOf": "2026-09-16",
+  "pendingCount": 54,
   "appliedReviewCount": 17,
   "appliedReviews": [
     {
@@ -149,7 +149,7 @@
       "candidateId": "recruit-92f1aec141d1",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -175,7 +175,7 @@
       "candidateId": "recruit-d467da5ec138",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -201,7 +201,7 @@
       "candidateId": "recruit-05714d85b06d",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -227,7 +227,7 @@
       "candidateId": "recruit-c20c8339104f",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -253,7 +253,7 @@
       "candidateId": "recruit-804b462d8c5e",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -279,7 +279,7 @@
       "candidateId": "recruit-79130d26fd1e",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -305,7 +305,7 @@
       "candidateId": "recruit-6b76a68cbe7a",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -331,7 +331,7 @@
       "candidateId": "recruit-61f9b0e84212",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -357,7 +357,7 @@
       "candidateId": "recruit-046b5dbe123f",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -383,7 +383,7 @@
       "candidateId": "recruit-d745f607f312",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -409,7 +409,7 @@
       "candidateId": "recruit-98a393af457e",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "M+博物馆",
@@ -435,14 +435,14 @@
       "candidateId": "recruit-37df221cd74b",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "世博会博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "世博会博物馆 — 实习招募",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -468,14 +468,14 @@
       "candidateId": "recruit-ab7535399692",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "首都博物馆",
       "position": "29 2026.07 首都博物馆志愿者招募公告",
       "recruitmentBatch": "",
       "announcementTitle": "29 2026.07 首都博物馆志愿者招募公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "首都博物馆公告",
       "discoveryUrl": "https://www.capitalmuseum.org.cn/news/e9a6a6cc9a864f7c8ed160c72164a23c",
       "discoveryQuery": "",
@@ -494,14 +494,14 @@
       "candidateId": "recruit-0a658ec2dcf6",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "八路军西安办事处纪念馆",
       "position": "八路军西安办事处纪念馆志愿者招募公告",
       "recruitmentBatch": "",
       "announcementTitle": "八路军西安办事处纪念馆志愿者招募公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202601/t20260129_3609075.html",
       "discoveryQuery": "",
@@ -520,14 +520,14 @@
       "candidateId": "recruit-581b2f0c03a8",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "宝鸡青铜器博物院",
       "position": "宝鸡青铜器博物院2026年暑期志愿者招募公告",
       "recruitmentBatch": "2026年",
       "announcementTitle": "宝鸡青铜器博物院2026年暑期志愿者招募公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202606/t20260611_3646479.html",
       "discoveryQuery": "",
@@ -546,14 +546,14 @@
       "candidateId": "recruit-35a8999405c0",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "秦岭博物馆",
       "position": "秦岭博物馆2026年暑期志愿者招募公告",
       "recruitmentBatch": "2026年",
       "announcementTitle": "秦岭博物馆2026年暑期志愿者招募公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202606/t20260622_3649350.html",
       "discoveryQuery": "",
@@ -572,14 +572,14 @@
       "candidateId": "recruit-4efcee5f0ebe",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "陕西黄河文化博物馆",
       "position": "陕西黄河文化博物馆志愿者招募公告",
       "recruitmentBatch": "",
       "announcementTitle": "陕西黄河文化博物馆志愿者招募公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202601/t20260129_3609066.html",
       "discoveryQuery": "",
@@ -598,7 +598,7 @@
       "candidateId": "recruit-cc6d514a97d2",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "待核验文博机构",
@@ -624,7 +624,7 @@
       "candidateId": "recruit-626b72f8a578",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-06",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "云南省文化和旅游厅",
@@ -652,32 +652,6 @@
       "candidateId": "recruit-74adcdcd05e2",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-08",
-      "lastSeen": "2026-09-13"
-    },
-    {
-      "institution": "北京市文物局",
-      "position": "工作人员",
-      "recruitmentBatch": "2026年第一批",
-      "announcementTitle": "北京市文物局局属事业单位2026年第一批公开招聘24名工作人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
-      "discoverySource": "高校人才网博物馆岗位",
-      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/386715.html",
-      "discoveryQuery": "",
-      "publishedDate": "",
-      "deadline": "",
-      "targetPage": "jobs",
-      "opportunityType": "employment",
-      "verificationSource": "",
-      "verificationStatus": "pending",
-      "verificationPageType": "",
-      "decision": "pending",
-      "decisionReason": "directory_lead_requires_detail_and_application_check",
-      "missStage": "search_not_recalled",
-      "discoverySourceType": "recruitment_directory",
-      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
-      "candidateId": "recruit-27717046125a",
-      "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
       "lastSeen": "2026-09-14"
     },
     {
@@ -702,7 +676,7 @@
       "candidateId": "recruit-396ee36a9fa0",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -737,7 +711,7 @@
         }
       ],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -787,7 +761,7 @@
         }
       ],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -816,7 +790,7 @@
       "candidateId": "recruit-5d03f4d42296",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -845,7 +819,7 @@
       "candidateId": "recruit-2ebb644fdde0",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -874,7 +848,7 @@
       "candidateId": "recruit-97f93704009b",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -901,32 +875,6 @@
       "scope": "domestic",
       "sourcePublisherUrl": "https://finance.sina.cn",
       "candidateId": "recruit-16a8bbb3ee8d",
-      "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
-    },
-    {
-      "institution": "成都博物馆",
-      "position": "工作人员",
-      "recruitmentBatch": "2026年3月",
-      "announcementTitle": "成都博物馆2026年3月公开考核招聘1名工作人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
-      "discoverySource": "高校人才网博物馆岗位",
-      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/384791.html",
-      "discoveryQuery": "",
-      "publishedDate": "",
-      "deadline": "",
-      "targetPage": "jobs",
-      "opportunityType": "employment",
-      "verificationSource": "",
-      "verificationStatus": "pending",
-      "verificationPageType": "",
-      "decision": "pending",
-      "decisionReason": "directory_lead_requires_detail_and_application_check",
-      "missStage": "search_not_recalled",
-      "discoverySourceType": "recruitment_directory",
-      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
-      "candidateId": "recruit-e1863a4c01ac",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
       "lastSeen": "2026-09-14"
@@ -958,32 +906,6 @@
       "candidateId": "recruit-2ab223828790",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-13"
-    },
-    {
-      "institution": "福耀科技大学博物馆",
-      "position": "福耀科技大学博物馆藏品研究岗招聘公告",
-      "recruitmentBatch": "",
-      "announcementTitle": "福耀科技大学博物馆藏品研究岗招聘公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
-      "discoverySource": "高校人才网博物馆岗位",
-      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/358905.html",
-      "discoveryQuery": "",
-      "publishedDate": "",
-      "deadline": "",
-      "targetPage": "jobs",
-      "opportunityType": "employment",
-      "verificationSource": "",
-      "verificationStatus": "pending",
-      "verificationPageType": "",
-      "decision": "pending",
-      "decisionReason": "directory_lead_requires_detail_and_application_check",
-      "missStage": "search_not_recalled",
-      "discoverySourceType": "recruitment_directory",
-      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
-      "candidateId": "recruit-5b155aa82050",
-      "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
       "lastSeen": "2026-09-14"
     },
     {
@@ -1012,7 +934,7 @@
       "candidateId": "recruit-507e5ebc68dd",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -1046,7 +968,7 @@
         }
       ],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "待展开单位",
@@ -1074,7 +996,7 @@
       "candidateId": "recruit-d3cb3861462a",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-10",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "上海博物馆",
@@ -1100,14 +1022,14 @@
       "candidateId": "recruit-17c23da1edf1",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-13"
+      "lastSeen": "2026-09-14"
     },
     {
       "institution": "东莞市博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "东莞市博物馆 — 招聘公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -1133,14 +1055,14 @@
       "candidateId": "recruit-442031bdb68d",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "信宜市博物馆",
       "position": "公告岗位待展开",
       "recruitmentBatch": "",
       "announcementTitle": "信宜市博物馆 — 招聘公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "中国陈列展览网文博招聘",
       "discoveryUrl": "https://www.chinaclzl.com/djgz_1/55.html",
       "discoveryQuery": "",
@@ -1166,14 +1088,14 @@
       "candidateId": "recruit-6d66c36d5ee7",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "待展开单位",
       "position": "/ 事业单位公开招聘",
       "recruitmentBatch": "",
       "announcementTitle": "/ 事业单位公开招聘",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "上海市人社局招聘公告",
       "discoveryUrl": "https://rsj.sh.gov.cn/tsydwgkzp_17406/index.html",
       "discoveryQuery": "",
@@ -1192,14 +1114,14 @@
       "candidateId": "recruit-beae81b84039",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "清华大学艺术博物馆",
       "position": "工作人员",
       "recruitmentBatch": "",
       "announcementTitle": "清华大学艺术博物馆招聘工作人员",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "清华艺博招聘须知",
       "discoveryUrl": "https://mp.weixin.qq.com/s/zIor4c-O3Yom9puVTJXT8g",
       "discoveryQuery": "",
@@ -1218,14 +1140,40 @@
       "candidateId": "recruit-8bc14f33b6ac",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-13",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
+    },
+    {
+      "institution": "北京市文物局",
+      "position": "工作人员",
+      "recruitmentBatch": "2026年第一批",
+      "announcementTitle": "北京市文物局局属事业单位2026年第一批公开招聘24名工作人员公告",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
+      "discoverySource": "高校人才网博物馆岗位",
+      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/386715.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
+      "candidateId": "recruit-27717046125a",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "四川大学博物馆",
       "position": "编制外用工岗位",
       "recruitmentBatch": "2026年9月",
       "announcementTitle": "公告栏 四川大学博物馆2026年9月编制外用工岗位招聘公告 根据工作需要，四川大学博物馆现面向社会招聘编制外用工岗位，具体岗位和要求如下：一、招聘岗位：信息技术部信息技术岗1名岗位职责：1.负责智慧博物馆机房和安防机房的服务器、交换机、配电柜、UPS、空调、门禁、环控等设备的 7*24小时运行监控和运维；2.负责根据业务要求，配置机房内外网络，以及访问权限；3.负责智慧博物馆机房和安防机房的防火墙、漏洞检测等网络安全设备的配置和管理；4.负责对博物馆监控设备、安防平台等... 2026-09-14",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "四川大学博物馆",
       "discoveryUrl": "https://sum.scu.edu.cn/info/1086/3631.htm",
       "discoveryQuery": "",
@@ -1244,14 +1192,14 @@
       "candidateId": "recruit-ae0de23949e5",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "年陕西省文物局",
       "position": "拟聘工作人员",
       "recruitmentBatch": "2026年",
       "announcementTitle": "2026年陕西省文物局所属事业单位公开招聘拟聘工作人员公示",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/zfxxgk/fdzdgknr/zkly/202606/t20260609_3645874.html",
       "discoveryQuery": "",
@@ -1270,14 +1218,14 @@
       "candidateId": "recruit-226810e9deef",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "年陕西省文物局",
       "position": "（统招面试）2026年陕西省文物局直属事业单位公开招聘面试公告",
       "recruitmentBatch": "2026年",
       "announcementTitle": "（统招面试）2026年陕西省文物局直属事业单位公开招聘面试公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/zfxxgk/fdzdgknr/zkly/202605/t20260514_3638111.html",
       "discoveryQuery": "",
@@ -1296,14 +1244,14 @@
       "candidateId": "recruit-0c1a2d88614c",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "待展开单位",
       "position": "事业编制工作人员",
       "recruitmentBatch": "2026年",
       "announcementTitle": "敦煌研究院2026年公开招聘13名事业编制工作人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/427051.html",
       "discoveryQuery": "",
@@ -1322,14 +1270,40 @@
       "candidateId": "recruit-a560f8968f0d",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
+    },
+    {
+      "institution": "成都博物馆",
+      "position": "工作人员",
+      "recruitmentBatch": "2026年3月",
+      "announcementTitle": "成都博物馆2026年3月公开考核招聘1名工作人员公告",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
+      "discoverySource": "高校人才网博物馆岗位",
+      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/384791.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
+      "candidateId": "recruit-e1863a4c01ac",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "汉景帝阳陵博物院",
       "position": "汉景帝阳陵博物院2026年讲解员招聘启事",
       "recruitmentBatch": "2026年",
       "announcementTitle": "汉景帝阳陵博物院2026年讲解员招聘启事",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202603/t20260306_3617889.html",
       "discoveryQuery": "",
@@ -1348,14 +1322,40 @@
       "candidateId": "recruit-7beb45816d20",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
+    },
+    {
+      "institution": "福耀科技大学博物馆",
+      "position": "福耀科技大学博物馆藏品研究岗招聘公告",
+      "recruitmentBatch": "",
+      "announcementTitle": "福耀科技大学博物馆藏品研究岗招聘公告",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
+      "discoverySource": "高校人才网博物馆岗位",
+      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/358905.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
+      "candidateId": "recruit-5b155aa82050",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "秦始皇帝陵博物院",
       "position": "秦始皇帝陵博物院招聘讲解员公告",
       "recruitmentBatch": "",
       "announcementTitle": "秦始皇帝陵博物院招聘讲解员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202602/t20260227_3615491.html",
       "discoveryQuery": "",
@@ -1374,14 +1374,14 @@
       "candidateId": "recruit-8415b99a79aa",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "陕西历史博物馆",
       "position": "陕西历史博物馆秦汉馆合同制讲解员招聘公告",
       "recruitmentBatch": "",
       "announcementTitle": "陕西历史博物馆秦汉馆合同制讲解员招聘公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202603/t20260311_3619278.html",
       "discoveryQuery": "",
@@ -1400,14 +1400,14 @@
       "candidateId": "recruit-72d8d03f29ee",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "陕西省考古研究院",
       "position": "陕西省考古研究院博士后科研工作站2026年度博士后研究人员招收公告",
       "recruitmentBatch": "2026年",
       "announcementTitle": "陕西省考古研究院博士后科研工作站2026年度博士后研究人员招收公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202606/t20260623_3649881.html",
       "discoveryQuery": "",
@@ -1426,14 +1426,14 @@
       "candidateId": "recruit-64a514413132",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "陕西考古博物馆",
       "position": "陕西考古博物馆讲解员招聘公告",
       "recruitmentBatch": "",
       "announcementTitle": "陕西考古博物馆讲解员招聘公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "陕西省文物局人事招聘",
       "discoveryUrl": "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/202603/t20260311_3619330.html",
       "discoveryQuery": "",
@@ -1452,14 +1452,40 @@
       "candidateId": "recruit-d75ece57f5cb",
       "duplicateProvenance": [],
       "firstSeen": "2026-09-14",
-      "lastSeen": "2026-09-14"
+      "lastSeen": "2026-09-16"
+    },
+    {
+      "institution": "黑龙江省文物考古研究所",
+      "position": "黑龙江省文物考古研究所2026年“黑龙江人才周”招聘5名人才公告",
+      "recruitmentBatch": "2026年",
+      "announcementTitle": "黑龙江省文物考古研究所2026年“黑龙江人才周”招聘5名人才公告",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
+      "discoverySource": "高校人才网考古专题",
+      "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/431548.html",
+      "discoveryQuery": "",
+      "publishedDate": "",
+      "deadline": "",
+      "targetPage": "jobs",
+      "opportunityType": "employment",
+      "verificationSource": "",
+      "verificationStatus": "pending",
+      "verificationPageType": "",
+      "decision": "pending",
+      "decisionReason": "directory_lead_requires_detail_and_application_check",
+      "missStage": "search_not_recalled",
+      "discoverySourceType": "recruitment_directory",
+      "directoryUrl": "https://www.gaoxiaojob.com/column/134.html",
+      "candidateId": "recruit-436422423fdc",
+      "duplicateProvenance": [],
+      "firstSeen": "2026-09-16",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "云南省腾冲市文化和旅游局",
       "position": "云南省腾冲市文化和旅游局所属事业单位2025年校园公开招聘2名紧缺专业技术人才公告",
       "recruitmentBatch": "2025年",
       "announcementTitle": "云南省腾冲市文化和旅游局所属事业单位2025年校园公开招聘2名紧缺专业技术人才公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/306420.html",
       "discoveryQuery": "",
@@ -1477,15 +1503,15 @@
       "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
       "candidateId": "recruit-713a6619d85e",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-14"
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "山东省文化和旅游厅",
       "position": "山东省文化和旅游厅所属事业单位2025年度公开招聘人员公告",
       "recruitmentBatch": "2025年",
       "announcementTitle": "山东省文化和旅游厅所属事业单位2025年度公开招聘人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/346651.html",
       "discoveryQuery": "",
@@ -1503,15 +1529,15 @@
       "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
       "candidateId": "recruit-9ed8e114720a",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-14"
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "待展开单位",
       "position": "博物馆（校史馆）专业技术人员",
       "recruitmentBatch": "2025年",
       "announcementTitle": "中山大学关于2025年公开招聘7名博物馆（校史馆）专业技术人员的启事",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/323836.html",
       "discoveryQuery": "",
@@ -1529,15 +1555,15 @@
       "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
       "candidateId": "recruit-a3b8d3f0d5d8",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-14"
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "成都金沙遗址博物馆",
       "position": "工作人员",
       "recruitmentBatch": "2024年9月",
       "announcementTitle": "成都金沙遗址博物馆2024年9月公开招聘4名工作人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/254019.html",
       "discoveryQuery": "",
@@ -1555,15 +1581,15 @@
       "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
       "candidateId": "recruit-18acfe8bdd30",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-14"
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     },
     {
       "institution": "湖北省文物考古研究院",
       "position": "工作人员",
       "recruitmentBatch": "2024年",
       "announcementTitle": "湖北省文物考古研究院2024年专项公开招聘11名工作人员公告",
-      "discoveredAt": "2026-09-14T19:53:09+08:00",
+      "discoveredAt": "2026-09-16T22:53:15+08:00",
       "discoverySource": "高校人才网博物馆岗位",
       "discoveryUrl": "https://www.gaoxiaojob.com/announcement/detail/273012.html",
       "discoveryQuery": "",
@@ -1581,8 +1607,8 @@
       "directoryUrl": "https://www.gaoxiaojob.com/hotword/awbe850624",
       "candidateId": "recruit-113d237ceb47",
       "duplicateProvenance": [],
-      "firstSeen": "2026-09-09",
-      "lastSeen": "2026-09-14"
+      "firstSeen": "2026-09-14",
+      "lastSeen": "2026-09-16"
     }
   ]
 }

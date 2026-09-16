@@ -182,6 +182,20 @@
       ],
       "note": "已核对9月18日12:00截止、邮箱投递及两份Excel报名表要求。编外劳务派遣。",
       "auditPath": "audit/round25-scu-recruitment-evidence.json"
+    },
+    {
+      "jobId": "job-98be1a548fa804",
+      "signature": "40ae902670fcbc09d37759584bc487b44d829ef0144d90288cdc37300a9cb2dc",
+      "checkedAt": "2026-09-16T22:59:08+08:00",
+      "reviewAfter": "2026-09-19T22:59:08+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/202608/t20260831_20874.shtml",
+      "method": "public_web_extraction",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "清华艺博官方招募页支持2026年9月至12月工作期、8—10人、申请表下载及bwg邮箱投递；公告未注明统一报名截止日期，申请前核对原文。"
     }
   ]
 }

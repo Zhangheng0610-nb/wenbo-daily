@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-15",
-  "asOf": "2026-09-15",
+  "generated": "2026-09-16",
+  "asOf": "2026-09-16",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -6846,6 +6846,108 @@
         "duplicatesSkipped": 31,
         "scanStatus": "partial",
         "date": "2026-09-15"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "success",
+        "checkedAt": "2026-09-16T22:12:13+08:00",
+        "candidateCount": 3,
+        "note": "",
+        "rawCount": 12,
+        "eligibleCount": 12,
+        "acceptedThisRun": 3,
+        "retainedExisting": 0,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-16"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-16T22:13:01+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 5,
+        "eligibleCount": 5,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-16"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-16T22:12:09+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 39,
+        "eligibleCount": 24,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 3,
+        "scanStatus": "checked",
+        "date": "2026-09-16"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-16T22:12:15+08:00",
+        "candidateCount": 1,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 3,
+        "eligibleCount": 3,
+        "acceptedThisRun": 1,
+        "retainedExisting": 0,
+        "finalItemCount": 1,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-16"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-16T22:11:46+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 11,
+        "eligibleCount": 10,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-16"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-16T22:12:16+08:00",
+        "candidateCount": 3,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 267,
+        "eligibleCount": 14,
+        "acceptedThisRun": 3,
+        "retainedExisting": 0,
+        "finalItemCount": 3,
+        "duplicatesSkipped": 30,
+        "scanStatus": "partial",
+        "date": "2026-09-16"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -6862,42 +6964,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 611,
-    "includedProvincialRecords": 148,
-    "provincialEvents": 125,
+    "totalMonitoredRecords": 651,
+    "includedProvincialRecords": 163,
+    "provincialEvents": 136,
     "nationalEvents": 43,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 124,
-    "operationalRecords": 124,
+    "fixedPanelMonitoringRecords": 164,
+    "operationalRecords": 164,
     "operationalRecordTypes": {
-      "live": 105,
+      "live": 145,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 124
+      "fixed-panel-monitoring": 164
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 542,
+    "analysisRecords": 582,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 124
+      "fixed-panel-monitoring": 164
     },
     "excludedNonPanel": 0,
-    "unassigned": 328,
+    "unassigned": 348,
     "panelSourceCount": 6,
-    "coverageDays": 109,
+    "coverageDays": 110,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 358,
+    "successfulSourceChecks": 361,
     "coverageStatuses": {
-      "success": 150,
-      "no_update": 208,
-      "partial": 295,
+      "success": 151,
+      "no_update": 210,
+      "partial": 298,
       "failed": 1
     },
     "coverageByMode": {
@@ -6907,15 +7009,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 114,
-        "good": 85,
-        "days": 19
+        "checks": 120,
+        "good": 88,
+        "days": 20
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 114,
+    "operationalCoverageChecks": 120,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 19,
+    "operationalCoverageDays": 20,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -6923,25 +7025,189 @@
         "days": 4
       },
       "live": {
-        "checks": 90,
-        "good": 61,
-        "days": 15
+        "checks": 96,
+        "good": 64,
+        "days": 16
       }
     },
-    "liveOperationalCoverageChecks": 90,
-    "liveOperationalCoverageDays": 15,
+    "liveOperationalCoverageChecks": 96,
+    "liveOperationalCoverageDays": 16,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 88,
-      "cultural-relics-news": 134,
-      "archaeology": 231,
-      "museum-association": 31,
-      "xinhua-wenbo": 40,
-      "cctv-wenbo": 18
+      "ncha": 89,
+      "cultural-relics-news": 158,
+      "archaeology": 234,
+      "museum-association": 34,
+      "xinhua-wenbo": 44,
+      "cctv-wenbo": 23
     }
   },
   "events": [
+    {
+      "title": "山东博物馆举办“泰山：东方岱宗 万物始生”展",
+      "firstDate": "2026-09-16",
+      "lastDate": "2026-09-16",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "山东"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-16",
+          "title": "山东博物馆举办“泰山：东方岱宗 万物始生”展",
+          "url": "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-9e7b94fe35",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "第三届新时代考古学与博物馆学融合发展学术研讨会在京举行",
+      "firstDate": "2026-09-16",
+      "lastDate": "2026-09-16",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "博物馆",
+        "考古"
+      ],
+      "tags": [
+        "博物馆",
+        "考古",
+        "北京"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-16",
+          "title": "第三届新时代考古学与博物馆学融合发展学术研讨会在京举行",
+          "url": "https://www.news.cn/culture/20260916/0e71e1f4edc04e4e85281aa9f4ac0868/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260916/0e71e1f4edc04e4e85281aa9f4ac0868/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-b0b989ff70",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260916/0e71e1f4edc04e4e85281aa9f4ac0868/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "第四届中国实验室考古研讨会在内蒙古呼伦贝尔举办",
+      "firstDate": "2026-09-16",
+      "lastDate": "2026-09-16",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "内蒙古"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-16",
+          "title": "第四届中国实验室考古研讨会在内蒙古呼伦贝尔举办",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202609/t20260916_6067484.shtml",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国考古网",
+              "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202609/t20260916_6067484.shtml",
+              "host": "kaogu.cssn.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "archaeology"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-68155619bf",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/bszx/xshy/202609/t20260916_6067484.shtml",
+          "host": "kaogu.cssn.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "archaeology"
+        }
+      ]
+    },
     {
       "title": "新发现 | 山东淄博小高后李文化遗址考古勘探收获及相关认识",
       "firstDate": "2026-09-15",
@@ -6993,6 +7259,60 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "archaeology"
+        }
+      ]
+    },
+    {
+      "title": "“地球的红飘带——文学中的红军长征”展览在京开幕",
+      "firstDate": "2026-09-15",
+      "lastDate": "2026-09-15",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "北京"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-15",
+          "title": "“地球的红飘带——文学中的红军长征”展览在京开幕",
+          "url": "https://www.news.cn/politics/20260915/55059f5f97a9472d86d5857db79c3997/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/politics/20260915/55059f5f97a9472d86d5857db79c3997/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-7c0d9562e2",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260915/55059f5f97a9472d86d5857db79c3997/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
         }
       ]
     },
@@ -7357,6 +7677,84 @@
       ]
     },
     {
+      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "江西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护",
+        "江西"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112864",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112864",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-034b449e3f",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "重要",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112864",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        }
+      ]
+    },
+    {
       "title": "云南鹤庆蝙蝠洞遗址出土人类化石 确认属于丹尼索瓦人",
       "firstDate": "2026-09-12",
       "lastDate": "2026-09-12",
@@ -7409,6 +7807,60 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "大汶口遗址考古新发现学术研讨会暨山东省考古遗址保护利用工作交流会在泰安召开",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "山东",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "山东"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "大汶口遗址考古新发现学术研讨会暨山东省考古遗址保护利用工作交流会在泰安召开",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112871",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112871",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-0b21ad7579",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112871",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -7467,6 +7919,114 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "云南蝙蝠洞遗址考古取得重要成果 多学科综合研究重建丹尼索瓦人在我国西南地区的生存图景",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "云南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "云南"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "云南蝙蝠洞遗址考古取得重要成果 多学科综合研究重建丹尼索瓦人在我国西南地区的生存图景",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112866",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112866",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-0de6a2da2c",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112866",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        }
+      ]
+    },
+    {
+      "title": "以良法护石刻 以监督促传承 四川资阳用好地方条例推动安岳石刻保护利用",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "四川",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "四川"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "以良法护石刻 以监督促传承 四川资阳用好地方条例推动安岳石刻保护利用",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112867",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112867",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-4ff6a3923f",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112867",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -7585,6 +8145,62 @@
       ]
     },
     {
+      "title": "守护红色根脉 凝聚民族精神——辽宁东北抗日义勇军纪念馆探索革命文物保护利用路径",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆",
+        "文物保护"
+      ],
+      "tags": [
+        "博物馆",
+        "文物保护",
+        "辽宁"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "守护红色根脉 凝聚民族精神——辽宁东北抗日义勇军纪念馆探索革命文物保护利用路径",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112873",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112873",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-de4d2d0459",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22902/id/112873",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        }
+      ]
+    },
+    {
       "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
       "firstDate": "2026-09-12",
       "lastDate": "2026-09-12",
@@ -7605,6 +8221,22 @@
         {
           "date": "2026-09-12",
           "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112861",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112861",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-12",
+          "title": "2026年度全国博物馆馆长培训班在新疆伊犁举办",
           "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
           "sourceTier": "A",
           "sources": [
@@ -7621,6 +8253,68 @@
       ],
       "eventId": "evt-4daa893245",
       "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "一般",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112861",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        },
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "陕西举办全省等级博物馆及文物古建单位消防骨干培训班",
+      "firstDate": "2026-09-12",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆",
+        "陕西"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "陕西举办全省等级博物馆及文物古建单位消防骨干培训班",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112869",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112869",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-1bc4ad8573",
+      "sourceTier": "A",
       "sourceCount": 1,
       "reportCount": 1,
       "evidence": 100,
@@ -7629,12 +8323,12 @@
       "primaryTheme": "博物馆",
       "sources": [
         {
-          "name": "国家文物局",
-          "url": "http://www.ncha.gov.cn/art/2026/9/12/art_722_204795.html",
-          "host": "ncha.gov.cn",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22901/id/112869",
+          "host": "zhongguowenwubao.com",
           "tier": "A",
           "blocked": false,
-          "sourceId": "ncha"
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -7715,6 +8409,84 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
+      "firstDate": "2026-08-27",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "河南许昌地区颍河沿岸先秦遗址考古调查与收获",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112858",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112858",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-27",
+          "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国考古网",
+              "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
+              "host": "kaogu.cssn.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "archaeology"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-57cccd174c",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "重要",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
+          "host": "kaogu.cssn.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "archaeology"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112858",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -7851,56 +8623,134 @@
       ]
     },
     {
-      "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
-      "firstDate": "2026-09-10",
+      "title": "湖北黄梅县张山遗址2025年考古发掘收获",
+      "firstDate": "2026-08-01",
       "lastDate": "2026-09-10",
-      "primaryProvince": "江西",
+      "primaryProvince": "湖北",
       "relatedProvinces": [],
       "locationTier": "title",
       "locationConfidence": 0.9,
       "themes": [
-        "文物保护"
+        "考古"
       ],
       "tags": [
-        "文物保护",
-        "江西"
+        "考古",
+        "湖北"
       ],
-      "impact": 80.0,
+      "impact": 60.0,
       "scope": "province",
       "reports": [
         {
           "date": "2026-09-10",
-          "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
-          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
+          "title": "湖北黄梅县张山遗址2025年考古发掘收获",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112857",
           "sourceTier": "A",
           "sources": [
             {
-              "name": "国家文物局",
-              "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
-              "host": "ncha.gov.cn",
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112857",
+              "host": "zhongguowenwubao.com",
               "tier": "A",
               "blocked": false,
-              "sourceId": "ncha"
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-01",
+          "title": "新发现 | 湖北黄梅县张山遗址2025年考古发掘收获",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国考古网",
+              "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
+              "host": "kaogu.cssn.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "archaeology"
             }
           ]
         }
       ],
-      "eventId": "evt-034b449e3f",
+      "eventId": "evt-7f4ef97cc5",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
+          "host": "kaogu.cssn.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "archaeology"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112857",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        }
+      ]
+    },
+    {
+      "title": "内蒙古构建系统性保护体系 全方位守护祖国北疆长城千年文脉",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "内蒙古"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "内蒙古构建系统性保护体系 全方位守护祖国北疆长城千年文脉",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112841",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112841",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-cc431db462",
       "sourceTier": "A",
       "sourceCount": 1,
       "reportCount": 1,
       "evidence": 100,
       "breadth": 40,
-      "impactLabel": "重要",
-      "primaryTheme": "文物保护",
+      "impactLabel": "关注",
+      "primaryTheme": "政策行业",
       "sources": [
         {
-          "name": "国家文物局",
-          "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204768.html",
-          "host": "ncha.gov.cn",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112841",
+          "host": "zhongguowenwubao.com",
           "tier": "A",
           "blocked": false,
-          "sourceId": "ncha"
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -8013,6 +8863,60 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "福建省文物局组织开展红色标语类革命文物专项调查抽查工作",
+      "firstDate": "2026-09-10",
+      "lastDate": "2026-09-10",
+      "primaryProvince": "福建",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "福建"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-10",
+          "title": "福建省文物局组织开展红色标语类革命文物专项调查抽查工作",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112843",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112843",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-8a18d12ba8",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112843",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
         }
       ]
     },
@@ -8917,60 +9821,6 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "museum-association"
-        }
-      ]
-    },
-    {
-      "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
-      "firstDate": "2026-08-27",
-      "lastDate": "2026-08-27",
-      "primaryProvince": "河南",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "河南"
-      ],
-      "impact": 80.0,
-      "scope": "province",
-      "reports": [
-        {
-          "date": "2026-08-27",
-          "title": "新发现 | 河南许昌地区颍河沿岸先秦遗址考古调查与收获",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "中国考古网",
-              "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
-              "host": "kaogu.cssn.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "archaeology"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-57cccd174c",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "重要",
-      "primaryTheme": "考古",
-      "sources": [
-        {
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260827_6064809.shtml",
-          "host": "kaogu.cssn.cn",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "archaeology"
         }
       ]
     },
@@ -10636,60 +11486,6 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "museum-association"
-        }
-      ]
-    },
-    {
-      "title": "新发现 | 湖北黄梅县张山遗址2025年考古发掘收获",
-      "firstDate": "2026-08-01",
-      "lastDate": "2026-08-01",
-      "primaryProvince": "湖北",
-      "relatedProvinces": [],
-      "locationTier": "title",
-      "locationConfidence": 0.9,
-      "themes": [
-        "考古"
-      ],
-      "tags": [
-        "考古",
-        "湖北"
-      ],
-      "impact": 60.0,
-      "scope": "province",
-      "reports": [
-        {
-          "date": "2026-08-01",
-          "title": "新发现 | 湖北黄梅县张山遗址2025年考古发掘收获",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "中国考古网",
-              "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
-              "host": "kaogu.cssn.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "archaeology"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-7f4ef97cc5",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "关注",
-      "primaryTheme": "考古",
-      "sources": [
-        {
-          "name": "中国考古网",
-          "url": "http://kaogu.cssn.cn/xwzx/kgdt/202608/t20260801_6061896.shtml",
-          "host": "kaogu.cssn.cn",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "archaeology"
         }
       ]
     },
@@ -14317,6 +15113,200 @@
   ],
   "nationalEvents": [
     {
+      "title": "讲解传文脉 赛会育英才 第二届“博协杯”全国博物馆讲解大赛决赛在扬州圆满落幕",
+      "firstDate": "2026-07-23",
+      "lastDate": "2026-09-15",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-15",
+          "title": "第二届“博协杯”全国博物馆讲解大赛决赛获奖名单",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14777",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14777",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-15",
+          "title": "讲解传文脉 赛会育英才 第二届“博协杯”全国博物馆讲解大赛决赛在扬州圆满落幕",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14776",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14776",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-13",
+          "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公告",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14759",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14759",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        },
+        {
+          "date": "2026-08-05",
+          "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公示",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14749",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14749",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        },
+        {
+          "date": "2026-07-23",
+          "title": "第二届“博协杯”全国博物馆讲解大赛进入半决赛阶段",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14740",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国博物馆协会",
+              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14740",
+              "host": "chinamuseum.org.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "museum-association"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-46ad248cca",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 5,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "中国博物馆协会",
+          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14776",
+          "host": "chinamuseum.org.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "museum-association"
+        }
+      ]
+    },
+    {
+      "title": "国家文物局党组2026年巡视工作动员部署会召开",
+      "firstDate": "2026-09-11",
+      "lastDate": "2026-09-12",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 80.0,
+      "scope": "national",
+      "reports": [
+        {
+          "date": "2026-09-12",
+          "title": "国家文物局党组2026年巡视工作动员部署会召开",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112863",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112863",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-11",
+          "title": "国家文物局党组2026年巡视工作动员部署会召开",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-2372460871",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "重要",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        },
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-12/paperId/22900/id/112863",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        }
+      ]
+    },
+    {
       "title": "全国首套海上保护区数据集面世",
       "firstDate": "2026-09-11",
       "lastDate": "2026-09-11",
@@ -14372,59 +15362,6 @@
       ]
     },
     {
-      "title": "国家文物局党组2026年巡视工作动员部署会召开",
-      "firstDate": "2026-09-11",
-      "lastDate": "2026-09-11",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "政策行业"
-      ],
-      "tags": [
-        "政策行业"
-      ],
-      "impact": 80.0,
-      "scope": "national",
-      "reports": [
-        {
-          "date": "2026-09-11",
-          "title": "国家文物局党组2026年巡视工作动员部署会召开",
-          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "国家文物局",
-              "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
-              "host": "ncha.gov.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "ncha"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-2372460871",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "重要",
-      "primaryTheme": "政策行业",
-      "sources": [
-        {
-          "name": "国家文物局",
-          "url": "http://www.ncha.gov.cn/art/2026/9/11/art_722_204785.html",
-          "host": "ncha.gov.cn",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "ncha"
-        }
-      ]
-    },
-    {
       "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
       "firstDate": "2026-09-10",
       "lastDate": "2026-09-10",
@@ -14446,6 +15383,22 @@
         {
           "date": "2026-09-10",
           "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112840",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112840",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
           "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html",
           "sourceTier": "A",
           "sources": [
@@ -14462,13 +15415,21 @@
       ],
       "eventId": "evt-6698e0964b",
       "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
+      "sourceCount": 2,
+      "reportCount": 2,
       "evidence": 100,
-      "breadth": 40,
+      "breadth": 65,
       "impactLabel": "重要",
       "primaryTheme": "政策行业",
       "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112840",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        },
         {
           "name": "国家文物局",
           "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204756.html",
@@ -14499,6 +15460,22 @@
         {
           "date": "2026-09-10",
           "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112839",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "中国文物报",
+              "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112839",
+              "host": "zhongguowenwubao.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "cultural-relics-news"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-10",
+          "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
           "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html",
           "sourceTier": "A",
           "sources": [
@@ -14515,13 +15492,21 @@
       ],
       "eventId": "evt-25957f27ac",
       "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 1,
+      "sourceCount": 2,
+      "reportCount": 2,
       "evidence": 100,
-      "breadth": 40,
+      "breadth": 65,
       "impactLabel": "重要",
       "primaryTheme": "文物保护",
       "sources": [
+        {
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112839",
+          "host": "zhongguowenwubao.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "cultural-relics-news"
+        },
         {
           "name": "国家文物局",
           "url": "http://www.ncha.gov.cn/art/2026/9/10/art_722_204758.html",
@@ -15065,91 +16050,6 @@
           "tier": "A",
           "blocked": false,
           "sourceId": "cultural-relics-news"
-        }
-      ]
-    },
-    {
-      "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公告",
-      "firstDate": "2026-07-23",
-      "lastDate": "2026-08-13",
-      "primaryProvince": "",
-      "relatedProvinces": [],
-      "locationTier": "national",
-      "locationConfidence": 0.85,
-      "themes": [
-        "博物馆"
-      ],
-      "tags": [
-        "博物馆"
-      ],
-      "impact": 80.0,
-      "scope": "national",
-      "reports": [
-        {
-          "date": "2026-08-13",
-          "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公告",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14759",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "中国博物馆协会",
-              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14759",
-              "host": "chinamuseum.org.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "museum-association"
-            }
-          ]
-        },
-        {
-          "date": "2026-08-05",
-          "title": "第二届“博协杯”全国博物馆讲解大赛晋级决赛选手公示",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14749",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "中国博物馆协会",
-              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14749",
-              "host": "chinamuseum.org.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "museum-association"
-            }
-          ]
-        },
-        {
-          "date": "2026-07-23",
-          "title": "第二届“博协杯”全国博物馆讲解大赛进入半决赛阶段",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14740",
-          "sourceTier": "A",
-          "sources": [
-            {
-              "name": "中国博物馆协会",
-              "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=12&contentId=14740",
-              "host": "chinamuseum.org.cn",
-              "tier": "A",
-              "blocked": false,
-              "sourceId": "museum-association"
-            }
-          ]
-        }
-      ],
-      "eventId": "evt-46ad248cca",
-      "sourceTier": "A",
-      "sourceCount": 1,
-      "reportCount": 3,
-      "evidence": 100,
-      "breadth": 40,
-      "impactLabel": "重要",
-      "primaryTheme": "博物馆",
-      "sources": [
-        {
-          "name": "中国博物馆协会",
-          "url": "https://www.chinamuseum.org.cn/cma/detail.html?id=11&contentId=14759",
-          "host": "chinamuseum.org.cn",
-          "tier": "A",
-          "blocked": false,
-          "sourceId": "museum-association"
         }
       ]
     },

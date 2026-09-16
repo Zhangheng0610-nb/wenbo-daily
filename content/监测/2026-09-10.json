@@ -160,6 +160,378 @@
       "observationDate": "2026-09-10"
     },
     {
+      "recordId": "operational-20260910-cultural-relics-news-0005-2893id112841",
+      "date": "2026-09-10",
+      "title": "内蒙古构建系统性保护体系 全方位守护祖国北疆长城千年文脉",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112841"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "内蒙古",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "内蒙古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0009-2895id112849",
+      "date": "2026-09-10",
+      "title": "北上先锋 红心向党——红二十五军长征革命文物联展策展实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22895/id/112849"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0011-2898id112854",
+      "date": "2026-09-10",
+      "title": "千年石窟的数智重生——克孜尔石窟智慧修复与数字化阐释实践",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22898/id/112854"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "tags": [
+        "考古",
+        "文物保护",
+        "数字化"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0004-2892id112840",
+      "date": "2026-09-10",
+      "title": "国家文物局考古研究中心：中国—突尼斯联合考古 增进文明交流互鉴",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112840"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112840",
+        "duplicateUrls": [
+          "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112845"
+        ]
+      },
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0008-2894id112847",
+      "date": "2026-09-10",
+      "title": "暑期博物馆亲子热：在知识殿堂共度成长时光",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22894/id/112847"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆"
+      ],
+      "tags": [
+        "博物馆"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0013-2899id112858",
+      "date": "2026-09-10",
+      "title": "河南许昌地区颍河沿岸先秦遗址考古调查与收获",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112858"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "河南",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "河南"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0007-2894id112846",
+      "date": "2026-09-10",
+      "title": "深耕连片保护 聚力提质增效——革命文物保护利用片区建设工作巡礼之三",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22894/id/112846"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0012-2899id112857",
+      "date": "2026-09-10",
+      "title": "湖北黄梅县张山遗址2025年考古发掘收获",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112857"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "湖北"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0006-2893id112843",
+      "date": "2026-09-10",
+      "title": "福建省文物局组织开展红色标语类革命文物专项调查抽查工作",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112843"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "福建",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "福建"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0010-2896id112850",
+      "date": "2026-09-10",
+      "title": "考古中国-长江下游区域文明模式研究主要成果",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22896/id/112850"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0014-2899id112859",
+      "date": "2026-09-10",
+      "title": "长春市宽城区小城子古城的调查与初步研究",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22899/id/112859"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
+      "recordId": "operational-20260910-cultural-relics-news-0003-2892id112839",
+      "date": "2026-09-10",
+      "title": "风霜过隙 石壁犹存——石质文物保护一域磨剑、全国攻坚",
+      "sources": [
+        {
+          "sourceId": "cultural-relics-news",
+          "name": "中国文物报",
+          "url": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112839"
+        }
+      ],
+      "scope": "national",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "national",
+      "locationConfidence": 0.85,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22892/id/112839",
+        "duplicateUrls": [
+          "http://www.zhongguowenwubao.com/portal/DigitPager/paperDetail/publishdate/2026-09-10/paperId/22893/id/112844"
+        ]
+      },
+      "observedAt": "2026-09-16T22:11:46+08:00",
+      "observationDate": "2026-09-16"
+    },
+    {
       "recordId": "operational-20260910-ncha-0030-22204768html",
       "date": "2026-09-10",
       "title": "全国革命文物保护利用片区建设工作会在江西赣州召开",
