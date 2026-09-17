@@ -892,6 +892,15 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(result["label"], "high")
         self.assertIn("museum_collection_or_public_incident", result["reasons"])
 
+    def test_museum_collection_accountability_gets_high_priority(self):
+        result = editorial_priority({
+            "title": "受赠文物事件处理结果公布！南京博物院原院长徐湖平获刑三年",
+            "publishedDate": "2026-09-16",
+        }, __import__("datetime").date(2026, 9, 17))
+        self.assertTrue(result["museumCollectionOrPublicIncident"])
+        self.assertEqual(result["label"], "high")
+        self.assertIn("museum_collection_or_public_incident", result["reasons"])
+
     def test_public_salience_counts_independent_publishers_not_report_count(self):
         reports = [
             {"title": "同一事件报道", "sourceDomain": "news.cn", "url": "https://news.cn/a"},

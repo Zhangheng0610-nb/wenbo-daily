@@ -1,0 +1,77 @@
+{
+  "schema": "daily-news-supplement-v1",
+  "date": "2026-09-17",
+  "recordedAt": "2026-09-17T19:19:24+08:00",
+  "queryAudits": [
+    {
+      "queryFamily": "targeted-nanbo-follow-up",
+      "actualQuery": "南京博物院 南博 事件 最新进展 2026年9月16日 徐湖平",
+      "executedAt": "2026-09-17T19:19:24+08:00",
+      "backend": "codex-web",
+      "success": true,
+      "returnedResultCount": 6,
+      "acceptedRawCount": 1,
+      "note": "定向检索后以新华社原稿（人民网页面）和澎湃新华社转载正文交叉核验；其余结果作为同事件转载或评论，不重复计为独立事件。"
+    }
+  ],
+  "event": {
+    "eventId": "event-nanbo-20260916-accountability",
+    "title": "南博受赠文物管理问题处理结果公布：徐湖平获刑三年，多名责任人被处理",
+    "publishedDate": "2026-09-16",
+    "scope": "domestic",
+    "newDevelopment": true,
+    "discoveredVia": "codex-web-search",
+    "discoveryQuery": "南京博物院 南博 事件 最新进展 2026年9月16日 徐湖平",
+    "sourceOfRecord": "新华社",
+    "sourceUrls": [
+      "https://society.people.com.cn/n1/2026/0916/c1008-40800006.html",
+      "https://www.thepaper.cn/newsDetail_forward_34081492"
+    ],
+    "evidenceTier": "A",
+    "evidenceSources": [
+      {
+        "name": "徐湖平等相关责任人被依规依纪依法处理",
+        "url": "https://society.people.com.cn/n1/2026/0916/c1008-40800006.html",
+        "tier": "A",
+        "role": "targeted-web-verification",
+        "articleVerified": true,
+        "publisher": "新华社（人民网）",
+        "publisherDomain": "people.com.cn",
+        "sourceRelationship": "primary",
+        "publishedDate": "2026-09-16"
+      },
+      {
+        "name": "受赠文物事件处理结果公布！南京博物院原院长徐湖平获刑三年",
+        "url": "https://www.thepaper.cn/newsDetail_forward_34081492",
+        "tier": "B",
+        "role": "article-verification",
+        "articleVerified": true,
+        "publisher": "新华社（澎湃新闻转载）",
+        "publisherDomain": "thepaper.cn",
+        "sourceRelationship": "syndicated_primary",
+        "publishedDate": "2026-09-16",
+        "sourceDocumentPath": "audit/action-sources/8f75772d7a56ed6052a212e01eaf50b73fda2bd57aedf78b4aa27a2553165713.json",
+        "sourceDocumentSha256": "8f75772d7a56ed6052a212e01eaf50b73fda2bd57aedf78b4aa27a2553165713"
+      }
+    ]
+  },
+  "mechanismDiagnosis": {
+    "originalDiscoveryAuditPath": "content/发现/2026-09-17.json",
+    "originalQueryHits": 11,
+    "originalNanboRecords": 9,
+    "originalNanboPoolEvents": 6,
+    "originalEditorialPriorityScore": 28,
+    "originalEditorialPriorityLabel": "low",
+    "originalEvidenceQueueClass": "not_queued",
+    "originalEvidenceUpgradeAttempted": false,
+    "originalFinalEditorialPoolContains": false,
+    "failureStage": "editorial-priority-and-evidence-queue",
+    "rootCause": "标题只命中primary_freshness，现有词典未把博物院+文物+管理问责结果识别为馆藏公共事件；评分低于证据队列阈值，因此没有进入证据升级，也就没有进入最终编辑池。",
+    "postPatchRecheck": {
+      "editorialPriorityScore": 83,
+      "editorialPriorityLabel": "high",
+      "evidenceQueueClass": "priority",
+      "regressionTest": "test_museum_collection_accountability_gets_high_priority"
+    }
+  }
+}

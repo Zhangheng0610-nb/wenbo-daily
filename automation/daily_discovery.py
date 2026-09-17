@@ -364,6 +364,10 @@ PUBLIC_INCIDENT_TERMS = (
     "受损", "损坏", "破坏", "毁损", "打砸", "踢打", "手抓", "抓取", "拿起", "攀爬", "涂写", "泼洒",
     "擅自触摸", "人为破坏", "游客破坏", "盗窃", "失窃", "抢劫",
 )
+COLLECTION_ACCOUNTABILITY_TERMS = (
+    "管理问题", "受赠文物", "违规调拨", "违规销售", "文物流失", "责任追究", "处理结果",
+    "被处理", "获刑", "被判刑", "受贿罪", "开除党籍", "处分",
+)
 PUBLIC_SALIENCE_LEVELS = {"normal", "cross_media_attention", "sustained_public_attention"}
 PUBLIC_SALIENCE_CENTRAL_DOMAINS = (
     "news.cn", "xinhuanet.com", "people.com.cn", "cctv.com", "cnr.cn", "chinanews.com.cn", "gmw.cn",
@@ -3821,7 +3825,10 @@ def museum_collection_or_public_incident(record: dict) -> bool:
     return (
         any(term.lower() in text for term in MUSEUM_INSTITUTION_TERMS)
         and any(term.lower() in text for term in COLLECTION_OBJECT_TERMS)
-        and any(term.lower() in text for term in PUBLIC_INCIDENT_TERMS)
+        and (
+            any(term.lower() in text for term in PUBLIC_INCIDENT_TERMS)
+            or any(term.lower() in text for term in COLLECTION_ACCOUNTABILITY_TERMS)
+        )
     )
 
 
