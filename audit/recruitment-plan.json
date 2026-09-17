@@ -1,843 +1,357 @@
 {
-  "date": "2026-09-16",
+  "date": "2026-09-17",
   "queryPlan": [
     {
       "family": "official_institution",
       "query": "博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物院 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 公开招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 编外",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 讲解员 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 社教 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 展览 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 文保 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "考古院 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "考古研究院 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "文物考古研究所 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "文物保护 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "文物保护中心 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "文化遗产 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "数字文博 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "official_institution",
       "query": "博物馆 数字化 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文化和旅游厅 直属事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文化和旅游局 下属事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文广旅局 下属事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文物局 直属事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文旅厅 事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "government_umbrella",
       "query": "文旅局 编外 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "professional_recruitment",
       "query": "site:gaoxiaojob.com 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "professional_recruitment",
       "query": "site:shiyebian.com 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "professional_recruitment",
       "query": "site:gaoxiaojob.com 考古 文物 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "professional_recruitment",
       "query": "site:shiyebian.com 文旅厅 直属事业单位 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "school_employment",
       "query": "site:ncss.cn 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "school_employment",
       "query": "site:edu.cn 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "school_employment",
       "query": "site:edu.cn 考古 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "school_employment",
       "query": "site:edu.cn 文物保护 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 杭州 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 宁波 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 温州 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 绍兴 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 台州 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 嘉兴 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 湖州 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 金华 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 衢州 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 舟山 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "zhejiang_regional",
       "query": "浙江 丽水 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 实习生 招募",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物院 实习 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "考古 实习 招募",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 学生助理 招募",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 见习 岗位",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "文物修复 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "美术馆 策展 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 公共教育 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 数字化 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "site:edu.cn 博物馆 实习生",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "site:mp.weixin.qq.com 博物馆 实习 招募",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "博物馆 长期招聘 实习",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "香港 博物館 實習 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "澳门 博物馆 招聘",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "internship",
       "query": "台湾 博物館 實習 招募",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "北京 博物馆 考古 招聘",
-      "region": "北京",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "北京 人力资源 事业单位 文物 招聘",
-      "region": "北京",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "北京 博物馆 实习",
-      "region": "北京",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "天津 博物馆 考古 招聘",
-      "region": "天津",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "天津 人力资源 事业单位 文物 招聘",
-      "region": "天津",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "天津 博物馆 实习",
-      "region": "天津",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河北 博物馆 考古 招聘",
-      "region": "河北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河北 人力资源 事业单位 文物 招聘",
-      "region": "河北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河北 博物馆 实习",
-      "region": "河北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山西 博物馆 考古 招聘",
-      "region": "山西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山西 人力资源 事业单位 文物 招聘",
-      "region": "山西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山西 博物馆 实习",
-      "region": "山西",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "内蒙古 博物馆 考古 招聘",
       "region": "内蒙古",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "内蒙古 人力资源 事业单位 文物 招聘",
       "region": "内蒙古",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "内蒙古 博物馆 实习",
       "region": "内蒙古",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "辽宁 博物馆 考古 招聘",
-      "region": "辽宁",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "辽宁 人力资源 事业单位 文物 招聘",
-      "region": "辽宁",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "辽宁 博物馆 实习",
-      "region": "辽宁",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "吉林 博物馆 考古 招聘",
-      "region": "吉林",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "吉林 人力资源 事业单位 文物 招聘",
-      "region": "吉林",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "吉林 博物馆 实习",
-      "region": "吉林",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "黑龙江 博物馆 考古 招聘",
-      "region": "黑龙江",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "黑龙江 人力资源 事业单位 文物 招聘",
-      "region": "黑龙江",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "黑龙江 博物馆 实习",
-      "region": "黑龙江",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "上海 博物馆 考古 招聘",
-      "region": "上海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "上海 人力资源 事业单位 文物 招聘",
-      "region": "上海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "上海 博物馆 实习",
-      "region": "上海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江苏 博物馆 考古 招聘",
-      "region": "江苏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江苏 人力资源 事业单位 文物 招聘",
-      "region": "江苏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江苏 博物馆 实习",
-      "region": "江苏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "浙江 博物馆 考古 招聘",
-      "region": "浙江",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "浙江 人力资源 事业单位 文物 招聘",
-      "region": "浙江",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "浙江 博物馆 实习",
-      "region": "浙江",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "安徽 博物馆 考古 招聘",
       "region": "安徽",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "安徽 人力资源 事业单位 文物 招聘",
       "region": "安徽",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "安徽 博物馆 实习",
       "region": "安徽",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "福建 博物馆 考古 招聘",
-      "region": "福建",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "福建 人力资源 事业单位 文物 招聘",
-      "region": "福建",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "福建 博物馆 实习",
-      "region": "福建",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江西 博物馆 考古 招聘",
-      "region": "江西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江西 人力资源 事业单位 文物 招聘",
-      "region": "江西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "江西 博物馆 实习",
-      "region": "江西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山东 博物馆 考古 招聘",
-      "region": "山东",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山东 人力资源 事业单位 文物 招聘",
-      "region": "山东",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "山东 博物馆 实习",
-      "region": "山东",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河南 博物馆 考古 招聘",
-      "region": "河南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河南 人力资源 事业单位 文物 招聘",
-      "region": "河南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "河南 博物馆 实习",
-      "region": "河南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖北 博物馆 考古 招聘",
-      "region": "湖北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖北 人力资源 事业单位 文物 招聘",
-      "region": "湖北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖北 博物馆 实习",
-      "region": "湖北",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖南 博物馆 考古 招聘",
-      "region": "湖南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖南 人力资源 事业单位 文物 招聘",
-      "region": "湖南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "湖南 博物馆 实习",
-      "region": "湖南",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "广东 博物馆 考古 招聘",
       "region": "广东",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "广东 人力资源 事业单位 文物 招聘",
       "region": "广东",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "广东 博物馆 实习",
       "region": "广东",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "广西 博物馆 考古 招聘",
-      "region": "广西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "广西 人力资源 事业单位 文物 招聘",
-      "region": "广西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "广西 博物馆 实习",
-      "region": "广西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "海南 博物馆 考古 招聘",
-      "region": "海南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "海南 人力资源 事业单位 文物 招聘",
-      "region": "海南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "海南 博物馆 实习",
-      "region": "海南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "重庆 博物馆 考古 招聘",
-      "region": "重庆",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "重庆 人力资源 事业单位 文物 招聘",
-      "region": "重庆",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "重庆 博物馆 实习",
-      "region": "重庆",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "四川 博物馆 考古 招聘",
-      "region": "四川",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "四川 人力资源 事业单位 文物 招聘",
-      "region": "四川",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "四川 博物馆 实习",
-      "region": "四川",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "贵州 博物馆 考古 招聘",
-      "region": "贵州",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "贵州 人力资源 事业单位 文物 招聘",
-      "region": "贵州",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "贵州 博物馆 实习",
-      "region": "贵州",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "云南 博物馆 考古 招聘",
-      "region": "云南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "云南 人力资源 事业单位 文物 招聘",
-      "region": "云南",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "云南 博物馆 实习",
-      "region": "云南",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "西藏 博物馆 考古 招聘",
       "region": "西藏",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "西藏 人力资源 事业单位 文物 招聘",
       "region": "西藏",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "national_rotation",
       "query": "西藏 博物馆 实习",
       "region": "西藏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "陕西 博物馆 考古 招聘",
-      "region": "陕西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "陕西 人力资源 事业单位 文物 招聘",
-      "region": "陕西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "陕西 博物馆 实习",
-      "region": "陕西",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "甘肃 博物馆 考古 招聘",
-      "region": "甘肃",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "甘肃 人力资源 事业单位 文物 招聘",
-      "region": "甘肃",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "甘肃 博物馆 实习",
-      "region": "甘肃",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "青海 博物馆 考古 招聘",
-      "region": "青海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "青海 人力资源 事业单位 文物 招聘",
-      "region": "青海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "青海 博物馆 实习",
-      "region": "青海",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "宁夏 博物馆 考古 招聘",
-      "region": "宁夏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "宁夏 人力资源 事业单位 文物 招聘",
-      "region": "宁夏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "宁夏 博物馆 实习",
-      "region": "宁夏",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "新疆 博物馆 考古 招聘",
-      "region": "新疆",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "新疆 人力资源 事业单位 文物 招聘",
-      "region": "新疆",
-      "lookbackDays": 90
-    },
-    {
-      "family": "national_rotation",
-      "query": "新疆 博物馆 实习",
-      "region": "新疆",
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -849,7 +363,7 @@
         "https://www.gaoxiaojob.com/hotword/syzh709134",
         "https://www.gaoxiaojob.com/column/134.html"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -858,7 +372,7 @@
       "sourceUrls": [
         "https://www.shiyebian.com/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -867,7 +381,7 @@
       "sourceUrls": [
         "https://www.ncss.cn/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -876,7 +390,7 @@
       "sourceUrls": [
         "https://www.chinaclzl.com/djgz_1/55.html"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -885,7 +399,7 @@
       "sourceUrls": [
         "https://www.chnmuseum.cn/shxg/gbzp/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -894,7 +408,7 @@
       "sourceUrls": [
         "https://www.dpm.org.cn/about/dynamic.html"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -903,7 +417,7 @@
       "sourceUrls": [
         "https://www.capitalmuseum.org.cn/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -912,7 +426,7 @@
       "sourceUrls": [
         "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -921,7 +435,7 @@
       "sourceUrls": [
         "https://www.mplus.org.hk/en/join-the-team/m-internship/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -930,7 +444,7 @@
       "sourceUrls": [
         "https://www.cssn.cn/ggzp/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -939,7 +453,7 @@
       "sourceUrls": [
         "https://rsj.sh.gov.cn/tzpgg_17408/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -948,7 +462,7 @@
       "sourceUrls": [
         "https://wwj.shaanxi.gov.cn/sy/dtyw/tzgg/rszp/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -957,7 +471,7 @@
       "sourceUrls": [
         "https://wgl.zhenjiang.gov.cn/wgl/tzgg/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "registered_radar",
@@ -966,7 +480,7 @@
       "sourceUrls": [
         "https://sum.scu.edu.cn/"
       ],
-      "lookbackDays": 90
+      "lookbackDays": 30
     },
     {
       "family": "open_ended",

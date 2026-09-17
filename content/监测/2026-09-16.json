@@ -290,6 +290,38 @@
       "observationDate": "2026-09-16"
     },
     {
+      "recordId": "operational-20260916-xinhua-wenbo-0044-293e1e4chtml",
+      "date": "2026-09-16",
+      "title": "活力中国调研行｜千年矿冶遗址变身新潮公园",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.hb.xinhuanet.com/20260916/ed02750c4958402cb03b06750293e1e4/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "考古",
+        "政策行业"
+      ],
+      "tags": [
+        "考古",
+        "政策行业",
+        "湖北"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-17T07:15:14+08:00",
+      "observationDate": "2026-09-17"
+    },
+    {
       "recordId": "operational-20260916-xinhua-wenbo-0067-4ac0868chtml",
       "date": "2026-09-16",
       "title": "第三届新时代考古学与博物馆学融合发展学术研讨会在京举行",
