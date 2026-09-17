@@ -1,0 +1,198 @@
+{
+  "schema": "daily-coverage-comparison-v1",
+  "date": "2026-09-17",
+  "checkedAt": "2026-09-17T21:58:18.2724559+08:00",
+  "discoveryInput": "用户粘贴的文博圈13条目录，未提供公众号原文URL；仅作发现线索，不宣称读取公众号正文",
+  "baseAuditUnchanged": true,
+  "baseAudit": "content/发现/2026-09-17.json",
+  "comparison": [
+    {
+      "title": "文旅部发布十五五规划",
+      "status": "selected",
+      "decision": "已补入第2条；以9月16日官方公布为时间依据，不把规划写成已拨款。",
+      "url": "https://www.mct.gov.cn/whzx/whyw/202609/t20260916_967163.htm",
+      "diagnosis": "原始发现命中文旅规划；同时发现与电子信息制造业规划错误聚类，未进入最终池。"
+    },
+    {
+      "title": "殷墟青铜器鉴定培训班",
+      "status": "verified_not_selected",
+      "decision": "已找到9月14日开班报道，41名学员、7天培训；常规专项培训，不等于新增全国鉴定制度或资格标准，本期未选。",
+      "url": "https://hn.cri.cn/20260916/78ae5e3f-1f00-4ab3-ba87-e1547b16067b.html",
+      "diagnosis": "按目录关键词查原始记录未命中；不能据此断言所有转载均无召回。"
+    },
+    {
+      "title": "第三届考古学与博物馆学融合发展研讨会",
+      "status": "verified_not_selected",
+      "decision": "9月15日召开；已读新华社和中国社会科学网正文，主要为交流发言，未见新项目、标准、制度或合作成果落地，本期未选。",
+      "url": "https://www.xinhuanet.com/culture/20260916/0e71e1f4edc04e4e85281aa9f4ac0868/c.html",
+      "diagnosis": "原始records已有会议记录，未进入最终编辑池。"
+    },
+    {
+      "title": "北京四普省域整体验收",
+      "status": "selected",
+      "decision": "已补入第3条；验收历经9月9日、10日、14日，9月15日报道。",
+      "url": "https://xinwen.bjd.com.cn/content/s6aa8f2b8e4b0e42f8f0053c5.html?innerId=1",
+      "diagnosis": "按目录关键词查原始记录未命中北京项，存在新疆验收不能替代北京事件。"
+    },
+    {
+      "title": "南京博物院受赠文物事件处理结果",
+      "status": "already_published",
+      "decision": "前次纠偏已加入第1条，本次保留。",
+      "url": "https://society.people.com.cn/n1/2026/0916/c1008-40800006.html",
+      "diagnosis": "前次已确认低评分使其未进入证据升级队列；专项词表修复已发布。"
+    },
+    {
+      "title": "中秋国庆北京2000余场文旅活动",
+      "status": "verified_not_selected",
+      "decision": "9月17日政府门户已发布；是全市综合节庆、演艺和旅游安排，当前正文不足以构成单独文博行业重点动作，本期未选。",
+      "url": "https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202609/t20260917_4867746.html",
+      "diagnosis": "该原文发布时间晚于早间检索；不能仅据缺失归咎于早间抓取错误。"
+    },
+    {
+      "title": "河育万象自然生态展",
+      "status": "selected",
+      "decision": "已补入第4条；9月15日开展，55件（套），持续至12月13日。",
+      "url": "https://www.bj.chinanews.com.cn/news/2026/0915/103473.html",
+      "diagnosis": "event-b490aaa3ed78，score28，not_queued，evidenceUpgradeAttempted=null。"
+    },
+    {
+      "title": "乌日切夫作品展",
+      "status": "verified_not_selected",
+      "decision": "已读中国美术馆官方稿，9月12日开幕、9月23日结束；当前材料为个人艺术创作展，未发现藏品入藏、跨馆合作或其他行业增量，本期未选。",
+      "url": "https://www.namoc.cn/namoc/xinwen/202609/a48710e70dd14569a7969715f0320693.shtml",
+      "diagnosis": "按目录关键词查原始记录未命中。"
+    },
+    {
+      "title": "世界技能博物馆接驳专线",
+      "status": "verified_not_selected",
+      "decision": "已读上海人社官方公告，9月16—27日临时免费接驳；可作出行提示，不表述为永久线路，本期精选未选。",
+      "url": "https://rsj.sh.gov.cn/tbmts_17501/20260914/b33d677584db49a0a632c53b8847d0ec.html",
+      "diagnosis": "按目录关键词查原始记录未命中。"
+    },
+    {
+      "title": "永乐宫敦煌法海寺壁画临摹联展",
+      "status": "selected",
+      "decision": "已补入第5条；9月15日基地揭牌、12所院校合作授牌，170余幅临摹作品。",
+      "url": "http://sx.people.com.cn/n2/2026/0916/c189130-41697653.html",
+      "diagnosis": "event-03369b8a2ace，score28，not_queued，无证据升级尝试。HTTPS证书主机名校验失败，HTTP同站正文与web读取一致。"
+    },
+    {
+      "title": "阿尔寨石窟开凿年代至少可追溯至西夏",
+      "status": "needs_verification",
+      "decision": "原始RSS确有9月15日中新报道，但本次未找到可回读该篇完整正文。旧资料也有西夏年代判断，不能据标题就写成2026年新发现；保留待核。",
+      "url": null,
+      "diagnosis": "event-094dc0a75592，score28，not_queued，无证据升级尝试。"
+    },
+    {
+      "title": "布鲁塞尔Kanal蓬皮杜中心11月开放",
+      "status": "needs_verification",
+      "decision": "已读BRUZZ 9月11日稿：11月28—29日免费开放、9月15日开始预约；仍待机构原稿和历史公告去重，不能将11月开馆写成9月已开馆。",
+      "url": "https://www.bruzz.be/select/expo/kanal-trapt-af-met-gratis-openingsweekend-op-28-en-29-november-2026-09-11",
+      "diagnosis": "按目录关键词查原始记录未命中。"
+    },
+    {
+      "title": "荷兰克罗勒穆勒全部梵高画作",
+      "status": "selected",
+      "decision": "已补入第8条；9月15日开幕，88件全部馆藏画作，1984年以来首次。",
+      "url": "https://www.news.cn/shuhua/20260916/4f9c06bfc1ac4d1f8cdd4be0a30b7c40/c.html",
+      "diagnosis": "event-b8938dd3d5d3，score28，not_queued，无证据升级尝试；原始scope误为domestic，本次修订为international。"
+    }
+  ],
+  "summary": {
+    "provided": 13,
+    "newlySelected": 5,
+    "alreadyPublished": 1,
+    "verifiedNotSelected": 5,
+    "needsVerification": 2,
+    "otherNewlySelected": 2,
+    "dailySelected": 10
+  },
+  "otherSelected": [
+    "横琴陕耀中华文物展",
+    "乾隆石经主题文化展"
+  ],
+  "unresolvedEarlierLeads": [
+    "菏泽联合调查：已读澎湃官方通报转载，官方央广稿正文为图片，需完成高风险事实所需官方证据留存后再入选。",
+    "Portico资助、Flag Fen、英乌保护合作等：检索发现不等于逐篇核验完成，暂未入本次编辑池。"
+  ],
+  "mechanismFindings": [
+    "标题优先级实际充当证据准入门槛：四条已命中重要线索均28分/low/not_queued，原文未核验。",
+    "RSS来源是跳转链接，本身保留C级合理；不合理的是因此未经直链核验就永久排除低分事件。",
+    "不同行业十五五规划被错误聚类，具体去重规则尚待最小复现和回归测试；本次不改写原始审计。",
+    "中文媒体的荷兰新闻沿用domestic查询范围，说明来源语言/查询范围被误当成事件地域。",
+    "最终池仅审已升级事件，缺少外部目录逐项对照，查询成功率不能代表新闻覆盖率。"
+  ],
+  "repairStatus": "本轮完成内容补充及13条目录人工对照；候选校验复现canonical_article_identity将新华网URL日期目录20260916误当文章编号，使梵高展与山东泰山展误判同稿。已修复有效YYYYMMDD不作为article-id并新增两个回归测试。评分队列门槛、规划语义误聚类和自动目录对照仍未系统性修复；此前南博专项修复不能视为全面完成。",
+  "queryAudits": [
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://www.mct.gov.cn/whzx/whyw/202609/t20260916_967163.htm",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://xinwen.bjd.com.cn/content/s6aa8f2b8e4b0e42f8f0053c5.html?innerId=1",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://www.bj.chinanews.com.cn/news/2026/0915/103473.html",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "http://sx.people.com.cn/n2/2026/0916/c189130-41697653.html",
+      "executedAt": "2026-09-17T21:57:34+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://www.news.cn/shuhua/20260916/4f9c06bfc1ac4d1f8cdd4be0a30b7c40/c.html",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://www.news.cn/politics/20260917/cc9de8540c1d44b589f3be84a03479a0/c.html",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    },
+    {
+      "queryFamily": "targeted-direct-article-verification",
+      "actualQuery": "https://www.beijing.gov.cn/fuwu/bmfw/sy/jrts/202609/t20260916_4865963.html",
+      "executedAt": "2026-09-17T21:57:04+08:00",
+      "success": true,
+      "returnedResultCount": 1,
+      "acceptedRawCount": 1,
+      "backend": "direct_article_fetch",
+      "note": "原文直采，不计作广泛搜索查询"
+    }
+  ]
+}

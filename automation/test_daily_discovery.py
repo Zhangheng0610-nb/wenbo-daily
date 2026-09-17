@@ -116,6 +116,18 @@ class DailyDiscoveryTests(unittest.TestCase):
         self.assertEqual(canonical_article_url(secure), canonical_article_url(plain))
         self.assertEqual(canonical_article_identity(secure), canonical_article_identity(plain))
 
+    def test_article_identity_does_not_use_publication_date_as_id(self):
+        first = "https://www.news.cn/shuhua/20260916/4f9c06bfc1ac4d1f8cdd4be0a30b7c40/c.html"
+        second = "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html"
+        self.assertNotEqual(canonical_article_identity(first), canonical_article_identity(second))
+        self.assertEqual(canonical_article_identity(first), canonical_article_identity(first.replace("https://www.", "http://")))
+        self.assertIn("10687546", canonical_article_identity("https://www.chinanews.com.cn/wy/2026-09-16/10687546.shtml"))
+
+    def test_distinct_xinhua_exhibitions_are_not_historical_duplicates(self):
+        current = {"title": "荷兰克罗勒-穆勒博物馆集中展出全部88件馆藏梵高画作", "publishedDate": "2026-09-16", "url": "https://www.news.cn/shuhua/20260916/4f9c06bfc1ac4d1f8cdd4be0a30b7c40/c.html"}
+        previous = {"title": "山东博物馆泰山展向观众开放", "publishedDate": "2026-09-16", "url": "https://www.news.cn/culture/20260916/f4ee980803854f32b37569bfc150b647/c.html"}
+        self.assertIsNone(historical_published_event_relation(current, previous))
+
     @patch("automation.daily_discovery.load_history")
     def test_final_historical_guard_uses_evidence_url_after_upgrade(self, load_history_mock):
         load_history_mock.return_value = [{

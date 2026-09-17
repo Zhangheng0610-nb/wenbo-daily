@@ -1157,6 +1157,15 @@ def canonical_article_identity(url: str) -> str:
         # Numeric article IDs are a cross-publisher convention, but only a
         # standalone long numeric path segment is strong enough to use.
         if re.fullmatch(r"\d{5,}", stem):
+            # A YYYYMMDD directory is a publication date, not an article ID.
+            # Xinhua uses /YYYYMMDD/<uuid>/c.html for unrelated same-day items.
+            if re.fullmatch(r"\d{8}", stem):
+                try:
+                    date(int(stem[:4]), int(stem[4:6]), int(stem[6:]))
+                except ValueError:
+                    pass
+                else:
+                    continue
             return f"article-id|{host}|{stem}"
     return f"article-path|{host}|{path}"
 
