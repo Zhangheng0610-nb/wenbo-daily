@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-18",
+  "runType": "same_day_catch_up",
+  "actualStartedAt": "2026-09-18T11:54:20+08:00",
+  "failedAt": "2026-09-18T12:11:37+08:00",
+  "status": "failed",
+  "stage": "editorial_ledger_assembly",
+  "command": "python audit/compose-2026-09-18.py",
+  "exitCode": 1,
+  "error": "KeyError: 'title' at audit/compose-2026-09-18.py line 79; supplemental eventCandidates do not share finalEditorialPool title field schema",
+  "completionFiles": {
+    "content/日报/2026-09-18.md": false,
+    "content/候选/2026-09-18.json": false,
+    "content/复核/2026-09-18.json": false
+  },
+  "monitoring": {
+    "fixedSources": 6,
+    "checked": 3,
+    "partial": 3,
+    "excludedOutOfScopeToday": 2
+  },
+  "discovery": {
+    "sourceScansAttempted": 10,
+    "sourceScansSucceeded": 9,
+    "failedSource": "iccrom-news",
+    "queriesAttempted": 142,
+    "queriesSucceeded": 142,
+    "rawRecords": 1475,
+    "deduplicatedRecords": 1312,
+    "finalEditorialPool": 20
+  },
+  "editorialDraft": {
+    "reviewedOriginalEvents": 20,
+    "additionalVerifiedEvents": 3,
+    "plannedSelected": 5,
+    "published": 0
+  },
+  "recruitment": {
+    "queriesSucceeded": 8,
+    "queriesFailed": 85,
+    "draftNewPositions": 4,
+    "published": false
+  },
+  "notExecuted": [
+    "digital_trend.py --incremental",
+    "build.py",
+    "validate_candidates.py",
+    "validate_project.py",
+    "git commit",
+    "git push origin main",
+    "git push gitee main"
+  ],
+  "stopReason": "用户要求中途失败即停止，保留失败状态；未自动重跑，不以部分产物冒充完成。",
+  "recoveryNotes": [
+    "补充事件使用representativeTitle等字段，先规范标题再组装，不改原始发现审计。",
+    "组装脚本discoveredAt须改为真实审计时间或实际记录时刻，禁止使用估计整分时间。",
+    "现有招聘Markdown和证据为未发布草稿；任何恢复都须重新检查时效并完整验证。"
+  ]
+}

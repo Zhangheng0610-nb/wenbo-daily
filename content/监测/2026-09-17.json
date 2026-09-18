@@ -100,7 +100,413 @@
       "scanStatus": "partial"
     }
   ],
-  "items": [],
+  "items": [
+    {
+      "recordId": "operational-20260917-archaeology-0040-6067703shtml",
+      "date": "2026-09-17",
+      "title": "晚间新闻 | 中埃联合考古取得多项新成果",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260917_6067703.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-archaeology-0039-6067684shtml",
+      "date": "2026-09-17",
+      "title": "社科要闻 | 推动长江文明与世界大河文明交流互鉴",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260917_6067684.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业"
+      ],
+      "impact": 45,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-archaeology-0038-6067683shtml",
+      "date": "2026-09-17",
+      "title": "社科要闻 | 第三届新时代考古学与博物馆学融合发展学术研讨会召开",
+      "sources": [
+        {
+          "sourceId": "archaeology",
+          "name": "中国考古网",
+          "url": "http://kaogu.cssn.cn/xwzx/skyw/202609/t20260917_6067683.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "博物馆",
+        "考古"
+      ],
+      "tags": [
+        "博物馆",
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-cctv-wenbo-0041-n260917shtml",
+      "date": "2026-09-17",
+      "title": "《探索·发现》 20260917 考古零距离（24）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/17/VIDECX7QxRoLAo16f6oG4Z1n260917.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-ncha-0042-22204865html",
+      "date": "2026-09-17",
+      "title": "保护第一 考古筑基 吉林探索抗联遗址保护展示新路径",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204865.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "吉林",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "吉林"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-ncha-0044-22204892html",
+      "date": "2026-09-17",
+      "title": "天津市领导调研文物保护利用工作时强调 加强历史文化遗产保护利用 在推动文化传承发...",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204892.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "文化遗产"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "天津"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-ncha-0043-22204867html",
+      "date": "2026-09-17",
+      "title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204867.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文物保护"
+      ],
+      "tags": [
+        "文物保护"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-ncha-0045-22204894html",
+      "date": "2026-09-17",
+      "title": "新闻联播 |【文化中国行】绍兴历史街区保护：留人见物有生活",
+      "sources": [
+        {
+          "sourceId": "ncha",
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204894.html"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "文化遗产"
+      ],
+      "tags": [
+        "文化遗产"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-xinhua-wenbo-0048-58aaf7fchtml",
+      "date": "2026-09-17",
+      "title": "“陕”耀中华文物展亮相横琴",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260917/25d3cd89179d4b3fb1989726258aaf7f/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "陕西"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-xinhua-wenbo-0050-9ca1817chtml",
+      "date": "2026-09-17",
+      "title": "农业农村部等三部门联合实施农业品牌保护专项行动",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260917/0d71c1a77e394d1295155881f9ca1817/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "北京"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-xinhua-wenbo-0049-8152292chtml",
+      "date": "2026-09-17",
+      "title": "文化奇遇记｜在柳孜运河桥梁遗址博物馆探寻运河往事",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "安徽",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "博物馆",
+        "考古"
+      ],
+      "tags": [
+        "博物馆",
+        "考古",
+        "安徽"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "duplicateProvenance": {
+        "rule": "same_source_same_day_normalized_title",
+        "canonicalUrl": "https://www.news.cn/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html",
+        "duplicateUrls": [
+          "https://www.xinhuanet.com/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html"
+        ]
+      },
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-xinhua-wenbo-0046-ec3fd4cchtml",
+      "date": "2026-09-17",
+      "title": "石宝寨成“盆景” 白公祠聚宝贝 忠县让长江文物从“保下来”到 ...",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.cq.xinhuanet.com/20260917/a3d14c86799f42afa56707408ec3fd4c/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "重庆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "政策行业",
+        "重庆"
+      ],
+      "impact": 80,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
+      "recordId": "operational-20260917-xinhua-wenbo-0047-2ff8123chtml",
+      "date": "2026-09-17",
+      "title": "陈敏尔：加强历史文化遗产保护利用 在推动文化传承发展上善作善成",
+      "sources": [
+        {
+          "sourceId": "xinhua-wenbo",
+          "name": "新华网文博",
+          "url": "http://www.tj.xinhuanet.com/20260917/25d9711a4cd54c3b96f0c14b02ff8123/c.html"
+        }
+      ],
+      "scope": "province",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "政策行业",
+        "天津"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    }
+  ],
   "runType": "live",
   "scanAudit": {
     "scanner": "automation/backfill_monitoring.py",

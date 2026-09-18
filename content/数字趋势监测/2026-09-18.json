@@ -1,0 +1,103 @@
+{
+ "version": 1,
+ "date": "2026-09-18",
+ "checkedAt": "2026-09-18T12:19:41+08:00",
+ "scanMode": "incremental",
+ "scanWindow": {
+  "start": "2026-09-05",
+  "end": "2026-09-18"
+ },
+ "sourceColumn": 722,
+ "paginationPagesChecked": 1,
+ "sourcePagesChecked": 17,
+ "sourcePagesNew": 1,
+ "contentItemsNew": 1,
+ "duplicatesSkipped": 4,
+ "fetchFailed": 0,
+ "parseFailed": 0,
+ "status": "scan_success_with_update",
+ "note": "",
+ "ordinaryBodyChecks": [
+  {
+   "url": "/art/2026/9/17/art_722_204894.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 1005,
+   "titleMatched": false,
+   "bodySha256": "0b862a707ae5b1898226caf163b25e34cba18b1aa46fdd34c748b885fd214838"
+  },
+  {
+   "url": "/art/2026/9/17/art_722_204892.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 1120,
+   "titleMatched": false,
+   "bodySha256": "80db798610f389694d5d2be3072ed8c23d5b55dbe6590c283e117173cb34f0ad"
+  },
+  {
+   "url": "/art/2026/9/17/art_722_204867.html",
+   "status": "matched",
+   "bodyCharacters": 4027,
+   "titleMatched": false,
+   "bodySha256": "e8549476195e8ceb9bbd62082e0203f858e27bd23e1922c4fea5869c8237d587"
+  },
+  {
+   "url": "/art/2026/9/17/art_722_204865.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 2693,
+   "titleMatched": false,
+   "bodySha256": "494d9af57fc0a3ada6fd155bc1692fcf2b791bede0c21c1b8004c3b3009bfafc"
+  },
+  {
+   "url": "/art/2026/9/13/art_722_204817.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 570,
+   "titleMatched": false,
+   "bodySha256": "6f0f83ef8041528639a83f6717df2a126ae9d4282c42b11e37b33d5392248ea7"
+  },
+  {
+   "url": "/art/2026/9/13/art_722_204815.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 1455,
+   "titleMatched": false,
+   "bodySha256": "38ffefb64631ef4279c008c3a7dd1fd30bf5b29c853256f2bb9f102d41c129ef"
+  },
+  {
+   "url": "/art/2026/9/12/art_722_204795.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 478,
+   "titleMatched": false,
+   "bodySha256": "0753ebec3fad0069d53bf2c2289a91338e4249f2d045f6a478044a763ef8d51c"
+  },
+  {
+   "url": "/art/2026/9/11/art_722_204785.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 702,
+   "titleMatched": false,
+   "bodySha256": "9b3292299ab332ec1b7cd2413da409b2eec843972470ac2ae226d1c0233c5b1f"
+  },
+  {
+   "url": "/art/2026/9/11/art_722_204779.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 1051,
+   "titleMatched": false,
+   "bodySha256": "bd81fc005cf001c4f86be91a3428525ae81b487dd895360b8894df956f4fed8c"
+  },
+  {
+   "url": "/art/2026/9/10/art_722_204768.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 451,
+   "titleMatched": false,
+   "bodySha256": "b32d2d093df37d6b171897906b243fa740803d07f5d4d2355908e535f5f6e919"
+  },
+  {
+   "url": "/art/2026/9/10/art_722_204758.html",
+   "status": "excluded_scope"
+  },
+  {
+   "url": "/art/2026/9/7/art_722_204719.html",
+   "status": "no_digital_signal",
+   "bodyCharacters": 1085,
+   "titleMatched": false,
+   "bodySha256": "fd5b2a2e9171790c479cb1e079d866a0963f6804e4ae36bcc604aa30c3418b7b"
+  }
+ ]
+}

@@ -1,24 +1,24 @@
 {
- "generated": "2026-09-17",
+ "generated": "2026-09-18",
  "source": "国家文物局官网「文物新闻」栏目",
  "range": {
   "start": "2021-01-01",
-  "end": "2026-09-17"
+  "end": "2026-09-18"
  },
  "stats": {
-  "total": 278,
+  "total": 279,
   "title_hit": 26,
   "digest_extra": 649,
   "levels": {
-   "core": 221,
+   "core": 222,
    "ext": 12,
    "tech": 45
   },
   "digest_articles": 513,
-  "unique_source_pages": 160,
-  "source_article_total": 13785,
-  "source_unique_pages": 4787,
-  "overall_share": 3.34,
+  "unique_source_pages": 161,
+  "source_article_total": 13789,
+  "source_unique_pages": 4791,
+  "overall_share": 3.36,
   "topic_unique_counts": {
    "数字保护与数字采集": 82,
    "AI、三维扫描与科技考古": 76,
@@ -28,14 +28,14 @@
    "数字传播与国际交流": 13
   },
   "classified_article_count": 230,
-  "unclassified_article_count": 48,
-  "matched_record_count": 278,
-  "content_item_count": 278,
+  "unclassified_article_count": 49,
+  "matched_record_count": 279,
+  "content_item_count": 279,
   "digest_content_item_count": 245,
-  "standalone_content_item_count": 33,
-  "digital_source_pages": 160,
+  "standalone_content_item_count": 34,
+  "digital_source_pages": 161,
   "digest_source_pages": 127,
-  "standalone_source_pages": 33,
+  "standalone_source_pages": 34,
   "topic_content_item_counts": {
    "数字保护与数字采集": 82,
    "AI、三维扫描与科技考古": 76,
@@ -45,7 +45,7 @@
    "数字传播与国际交流": 13
   },
   "classified_content_item_count": 230,
-  "unclassified_content_item_count": 48
+  "unclassified_content_item_count": 49
  },
  "quality": {
   "source_fetch_complete": true,
@@ -53,10 +53,10 @@
   "note": "关键词只负责纳入趋势库；页面按六类行业方向展示。主数据 articles 按原文URL聚合，保留关键词、方向与摘编命中片段；unique_count按原文URL去重，share按国家文物局全部文物新闻原文URL计算。",
   "topic_taxonomy": "六类行业方向和趋势按 content_items 统计；source_pages 仅用于来源页和 page-level 占比；同一摘编父页的不同条目不会继承彼此方向。",
   "incremental_update_mode": "recent source-page scan",
-  "last_incremental_scan_at": "2026-09-17T08:04:04+08:00",
+  "last_incremental_scan_at": "2026-09-18T12:19:41+08:00",
   "last_incremental_scan_window": {
-   "start": "2026-09-04",
-   "end": "2026-09-17"
+   "start": "2026-09-05",
+   "end": "2026-09-18"
   }
  },
  "topic_info": [
@@ -5199,6 +5199,26 @@
    "from_digest": false,
    "digest_title": "",
    "evidence_snippet": "新华社电（记者 王思北 萧海川）2026年国家网络安全宣传周开幕式于9月14日在山东济南举行。《人工智能安全治理框架》3.0、《2026年人工智能技术赋能网络安全应用测试结果》、消费类网联摄像头网络安全标识备案产品等一系列网络安全领域重要成果在开幕式上发布。 2026年国家网络安全宣传周由中央宣传部、中央网信办、教育部、工业和信息化部、公安部、中国人民银行、…",
+   "admission_reason": "strong-body"
+  },
+  {
+   "content_item_id": "/art/2026/9/17/art_722_204867.html",
+   "display_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "source_url": "/art/2026/9/17/art_722_204867.html",
+   "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "is_digest_item": false,
+   "t": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "d": "2026-09-17",
+   "u": "/art/2026/9/17/art_722_204867.html",
+   "l": "core",
+   "w": "数字化",
+   "topics": [],
+   "matched_keywords": [
+    "数字化"
+   ],
+   "from_digest": false,
+   "digest_title": "",
+   "evidence_snippet": "…政策资金扶持，完善非国有产权救治保障措施；四是强化业务指导、帮扶，以项目为抓手培养专业人才。 也有与会者提出，革命文物的数字化不能和其他历史建筑的数字化在同一层面考虑，因为革命文物承载着更多的精神内核，其数字化单一参照历史建筑的数字化标准较为浪费；低级别革命文物产权问题不容回避，希望通过出台相应的指导性文件，如以产权流转、置换来提升基层工作的积极性；工作中存…",
    "admission_reason": "strong-body"
   }
  ],
@@ -11531,13 +11551,13 @@
   },
   {
    "key": "2026-09",
-   "count": 5,
-   "content_item_count": 5,
-   "source_page_count": 4,
-   "unique_count": 4,
-   "source_count": 17,
-   "source_unique_count": 17,
-   "share": 23.53,
+   "count": 6,
+   "content_item_count": 6,
+   "source_page_count": 5,
+   "unique_count": 5,
+   "source_count": 21,
+   "source_unique_count": 21,
+   "share": 23.81,
    "items": [
     {
      "content_item_id": "/art/2026/9/10/art_722_204760.html",
@@ -11645,6 +11665,23 @@
      "u": "/art/2026/9/15/art_722_204846.html",
      "t": "2026年国家网络安全宣传周开幕",
      "l": "tech"
+    },
+    {
+     "content_item_id": "/art/2026/9/17/art_722_204867.html",
+     "display_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "source_url": "/art/2026/9/17/art_722_204867.html",
+     "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…政策资金扶持，完善非国有产权救治保障措施；四是强化业务指导、帮扶，以项目为抓手培养专业人才。 也有与会者提出，革命文物的数字化不能和其他历史建筑的数字化在同一层面考虑，因为革命文物承载着更多的精神内核，其数字化单一参照历史建筑的数字化标准较为浪费；低级别革命文物产权问题不容回避，希望通过出台相应的指导性文件，如以产权流转、置换来提升基层工作的积极性；工作中存…",
+     "matched_keywords": [
+      "数字化"
+     ],
+     "topics": [],
+     "d": "2026-09-17",
+     "u": "/art/2026/9/17/art_722_204867.html",
+     "t": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "l": "core"
     }
    ]
   }
@@ -20683,13 +20720,13 @@
   },
   {
    "key": "2026-W38",
-   "count": 1,
-   "content_item_count": 1,
-   "source_page_count": 1,
-   "unique_count": 1,
-   "source_count": 1,
-   "source_unique_count": 1,
-   "share": 100.0,
+   "count": 2,
+   "content_item_count": 2,
+   "source_page_count": 2,
+   "unique_count": 2,
+   "source_count": 5,
+   "source_unique_count": 5,
+   "share": 40.0,
    "items": [
     {
      "content_item_id": "/art/2026/9/15/art_722_204846.html",
@@ -20711,6 +20748,23 @@
      "u": "/art/2026/9/15/art_722_204846.html",
      "t": "2026年国家网络安全宣传周开幕",
      "l": "tech"
+    },
+    {
+     "content_item_id": "/art/2026/9/17/art_722_204867.html",
+     "display_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "source_url": "/art/2026/9/17/art_722_204867.html",
+     "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…政策资金扶持，完善非国有产权救治保障措施；四是强化业务指导、帮扶，以项目为抓手培养专业人才。 也有与会者提出，革命文物的数字化不能和其他历史建筑的数字化在同一层面考虑，因为革命文物承载着更多的精神内核，其数字化单一参照历史建筑的数字化标准较为浪费；低级别革命文物产权问题不容回避，希望通过出台相应的指导性文件，如以产权流转、置换来提升基层工作的积极性；工作中存…",
+     "matched_keywords": [
+      "数字化"
+     ],
+     "topics": [],
+     "d": "2026-09-17",
+     "u": "/art/2026/9/17/art_722_204867.html",
+     "t": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "l": "core"
     }
    ]
   }
@@ -44296,6 +44350,35 @@
      "l": "tech"
     }
    ]
+  },
+  {
+   "key": "2026-09-17",
+   "count": 1,
+   "content_item_count": 1,
+   "source_page_count": 1,
+   "unique_count": 1,
+   "source_count": 4,
+   "source_unique_count": 4,
+   "share": 25.0,
+   "items": [
+    {
+     "content_item_id": "/art/2026/9/17/art_722_204867.html",
+     "display_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "source_url": "/art/2026/9/17/art_722_204867.html",
+     "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "digest_title": "",
+     "is_digest_item": false,
+     "evidence_snippet": "…政策资金扶持，完善非国有产权救治保障措施；四是强化业务指导、帮扶，以项目为抓手培养专业人才。 也有与会者提出，革命文物的数字化不能和其他历史建筑的数字化在同一层面考虑，因为革命文物承载着更多的精神内核，其数字化单一参照历史建筑的数字化标准较为浪费；低级别革命文物产权问题不容回避，希望通过出台相应的指导性文件，如以产权流转、置换来提升基层工作的积极性；工作中存…",
+     "matched_keywords": [
+      "数字化"
+     ],
+     "topics": [],
+     "d": "2026-09-17",
+     "u": "/art/2026/9/17/art_722_204867.html",
+     "t": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+     "l": "core"
+    }
+   ]
   }
  ],
  "by_year": [
@@ -44351,13 +44434,13 @@
   },
   {
    "key": "2026",
-   "count": 63,
-   "content_item_count": 63,
-   "source_page_count": 32,
-   "unique_count": 32,
-   "source_count": 560,
-   "source_unique_count": 300,
-   "share": 10.67
+   "count": 64,
+   "content_item_count": 64,
+   "source_page_count": 33,
+   "unique_count": 33,
+   "source_count": 564,
+   "source_unique_count": 304,
+   "share": 10.86
   }
  ],
  "content_items": [
@@ -49440,9 +49523,37 @@
     "数字传播与国际交流"
    ],
    "is_digest_item": false
+  },
+  {
+   "content_item_id": "/art/2026/9/17/art_722_204867.html",
+   "display_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "source_url": "/art/2026/9/17/art_722_204867.html",
+   "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "digest_title": "",
+   "date": "2026-09-17",
+   "level": "core",
+   "matched_keywords": [
+    "数字化"
+   ],
+   "evidence_snippet": "…政策资金扶持，完善非国有产权救治保障措施；四是强化业务指导、帮扶，以项目为抓手培养专业人才。 也有与会者提出，革命文物的数字化不能和其他历史建筑的数字化在同一层面考虑，因为革命文物承载着更多的精神内核，其数字化单一参照历史建筑的数字化标准较为浪费；低级别革命文物产权问题不容回避，希望通过出台相应的指导性文件，如以产权流转、置换来提升基层工作的积极性；工作中存…",
+   "topics": [],
+   "is_digest_item": false
   }
  ],
  "source_pages": [
+  {
+   "source_page_id": "/art/2026/9/17/art_722_204867.html",
+   "source_url": "/art/2026/9/17/art_722_204867.html",
+   "source_page_title": "夯基垒台 积厚成势——革命文物保护利用片区建设迈入新阶段",
+   "date": "2026-09-17",
+   "is_digest_page": false,
+   "content_item_ids": [
+    "/art/2026/9/17/art_722_204867.html"
+   ],
+   "content_item_count": 1,
+   "digest_content_item_count": 0,
+   "standalone_content_item_count": 1
+  },
   {
    "source_page_id": "/art/2026/9/15/art_722_204846.html",
    "source_url": "/art/2026/9/15/art_722_204846.html",

@@ -190,6 +190,35 @@
       "observationDate": "2026-09-16"
     },
     {
+      "recordId": "operational-20260916-cctv-wenbo-0035-8260916shtml",
+      "date": "2026-09-16",
+      "title": "《探索·发现》 20260916 考古零距离（23）",
+      "sources": [
+        {
+          "sourceId": "cctv-wenbo",
+          "name": "央视网文博与央视新闻",
+          "url": "https://tv.cctv.cn/2026/09/16/VIDEulT4RMrfs28OK8GqMvg8260916.shtml"
+        }
+      ],
+      "scope": "unassigned",
+      "primaryProvince": "",
+      "relatedProvinces": [],
+      "locationTier": "unassigned",
+      "locationConfidence": 0.0,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古"
+      ],
+      "impact": 60,
+      "selectedForDaily": false,
+      "origin": "fixed-panel-monitoring",
+      "runType": "live",
+      "observedAt": "2026-09-18T11:54:53+08:00",
+      "observationDate": "2026-09-18"
+    },
+    {
       "recordId": "operational-20260916-museum-association-0065-ntentid14778",
       "date": "2026-09-16",
       "title": "国际博协藏品保护委员会第21届大会在挪威奥斯陆开幕",

@@ -1,9 +1,30 @@
 {
   "schemaVersion": 1,
-  "asOf": "2026-09-17",
+  "asOf": "2026-09-18",
   "scope": "published_reporting_latest_issue_minus_13_days",
   "countUnit": "editorial_event",
   "items": [
+    {
+      "eventId": "event-dbf67ad4df3b",
+      "title": "UNESCO与ICOM公布博物馆AI调查：应用领先于内部治理",
+      "summary": "UNESCO与国际博物馆协会（ICOM）首次全球博物馆AI使用调查结果于9月17日在利雅得全球人工智能伦理论坛公布。调查覆盖90个国家的400多家博物馆：57%的受访馆已使用AI，55%没有内部AI政策、战略或指引。应用涉及行政、翻译、藏品研究、建档、展览及观众服务，结果将用于后续操作指引和能力建设。",
+      "reportDate": "2026-09-18",
+      "publishedDate": "2026-09-16",
+      "reportUrl": "reports/2026-09-18.html#item4",
+      "sources": [
+        {
+          "title": "UNESCO",
+          "url": "https://www.unesco.org/en/articles/unesco-icom-global-survey-finds-museums-embracing-ai-governance-and-capacity-lag-behind"
+        }
+      ],
+      "topics": [
+        "AI、三维扫描与科技考古"
+      ],
+      "matchedKeywords": [
+        "AI",
+        "人工智能"
+      ]
+    },
     {
       "eventId": "event-fefdce2b84e9",
       "title": "文化遗产保护与数字化论坛在京开幕，发布中希数字遗产联合实验室旗舰项目",

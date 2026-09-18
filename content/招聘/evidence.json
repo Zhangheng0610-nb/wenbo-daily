@@ -196,6 +196,118 @@
         "application"
       ],
       "note": "清华艺博官方招募页支持2026年9月至12月工作期、8—10人、申请表下载及bwg邮箱投递；公告未注明统一报名截止日期，申请前核对原文。"
+    },
+    {
+      "jobId": "job-28359e386c00a1",
+      "signature": "a1cc671e6488a4a2ef34e08bd1911c9ce145892f7ef11e14af1a4ac45c05eb40",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.fenbi.com/page/exam-information-detail/469000650774528",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-9aa43e9d784668",
+      "signature": "880195258de23e5afa9ac23dcbb337c3421d4a7cf5e3cb586b4f3a3e8913e7ad",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.fenbi.com/page/exam-information-detail/469000650774528",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-e4eb18a3a14265",
+      "signature": "fcf0492646920ea3c6cfb9e27e8bd7bb30f0aa1eb4a4c453386fb3a52486032e",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://sum.scu.edu.cn/info/1086/3631.htm",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-aa67e6b1ba43c9",
+      "signature": "4709620ef4ede5426e4eac2e6f2c2046b2918da6bfd15968a61c31f3ab31fdbd",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.nlc.cn/nmcb/gonggao/20260909_2654426.shtml",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-34e3e8ac1de31f",
+      "signature": "760450fca2b4a8f8cefd98dc88f6efcf46eb9eff11b11ec11d515a2fc5b8e518",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-44b4b202ab36b3",
+      "signature": "44510b336e68494e39364a9a87e2cc26040958bf1d06362d02d96ce09b188288",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-6dd524a840c8b1",
+      "signature": "dffaea144a7044bcd1226781a7f6ccfb5172b2da01b033e9afce8ea5e7729fb1",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://sum.scu.edu.cn/info/1086/3622.htm",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
+    },
+    {
+      "jobId": "job-98be1a548fa804",
+      "signature": "40ae902670fcbc09d37759584bc487b44d829ef0144d90288cdc37300a9cb2dc",
+      "checkedAt": "2026-09-18T12:03:18+08:00",
+      "reviewAfter": "2026-09-21T12:03:18+08:00",
+      "outcome": "supported",
+      "sourceUrl": "https://www.artmuseum.tsinghua.edu.cn/lxwm/zp/zpxz/202608/t20260831_20874.shtml",
+      "method": "source_body_read",
+      "fields": [
+        "deadline",
+        "application"
+      ],
+      "note": "已读取详情正文核对报名窗口与投递方式。未注明截止日期的岗位不承诺仍有空缺；来源正文存于 audit/recruitment-source-review-2026-09-18.json。"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "generated": "2026-09-17",
-  "asOf": "2026-09-17",
+  "generated": "2026-09-18",
+  "asOf": "2026-09-18",
   "start": "2026-05-30",
   "decay": 0.93,
   "methodology": {
@@ -7050,6 +7050,109 @@
         "duplicatesSkipped": 30,
         "scanStatus": "partial",
         "date": "2026-09-17"
+      },
+      {
+        "sourceId": "archaeology",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-18T11:55:16+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 11,
+        "eligibleCount": 11,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-18"
+      },
+      {
+        "sourceId": "cctv-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-18T11:55:53+08:00",
+        "candidateCount": 0,
+        "note": "央视网文博与央视新闻公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 7,
+        "eligibleCount": 7,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-18"
+      },
+      {
+        "sourceId": "cultural-relics-news",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-18T11:55:14+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 16,
+        "eligibleCount": 12,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-18"
+      },
+      {
+        "sourceId": "museum-association",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-18T11:55:17+08:00",
+        "candidateCount": 0,
+        "note": "中国博物馆协会公开资讯、行业资讯、公告和展览档案已回溯。",
+        "rawCount": 3,
+        "eligibleCount": 3,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "partial",
+        "date": "2026-09-18"
+      },
+      {
+        "sourceId": "ncha",
+        "mode": "operational",
+        "runType": "live",
+        "status": "no_update",
+        "checkedAt": "2026-09-18T11:54:53+08:00",
+        "candidateCount": 0,
+        "note": "",
+        "rawCount": 9,
+        "eligibleCount": 8,
+        "acceptedThisRun": 0,
+        "retainedExisting": 0,
+        "finalItemCount": 0,
+        "duplicatesSkipped": 0,
+        "scanStatus": "checked",
+        "date": "2026-09-18"
+      },
+      {
+        "sourceId": "xinhua-wenbo",
+        "mode": "operational",
+        "runType": "live",
+        "status": "partial",
+        "checkedAt": "2026-09-18T11:55:18+08:00",
+        "candidateCount": 2,
+        "note": "新华网文博与文化频道公开页可回溯部分栏目，完整历史索引仍待补齐。",
+        "rawCount": 243,
+        "eligibleCount": 13,
+        "acceptedThisRun": 2,
+        "retainedExisting": 0,
+        "finalItemCount": 2,
+        "duplicatesSkipped": 29,
+        "scanStatus": "partial",
+        "scopeReviewExcludedCount": 2,
+        "date": "2026-09-18"
       }
     ],
     "monitoringStart": "2026-05-30",
@@ -7066,42 +7169,42 @@
     }
   },
   "stats": {
-    "totalMonitoredRecords": 652,
-    "includedProvincialRecords": 164,
-    "provincialEvents": 137,
+    "totalMonitoredRecords": 668,
+    "includedProvincialRecords": 173,
+    "provincialEvents": 145,
     "nationalEvents": 43,
     "internationalEvents": 0,
     "legacyBaselineRecords": 69,
     "archiveBackfillRecords": 418,
-    "fixedPanelMonitoringRecords": 165,
-    "operationalRecords": 165,
+    "fixedPanelMonitoringRecords": 181,
+    "operationalRecords": 181,
     "operationalRecordTypes": {
-      "live": 146,
+      "live": 162,
       "replay": 19,
       "unknown": 0
     },
     "provenanceRecords": {
       "legacy-daily-selection": 69,
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 165
+      "fixed-panel-monitoring": 181
     },
     "otherProvenanceRecords": {},
     "provenanceReconciled": true,
-    "analysisRecords": 583,
+    "analysisRecords": 599,
     "analysisProvenanceRecords": {
       "archive-backfill": 418,
-      "fixed-panel-monitoring": 165
+      "fixed-panel-monitoring": 181
     },
     "excludedNonPanel": 0,
-    "unassigned": 348,
+    "unassigned": 355,
     "panelSourceCount": 6,
-    "coverageDays": 111,
+    "coverageDays": 112,
     "completeCoverageDays": 11,
-    "successfulSourceChecks": 364,
+    "successfulSourceChecks": 367,
     "coverageStatuses": {
       "success": 151,
-      "no_update": 213,
-      "partial": 301,
+      "no_update": 216,
+      "partial": 304,
       "failed": 1
     },
     "coverageByMode": {
@@ -7111,15 +7214,15 @@
         "days": 90
       },
       "operational": {
-        "checks": 126,
-        "good": 91,
-        "days": 21
+        "checks": 132,
+        "good": 94,
+        "days": 22
       }
     },
     "archiveBackfillCoverageChecks": 540,
-    "operationalCoverageChecks": 126,
+    "operationalCoverageChecks": 132,
     "archiveBackfillCoverageDays": 90,
-    "operationalCoverageDays": 21,
+    "operationalCoverageDays": 22,
     "operationalCoverageByRunType": {
       "replay": {
         "checks": 24,
@@ -7127,25 +7230,495 @@
         "days": 4
       },
       "live": {
-        "checks": 102,
-        "good": 67,
-        "days": 17
+        "checks": 108,
+        "good": 70,
+        "days": 18
       }
     },
-    "liveOperationalCoverageChecks": 102,
-    "liveOperationalCoverageDays": 17,
+    "liveOperationalCoverageChecks": 108,
+    "liveOperationalCoverageDays": 18,
     "replayOperationalCoverageChecks": 24,
     "replayOperationalCoverageDays": 4,
     "recordsBySource": {
-      "ncha": 89,
+      "ncha": 93,
       "cultural-relics-news": 158,
-      "archaeology": 234,
+      "archaeology": 237,
       "museum-association": 34,
-      "xinhua-wenbo": 45,
-      "cctv-wenbo": 23
+      "xinhua-wenbo": 52,
+      "cctv-wenbo": 25
     }
   },
   "events": [
+    {
+      "title": "走进沈阳“九·一八”历史博物馆",
+      "firstDate": "2026-09-18",
+      "lastDate": "2026-09-18",
+      "primaryProvince": "辽宁",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "博物馆",
+        "政策行业"
+      ],
+      "tags": [
+        "博物馆",
+        "政策行业",
+        "辽宁"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-18",
+          "title": "走进沈阳“九·一八”历史博物馆",
+          "url": "https://www.news.cn/politics/20260918/f429605271c24e1b8225a9152d19aae0/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/politics/20260918/f429605271c24e1b8225a9152d19aae0/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-a64f652f09",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260918/f429605271c24e1b8225a9152d19aae0/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "湖北襄阳：古城焕彩承文脉 文旅融合引客来",
+      "firstDate": "2026-09-18",
+      "lastDate": "2026-09-18",
+      "primaryProvince": "湖北",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文化遗产",
+        "政策行业",
+        "湖北"
+      ],
+      "impact": 45.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-18",
+          "title": "湖北襄阳：古城焕彩承文脉 文旅融合引客来",
+          "url": "https://www.news.cn/culture/20260918/d31bfffdd2004014a7760ba99b0faece/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/culture/20260918/d31bfffdd2004014a7760ba99b0faece/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-f4f16b37c8",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "一般",
+      "primaryTheme": "文化遗产",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/culture/20260918/d31bfffdd2004014a7760ba99b0faece/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "石宝寨成“盆景” 白公祠聚宝贝 忠县让长江文物从“保下来”到 ...",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "重庆",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "政策行业",
+        "重庆"
+      ],
+      "impact": 80.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "石宝寨成“盆景” 白公祠聚宝贝 忠县让长江文物从“保下来”到 ...",
+          "url": "http://www.cq.xinhuanet.com/20260917/a3d14c86799f42afa56707408ec3fd4c/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.cq.xinhuanet.com/20260917/a3d14c86799f42afa56707408ec3fd4c/c.html",
+              "host": "cq.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-c6c435be20",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "重要",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "http://www.cq.xinhuanet.com/20260917/a3d14c86799f42afa56707408ec3fd4c/c.html",
+          "host": "cq.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "陈敏尔：加强历史文化遗产保护利用 在推动文化传承发展上善作善成",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "天津",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "文物保护",
+        "文化遗产",
+        "政策行业"
+      ],
+      "tags": [
+        "文物保护",
+        "文化遗产",
+        "天津",
+        "政策行业"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "天津市领导调研文物保护利用工作时强调 加强历史文化遗产保护利用 在推动文化传承发...",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204892.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204892.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        },
+        {
+          "date": "2026-09-17",
+          "title": "陈敏尔：加强历史文化遗产保护利用 在推动文化传承发展上善作善成",
+          "url": "http://www.tj.xinhuanet.com/20260917/25d9711a4cd54c3b96f0c14b02ff8123/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "http://www.tj.xinhuanet.com/20260917/25d9711a4cd54c3b96f0c14b02ff8123/c.html",
+              "host": "tj.xinhuanet.com",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-9fc8eeaf5d",
+      "sourceTier": "A",
+      "sourceCount": 2,
+      "reportCount": 2,
+      "evidence": 100,
+      "breadth": 65,
+      "impactLabel": "关注",
+      "primaryTheme": "文物保护",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204892.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        },
+        {
+          "name": "新华网文博",
+          "url": "http://www.tj.xinhuanet.com/20260917/25d9711a4cd54c3b96f0c14b02ff8123/c.html",
+          "host": "tj.xinhuanet.com",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "“陕”耀中华文物展亮相横琴",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "陕西",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "展览"
+      ],
+      "tags": [
+        "展览",
+        "陕西"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "“陕”耀中华文物展亮相横琴",
+          "url": "https://www.news.cn/ci/20260917/25d3cd89179d4b3fb1989726258aaf7f/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/ci/20260917/25d3cd89179d4b3fb1989726258aaf7f/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-5edf1be029",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "展览",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260917/25d3cd89179d4b3fb1989726258aaf7f/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "保护第一 考古筑基 吉林探索抗联遗址保护展示新路径",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "吉林",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.9,
+      "themes": [
+        "考古"
+      ],
+      "tags": [
+        "考古",
+        "吉林"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "保护第一 考古筑基 吉林探索抗联遗址保护展示新路径",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204865.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "国家文物局",
+              "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204865.html",
+              "host": "ncha.gov.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "ncha"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-1b2cd770ca",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "考古",
+      "sources": [
+        {
+          "name": "国家文物局",
+          "url": "http://www.ncha.gov.cn/art/2026/9/17/art_722_204865.html",
+          "host": "ncha.gov.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "ncha"
+        }
+      ]
+    },
+    {
+      "title": "农业农村部等三部门联合实施农业品牌保护专项行动",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "北京",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "政策行业"
+      ],
+      "tags": [
+        "政策行业",
+        "北京"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "农业农村部等三部门联合实施农业品牌保护专项行动",
+          "url": "https://www.news.cn/politics/20260917/0d71c1a77e394d1295155881f9ca1817/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/politics/20260917/0d71c1a77e394d1295155881f9ca1817/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-6302b42598",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "政策行业",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/politics/20260917/0d71c1a77e394d1295155881f9ca1817/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
+    {
+      "title": "文化奇遇记｜在柳孜运河桥梁遗址博物馆探寻运河往事",
+      "firstDate": "2026-09-17",
+      "lastDate": "2026-09-17",
+      "primaryProvince": "安徽",
+      "relatedProvinces": [],
+      "locationTier": "title",
+      "locationConfidence": 0.62,
+      "themes": [
+        "博物馆",
+        "考古"
+      ],
+      "tags": [
+        "博物馆",
+        "考古",
+        "安徽"
+      ],
+      "impact": 60.0,
+      "scope": "province",
+      "reports": [
+        {
+          "date": "2026-09-17",
+          "title": "文化奇遇记｜在柳孜运河桥梁遗址博物馆探寻运河往事",
+          "url": "https://www.news.cn/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html",
+          "sourceTier": "A",
+          "sources": [
+            {
+              "name": "新华网文博",
+              "url": "https://www.news.cn/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html",
+              "host": "news.cn",
+              "tier": "A",
+              "blocked": false,
+              "sourceId": "xinhua-wenbo"
+            }
+          ]
+        }
+      ],
+      "eventId": "evt-5b37910049",
+      "sourceTier": "A",
+      "sourceCount": 1,
+      "reportCount": 1,
+      "evidence": 100,
+      "breadth": 40,
+      "impactLabel": "关注",
+      "primaryTheme": "博物馆",
+      "sources": [
+        {
+          "name": "新华网文博",
+          "url": "https://www.news.cn/ci/20260917/b3622deba93547b8b33cec5b28152292/c.html",
+          "host": "news.cn",
+          "tier": "A",
+          "blocked": false,
+          "sourceId": "xinhua-wenbo"
+        }
+      ]
+    },
     {
       "title": "活力中国调研行｜千年矿冶遗址变身新潮公园",
       "firstDate": "2026-09-16",
